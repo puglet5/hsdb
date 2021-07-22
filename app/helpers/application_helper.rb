@@ -7,4 +7,47 @@ module ApplicationHelper
       link_to "Logout", destroy_user_session_path, method: :delete, class: style
     end
   end
+
+  def set_copyright
+    ViewTool::Renderer.copyright "Michael Basmanov", "All rights reserved"
+  end
+
+  def nav_items
+    [
+      {
+        url: root_path,
+        title: "Home",
+      },
+      {
+        url: about_path,
+        title: "About",
+      },
+      {
+        url: uploads_path,
+        title: "Uploads",
+      },
+    ]
+  end
+
+  def nav_helper(style, tag_type)
+    nav_links = ""
+
+    nav_items.each do |item|
+      nav_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
+    end
+
+    nav_links.html_safe
+  end
+
+  def active?(path)
+    "active" if current_page? path
+  end
+end
+
+module ViewTool
+  class Renderer
+    def self.copyright(name, msg)
+      "<div> &copy; #{Time.now.year} | <b>#{name}</b> | #{msg} </div>".html_safe
+    end
+  end
 end
