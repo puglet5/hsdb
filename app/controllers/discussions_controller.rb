@@ -34,7 +34,6 @@ class DiscussionsController < ApplicationController
         format.html { redirect_to @discussion, notice: "Discussion was successfully created." }
         format.json { render :show, status: :created, location: @discussion }
       else
-        byebug
         format.html { render :new }
         format.json { render json: @discussion.errors, status: :unprocessable_entity }
       end

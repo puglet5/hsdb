@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /categories
   def index
@@ -27,10 +27,14 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
-    if @category.save
-      redirect_to categories_path, notice: "Category was successfully created."
-    else
-      render :new
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to categories_path, notice: "Category was successfully created." }
+        format.json { render :show, status: :created, location: @category }
+      else
+        format.html { render :new }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 
