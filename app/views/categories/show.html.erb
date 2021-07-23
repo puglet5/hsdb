@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<div class="">
+  <div class="">
+    <h1 class=""><%= @category.category_name %></h1>
+  </div>
+  <div class="">
+    <% if has_role?(:admin) %>
+      <%= link_to 'Edit Category', edit_category_path(@category), class:"" %>
+    <% end %>
+  </div>
+</div>
+<hr />
+<div class="">
+  <%= render 'shared/discussions' %>
+  <%= render 'discussions/sidebar' %>
+</div>

@@ -1,0 +1,9 @@
+<%= simple_form_for(@category) do |f| %>
+  <%= f.error_notification %>
+  <div class="">
+    <div class="">
+      <%= f.input :category_name, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' } %>
+    </div>
+  </div>
+  <%= f.button :submit, class: '' %>
+<% end %>
