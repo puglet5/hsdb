@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_130008) do
+ActiveRecord::Schema.define(version: 2021_07_23_175233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_130008) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "discussion_id"
+    t.string "slug"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -29,6 +30,18 @@ ActiveRecord::Schema.define(version: 2021_07_23_130008) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "category_id"
+    t.string "slug"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -37,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_130008) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "discussion_id"
     t.integer "user_id"
+    t.string "slug"
   end
 
   create_table "roles", force: :cascade do |t|
