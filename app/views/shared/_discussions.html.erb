@@ -1,10 +1,10 @@
 <div class="column is-8">
-  <h3 class="title is-5 has-text-grey-light">Latest Discussions</h3>
+  <h3 class="font-bold">Latest Discussions</h3>
   <div class="discussions">
     <% @discussions.each do |discussion| %>
       <div class="columns bb-not-last pv10">
         <div class="column is-1">
-          <%= gravatar_image_tag(discussion.user.email, class:'border-radius-50', size: 48, alt: discussion.user.first_name) %>
+          <%# gravatar_image_tag(discussion.user.email, class:'border-radius-50', size: 48, alt: discussion.user.first_name) %>
         </div>
         <div class="column is-8">
           <%= link_to discussion do %>
@@ -16,14 +16,20 @@
                   <% if discussion.category %>
                     <%= link_to discussion.category.category_name , discussion.category %>
                   <% end %>
-                  by <%= discussion.user.first_name %>
+                  by <%= (discussion.user.first_name) + " " + (discussion.user.last_name)%>
                 </small>
               </em>
             </p>
           </div>
         </div>
-
+        <% if discussion_author(discussion) || has_role?(:admin) %>
+          <div class="column has-text-right">
+            <%= link_to 'Edit', edit_discussion_path(discussion), class:'button' %>
+            <%= link_to 'Delete', discussion, method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
+          </div>
+        <% end %>
       </div>
     <% end %>
+    <%= link_to "New Discussion", new_discussion_path%>
   </div>
 </div>
