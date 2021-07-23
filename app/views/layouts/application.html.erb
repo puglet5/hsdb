@@ -7,13 +7,14 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %><link rel="stylesheet" href="https://rsms.me/inter/inter.css"
   </head>
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= auth_helper%>
-    <%= nav_helper "nav-link", "div"%>
-    <%= yield %>
-    <%= set_copyright %>
-  </body>
-</html>
+    <body>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= auth_helper%>
+      <%= nav_helper "nav-link", "div"%>
+      <%= yield %>
+      <%= set_copyright %>
+    </body>
+  </html>
