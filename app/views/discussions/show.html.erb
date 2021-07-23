@@ -1,25 +1,25 @@
 <p id="notice"><%= notice %></p>
-<div class="columns">
-  <div class="column is-8">
-    <h1 class="title is-2 has-text-grey discussion-title"><%= @discussion.title %></h1>
-    <h3 class="subtitle is-5 has-text-grey-lighter">by <%= @discussion.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %></h3>
-    <div class="level">
-      <div class="level-left"></div>
-      <div class="level-right">
+<div class="">
+  <div class="">
+    <h1 class=""><%= @discussion.title %></h1>
+    <h3 class="">by <%= @discussion.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %></h3>
+    <div class="">
+      <div class=""></div>
+      <div class="">
         <% if discussion_author(@discussion) %>
-          <div class="buttons">
+          <div class="">
             <%= link_to 'Edit Discussion', edit_discussion_path(@discussion), class:'button'%>
             <%= link_to 'Delete', discussion_path(@discussion), method: :delete, data: { confirm: "Delete discussion?" }, class:'button' %>
           </div>
         <% end %>
       </div>
     </div>
-    <div class="content"><%= markdown(@discussion.content) %></div>
-    <h2 class="subtitle is-5 has-text-grey"><%= @discussion.replies.count %> Replies</h2>
-    <div id="discussion-replies">
+    <div class=""><%= markdown(@discussion.content) %></div>
+    <h2 class=""><%= @discussion.replies.count %> Replies</h2>
+    <div id="">
       <%= render @discussion.replies %>
     </div>
-    <h3 class="subtitle is-3 has-text-grey">Leave a reply</h3>
+    <h3 class="">Leave a reply</h3>
     <% if user_signed_in? %>
       <%= render 'replies/form' %>
     <% else %>
