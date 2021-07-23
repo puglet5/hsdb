@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def set_copyright
-    ViewTool::Renderer.copyright "Michael Basmanov", "All rights reserved"
+    Renderer.copyright "Michael Basmanov", "All rights reserved"
   end
 
   def nav_items
@@ -46,12 +46,40 @@ module ApplicationHelper
   def active?(path)
     "active" if current_page? path
   end
-end
 
-module ViewTool
+  require "redcarpet/render_strip"
+
+  def has_role?(role)
+    current_user && current_user.has_role?(role)
+  end
+
   class Renderer
     def self.copyright(name, msg)
       "<div> &copy; #{Time.now.year} | <b>#{name}</b> | #{msg} </div>".html_safe
     end
+  end
+
+  # Markdown Helpers
+  class CodeRayify < Redcarpet::Render::HTML
+    def block_code(code, language)
+      CodeRay.scan(code, language).div
+    end
+  end
+
+  def markdown(text)
+    coderayified = CodeRayify.new(:filter_html => true, :hard_wrap => true)
+    options = {
+      fenced_code_blocks: true,
+      no_intra_emphasis: true,
+      autolink: true,
+      lax_html_blocks: true,
+    }
+    markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
+    markdown_to_html.render(text).html_safe
+  end
+
+  def strip_markdown(text)
+    markdown_to_plain_text = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
+    markdown_to_plain_text.render(text).html_safe
   end
 end
