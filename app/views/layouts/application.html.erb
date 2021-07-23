@@ -13,9 +13,9 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= auth_helper%>
-    <%= nav_helper "nav-link", "span"%>
+    <%= auth_helper "no-underline hover:underline" %>
+    <%= nav_helper "no-underline hover:underline", "span"%>
     <%= yield %>
-    <%= set_copyright %>
+    <%# set_copyright %>
   </body>
 </html>
