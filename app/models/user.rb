@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :categories, through: :discussions
 
   extend FriendlyId
-  friendly_id :full_name, use: [:slugged, :finders]
+  friendly_id :full_name_slug, use: [:slugged, :finders]
 
-  def full_name
+  def full_name_slug
     "#{first_name} - #{last_name}"
   end
 
