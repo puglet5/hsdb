@@ -9,7 +9,11 @@ class User < ApplicationRecord
   has_many :categories, through: :discussions
 
   extend FriendlyId
-  friendly_id :last_name, use: [:slugged, :finders]
+  friendly_id :full_name, use: [:slugged, :finders]
+
+  def full_name
+    "#{first_name} - #{last_name}"
+  end
 
   def should_generate_new_friendly_id?
     last_name_changed?
