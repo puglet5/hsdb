@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get "users/show"
   resources :categories
+  resources :users
   resources :discussions do
     resources :replies
   end
