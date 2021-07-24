@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :discussions, dependent: nil
   has_many :categories, through: :discussions
+  has_one_attached :avatar
 
   extend FriendlyId
   friendly_id :full_name_slug, use: [:slugged, :finders]
