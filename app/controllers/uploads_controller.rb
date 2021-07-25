@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
 
   # GET /uploads or /uploads.json
   def index
-    @uploads = Upload.all
+    @uploads = Upload.all.page(params[:page]).per(5)
   end
 
   # GET /uploads/1 or /uploads/1.json
