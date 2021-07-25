@@ -14,7 +14,7 @@
         <% end %>
       </div>
     </div>
-    <div class=""><%= markdown(@discussion.content) %></div>
+    <div class=""><%= @discussion.content %></div>
     <h2 class=""><%= @discussion.replies.count %> Replies</h2>
     <div id="discussion-replies">
       <%= render @discussion.replies %>

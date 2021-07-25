@@ -11,7 +11,7 @@
             <h3 class=""><%= discussion.title %></h3>
           <% end %>
           <div class="">
-            <%= truncate(strip_markdown(discussion.content), length: 140) %>
+            <%= truncate(strip_tags(discussion.content.to_s), length: 140) %>
             <p><em><small>Posted <%= time_ago_in_words(discussion.created_at) %> ago in
                   <% if discussion.category %>
                     <%= link_to discussion.category.category_name , discussion.category %>

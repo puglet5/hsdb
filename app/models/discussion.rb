@@ -3,6 +3,8 @@ class Discussion < ApplicationRecord
   belongs_to :user
   has_many :replies, dependent: :destroy
 
+  has_rich_text :content
+
   validates :title, :content, presence: true
 
   resourcify
