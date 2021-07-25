@@ -4,6 +4,13 @@ class Upload < ApplicationRecord
   validates :title, :description, presence: true
   validate :image_type
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
+
   def thumbnail(input)
     return self.images[input].variant(resize: "25%").processed
   end
