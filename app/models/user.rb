@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :discussions, dependent: nil
+  has_many :uploads, dependent: nil
   has_many :categories, through: :discussions
   has_one_attached :avatar
 

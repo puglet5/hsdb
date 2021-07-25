@@ -14,7 +14,7 @@
     <label class="">Category</label>
     <div class="">
       <span class="">
-        <%= f.input_field :category_id, collection:@categories.map { |c| [c.category_name, c.id] } %>
+        <%= f.input_field :category_id, default: "", collection:@categories.map { |c| [c.category_name, c.id] } %>
       </span>
     </div>
   </div>

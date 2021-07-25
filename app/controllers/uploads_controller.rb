@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /uploads or /uploads.json
   def index
@@ -12,7 +13,7 @@ class UploadsController < ApplicationController
 
   # GET /uploads/new
   def new
-    @upload = Upload.new
+    @upload = current_user.uploads.build
   end
 
   # GET /uploads/1/edit
@@ -21,7 +22,7 @@ class UploadsController < ApplicationController
 
   # POST /uploads or /uploads.json
   def create
-    @upload = Upload.new(upload_params)
+    @upload = current_user.uploads.build(upload_params)
 
     respond_to do |format|
       if @upload.save
@@ -57,13 +58,14 @@ class UploadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_upload
-      @upload = Upload.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def upload_params
-      params.require(:upload).permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_upload
+    @upload = Upload.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def upload_params
+    params.require(:upload).permit(:title, :description, images: [])
+  end
 end
