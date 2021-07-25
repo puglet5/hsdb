@@ -1,7 +1,7 @@
 class Upload < ApplicationRecord
   has_many_attached :images
   belongs_to :user
-  validates :title, :description, presence: true
+  validates :title, :description, :body, presence: true
   validate :image_type
 
   has_rich_text :body
