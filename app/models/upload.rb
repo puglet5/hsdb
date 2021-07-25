@@ -4,6 +4,8 @@ class Upload < ApplicationRecord
   validates :title, :description, presence: true
   validate :image_type
 
+  has_rich_text :description
+
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]
 
