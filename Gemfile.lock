@@ -285,6 +285,7 @@ DEPENDENCIES
   jquery-rails (~> 4.4)
   kaminari (~> 1.2, >= 1.2.1)
   listen (~> 3.3)
+  mini_magick
   petergate (~> 2.0, >= 2.0.1)
   pg (~> 1.1)
   puma (~> 5.0)
