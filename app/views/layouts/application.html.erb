@@ -10,12 +10,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= auth_helper "no-underline hover:underline" %>
-    <%= nav_helper "no-underline hover:underline m-2", "span"%>
-    <br>
-    <%= yield %>
-    <%# set_copyright %>
+    <!--
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+    -->
+    <%= render "shared/application_nav" %>
+    <main class="grey lighten-3">
+      <%= yield %>
+    </main>
+    <%= render "shared/application_footer" %>
   </body>
 </html>

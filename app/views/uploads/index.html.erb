@@ -1,7 +1,12 @@
-<p id="notice"><%= notice %></p>
-<h1>Uploads</h1>
-<%= link_to 'New Upload', new_upload_path %>
-<%= render "search_form"%>
-<%= paginate @uploads %>
-<%= render @uploads %>
-<%= paginate @uploads %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>Uploads</h1>
+  <%= link_to 'New Upload', new_upload_path, class: "btn"%>
+  <%= render "search_form"%>
+  <div class="row">
+    <%= render @uploads %>
+  </div>
+  <div>
+    <%= paginate @uploads %>
+  </div>
+</div>
