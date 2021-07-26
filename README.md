@@ -18,16 +18,16 @@ This app derectly depends on graphicsmagick for image processing:
 
 You can optionaly install foreman for faster compilation:
 
-```ruby
-gem install foreman
-```
+
+`gem install foreman`
+
 
 Use the following command to start the server:
 
-```ruby
-foreman start -f Procfile.dev
-```
+
+`foreman start -f Procfile.dev`
+
 
 Procfile.dev is included in the repository's root.
 
-*Note:* Do not [include foreman](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foremanhttps://) in Gemfile.
+*Note:* Do not [include foreman](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman) in Gemfile.
