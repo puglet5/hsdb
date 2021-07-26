@@ -8,6 +8,9 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
+import "../stylesheets/application";
+import "materialize-css/dist/js/materialize";
+
 require("stylesheets/application.scss");
 // require("@rails/ujs").start();
 require("turbolinks").start();
