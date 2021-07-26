@@ -4,7 +4,9 @@ class UploadsController < ApplicationController
 
   # GET /uploads or /uploads.json
   def index
-    @uploads = Upload.all.page(params[:page]).per(5)
+    # @uploads = Upload.all.page(params[:page]).per(5)
+    @q = Upload.ransack(params[:q])
+    @uploads = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   # GET /uploads/1 or /uploads/1.json
