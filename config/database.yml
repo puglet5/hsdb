@@ -24,6 +24,11 @@ default: &default
 development:
   <<: *default
   database: ITMO_HSDB_development
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: puglet5
+  password:
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
