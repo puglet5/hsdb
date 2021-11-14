@@ -29,9 +29,14 @@
 /config/master.key
 
 /public/packs
+/public/img
 /public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
 mkmf.log
+.vscode/tasks.json
+/db/migrate copy
+.vscode/settings.json
+.gitignore

@@ -3,20 +3,21 @@
   <head>
     <title>ITMOHSDB</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= auth_helper "no-underline hover:underline" %>
-    <%= nav_helper "no-underline hover:underline m-2", "span"%>
-    <br>
-    <%= yield %>
-    <%# set_copyright %>
+    <!--
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+    -->
+    <%= render "shared/application_nav" %>
+    <main class="grey lighten-3">
+      <%= yield %>
+    </main>
+    <%= render "shared/application_footer" %>
   </body>
 </html>
