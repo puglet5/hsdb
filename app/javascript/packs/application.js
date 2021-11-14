@@ -11,6 +11,9 @@ import "channels";
 import "../stylesheets/application";
 import "materialize-css/dist/js/materialize";
 
+import "trix";
+import "@rails/actiontext";
+
 require("stylesheets/application.scss");
 // require("@rails/ujs").start();
 require("turbolinks").start();
