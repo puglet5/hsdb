@@ -14,7 +14,7 @@ class Upload < ApplicationRecord
   end
 
   def thumbnail(input)
-    return self.images[input].variant(resize: "25%").processed
+    return self.images[input].variant(resize: "400x300^", crop: "400x300+0+0").processed
   end
 
   private
