@@ -27,7 +27,7 @@ gem "jbuilder", "~> 2.7"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
-gem "bulma-rails", "~> 0.9.1"
+# gem "bulma-rails", "~> 0.9.1"
 gem "simple_form", "~> 5.1"
 gem "gravatar_image_tag", "~> 1.2"
 gem "jquery-rails", "~> 4.4"
@@ -42,7 +42,7 @@ gem "petergate", "~> 2.0", ">= 2.0.1"
 gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.2"
 gem "kaminari", "~> 1.2", ">= 1.2.1"
 gem "image_processing", "~> 1.12", ">= 1.12.1"
-gem "graphicsmagick", "~> 1.0", ">= 1.0.6"
+gem "graphicsmagick", "~> 1.0", ">= we"
 gem "mini_magick", "~> 4.11"
 gem "ransack", "~> 2.4", ">= 2.4.2"
 gem "faker", "~> 2.18"
@@ -61,6 +61,10 @@ group :development do
   gem "listen", "~> 3.3"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
+  gem 'rails-erd'
+  gem "erd"
+  gem 'rails-perftest'
+  gem 'ruby-prof'
 end
 
 group :test do
