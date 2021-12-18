@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def set_copyright
     # Renderer.copyright "Michael Basmanov", "All rights reserved"
-    Renderer.copyright "Michael Basmanov", "ITMO University"
+    Renderer.copyright "ITMO University"
   end
 
   def auth_items
@@ -73,9 +73,9 @@ module ApplicationHelper
   end
 
   class Renderer
-    def self.copyright(name, msg)
+    def self.copyright(msg)
       # "&copy; #{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
-      "#{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
+      "#{Time.now.year} | #{msg}".html_safe
     end
   end
 
