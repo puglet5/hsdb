@@ -112,6 +112,7 @@ GEM
     graphicsmagick (1.0.6)
       subexec
     gravatar_image_tag (1.2.0)
+    htmlbeautifier (1.4.1)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -296,6 +297,7 @@ DEPENDENCIES
   friendly_id (~> 5.4, >= 5.4.2)
   graphicsmagick (~> 1.0, >= 1.0.6)
   gravatar_image_tag (~> 1.2)
+  htmlbeautifier
   image_processing (~> 1.12, >= 1.12.1)
   jbuilder (~> 2.7)
   jquery-rails (~> 4.4)

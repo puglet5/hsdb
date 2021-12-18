@@ -65,6 +65,7 @@ group :development do
   gem "erd"
   gem 'rails-perftest'
   gem 'ruby-prof'
+  gem 'htmlbeautifier'
 end
 
 group :test do
