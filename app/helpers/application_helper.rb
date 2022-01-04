@@ -2,7 +2,7 @@ module ApplicationHelper
   def auth_helper(style = "", tag_type)
     auth_links = ""
 
-    if current_user.is_a?(GuestUser)
+    if !user_signed_in?
       auth_items.each do |item|
         auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
       end
