@@ -1,7 +1,8 @@
 class DiscussionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
   before_action :find_categories, only: [:index, :show, :new, :edit]
-  before_action :authenticate_user!, except: [:index, :show]
+  # , except: [:index, :show]
 
   # GET /discussions
   # GET /discussions.json

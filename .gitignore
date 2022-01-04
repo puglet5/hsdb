@@ -39,4 +39,10 @@ mkmf.log
 .vscode/tasks.json
 /db/migrate copy
 .vscode/settings.json
-.gitignore
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+erd*

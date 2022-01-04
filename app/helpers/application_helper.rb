@@ -2,7 +2,7 @@ module ApplicationHelper
   def auth_helper(style = "", tag_type)
     auth_links = ""
 
-    if current_user.is_a?(GuestUser)
+    if !user_signed_in?
       auth_items.each do |item|
         auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
       end
@@ -14,7 +14,8 @@ module ApplicationHelper
   end
 
   def set_copyright
-    Renderer.copyright "Michael Basmanov", "All rights reserved"
+    # Renderer.copyright "Michael Basmanov", "All rights reserved"
+    Renderer.copyright "ITMO University"
   end
 
   def auth_items
@@ -72,8 +73,9 @@ module ApplicationHelper
   end
 
   class Renderer
-    def self.copyright(name, msg)
-      "&copy; #{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
+    def self.copyright(msg)
+      # "&copy; #{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
+      "#{Time.now.year} | #{msg}".html_safe
     end
   end
 
