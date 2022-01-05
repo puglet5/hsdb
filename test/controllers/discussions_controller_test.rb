@@ -1,21 +1,23 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class DiscussionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @discussion = discussions(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get discussions_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_discussion_url
     assert_response :success
   end
 
-  test "should create discussion" do
+  test 'should create discussion' do
     assert_difference('Discussion.count') do
       post discussions_url, params: { discussion: { content: @discussion.content, title: @discussion.title } }
     end
@@ -23,22 +25,23 @@ class DiscussionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to discussion_url(Discussion.last)
   end
 
-  test "should show discussion" do
+  test 'should show discussion' do
     get discussion_url(@discussion)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_discussion_url(@discussion)
     assert_response :success
   end
 
-  test "should update discussion" do
-    patch discussion_url(@discussion), params: { discussion: { content: @discussion.content, title: @discussion.title } }
+  test 'should update discussion' do
+    patch discussion_url(@discussion),
+          params: { discussion: { content: @discussion.content, title: @discussion.title } }
     assert_redirected_to discussion_url(@discussion)
   end
 
-  test "should destroy discussion" do
+  test 'should destroy discussion' do
     assert_difference('Discussion.count', -1) do
       delete discussion_url(@discussion)
     end

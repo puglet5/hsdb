@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   extend FriendlyId
-  friendly_id :full_name_slug, use: [:slugged, :finders]
+  friendly_id :full_name_slug, use: %i[slugged finders]
 
   def full_name_slug
     "#{first_name} - #{last_name}"

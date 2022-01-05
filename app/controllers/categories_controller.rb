@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: %i[show edit update destroy]
   # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /categories
   def index
     @categories = Category.all
-    @discussions = Discussion.all.order("created_at desc")
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /categories/1
   def show
-    @discussions = Discussion.where("category_id = ?", @category.id)
+    @discussions = Discussion.where(category_id: @category.id)
     @categories = Category.all
   end
 
@@ -20,8 +22,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /categories
   def create
@@ -29,7 +30,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_path, notice: "Category was successfully created." }
+        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -41,7 +42,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
-      redirect_to categories_path, notice: "Category was successfully updated."
+      redirect_to categories_path, notice: 'Category was successfully updated.'
     else
       render :edit
     end
@@ -50,7 +51,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy
-    redirect_to categories_url, notice: "Category was successfully destroyed."
+    redirect_to categories_url, notice: 'Category was successfully destroyed.'
   end
 
   private
