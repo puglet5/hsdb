@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class DiscussionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_discussion, only: [:show, :edit, :update, :destroy]
-  before_action :find_categories, only: [:index, :show, :new, :edit]
+  before_action :set_discussion, only: %i[show edit update destroy]
+  before_action :find_categories, only: %i[index show new edit]
   # , except: [:index, :show]
 
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = Discussion.all.order("created_at desc")
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    @discussions = Discussion.all.order("created_at desc")
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /discussions/new
@@ -22,8 +24,7 @@ class DiscussionsController < ApplicationController
   end
 
   # GET /discussions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /discussions
   # POST /discussions.json
@@ -32,7 +33,7 @@ class DiscussionsController < ApplicationController
 
     respond_to do |format|
       if @discussion.save
-        format.html { redirect_to @discussion, notice: "Discussion was successfully created." }
+        format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
         format.json { render :show, status: :created, location: @discussion }
       else
         format.html { render :new }
@@ -46,7 +47,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to @discussion, notice: "Discussion was successfully updated." }
+        format.html { redirect_to @discussion, notice: 'Discussion was successfully updated.' }
         format.json { render :show, status: :ok, location: @discussion }
       else
         format.html { render :edit }
@@ -60,7 +61,7 @@ class DiscussionsController < ApplicationController
   def destroy
     @discussion.destroy
     respond_to do |format|
-      format.html { redirect_to discussions_url, notice: "Discussion was successfully destroyed." }
+      format.html { redirect_to discussions_url, notice: 'Discussion was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,7 +74,7 @@ class DiscussionsController < ApplicationController
   end
 
   def find_categories
-    @categories = Category.all.order("created_at desc")
+    @categories = Category.all.order('created_at desc')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

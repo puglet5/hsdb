@@ -1,13 +1,14 @@
 module ApplicationHelper
-  def auth_helper(style = "", tag_type)
-    auth_links = ""
+  def auth_helper(style = '', tag_type)
+    auth_links = ''
 
-    if !user_signed_in?
+    if user_signed_in?
+      auth_links << "<#{tag_type}>#{link_to 'Logout', destroy_user_session_path, method: :delete,
+                                                                                 class: style}</#{tag_type}>"
+    else
       auth_items.each do |item|
         auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
       end
-    else
-      auth_links << "<#{tag_type}>#{link_to "Logout", destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
     end
 
     auth_links.html_safe
@@ -15,19 +16,19 @@ module ApplicationHelper
 
   def set_copyright
     # Renderer.copyright "Michael Basmanov", "All rights reserved"
-    Renderer.copyright "ITMO University"
+    Renderer.copyright 'ITMO University'
   end
 
   def auth_items
     [
       {
         url: new_user_session_path,
-        title: "Login",
+        title: 'Login'
       },
       {
         url: new_user_registration_path,
-        title: "Register",
-      },
+        title: 'Register'
+      }
     ]
   end
 
@@ -35,25 +36,25 @@ module ApplicationHelper
     [
       {
         url: root_path,
-        title: "Home",
+        title: 'Home'
       },
       {
         url: about_path,
-        title: "About",
+        title: 'About'
       },
       {
         url: uploads_path,
-        title: "Uploads",
+        title: 'Uploads'
       },
       {
         url: discussions_path,
-        title: "Forum",
-      },
+        title: 'Forum'
+      }
     ]
   end
 
-  def nav_helper(style = "", tag_type)
-    nav_links = ""
+  def nav_helper(style = '', tag_type)
+    nav_links = ''
 
     nav_items.each do |item|
       nav_links << "<#{tag_type} class= '#{active? item[:url]}'><a href='#{item[:url]}' class = '#{style}'> #{item[:title]} </a></#{tag_type}>"
@@ -63,10 +64,10 @@ module ApplicationHelper
   end
 
   def active?(path)
-    "active" if current_page? path
+    'active' if current_page? path
   end
 
-  require "redcarpet/render_strip"
+  require 'redcarpet/render_strip'
 
   def has_role?(role)
     current_user && current_user.has_role?(role)

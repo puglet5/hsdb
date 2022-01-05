@@ -1,3 +1,5 @@
-Rails::Html::WhiteListSanitizer.allowed_tags << "video"
-Rails::Html::WhiteListSanitizer.allowed_tags << "source"
-Rails::Html::WhiteListSanitizer.allowed_attributes << "controls"
+# frozen_string_literal: true
+
+Rails::Html::WhiteListSanitizer.allowed_tags << 'video'
+Rails::Html::WhiteListSanitizer.allowed_tags << 'source'
+Rails::Html::WhiteListSanitizer.allowed_attributes << 'controls'

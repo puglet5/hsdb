@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UploadsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_upload, only: %i[ show edit update destroy ]
+  before_action :set_upload, only: %i[show edit update destroy]
 
   # GET /uploads or /uploads.json
   def index
@@ -10,8 +12,7 @@ class UploadsController < ApplicationController
   end
 
   # GET /uploads/1 or /uploads/1.json
-  def show
-  end
+  def show; end
 
   # GET /uploads/new
   def new
@@ -19,8 +20,7 @@ class UploadsController < ApplicationController
   end
 
   # GET /uploads/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /uploads or /uploads.json
   def create
@@ -28,7 +28,7 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to @upload, notice: "Upload was successfully created." }
+        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class UploadsController < ApplicationController
   def update
     respond_to do |format|
       if @upload.update(upload_params)
-        format.html { redirect_to @upload, notice: "Upload was successfully updated." }
+        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
         format.json { render :show, status: :ok, location: @upload }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class UploadsController < ApplicationController
   def destroy
     @upload.destroy
     respond_to do |format|
-      format.html { redirect_to uploads_url, notice: "Upload was successfully destroyed." }
+      format.html { redirect_to uploads_url, notice: 'Upload was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
