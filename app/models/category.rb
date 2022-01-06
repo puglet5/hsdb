@@ -10,6 +10,6 @@ class Category < ApplicationRecord
   friendly_id :category_name, use: %i[slugged finders]
 
   def should_generate_new_friendly_id?
-    category_name_changed?
+    slug.blank? || category_name_changed?
   end
 end

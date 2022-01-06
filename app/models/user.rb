@@ -2,8 +2,7 @@
 
 class User < ApplicationRecord
   rolify
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
@@ -20,6 +19,6 @@ class User < ApplicationRecord
   end
 
   def should_generate_new_friendly_id?
-    last_name_changed?
+    slug.blank? || last_name_changed? || last_name_changed?
   end
 end

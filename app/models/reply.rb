@@ -10,6 +10,6 @@ class Reply < ApplicationRecord
   friendly_id :reply, use: %i[slugged finders]
 
   def should_generate_new_friendly_id?
-    reply_changed?
+    slug.blank? || reply_changed?
   end
 end

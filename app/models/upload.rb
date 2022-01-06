@@ -12,7 +12,7 @@ class Upload < ApplicationRecord
   friendly_id :title, use: %i[slugged finders]
 
   def should_generate_new_friendly_id?
-    title_changed?
+    slug.blank? || title_changed?
   end
 
   def thumbnail(input)
