@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   get 'contact', to: 'pages#contact'
   get 'welcome', to: 'pages#welcome'
 
+  namespace :admin do 
+    resources :users, only: %i[index]
+  end
+  
   root to: 'pages#home'
 end
