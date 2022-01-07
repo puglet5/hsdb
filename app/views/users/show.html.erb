@@ -1,5 +1,5 @@
-<h1><%= full_name(@user)%> </h1>
-<p> <%=@user.organization%> </p>
+<h1><%= full_name(@user) %> </h1>
+<p> <%= @user.organization %> </p>
 <% if @user == current_user %>
   <%= link_to "Edit your account", edit_user_registration_path %>
 <% end %>

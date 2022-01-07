@@ -4,7 +4,7 @@
     <% @discussions.each do |discussion| %>
       <div class="">
         <div class="">
-          <%# gravatar_image_tag(discussion.user.email, class:'border-radius-50', size: 48, alt: discussion.user.first_name) %>
+          <% # gravatar_image_tag(discussion.user.email, class:'border-radius-50', size: 48, alt: discussion.user.first_name) %>
         </div>
         <div class="">
           <%= link_to discussion do %>
@@ -14,9 +14,9 @@
             <%= truncate(strip_tags(discussion.content.to_s), length: 140) %>
             <p><em><small>Posted <%= time_ago_in_words(discussion.created_at) %> ago in
                   <% if discussion.category %>
-                    <%= link_to discussion.category.category_name , discussion.category %>
+                    <%= link_to discussion.category.category_name, discussion.category %>
                   <% end %>
-                  by <%= (discussion.user.first_name) + " " + (discussion.user.last_name)%>
+                  by <%= (discussion.user.first_name) + " " + (discussion.user.last_name) %>
                 </small>
               </em>
             </p>
@@ -24,12 +24,12 @@
         </div>
         <% if discussion_author(discussion) || has_role?(:admin) %>
           <div class="">
-            <%= link_to 'Edit', edit_discussion_path(discussion), class:"" %>
-            <%= link_to 'Delete', discussion, method: :delete, data: { confirm: 'Are you sure?' }, class: "" %>
+            <%= link_to "Edit", edit_discussion_path(discussion), class: "" %>
+            <%= link_to "Delete", discussion, method: :delete, data: { confirm: "Are you sure?" }, class: "" %>
           </div>
         <% end %>
       </div>
     <% end %>
-    <%= link_to "New Discussion", new_discussion_path%>
+    <%= link_to "New Discussion", new_discussion_path %>
   </div>
 </div>

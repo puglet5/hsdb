@@ -23,12 +23,12 @@ module ApplicationHelper
     [
       {
         url: new_user_session_path,
-        title: 'Login'
+        title: 'Login',
       },
       {
         url: new_user_registration_path,
-        title: 'Register'
-      }
+        title: 'Register',
+      },
     ]
   end
 
@@ -36,20 +36,20 @@ module ApplicationHelper
     [
       {
         url: root_path,
-        title: 'Home'
+        title: 'Home',
       },
       {
         url: about_path,
-        title: 'About'
+        title: 'About',
       },
       {
         url: uploads_path,
-        title: 'Uploads'
+        title: 'Uploads',
       },
       {
         url: discussions_path,
-        title: 'Forum'
-      }
+        title: 'Forum',
+      },
     ]
   end
 
