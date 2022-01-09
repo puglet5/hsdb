@@ -32,5 +32,5 @@ Procfile.dev is included in the repository's root.
 
 *Note:* Do not [include foreman](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman) in Gemfile.
 
-rvm postgres nodejs bundler libpqdev postgres db:setup users yarn webpacker 
+rvm postgres nodejs bundler libpqdev postgres db:setup users yarn webpacker:install
 
