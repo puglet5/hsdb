@@ -23,4 +23,4 @@ jobs:
           bundler-cache: true
       - name: Install graphicsmagick
         run: sudo apt-get update && sudo apt-get install -y graphicsmagick
-      - run: bundle exec rake rspec
+      - run: bundle exec rspec
