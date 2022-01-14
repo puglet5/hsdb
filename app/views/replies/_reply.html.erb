@@ -1,10 +1,4 @@
 <div class="">
-  <article class="">
-    <div class="">
-      <figure class="image is-48x48">
-        <% # gravatar_image_tag(reply.user.email, class: 'border-radius-50', size: 48, alt: reply.user.username) %>
-      </figure>
-    </div>
     <div class="">
       <div class="">
         <p>
@@ -14,22 +8,20 @@
         </p>
       </div>
       <% if reply_author(reply) || has_role?(:admin) %>
-        <nav class="">
           <div class="">
             <a class="">
               <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
-                <%= fa_icon "edit" %>
+              edit comment
               <% end %>
             </a>
+            <br>
             <a class="">
               <%= link_to [reply.discussion, reply],
                           method: :delete, data: { confirm: "Are you sure ?" } do %>
-                <%= fa_icon "trash" %>
+                delete comment
               <% end %>
             </a>
           </div>
-        </nav>
       <% end %>
     </div>
-  </article>
 </div>
