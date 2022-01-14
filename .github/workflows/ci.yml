@@ -21,4 +21,5 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+      - run: apt-get install -y graphicsmagick
       - run: bundle exec rake rspec
