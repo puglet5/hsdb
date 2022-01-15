@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # gem "bulma-rails", "~> 0.9.1"
 # gem 'bootstrap', '~> 5.0.1'
 gem 'cancancan', '~> 3.3'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'coderay', '~> 1.1', '>= 1.1.3'
 gem 'devise', '~> 4.8'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
@@ -40,16 +42,14 @@ gem 'gravatar_image_tag', '~> 1.2'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jquery-rails', '~> 4.4'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 gem 'mini_magick', '~> 4.11'
 gem 'petergate', '~> 2.0', '>= 2.0.1'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 gem 'redcarpet', '~> 3.5', '>= 3.5.1'
 gem 'rolify', '~> 6.0'
-gem 'simple_form', '~> 5.1'
-gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 gem 'rubyzip', '~> 2'
-gem 'caxlsx'
-gem 'caxlsx_rails'
+gem 'simple_form', '~> 5.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
