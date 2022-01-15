@@ -43,11 +43,11 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 gem 'mini_magick', '~> 4.11'
 gem 'petergate', '~> 2.0', '>= 2.0.1'
+gem 'rails-i18n', '~> 6.0'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 gem 'redcarpet', '~> 3.5', '>= 3.5.1'
 gem 'rolify', '~> 6.0'
 gem 'simple_form', '~> 5.1'
-gem 'rails-i18n', '~> 6.0' 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

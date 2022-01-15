@@ -40,9 +40,7 @@ module Internationalization
 
       if I18n.enforce_available_locales
         locale = locales.reverse.find { |locale| I18n.available_locales.any? { |al| match?(al, locale) } }
-        if locale
-          I18n.available_locales.find { |al| match?(al, locale) }
-        end
+        I18n.available_locales.find { |al| match?(al, locale) } if locale
       else
         locales.last
       end
