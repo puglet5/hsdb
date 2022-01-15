@@ -1,4 +1,4 @@
-# Note: You must restart bin/webpack-dev-server for changes to take effect
+# Note: You must restart bin/webpacker-dev-server for changes to take effect
 
 default: &default
   source_path: app/javascript
@@ -14,6 +14,40 @@ default: &default
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
+
+  # Extract and emit a css file
+  extract_css: false
+
+  static_assets_extensions:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+    - .tiff
+    - .ico
+    - .svg
+    - .eot
+    - .otf
+    - .ttf
+    - .woff
+    - .woff2
+
+  extensions:
+    - .jsx
+    - .vue
+    - .mjs
+    - .js
+    - .sass
+    - .scss
+    - .css
+    - .module.sass
+    - .module.scss
+    - .module.css
+    - .png
+    - .svg
+    - .gif
+    - .jpeg
+    - .jpg
 
 development:
   <<: *default

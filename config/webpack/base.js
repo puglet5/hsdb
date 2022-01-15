@@ -1,3 +1,10 @@
 const { webpackConfig } = require('@rails/webpacker')
+const { merge } = require('webpack-merge')
 
-module.exports = webpackConfig
+const customConfig = {
+  resolve: {
+    extensions: [".css"]
+  }
+}
+
+module.exports = merge(webpackConfig, customConfig)

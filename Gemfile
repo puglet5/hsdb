@@ -12,13 +12,12 @@ gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.2.1'
+gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+# gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -30,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 # gem "bulma-rails", "~> 0.9.1"
-gem 'bootstrap', '~> 5.0.1'
+# gem 'bootstrap', '~> 5.0.1'
 gem 'cancancan', '~> 3.3'
 gem 'coderay', '~> 1.1', '>= 1.1.3'
 gem 'devise', '~> 4.8'
@@ -47,6 +46,7 @@ gem 'ransack', '~> 2.4', '>= 2.4.2'
 gem 'redcarpet', '~> 3.5', '>= 3.5.1'
 gem 'rolify', '~> 6.0'
 gem 'simple_form', '~> 5.1'
+gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

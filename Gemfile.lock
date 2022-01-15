@@ -1,3 +1,22 @@
+GIT
+  remote: https://github.com/mkhairi/materialize-sass.git
+  revision: 6c70ecf1c317b2319b57cbe0be4a74119815e655
+  specs:
+    materialize-sass (1.1.0.alpha)
+      autoprefixer-rails (>= 9.1.0)
+      sassc-rails (>= 2.0.0)
+
+GIT
+  remote: https://github.com/rails/webpacker.git
+  revision: aba79635e6ff6562ec04d3c446d57ef19a5fef7d
+  branch: master
+  specs:
+    webpacker (6.0.0.rc.6)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -69,10 +88,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.9.4)
       msgpack (~> 1.0)
-    bootstrap (5.0.2)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.9.2, < 3)
-      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.3)
     cancancan (3.3.0)
@@ -120,9 +135,6 @@ GEM
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    jbuilder (2.11.5)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -164,7 +176,6 @@ GEM
     petergate (2.0.1)
       activerecord (> 4.0.0)
     pg (1.2.3)
-    popper_js (2.9.3)
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
@@ -255,7 +266,7 @@ GEM
     rubocop-performance (1.13.1)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.13.1)
+    rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -266,8 +277,6 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -295,9 +304,6 @@ GEM
     subexec (0.2.3)
     thor (1.2.1)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -312,11 +318,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
-    webpacker (5.2.2)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -329,7 +330,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
-  bootstrap (~> 5.0.1)
   byebug
   cancancan (~> 3.3)
   capybara (>= 3.26)
@@ -343,10 +343,10 @@ DEPENDENCIES
   gravatar_image_tag (~> 1.2)
   htmlbeautifier
   image_processing (~> 1.12, >= 1.12.1)
-  jbuilder (~> 2.7)
   jquery-rails (~> 4.4)
   kaminari (~> 1.2, >= 1.2.1)
   listen (~> 3.3)
+  materialize-sass!
   mini_magick (~> 4.11)
   petergate (~> 2.0, >= 2.0.1)
   pg (~> 1.1)
@@ -363,15 +363,13 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   ruby-prof
-  sass-rails (>= 6)
   selenium-webdriver
   simple_form (~> 5.1)
   spring
-  turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  webpacker (~> 5.2.1)
+  webpacker!
 
 BUNDLED WITH
    2.2.31
