@@ -5,10 +5,14 @@
 </h1>
 <% (0...@upload.images.count).each do |image| %>
   <%= image_tag(@upload.thumbnail(image)) %>
+  <!--
+  <%= link_to "Download", rails_blob_path(@upload.images.find_by(blob_id: (@upload.images.first.blob_id + image)), disposition: 'attachment') %>
+   -->
 <% end %>
 <h3>
   <strong>Description:</strong>
 </h3>
+
   <%= @upload.description %>
 <p>
   <%= @upload.body %>
