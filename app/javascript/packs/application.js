@@ -14,11 +14,15 @@ import "@rails/actiontext";
 require("@rails/activestorage").start();
 require("channels");
 
-Rails.start();
-Turbolinks.start();
 ActiveStorage.start();
 
 require("trix");
+require("jquery");
 require("@rails/actiontext");
 
 require.context('../img', true)
+
+$(document).ready(function(){
+  $('.modal').modal();
+  $('.dropdown-trigger').dropdown();
+});

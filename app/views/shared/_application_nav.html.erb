@@ -15,6 +15,24 @@
       <% end %>
 
       <%= auth_helper "", "li" %>
+      <li>
+      <a class='dropdown-trigger' href='#' data-target='dropdown1' style= "background-color: #1E51A4 !important;" >Lang</a>
+      
+      </li>
+      <!-- Dropdown Trigger -->
+
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <% I18n.available_locales.each do |locale| %>
+          <li>
+            <% if I18n.locale == locale %>
+              <% tag.span locale, class: "dropdown-item" %>
+            <% else %>
+              <%= link_to locale, url_for(request.params.merge(locale: locale)), class: "dropdown-item" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </ul>
   </div>
 </nav>

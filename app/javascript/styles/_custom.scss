@@ -9,6 +9,11 @@ main {
   flex: 1 0 auto;
 }
 
+.dropdown-content{
+  width: max-content !important;
+  height:auto !important;
+}
+
 .trix-content {
   .attachment-gallery {
     > action-text-attachment,
