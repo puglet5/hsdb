@@ -4,9 +4,8 @@
       <%= nav_helper "", "li" %>
     </ul>
     <a href="#">
-    <img src="/img/logo.png" alt="header logo" class="responsive-img brand-logo center" style='height: 100%; object-fit: contain'/>
+    <img src="<%= image_pack_path "logo.png" %>" alt="header logo" class="responsive-img brand-logo center" style='height: 100%; object-fit: contain'/>
     </a>
-    
 
     <ul id="tabs" class="right hide-on-med-and-down">
       <% unless current_user.nil? %>
