@@ -20,7 +20,9 @@
   <strong>Description:</strong>
   </h3>
   <div>
-  <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
+  <% if @upload.images.any?%>
+    <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
+  <% end%>
   </div>
   <%= @upload.description %>
   <p>
