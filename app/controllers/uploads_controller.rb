@@ -79,11 +79,6 @@ class UploadsController < ApplicationController
     @upload = Upload.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def upload_params
-    params.require(:upload).permit(:title, :body, :description, images: [])
-  end
-
   def bulk_download
     filename = "#{@upload.title}#{Time.current}.zip"
     temp_file = Tempfile.new(filename)
@@ -108,5 +103,10 @@ class UploadsController < ApplicationController
       temp_file.close
       temp_file.unlink
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def upload_params
+    params.require(:upload).permit(:title, :body, :description, images: [], documents: [])
   end
 end
