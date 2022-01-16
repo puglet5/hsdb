@@ -7,6 +7,7 @@ import "channels";
 
 import 'materialize-css/dist/js/materialize'
 import "./direct_upload";
+// import "./dataconfirm"
 import "../styles/application.scss";
 
 import "trix";
@@ -20,6 +21,10 @@ ActiveStorage.start();
 require("trix");
 require("jquery");
 require("@rails/actiontext");
+
+// require('popper.js')
+// require('bootstrap')
+// require('data-confirm-modal')
 
 require.context('../img', true)
 
