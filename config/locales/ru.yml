@@ -14,5 +14,5 @@ ru:
     itmo: "Университет ИТМО"
   uploads:
     index:
-      upload: "Загрузки"
+      uploads: "Загрузки"
       new: "Загрузить"

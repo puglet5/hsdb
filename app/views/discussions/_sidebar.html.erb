@@ -1,10 +1,9 @@
-  <h3 class="font-bold">Categories</h3>
-  <ul class="">
-    <% @categories.each do |c| %>
-      <li><%= link_to c.category_name, c %></li>
-    <% end %>
-  </ul>
-  <br/>
-  <% if has_role?(:admin) %>
-    <%= link_to "New Category", new_category_path, class: "no-underline hover:underline m-2" %>
+<ul class="collection">
+  <li class="collection-header with-header grey lighten-3 center"><h4>Categories</h4></li>
+  <% @categories.each do |c| %>
+    <li class="collecion-item grey lighten-3 center"><%= link_to c.category_name, c %></li>
   <% end %>
+  <% if has_role?(:admin) %>
+    <li class="collecion-item grey lighten-3 center"><%= link_to "New Category", new_category_path, class: "btn" %></li>
+  <% end %>
+</ul>
