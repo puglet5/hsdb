@@ -1,13 +1,15 @@
-<h1><%= full_name(@user) %> </h1>
 <div class="container">
-<p> <%= @user.organization %> </p>
-<% if @user == current_user %>
-  <%= link_to "Edit your account", edit_user_registration_path %>
-<% end %>
+  <h1><%= full_name(@user) %> </h1>
+  <div class="container">
+  <p> <%= @user.organization %> </p>
+  <% if @user == current_user %>
+    <%= link_to "Edit your account", edit_user_registration_path %>
+  <% end %>
 
-<br>
+  <br>
 
-<% if @user.has_role?("admin") %>
-  <%= link_to "Users Table", "/admin/users" %>
-<% end %>
+  <% if @user.has_role?("admin") %>
+    <%= link_to "Users Table", "/admin/users" %>
+  <% end %>
+  </div>
 </div>

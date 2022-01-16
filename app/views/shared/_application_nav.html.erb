@@ -10,7 +10,7 @@
     <ul id="tabs" class="right hide-on-med-and-down">
       <% unless current_user.nil? %>
         <li>
-          <%= link_to "#{current_user.first_name}", "/users/#{current_user.slug}" %>
+          <%= link_to "#{current_user.first_name}", "/#{locale}/users/#{current_user.slug}" %>
         </li>
       <% end %>
 

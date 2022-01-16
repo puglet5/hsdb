@@ -38,11 +38,10 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
-        format.json { render :show, status: :created, location: @upload }
+        flash[:success] = 'Upload was successfully created'
+        format.html { redirect_to @upload }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,11 +50,10 @@ class UploadsController < ApplicationController
   def update
     respond_to do |format|
       if @upload.update(upload_params)
-        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
-        format.json { render :show, status: :ok, location: @upload }
+        flash[:success] = 'Upload was successfully updated'
+        format.html { redirect_to @upload }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,8 +62,8 @@ class UploadsController < ApplicationController
   def destroy
     @upload.destroy
     respond_to do |format|
-      format.html { redirect_to uploads_url, notice: 'Upload was successfully destroyed.' }
-      format.json { head :no_content }
+      flash[:success] = 'Upload was successfully destroyed'
+      format.html { redirect_to uploads_url }
     end
   end
 
@@ -90,11 +88,11 @@ class UploadsController < ApplicationController
 
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
         @upload.images.all.each do |attachment|
-          File.open(Tempfile.new("#{attachment.filename}"), 'w', encoding: 'ASCII-8BIT') do |file|
+          File.open(Tempfile.new(attachment.filename.to_s), 'w', encoding: 'ASCII-8BIT') do |file|
             attachment.download do |chunk|
               file.write(chunk)
             end
-            zip.add("#{attachment.filename}", file.path)
+            zip.add(attachment.filename.to_s, file.path)
           end
         end
       end

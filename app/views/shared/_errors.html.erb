@@ -1,0 +1,8 @@
+<% if obj.errors.full_messages.any? %>
+  <ul class="">
+    <% obj.errors.full_messages.each do |msg| %>
+      <li class = "materialert error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+

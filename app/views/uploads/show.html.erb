@@ -1,25 +1,24 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
-<h2 class="center">
+  <h2 class="center">
   <%= @upload.title %>
-</h1>
-<% (0...@upload.images.count).each do |image| %>
+  </h1>
+  <% (0...@upload.images.count).each do |image| %>
   <%= image_tag(@upload.thumbnail(image)) %>
   <!--
   <%= link_to "Download", rails_blob_path(@upload.images.find_by(blob_id: (@upload.images.first.blob_id + image)), disposition: "attachment") %>
-   -->
-<% end %>
-<h3>
+  -->
+  <% end %>
+  <h3>
   <strong>Description:</strong>
-</h3>
+  </h3>
   <div>
   <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
-</div>
+  </div>
   <%= @upload.description %>
-<p>
+  <p>
   <%= @upload.body %>
-</p>
-<%= link_to "Edit", edit_upload_path(@upload) %> |
-<%= link_to "Back", uploads_path %>
-</div>
+  </p>
+  <%= link_to "Edit", edit_upload_path(@upload), class: "btn", style: "background-color: #1E51A4 !important;" %> |
+  <%= link_to "Back", uploads_path, class: "btn", style: "background-color: #1E51A4 !important;" %>
 
+</div>
