@@ -49,7 +49,12 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
-      if @upload.update(upload_params)
+      if @upload.update(upload_params.reject { |k| k['images'] })
+        if upload_params[:images].present?
+          upload_params[:images].each do |image|
+            @upload.images.attach(image)
+          end
+        end
         flash[:success] = 'Upload was successfully updated'
         format.html { redirect_to @upload }
       else
