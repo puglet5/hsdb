@@ -1,10 +1,26 @@
-<%= simple_form_for @discussion do |f| %>
+<%= simple_form_for(@discussion) do |f| %>
   <%= f.error_notification %>
+  <div class="">
+    <div class="">
       <%= f.input :title, required: true, input_html: { class: "input" }, wrapper: false, label_html: { class: "label" } %>
+    </div>
+  </div>
+  <div class="">
+    <div class="">
       <%= f.rich_text_area :content, required: true, input_html: { class: "textarea" }, wrapper: false, label_html: { class: "label" } %>
-
-      <%= f.select :category_id, Category.all.collect { |p| p.id }, include_blank: true %>
-
+    </div>
+  </div>
+  <div class="">
+    <label class="">Category</label>
+    <div class="">
+      <span class="">
+        <%= f.input_field :category_id, default: "", collection: @categories.map { |c| [c.category_name, c.id] } %>
+      </span>
+    </div>
+  </div>
+  <div class="">
+    <div class="">
       <%= f.button :submit, class: "" %>
-      <%= Category.all.collect { |p| p.id } %>
+    </div>
+  </div>
 <% end %>

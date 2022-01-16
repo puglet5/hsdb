@@ -1,5 +1,13 @@
-<p id="notice"><%= notice %></p>
 <div class="container">
-  <%= render "shared/discussions" %>
-  <%= render "sidebar" %>
+  <div class="row">
+
+    <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+      <%= render "sidebar" %>
+    </div>
+
+    <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+      <%= render "shared/discussions" %>
+    </div>
+
+  </div>
 </div>
