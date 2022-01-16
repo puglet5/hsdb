@@ -55,10 +55,10 @@ gem 'simple_form', '~> 5.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 5.0.0'
 end
 
 group :development do
@@ -72,6 +72,7 @@ group :development do
   gem 'erd'
   gem 'faker', '~> 2.18'
   gem 'htmlbeautifier'
+  gem 'letter_opener'
   gem 'rails-erd'
   gem 'rails-perftest'
   gem 'rubocop', '~> 1.24', require: false
@@ -79,7 +80,6 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'
   gem 'spring'
-  gem 'letter_opener'
 end
 
 group :test do

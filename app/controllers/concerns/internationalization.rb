@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Internationalization
   extend ActiveSupport::Concern
 
@@ -31,7 +33,7 @@ module Internationalization
         quality = quality ? quality.to_f : 1.0
         [locale, quality]
       end.reject do |(locale, quality)|
-        locale == '*' || quality == 0
+        locale == '*' || quality.zero?
       end.sort_by do |(_, quality)|
         quality
       end.map(&:first)
@@ -47,7 +49,7 @@ module Internationalization
     end
 
     def match?(s1, s2)
-      s1.to_s.casecmp(s2.to_s) == 0
+      s1.to_s.casecmp(s2.to_s).zero?
     end
 
     def default_url_options

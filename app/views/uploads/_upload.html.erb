@@ -37,7 +37,7 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><%= link_to upload.title, upload %><i class="material-icons right">close</i></span>
       <p class="truncate"><%= upload.description %></p>
-      <p>Created <%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <a href="#"><%= upload.user.first_name %></a></p>
+      <p>Created <%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <%= link_to upload.user.first_name, user_path(upload.user) %></p>
     </div>
   </div>
 </div>
