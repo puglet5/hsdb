@@ -4,10 +4,10 @@
   <% end %>
   <% if blob.video? %>
     <%= video_tag url_for(blob.attachable),
-          preload: "auto",
-          controls: "controls",
-          width: "640",
-          height: "360" %>
+                  preload: "auto",
+                  controls: "controls",
+                  width: "640",
+                  height: "360" %>
   <% end %>
 
   <figcaption class="attachment__caption">

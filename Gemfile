@@ -55,6 +55,9 @@ gem 'simple_form', '~> 5.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 5.0.0'
 end
 
@@ -69,6 +72,7 @@ group :development do
   gem 'erd'
   gem 'faker', '~> 2.18'
   gem 'htmlbeautifier'
+  gem 'letter_opener'
   gem 'rails-erd'
   gem 'rails-perftest'
   gem 'rubocop', '~> 1.24', require: false
@@ -80,7 +84,6 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
