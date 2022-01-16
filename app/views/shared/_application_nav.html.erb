@@ -4,9 +4,8 @@
       <%= nav_helper "", "li" %>
     </ul>
     <a href="#">
-    <img src="/img/logo.png" alt="header logo" class="responsive-img brand-logo center" style='height: 100%; object-fit: contain'/>
+    <img src="<%= image_pack_path "logo.png" %>" alt="header logo" class="responsive-img brand-logo center" style='height: 100%; object-fit: contain'/>
     </a>
-    
 
     <ul id="tabs" class="right hide-on-med-and-down">
       <% unless current_user.nil? %>
@@ -16,6 +15,20 @@
       <% end %>
 
       <%= auth_helper "", "li" %>
+      <li>
+      <a class='dropdown-trigger' href='#' data-target='dropdown1' style= "background-color: #1E51A4 !important;" >Lang</a>
+      
+      </li>
+      <!-- Dropdown Trigger -->
+
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <% I18n.available_locales.each do |locale| %>
+          <li>
+            <%= link_to t(locale), url_for(request.params.merge(locale: locale)), class: "dropdown-item" %>
+          </li>
+        <% end %>
+      </ul>
     </ul>
   </div>
 </nav>

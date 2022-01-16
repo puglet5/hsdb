@@ -1,0 +1,18 @@
+ru:
+  en: "Английский"
+  ru: "Русский"
+  nav:
+    home: "Главная"
+    about: "Контакты"
+    uploads: "Загрузки"
+    forum: "Форум"
+  auth:
+    login: "Войти"
+    register: "Регистрация"
+    logout: "Выйти"
+  footer:
+    itmo: "Университет ИТМО"
+  uploads:
+    index:
+      upload: "Загрузки"
+      new: "Загрузить"

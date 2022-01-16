@@ -50,6 +50,13 @@ main {
   flex: 1 0 auto;
 }
 
+//Locale dropdown
+
+.dropdown-content{
+  width: max-content !important;
+  height:auto !important;
+}
+
 //Trix
 
 .trix-content {

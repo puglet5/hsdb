@@ -3,8 +3,8 @@ module ApplicationHelper
     auth_links = ''
 
     if user_signed_in?
-      auth_links << "<#{tag_type}>#{link_to 'Logout', destroy_user_session_path, method: :delete,
-                                                                                 class: style}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete,
+                                                                                         class: style}</#{tag_type}>"
     else
       auth_items.each do |item|
         auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
@@ -16,18 +16,18 @@ module ApplicationHelper
 
   def set_copyright
     # Renderer.copyright "Michael Basmanov", "All rights reserved"
-    Renderer.copyright 'ITMO University'
+    Renderer.copyright t('footer.itmo')
   end
 
   def auth_items
     [
       {
         url: new_user_session_path,
-        title: 'Login'
+        title: t('auth.login')
       },
       {
         url: new_user_registration_path,
-        title: 'Register'
+        title: t('auth.register')
       }
     ]
   end
@@ -36,19 +36,19 @@ module ApplicationHelper
     [
       {
         url: root_path,
-        title: 'Home'
+        title: t('nav.home')
       },
       {
         url: about_path,
-        title: 'About'
+        title: t('nav.about')
       },
       {
         url: uploads_path,
-        title: 'Uploads'
+        title: t('nav.uploads')
       },
       {
         url: discussions_path,
-        title: 'Forum'
+        title: t('nav.forum')
       }
     ]
   end

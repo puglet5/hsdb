@@ -1,8 +1,12 @@
+const { environment } = require('@rails/webpacker')
+
 const webpack = require('webpack')
+
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery',
+    'window.jQuery': 'jquery',
     Popper: ['popper.js', 'default'],
     toastr: 'toastr/toastr',
     ApexCharts: ['apexcharts', 'default'],
@@ -10,15 +14,5 @@ environment.plugins.prepend('Provide',
     Rails: ['@rails/ujs']
   })
 )
-
-Encore.configureDevServerOptions(options => {
-  options.allowedHosts = 'all';
-  options.https = {
-    cert: '/etc/apache2/ssl/domain.dev/fullchain.pem',
-    key: '/etc/apache2/ssl/domain.dev/privkey.pem',
-  };
-  
-  delete options.client.host;
-})
 
 module.exports = environment
