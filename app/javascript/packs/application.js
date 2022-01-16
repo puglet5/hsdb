@@ -6,6 +6,7 @@ import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
 import 'materialize-css/dist/js/materialize'
+import "./direct_upload";
 import "../styles/application.scss";
 
 import "trix";

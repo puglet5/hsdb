@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require('zip')
+
 class UploadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]
@@ -12,7 +14,15 @@ class UploadsController < ApplicationController
   end
 
   # GET /uploads/1 or /uploads/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html do
+        @upload = Upload.find(params[:id])
+      end
+
+      format.zip { bulk_download }
+    end
+  end
 
   # GET /uploads/new
   def new
@@ -69,5 +79,31 @@ class UploadsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def upload_params
     params.require(:upload).permit(:title, :body, :description, images: [])
+  end
+
+  def bulk_download
+    filename = "#{@upload.title}#{Time.current}.zip"
+    temp_file = Tempfile.new(filename)
+
+    begin
+      Zip::OutputStream.open(temp_file) { |zos| }
+
+      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
+        @upload.images.all.each do |attachment|
+          File.open(Tempfile.new("#{attachment.filename}"), 'w', encoding: 'ASCII-8BIT') do |file|
+            attachment.download do |chunk|
+              file.write(chunk)
+            end
+            zip.add("#{attachment.filename}", file.path)
+          end
+        end
+      end
+
+      zip_data = File.read(temp_file.path)
+      send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: filename)
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
   end
 end
