@@ -67,7 +67,7 @@ module ApplicationHelper
     'active' if current_page? path
   end
 
-  require 'redcarpet/render_strip'
+  # require 'redcarpet/render_strip'
 
   def has_role?(role)
     current_user && current_user.has_role?(role)
