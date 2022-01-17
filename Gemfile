@@ -59,6 +59,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'awesome_print'
 end
 
 group :development do
