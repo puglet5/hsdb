@@ -15,17 +15,12 @@ module Admin
       end
     end
 
-    def crate
-    end
+    def crate; end
 
-    def edit
-    end
+    def edit; end
 
     def update
-      if params[:user][:password].blank?
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
+      params[:user][:role_ids] ||= []
       if @user.update_with_password user_params
         flash[:success] = 'User was successfully updated'
         redirect_to admin_users_path
@@ -63,7 +58,9 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :roles, :password, :password_confirmation, :organization, :bio, :current_password)
+      list_allowed_params = []
+      list_allowed_params += [:email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, role_ids: []] if current_user.has_role?(:admin)
+      params.require(:user).permit(list_allowed_params)
     end
   end
 end
