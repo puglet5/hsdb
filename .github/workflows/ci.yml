@@ -13,14 +13,26 @@ jobs:
         ruby:
           - 2.7
           - "3.0"
+        node-version:
+        - '16.13.2'
+        database-name:
+        - ITMO_HSDB_test
+        database-password:
+        - postgres
+        database-user:
+        - postgres
+        database-host:
+        - 127.0.0.1
+        database-port:
+        - 5432
     runs-on: ${{ matrix.os }}
     services:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: postgres        
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
         ports:
           - 5432:5432
         # Set health checks to wait until postgres has started
@@ -30,16 +42,33 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-      - name: Install graphicsmagick
-        run: sudo apt-get update && sudo apt-get install -y graphicsmagick
-      - name: Run rubocop
-        run: bundle exec rubocop
-      - name: Run rspec
-        run: bundle exec rspec
+    - name: Check out Git Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby, Bundler and Rails
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install packages
+      run: |
+        yarn install --check-files
+
+    - name: Setup test database
+      env:
+        RAILS_ENV: test
+        DATABASE_NAME_TEST: ${{ matrix.database-name }}
+        DATABASE_USER: ${{ matrix.database-user }}
+        DATABASE_PASSWORD: ${{ matrix.database-password }}
+        DATABASE_HOST: ${{ matrix.database-host }}
+        DATABASE_PORT: ${{ matrix.database-port }}
+        POSTGRES_DB: ${{ matrix.database-name }}
+      run: |
+        bundle exec rails db:migrate
+        bundle exec rails db:seed
