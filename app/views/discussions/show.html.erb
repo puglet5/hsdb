@@ -18,7 +18,7 @@
             <% if discussion_author(@discussion) %>
               <div class="">
                 <%= link_to "Edit Discussion", edit_discussion_path(@discussion), class: "button" %>
-                <%= link_to "Delete", discussion_path(@discussion), method: :delete, data: { confirm: "Delete discussion?" }, class: "button" %>
+                <%= link_to "Delete", discussion_path(@discussion), method: :delete, data: { confirm: "Delete discussion?" }, class: "btn red" %>
               </div>
             <% end %>
           </div>

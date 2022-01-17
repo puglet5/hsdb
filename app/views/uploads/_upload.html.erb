@@ -13,7 +13,7 @@
     </div>
     <div class="card-action">
       <%= link_to "Edit", edit_upload_path(upload) %>
-      <%= link_to "Delete", upload, method: :delete, data: { confirm: "Are you sure?" } %>
+      <%= link_to "Delete", upload, method: :delete, data: { confirm: "Are you sure?" }, class: "btn red" %>
     </div>
   </div>
 </div>
@@ -33,7 +33,7 @@
     <div class="card-action">
         <%= link_to "Edit", edit_upload_path(upload) %>
         <%= link_to "Delete", upload, method: :delete, data: { confirm: "Are you sure?",
-                                                               'confirm-dialog': "#my-confirm-dialog" } %>
+                                                               'confirm-dialog': "#my-confirm-dialog" }, class: "btn red" %>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><%= link_to upload.title, upload %><i class="material-icons right">close</i></span>
