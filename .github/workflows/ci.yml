@@ -23,4 +23,7 @@ jobs:
           bundler-cache: true
       - name: Install graphicsmagick
         run: sudo apt-get update && sudo apt-get install -y graphicsmagick
+      - name: Run postgres
+        run: sudo systemctl enable --now postgresql
+      - name: Run rspec
       - run: bundle exec rspec
