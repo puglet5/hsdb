@@ -26,4 +26,4 @@ jobs:
       - name: Run postgres
         run: sudo systemctl enable --now postgresql
       - name: Run rspec
-      - run: bundle exec rspec
+        run: bundle exec rspec
