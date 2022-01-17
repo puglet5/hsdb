@@ -125,6 +125,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.1)
+      devise (>= 4.8.0)
+    devise_materialize (1.2.1)
+      railties (>= 4.1.0, < 7.0.0)
     diff-lcs (1.5.0)
     erd (0.8.0)
       nokogiri
@@ -181,6 +185,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    material_icons (2.2.1)
+      railties (>= 3.2)
     matrix (0.4.2)
     method_source (1.0.0)
     mini_magick (4.11.0)
@@ -359,6 +365,8 @@ DEPENDENCIES
   caxlsx_rails
   database_cleaner
   devise (~> 4.8)
+  devise-i18n (~> 1.10.1)
+  devise_materialize (~> 1.2.0)
   erd
   factory_bot_rails
   faker (~> 2.18)
@@ -370,6 +378,7 @@ DEPENDENCIES
   kaminari (~> 1.2, >= 1.2.1)
   letter_opener
   listen (~> 3.3)
+  material_icons
   materialize-sass!
   mini_magick (~> 4.11)
   pg (~> 1.1)

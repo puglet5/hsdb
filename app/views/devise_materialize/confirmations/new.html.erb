@@ -1,0 +1,34 @@
+<div class=" container row login-form">
+  <div class="col s12">
+    <div class="card hoverable">
+      <div class="card-content">
+        <span class="card-title center">Resend Confirmation Instructions</span>
+        <div class="divider"></div>
+        <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f| %>
+          <% if devise_error_messages? || alert %>
+            <div class="form-errors red lighten-1">
+              <%= devise_error_messages! %>
+              <%= alert %>
+            </div>
+          <% end %>
+          <div class="form-inputs row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">email</i>
+              <%= f.email_field :email, autofocus: true, required: true, class: "validate",
+                                        value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+              <%= f.label :email %>
+            </div>
+          </div>
+          <div class="form-actions center">
+            <%= f.submit "Resend Confirmation Instructions", class: "btn wave-effects" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-action">
+        <div class="devise-links">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

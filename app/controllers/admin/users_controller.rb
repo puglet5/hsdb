@@ -60,7 +60,7 @@ module Admin
 
     def user_params
       list_allowed_params = []
-      list_allowed_params += [:email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }] if current_user.has_role?(:admin)
+      list_allowed_params += [:avatar, :email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }] if current_user.has_role?(:admin)
       params.require(:user).permit(list_allowed_params)
     end
   end

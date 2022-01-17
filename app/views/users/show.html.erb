@@ -1,10 +1,18 @@
 <div class="container">
-  <h1><%= full_name(@user) %> </h1>
+  <h1>
+  <% if @user.avatar.present? %>
+
+    <%= image_tag(@user.avatar.representation(resize: "50x50!"), class: "circle responsive-img") %>
+    
+  <% end %>
+<%= full_name(@user) %> </h1>
   <div class="container">
   <p> <%= @user.organization %> </p>
   <% if @user == current_user %>
     <%= link_to "Edit your account", edit_user_registration_path %>
   <% end %>
+
+
 
   <br>
 
