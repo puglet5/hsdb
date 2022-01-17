@@ -1,0 +1,61 @@
+
+<%= render "shared/errors", obj: user %>
+
+<div class="container">
+  <%= form_for(user, url: admin_user_path(user), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: user %>
+    <div class="field">
+      <p>Profile picture</p>
+      <% if user.avatar.attached? %>
+        <%= image_tag user.avatar.variant(resize: "100x100!"), class: "" %>
+      <% else %>
+        <% # default avatar %>
+      <% end %>
+      <%= f.file_field :avatar %>
+    </div>
+    <div class="field">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :organization %><br />
+      <%= f.text_field :organization %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+    <!-- 
+    <div class="field">
+      <%= f.label :roles %><br />
+      <%= f.select :roles, user_roles, {} %>
+    </div>
+    -->
+    <% if devise_mapping.confirmable? && user.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= user.unconfirmed_email %></div>
+    <% end %>
+    <div class="field">
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+    <div class="field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
+</div>

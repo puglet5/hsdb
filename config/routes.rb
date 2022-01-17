@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get 'welcome', to: 'pages#welcome'
 
     namespace :admin do
-      resources :users, only: %i[index]
+      resources :users, only: %i[index create edit update destroy]
     end
 
     root to: 'pages#home'

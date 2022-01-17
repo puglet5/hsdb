@@ -8,8 +8,10 @@ class User < ApplicationRecord
 
   has_many :discussions, dependent: nil
   has_many :uploads, dependent: nil
-  has_many :categories, through: :discussions
+  has_many :categories, through: :discussions, dependent: nil
   has_one_attached :avatar
+
+  validates_confirmation_of :password
 
   extend FriendlyId
   friendly_id :full_name_slug, use: %i[slugged finders]
