@@ -6,9 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  has_many :discussions, dependent: nil
-  has_many :uploads, dependent: nil
-  has_many :categories, through: :discussions, dependent: nil
+  has_many :discussions, dependent: :nullify
+  has_many :uploads, dependent: :nullify
+  has_many :categories, through: :discussions
   has_one_attached :avatar
 
   validates_confirmation_of :password
