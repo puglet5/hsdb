@@ -41,15 +41,15 @@ module Internationalization
       return if locales.empty?
 
       if I18n.enforce_available_locales
-        locale = locales.reverse.find { |locale| I18n.available_locales.any? { |al| match?(al, locale) } }
+        locale = locales.reverse.find { |l| I18n.available_locales.any? { |al| match?(al, l) } }
         I18n.available_locales.find { |al| match?(al, locale) } if locale
       else
         locales.last
       end
     end
 
-    def match?(s1, s2)
-      s1.to_s.casecmp(s2.to_s).zero?
+    def match?(str1, str2)
+      str1.to_s.casecmp(str2.to_s).zero?
     end
 
     def default_url_options

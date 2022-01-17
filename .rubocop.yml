@@ -16,3 +16,24 @@ Layout/LineLength:
 
 Rails/FilePath:
   EnforcedStyle: arguments
+  Enabled: false
+  
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Naming:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+  
+  

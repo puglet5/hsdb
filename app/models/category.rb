@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  has_many :discussions
+  has_many :discussions, dependent: nil
   has_many :users, through: :discussions
 
   resourcify

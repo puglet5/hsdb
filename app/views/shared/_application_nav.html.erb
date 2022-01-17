@@ -1,7 +1,7 @@
 <nav>
   <div class="nav-wrapper" style="background-color: #1E51A4 !important;">
     <ul id="tabs" class="left hide-on-med-and-down">
-      <%= nav_helper "", "li" %>
+      <%= nav_helper "li", "" %>
     </ul>
     <a href="#">
     <img src="<%= image_pack_path "logo.png" %>" alt="header logo" class="responsive-img brand-logo center" style='height: 100%; object-fit: contain'/>
@@ -13,7 +13,7 @@
           <%= link_to "#{current_user.first_name}", "/#{locale}/users/#{current_user.slug}" %>
         </li>
       <% end %>
-      <%= auth_helper "", "li" %>
+      <%= auth_helper "li", "" %>
       <li>
       <a class='dropdown-trigger' href='#' data-target='dropdown1' style= "background-color: #1E51A4 !important;" ><%= t(locale) %></a>
       

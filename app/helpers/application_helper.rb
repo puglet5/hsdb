@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module ApplicationHelper
   def devise_mapping
     Devise.mappings[:user]
@@ -11,7 +13,7 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def auth_helper(style = '', tag_type)
+  def auth_helper(tag_type, style = '')
     auth_links = ''
 
     if user_signed_in?
@@ -23,7 +25,7 @@ module ApplicationHelper
       end
     end
 
-    auth_links.html_safe
+    sanitize auth_links.html_safe
   end
 
   def set_copyright
@@ -65,14 +67,14 @@ module ApplicationHelper
     ]
   end
 
-  def nav_helper(style = '', tag_type)
+  def nav_helper(tag_type, style = '')
     nav_links = ''
 
     nav_items.each do |item|
       nav_links << "<#{tag_type} class= '#{active? item[:url]}'><a href='#{item[:url]}' class = '#{style}'> #{item[:title]} </a></#{tag_type}>"
     end
 
-    nav_links.html_safe
+    sanitize nav_links.html_safe
   end
 
   def active?(path)
@@ -82,13 +84,13 @@ module ApplicationHelper
   # require 'redcarpet/render_strip'
 
   def has_role?(role)
-    current_user && current_user.has_role?(role)
+    current_user&.has_role?(role)
   end
 
   class Renderer
     def self.copyright(msg)
       # "&copy; #{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
-      "#{Time.now.year} | #{msg}".html_safe
+      "#{Time.zone.now.year} | #{msg}"
     end
   end
 

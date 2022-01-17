@@ -7,7 +7,7 @@ class UserMailer < Devise::Mailer
 
   def reset_password_instructions(user)
     @user = user
-    if user
+    return unless user do
       create_reset_password_token(user)
       mail(to: user.email, subject: 'Password reset | ITMO Heritage DB')
     end
