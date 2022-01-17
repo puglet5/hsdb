@@ -60,6 +60,9 @@ jobs:
       run: |
         yarn install --check-files
 
+    - name: Install graphicsmagick
+      run: sudo apt-get update && sudo apt-get install -y graphicsmagick
+
     - name: Setup test database
       env:
         RAILS_ENV: test
@@ -72,3 +75,7 @@ jobs:
       run: |
         bundle exec rails db:migrate
         bundle exec rails db:seed
+    - name: Run rubocop
+      run: bundle exec rubocop
+    - name: Run rspec
+      run: bundle exec rspec
