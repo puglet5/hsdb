@@ -47,7 +47,12 @@
   right: 5px;
 }
 .materialert.info{
-  background-color: #039be5;
+  background-color: #1E51A4;
+  color: #fff;
+}
+
+.materialert.notice{
+  background-color: #1E51A4;
   color: #fff;
 }
 .materialert.success{
@@ -58,7 +63,7 @@
   background-color: #c62828;
   color: #fff;
 }
-.materialert.danger{
+.materialert.alert{
   background-color: #c62828;
   color: #fff;
 }

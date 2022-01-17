@@ -8,7 +8,7 @@ module Admin
     def index
       respond_to do |format|
         format.html do
-          @users = User.order(created_at: :desc)
+          @users = User.order(created_at: :asc)
         end
 
         format.zip { respond_with_zipped_users }
@@ -21,6 +21,7 @@ module Admin
 
     def update
       params[:user][:role_ids] ||= []
+
       if @user.update_with_password user_params
         flash[:success] = 'User was successfully updated'
         redirect_to admin_users_path

@@ -17,8 +17,7 @@ module ApplicationHelper
     auth_links = ''
 
     if user_signed_in?
-      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete,
-                                                                                         class: style}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete}</#{tag_type}>"
     else
       auth_items.each do |item|
         auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"

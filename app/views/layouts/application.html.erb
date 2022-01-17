@@ -11,11 +11,9 @@
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
   <body>
-    <!--
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-    -->
+
     <%= render "shared/application_nav" %>
+
     <main class="grey lighten-3">
       <% flash.each do |k, v| %>
         <%= tag.div v, class: "container materialert #{k}", role: "alert" %>

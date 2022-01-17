@@ -67,7 +67,7 @@ class UploadsController < ApplicationController
   def destroy
     @upload.destroy
     respond_to do |format|
-      flash[:success] = 'Upload was successfully destroyed'
+      flash[:success] = 'Upload was successfully deleted'
       format.html { redirect_to uploads_url }
     end
   end
