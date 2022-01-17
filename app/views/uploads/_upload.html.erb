@@ -9,7 +9,7 @@
       <% end %> 
 
       <p class="truncate"><%= upload.description %></p>
-      <p class=""><%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <a href="#"><%= upload.user.first_name %></a></p>
+      <p class=""><%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <a href="#"><%= upload.user&.first_name %></a></p>
     </div>
     <div class="card-action">
       <%= link_to "Edit", edit_upload_path(upload) %>
@@ -38,7 +38,7 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><%= link_to upload.title, upload %><i class="material-icons right">close</i></span>
       <p class="truncate"><%= upload.description %></p>
-      <p>Created <%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <%= link_to upload.user.first_name, user_path(upload.user) %></p>
+      <p>Created <%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <%= link_to upload.user&.first_name, user_path(upload.user) if !upload.user.nil? %></p>
     </div>
   </div>
 </div>

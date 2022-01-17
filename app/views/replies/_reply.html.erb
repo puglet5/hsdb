@@ -2,7 +2,7 @@
     <div class="">
       <div class="">
         <p>
-          <strong><%= reply.user.first_name %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
+          <strong><%= reply.user&.first_name %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
           <br/>
           <%= reply.reply %>
         </p>

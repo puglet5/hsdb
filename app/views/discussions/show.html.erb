@@ -11,7 +11,7 @@
     
 
         <h1 class=""><%= @discussion.title %></h1>
-        <h3 class="">by <%= @discussion.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %></h3>
+        <h3 class="">by <%= @discussion&.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %></h3>
         <div class="">
           <div class=""></div>
           <div class="">

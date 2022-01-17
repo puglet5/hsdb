@@ -4,9 +4,6 @@
     <% @discussions.each do |discussion| %>
       <div class="">
         <div class="">
-          <% # gravatar_image_tag(discussion.user.email, class:'border-radius-50', size: 48, alt: discussion.user.first_name) %>
-        </div>
-        <div class="">
           <%= link_to discussion do %>
             <h3 class=""><%= discussion.title %></h3>
           <% end %>
@@ -16,7 +13,7 @@
                   <% if discussion.category %>
                     <%= link_to discussion.category.category_name, discussion.category %>
                   <% end %>
-                  by <%= (discussion.user.first_name) + " " + (discussion.user.last_name) %>
+                  by <%= (discussion.user&.first_name) + " " + (discussion&.user.last_name) %>
                 </small>
               </em>
             </p>
