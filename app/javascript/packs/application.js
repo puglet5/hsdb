@@ -32,3 +32,7 @@ $(document).ready(function(){
   $('.modal').modal();
   $('.dropdown-trigger').dropdown();
 });
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
