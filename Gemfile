@@ -51,6 +51,8 @@ gem 'simple_form', '~> 5.1'
 gem 'devise-i18n', '~> 1.10.1'
 gem "material_icons"
 
+gem 'public_activity'
+
 gem "devise_materialize", "~>1.2.0"
 
 group :development, :test do

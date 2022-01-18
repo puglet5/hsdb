@@ -3,6 +3,9 @@
 class User < ApplicationRecord
   extend FriendlyId
   rolify
+
+  include PublicActivity::Model
+  tracked owner: :itself
   # validate :must_have_a_role
 
   devise :database_authenticatable, :registerable,

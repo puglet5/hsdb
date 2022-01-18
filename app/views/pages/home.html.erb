@@ -1,4 +1,9 @@
 <div class="container">
-  <h3>Nulla do excepteur incididunt consequat occaecat nisi officia culpa.</h3>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt error sequi, at quae expedita provident in corporis placeat corrupti ex itaque consectetur soluta. Omnis nobis autem tempore aut sit voluptatem.</p>
+  <h3>Journal</h3>
+    <div class="activity">
+    <% @activities.each do |activity| %>
+      <%= render_activity activity %>
+    <% end %>
+    </div>
 </div>
+

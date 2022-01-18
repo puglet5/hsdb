@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Reply < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: Proc.new { |controller, model| controller.current_user }
+
   belongs_to :discussion
   belongs_to :user
 

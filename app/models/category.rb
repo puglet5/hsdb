@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
+  include PublicActivity::Model
+  tracked
+
   has_many :discussions, dependent: nil
   has_many :users, through: :discussions
 
