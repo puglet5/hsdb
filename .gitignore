@@ -46,3 +46,10 @@ mkmf.log
 yarn-debug.log*
 .yarn-integrity
 erd*
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
