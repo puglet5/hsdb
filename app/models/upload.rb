@@ -2,6 +2,8 @@
 
 class Upload < ApplicationRecord
   include PublicActivity::Model
+  include Authorship
+
   tracked owner: Proc.new { |controller, model| controller.current_user }
 
   has_many_attached :images
@@ -17,6 +19,10 @@ class Upload < ApplicationRecord
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
+  end
+
+  def author?(obj)
+    obj.user == self
   end
 
   def thumbnail(input)

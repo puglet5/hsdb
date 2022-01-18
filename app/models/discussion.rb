@@ -2,6 +2,8 @@
 
 class Discussion < ApplicationRecord
   include PublicActivity::Model
+  include Authorship
+
   tracked owner: Proc.new { |controller, model| controller.current_user }
 
   belongs_to :category

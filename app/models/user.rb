@@ -37,6 +37,10 @@ class User < ApplicationRecord
     slug.blank? || first_name_changed? || last_name_changed?
   end
 
+  def guest?
+    false
+  end
+
   private
 
   def must_have_a_role

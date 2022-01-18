@@ -5,6 +5,8 @@ require('zip')
 class UploadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]
+  before_action :authorize_upload
+  after_action :verify_authorized
 
   # GET /uploads or /uploads.json
   def index
@@ -111,5 +113,9 @@ class UploadsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def upload_params
     params.require(:upload).permit(:title, :body, :description, images: [], documents: [])
+  end
+
+  def authorize_upload
+    authorize(@upload || Upload)
   end
 end

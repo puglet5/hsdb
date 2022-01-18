@@ -50,6 +50,7 @@ gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
 gem 'devise-i18n', '~> 1.10.1'
 gem "material_icons"
+gem "pundit"
 
 gem 'public_activity'
 

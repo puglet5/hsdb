@@ -2,6 +2,7 @@
 
 class Category < ApplicationRecord
   include PublicActivity::Model
+  include Authorship
   tracked
 
   has_many :discussions, dependent: nil
