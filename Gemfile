@@ -45,15 +45,15 @@ gem 'mini_magick', '~> 4.11'
 gem 'rails-i18n', '~> 6.0'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 # gem 'redcarpet', '~> 3.5', '>= 3.5.1'
+gem 'bullet'
 gem 'devise-i18n', '~> 1.10.1'
+gem 'devise_materialize', '~>1.2.0'
 gem 'material_icons'
+gem 'public_activity'
 gem 'pundit'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
-gem 'public_activity'
-gem 'devise_materialize', '~>1.2.0'
-gem 'bullet'
 
 group :development, :test do
   gem 'awesome_print'
@@ -66,9 +66,9 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 4.1.0'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'web-console', '>= 4.1.0'
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'erd'
   gem 'faker', '~> 2.18'
