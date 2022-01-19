@@ -45,7 +45,7 @@ module Admin
           zos.print render_to_string(
             locale: false, layout: false, handlers: [:axlsx], formats: [:xlsx],
             template: 'admin/users/user',
-            locals: { user: user }
+            locals: { user: user },
           )
         end
       end
@@ -59,8 +59,7 @@ module Admin
     end
 
     def user_params
-      list_allowed_params = []
-      list_allowed_params += [:avatar, :email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }] if current_user.has_role?(:admin)
+      list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }]
       params.require(:user).permit(list_allowed_params)
     end
   end
