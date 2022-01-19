@@ -51,13 +51,11 @@ gem 'pundit'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
-
 gem 'public_activity'
-
 gem 'devise_materialize', '~>1.2.0'
+gem 'bullet'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'awesome_print'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
@@ -69,11 +67,9 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'erd'
   gem 'faker', '~> 2.18'
   gem 'htmlbeautifier'
@@ -85,6 +81,7 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'
   gem 'spring'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 end
 
 group :test do

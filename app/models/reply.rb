@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Reply < ApplicationRecord
-  include PublicActivity::Model\
-    include Authorship
+  include PublicActivity::Model
+  include Authorship
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
