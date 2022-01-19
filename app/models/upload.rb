@@ -14,6 +14,8 @@ class Upload < ApplicationRecord
 
   has_rich_text :body
 
+  enum status: { draft: 0, active: 1, archived: 2 }
+
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 

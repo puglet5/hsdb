@@ -11,7 +11,7 @@ class UploadsController < ApplicationController
   # GET /uploads or /uploads.json
   def index
     # @uploads = Upload.all.page(params[:page]).per(5)
-    @q = Upload.includes([images_attachments: :blob]).ransack(params[:q])
+    @q = Upload.includes([:user, images_attachments: :blob]).ransack(params[:q])
     @uploads = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
@@ -110,7 +110,7 @@ class UploadsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:title, :body, :description, images: [], documents: [])
+    params.require(:upload).permit(:title, :body, :description, :status, images: [], documents: [])
   end
 
   def authorize_upload

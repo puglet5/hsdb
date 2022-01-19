@@ -1,0 +1,36 @@
+.login-form {
+  margin: auto !important;
+}
+.login-form .card {
+  max-width: 500px;
+  width: 500px;
+}
+.login-form .card .form-errors {
+  margin-bottom: 10px;
+  padding: 15px;
+}
+.login-form .card .form-errors ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.login-form .card .form-inputs .input-field label.active::after {
+  content: attr(data-hint) !important;
+  opacity: 1;
+}
+.login-form .card .card-title {
+  font-size: 40px;
+  line-height: 50px !important;
+}
+.login-form .card .card-action a {
+  text-transform: none !important;
+}
+.login-form .card .card-action .devise-links {
+  text-align: right;
+}
+.login-form .card .divider {
+  margin-bottom: 10px;
+}
+.login-form abbr {
+  border-bottom: 0 !important;
+  color: #f00;
+}/*# sourceMappingURL=devise.css.map */

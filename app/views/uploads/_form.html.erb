@@ -1,11 +1,13 @@
 <%= render "shared/errors", obj: @upload %>
 
-
-
-<%= form_with(model: upload) do |form| %>
+<%= simple_form_for(@upload) do |form| %>
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.input_field :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] } %>
   </div>
   <div class="field">
     <%= form.label :images %>
