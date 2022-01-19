@@ -50,9 +50,7 @@ class UploadsController < ApplicationController
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
-    if @upload.user.nil?
-      @upload.user = current_user
-    end
+    @upload.user = current_user if @upload.user.nil?
     respond_to do |format|
       if @upload.update(upload_params.reject { |k| k['images'] })
         if upload_params[:images].present?

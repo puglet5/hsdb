@@ -36,12 +36,12 @@ module ApplicationHelper
     [
       {
         url: new_user_session_path,
-        title: t('auth.login'),
+        title: t('auth.login')
       },
       {
         url: new_user_registration_path,
-        title: t('auth.register'),
-      },
+        title: t('auth.register')
+      }
     ]
   end
 
@@ -49,20 +49,20 @@ module ApplicationHelper
     [
       {
         url: root_path,
-        title: t('nav.home'),
+        title: t('nav.home')
       },
       {
         url: about_path,
-        title: t('nav.about'),
+        title: t('nav.about')
       },
       {
         url: uploads_path,
-        title: t('nav.uploads'),
+        title: t('nav.uploads')
       },
       {
         url: discussions_path,
-        title: t('nav.forum'),
-      },
+        title: t('nav.forum')
+      }
     ]
   end
 

@@ -45,16 +45,16 @@ gem 'mini_magick', '~> 4.11'
 gem 'rails-i18n', '~> 6.0'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 # gem 'redcarpet', '~> 3.5', '>= 3.5.1'
+gem 'devise-i18n', '~> 1.10.1'
+gem 'material_icons'
+gem 'pundit'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
-gem 'devise-i18n', '~> 1.10.1'
-gem "material_icons"
-gem "pundit"
 
 gem 'public_activity'
 
-gem "devise_materialize", "~>1.2.0"
+gem 'devise_materialize', '~>1.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

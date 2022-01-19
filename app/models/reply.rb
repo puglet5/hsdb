@@ -2,9 +2,9 @@
 
 class Reply < ApplicationRecord
   include PublicActivity::Model\
-  include Authorship
+    include Authorship
 
-  tracked owner: Proc.new { |controller, model| controller.current_user }
+  tracked owner: proc { |controller, _model| controller.current_user }
 
   belongs_to :discussion
   belongs_to :user
