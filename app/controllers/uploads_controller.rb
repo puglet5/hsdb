@@ -68,6 +68,16 @@ class UploadsController < ApplicationController
     end
   end
 
+  def update_status
+    @upload = Upload.find(params[:id])
+    respond_to do |format|
+      if @upload.update(status: params[:status])
+        format.html { redirect_to @upload }
+        flash[:success] = "Status successfully changed to #{@upload.status}"
+      end
+    end
+  end
+
   # DELETE /uploads/1 or /uploads/1.json
   def destroy
     @upload.destroy

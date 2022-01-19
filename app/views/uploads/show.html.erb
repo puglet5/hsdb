@@ -1,13 +1,22 @@
 <div class="container">
-  <h2 class="center">
-  <%= @upload.title %>
-  </h1>
+  <div class="center">
+    <h2>
+      <%= @upload.title %>
+    </h2>
+    <div>
+      <% Upload.statuses.keys.each do |status| %>
+        <%= link_to_unless @upload.status.eql?(status.to_s), status, update_status_upload_path(@upload, status: status), method: :patch, class: "btn" %>
+
+      <% end %>
+    </div>
+    <hr>
+
+  </div>
+
   <% (0...@upload.images.count).each do |image| %>
-  <%= image_tag(@upload.thumbnail(image)) %>
-  <!--
-  <% #= link_to "Download", rails_blob_path(@upload.images.find_by(blob_id: (@upload.images.first.blob_id + image)), disposition: "attachment") %>
-  -->
+    <%= image_tag(@upload.thumbnail(image)) %>
   <% end %>
+
   <hr>
   <% @upload.documents.all.each do |doc| %>
     <% if doc.representable? %>
@@ -16,19 +25,25 @@
       <%= tag.span doc.filename %>
     <% end %>
   <% end %>
+
   <h3>
-  <strong>Description:</strong>
+    <strong>Description:</strong>
   </h3>
+
   <div>
-  <% if @upload.images.any?%>
-    <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
-  <% end%>
+    <% if @upload.images.any? %>
+      <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
+    <% end %>
   </div>
+  
   <%= @upload.description %>
+
   <p>
-  <%= @upload.body %>
+    <%= @upload.body %>
   </p>
+
   <%= link_to "Edit", edit_upload_path(@upload), class: "btn", style: "background-color: #1E51A4 !important;" %> |
+  
   <%= link_to "Back", uploads_path, class: "btn", style: "background-color: #1E51A4 !important;" %>
 
 </div>
