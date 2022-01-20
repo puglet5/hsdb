@@ -13,14 +13,18 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def auth_helper(tag_type, style = '')
+  def auth_helper(tag_type, style = '', active_class)
     auth_links = ''
 
     if user_signed_in?
-      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete}</#{tag_type}>"
+
+      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
+      
+      auth_links << "<#{tag_type}>#{link_to "#{current_user.first_name}", "/#{locale}/users/#{current_user.slug}", class: "#{style} #{active? user_path(current_user), active_class}"}</#{tag_type}>"
+
     else
       auth_items.each do |item|
-        auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url]}'> #{item[:title]} </a></#{tag_type}>"
+        auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style} #{active? item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
       end
     end
 
@@ -41,7 +45,7 @@ module ApplicationHelper
       {
         url: new_user_registration_path,
         title: t('auth.register')
-      }
+      },
     ]
   end
 
@@ -49,35 +53,39 @@ module ApplicationHelper
     [
       {
         url: root_path,
-        title: t('nav.home')
+        title: t('nav.home'),
+        icon: "home"
       },
       {
         url: about_path,
-        title: t('nav.about')
+        title: t('nav.about'),
+        icon: "about"
       },
       {
         url: uploads_path,
-        title: t('nav.uploads')
+        title: t('nav.uploads'),
+        icon: "download"
       },
       {
         url: discussions_path,
-        title: t('nav.forum')
+        title: t('nav.forum'),
+        icon: "forum"
       }
     ]
   end
 
-  def nav_helper(tag_type, style = '')
+  def nav_helper(tag_type, style = '', active_class)
     nav_links = ''
 
     nav_items.each do |item|
-      nav_links << "<#{tag_type} class= '#{active? item[:url]}'><a href='#{item[:url]}' class = '#{style}'> #{item[:title]} </a></#{tag_type}>"
+      nav_links << "<#{tag_type} class= '#{active? item[:url], active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
     end
 
     sanitize nav_links.html_safe
   end
 
-  def active?(path)
-    'active' if current_page? path
+  def active?(path, klass)
+    klass.to_s if current_page? path
   end
 
   def has_role?(role)

@@ -1,15 +1,16 @@
-<div class="col s6">
-  <div class="card">
-    <div class="card-image">
-        <%= link_to upload do %>
+<article class="no-padding border">
+  <%= link_to upload do %>
       <% if upload.images.count > 0 %>
-          <%= image_tag(upload.thumbnail(0), :class => "responsive-img") %>
+        <%= image_tag(upload.thumbnail(0), class: "responsive small") %>
       <% else %> 
-      <%= image_tag("https://via.placeholder.com/150", :class => "responsive-img") %>
-        <% end %>
-          <%= tag.span upload.title, class: "card-title" %>
-      <% end %> 
-      <span class="new badge green" data-badge-caption="" style=" position: absolute; top: 1px; right: 1px;"><%= upload.status %></span>
+        <%= image_tag("https://via.placeholder.com/150", class: "responsive small") %>
+      <% end %>
+    <div class="padding">
+      <%= tag.h5 upload.title, class: "no-margin" %>
     </div>
-  </div>
-</div>
+  <% end %> 
+    <div><%= upload.description %></div>
+    <nav>
+      <button class="none">Button</button>
+    </nav>
+</article>

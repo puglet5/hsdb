@@ -5,11 +5,12 @@ import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
-import 'materialize-css/dist/js/materialize'
+// import 'materialize-css/dist/js/materialize'
 import "./direct_upload";
 // import "./dataconfirm"
 import "../styles/application.scss";
 
+import "beercss/src/cdn/beer"
 import "trix";
 import "@rails/actiontext";
 
@@ -28,11 +29,4 @@ require("@rails/actiontext");
 
 require.context('../img', true)
 
-$(document).ready(function(){
-  $('.modal').modal();
-  $('.dropdown-trigger').dropdown();
-});
-
-$(document).ready(function(){
-  $('select').formSelect();
-});
+ui();

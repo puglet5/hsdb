@@ -30,7 +30,7 @@
 
   <div>
     <% if @upload.images.any? %>
-      <%= link_to "Download images", upload_path(format: :zip), class: "btn", style: "background-color: #1E51A4 !important;" %>
+      <%= link_to "Download images", upload_path(format: :zip), class: "btn" %>
     <% end %>
   </div>
   
@@ -40,8 +40,8 @@
     <%= @upload.body %>
   </p>
 
-  <%= link_to "Edit", edit_upload_path(@upload), class: "btn", style: "background-color: #1E51A4 !important;" %> |
+  <%= link_to "Edit", edit_upload_path(@upload), class: "btn" %> |
   
-  <%= link_to "Back", uploads_path, class: "btn", style: "background-color: #1E51A4 !important;" %>
+  <%= link_to "Back", uploads_path, class: "btn" %>
 
 </div>
