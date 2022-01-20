@@ -9,7 +9,6 @@
 
       <% end %>
     </div>
-    <hr>
 
   </div>
 
@@ -17,7 +16,6 @@
     <%= image_tag(@upload.thumbnail(image)) %>
   <% end %>
 
-  <hr>
   <% @upload.documents.all.each do |doc| %>
     <% if doc.representable? %>
       <%= image_tag(doc.representation(resize: "200x200")) %>

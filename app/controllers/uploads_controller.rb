@@ -7,7 +7,7 @@ class UploadsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]
-  before_action :fetch_tags, only: %i[new edit]
+  before_action :fetch_tags, only: %i[new edit update]
 
   before_action :authorize_upload
   after_action :verify_authorized

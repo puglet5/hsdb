@@ -53,3 +53,4 @@ erd*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.erb-lint.yml
