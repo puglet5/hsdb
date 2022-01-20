@@ -7,6 +7,8 @@ class UploadsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]
+  before_action :fetch_tags, only: %i[new edit]
+
   before_action :authorize_upload
   after_action :verify_authorized
 
@@ -94,9 +96,13 @@ class UploadsController < ApplicationController
     @upload = Upload.includes([images_attachments: :blob]).find(params[:id])
   end
 
+  def fetch_tags
+    @tags = Tag.all
+  end
+
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:title, :body, :description, :status, images: [], documents: [])
+    params.require(:upload).permit(:title, :body, :description, :status, images: [], documents: [], tag_ids: [])
   end
 
   def authorize_upload

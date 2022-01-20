@@ -8,6 +8,8 @@ class Upload < ApplicationRecord
 
   has_many_attached :images
   has_many_attached :documents
+  has_many :upload_tags, dependent: :destroy
+  has_many :tags, through: :upload_tags
   belongs_to :user
   validates :title, :description, :body, presence: true
   validate :image_type

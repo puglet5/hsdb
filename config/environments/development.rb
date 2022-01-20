@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
+require 'faker'
+I18n.reload!
 
 Rails.application.configure do
   config.after_initialize do
@@ -15,6 +17,12 @@ Rails.application.configure do
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'Upload', association: :images_attachments
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment', association: :blob
   end
+
+  Faker::Config.locale = 'en'
+
+  # config.devServer.injectClient = false
+
+  config.web_console.whiny_requests = false
 
   # Settings specified here will take precedence over those in config/application.rb.
 

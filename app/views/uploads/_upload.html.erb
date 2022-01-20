@@ -1,11 +1,13 @@
 <div class="col s6">
   <div class="card">
     <div class="card-image">
-      <% if upload.images.count > 0 %>
         <%= link_to upload do %>
+      <% if upload.images.count > 0 %>
           <%= image_tag(upload.thumbnail(0), :class => "responsive-img") %>
+      <% else %> 
+      <%= image_tag("https://via.placeholder.com/150", :class => "responsive-img") %>
+        <% end %>
           <%= tag.span upload.title, class: "card-title" %>
-        <% end %> 
       <% end %> 
       <span class="new badge green" data-badge-caption="" style=" position: absolute; top: 1px; right: 1px;"><%= upload.status %></span>
     </div>

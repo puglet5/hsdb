@@ -25,6 +25,10 @@
     <%= form.label :body %>
     <%= form.rich_text_area :body %>
   </div>
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.collection_select :tag_ids, tags, :id, :title, {}, multiple: true %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
