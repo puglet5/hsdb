@@ -24,7 +24,7 @@
       <ul id='dropdown1' class='dropdown-content'>
         <% I18n.available_locales.each do |locale| %>
           <li>
-            <%= link_to t(locale), url_for(request.params.merge(locale: locale)), class: "dropdown-item" %>
+            <%= link_to t(locale), url_for(params.to_unsafe_h.merge(locale: locale)), class: "dropdown-item" %>
           </li>
         <% end %>
       </ul>

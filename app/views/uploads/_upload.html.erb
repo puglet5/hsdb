@@ -1,44 +1,13 @@
-<% if false %>
-<div class="col s12 m6">
-  <div class="card blue-grey darken-1">
-    <div class="card-content white-text">
-      <span class="card-title"><%= link_to upload.title, upload %></span>
-
+<div class="col s6">
+  <div class="card">
+    <div class="card-image">
       <% if upload.images.count > 0 %>
-        <%= image_tag(upload.thumbnail(0), :class => "responsive-img") %>
+        <%= link_to upload do %>
+          <%= image_tag(upload.thumbnail(0), :class => "responsive-img") %>
+          <%= tag.span upload.title, class: "card-title" %>
+        <% end %> 
       <% end %> 
-
-      <p class="truncate"><%= upload.description %></p>
-      <p class=""><%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <a href="#"><%= upload.user&.first_name %></a></p>
-    </div>
-    <div class="card-action">
-      <%= link_to "Edit", edit_upload_path(upload) %>
-      <%= link_to "Delete", upload, method: :delete, data: { confirm: "Are you sure?" }, class: "btn red" %>
-    </div>
-  </div>
-</div>
-<% end %>
-
-
-<div class="col s4">
-  <div class="card medium">
-    <div class="card-image waves-effect waves-block waves-light activator">
-      <% if upload.images.count > 0 %>
-        <%= image_tag(upload.thumbnail(0), :class => "responsive-img") %>
-      <% end %> 
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4"><%= link_to upload.title, upload %><i class="material-icons right">more_vert</i></span>
-    </div>
-    <div class="card-action">
-        <%= link_to "Edit", edit_upload_path(upload) %>
-        <%= link_to "Delete", upload, method: :delete, data: { confirm: "Are you sure?",
-                                                               'confirm-dialog': "#my-confirm-dialog" }, class: "btn red" %>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4"><%= link_to upload.title, upload %><i class="material-icons right">close</i></span>
-      <p class="truncate"><%= upload.description %></p>
-      <p>Created <%= distance_of_time_in_words(upload.created_at, Time.now) %> ago by <%= link_to upload.user&.first_name, user_path(upload.user) if !upload.user.nil? %></p>
+      <span class="new badge green" data-badge-caption="" style=" position: absolute; top: 1px; right: 1px;"><%= upload.status %></span>
     </div>
   </div>
 </div>
