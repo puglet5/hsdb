@@ -27,7 +27,7 @@ gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 gem 'bootsnap', '>= 1.4.4', require: false
 # gem "bulma-rails", "~> 0.9.1"
 # gem 'bootstrap', '~> 5.0.1'
-gem 'cancancan', '~> 3.3'
+# gem 'cancancan', '~> 3.3'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 # gem 'coderay', '~> 1.1', '>= 1.1.3'
@@ -47,8 +47,8 @@ gem 'ransack', '~> 2.4', '>= 2.4.2'
 # gem 'redcarpet', '~> 3.5', '>= 3.5.1'
 gem 'bullet'
 gem 'devise-i18n', '~> 1.10.1'
-gem 'devise_materialize', '~>1.2.0'
-gem 'material_icons'
+# gem 'devise_materialize', '~>1.2.0'
+# gem 'material_icons'
 gem 'public_activity'
 gem 'pundit'
 gem 'rolify', '~> 6.0'
@@ -93,3 +93,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem "bundle", "~> 0.0.1"

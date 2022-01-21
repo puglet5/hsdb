@@ -19,8 +19,13 @@ require("channels");
 ActiveStorage.start();
 
 require("trix");
+
+var Turbolinks = require("turbolinks")
+
+Turbolinks.start()
+
 require("jquery");
-require("@rails/actiontext");
+require("@rails/actiontext")
 
 // require('popper.js')
 // require('bootstrap')
