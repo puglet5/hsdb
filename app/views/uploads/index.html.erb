@@ -1,14 +1,23 @@
-<div class="container center-align small-padding">
-  
-  <h3><%= t(".uploads") %></h3>
+<div class="row large-margin">
+  <div class="col s2"></div>
+  <div class="col s8 center-align small-padding">
+    <!--
+    <h3><%= t(".uploads") %></h3>
+    -->
+    <div class="middle-align row">
+      <%= link_to t(".new"), new_upload_path, class: "button flat col s2 no-padding" %>
+      <%= render "search_form" %>
+    </div>
 
-  <%= link_to t(".new"), new_upload_path, class: "button" %>
-  <%= render "search_form" %>
+    <div class="row">
+      <%= render @uploads %>
+    </div>
+    
+    <div>
+      <%= paginate @uploads %>
+    </div>
 
-  <%= render @uploads %>
-
-  <div>
-    <%= paginate @uploads %>
   </div>
+  <div class="col s2"></div>
 
 </div>

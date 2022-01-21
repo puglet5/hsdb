@@ -19,8 +19,8 @@ module ApplicationHelper
     if user_signed_in?
 
       auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
-      
-      auth_links << "<#{tag_type}>#{link_to "#{current_user.first_name}", "/#{locale}/users/#{current_user.slug}", class: "#{style} #{active? user_path(current_user), active_class}"}</#{tag_type}>"
+
+      auth_links << "<#{tag_type}>#{link_to current_user.first_name.to_s, "/#{locale}/users/#{current_user.slug}", class: "#{style} #{active? user_path(current_user), active_class}"}</#{tag_type}>"
 
     else
       auth_items.each do |item|
@@ -45,7 +45,7 @@ module ApplicationHelper
       {
         url: new_user_registration_path,
         title: t('auth.register')
-      },
+      }
     ]
   end
 
@@ -54,22 +54,22 @@ module ApplicationHelper
       {
         url: root_path,
         title: t('nav.home'),
-        icon: "home"
+        icon: 'home'
       },
       {
         url: about_path,
         title: t('nav.about'),
-        icon: "about"
+        icon: 'about'
       },
       {
         url: uploads_path,
         title: t('nav.uploads'),
-        icon: "download"
+        icon: 'download'
       },
       {
         url: discussions_path,
         title: t('nav.forum'),
-        icon: "forum"
+        icon: 'forum'
       }
     ]
   end
