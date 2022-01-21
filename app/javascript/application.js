@@ -6,9 +6,9 @@ import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
 import 'materialize-css/dist/js/materialize'
-import "./direct_upload";
+import "packs/direct_upload";
 // import "./dataconfirm"
-import "../styles/application.scss";
+import "styles/application.scss";
 
 import "trix";
 import "@rails/actiontext";
@@ -31,7 +31,7 @@ require("@rails/actiontext")
 // require('bootstrap')
 // require('data-confirm-modal')
 
-require.context('../img', true)
+require.context('img', true)
 
 $(document).ready(function(){
   $('.modal').modal();
