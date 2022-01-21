@@ -4,6 +4,7 @@ global.Rails = Rails;
 import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
+import "./controllers";
 
 import 'materialize-css/dist/js/materialize'
 import "packs/direct_upload";
@@ -15,6 +16,8 @@ import "@rails/actiontext";
 
 require("@rails/activestorage").start();
 require("channels");
+require("controllers");
+
 
 ActiveStorage.start();
 
