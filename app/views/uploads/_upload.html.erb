@@ -1,11 +1,17 @@
+<% img_class = "responsive medium"%>
+
 <div class="col s3">
   <article class="no-padding border">
-    <%= link_to upload do %>
-        <% if upload.images.count > 0 %>
-          <%= image_tag(upload.thumbnail(0), class: "responsive medium") %>
-        <% else %> 
-          <%= image_tag("https://via.placeholder.com/400x300", class: "responsive medium") %>
-        <% end %>
+
+    <%= link_to upload, class: "fill" do %>
+      <% if upload.images.count > 0 %>
+        <%= image_tag(upload.thumbnail(0), class: img_class) %>
+      <% else %> 
+        <%= image_tag("https://via.placeholder.com/400x300", class: img_class) %>
+      <% end %>
+
+      <span class="badge top right round">New</span>
+
       <div class="absolute bottom left right padding white-text">
         <%= tag.h5 upload.title.truncate(20), class: "no-margin" %>
       </div>
