@@ -19,7 +19,7 @@ gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.5.1'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -58,7 +58,7 @@ gem 'simple_form', '~> 5.1'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "stimulus_reflex", "~> 3.4.1"
+gem 'stimulus_reflex', '~> 3.4.1'
 
 group :development, :test do
   gem 'awesome_print'
@@ -86,6 +86,7 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'
   gem 'spring'
+  gem 'pry-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 end
 
@@ -95,5 +96,3 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
-
