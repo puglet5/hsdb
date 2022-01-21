@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
-require 'faker'
-I18n.reload!
 
 Rails.application.configure do
+  config.session_store :cache_store
+
   config.after_initialize do
     Bullet.enable = false
     Bullet.alert = true
