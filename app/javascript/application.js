@@ -3,12 +3,12 @@ global.Rails = Rails;
 
 import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
-import "channels";
+import "./channels";
 import "./controllers";
 
-import "./direct_upload";
+import "./packs/direct_upload";
 // import "./dataconfirm"
-import "styles/application.scss";
+import "./styles/application.scss";
 
 import "beercss/src/cdn/beer"
 import "trix";
@@ -36,4 +36,6 @@ require("@rails/actiontext")
 
 require.context('img', true)
 
-ui();
+document.addEventListener("turbolinks:load", () => {
+  ui();
+})

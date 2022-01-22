@@ -1967,7 +1967,6 @@ __metadata:
     css-minimizer-webpack-plugin: ^3.4.1
     data-confirm-modal: ^1.6.2
     jquery: ^3.6.0
-    materialize-css: ^1.0.0
     mini-css-extract-plugin: 2.2.0
     popper.js: ^1.16.1
     postcss: ^8.4.5
@@ -1976,13 +1975,9 @@ __metadata:
     postcss-preset-env: ^7.2.3
     sass: ^1.49.0
     sass-loader: ^12.4.0
-<<<<<<< HEAD
-    trix: ^2.0.0-alpha.0
-=======
     stimulus: ^3.0.1
     stimulus_reflex: 3.4.1
-    trix: ^1.2.0
->>>>>>> master
+    trix: ^2.0.0-alpha.0
     turbolinks: ^5.2.0
     webpack: ^5.67.0
     webpack-cli: ^4.9.1
@@ -2137,9 +2132,9 @@ __metadata:
   linkType: hard
 
 "beercss@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "beercss@npm:2.0.0"
-  checksum: 5778be8d1861617aceb0f4715200fa5e27172b9343543d918f83eeabbb6773e95444ed8ded8d0b69fc4f86dd637d82dfe0c859f24536b8521a6c2b8381732b02
+  version: 2.0.1
+  resolution: "beercss@npm:2.0.1"
+  checksum: 5e3152dac67c5ad0ddfca5915f43c8e21c1111ad62b3e807d726498ae3a24c3c158fd64807c86a9b4355ab45408f8a94810f0a159e405cccd5038de29f3d50b1
   languageName: node
   linkType: hard
 
@@ -3016,15 +3011,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.17":
-<<<<<<< HEAD
-  version: 1.4.49
-  resolution: "electron-to-chromium@npm:1.4.49"
-  checksum: 0527cc195c34b609f4ecad25584d238494d758c730d0aafdbd408a0ccce42cc6f05c1c0b76cc055a0a173700e29b1f3352d91b5cbeb91d063321690913afae84
-=======
   version: 1.4.50
   resolution: "electron-to-chromium@npm:1.4.50"
   checksum: c1468cba3497994c1541cdcdcb1dcb1e25f305f5610dda5ff635aa0fd95d803ca60f4dd207c98b13df9e630a339aad34784e06dd2e8ef9335465599167b09635
->>>>>>> master
   languageName: node
   linkType: hard
 
@@ -4219,13 +4208,6 @@ __metadata:
     socks-proxy-agent: ^6.0.0
     ssri: ^8.0.0
   checksum: 0eb371c85fdd0b1584fcfdf3dc3c62395761b3c14658be02620c310305a9a7ecf1617a5e6fb30c1d081c5c8aaf177fa133ee225024313afabb7aa6a10f1e3d04
-  languageName: node
-  linkType: hard
-
-"materialize-css@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "materialize-css@npm:1.0.0"
-  checksum: 60ce8c16a65ec458db46a1270017972eabbc4c3dad63f2104ca9a58e8b22b58c1cd90fc9b6737b1a354a85958f359cb766b095c27114eda4954242077500017a
   languageName: node
   linkType: hard
 
@@ -5912,11 +5894,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "sass@npm:^1.49.0":
-=======
-"sass@npm:^1.48.0":
->>>>>>> master
   version: 1.49.0
   resolution: "sass@npm:1.49.0"
   dependencies:

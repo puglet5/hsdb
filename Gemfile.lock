@@ -1,14 +1,6 @@
 GIT
-  remote: https://github.com/mkhairi/materialize-sass.git
-  revision: 6c70ecf1c317b2319b57cbe0be4a74119815e655
-  specs:
-    materialize-sass (1.1.0.alpha)
-      autoprefixer-rails (>= 9.1.0)
-      sassc-rails (>= 2.0.0)
-
-GIT
   remote: https://github.com/rails/webpacker.git
-  revision: 26b4d8ee5ab2db77f73d28d45d6e8905641f6259
+  revision: b8a01d7a880e0c34473a8c8490b3dc730e3f3586
   branch: master
   specs:
     webpacker (6.0.0.rc.6)
@@ -82,12 +74,10 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.2.0)
-      execjs (~> 2)
     awesome_print (1.9.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.10.1)
+    bootsnap (1.10.2)
       msgpack (~> 1.2)
     builder (3.2.4)
     bullet (7.0.1)
@@ -138,7 +128,6 @@ GEM
       nokogiri
       ruby-graphviz
     erubi (1.10.0)
-    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -194,7 +183,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    msgpack (1.4.2)
+    msgpack (1.4.3)
     nio4r (2.5.8)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
@@ -294,9 +283,9 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
-    rubocop (1.24.1)
+    rubocop (1.25.0)
       parallel (~> 1.10)
-      parser (>= 3.0.0.0)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
@@ -319,14 +308,6 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -352,7 +333,6 @@ GEM
     subexec (0.2.3)
     thor (1.2.1)
     thread-local (1.1.0)
-    tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -400,7 +380,6 @@ DEPENDENCIES
   kaminari (~> 1.2, >= 1.2.1)
   letter_opener
   listen (~> 3.3)
-  materialize-sass!
   mini_magick (~> 4.11)
   pg (~> 1.1)
   pry-rails
