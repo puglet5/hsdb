@@ -55,7 +55,8 @@ erd*
 !.yarn/versions
 .erb-lint.yml
 
-yarn.lock
 package-lock.json
 
 app/assets/builds
+.solargraph.yml
+.rufo

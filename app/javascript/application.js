@@ -18,7 +18,6 @@ require("@rails/activestorage").start();
 require("channels");
 require("controllers");
 
-
 ActiveStorage.start();
 
 require("trix");
