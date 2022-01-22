@@ -57,3 +57,5 @@ erd*
 
 yarn.lock
 package-lock.json
+
+app/assets/builds
