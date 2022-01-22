@@ -1,9 +1,8 @@
 <div class="container center-align small-padding">
   <h3>Journal</h3>
-    <div class="activity">
+  <div class="activity">
     <% @activities.each do |activity| %>
       <%= render_activity activity if activity.trackable_type == "Upload" %>
     <% end %>
-    </div>
+  </div>
 </div>
-

@@ -1261,6 +1261,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hotwired/stimulus-webpack-helpers@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@hotwired/stimulus-webpack-helpers@npm:1.0.1"
+  peerDependencies:
+    "@hotwired/stimulus": ">= 3.0"
+  checksum: 68d833f74fb90f2993c7baed6e542880c23416a129b50cadc00571102c782f6bdc8c68742ecdd668cc702aa0fafd8888f91098ed7dc43c12b2212fe5969ef6cd
+  languageName: node
+  linkType: hard
+
+"@hotwired/stimulus@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@hotwired/stimulus@npm:3.0.1"
+  checksum: 5f2dbfeb3dfff8472e1d0ef7db59a18d71540651861c0c5839fa32c56fcd5cae3fc6183a94746303c5adfbd66a9b552a3167e7e193c04dfaa6f51a8e5bea8e5e
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1305,6 +1321,13 @@ __metadata:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
   checksum: c96381d4a37448ea280951e46233f7e541058cf57a57d4094dd4bdcaae43fa5872b5f2eb6bfb004591a68e29c5877abe3cdc210cb3588cbf20ab2877f31a7de7
+  languageName: node
+  linkType: hard
+
+"@rails/actioncable@npm:>= 6.0":
+  version: 7.0.1
+  resolution: "@rails/actioncable@npm:7.0.1"
+  checksum: b4190c2297f973a5d844d8a3ddb1ac907cc96f3a94e42c6c474175059b03854e32985750de378d28c80f38fbe0a64376b27e9c9115faa636e1413f0570a2956b
   languageName: node
   linkType: hard
 
@@ -1953,9 +1976,15 @@ __metadata:
     postcss-preset-env: ^7.2.3
     sass: ^1.49.0
     sass-loader: ^12.4.0
+<<<<<<< HEAD
     trix: ^2.0.0-alpha.0
+=======
+    stimulus: ^3.0.1
+    stimulus_reflex: 3.4.1
+    trix: ^1.2.0
+>>>>>>> master
     turbolinks: ^5.2.0
-    webpack: ^5.66.0
+    webpack: ^5.67.0
     webpack-cli: ^4.9.1
     webpack-dev-server: ^4.7.3
   languageName: unknown
@@ -2236,6 +2265,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cable_ready@npm:>= 4.5.0":
+  version: 4.5.0
+  resolution: "cable_ready@npm:4.5.0"
+  dependencies:
+    morphdom: ^2.6.1
+  checksum: c655f7ca2f0b242bb4039337e6324041cc46edd1b7cdee6d6bae02461e7e24d461bff23d68e9a61db2b073158fd1511b0041991a813bc80c096deca9071e63be
+  languageName: node
+  linkType: hard
+
 "cacache@npm:^15.2.0":
   version: 15.3.0
   resolution: "cacache@npm:15.3.0"
@@ -2285,9 +2323,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001286, caniuse-lite@npm:^1.0.30001297, caniuse-lite@npm:^1.0.30001299":
-  version: 1.0.30001300
-  resolution: "caniuse-lite@npm:1.0.30001300"
-  checksum: f8c981c0658e2ea67b5e106538a9f3b15d528a6679f2b6e7cb3f508a99e4f9f3f69c73d1b243c77e5ccb3bcef964a801a26a2ba6a13416b42baf314577e3172a
+  version: 1.0.30001301
+  resolution: "caniuse-lite@npm:1.0.30001301"
+  checksum: 0e359f2c682bed35521902ce7fc91136c485de4c1e1e33272d6fbb7cdf77178df7649960a9b69ce9da12022aadd7a0037b3c9b3594c41146d58216654dc9a236
   languageName: node
   linkType: hard
 
@@ -2978,9 +3016,15 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.17":
+<<<<<<< HEAD
   version: 1.4.49
   resolution: "electron-to-chromium@npm:1.4.49"
   checksum: 0527cc195c34b609f4ecad25584d238494d758c730d0aafdbd408a0ccce42cc6f05c1c0b76cc055a0a173700e29b1f3352d91b5cbeb91d063321690913afae84
+=======
+  version: 1.4.50
+  resolution: "electron-to-chromium@npm:1.4.50"
+  checksum: c1468cba3497994c1541cdcdcb1dcb1e25f305f5610dda5ff635aa0fd95d803ca60f4dd207c98b13df9e630a339aad34784e06dd2e8ef9335465599167b09635
+>>>>>>> master
   languageName: node
   linkType: hard
 
@@ -4402,6 +4446,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"morphdom@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "morphdom@npm:2.6.1"
+  checksum: 8930281b27df2c918a168872a650931d92ac728b9177ed6d74779acf40a4bf6a1c62482a267496a1007f9658d0c6a4125e7080ec1194c6b937ff55f903235ad0
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -5752,28 +5803,28 @@ __metadata:
   linkType: hard
 
 "resolve@npm:^1.1.7, resolve@npm:^1.14.2, resolve@npm:^1.9.0":
-  version: 1.21.0
-  resolution: "resolve@npm:1.21.0"
+  version: 1.21.1
+  resolution: "resolve@npm:1.21.1"
   dependencies:
     is-core-module: ^2.8.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: d7d9092a5c04a048bea16c7e5a2eb605ac3e8363a0cc5644de1fde17d5028e8d5f4343aab1d99bd327b98e91a66ea83e242718150c64dfedcb96e5e7aad6c4f5
+  checksum: 4703fbd6ddaebf7a7f7834ca29f5cfa2c64ef7988ac34bcd26148f0d017783d3a475936ffca02add1b9696e0d1db2a75210052c4b08e748e144e2886e575617c
   languageName: node
   linkType: hard
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.9.0#~builtin<compat/resolve>":
-  version: 1.21.0
-  resolution: "resolve@patch:resolve@npm%3A1.21.0#~builtin<compat/resolve>::version=1.21.0&hash=07638b"
+  version: 1.21.1
+  resolution: "resolve@patch:resolve@npm%3A1.21.1#~builtin<compat/resolve>::version=1.21.1&hash=07638b"
   dependencies:
     is-core-module: ^2.8.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: a0a4d1f7409e73190f31f901f8a619960bb3bd4ae38ba3a54c7ea7e1c87758d28a73256bb8d6a35996a903d1bf14f53883f0dcac6c571c063cb8162d813ad26e
+  checksum: 112e944aa5c73dbeeefb1a1d8f9c70886a063b49f7f5bc4a2d3af1dc68967281da9ae388435634c8bf4b5a239026a4b5e25c5e9eca07c1190bc23c3dc0446dc5
   languageName: node
   linkType: hard
 
@@ -5861,7 +5912,11 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "sass@npm:^1.49.0":
+=======
+"sass@npm:^1.48.0":
+>>>>>>> master
   version: 1.49.0
   resolution: "sass@npm:1.49.0"
   dependencies:
@@ -6201,6 +6256,28 @@ __metadata:
   version: 1.5.0
   resolution: "statuses@npm:1.5.0"
   checksum: c469b9519de16a4bb19600205cffb39ee471a5f17b82589757ca7bd40a8d92ebb6ed9f98b5a540c5d302ccbc78f15dc03cc0280dd6e00df1335568a5d5758a5c
+  languageName: node
+  linkType: hard
+
+"stimulus@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "stimulus@npm:3.0.1"
+  dependencies:
+    "@hotwired/stimulus": ^3.0.1
+    "@hotwired/stimulus-webpack-helpers": ^1.0.0
+  checksum: 381b80d638b3168c3b7297777724127bfa96e57600bee73393017f10c9702cf313f4391dc5cd1dbe8a118fe3ae40dd66fdb1a72ee931ea9f26c0f342e53c15e8
+  languageName: node
+  linkType: hard
+
+"stimulus_reflex@npm:3.4.1":
+  version: 3.4.1
+  resolution: "stimulus_reflex@npm:3.4.1"
+  dependencies:
+    "@rails/actioncable": ">= 6.0"
+    cable_ready: ">= 4.5.0"
+  peerDependencies:
+    stimulus: ">= 1.1"
+  checksum: 485e584ccf2d013055a7b17ba1962f3ea3b33ea3f5f07046ae87027892b1e78ba87fbbfd3bcf52b0cb9182e0be41404b6a5640a70ea67048c3fa3359a7953f57
   languageName: node
   linkType: hard
 
@@ -6686,16 +6763,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-sources@npm:^3.2.1, webpack-sources@npm:^3.2.2":
+"webpack-sources@npm:^3.2.1, webpack-sources@npm:^3.2.3":
   version: 3.2.3
   resolution: "webpack-sources@npm:3.2.3"
   checksum: 989e401b9fe3536529e2a99dac8c1bdc50e3a0a2c8669cbafad31271eadd994bc9405f88a3039cd2e29db5e6d9d0926ceb7a1a4e7409ece021fe79c37d9c4607
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.53.0, webpack@npm:^5.66.0":
-  version: 5.66.0
-  resolution: "webpack@npm:5.66.0"
+"webpack@npm:^5.53.0, webpack@npm:^5.67.0":
+  version: 5.67.0
+  resolution: "webpack@npm:5.67.0"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.50
@@ -6720,13 +6797,13 @@ __metadata:
     tapable: ^2.1.1
     terser-webpack-plugin: ^5.1.3
     watchpack: ^2.3.1
-    webpack-sources: ^3.2.2
+    webpack-sources: ^3.2.3
   peerDependenciesMeta:
     webpack-cli:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 5a44664a840fd64c5383aa78847b205ae0b42b607f85ee1d6a568617a210c1b9caab1822bce40a89a3b5eb0f626a83fb5fe2055c638aa230897bf224030d28e8
+  checksum: a7f810a5e1d4d78b533ca0caf42fa889839326073cedd3ac8e59e5c4890ca864ab0265fa5b2608715746ff3e34cbfaf4f15d56a92bc3f717a2f5c13202d58b6c
   languageName: node
   linkType: hard
 
