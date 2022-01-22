@@ -1,12 +1,23 @@
-<div class="container">
-  
-  <h1><%= t(".uploads") %></h1>
-  <%= link_to t(".new"), new_upload_path, class: "btn", style: "background-color: #1E51A4 !important;" %>
-  <%= render "search_form" %>
-  <div class="row">
-    <%= render @uploads %>
+<div class="row large-margin">
+  <div class="col s2"></div>
+  <div class="col s8 center-align small-padding">
+    <!--
+    <h3><%= t(".uploads") %></h3>
+    -->
+    <div class="middle-align row">
+      <%= link_to "New", new_upload_path, class: "button large flat col s1 no-padding" %>
+      <%= render "search_form" %>
+    </div>
+
+    <div class="row">
+      <%= render @uploads %>
+    </div>
+    
+    <div>
+      <%= paginate @uploads %>
+    </div>
+
   </div>
-  <div>
-    <%= paginate @uploads %>
-  </div>
+  <div class="col s2"></div>
+
 </div>

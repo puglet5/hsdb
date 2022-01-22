@@ -16,7 +16,7 @@ class UploadsController < ApplicationController
   def index
     # @uploads = Upload.all.page(params[:page]).per(5)
     @q = Upload.includes([:user, { images_attachments: :blob }]).ransack(params[:q])
-    @uploads = @q.result(distinct: true).page(params[:page]).per(5)
+    @uploads = @q.result(distinct: true).page(params[:page]).per(16)
   end
 
   # GET /uploads/1 or /uploads/1.json

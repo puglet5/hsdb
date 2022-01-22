@@ -1961,6 +1961,7 @@ __metadata:
     "@rails/webpacker": ^6.0.0-rc.6
     "@webpack-cli/serve": ^1.6.0
     autoprefixer: ^10.4.2
+    beercss: ^2.0.0
     bootstrap: 3.4.1
     css-loader: ^6.5.1
     css-minimizer-webpack-plugin: ^3.4.1
@@ -1973,11 +1974,15 @@ __metadata:
     postcss-flexbugs-fixes: ^5.0.2
     postcss-import: ^14.0.2
     postcss-preset-env: ^7.2.3
-    sass: ^1.48.0
+    sass: ^1.49.0
     sass-loader: ^12.4.0
+<<<<<<< HEAD
+    trix: ^2.0.0-alpha.0
+=======
     stimulus: ^3.0.1
     stimulus_reflex: 3.4.1
     trix: ^1.2.0
+>>>>>>> master
     turbolinks: ^5.2.0
     webpack: ^5.67.0
     webpack-cli: ^4.9.1
@@ -2128,6 +2133,13 @@ __metadata:
   version: 0.6.1
   resolution: "batch@npm:0.6.1"
   checksum: 61f9934c7378a51dce61b915586191078ef7f1c3eca707fdd58b96ff2ff56d9e0af2bdab66b1462301a73c73374239e6542d9821c0af787f3209a23365d07e7f
+  languageName: node
+  linkType: hard
+
+"beercss@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "beercss@npm:2.0.0"
+  checksum: 5778be8d1861617aceb0f4715200fa5e27172b9343543d918f83eeabbb6773e95444ed8ded8d0b69fc4f86dd637d82dfe0c859f24536b8521a6c2b8381732b02
   languageName: node
   linkType: hard
 
@@ -3004,9 +3016,15 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.17":
+<<<<<<< HEAD
+  version: 1.4.49
+  resolution: "electron-to-chromium@npm:1.4.49"
+  checksum: 0527cc195c34b609f4ecad25584d238494d758c730d0aafdbd408a0ccce42cc6f05c1c0b76cc055a0a173700e29b1f3352d91b5cbeb91d063321690913afae84
+=======
   version: 1.4.50
   resolution: "electron-to-chromium@npm:1.4.50"
   checksum: c1468cba3497994c1541cdcdcb1dcb1e25f305f5610dda5ff635aa0fd95d803ca60f4dd207c98b13df9e630a339aad34784e06dd2e8ef9335465599167b09635
+>>>>>>> master
   languageName: node
   linkType: hard
 
@@ -5894,7 +5912,11 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
+"sass@npm:^1.49.0":
+=======
 "sass@npm:^1.48.0":
+>>>>>>> master
   version: 1.49.0
   resolution: "sass@npm:1.49.0"
   dependencies:
@@ -6474,10 +6496,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^1.2.0":
-  version: 1.3.1
-  resolution: "trix@npm:1.3.1"
-  checksum: b4c6426d6fa78b09d6007cd627c10fe4f21a4f02abcd0266f6c34d16b030a328f1526ba5928c7ee315a48de54e9deb317ada31c3f8eccc0629a1ed67896f8692
+"trix@npm:^2.0.0-alpha.0":
+  version: 2.0.0-alpha.0
+  resolution: "trix@npm:2.0.0-alpha.0"
+  checksum: 9827be07dac27f5268f8931e15b2ff34247c7705bbfc8daa0add19acb437d0f916fbf37d5c402c99066c1fa7cbfc87d48bc2428e01461f18b7bf2831c752d7be
   languageName: node
   linkType: hard
 

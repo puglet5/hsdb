@@ -1,9 +1,10 @@
-<%= search_form_for @q do |f| %>
+<%= search_form_for @q, class: "col s11 no-margin no-padding" do |f| %>
 
-<div class="input-field">
-  <%= f.search_field :title_or_description_cont, placeholder: "Title or description" %>
-  <%= f.submit class: "btn", style: "background-color: #1E51A4 !important;" %>
-</div>
-
+  <div class="field label prefix border no-margin no-padding">
+    <i>search</i>
+    <%= f.search_field :title_or_description_cont, class: ""%>
+    <label>Title or description</label>
+  </div>
 
 <% end %>
+

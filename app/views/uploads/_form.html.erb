@@ -1,34 +1,39 @@
 <%= render "shared/errors", obj: @upload %>
 
 <%= simple_form_for(@upload) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
+  <div class="field label">
     <%= form.text_field :title %>
+    <label>Title</label>
   </div>
-  <div class="field">
-    <%= form.label :status %>
+  <div class="field suffix">
     <%= form.input_field :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] } %>
+    <i>arrow_drop_down</i>
   </div>
-  <div class="field">
-    <%= form.label :images %>
+  <div class="field label suffix">
     <%= form.file_field :images, multiple: true, direct_upload: true %>
+    <label>Images</label>
+    <i>attach_file</i>
   </div>
-  <div class="field">
-    <%= form.label :documents %>
+  <div class="field label suffix">
     <%= form.file_field :documents, multiple: true, direct_upload: true %>
+    <label>Documents</label>
+    <i>attach_file</i>
   </div>
-  <div class="field">
-    <%= form.label :description %>
+  <div class="field label">
     <%= form.text_area :description %>
+    <label>Desctiption</label>
   </div>
   <div class="field">
     <%= form.label :body %>
     <%= form.rich_text_area :body %>
   </div>
-  <div class="field">
-    <%= form.label :tags %>
-    <%= form.collection_select :tag_ids, tags, :id, :title, {}, multiple: true %>
+
+  <div class="field suffix">
+    <%= form.collection_select :tag_ids, tags, :id, :title, {} %>
+    <i>arrow_drop_down</i>
   </div>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
