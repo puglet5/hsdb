@@ -7,8 +7,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rails', '~> 6.1.4.1'
 # Use Puma as the app server
+gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'webpacker', github: 'rails/webpacker', branch: 'master'
+# gem 'shakapacker', git: 'https://github.com/shakacode/shakapacker.git'
 # gem 'turbolinks', '~> 5' //loaded through webpack, see package.json
 gem 'redis', '~> 4.5.1'
 # Reduces boot times through caching; required in config/boot.rb
