@@ -27,12 +27,13 @@ gem 'jquery-rails', '~> 4.4'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'mini_magick', '~> 4.11'
 gem 'public_activity'
-gem 'pundit'
+gem 'pundit', '~> 2.1'
 gem 'rails-i18n', '~> 6.0'
 gem 'ransack', '~> 2.4', '>= 2.4.2'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
+gem 'textacular', '~> 5.5'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

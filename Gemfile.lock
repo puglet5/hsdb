@@ -331,6 +331,8 @@ GEM
       rails (>= 5.2)
       redis
     subexec (0.2.3)
+    textacular (5.5.1)
+      activerecord (>= 5.0, < 7.1)
     thor (1.2.1)
     thread-local (1.1.0)
     tzinfo (2.0.4)
@@ -385,7 +387,7 @@ DEPENDENCIES
   pry-rails
   public_activity
   puma (~> 5.0)
-  pundit
+  pundit (~> 2.1)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4.1)
   rails-erd
@@ -404,6 +406,7 @@ DEPENDENCIES
   simple_form (~> 5.1)
   spring
   stimulus_reflex (~> 3.4.1)
+  textacular (~> 5.5)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
