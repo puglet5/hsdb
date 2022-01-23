@@ -15,21 +15,21 @@ gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 gem 'redis', '~> 4.5.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bullet'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'devise', '~> 4.8'
+gem 'devise-i18n', '~> 1.10.1'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'graphicsmagick', '~> 1.0', '>= 1.0.6'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jquery-rails', '~> 4.4'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'mini_magick', '~> 4.11'
-gem 'rails-i18n', '~> 6.0'
-gem 'ransack', '~> 2.4', '>= 2.4.2'
-gem 'bullet'
-gem 'devise-i18n', '~> 1.10.1'
 gem 'public_activity'
 gem 'pundit'
+gem 'rails-i18n', '~> 6.0'
+gem 'ransack', '~> 2.4', '>= 2.4.2'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
@@ -58,6 +58,7 @@ group :development do
   gem 'faker', '~> 2.18'
   gem 'htmlbeautifier'
   gem 'letter_opener'
+  gem 'pry-rails'
   gem 'rails-erd'
   gem 'rails-perftest'
   gem 'rubocop', '~> 1.24', require: false
@@ -65,7 +66,6 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'
   gem 'spring'
-  gem 'pry-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 end
 
