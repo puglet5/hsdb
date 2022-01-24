@@ -12,14 +12,12 @@ class UploadsController < ApplicationController
   before_action :authorize_upload
   after_action :verify_authorized
 
-  # GET /uploads or /uploads.json
   def index
     # @uploads = Upload.all.page(params[:page]).per(5)
     @q = Upload.includes([:user, { images_attachments: :blob }]).ransack(params[:q])
     @uploads = @q.result(distinct: true).page(params[:page]).per(16)
   end
 
-  # GET /uploads/1 or /uploads/1.json
   def show
     respond_to do |format|
       format.html do
@@ -27,18 +25,18 @@ class UploadsController < ApplicationController
       end
 
       format.zip { bulk_download }
+      # format.pdf do
+      #   render pdf: "Upload_#{@upload.id}", template: "uploads/show.html.erb"
+      # end
     end
   end
 
-  # GET /uploads/new
   def new
     @upload = current_user.uploads.build
   end
 
-  # GET /uploads/1/edit
   def edit; end
 
-  # POST /uploads or /uploads.json
   def create
     @upload = current_user.uploads.build(upload_params)
 
@@ -52,7 +50,6 @@ class UploadsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     @upload.user = current_user if @upload.user.nil?
     respond_to do |format|
@@ -80,7 +77,6 @@ class UploadsController < ApplicationController
     end
   end
 
-  # DELETE /uploads/1 or /uploads/1.json
   def destroy
     @upload.destroy
     respond_to do |format|
@@ -91,7 +87,6 @@ class UploadsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_upload
     @upload = Upload.includes([images_attachments: :blob]).find(params[:id])
   end
