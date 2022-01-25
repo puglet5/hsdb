@@ -1960,7 +1960,7 @@ __metadata:
     "@rails/ujs": ^6.1.4
     "@rails/webpacker": ^6.0.0-rc.6
     "@webpack-cli/serve": ^1.6.0
-    beercss: ^2.0.1
+    beercss: ^2.0.2
     css-loader: ^6.5.1
     css-minimizer-webpack-plugin: ^3.4.1
     data-confirm-modal: ^1.6.2
@@ -2107,10 +2107,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"beercss@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "beercss@npm:2.0.1"
-  checksum: 5e3152dac67c5ad0ddfca5915f43c8e21c1111ad62b3e807d726498ae3a24c3c158fd64807c86a9b4355ab45408f8a94810f0a159e405cccd5038de29f3d50b1
+"beercss@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "beercss@npm:2.0.2"
+  checksum: c087eb1d14788fe59e8547e6fa3a5408c84b3eb696d5b6bdb167abe52ec16e6e16fb2d5ff8cd6be22820cd264c7e6d23d4530d7a2de2f6350e2f3c66e9543998
   languageName: node
   linkType: hard
 

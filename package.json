@@ -5,7 +5,7 @@
     "@rails/actiontext": "^6.1.4",
     "@rails/ujs": "^6.1.4",
     "@rails/webpacker": "^6.0.0-rc.6",
-    "beercss": "^2.0.1",
+    "beercss": "^2.0.2",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "data-confirm-modal": "^1.6.2",

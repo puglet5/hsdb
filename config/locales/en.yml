@@ -1,19 +1,39 @@
 en:
-  en: "English"
-  ru: "Russian"
+  en: English
+  ru: Russian
   nav:
-    home: "Home"
-    about: "About"
-    uploads: "Uploads"
-    forum: "Forum"
+    home: Home
+    about: About
+    uploads: Uploads
+    forum: Forum
   auth:
-    login: "Login"
-    register: "Sign Up"
-    logout: "Logout"
+    login: Login
+    register: Sign Up
+    logout: Logout
   footer:
-    itmo: "ITMO University"
+    itmo: ITMO University
   uploads:
     index:
-      upload: "Upload"
-      new: "New Upload"
-      
+      upload: Upload
+      new: New Upload
+  events: Events
+  enter-a-url: Enter a URL…
+  unlink: Unlink
+  undo: Undo
+  strikethrough: Strikethrough
+  remove: Remove
+  redo: Redo
+  quote: Quote
+  decrease-level: Decrease Level
+  numbers: Numbers
+  link: Link
+  italic: Italic
+  increase-level: Increase Level
+  heading: Heading
+  code: Code
+  add-a-caption: Add a caption…
+  bytes: Bytes
+  byte: Byte
+  bullets: Bullets
+  bold: Bold
+  attach-files: Attach Files
