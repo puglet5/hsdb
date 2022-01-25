@@ -7,6 +7,7 @@ class Upload < ApplicationRecord
   tracked owner: proc { |controller, _model| controller.current_user }
 
   has_many_attached :images
+  has_one_attached :thumbnail
   has_many_attached :documents
   has_many :upload_tags, dependent: :destroy
   has_many :tags, through: :upload_tags
@@ -29,7 +30,7 @@ class Upload < ApplicationRecord
     obj.user == self
   end
 
-  def thumbnail(input)
+  def to_thumbnail(input)
     images[input].variant(resize: '400x300^', crop: '400x300+0+0').processed
   end
 

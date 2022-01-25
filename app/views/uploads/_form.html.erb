@@ -1,5 +1,4 @@
 <%= render "shared/errors", obj: @upload %>
-
 <%= simple_form_for(@upload) do |form| %>
   <div class="field label">
     <%= form.text_field :title %>
@@ -8,6 +7,11 @@
   <div class="field suffix">
     <%= form.input_field :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] } %>
     <i>arrow_drop_down</i>
+  </div>
+  <div class="field label suffix">
+    <%= form.file_field :thumbnail, multiple: false, direct_upload: true %>
+    <label>Thumbnail</label>
+    <i>attach_file</i>
   </div>
   <div class="field label suffix">
     <%= form.file_field :images, multiple: true, direct_upload: true %>
@@ -27,13 +31,10 @@
     <%= form.label :body %>
     <%= form.rich_text_area :body %>
   </div>
-
   <div class="field suffix">
     <%= form.collection_select :tag_ids, tags, :id, :title, {} %>
     <i>arrow_drop_down</i>
   </div>
-
-
   <div class="actions">
     <%= form.submit %>
   </div>

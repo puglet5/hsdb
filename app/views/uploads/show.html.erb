@@ -1,3 +1,15 @@
+<article class="thumbnail no-padding">
+  <% if @upload.thumbnail.attached? %>
+    <%= image_tag @upload.thumbnail, class: "" %>
+  <% end %>
+  <div class="absolute bottom left right padding bottom-shadow white-text">
+    <h3 class="no-margin"><%=@upload.title%></h5>
+    <div>Complementary text</div>
+    <%# <nav>
+      <button class="border small">Button</button>
+    </nav> %>
+  </div>
+</article>
 <div class="container">
   <div class="center">
     <h2>
@@ -11,7 +23,7 @@
     </div>
   </div>
   <% (0...@upload.images.count).each do |image| %>
-    <%= image_tag(@upload.thumbnail(image)) %>
+    <%= image_tag(@upload.to_thumbnail(image)) %>
   <% end %>
   <% @upload.documents.all.each do |doc| %>
     <% if doc.representable? %>

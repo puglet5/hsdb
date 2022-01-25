@@ -97,7 +97,7 @@ class UploadsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:title, :body, :description, :status, images: [], documents: [], tag_ids: [])
+    params.require(:upload).permit(:title, :body, :description, :status, :thumbnail, images: [], documents: [], tag_ids: [])
   end
 
   def authorize_upload
