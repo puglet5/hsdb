@@ -1,13 +1,10 @@
 <div class="container">
-
-<h3 class="center">HSDB Users</h3>
-
+  <h3 class="center">HSDB Users</h3>
   <div>
-    <%= link_to "Download zipped XLSX", admin_users_path(format: :zip), class: "btn" %>
+    <%= link_to "Download zipped XLSX", admin_users_path(format: :zip), class: "button" %>
   </div>
-
   <hr>
-  <table class="container striped highlight centered responsive-table">
+  <table class="border center-align">
     <thead>
       <tr>
         <th>#</th>
@@ -19,7 +16,6 @@
         <th></th>
       </tr>
     </thead>
-
     <tbody>
       <%= render @users %>
     </tbody>
