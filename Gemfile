@@ -8,7 +8,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails', '~> 6.1.4.7'
 # Use Puma as the app server
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
+gem 'puma', '>= 5.6.4'
 gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 # gem 'shakapacker', git: 'https://github.com/shakacode/shakapacker.git'
 # gem 'turbolinks', '~> 5' //loaded through webpack, see package.json
