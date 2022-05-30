@@ -262,7 +262,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.5.1)
-    regexp_parser (2.4.0)
+    regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -305,7 +305,7 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     ruby-graphviz (1.2.5)
       rexml
-    ruby-lsp (0.0.2)
+    ruby-lsp (0.0.3)
       language_server-protocol
       rubocop (>= 1.0)
       syntax_tree (>= 2.3)
@@ -337,7 +337,7 @@ GEM
       rails (>= 5.2)
       redis
     subexec (0.2.3)
-    syntax_tree (2.7.0)
+    syntax_tree (2.7.1)
       prettier_print
     textacular (5.5.1)
       activerecord (>= 5.0, < 7.1)
