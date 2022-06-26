@@ -5,14 +5,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby '3.0.0'
 
-gem 'rails', '~> 6.1.4.7'
+gem 'rails', '~> 7.0.3'
 # Use Puma as the app server
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.6.4'
 gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 # gem 'shakapacker', git: 'https://github.com/shakacode/shakapacker.git'
 # gem 'turbolinks', '~> 5' //loaded through webpack, see package.json
-gem 'redis', '~> 4.5.1'
+gem 'redis', '~> 4.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bullet'
@@ -28,8 +28,8 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'mini_magick', '~> 4.11'
 gem 'public_activity'
 gem 'pundit', '~> 2.1'
-gem 'rails-i18n', '~> 6.0'
-gem 'ransack', '~> 2.4', '>= 2.4.2'
+gem 'rails-i18n', '~> 7.0.3'
+gem 'ransack', '~> 3.2.1'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
@@ -48,13 +48,13 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec-rails', '~> 5.1.2'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 3.0'
   gem 'web-console', '>= 4.1.0'
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'erd'
@@ -79,4 +79,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "ruby-lsp", "~> 0.0.2", :group => :development
+# gem "ruby-lsp", "~> 0.1.0", :group => :development
