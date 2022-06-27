@@ -1,8 +1,7 @@
-import Rails from "@rails/ujs";
-global.Rails = Rails;
-
-import * as ActiveStorage from "@rails/activestorage";
-import "./channels";
+require("@rails/ujs").start();
+require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
 // import "./controllers";
 
 import "./packs/direct_upload";
@@ -12,6 +11,7 @@ import "./packs/direct_upload";
 // import "beercss/src/cdn/beer"
 
 import "trix"
+import "flowbite/dist/flowbite.js"
 
 import "@rails/actiontext";
 

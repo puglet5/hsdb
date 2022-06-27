@@ -59,6 +59,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.9.3":
+  version: 2.11.5
+  resolution: "@popperjs/core@npm:2.11.5"
+  checksum: fd7f9dca3fb716d7426332b6ee283f88d2724c0ab342fb678865a640bad403dfb9eeebd8204a406986162f7e2b33394f104320008b74d0e9066d7322f70ea35d
+  languageName: node
+  linkType: hard
+
 "@rails/actiontext@npm:^6.1.5":
   version: 6.1.6
   resolution: "@rails/actiontext@npm:6.1.6"
@@ -227,8 +234,9 @@ __metadata:
     autoprefixer: latest
     data-confirm-modal: ^1.6.2
     esbuild: ^0.14.47
+    flowbite: latest
     jquery: ^3.6.0
-    mini-css-extract-plugin: 2.6.1
+    mini-css-extract-plugin: ^2.6.1
     popper.js: ^1.16.1
     postcss: latest
     sass: ^1.53.0
@@ -808,6 +816,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flowbite@npm:latest":
+  version: 1.4.7
+  resolution: "flowbite@npm:1.4.7"
+  dependencies:
+    "@popperjs/core": ^2.9.3
+    mini-svg-data-uri: ^1.4.3
+  checksum: 14bd832553e430a4c53bfdb24e135058ef1e2051bc9aa7ee9dc75d2c2cbdecfce4055607194a5742c6f067314a383d4d955e007d667d6c51900c93b54661921f
+  languageName: node
+  linkType: hard
+
 "fraction.js@npm:^4.2.0":
   version: 4.2.0
   resolution: "fraction.js@npm:4.2.0"
@@ -1179,7 +1197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mini-css-extract-plugin@npm:2.6.1":
+"mini-css-extract-plugin@npm:^2.6.1":
   version: 2.6.1
   resolution: "mini-css-extract-plugin@npm:2.6.1"
   dependencies:
@@ -1187,6 +1205,15 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: df60840404878c4832b4104799fd29c5a89b06b1e377956c8d4a5729efe0ef301a52e5087d6f383871df5e69a8445922a0ae635c11abf412d7645a7096d0e973
+  languageName: node
+  linkType: hard
+
+"mini-svg-data-uri@npm:^1.4.3":
+  version: 1.4.4
+  resolution: "mini-svg-data-uri@npm:1.4.4"
+  bin:
+    mini-svg-data-uri: cli.js
+  checksum: 997f1fbd8d59a70f03761e18626d335197a3479cb9d1ff75678e4b64b864d32a0b8fc18115eabde035e5299b8b4a354a78e57dd6ac10f9d604162a6170898d09
   languageName: node
   linkType: hard
 
