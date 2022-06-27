@@ -4,36 +4,29 @@
   "dependencies": {
     "@rails/actiontext": "^6.1.5",
     "@rails/ujs": "^6.1.5",
-    "@rails/webpacker": "^6.0.0-rc.6",
-    "beercss": "^2.0.31",
-    "css-loader": "^6.5.1",
-    "css-minimizer-webpack-plugin": "^4.0.0",
+    "autoprefixer": "latest",
     "data-confirm-modal": "^1.6.2",
+    "esbuild": "^0.14.47",
+    "flowbite": "latest",
     "jquery": "^3.6.0",
-    "mini-css-extract-plugin": "2.6.1",
+    "mini-css-extract-plugin": "^2.6.1",
     "popper.js": "^1.16.1",
+    "postcss": "latest",
     "sass": "^1.53.0",
-    "sass-loader": "^13.0.1",
-    "stimulus": "^3.0.1",
-    "stimulus_reflex": "3.4.1",
+    "tailwindcss": "latest",
     "trix": "^1.2.0",
-    "turbolinks": "^5.2.0",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.1"
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "babel": {
-    "presets": [
-      "./node_modules/@rails/webpacker/package/babel/preset.js"
-    ]
+    "presets": []
   },
   "browserslist": [
-    "defaults",
-    "not IE 11"
+    "defaults"
   ],
-  "devDependencies": {
-    "@webpack-cli/serve": "^1.6.0",
-    "webpack-dev-server": "^4.7.4"
-  },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "scripts": {
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css --minify",
+    "build": "esbuild ./app/javascript/*.* --bundle --outdir=./app/assets/builds --public-path=assets"
+  }
 }
