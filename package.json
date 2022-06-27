@@ -7,11 +7,13 @@
     "autoprefixer": "latest",
     "data-confirm-modal": "^1.6.2",
     "esbuild": "^0.14.47",
-    "flowbite": "latest",
+    "flowbite": "1.3.3",
     "jquery": "^3.6.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "patch-package": "^6.4.7",
     "popper.js": "^1.16.1",
     "postcss": "latest",
+    "postinstall-postinstall": "^2.1.0",
     "sass": "^1.53.0",
     "tailwindcss": "latest",
     "trix": "^1.2.0",
@@ -27,6 +29,7 @@
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css --minify",
+    "postinstall": "patch-package",
     "build": "esbuild ./app/javascript/*.* --bundle --outdir=./app/assets/builds --public-path=assets"
   }
 }

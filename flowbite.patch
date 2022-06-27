@@ -1,0 +1,58 @@
+diff --git a/node_modules/flowbite/dist/flowbite.js b/node_modules/flowbite/dist/flowbite.js
+index 92e66fc..3659e36 100644
+--- a/node_modules/flowbite/dist/flowbite.js
++++ b/node_modules/flowbite/dist/flowbite.js
+@@ -32,7 +32,7 @@ const rotateAccordionIcon = accordionHeaderEl => {
+   }
+ };
+
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   document.querySelectorAll('[data-accordion]').forEach(function (accordionEl) {
+     const accordionId = accordionEl.getAttribute('id');
+     const collapseAccordion = accordionEl.getAttribute('data-accordion');
+@@ -109,7 +109,7 @@ const toggleCollapse = (elementId, show = true) => {
+   }
+ };
+
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   // Toggle target elements using [data-collapse-toggle]
+   document.querySelectorAll('[data-collapse-toggle]').forEach(function (collapseToggleEl) {
+     var collapseId = collapseToggleEl.getAttribute('data-collapse-toggle');
+@@ -150,7 +150,7 @@ const toggleModal = (modalId, show = true) => {
+ };
+
+ window.toggleModal = toggleModal;
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   document.querySelectorAll('[data-modal-toggle]').forEach(function (modalToggleEl) {
+     var modalId = modalToggleEl.getAttribute('data-modal-toggle');
+     var modalEl = document.getElementById(modalId);
+@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
+ /***/ 454:
+ /***/ (() => {
+
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   document.querySelectorAll('[data-tabs-toggle]').forEach(function (tabsToggleEl) {
+     const tabsToggleElementsId = tabsToggleEl.getAttribute('id');
+     const tabsToggleElements = document.querySelectorAll('#' + tabsToggleElementsId + ' [role="tab"]');
+@@ -2208,7 +2208,7 @@ var popper_createPopper = /*#__PURE__*/popperGenerator({
+
+ ;// CONCATENATED MODULE: ./src/components/dropdown.js
+
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   // Toggle dropdown elements using [data-dropdown-toggle]
+   document.querySelectorAll('[data-dropdown-toggle]').forEach(function (dropdownToggleEl) {
+     const dropdownMenuId = dropdownToggleEl.getAttribute('data-dropdown-toggle');
+@@ -2256,7 +2256,7 @@ var tabs = __webpack_require__(454);
+ var modal = __webpack_require__(508);
+ ;// CONCATENATED MODULE: ./src/components/tooltip.js
+
+-document.addEventListener('DOMContentLoaded', () => {
++document.addEventListener('turbolinks:load', () => {
+   // Toggle dropdown elements using [data-dropdown-toggle]
+   document.querySelectorAll('[data-tooltip-target]').forEach(function (tooltipToggleEl) {
+     const tooltipEl = document.getElementById(tooltipToggleEl.getAttribute('data-tooltip-target'));
