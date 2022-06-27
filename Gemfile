@@ -9,7 +9,7 @@ gem 'rails', '~> 7.0.3'
 # Use Puma as the app server
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.6.4'
-gem 'webpacker', github: 'rails/webpacker', branch: 'master'
+# gem 'webpacker', github: 'rails/webpacker', branch: 'master'
 # gem 'shakapacker', git: 'https://github.com/shakacode/shakapacker.git'
 # gem 'turbolinks', '~> 5' //loaded through webpack, see package.json
 gem 'redis', '~> 4.7'
@@ -37,10 +37,13 @@ gem 'textacular', '~> 5.5'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+gem 'sprockets-rails', '~> 3.4'
+gem 'jsbundling-rails', '~> 1.0'
+gem 'cssbundling-rails', '~> 1.0'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'stimulus_reflex', '~> 3.4.1'
+gem 'stimulus_reflex', '~> 3.5.0.pre9'
 
 group :development, :test do
   gem 'awesome_print'

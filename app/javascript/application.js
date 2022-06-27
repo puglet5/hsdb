@@ -7,7 +7,7 @@ import "./controllers";
 
 import "./packs/direct_upload";
 // import "./dataconfirm"
-import "./styles/application.scss";
+// import "./styles/application.scss";
 
 import "beercss/src/cdn/beer"
 import "trix"
@@ -22,8 +22,8 @@ Turbolinks.start()
 require("jquery");
 require("@rails/actiontext")
 
-require.context('img', true)
+// require.context('img', true)
 
-document.addEventListener("turbolinks:load", () => {
-  ui();
-})
+// document.addEventListener("turbolinks:load", () => {
+//   ui();
+// })
