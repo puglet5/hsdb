@@ -9,12 +9,16 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application" %>
   </head>
-  <body class="h-screen">
+  <body class="flex flex-col h-screen justify-between">
     <%= render "shared/application_nav" %>
     <% flash.each do |k, v| %>
-      <%= tag.div v, class: "container #{k}", role: "alert" %>
+      <div class="flex justify-center">
+        <%= tag.div v, class: "p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800", role: "alert" %>
+      </div>
     <% end %>
-    <%= yield %>
-    <%#= render "shared/application_footer" %>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+    <%= render "shared/application_footer" %>
   </body>
 </html>
