@@ -20,7 +20,7 @@ module ApplicationHelper
 
       auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
 
-      auth_links << "<#{tag_type}>#{link_to current_user.first_name.to_s, "/#{locale}/users/#{current_user.slug}", class: "#{style} #{active? user_path(current_user), active_class}"}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to "Account", "/#{locale}/users/#{current_user.slug}", class: "#{style} #{active? user_path(current_user), active_class}"}</#{tag_type}>"
 
     else
       auth_items.each do |item|
@@ -74,7 +74,7 @@ module ApplicationHelper
     ]
   end
 
-  def nav_helper(tag_type, style = '', active_class)
+  def nav_helper(tag_type, style = '', active_class = '')
     nav_links = ''
 
     nav_items.each do |item|
