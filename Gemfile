@@ -63,6 +63,8 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'
   gem 'spring'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
 end
 
 group :test do

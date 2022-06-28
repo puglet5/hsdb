@@ -1,3 +1,4 @@
 web: rails s -p 3000
 css: yarn build:css --watch
 js: yarn build --watch
+gd: bundle exec guard
