@@ -1,58 +1,76 @@
 diff --git a/node_modules/flowbite/dist/flowbite.js b/node_modules/flowbite/dist/flowbite.js
-index 92e66fc..3659e36 100644
+index 8ffce3d..a5a32fb 100644
 --- a/node_modules/flowbite/dist/flowbite.js
 +++ b/node_modules/flowbite/dist/flowbite.js
-@@ -32,7 +32,7 @@ const rotateAccordionIcon = accordionHeaderEl => {
-   }
- };
+@@ -163,7 +163,7 @@ var Accordion = /*#__PURE__*/function () {
+ }();
 
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
+ window.Accordion = Accordion;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
    document.querySelectorAll('[data-accordion]').forEach(function (accordionEl) {
-     const accordionId = accordionEl.getAttribute('id');
-     const collapseAccordion = accordionEl.getAttribute('data-accordion');
-@@ -109,7 +109,7 @@ const toggleCollapse = (elementId, show = true) => {
-   }
+     var alwaysOpen = accordionEl.getAttribute('data-accordion');
+     var activeClasses = accordionEl.getAttribute('data-active-classes');
+@@ -281,7 +281,7 @@ var Collapse = /*#__PURE__*/function () {
+ }();
+
+ window.Collapse = Collapse;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-collapse-toggle]').forEach(function (triggerEl) {
+     var targetEl = document.getElementById(triggerEl.getAttribute('data-collapse-toggle'));
+     new Collapse(targetEl, {
+@@ -537,7 +537,7 @@ var Carousel = /*#__PURE__*/function () {
+ }();
+
+ window.Carousel = Carousel;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-carousel]').forEach(function (carouselEl) {
+     var interval = carouselEl.getAttribute('data-carousel-interval');
+     var slide = carouselEl.getAttribute('data-carousel') === 'slide' ? true : false;
+@@ -663,7 +663,7 @@ var Dismiss = /*#__PURE__*/function () {
+ }();
+
+ window.Dismiss = Dismiss;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-dismiss-target]').forEach(function (triggerEl) {
+     var targetEl = document.querySelector(triggerEl.getAttribute('data-dismiss-target'));
+     new Dismiss(targetEl, {
+@@ -2802,7 +2802,7 @@ var Dropdown = /*#__PURE__*/function () {
+ }();
+
+ window.Dropdown = Dropdown;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-dropdown-toggle]').forEach(function (triggerEl) {
+     var targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
+     var placement = triggerEl.getAttribute('data-dropdown-placement');
+@@ -2996,7 +2996,7 @@ var getModalInstance = function getModalInstance(id, instances) {
+   return false;
  };
 
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
-   // Toggle target elements using [data-collapse-toggle]
-   document.querySelectorAll('[data-collapse-toggle]').forEach(function (collapseToggleEl) {
-     var collapseId = collapseToggleEl.getAttribute('data-collapse-toggle');
-@@ -150,7 +150,7 @@ const toggleModal = (modalId, show = true) => {
- };
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   var modalInstances = [];
+   document.querySelectorAll('[data-modal-toggle]').forEach(function (el) {
+     var modalId = el.getAttribute('data-modal-toggle');
+@@ -3165,7 +3165,7 @@ var Tabs = /*#__PURE__*/function () {
+ }();
 
- window.toggleModal = toggleModal;
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
-   document.querySelectorAll('[data-modal-toggle]').forEach(function (modalToggleEl) {
-     var modalId = modalToggleEl.getAttribute('data-modal-toggle');
-     var modalEl = document.getElementById(modalId);
-@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
- /***/ 454:
- /***/ (() => {
+ window.Tabs = Tabs;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-tabs-toggle]').forEach(function (triggerEl) {
+     var tabElements = [];
+     var defaultTabId = null;
+@@ -3342,7 +3342,7 @@ var Tooltip = /*#__PURE__*/function () {
+ }();
 
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
-   document.querySelectorAll('[data-tabs-toggle]').forEach(function (tabsToggleEl) {
-     const tabsToggleElementsId = tabsToggleEl.getAttribute('id');
-     const tabsToggleElements = document.querySelectorAll('#' + tabsToggleElementsId + ' [role="tab"]');
-@@ -2208,7 +2208,7 @@ var popper_createPopper = /*#__PURE__*/popperGenerator({
-
- ;// CONCATENATED MODULE: ./src/components/dropdown.js
-
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
-   // Toggle dropdown elements using [data-dropdown-toggle]
-   document.querySelectorAll('[data-dropdown-toggle]').forEach(function (dropdownToggleEl) {
-     const dropdownMenuId = dropdownToggleEl.getAttribute('data-dropdown-toggle');
-@@ -2256,7 +2256,7 @@ var tabs = __webpack_require__(454);
- var modal = __webpack_require__(508);
- ;// CONCATENATED MODULE: ./src/components/tooltip.js
-
--document.addEventListener('DOMContentLoaded', () => {
-+document.addEventListener('turbolinks:load', () => {
-   // Toggle dropdown elements using [data-dropdown-toggle]
-   document.querySelectorAll('[data-tooltip-target]').forEach(function (tooltipToggleEl) {
-     const tooltipEl = document.getElementById(tooltipToggleEl.getAttribute('data-tooltip-target'));
+ window.Tooltip = Tooltip;
+-document.addEventListener('DOMContentLoaded', function () {
++document.addEventListener('turbolinks:load', function () {
+   document.querySelectorAll('[data-tooltip-target]').forEach(function (triggerEl) {
+     var targetEl = document.getElementById(triggerEl.getAttribute('data-tooltip-target'));
+     var triggerType = triggerEl.getAttribute('data-tooltip-trigger');
