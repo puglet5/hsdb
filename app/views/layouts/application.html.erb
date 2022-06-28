@@ -9,7 +9,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application" %>
   </head>
-  <body class="flex flex-col h-screen justify-between">
+  <body class="bg-gray-100 flex flex-col h-screen justify-between">
     <%= render "shared/application_nav" %>
     <% flash.each do |k, v| %>
       <div class="flex justify-center">

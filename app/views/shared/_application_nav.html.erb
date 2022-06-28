@@ -1,14 +1,22 @@
-<nav class="bg-gray-100 px-2 sm:px-4 py-2.5 border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
-  <div class="flex flex-wrap justify-between items-center mx-auto">
-    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Heritage Science DB</span>
-    <%# <a href="https://itmo.ru/" class="flex items-center"> %>
-    <%#= image_tag "itmo_horiz_white_logo", class: "mr-3 h-6 sm:h-9", alt: "ITMO Logo" %>
-    <%# </a> %>
-    <% if current_user %>
-      <div class="flex items-center md:order-2">
-        <button type="button" class="flex mr-3 text-sm bg-gray-300 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+<nav class="bg-white px-2 sm:px-4 py-2.5 border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+  <div class="grid grid-cols-3 gap-4">
+    <div class="place-self-start"><span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Heritage Science DB</span></div>
+    <div class="place-self-center my-auto">
+      <ul class="flex flex-row space-x-8 mt-0 text-sm font-medium">
+        <% if current_user %>
+          <%= nav_helper  "li", "bg-transparent text-itmo_primary-500 p-0 dark:text-white", "bg-transparent text-itmo_misc_3-500 p-0 dark:text-white" %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="flex  place-self-end">
+      <% if current_user %>
+        <button type="button" class="flex mx-3 text-sm bg-white rounded-full md:mr-3 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 text-itmo_primary-500" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt=<%= current_user.first_name.to_s[0,1]%>>
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar.variant(resize: "100x100!"), class: "w-6 h-6 rounded-full" %>
+          <% else %>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          <% end %>
         </button>
         <!-- Dropdown menu -->
         <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(955px, 1844px);" data-popper-placement="bottom">
@@ -18,27 +26,29 @@
           </div>
           <ul class="py-1" aria-labelledby="dropdown">
             <%= auth_helper "li", 'block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white', "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
-            <% I18n.available_locales.each do |locale| %>
-              <li class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                <%= link_to locale, url_for(params.to_unsafe_h.merge(locale: locale)) %>
-              </li>
-            <% end %>
           </ul>
         </div>
-        <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-          <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
+      <% end %>
+      <% if !current_user %>
+        <button id="dropdownDefault" data-dropdown-toggle="dropdown-1" class="mx-4 text-center text-itmo_primary-500 bg-white rounded-lg hover:text-itmo_primary-300 focus:ring-4 focus:outline-none focus:ring-white" type="button"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></button>
+        <!-- Dropdown menu -->
+        <div id="dropdown-1" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+            <%= auth_helper "span", "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          </ul>
+        </div>
+      <% end %>
+      <button id="dropdownDefault" data-dropdown-toggle="dropdown-2" class="text-center text-itmo_primary-500 bg-white rounded-lg hover:text-itmo_primary-300 focus:ring-4 focus:outline-none focus:ring-gray-300" type="button"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
+      <!-- Dropdown menu -->
+      <div id="dropdown-2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-20 dark:bg-gray-700">
+        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+          <% I18n.available_locales.each do |locale| %>
+            <li class="">
+              <%= link_to locale, url_for(params.to_unsafe_h.merge(locale: locale)), class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    <% end %>
-    <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-      <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-        <%= nav_helper  "li", "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-green-700 md:p-0 dark:text-white" %>
-        <% if !current_user %>
-          <%= auth_helper "li", 'block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 dark:text-white', "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 dark:text-white" %>
-        <% end %>
-      </ul>
     </div>
   </div>
 </nav>
