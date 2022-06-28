@@ -7,5 +7,11 @@ module.exports = {
   ],
   plugins: [
     require('flowbite/plugin')
-  ]
+  ],
+
+  theme: {
+    container: {
+      center: true
+    }
+  }
 }

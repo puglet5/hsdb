@@ -1,23 +1,31 @@
-<article class="border container">
-  <h2>Log in</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field label">
-      <%= f.email_field :email, autofocus: false, autocomplete: "email" %>
-      <%= f.label :email %>
-    </div>
-    <div class="field label">
-      <%= f.password_field :password, autocomplete: "current-password" %>
-      <%= f.label :password %>
-    </div>
-    <% if devise_mapping.rememberable? %>
-      <label class="checkbox">
-        <%= f.check_box :remember_me %>
-        <span>Remember me</span>
-      </label>
+<div class="container flex h-full my-28 justify-center">
+  <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 h-fit">
+    <p class="font-bold dark:text-white text-2xl mb-4">Hi! Please, log in</p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Email</label>
+      <div class="relative mb-6">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+        </div>
+        <%= f.email_field :email, autofocus: false, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"user@example.com" %>
+      </div>
+      <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+      <div class="flex">
+        <%= f.password_field :password, autocomplete: "current-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "•••••••••" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center my-4">
+          <%= f.check_box :remember_me, class: "w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+          <label for="default-checkbox" class="block mb-0 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+        </div>
+      <% end %>
+      <%= f.submit "Log in", type: "link", class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to t(".sign_up"), new_registration_path(resource_name), class: "text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <% end %>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to t(".forgot_your_password"), new_password_path(resource_name), class: "block mb-2 text-sm font-medium text-gray-500 dark:text-gray-300 mt-2" %>
+      <% end %>
     <% end %>
-    <div class="actions margin">
-      <%= f.submit "Log in", class: "button responsive" %>
-    </div>
-  <% end %>
-  <%= render "devise/shared/links" %>
-</article>
+  </div>
+</div>
