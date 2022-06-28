@@ -1,10 +1,10 @@
 <nav class="bg-white px-2 sm:px-4 py-2.5 border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
   <div class="grid grid-cols-3 gap-4">
-    <div class="place-self-start"><span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Heritage Science DB</span></div>
+    <div class="place-self-start"><span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-itmo_primary-500">Heritage Science DB</span></div>
     <div class="place-self-center my-auto">
       <ul class="flex flex-row space-x-8 mt-0 text-sm font-medium">
         <% if current_user %>
-          <%= nav_helper  "li", "bg-transparent text-itmo_primary-500 p-0 dark:text-white", "bg-transparent text-itmo_misc_3-500 p-0 dark:text-white" %>
+          <%= nav_helper  "li", "bg-transparent text-itmo_primary-300 p-0 dark:text-white", "!text-itmo_primary-500", true %>
         <% end %>
       </ul>
     </div>
@@ -25,7 +25,7 @@
             <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user.email.to_s %></span>
           </div>
           <ul class="py-1" aria-labelledby="dropdown">
-            <%= auth_helper "li", 'block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white', "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+            <%= auth_helper "li", 'block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white', "" %>
           </ul>
         </div>
       <% end %>
