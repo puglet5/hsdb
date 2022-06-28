@@ -12,6 +12,9 @@ module.exports = {
   ],
 
   theme: {
+    fontFamily: {
+      'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
+    },
     container: {
       center: true
     },
