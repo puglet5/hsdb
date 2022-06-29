@@ -1,6 +1,6 @@
 en:
-  en: English
-  ru: Russian
+  language_name: "English"
+  language_abbr: "EN"
   nav:
     home: Home
     about: About

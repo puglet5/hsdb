@@ -1,6 +1,6 @@
 ru:
-  en: "Английский"
-  ru: "Русский"
+  language_name: "Русский"
+  language_abbr: "RU"
   nav:
     home: "Главная"
     about: "Контакты"
