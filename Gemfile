@@ -65,9 +65,11 @@ group :development do
   gem 'ruby-prof'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem "foreman", "~> 0.87.2"
 end
 
 group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+

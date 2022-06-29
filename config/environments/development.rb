@@ -110,5 +110,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.hosts << '127.0.0.1'
 
-  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+  # config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+  config.middleware.use(Rack::LiveReload, host: 'localhost', source: :vendored)
 end

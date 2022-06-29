@@ -135,6 +135,7 @@ GEM
     faker (2.21.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    foreman (0.87.2)
     formatador (1.1.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -413,6 +414,7 @@ DEPENDENCIES
   erd
   factory_bot_rails
   faker (~> 2.18)
+  foreman (~> 0.87.2)
   friendly_id (~> 5.4, >= 5.4.2)
   graphicsmagick (~> 1.0, >= 1.0.6)
   guard-livereload
