@@ -1,6 +1,8 @@
 <nav class="bg-white px-2 sm:px-4 py-2.5 border border-gray-200 shadow-md ">
   <div class="grid grid-cols-3 gap-4">
-    <div class="place-self-start"><span class="flex flex-row self-center text-xl font-semibold whitespace-nowrap text-itmo_primary-500"><svg class="w-6 h-6 mr-2 my-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>ITMO Heritage Science DB</span></div>
+    <div class="place-self-start">
+      <span class="flex flex-row self-center text-xl font-semibold whitespace-nowrap text-itmo_primary-500"><svg class="w-6 h-6 mr-2 my-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>ITMO Heritage Science DB</span>
+    </div>
     <div class="place-self-center my-auto">
       <ul class="flex flex-row space-x-8 mt-0 text-sm font-medium">
         <% if current_user %>
@@ -8,10 +10,10 @@
         <% end %>
       </ul>
     </div>
-    <div class="flex  place-self-end">
+    <div class="flex place-self-end">
       <% if !current_user %>
         <button id="dropdownDefault" data-dropdown-toggle="dropdown-2" class="text-center text-itmo_primary-500 bg-white rounded-lg hover:text-itmo_primary-300 focus:ring-4 focus:outline-none focus:ring-gray-300" type="button"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
-        <!-- Dropdown menu -->
+        <!-- Dropdown language menu -->
         <div id="dropdown-2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow ">
           <aside class="w-64" aria-label="Sidebar">
             <div class="overflow-y-auto px-3 bg-white rounded dark:bg-gray-800">
@@ -40,7 +42,7 @@
           <span class="sr-only">Open user menu</span>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </button>
-        <!-- Dropdown menu -->
+        <!-- Dropdown user  menu -->
         <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow " id="dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(955px, 1844px);" data-popper-placement="bottom">
           <%= render "shared/application_nav_sidebar" %>
         </div>
