@@ -17,7 +17,8 @@
     "sass": "^1.53.0",
     "tailwindcss": "latest",
     "trix": "^1.2.0",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "tw-elements": "^1.0.0-alpha12"
   },
   "version": "0.1.0",
   "babel": {
