@@ -9,7 +9,7 @@ bundle check || bundle install --jobs 20 --retry 5
 
 yarn install
 
-bin/rails db:setup
+# bin/rails db:migrate 2>/dev/null || bin/rails db:setup
 
 # Remove pre-existing puma/passenger server.pid
 rm -f $APP_PATH/tmp/pids/server.pid
