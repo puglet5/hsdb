@@ -1,7 +1,7 @@
 <aside class="w-64 border" aria-label="Sidebar">
   <div class="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
     <% if current_user %>
-      <%= link_to "/#{locale}/users/#{current_user.slug}", class: "flex items-center pl-2.5 mb-5" do %>
+      <%= link_to "/#{locale}/users/#{current_user.slug}", class: "flex items-center pl-2 mb-5" do %>
         <% if current_user.avatar.attached? %>
           <%= image_tag current_user.avatar.variant(resize: "100x100!"), class: "w-6 h-6 rounded-full" %>
         <% else %>
