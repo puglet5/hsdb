@@ -1,18 +1,11 @@
 <% img_class = "responsive medium"%>
-<div class="col s3">
-  <article class="no-padding border">
-    <%= link_to upload, class: "fill" do %>
-      <% if upload.thumbnail.attached? %>
-        <%= image_tag(upload.thumbnail.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: img_class) %>
-      <% elsif upload.images.any? %>
-        <%= image_tag(upload.to_thumbnail(0), class: img_class) %>
-      <% else %>
-        <%= image_tag("https://picsum.photos/400/300", class: img_class)%>
-      <% end %>
-      <span class="badge top right round upload_badge">New</span>
-      <div class="absolute bottom left right padding white-text">
-        <%= tag.h5 upload.title.truncate(20), class: "no-margin" %>
-      </div>
-    <% end %>
-  </article>
-</div>
+<%= link_to upload, class: "fill" do %>
+  <% if upload.thumbnail.attached? %>
+    <%= image_tag(upload.thumbnail.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: img_class) %>
+  <% elsif upload.images.any? %>
+    <%= image_tag(upload.to_thumbnail(0), class: img_class) %>
+  <% else %>
+    <%= image_tag("https://picsum.photos/400/300", class: img_class)%>
+  <% end %>
+  <%= tag.h5 upload.title.truncate(20), class: "no-margin" %>
+<% end %>
