@@ -1,41 +1,47 @@
 <%= render "shared/errors", obj: @upload %>
-<%= simple_form_for(@upload) do |form| %>
-  <div class="field label">
-    <%= form.text_field :title %>
-    <label>Title</label>
-  </div>
-  <div class="field suffix">
-    <%= form.input_field :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] } %>
-    <i>arrow_drop_down</i>
-  </div>
-  <div class="field label suffix">
-    <%= form.file_field :thumbnail, multiple: false, direct_upload: true %>
-    <label>Thumbnail</label>
-    <i>attach_file</i>
-  </div>
-  <div class="field label suffix">
-    <%= form.file_field :images, multiple: true, direct_upload: true %>
-    <label>Images</label>
-    <i>attach_file</i>
-  </div>
-  <div class="field label suffix">
-    <%= form.file_field :documents, multiple: true, direct_upload: true %>
-    <label>Documents</label>
-    <i>attach_file</i>
-  </div>
-  <div class="field label">
-    <%= form.text_area :description %>
-    <label>Desctiption</label>
-  </div>
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.rich_text_area :body %>
-  </div>
-  <div class="field suffix">
-    <%= form.collection_select :tag_ids, tags, :id, :title, {} %>
-    <i>arrow_drop_down</i>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="container mx-auto p-20">
+  <%= simple_form_for(@upload) do |form| %>
+    <div class="grid gap-6 mb-6 lg:grid-cols-2">
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
+        <%= form.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)", required: true %>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Status</label>
+        <%= form.input_field :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, class: "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" %>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Thumbnail</label>
+        <%= form.file_field :thumbnail, multiple: false, direct_upload: true, class: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Images</label>
+        <%= form.file_field :images, multiple: true, direct_upload: true, class: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Documents</label>
+        <%= form.file_field :documents, multiple: true, direct_upload: true, class: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PDF or any other format (MAX. 800x400px).</p>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other info</label>
+        <input type="text" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+      </div>
+    </div>
+    <div class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Short description</label>
+      <%= form.text_area :description, class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Your message..." %>
+    </div>
+    <div class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Detailed description</label>
+      <%= form.rich_text_area :body %>
+    </div>
+    <div class="flex">
+      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">    <%= form.submit %>
+      </button>
+      <%= link_to "Back", uploads_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
+    </div>
+  <% end %>
+</div>
