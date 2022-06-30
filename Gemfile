@@ -36,7 +36,7 @@ gem 'textacular', '~> 5.5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-# gem 'stimulus_reflex', '~> 3.5.0.pre9'
+gem 'ledermann-rails-settings'
 
 group :development, :test do
   gem 'awesome_print'

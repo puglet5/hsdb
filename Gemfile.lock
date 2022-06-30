@@ -187,6 +187,8 @@ GEM
     kaminari-core (1.2.2)
     launchy (2.5.0)
       addressable (~> 2.7)
+    ledermann-rails-settings (2.5.0)
+      activerecord (>= 4.2)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     listen (3.7.1)
@@ -425,6 +427,7 @@ DEPENDENCIES
   jquery-rails (~> 4.4)
   jsbundling-rails (~> 1.0)
   kaminari (~> 1.2, >= 1.2.1)
+  ledermann-rails-settings
   letter_opener
   listen (~> 3.3)
   mini_magick (~> 4.11)
