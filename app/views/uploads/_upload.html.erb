@@ -1,11 +1,24 @@
-<% img_class = "responsive medium"%>
-<%= link_to upload, class: "fill" do %>
-  <% if upload.thumbnail.attached? %>
-    <%= image_tag(upload.thumbnail.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: img_class) %>
-  <% elsif upload.images.any? %>
-    <%= image_tag(upload.to_thumbnail(0), class: img_class) %>
-  <% else %>
-    <%= image_tag("https://picsum.photos/400/300", class: img_class)%>
+<div class="max-w-sm bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 mb-4">
+  <%= link_to upload do %>
+    <% if upload.thumbnail.attached? %>
+      <div class="flex relative">
+        <%= image_tag(upload.thumbnail.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "") %>
+        <span class="absolute top-0 right-0 bg-itmo_primary-300  text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 dark:bg-gray-700 dark:text-gray-300">
+          <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+          <%= "#{time_ago_in_words upload.created_at} ago" %>
+        </span>
+        <span class="absolute top-0 left-0 bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 dark:bg-gray-700 dark:text-gray-300">
+          <%= upload.status %>
+        </span>
+      </div>
+    <% elsif upload.images.any? %>
+      <%= image_tag(upload.to_thumbnail(0)) %>
+    <% else %>
+      <%= image_tag("https://picsum.photos/400/300")%>
+    <% end %>
+    <div class="p-5">
+      <h5 class="mb-0 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%=upload.title.truncate(30)%></h5>
+    </div>
   <% end %>
-  <%= tag.h5 upload.title.truncate(20), class: "no-margin" %>
-<% end %>
+  <p class="mb-3 px-5 font-normal text-gray-700 dark:text-gray-400"><%=upload.description.truncate(120)%></p>
+</div>
