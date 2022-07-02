@@ -5,10 +5,14 @@
       <!-- Item 1 -->
       <% id = @upload.images.first.id %>
       <% (0...3).each do |i| %>
-        <div class="duration-100 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="">
+        <div class="duration-100 ease-in-out inset-0 transition-all transform translate-x-0 z-10" data-carousel-item="">
           <%= image_tag(@upload.images.find(id+i), class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2") %>
         </div>
       <% end %>
+      <div class="carousel-caption hidden md:block absolute text-center z-20">
+        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
+        <p><%= @upload.description %></p>
+      </div>
     </div>
     <!-- Slider indicators -->
     <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
@@ -34,28 +38,38 @@
   <% if @upload.thumbnail.attached? %>
     <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
       <%= image_tag @upload.thumbnail, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" %>
+      <div class="carousel-caption hidden md:block absolute text-center z-20">
+        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
+        <p><%= @upload.description %></p>
+      </div>
     </div>
   <% end %>
 <% end %>
-<%= @upload.title %>
-<%= @upload.status %>
-<% Upload.statuses.keys.each do |status| %>
-  <%= link_to status, '#', data: { reflex: 'click->Upload#change_status', upload_id: @upload.id, status: status}, class: "btn" %>
-<% end %>
-<% (0...@upload.images.count).each do |image| %>
-  <%= image_tag(@upload.to_thumbnail(image)) %>
-<% end %>
-<% @upload.documents.all.each do |doc| %>
-  <% if doc.representable? %>
-    <%= image_tag(doc.representation(resize: "200x200")) %>
-  <% else %>
-    <%= tag.span doc.filename %>
-  <% end %>
-<% end %>
-<% if @upload.images.any? %>
-  <%= link_to "Download images", upload_path(format: :zip), class: "btn" %>
-<% end %>
-<%= @upload.description %>
-<%= @upload.body %>
-<%= link_to "Edit", edit_upload_path(@upload), class: "btn" %> |
-<%= link_to "Back", uploads_path, class: "btn" %>
+<div class="grid grid-cols-3 gap-4 mx-auto md:container md:mx-auto my-20 w-full">
+  <div class="justify-self-start ">
+    <%= @upload.status %>
+    <% if @upload.images.any? %>
+      <%= link_to "Download images", upload_path(format: :zip), class: "btn" %>
+    <% end %>
+    <%= @upload.description %>
+    <%= @upload.body %>
+    <% @upload.documents.all.each do |doc| %>
+      <% if doc.representable? %>
+        <%= image_tag(doc.representation(resize: "200x200")) %>
+      <% else %>
+        <%= tag.span doc.filename %>
+      <% end %>
+    <% end %>
+    <%= link_to "Edit", edit_upload_path(@upload), class: "btn" %> |
+    <%= link_to "Back", uploads_path, class: "btn" %>
+  </div>
+  <div class="justify-self-end col-span-2">
+    <div class="grid grid-cols-2 gap-1">
+      <% (0...@upload.images.count).each do |image| %>
+        <div>
+          <%= image_tag(@upload.to_thumbnail(image), class: "object-cover h-100") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
