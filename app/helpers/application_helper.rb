@@ -13,14 +13,13 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def auth_helper(tag_type, style = '', active_class)
+  def auth_helper(tag_type, style = '', _active_class)
     auth_links = ''
 
     if user_signed_in?
-      auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}", class: "#{style}"}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}", class: style.to_s}</#{tag_type}>"
 
       auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
-
 
     else
       auth_items.each do |item|
@@ -96,7 +95,7 @@ module ApplicationHelper
   end
 
   def active?(controller, url, klass)
-    klass.to_s if (params[:controller] == controller && !params[:action].in?(['home','about'])) || (params[:action].in?(['home','about']) && current_page?(url))
+    klass.to_s if (params[:controller] == controller && !params[:action].in?(%w[home about])) || (params[:action].in?(%w[home about]) && current_page?(url))
   end
 
   def has_role?(role)

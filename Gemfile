@@ -22,6 +22,7 @@ gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jquery-rails', '~> 4.4'
 gem 'jsbundling-rails', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'ledermann-rails-settings'
 gem 'mini_magick', '~> 4.11'
 gem 'public_activity'
 gem 'pundit', '~> 2.1'
@@ -36,7 +37,6 @@ gem 'textacular', '~> 5.5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'ledermann-rails-settings'
 
 group :development, :test do
   gem 'awesome_print'
@@ -50,6 +50,7 @@ end
 group :development do
   gem 'erd'
   gem 'faker', '~> 2.18'
+  gem 'foreman', '~> 0.87.2'
   gem 'guard-livereload'
   gem 'htmlbeautifier'
   gem 'letter_opener'
@@ -65,11 +66,9 @@ group :development do
   gem 'ruby-prof'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
-  gem "foreman", "~> 0.87.2"
 end
 
 group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
-
