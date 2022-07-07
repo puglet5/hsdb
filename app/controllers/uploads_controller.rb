@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
   def index
     @uploads = Upload.all.page(params[:page]).per(3)
     @q = Upload.includes([:user, { images_attachments: :blob }]).ransack(params[:q])
-    @uploads = @q.result(distinct: true).page(params[:page]).per(16)
+    @uploads = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   def show

@@ -39,7 +39,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 group :development, :test do
-  gem 'awesome_print'
+  gem 'ffaker'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'database_cleaner'
@@ -49,13 +49,12 @@ end
 
 group :development do
   gem 'erd'
-  gem 'faker', '~> 2.18'
   gem 'foreman', '~> 0.87.2'
   gem 'guard-livereload'
   gem 'htmlbeautifier'
   gem 'letter_opener'
   gem 'listen', '~> 3.3'
-  gem 'pry-rails'
+  # gem 'pry-rails'
   gem 'rack-livereload'
   gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd'

@@ -18,8 +18,6 @@ Rails.application.configure do
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment', association: :blob
   end
 
-  Faker::Config.locale = 'en'
-
   # config.devServer.injectClient = false
 
   config.web_console.whiny_requests = false
