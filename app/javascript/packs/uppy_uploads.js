@@ -1,6 +1,6 @@
-const Uppy = require('@uppy/core')
-const Dashboard = require('@uppy/dashboard')
-const ActiveStorageUpload = require('uppy-activestorage-upload')
+import Uppy from '@uppy/core'
+import Dashboard from '@uppy/dashboard'
+import ActiveStorageUpload from 'uppy-activestorage-upload'
 
 document.addEventListener('turbo:load', () => {
   document.querySelectorAll('[data-uppy]').forEach(element => setupUppy(element))
@@ -10,19 +10,17 @@ document.addEventListener('turbo:render', () => {
 })
 
 
-function setupUppy(element) {
+const setupUppy = (element) => {
   let trigger = element.querySelector('[data-behavior="uppy-trigger"]')
-  let form = element.closest('form')
   let direct_upload_url = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
   let field_name = element.dataset.uppy
 
-  trigger.addEventListener("click", (event) => event.preventDefault())
+  trigger.addEventListener("click", (e) => e.preventDefault())
 
   let uppy = new Uppy({
     autoProceed: false,
     allowMultipleUploads: true,
     allowMultipleUploadBatches: true,
-    // logger: Uppy.debugLogger
   })
 
   uppy.use(ActiveStorageUpload, {
@@ -33,24 +31,19 @@ function setupUppy(element) {
     trigger: trigger,
     closeAfterFinish: false,
     inline: false,
-    // showLinkToFileUploadResult: true
     showProgressDetails: true,
     fileManagerSelectionType: "both",
     proudlyDisplayPoweredByUppy: false
-
   })
 
-
   uppy.on('complete', (result) => {
-
     result.successful.forEach(file => {
       appendUploadedFile(element, file, field_name)
     })
-
   })
 }
 
-function appendUploadedFile(element, file, field_name) {
+const appendUploadedFile = (element, file, field_name) => {
   const hiddenField = document.createElement('input')
 
   hiddenField.setAttribute('type', 'hidden')
