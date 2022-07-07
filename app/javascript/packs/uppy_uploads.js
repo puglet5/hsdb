@@ -1,4 +1,3 @@
-
 const Uppy = require('@uppy/core')
 const Dashboard = require('@uppy/dashboard')
 const ActiveStorageUpload = require('uppy-activestorage-upload')
@@ -34,8 +33,10 @@ function setupUppy(element) {
     // showLinkToFileUploadResult: true
     showProgressDetails: true,
     fileManagerSelectionType: "both",
-    proudlyDisplayPoweredByUppy: false,
+    proudlyDisplayPoweredByUppy: false
+
   })
+
 
   uppy.on('complete', (result) => {
 
