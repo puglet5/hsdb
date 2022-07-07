@@ -1,5 +1,7 @@
 ## ITMO Heritage Lab DB app (Heritage Science Database)
 
+Export appropriate database env variables (see config/database.yml)
+
 Install docker, docker-compose and run:
 
 ```bash
