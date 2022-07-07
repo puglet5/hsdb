@@ -46,6 +46,7 @@ class UploadsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+    ActiveStorage::Blob.unattached.each(&:purge_later)
   end
 
   def update

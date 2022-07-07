@@ -117,10 +117,133 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@transloadit/prettier-bytes@npm:0.0.7":
+  version: 0.0.7
+  resolution: "@transloadit/prettier-bytes@npm:0.0.7"
+  checksum: af075e1b2b045cac55d5ab854b5c94273ef7f4bd825f05fe578559465f206d2a1535343b50170252a9efb31ffdc2d6420e64eb32d2faeabeeb8b7d81d5d46ef0
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
   checksum: 527bddfe62db9012fccd7627794bd4c71beb77601861055d87e3ee464f2217c85fca7a4b56ae677478367bbd248dbde13553312b7d4dbc702a2f2bbf60c4018d
+  languageName: node
+  linkType: hard
+
+"@uppy/companion-client@npm:^2.0.0":
+  version: 2.2.1
+  resolution: "@uppy/companion-client@npm:2.2.1"
+  dependencies:
+    "@uppy/utils": ^4.1.0
+    namespace-emitter: ^2.0.1
+  checksum: 9f81638afd07d9486355a8e5c489d62bc7613c1e05bb4c6ef0dc3640a044b4cc1949403e49916f090a0a7e712d93fdebeef121f6992235ed4499c13e001f7c5f
+  languageName: node
+  linkType: hard
+
+"@uppy/core@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "@uppy/core@npm:2.3.1"
+  dependencies:
+    "@transloadit/prettier-bytes": 0.0.7
+    "@uppy/store-default": ^2.1.0
+    "@uppy/utils": ^4.1.0
+    lodash.throttle: ^4.1.1
+    mime-match: ^1.0.2
+    namespace-emitter: ^2.0.1
+    nanoid: ^3.1.25
+    preact: ^10.5.13
+  checksum: 2d910ffa50ca7c670fbac2bd4f080879c694496abb87c5a17639cf70a37817faf9932f5dd05645b6d10c8e5e1e5990032f161127c210a41bf17609c70649d3a1
+  languageName: node
+  linkType: hard
+
+"@uppy/dashboard@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@uppy/dashboard@npm:2.3.0"
+  dependencies:
+    "@transloadit/prettier-bytes": 0.0.7
+    "@uppy/informer": ^2.1.0
+    "@uppy/provider-views": ^2.1.1
+    "@uppy/status-bar": ^2.2.1
+    "@uppy/thumbnail-generator": ^2.2.0
+    "@uppy/utils": ^4.1.0
+    classnames: ^2.2.6
+    is-shallow-equal: ^1.0.1
+    lodash.debounce: ^4.0.8
+    memoize-one: ^5.0.4
+    nanoid: ^3.1.25
+    preact: ^10.5.13
+  peerDependencies:
+    "@uppy/core": ^2.3.0
+  checksum: af1f81d6a9c88ec1fa3e4180c497a3c17e5fd148c456396bba66c10f33913ea10ec1c5406a88d3e896bcb447555cf374b422fc17632c45c6b486350937400b6d
+  languageName: node
+  linkType: hard
+
+"@uppy/informer@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@uppy/informer@npm:2.1.0"
+  dependencies:
+    "@uppy/utils": ^4.1.0
+    preact: ^10.5.13
+  peerDependencies:
+    "@uppy/core": ^2.3.0
+  checksum: 9e15a1d620eda2b02e611c7c52c0f2fde8f6fddbcb272bd986bd0ae3cb2b60d9f54b176d583649d6416966c5dcf14bfac55e1d5e55af1ee0420e577903a9b88e
+  languageName: node
+  linkType: hard
+
+"@uppy/provider-views@npm:^2.1.1":
+  version: 2.1.2
+  resolution: "@uppy/provider-views@npm:2.1.2"
+  dependencies:
+    "@uppy/utils": ^4.1.0
+    classnames: ^2.2.6
+    preact: ^10.5.13
+  peerDependencies:
+    "@uppy/core": ^2.3.1
+  checksum: 79eb9f1f309e4daf52e7e26d8985f83ae742a32d4472acab95d0742615f387c61b88fab0e18e55328f2328fd3bc70d1f1d0655cd0e7ece89e5b5a8fd9acd11f9
+  languageName: node
+  linkType: hard
+
+"@uppy/status-bar@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@uppy/status-bar@npm:2.2.1"
+  dependencies:
+    "@transloadit/prettier-bytes": 0.0.7
+    "@uppy/utils": ^4.1.0
+    classnames: ^2.2.6
+    lodash.throttle: ^4.1.1
+    preact: ^10.5.13
+  peerDependencies:
+    "@uppy/core": ^2.3.0
+  checksum: 023025a2f03cddc3f7c653dc29a15728cc3a894452974147de34ba3f634afc91191433e44585cf7aa67eec9b1348af94e564f88b3feb8454c8dc2ec0d56bc8f1
+  languageName: node
+  linkType: hard
+
+"@uppy/store-default@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@uppy/store-default@npm:2.1.0"
+  checksum: 6e5324837cf0d19c45a92d4195d49115a3343f93cb8a2c1becab894938645139fe8a289be0b69f5b9696a3a795ee6b5d210da6de11c2488b0d10cbfe9cf67fc6
+  languageName: node
+  linkType: hard
+
+"@uppy/thumbnail-generator@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@uppy/thumbnail-generator@npm:2.2.0"
+  dependencies:
+    "@uppy/utils": ^4.1.0
+    exifr: ^7.0.0
+  peerDependencies:
+    "@uppy/core": ^2.3.0
+  checksum: 983c0b6df8d1d73f628a0f3e22c92cb66c5d1fd80d4b17bdb64c7d0dc2cd56e31caa0596e131fbc88e9c12374e64d570883037988b65594ebc0e2bd7b4c51159
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^4.0.0, @uppy/utils@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@uppy/utils@npm:4.1.0"
+  dependencies:
+    lodash.throttle: ^4.1.1
+  checksum: ba1bf3a6e347a15901e53fb0252e008772cbb8654e5c21b074684f26d88916addd747bf595db8516f1749d250291554cd6d0eb2bb6f5a3a77da46b929e289824
   languageName: node
   linkType: hard
 
@@ -264,6 +387,8 @@ __metadata:
   dependencies:
     "@hotwired/turbo-rails": ^7.1.3
     "@rails/actiontext": ^6.1.6
+    "@uppy/core": ^2.3.1
+    "@uppy/dashboard": ^2.3.0
     autoprefixer: ^10.4.7
     data-confirm-modal: ^1.6.2
     esbuild: ^0.14.48
@@ -278,6 +403,7 @@ __metadata:
     tailwindcss: ^3.1.4
     trix: ^1.3.1
     tw-elements: ^1.0.0-alpha9
+    uppy-activestorage-upload: "https://github.com/puglet5/uppy-activestorage-upload"
   languageName: unknown
   linkType: soft
 
@@ -507,6 +633,13 @@ __metadata:
   version: 2.0.0
   resolution: "ci-info@npm:2.0.0"
   checksum: 3b374666a85ea3ca43fa49aa3a048d21c9b475c96eb13c133505d2324e7ae5efd6a454f41efe46a152269e9b6a00c9edbe63ec7fa1921957165aae16625acd67
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.2.6":
+  version: 2.3.1
+  resolution: "classnames@npm:2.3.1"
+  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
   languageName: node
   linkType: hard
 
@@ -937,6 +1070,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"exifr@npm:^7.0.0":
+  version: 7.1.3
+  resolution: "exifr@npm:7.1.3"
+  checksum: c75a21e700378a29d226dd2c102d43679a68539ff1774b05ca19acce366ad47d056985e4f497afe7da6d0d8966d7dc73efb51acc11ff84fa57c9467e630c67ff
+  languageName: node
+  linkType: hard
+
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -1318,6 +1458,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-shallow-equal@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "is-shallow-equal@npm:1.0.1"
+  checksum: 6bd0981c14c4c9219449c9bea4c73035defc4544394b96392573515046c1165c770a19a87c88457c40f0983f94f6750d14b0d207b27be00727e273dc4e0f5a35
+  languageName: node
+  linkType: hard
+
 "is-wsl@npm:^2.1.1":
   version: 2.2.0
   resolution: "is-wsl@npm:2.2.0"
@@ -1376,6 +1523,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.debounce@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "lodash.debounce@npm:4.0.8"
+  checksum: a3f527d22c548f43ae31c861ada88b2637eb48ac6aa3eb56e82d44917971b8aa96fbb37aa60efea674dc4ee8c42074f90f7b1f772e9db375435f6c83a19b3bc6
+  languageName: node
+  linkType: hard
+
+"lodash.throttle@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "lodash.throttle@npm:4.1.1"
+  checksum: 129c0a28cee48b348aef146f638ef8a8b197944d4e9ec26c1890c19d9bf5a5690fe11b655c77a4551268819b32d27f4206343e30c78961f60b561b8608c8c805
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^6.0.0":
   version: 6.0.0
   resolution: "lru-cache@npm:6.0.0"
@@ -1416,6 +1577,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"memoize-one@npm:^5.0.4":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
 "merge2@npm:^1.3.0":
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
@@ -1430,6 +1598,15 @@ __metadata:
     braces: ^3.0.2
     picomatch: ^2.3.1
   checksum: 02a17b671c06e8fefeeb6ef996119c1e597c942e632a21ef589154f23898c9c6a9858526246abb14f8bca6e77734aa9dcf65476fca47cedfb80d9577d52843fc
+  languageName: node
+  linkType: hard
+
+"mime-match@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "mime-match@npm:1.0.2"
+  dependencies:
+    wildcard: ^1.1.0
+  checksum: 3e4afd6be98e20bfb421146a14147560941f471886e6d3534372b37d29bb7e35a7462e1f9cee98312f92e44969ae9deca2da7ad91ab5a738af55a7d5f03a6814
   languageName: node
   linkType: hard
 
@@ -1578,7 +1755,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.4":
+"namespace-emitter@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "namespace-emitter@npm:2.0.1"
+  checksum: 49ae49674d5b83e18ad91c549ed264df1fcba02d039617e0932dab618f79e3749de6d878d54962b5cbf2611c0eafc91203a376980399c33c30edf542f19cb034
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.1.25, nanoid@npm:^3.3.4":
   version: 3.3.4
   resolution: "nanoid@npm:3.3.4"
   bin:
@@ -1871,6 +2055,13 @@ __metadata:
   version: 2.1.0
   resolution: "postinstall-postinstall@npm:2.1.0"
   checksum: e1d34252cf8d2c5641c7d2db7426ec96e3d7a975f01c174c68f09ef5b8327bc8d5a9aa2001a45e693db2cdbf69577094d3fe6597b564ad2d2202b65fba76134b
+  languageName: node
+  linkType: hard
+
+"preact@npm:^10.5.13":
+  version: 10.9.0
+  resolution: "preact@npm:10.9.0"
+  checksum: 752109823affeb531fd1a97a62a08015f93aef4f46e876cdbc4db5a11023269aa24728a61916f965adc7d864e5d43b6a25c00dee49051ace6b6e95db7b0f77f5
   languageName: node
   linkType: hard
 
@@ -2341,6 +2532,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uppy-activestorage-upload@https://github.com/puglet5/uppy-activestorage-upload":
+  version: 2.0.0
+  resolution: "uppy-activestorage-upload@https://github.com/puglet5/uppy-activestorage-upload.git#commit=60dcbc1150aa513d942edafc15021fa28fb1b865"
+  dependencies:
+    "@uppy/companion-client": ^2.0.0
+    "@uppy/utils": ^4.0.0
+    nanoid: ^3.1.25
+  peerDependencies:
+    "@rails/activestorage": ^6.0.0
+    "@uppy/core": ^2.0.0
+  checksum: 252fb5c05683ccf949a6703f4061eec913876cbc4d73bc5660b94fc20c04aaad0b14c46c79fa8212b3b0cbab5b1f4e4d33b2daf32ca0d1265b64f9b1819e5ea3
+  languageName: node
+  linkType: hard
+
 "uri-js@npm:^4.2.2":
   version: 4.4.1
   resolution: "uri-js@npm:4.4.1"
@@ -2385,6 +2590,13 @@ __metadata:
   dependencies:
     string-width: ^1.0.2 || 2 || 3 || 4
   checksum: d5fc37cd561f9daee3c80e03b92ed3e84d80dde3365a8767263d03dacfc8fa06b065ffe1df00d8c2a09f731482fcacae745abfbb478d4af36d0a891fad4834d3
+  languageName: node
+  linkType: hard
+
+"wildcard@npm:^1.1.0":
+  version: 1.1.2
+  resolution: "wildcard@npm:1.1.2"
+  checksum: f93bf48a23b7b776f7960fa7f252af55da265b4ce8127852e420f04a907b78073bc0412f74fc662f561667f3277473974f6553a260ece67f53b1975d128320ab
   languageName: node
   linkType: hard
 

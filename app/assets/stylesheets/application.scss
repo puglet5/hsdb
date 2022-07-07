@@ -1,4 +1,6 @@
 @import "trix";
+@import '@uppy/core/dist/style.css';
+@import '@uppy/dashboard/dist/style.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
