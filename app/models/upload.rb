@@ -22,6 +22,10 @@ class Upload < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
+  before_save do
+    self.metadata = JSON.parse(metadata)
+  end
+
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
   end
