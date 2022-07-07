@@ -5,6 +5,9 @@ const ActiveStorageUpload = require('uppy-activestorage-upload')
 document.addEventListener('turbo:load', () => {
   document.querySelectorAll('[data-uppy]').forEach(element => setupUppy(element))
 })
+document.addEventListener('turbo:render', () => {
+  document.querySelectorAll('[data-uppy]').forEach(element => setupUppy(element))
+})
 
 
 function setupUppy(element) {
