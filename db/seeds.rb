@@ -1,24 +1,37 @@
 # frozen_string_literal: true
-# # frozen_string_literal: true
 
-# Faker::Config.locale = 'en'
+# FFFaker::Config.locale = 'en'
 
-# 10.times do
-#   User.create!(first_name: Faker::Name.first_name,
-#                second_name: Faker::Name.second_name,
-#                email: Faker::Internet.email,
-#                password: '123456')
-# end
+10.times do
+  user = User.create!(first_name: FFaker::Name.first_name,
+               last_name: FFaker::Name.last_name,
+               email: FFaker::Internet.email,
+               password: '123456')
+  user.save!
+end
 
-# 10.times do |_x|
-#   Upload.create!(title: Faker::Lorem.sentences(number: 1),
-#                  description: Faker::Lorem.paragraph(sentence_count: 2),
-#                  body: Faker::Lorem.paragraph(sentence_count: 5),
-#                  user_id: 2)
-# end
+sample_user = User.create!(first_name: "Michael",
+             last_name: "Basmanov",
+             email: "puglet5@mail.ru",
+             password: '123456')
+sample_user.save!
 
-# 10.times do
-#   Tag.create!(title: Faker::Hipster.word)
-# end
+Role.create!(name: 'admin')
 
-# Role.create!(name: 'admin')
+sample_user.add_role("admin")
+
+PublicActivity.enabled = false
+
+users = User.order(:created_at).take(5)
+10.times do
+  title = FFaker::Lorem.sentence
+  description = FFaker::Lorem.paragraph
+  body = FFaker::Lorem.paragraph
+  status = "draft"
+  users.each do |user|
+     up = Upload.create!(title: title, description: description, body: body, status: status, user_id: user.id)
+     up.thumbnail.attach(io: File.open(File.join(Rails.root,'public/images/rose.jpg')), filename: 'rose.jpg')
+  end
+end
+
+
