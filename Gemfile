@@ -5,10 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
-gem 'pg', '~> 1.1'
-gem 'puma', '>= 5.6.4'
-gem 'rails', '~> 7.0.3'
-# gem 'turbolinks', '~> 5' //loaded through webpack, see package.json
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bullet'
 gem 'caxlsx'
@@ -24,26 +20,30 @@ gem 'jsbundling-rails', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'ledermann-rails-settings'
 gem 'mini_magick', '~> 4.11'
+gem 'pg', '~> 1.1'
+gem 'propshaft', '~> 0.6'
 gem 'public_activity'
+gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1'
+gem 'rails', '~> 7.0.3'
 gem 'rails-i18n', '~> 7.0.3'
 gem 'ransack', '~> 3.2.1'
 gem 'redis', '~> 4.7'
 gem 'rolify', '~> 6.0'
 gem 'rubyzip', '~> 2'
 gem 'simple_form', '~> 5.1'
-gem 'sprockets-rails', '~> 3.4'
 gem 'textacular', '~> 5.5'
+gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 group :development, :test do
-  gem 'ffaker'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
+  gem 'ffaker'
   gem 'rspec-rails', '~> 5.1.2'
 end
 

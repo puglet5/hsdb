@@ -60,10 +60,7 @@ class DiscussionsController < ApplicationController
   # DELETE /discussions/1.json
   def destroy
     @discussion.destroy
-    respond_to do |format|
-      format.html { redirect_to discussions_url, notice: 'Discussion was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    redirect_to discussions_url, notice: 'Discussion was successfully deleted.', status: :see_other
   end
 
   private

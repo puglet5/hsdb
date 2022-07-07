@@ -10,5 +10,5 @@
   <td><% user.roles.all.each do |role| %> <span><%= role.name %></span><% end %></td>
   <td><%= time_ago_in_words(user.created_at) %> ago</td>
   <td>
-    <%= link_to "Delete", admin_user_path(user), class: "button red", data: { method: :delete, confirm: "Are you sure?" } %></td>
+    <%= link_to "Delete", admin_user_path(user), class: "button red", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
 </tr>

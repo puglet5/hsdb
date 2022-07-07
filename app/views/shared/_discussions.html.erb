@@ -22,7 +22,7 @@
         <% if discussion_author(discussion) || has_role?(:admin) %>
           <div class="">
             <%= link_to "Edit", edit_discussion_path(discussion), class: "" %>
-            <%= link_to "Delete", discussion, method: :delete, data: { confirm: "Are you sure?" }, class: "btn red" %>
+            <%= link_to "Delete", discussion, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn red" %>
           </div>
         <% end %>
       </div>
