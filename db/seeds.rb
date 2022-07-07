@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# FFFaker::Config.locale = 'en'
-
 10.times do
   user = User.create!(first_name: FFaker::Name.first_name,
                last_name: FFaker::Name.last_name,
