@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
   def index
     @uploads = Upload.all.page(params[:page]).per(3)
     @q = Upload.includes([:user, { images_attachments: :blob }]).ransack(params[:q])
-    @uploads = @q.result(distinct: true).page(params[:page]).per(20)
+    @uploads = @q.result(distinct: true).page(params[:page]).per(9)
   end
 
   def show
@@ -44,6 +44,7 @@ class UploadsController < ApplicationController
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
     else
+      # flash.now[:alert] = 'Couldn\'t save the upload: invalid params'
       render :new, status: :unprocessable_entity
     end
     ActiveStorage::Blob.unattached.each(&:purge_later)
