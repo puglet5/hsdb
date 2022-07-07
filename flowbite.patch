@@ -7,7 +7,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Accordion = Accordion;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-accordion]').forEach(function (accordionEl) {
      var alwaysOpen = accordionEl.getAttribute('data-accordion');
      var activeClasses = accordionEl.getAttribute('data-active-classes');
@@ -16,7 +16,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Collapse = Collapse;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-collapse-toggle]').forEach(function (triggerEl) {
      var targetEl = document.getElementById(triggerEl.getAttribute('data-collapse-toggle'));
      new Collapse(targetEl, {
@@ -25,7 +25,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Carousel = Carousel;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-carousel]').forEach(function (carouselEl) {
      var interval = carouselEl.getAttribute('data-carousel-interval');
      var slide = carouselEl.getAttribute('data-carousel') === 'slide' ? true : false;
@@ -34,7 +34,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Dismiss = Dismiss;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-dismiss-target]').forEach(function (triggerEl) {
      var targetEl = document.querySelector(triggerEl.getAttribute('data-dismiss-target'));
      new Dismiss(targetEl, {
@@ -43,7 +43,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Dropdown = Dropdown;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-dropdown-toggle]').forEach(function (triggerEl) {
      var targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
      var placement = triggerEl.getAttribute('data-dropdown-placement');
@@ -52,7 +52,7 @@ index 8ffce3d..a5a32fb 100644
  };
 
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    var modalInstances = [];
    document.querySelectorAll('[data-modal-toggle]').forEach(function (el) {
      var modalId = el.getAttribute('data-modal-toggle');
@@ -61,7 +61,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Tabs = Tabs;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-tabs-toggle]').forEach(function (triggerEl) {
      var tabElements = [];
      var defaultTabId = null;
@@ -70,7 +70,7 @@ index 8ffce3d..a5a32fb 100644
 
  window.Tooltip = Tooltip;
 -document.addEventListener('DOMContentLoaded', function () {
-+document.addEventListener('turbo:load', function () {
++document.addEventListener('turbo:render', function () {
    document.querySelectorAll('[data-tooltip-target]').forEach(function (triggerEl) {
      var targetEl = document.getElementById(triggerEl.getAttribute('data-tooltip-target'));
      var triggerType = triggerEl.getAttribute('data-tooltip-trigger');

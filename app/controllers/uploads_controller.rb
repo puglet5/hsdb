@@ -61,7 +61,7 @@ class UploadsController < ApplicationController
       flash[:success] = 'Upload was successfully updated'
       redirect_to @upload
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity, content_type: "text/html"
     end
   end
 
