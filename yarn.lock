@@ -76,6 +76,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pgrabovets/json-view@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "@pgrabovets/json-view@npm:2.7.1"
+  checksum: fa15b08f358049f72ab0e076c64b25664844ea8e2814a790a7cdf5a3631c81140efc1ce78f4e553795236ac3704ed42f574d7459542e6d9f9aa1e2859e3da2cd
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.6.0, @popperjs/core@npm:^2.9.3":
   version: 2.11.5
   resolution: "@popperjs/core@npm:2.11.5"
@@ -386,6 +393,7 @@ __metadata:
   resolution: "app@workspace:."
   dependencies:
     "@hotwired/turbo-rails": ^7.1.3
+    "@pgrabovets/json-view": ^2.7.1
     "@rails/actiontext": ^6.1.6
     "@uppy/core": ^2.3.1
     "@uppy/dashboard": ^2.3.0
