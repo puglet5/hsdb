@@ -15,7 +15,7 @@ import "./packs/metadata_fields.js"
 
 document.addEventListener("turbo:load", e => {
 
-  if ((document.querySelector('meta[name="psj"]').attributes["controller"].value !== "uploads") || (document.querySelector('meta[name="psj"]').attributes["action"].value !== "new"))
+  if ((document.querySelector('meta[name="psj"]').attributes["controller"].value !== "uploads") || ((document.querySelector('meta[name="psj"]').attributes["action"].value !== "new") && (document.querySelector('meta[name="psj"]').attributes["action"].value !== "edit")))
     return
 
   const addFields = () => {
