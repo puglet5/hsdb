@@ -1,27 +1,27 @@
 <div class="">
+  <div class="">
     <div class="">
-      <div class="">
-        <p>
-          <strong><%= reply.user&.first_name %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
-          <br/>
-          <%= reply.reply %>
-        </p>
-      </div>
-      <% if reply_author(reply) || has_role?(:admin) %>
-          <div class="">
-            <a class="">
-              <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
-              edit comment
-              <% end %>
-            </a>
-            <br>
-            <a class="">
-              <%= link_to [reply.discussion, reply],
-                          method: :delete, data: { confirm: "Are you sure ?" } do %>
-                delete comment
-              <% end %>
-            </a>
-          </div>
-      <% end %>
+      <p>
+        <strong><%= reply.user&.first_name %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
+        <br/>
+        <%= reply.reply %>
+      </p>
     </div>
+    <% if reply_author(reply) || has_role?(:admin) %>
+      <div class="">
+        <a class="">
+          <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
+            edit comment
+          <% end %>
+        </a>
+        <br>
+        <a class="">
+          <%= link_to [reply.discussion, reply],
+                           data: {turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
+            delete comment
+          <% end %>
+        </a>
+      </div>
+    <% end %>
+  </div>
 </div>

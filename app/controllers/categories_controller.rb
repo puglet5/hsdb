@@ -51,7 +51,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully deleted.'
+    redirect_to categories_url, notice: 'Category was successfully deleted.', status: :see_other
   end
 
   private

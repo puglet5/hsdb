@@ -19,7 +19,7 @@ module ApplicationHelper
     if user_signed_in?
       auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}", class: style.to_s}</#{tag_type}>"
 
-      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, method: :delete, class: style}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, turbo_method: :delete, class: style}</#{tag_type}>"
 
     else
       auth_items.each do |item|

@@ -40,30 +40,26 @@ class UploadsController < ApplicationController
   def create
     @upload = current_user.uploads.build(upload_params)
 
-    respond_to do |format|
-      if @upload.save
-        flash[:success] = 'Upload was successfully created'
-        format.html { redirect_to @upload }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @upload.save
+      flash[:success] = 'Upload was successfully created'
+      redirect_to @upload
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @upload.user = current_user if @upload.user.nil?
-    respond_to do |format|
-      if @upload.update(upload_params.reject { |k| k['images'] })
-        if upload_params[:images].present?
-          upload_params[:images].each do |image|
-            @upload.images.attach(image)
-          end
+    if @upload.update(upload_params.reject { |k| k['images'] })
+      if upload_params[:images].present?
+        upload_params[:images].each do |image|
+          @upload.images.attach(image)
         end
-        flash[:success] = 'Upload was successfully updated'
-        format.html { redirect_to @upload }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
       end
+      flash[:success] = 'Upload was successfully updated'
+      redirect_to @upload
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -79,10 +75,8 @@ class UploadsController < ApplicationController
 
   def destroy
     @upload.destroy
-    respond_to do |format|
-      flash[:success] = 'Upload was successfully deleted'
-      format.html { redirect_to uploads_url }
-    end
+    flash[:success] = 'Upload was successfully deleted'
+    redirect_to uploads_url, status: :see_other
   end
 
   private
