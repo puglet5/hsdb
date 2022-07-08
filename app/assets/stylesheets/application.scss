@@ -13,3 +13,11 @@
 .hide-file-input-text {
   color: transparent;
 }
+
+.json-string {
+  @apply break-all
+}
+
+.line {
+  @apply mt-0 pt-1 !important
+}

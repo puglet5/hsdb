@@ -19,8 +19,9 @@ const addFields = () => {
 
     let newForm = document.getElementById('metadata-form-template').cloneNode(true);
     newForm.id = 'metadata-form';
-    newForm.className = 'grid grid-cols-11 gap-4 container mx-auto mt-0';
+    newForm.className = 'grid grid-cols-11 gap-2 container mx-auto my-0 gap-y-0';
     let childFields = newForm.getElementsByTagName("*");
+    const addFieldBtn = document.getElementById('add-fields')
 
     for (let i = 0; i < childFields.length; i++) {
       let theName = childFields[i].name
@@ -28,6 +29,10 @@ const addFields = () => {
         childFields[i].name = theName + '-' + fieldCounter;
       if (childFields[i].tagName === "INPUT")
         childFields[i].classList.add("metadata")
+      if (childFields[i].id === "remove-field") {
+        childFields[i].parentNode.replaceChild(addFieldBtn, childFields[i])
+        childFields[i].classList.remove('hidden')
+      }
     }
 
     let insertHere = document.getElementById('insert-node');
@@ -45,6 +50,8 @@ const addFields = () => {
         childFields[i].name = theName + '-' + fieldCounter;
       if (childFields[i].tagName === "INPUT")
         childFields[i].classList.add("metadata")
+      if (childFields[i].tagName === "LABEL")
+        childFields[i].remove()
     }
 
     var form = document.getElementById("metadata-form");
@@ -66,9 +73,10 @@ const addFields = () => {
 }
 
 const removeFields = (event) => {
+  fieldCounter--
   element = event.target.closest('div')
-  element.previousElementSibling.remove()
-  element.previousElementSibling.remove()
+  element.nextElementSibling.remove()
+  element.nextElementSibling.remove()
   element.remove()
 }
 
@@ -77,7 +85,18 @@ const formToJSON = (elements) =>
   [].reduce.call(
     elements,
     (data, element) => {
-      data[element.name] = element.value;
+
+      if (!isNaN(Number(element.value)) && (parseFloat(element.value) === Number(element.value)))
+        data[element.name] = parseFloat(element.value);
+      else try {
+        let jToArr = JSON.parse(element.value)
+        data[element.name] = jToArr;
+
+      }
+      catch (e) {
+        data[element.name] = element.value;
+      }
+
       return data;
     },
     {},
@@ -146,21 +165,25 @@ const handleEdit = (event) => {
   const data = formToJSON(mDataFormInputs);
   let jsonData = removeEmpty(data)
   jsonData = metadataFromJSON(jsonData)
-  jsonData = convertKeysToLowerCase(jsonData)
+  // jsonData = convertKeysToLowerCase(jsonData)
   jsonData = JSON.stringify(jsonData)
+  console.log(jsonData)
 
   // document.getElementById("json-hidden-pre").textContent = jsonData.toString();
   if (document.querySelector('.json-container'))
     document.querySelector('.json-container').remove()
+
   const tree = jsonview.create(jsonData);
-  jsonview.render(tree, document.querySelector('.tree'));
-  jsonview.expand(tree);
+  if ((jsonData !== "{\"\":\"\"}")) {
+    jsonview.render(tree, document.querySelector('.tree'));
+    jsonview.expand(tree);
+  }
   document.getElementById("json-hidden-input").value = jsonData.toString();
 
 }
 
 ['turbo:load'].forEach(event => document.addEventListener(event, e => {
-  if ((document.querySelector('meta[name="psj"]').attributes["controller"].value !== "uploads") || !(["new", "edit"].includes(document.querySelector('meta[name="psj"]').attributes["action"].value)))
+  if ((document.querySelector('meta[name="psj"]').attributes["controller"].value !== "uploads") || !(["new"].includes(document.querySelector('meta[name="psj"]').attributes["action"].value)))
     return
 
   fieldCounter = 0;
