@@ -362,6 +362,8 @@ GEM
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     spring (4.0.0)
+    stimulus-rails (1.0.4)
+      railties (>= 6.0.0)
     strscan (3.0.3)
     subexec (0.2.3)
     textacular (5.5.1)
@@ -451,6 +453,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form (~> 5.1)
   spring
+  stimulus-rails
   textacular (~> 5.5)
   turbo-rails (~> 1.1)
   tzinfo-data

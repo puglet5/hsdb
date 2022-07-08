@@ -36,6 +36,7 @@ gem 'textacular', '~> 5.5'
 gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
+gem "stimulus-rails"
 gem 'wkhtmltopdf-binary'
 
 group :development, :test do

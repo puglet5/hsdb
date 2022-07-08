@@ -12,6 +12,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hotwired/stimulus@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@hotwired/stimulus@npm:3.0.1"
+  checksum: 5f2dbfeb3dfff8472e1d0ef7db59a18d71540651861c0c5839fa32c56fcd5cae3fc6183a94746303c5adfbd66a9b552a3167e7e193c04dfaa6f51a8e5bea8e5e
+  languageName: node
+  linkType: hard
+
 "@hotwired/turbo-rails@npm:^7.1.3":
   version: 7.1.3
   resolution: "@hotwired/turbo-rails@npm:7.1.3"
@@ -392,6 +399,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:."
   dependencies:
+    "@hotwired/stimulus": ^3.0.1
     "@hotwired/turbo-rails": ^7.1.3
     "@pgrabovets/json-view": ^2.7.1
     "@rails/actiontext": ^6.1.6
