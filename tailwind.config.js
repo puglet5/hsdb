@@ -15,6 +15,10 @@ module.exports = {
   ],
 
   theme: {
+    minHeight: {
+      '1/2': '50%',
+      '2/3': '66%',
+    },
     fontFamily: {
       'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
     },

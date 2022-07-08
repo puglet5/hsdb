@@ -14,10 +14,14 @@
   color: transparent;
 }
 
+.json-container {
+  @apply rounded-lg bg-gray-50 !important
+}
+
 .json-string {
   @apply break-all
 }
 
 .line {
-  @apply mt-0 pt-1 !important
+  @apply mt-0 pt-1 bg-gray-50 !important
 }

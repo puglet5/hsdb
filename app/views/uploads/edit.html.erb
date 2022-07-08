@@ -1,7 +1,7 @@
 <%= render "shared/errors", obj: @upload %>
 <div class="container">
   <h1>Editing Upload</h1>
-  <%= render "edit_form", upload: @upload, tags: @tags %>
+  <%= render "form", upload: @upload, tags: @tags %>
   <%= link_to "Show", @upload %>
   <%= link_to "Back", uploads_path %>
 </div>

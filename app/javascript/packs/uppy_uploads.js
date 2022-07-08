@@ -12,6 +12,9 @@ document.addEventListener('turbo:render', () => {
 
 const setupUppy = (element) => {
   let trigger = element.querySelector('[data-behavior="uppy-trigger"]')
+  let target = document.getElementById('uppy-target')
+  console.log(target)
+
   let direct_upload_url = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
   let field_name = element.dataset.uppy
 
@@ -29,12 +32,16 @@ const setupUppy = (element) => {
 
   uppy.use(Dashboard, {
     trigger: trigger,
+    // target: target,
     closeAfterFinish: false,
     inline: false,
     showProgressDetails: true,
     fileManagerSelectionType: "both",
     proudlyDisplayPoweredByUppy: false
   })
+
+  let dashboard = document.querySelector('.uppy-Dashboard-inner')
+  dashboard.removeAttribute('style')
 
   uppy.on('complete', (result) => {
     result.successful.forEach(file => {
