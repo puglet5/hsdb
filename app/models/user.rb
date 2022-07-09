@@ -41,6 +41,10 @@ class User < ApplicationRecord
     false
   end
 
+  def author?(obj)
+    obj.user == self
+  end
+
   private
 
   def must_have_a_role
