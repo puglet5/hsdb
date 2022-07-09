@@ -17,6 +17,8 @@ class DiscussionsController < ApplicationController
 
   def show
     @discussions = Discussion.all.order('created_at desc')
+    @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
+    @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
   end
 
   def new

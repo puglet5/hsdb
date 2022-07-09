@@ -8,11 +8,15 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
     @discussions = Discussion.all.order('created_at desc')
+    @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
+    @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
   end
 
   # GET /categories/1
   def show
     @discussions = Discussion.where(category_id: @category.id)
+    @discussions_unpinned = Discussion.all.where(category_id: @category.id, pinned: false).order('created_at desc')
+    @discussions_pinned = Discussion.all.where(category_id: @category.id, pinned: true).order('created_at desc')
     @categories = Category.all
   end
 
