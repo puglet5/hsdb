@@ -13,7 +13,8 @@ sample_user = User.create!(first_name: 'Michael',
                            last_name: 'Basmanov',
                            email: 'puglet5@mail.ru',
                            password: '123456')
-sample_user.save!
+
+sample_user.avatar.attach(io: File.open('public/images/rose.jpg'), filename: 'rose.jpg')
 
 Role.create!(name: 'admin')
 

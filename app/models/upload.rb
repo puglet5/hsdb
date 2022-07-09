@@ -44,7 +44,7 @@ class Upload < ApplicationRecord
 
   def image_type
     images.each do |image|
-      errors.add(:images, 'need to be JPEG or PNG') unless image.content_type.in?(%("image/jpeg image/png"))
+      errors.add(:images, 'need to be JPEG or PNG') unless image.content_type.in?(%("image/jpeg image/png image/svg image/gif"))
     end
   end
 end
