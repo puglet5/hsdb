@@ -25,3 +25,7 @@
 .line {
   @apply mt-0 pt-1 bg-gray-50 rounded-lg !important
 }
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}

@@ -2,6 +2,11 @@
 
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+
+    namespace :api do
+      resources :categories, only: :update
+    end
+
     get 'users/show'
     resources :categories
     resources :users

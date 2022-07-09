@@ -2,6 +2,8 @@
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :authorize_category
+  after_action :verify_authorized
   # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /categories
@@ -68,5 +70,9 @@ class CategoriesController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def category_params
     params.require(:category).permit(:category_name)
+  end
+
+  def authorize_category
+    authorize(@category || Category)
   end
 end

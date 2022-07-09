@@ -1,16 +1,16 @@
-
-<div class="">
-  <div class="">
-    <h1 class=""><%= @category.category_name %></h1>
+<section class="bg-gray-50 dark:bg-gray-900 border">
+  <div class="container mx-auto mt-10 ">
+    <div class="flex flex-col">
+      <h1 class="mb-2 text-center text-4xl font-bold tracking-tight leading-none text-gray-900">Forum</h1>
+      <%= tag.div class: "mb-14 flex justify-center", data: {controller: 'category', "category-loading-class": "disabled", "category-id-value": @category.id}  do %>
+        <%= tag.h1 @category.category_name, class: "text-center text-2xl font-medium tracking-tight leading-none text-gray-700", data: {"category-target": "title"} %>
+      <% end %>
+    </div>
+    <%# if policy(:category).update? %>
+    <%#= link_to edit_category_path(@category) do
+        "a"
+      end %>
+    <%# end %>
+    <%= render "shared/discussions" %>
   </div>
-  <div class="">
-    <% if has_role?(:admin) %>
-      <%= link_to "Edit Category", edit_category_path(@category), class: "" %>
-    <% end %>
-  </div>
-</div>
-<hr />
-<div class="container">
-  <%= render "shared/discussions" %>
-  <%= render "discussions/sidebar" %>
-</div>
+</section>
