@@ -14,7 +14,7 @@ class UploadPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.has_role?(:admin) || author?(record)
+    user.has_role?(:admin) || user.author?(record)
   end
 
   def index?
