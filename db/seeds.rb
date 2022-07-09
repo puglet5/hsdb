@@ -6,7 +6,6 @@ require 'faker'
                       last_name: Faker::Name.last_name,
                       email: Faker::Internet.email,
                       password: '123456')
-  user.save!
 end
 
 sample_user = User.create!(first_name: 'Michael',
@@ -37,4 +36,12 @@ users = User.order(:created_at).take(5)
   end
 end
 
-Category.create!(category_name: "Other")
+Category.create!(category_name: "Info", pinned: true)
+Category.create!(category_name: "Support", pinned: true)
+Category.create!(category_name: "Other", pinned: true)
+
+5.times do
+  post = Discussion.create!(title: Faker::Lorem.sentence, category_id: rand(1..3), user_id: users[rand(0..4)].id, pinned: [true, false].sample)
+
+  ActionText::RichText.create!(record_type: 'Discussion', record_id: post.id, name: 'content', body: Faker::Lorem.sentence)
+end
