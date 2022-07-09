@@ -44,7 +44,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'ffaker'
+  gem 'faker'
   gem 'rspec-rails', '~> 5.1.2'
 end
 

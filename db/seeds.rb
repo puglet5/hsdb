@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+require 'faker'
 
 10.times do
-  user = User.create!(first_name: FFaker::Name.first_name,
-                      last_name: FFaker::Name.last_name,
-                      email: FFaker::Internet.email,
+  user = User.create!(first_name: Faker::Name.first_name,
+                      last_name: Faker::Name.last_name,
+                      email: Faker::Internet.email,
                       password: '123456')
   user.save!
 end
@@ -21,13 +22,18 @@ sample_user.add_role('admin')
 PublicActivity.enabled = false
 
 users = User.order(:created_at).take(5)
-10.times do
-  title = FFaker::Lorem.sentence
-  description = FFaker::Lorem.paragraph
-  body = FFaker::Lorem.paragraph
+2.times do
+  title = Faker::Lorem.sentence
+  description = Faker::Lorem.paragraph
+  body = Faker::Lorem.paragraph
   status = 'draft'
+  metadata = Faker::Json.shallow_json(width: 3, options: { key: 'Science.element', value: 'Number.decimal(l_digits: 3, r_digits: 3)' })
   users.each do |user|
     up = Upload.create!(title: title, description: description, body: body, status: status, user_id: user.id)
-    up.thumbnail.attach(io: File.open(File.join(Rails.root, 'public/images/rose.jpg')), filename: 'rose.jpg')
+    up.thumbnail.attach(io: File.open('public/images/rose.jpg'),
+                         filename: 'rose.jpg')
+    up.update!(metadata: metadata)
   end
 end
+
+Category.create!(category_name: "Other")

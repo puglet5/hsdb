@@ -131,7 +131,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    ffaker (2.21.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     foreman (0.87.2)
     formatador (1.1.0)
@@ -416,7 +417,7 @@ DEPENDENCIES
   devise-i18n (~> 1.10.1)
   erd
   factory_bot_rails
-  ffaker
+  faker
   foreman (~> 0.87.2)
   friendly_id (~> 5.4, >= 5.4.2)
   graphicsmagick (~> 1.0, >= 1.0.6)
