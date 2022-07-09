@@ -1,34 +1,16 @@
-<div class="row">
-  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-    <%= render "sidebar" %>
-  </div>
-  <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
-    <h1 class=""><%= @discussion.title %></h1>
-    <h3 class="">by <%= @discussion&.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %></h3>
-    <div class="">
-      <div class=""></div>
-      <div class="">
-        <% if discussion_author(@discussion) %>
-          <div class="">
-            <%= link_to "Edit Discussion", edit_discussion_path(@discussion), class: "button" %>
-            <%= link_to "Delete", discussion_path(@discussion), data: {turbo_method: :delete, turbo_confirm: "Delete discussion?" }, class: "btn red" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div class=""><%= @discussion.content %></div>
-    <h2 class=""><%= @discussion.replies.count %> Replies</h2>
-    <div id="discussion-replies">
-      <%= render @discussion.replies %>
-    </div>
-    <h3 class="">Leave a reply</h3>
-    <% if user_signed_in? %>
-      <%= render "replies/form" %>
-    <% else %>
-      <p>To reply you need to <%= link_to "login", new_user_session_path %>. Don't have an account?
-        <%= link_to "Sign up", new_user_registration_path %> for one.</p>
-    <% end %>
-    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
-  </div>
-</div>
+<%= @discussion.title %>
+by <%= @discussion&.user.first_name %> in <%= link_to @discussion.category.category_name, @discussion.category %>
+<% if discussion_author(@discussion) %>
+  <%= link_to "Edit Discussion", edit_discussion_path(@discussion), class: "button" %>
+  <%= link_to "Delete", discussion_path(@discussion), data: {turbo_method: :delete, turbo_confirm: "Delete discussion?" }, class: "btn red" %>
+<% end %>
+<%= @discussion.content %>
+<%= @discussion.replies.count %> Replies
+<%= render @discussion.replies %>
+Leave a reply
+<% if user_signed_in? %>
+  <%= render "replies/form" %>
+<% else %>
+  <p>To reply you need to <%= link_to "login", new_user_session_path %>. Don't have an account?
+    <%= link_to "Sign up", new_user_registration_path %> for one.</p>
+<% end %>

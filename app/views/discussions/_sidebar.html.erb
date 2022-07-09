@@ -1,9 +1,45 @@
-<ul class="collection">
-  <li class="collection-header with-header grey lighten-3 center"><h4>Categories</h4></li>
-  <% @categories.each do |c| %>
-    <li class="collecion-item grey lighten-3 center"><%= link_to c.category_name, c %></li>
-  <% end %>
+<div class="flex justify-between">
+  <h1 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900">Categories</h1>
   <% if has_role?(:admin) %>
-    <li class="collecion-item grey lighten-3 center"><%= link_to "New Category", new_category_path, class: "btn" %></li>
+    <%= link_to new_category_path, class: "mr-6" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+    <% end %>
   <% end %>
-</ul>
+</div>
+<aside class="block mr-8 ml-2 mt-4 p-2 bg-white rounded-lg border border-gray-200 shadow-md" aria-label="Sidebar">
+  <div class="overflow-y-auto py-4 px-3 bg-gray rounded dark:bg-gray-800">
+    <ul class="">
+      <% @categories.each do |c| %>
+        <div class="flex justify-between">
+          <div class="flex">
+            <div class="my-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <%= link_to c, class: " transition duration-75 group hover:bg-gray-100 flex items-center p-2 text-base font-normal text-gray-900 rounded-lg" do %>
+              <%= c.category_name %>
+            <% end %>
+          </div>
+          <button type="button" class="p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+        <ul id="dropdown-example" class="hidden">
+          <% c.discussions.each do |d| %>
+            <li>
+              <%= link_to d, class: "flex items-center p-2 pl-8 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                <%= d.title.truncate(20) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+  </div>
+</aside>
