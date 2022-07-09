@@ -23,9 +23,7 @@ class Upload < ApplicationRecord
   friendly_id :title, use: %i[slugged finders]
 
   before_save do
-    if self.metadata.is_a?(String)
-      self.metadata = JSON.parse(metadata)
-    end
+    self.metadata = JSON.parse(metadata) if metadata.is_a?(String)
   end
 
   def should_generate_new_friendly_id?

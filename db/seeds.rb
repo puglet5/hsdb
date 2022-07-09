@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'faker'
 
 10.times do
@@ -31,14 +32,14 @@ users = User.order(:created_at).take(5)
   users.each do |user|
     up = Upload.create!(title: title, description: description, body: body, status: status, user_id: user.id)
     up.thumbnail.attach(io: File.open('public/images/rose.jpg'),
-                         filename: 'rose.jpg')
+                        filename: 'rose.jpg')
     up.update!(metadata: metadata)
   end
 end
 
-Category.create!(category_name: "Info", pinned: true)
-Category.create!(category_name: "Support", pinned: true)
-Category.create!(category_name: "Other", pinned: true)
+Category.create!(category_name: 'Info', pinned: true)
+Category.create!(category_name: 'Support', pinned: true)
+Category.create!(category_name: 'Other', pinned: true)
 
 5.times do
   post = Discussion.create!(title: Faker::Lorem.sentence, category_id: rand(1..3), user_id: users[rand(0..4)].id, pinned: [true, false].sample)

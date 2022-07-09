@@ -24,5 +24,4 @@ class DiscussionPolicy < ApplicationPolicy
   def show?
     true
   end
-
 end

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < BaseController
     before_action :authenticate_user!
     before_action :set_user!, only: %i[edit update destroy]
+    before_action :authorize_user!
+    after_action :verify_authorized
 
     def index
       respond_to do |format|
@@ -61,6 +63,10 @@ module Admin
     def user_params
       list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }]
       params.require(:user).permit(list_allowed_params)
+    end
+
+    def authorize_user!
+      authorize(@user || User)
     end
   end
 end

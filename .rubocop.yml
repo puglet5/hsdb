@@ -7,6 +7,7 @@ require:
 AllCops:
   NewCops: enable
   TargetRubyVersion: 3.0
+  SuggestExtensions: false
 
 Style/Documentation:
   Enabled: false
@@ -17,7 +18,7 @@ Layout/LineLength:
 Rails/FilePath:
   EnforcedStyle: arguments
   Enabled: false
-  
+
 Rails/HasAndBelongsToMany:
   Enabled: false
 
@@ -35,5 +36,5 @@ Naming:
 
 Rails/OutputSafety:
   Enabled: false
-  
-  
+
+

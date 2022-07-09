@@ -8,10 +8,9 @@
     <p> <%= @user.organization %> </p>
     <% if @user == current_user %>
       <%= link_to "Edit your account", edit_user_registration_path %>
-    <% end %>
-    <br>
-    <% if @user.has_role?("admin") %>
-      <%= link_to "Users Table", "/admin/users" %>
+      <% if policy([:admin, :user]).index? %>
+        <%= link_to "Users Table", "/admin/users" %>
+      <% end %>
     <% end %>
   </div>
 </div>
