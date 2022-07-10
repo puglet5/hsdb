@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all
+    @categories = Category.all.order('created_at asc')
     @discussions = Discussion.all.order('created_at desc')
     @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
     @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     @discussions = Discussion.where(category_id: @category.id)
     @discussions_unpinned = Discussion.all.where(category_id: @category.id, pinned: false).order('created_at desc')
     @discussions_pinned = Discussion.all.where(category_id: @category.id, pinned: true).order('created_at desc')
-    @categories = Category.all
+    @categories = Category.all.order('created_at asc')
   end
 
   # GET /categories/new

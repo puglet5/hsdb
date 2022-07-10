@@ -65,7 +65,7 @@ class DiscussionsController < ApplicationController
   end
 
   def find_categories
-    @categories = Category.all.order('created_at desc')
+    @categories = Category.all.order('created_at asc')
   end
 
   def discussion_params
