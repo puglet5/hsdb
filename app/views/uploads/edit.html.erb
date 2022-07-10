@@ -1,7 +1,9 @@
 <%= render "shared/errors", obj: @upload %>
-<div class="container">
-  <h1>Editing Upload</h1>
-  <%= render "form", upload: @upload, tags: @tags %>
-  <%= link_to "Show", @upload %>
-  <%= link_to "Back", uploads_path %>
-</div>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="container mx-auto p-20">
+    <div class="flex justify-center text-4xl mb-6 font-semibold">
+      Edit upload
+    </div>
+    <%= render "form", upload: @upload, tags: @tags %>
+  </div>
+</section>
