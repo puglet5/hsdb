@@ -6,11 +6,7 @@ class DiscussionPolicy < ApplicationPolicy
   end
 
   def update?
-    user.has_role?(:admin) || user.has_role?(:moderator) || user.author?(record)
-  end
-
-  def update_status?
-    user.has_role?(:admin) || user.has_role?(:moderator) || user.author?(record)
+    user.has_role?(:admin) || user.author?(record)
   end
 
   def destroy?

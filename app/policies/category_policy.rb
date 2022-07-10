@@ -18,7 +18,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    user.has_role?(:admin)
   end
 
   def show?

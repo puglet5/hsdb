@@ -3,11 +3,9 @@
 class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: %i[show edit update destroy]
-  before_action :find_categories, only: %i[index show new update create edit]
+  before_action :find_categories, only: %i[index new update create edit]
   before_action :authorize_discussion
   after_action :verify_authorized
-
-  # , except: [:index, :show]
 
   def index
     @discussion = Discussion.all.order('created_at desc')
