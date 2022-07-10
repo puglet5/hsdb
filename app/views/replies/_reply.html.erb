@@ -1,7 +1,7 @@
-<span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+<span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-itmo_primary-300 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
   <% if reply.user %>
     <% if reply.user.avatar.attached? %>
-      <%= image_tag  reply.user.avatar, class:"rounded-full shadow-lg"%>
+      <%= image_tag  reply.user.avatar, class:"shadow-lg object-cover rounded-full w-6 h-6"%>
     <% end %>
   <% end %>
 </span>
