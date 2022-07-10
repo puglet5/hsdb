@@ -1,60 +1,46 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_categories, only: %i[index show edit update destroy]
   before_action :authorize_category
   after_action :verify_authorized
-  # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
-  # GET /categories
   def index
-    @categories = Category.all.order('created_at asc')
     @discussions = Discussion.all.order('created_at desc')
     @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
     @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
   end
 
-  # GET /categories/1
   def show
     @discussions = Discussion.where(category_id: @category.id)
     @discussions_unpinned = Discussion.all.where(category_id: @category.id, pinned: false).order('created_at desc')
     @discussions_pinned = Discussion.all.where(category_id: @category.id, pinned: true).order('created_at desc')
-    @categories = Category.all.order('created_at asc')
   end
 
-  # GET /categories/new
   def new
     @category = Category.new
   end
 
-  # GET /categories/1/edit
   def edit; end
 
-  # POST /categories
   def create
     @category = Category.new(category_params)
 
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+        redirect_to categories_path, notice: 'Category was successfully created.'
+    else
+        render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
       redirect_to categories_path, notice: 'Category was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /categories/1
   def destroy
     @category.destroy
     redirect_to categories_url, notice: 'Category was successfully deleted.', status: :see_other
@@ -62,12 +48,11 @@ class CategoriesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_category
+  def set_categories
+    @categories = Category.all.order('created_at asc')
     @category = Category.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def category_params
     params.require(:category).permit(:category_name)
   end

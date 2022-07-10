@@ -3,7 +3,7 @@
 class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: %i[show edit update destroy]
-  before_action :find_categories, only: %i[index show new edit]
+  before_action :find_categories, only: %i[index show new update create edit]
   before_action :authorize_discussion
   after_action :verify_authorized
 
@@ -30,15 +30,12 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussions.build(discussion_params)
 
-    respond_to do |format|
       if @discussion.save
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
-        format.json { render :show, status: :created, location: @discussion }
+        redirect_to @discussion, notice: 'Discussion was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @discussion.errors, status: :unprocessable_entity }
+        # flash.now[:alert] = 'Couldn\'t save discussion: invalid params'
+        render :new, status: :unprocessable_entity
       end
-    end
   end
 
   def update
