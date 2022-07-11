@@ -2,24 +2,23 @@
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :fetch_categories, only: %i[index show]
   before_action :authorize_category
   after_action :verify_authorized
   # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
   # GET /categories
   def index
-    @categories = Category.all.order('created_at asc')
-    @discussions = Discussion.all.order('created_at desc')
-    @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
-    @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
+    @discussions = Discussion.all.includes(%i[user category rich_text_content replies]).order('created_at desc')
+    @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
+    @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
 
   # GET /categories/1
   def show
-    @discussions = Discussion.where(category_id: @category.id)
-    @discussions_unpinned = Discussion.all.where(category_id: @category.id, pinned: false).order('created_at desc')
-    @discussions_pinned = Discussion.all.where(category_id: @category.id, pinned: true).order('created_at desc')
-    @categories = Category.all.order('created_at asc')
+    @discussions = Discussion.where(category_id: @category.id).includes(%i[user category rich_text_content replies])
+    @discussions_unpinned = @discussions.where(category_id: @category.id, pinned: false).order('created_at desc')
+    @discussions_pinned = @discussions.where(category_id: @category.id, pinned: true).order('created_at desc')
   end
 
   # GET /categories/new
@@ -65,6 +64,10 @@ class CategoriesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def fetch_categories
+    @categories = Category.all.includes([:discussions]).order('created_at asc')
   end
 
   # Only allow a trusted parameter "white list" through.

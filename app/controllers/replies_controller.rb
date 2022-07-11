@@ -9,13 +9,10 @@ class RepliesController < ApplicationController
     @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
     @reply.user_id = current_user.id
 
-    respond_to do |format|
-      if @reply.save
-        format.html { redirect_to discussion_path(@discussion) }
-      else
-        format.html { redirect_to discussion_path(@discussion), notice: 'Reply did not save. Please try again.' }
-      end
-      format.js
+    if @reply.save
+      redirect_to discussion_path(@discussion)
+    else
+      redirect_to discussion_path(@discussion), notice: 'Reply wasn\'t saved. Please try again.'
     end
   end
 
@@ -34,13 +31,10 @@ class RepliesController < ApplicationController
 
   def update
     @reply = @discussion.replies.find(params[:id])
-    respond_to do |format|
-      if @reply.update(reply_params)
-        format.html { redirect_to discussion_path(@discussion), notice: 'Reply was successfully updated.' }
-      else
-        format.html { render :edit }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-      end
+    if @reply.update(reply_params)
+      redirect_to discussion_path(@discussion), notice: 'Reply was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

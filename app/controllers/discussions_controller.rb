@@ -4,19 +4,18 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: %i[show edit update destroy]
   before_action :find_categories, only: %i[index new update create edit]
+  before_action :fetch_discussions, only: %i[index show]
   before_action :authorize_discussion
   after_action :verify_authorized
 
   def index
-    @discussion = Discussion.all.order('created_at desc')
-    @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
-    @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
+    @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
+    @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
 
   def show
-    @discussions = Discussion.all.order('created_at desc')
-    @discussions_unpinned = Discussion.all.where(pinned: false).order('created_at desc')
-    @discussions_pinned = Discussion.all.where(pinned: true).order('created_at desc')
+    @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
+    @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
 
   def new
@@ -28,23 +27,19 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussions.build(discussion_params)
 
-      if @discussion.save
-        redirect_to @discussion, notice: 'Discussion was successfully created.'
-      else
-        # flash.now[:alert] = 'Couldn\'t save discussion: invalid params'
-        render :new, status: :unprocessable_entity
-      end
+    if @discussion.save
+      redirect_to @discussion, notice: 'Discussion was successfully created.'
+    else
+      # flash.now[:alert] = 'Couldn\'t save discussion: invalid params'
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
-    respond_to do |format|
-      if @discussion.update(discussion_params)
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @discussion }
-      else
-        format.html { render :edit }
-        format.json { render json: @discussion.errors, status: :unprocessable_entity }
-      end
+    if @discussion.update(discussion_params)
+      redirect_to @discussion, notice: 'Discussion was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -59,8 +54,12 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
   end
 
+  def fetch_discussions
+    @discussions = Discussion.all.includes(%i[user category rich_text_content replies]).order('created_at desc')
+  end
+
   def find_categories
-    @categories = Category.all.order('created_at asc')
+    @categories = Category.all.includes([:discussions]).order('created_at asc')
   end
 
   def discussion_params

@@ -13,8 +13,8 @@ class UploadsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @uploads = Upload.all.page(params[:page]).per(3)
-    @q = Upload.includes([:user, { images_attachments: :blob }]).ransack(params[:q])
+    # @uploads = Upload.all.page(params[:page]).per(3)
+    @q = Upload.includes([:thumbnail_attachment]).ransack(params[:q])
     @uploads = @q.result(distinct: true).page(params[:page]).per(9)
   end
 
@@ -67,11 +67,9 @@ class UploadsController < ApplicationController
 
   def update_status
     @upload = Upload.find(params[:id])
-    respond_to do |format|
-      if @upload.update(status: params[:status])
-        format.html { redirect_to @upload }
-        flash[:success] = "Status successfully changed to #{@upload.status}"
-      end
+    if @upload.update(status: params[:status])
+      redirect_to @upload
+      flash[:success] = "Status successfully changed to #{@upload.status}"
     end
   end
 

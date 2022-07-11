@@ -25,7 +25,7 @@
       <%= @discussion.content %>
       <ol class="relative border-l border-gray-200 dark:border-gray-700">
         <li class="mb-10 ml-6">
-          <%= render @discussion.replies.order("created_at asc") %>
+          <%= render @discussion.replies.includes([:user]).order("created_at asc") %>
         </li>
       </ol>
       <%= render "replies/form" %>
