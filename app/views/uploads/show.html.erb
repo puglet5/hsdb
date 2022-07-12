@@ -3,10 +3,10 @@
     <!-- Carousel wrapper -->
     <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
       <!-- Item 1 -->
-      <% id = @upload.images.first.id %>
-      <% (0...3).each do |i| %>
+      <% id =  %>
+      <% @upload.images.first(3).each do |image| %>
         <div class="duration-100 ease-in-out inset-0 transition-all transform translate-x-0 z-10" data-carousel-item="">
-          <%= image_tag(@upload.images.find(id+i), class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2") %>
+          <%= image_tag(image, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2") %>
         </div>
       <% end %>
       <div class="carousel-caption hidden md:block absolute text-center z-20">

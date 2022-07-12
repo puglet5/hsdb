@@ -47,7 +47,7 @@ class UploadsController < ApplicationController
       # flash.now[:alert] = 'Couldn\'t save the upload: invalid params'
       render :new, status: :unprocessable_entity
     end
-    ActiveStorage::Blob.unattached.each(&:purge_later)
+    # ActiveStorage::Blob.unattached.each(&:purge_later)
   end
 
   def update
