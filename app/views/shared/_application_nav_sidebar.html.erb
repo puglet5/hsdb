@@ -3,9 +3,9 @@
     <% if current_user %>
       <ul>
         <li>
-          <%= link_to "/#{locale}/users/#{current_user.slug}", class: "flex items-center pl-2 mb-5" do %>
+          <%= link_to "/#{locale}/users/#{current_user.slug}", class: "flex items-center pl-2 mb-5 w-10 h-10" do %>
             <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar.variant(resize: "100x100!"), class: "w-10 h-10 rounded-full" %>
+              <%= image_tag current_user.avatar, class: "w-10 h-10 object-cover rounded-full" %>
             <% else %>
             <% end %>
             <div>

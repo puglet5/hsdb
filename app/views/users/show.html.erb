@@ -1,16 +1,66 @@
-<div class="container">
-  <h1>
-    <% if @user.avatar.present? %>
-      <%= image_tag(@user.avatar.representation(resize: "50x50!"), class: "circle responsive-img") %>
-    <% end %>
-    <%= full_name(@user) %> </h1>
-  <div class="container">
-    <p> <%= @user.organization %> </p>
-    <% if @user == current_user %>
-      <%= link_to "Edit your account", edit_user_registration_path %>
-      <% if policy([:admin, :user]).index? %>
-        <%= link_to "Users Table", "/admin/users" %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<section class="py-20 text-gray-700 bg-gray-50 dark:bg-gray-900 border mb-20">
+  <div class="container mx-auto">
+    <div class="p-4 bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <div class="grid grid-cols-12">
+        <div class="col-span-3  border-r">
+          <div class="flex flex-col justify-center">
+            <span class="flex bg-itmo_primary-300 rounded-full w-20 h-20 md:w-40 md:h-40 m-auto">
+              <% if @user.avatar.present? %>
+                <%= image_tag @user.avatar, class: "object-cover rounded-full " %>
+              <% end %>
+              <% if @user == current_user %>
+                <%= link_to edit_user_registration_path do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                <% end %>
+              <% end %>
+            </span>
+            <h3 class="m-auto text-xl font-medium mt-2">
+              <%= full_name(@user) %>
+            </h3>
+            <p class="mx-auto font-normal text-gray-500">
+              <%= @user.organization %>
+            </p>
+            <p class="mx-auto italic font-normal text-gray-500">
+              <a href=<%= "mailto:#{@user.email}" %>>
+              <%=@user.email%>
+            </a>
+              </p>
+            </div>
+          </div>
+          <div class="col-span-6">
+            <h4 class="text-l font-medium mb-4 mx-4">Recent activity</h4>
+            <%# PublicActivity::Activity.all.where(owner_id: current_user.id).each do |a|%>
+              <%#= render_activity(a) %>
+              <%# end %>
+            </div>
+            <div class="col-span-3 border-l">
+              <div class="mx-4">
+                <h4 class="text-l font-medium mb-4">Administration</h4>
+                <% if policy([:admin, :user]).index? %>
+                  <%= link_to "/admin/users" do %>
+                    <div class="flex my-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                      <p class="ml-2">Edit user table</p>
+                    </div>
+                  <% end %>
+                <% end %>
+                <% if policy(:category).index? %>
+                  <%= link_to categories_path do %>
+                    <div class="flex my-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                      <p class="ml-2">Manage forum categories</p>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
