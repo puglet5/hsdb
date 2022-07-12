@@ -23,7 +23,7 @@ sample_user.add_role('admin')
 PublicActivity.enabled = false
 
 users = User.order(:created_at).take(5)
-2.times do
+1.times do
   title = Faker::Lorem.sentence
   description = Faker::Lorem.paragraph
   body = Faker::Lorem.paragraph

@@ -1,4 +1,13 @@
   <%= simple_form_for(@upload) do |form| %>
+  <!-- Attachment retain on form resubmit, must stay at the top  -->
+  <% form.object.images.each do |image|%>
+    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
+  <% end %>
+  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached? %>
+  <% form.object.documents.each do |doc|%>
+    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
+  <% end %>
+  <!-- -->
   <label class="block mb-4 text-lg border-b font-medium text-gray-900 dark:text-gray-300">Info</label>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
     <div>
@@ -81,14 +90,6 @@
       <label class="block mb-4 text-lg border-b font-medium text-gray-900 dark:text-gray-300">Metadata</label>
       <%= form.text_area :metadata, value: JSON.pretty_generate(@upload.metadata), class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }%>
     </div>
-  <% end %>
-  <% form.object.images.each do |image|%>
-    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
-  <% end %>
-  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached?
- %>
-  <% form.object.documents.each do |doc|%>
-    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
   <% end %>
   <div class="flex">
     <button type="submit" class="text-white bg-itmo_primary-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-itmo_primary-500 dark:hover:bg-itmo_primary-500 dark:focus:ring-blue-800">

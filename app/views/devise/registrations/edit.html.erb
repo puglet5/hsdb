@@ -9,7 +9,7 @@
       <% else %>
         <% # default avatar %>
       <% end %>
-      <%= f.file_field :avatar %>
+      <%= f.file_field :avatar, direct_upload: true%>
     </div>
     <div class="field">
       <%= f.label :first_name %><br />
