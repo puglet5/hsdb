@@ -1,6 +1,7 @@
 import Uppy from '@uppy/core'
 import Dashboard from '@uppy/dashboard'
 import ActiveStorageUpload from 'uppy-activestorage-upload'
+import ImageEditor from '@uppy/image-editor'
 
 document.addEventListener('turbo:load', () => {
   document.querySelectorAll('[data-uppy]').forEach(element => setupUppy(element))
@@ -32,11 +33,28 @@ const setupUppy = (element) => {
   uppy.use(Dashboard, {
     trigger: trigger,
     // target: target,
-    closeAfterFinish: false,
+    closeAfterFinish: true,
     inline: false,
     showProgressDetails: true,
     fileManagerSelectionType: "both",
     proudlyDisplayPoweredByUppy: false
+  })
+
+  uppy.use(ImageEditor, {
+    target: Dashboard,
+    quality: 1,
+    cropperOptions: {
+      viewMode: 0,
+      background: false,
+      autoCropArea: 1,
+      responsive: true,
+      croppedCanvasOptions: {},
+    },
+    actions: {
+      cropSquare: false,
+      cropWidescreen: false,
+      cropWidescreenVertical: false,
+    },
   })
 
   let dashboard = document.querySelector('.uppy-Dashboard-inner')
