@@ -43,11 +43,11 @@ class UploadsController < ApplicationController
     if @upload.save
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
+      ActiveStorage::Blob.unattached.each(&:purge_later)
     else
       # flash.now[:alert] = 'Couldn\'t save the upload: invalid params'
       render :new, status: :unprocessable_entity
     end
-    # ActiveStorage::Blob.unattached.each(&:purge_later)
   end
 
   def update
