@@ -31,6 +31,10 @@ class UploadsController < ApplicationController
     end
   end
 
+  def images
+    @uploads = Upload.all
+  end
+
   def new
     @upload = current_user.uploads.build
   end

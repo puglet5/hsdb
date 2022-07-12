@@ -2,12 +2,9 @@
 
 class PagesController < ApplicationController
   def home
-    @activities = PublicActivity::Activity.all.includes(%i[trackable owner]).order('created_at DESC')
   end
 
-  def about; end
+  def about
+  end
 
-  def welcome; end
-
-  def contact; end
 end

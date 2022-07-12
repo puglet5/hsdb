@@ -24,4 +24,8 @@ class UploadPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def images?
+    true
+  end
 end

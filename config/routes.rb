@@ -6,9 +6,10 @@ Rails.application.routes.draw do
       resources :categories, only: :update
     end
 
-    get 'users/show'
-    resources :categories
     resources :users
+    get 'users/show'
+    get 'uploads/resources/images', to: "uploads#images"
+    resources :categories
     resources :discussions do
       resources :replies
     end
@@ -21,8 +22,6 @@ Rails.application.routes.draw do
     end
 
     get 'about', to: 'pages#about'
-    get 'contact', to: 'pages#contact'
-    get 'welcome', to: 'pages#welcome'
 
     namespace :admin do
       resources :users, only: %i[index create edit update destroy]
