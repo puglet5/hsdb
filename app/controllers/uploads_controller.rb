@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require('zip')
-
 class UploadsController < ApplicationController
-  include BulkDownload
+  include ActiveStorage::SendZip
 
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]
@@ -24,7 +22,10 @@ class UploadsController < ApplicationController
         @upload = Upload.find(params[:id])
       end
 
-      format.zip { bulk_download }
+      format.zip do
+        send_zip @upload.images, filename: "#{@upload.title} — #{Time.now.to_formatted_s(:long)}.zip"
+        # flash[:info] = "Downloading images for #{@upload.title}"
+      end
       # format.pdf do
       #   render pdf: "Upload_#{@upload.id}", template: "uploads/show.html.erb"
       # end
