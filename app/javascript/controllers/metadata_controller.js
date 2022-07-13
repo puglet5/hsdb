@@ -8,7 +8,6 @@ export default class extends Controller {
 
   connect() {
     const jsonData = this.jsonValue
-    console.log(this.jsonValue)
     const tree = jsonview.create(jsonData);
     if ((jsonData !== "{}")) {
       jsonview.render(tree, document.querySelector('.tree'));

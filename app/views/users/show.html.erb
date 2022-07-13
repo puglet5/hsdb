@@ -36,29 +36,31 @@
               <%# end %>
             </div>
             <div class="col-span-3 border-l">
-              <div class="mx-4">
-                <h4 class="text-l font-medium mb-4">Administration</h4>
-                <% if policy([:admin, :user]).index? %>
-                  <%= link_to "/admin/users" do %>
-                    <div class="flex my-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                      <p class="ml-2">Edit user table</p>
-                    </div>
+              <% if @user == current_user %>
+                <div class="mx-4">
+                  <h4 class="text-l font-medium mb-4">Administration</h4>
+                  <% if policy([:admin, :user]).index? %>
+                    <%= link_to "/admin/users" do %>
+                      <div class="flex my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <p class="ml-2">Edit user table</p>
+                      </div>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <% if policy(:category).index? %>
-                  <%= link_to categories_path do %>
-                    <div class="flex my-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                      <p class="ml-2">Manage forum categories</p>
-                    </div>
+                  <% if policy(:category).index? %>
+                    <%= link_to categories_path do %>
+                      <div class="flex my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <p class="ml-2">Manage forum categories</p>
+                      </div>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

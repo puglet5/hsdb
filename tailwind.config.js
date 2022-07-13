@@ -15,9 +15,19 @@ module.exports = {
   ],
 
   theme: {
+    extend: {
+      boxShadow: {
+        '3xl': '0 0 120px rgba(0, 0, 0, 0.3)',
+      }
+    },
     minHeight: {
       '1/2': '50%',
       '2/3': '66%',
+    },
+    maxWidth: {
+      '1/2': '50%',
+      '2/3': '66%',
+      '4/5': '80%',
     },
     fontFamily: {
       // 'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
