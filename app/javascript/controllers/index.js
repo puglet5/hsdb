@@ -7,7 +7,8 @@ import { application } from "./application"
 import TextareaController from "./textarea_controller"
 application.register("textarea", TextareaController)
 
-
 import CategoryController from "./category_controller"
 application.register("category", CategoryController)
 
+import MetadataController from "./metadata_controller"
+application.register("metadata", MetadataController)

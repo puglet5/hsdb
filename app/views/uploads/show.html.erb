@@ -100,9 +100,10 @@
         <div class="col-span-3">
           <div class="mx-4">
             <h4 class="text-l font-medium mb-4">Metadata</h4>
-            <div class="tree">
-              <%= JSON.pretty_generate(@upload.metadata) %>
-            </div>
+            <%= tag.div data: {controller: 'metadata', "metadata-json-value": @upload.metadata} do %>
+              <div class="tree">
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
