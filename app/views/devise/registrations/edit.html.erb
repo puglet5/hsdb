@@ -10,8 +10,6 @@
           <span class="flex bg-itmo_primary-300 rounded-full m-auto">
             <% if resource.avatar.attached? %>
               <%= image_tag resource.avatar, class: "object-cover rounded-full w-20 h-20 md:w-40 md:h-40" %>
-            <% else %>
-              <% # default avatar %>
             <% end %>
             <div class="">
               <label for="avatar-upload" class="cursor-pointer">

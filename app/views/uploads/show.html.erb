@@ -9,10 +9,6 @@
           <%= image_tag(image, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2") %>
         </div>
       <% end %>
-      <div class="carousel-caption hidden md:block absolute text-center z-20">
-        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
-        <p><%= @upload.description %></p>
-      </div>
     </div>
     <!-- Slider indicators -->
     <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
@@ -38,43 +34,98 @@
   <% if @upload.thumbnail.attached? %>
     <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
       <%= image_tag @upload.thumbnail, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" %>
-      <div class="carousel-caption hidden md:block absolute text-center z-20">
-        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
-        <p><%= @upload.description %></p>
-      </div>
     </div>
   <% end %>
 <% end %>
-<div class="grid grid-cols-3 gap-4 mx-auto md:container md:mx-auto my-20 w-full">
-  <div class="justify-self-start ">
-    <%= @upload.status %>
-    <% if @upload.images.any? %>
-      <%= link_to "Download images", upload_path(format: :zip), class: "btn" %>
-    <% end %>
-    <%= @upload.description %>
-    <%= @upload.body %>
-    <% @upload.documents.all.each do |doc| %>
-      <% if doc.representable? %>
-        <%= image_tag(doc.representation(resize: "200x200")) %>
-      <% else %>
-        <%= tag.span doc.filename %>
-      <% end %>
-    <% end %>
-    <%= @upload.metadata %>
-    <% if policy(@upload).update? %>
-      <%= link_to "Edit", edit_upload_path(@upload), class: "btn" %> |
-    <% end %>
-    <% if policy(@upload).destroy? %>
-      <%= link_to "Back", uploads_path, class: "btn" %>
-    <% end %>
-  </div>
-  <div class="justify-self-end col-span-2">
-    <div class="grid grid-cols-2 gap-1">
-      <% (0...@upload.images.count).each do |image| %>
-        <div>
-          <%= image_tag(@upload.to_thumbnail(image), class: "object-cover h-100") %>
+<section class="pb-20 text-gray-700 bg-gray-50 dark:bg-gray-900 border mb-20">
+  <div class="container mx-auto">
+    <div class="text-center my-10">
+      <div class="flex justify-center">
+        <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 my-auto">
+          <%= @upload.status %>
+        </span>
+        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
+      </div>
+      <p><%= @upload.description %></p>
+    </div>
+    <div class="flex justify-between mb-4 border-b">
+      <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Info</label>
+      <div class="flex mr-4 my-auto">
+        <% if policy(@upload).update? %>
+          <%= link_to edit_upload_path(@upload) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          <% end %>
+        <% end %>
+        <% if policy(@upload).destroy? %>
+          <%= link_to upload_path(@upload), data: {turbo_method: :delete, turbo_confirm: "Delete upload?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="p-4 bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <div class="grid grid-cols-12 pb-10">
+        <div class="col-span-6 border-r">
+          <div class="m-4">
+            <%= @upload.body %>
+          </div>
+          <%= link_to "Back to uploads", uploads_path, class: "block my-auto text-sm font-medium text-gray-500 dark:text-gray-300 " %>
         </div>
-      <% end %>
+        <div class="col-span-3 border-r">
+          <div class="mx-4">
+            <div class="flex">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+              </svg>
+              <h4 class="text-l font-medium mb-4 ml-1">Documents</h4>
+            </div>
+            <div class="ml-8">
+              <ul class="list-disc">
+                <% @upload.documents.all.each do |doc| %>
+                  <li>
+                    <p class="truncate">
+                      <%= link_to rails_blob_path(doc, disposition: 'attachment') do %>
+                        <%= doc.filename.to_s %>
+                      <% end %>
+                    </p>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div class="mx-4">
+            <h4 class="text-l font-medium mb-4">Metadata</h4>
+            <div class="tree">
+              <%= JSON.pretty_generate(@upload.metadata) %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  <% if @upload.images.any? %>
+    <div class="mx-auto md:container md:mx-auto my-10 w-full">
+      <div class="flex border-b mb-4 ">
+        <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images</label>
+        <%= link_to upload_path(format: :zip), class:"my-auto ml-2" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          </svg>
+        <% end %>
+      </div>
+      <div class="grid grid-cols-5 gap-y-1">
+        <% (0...@upload.images.count).each do |image| %>
+          <div class="m-2">
+            <%= image_tag(@upload.to_thumbnail(image), class: "rounded object-cover w-full") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</section>
