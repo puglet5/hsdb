@@ -2,9 +2,9 @@
   <%= link_to upload do %>
     <div class="flex relative">
       <% if upload.thumbnail.attached? %>
-        <%= image_tag upload.thumbnail, class: "" %>
+        <%= image_tag upload.thumbnail.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "" %>
       <% elsif upload.images.any? %>
-        <%= image_tag upload.to_thumbnail(0) %>
+        <%= image_tag upload.images.first.variant(resize: '400x300^', crop: '400x300+0+0').processed %>
       <% else %>
         <%= image_tag "https://dummyimage.com/300.png" , class: ""%>
       <% end %>

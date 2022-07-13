@@ -30,10 +30,6 @@ class Upload < ApplicationRecord
     slug.blank? || title_changed?
   end
 
-  def to_thumbnail(input)
-    images[input].variant(resize: '400x300^', crop: '400x300+0+0').processed
-  end
-
   private
 
   def image_type
