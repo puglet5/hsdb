@@ -20,7 +20,11 @@ module.exports = {
       '2/3': '66%',
     },
     fontFamily: {
-      'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
+      // 'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
+      "sans": ['ui-monospace'],
+      "sefif": ['ui-monospace'],
+      "mono": ['ui-monospace'],
+
     },
     container: {
       center: true
