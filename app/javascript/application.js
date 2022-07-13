@@ -2,7 +2,6 @@ require("@rails/activestorage").start();
 
 import "trix"
 import "flowbite/dist/flowbite.js"
-// import 'tw-elements';
 import "@rails/actiontext";
 import "@hotwired/turbo-rails"
 import "./controllers"

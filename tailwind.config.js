@@ -1,7 +1,8 @@
-const colors = require('tailwindcss/colors')
+// const colors = require('tailwindcss/colors')
 
 module.exports = {
   darkMode: 'class',
+  mode: "jit",
   content: [
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
@@ -11,7 +12,6 @@ module.exports = {
   ],
   plugins: [
     require('flowbite/plugin'),
-    require('tw-elements/dist/plugin')
   ],
 
   theme: {

@@ -9,20 +9,13 @@
     "@uppy/core": "^2.3.1",
     "@uppy/dashboard": "^2.3.0",
     "@uppy/image-editor": "^1.3.0",
-    "autoprefixer": "^10.4.7",
     "data-confirm-modal": "^1.6.2",
     "esbuild": "^0.14.49",
     "flowbite": "1.4.7",
-    "jquery": "^3.6.0",
     "mini-css-extract-plugin": "^2.6.1",
-    "patch-package": "^6.4.7",
-    "popper.js": "^1.16.1",
     "postcss": "^8.4.14",
-    "postinstall-postinstall": "^2.1.0",
-    "sass": "^1.53.0",
     "tailwindcss": "^3.1.6",
     "trix": "^2.0.0-beta.0",
-    "tw-elements": "^1.0.0-alpha9",
     "uppy-activestorage-upload": "https://github.com/puglet5/uppy-activestorage-upload"
   },
   "version": "0.1.0",
@@ -35,7 +28,6 @@
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css --minify",
-    "postinstall": "patch-package",
-    "build": "esbuild ./app/javascript/*.* --bundle --outdir=./app/assets/builds --public-path=assets"
+    "build": "esbuild ./app/javascript/*.* --bundle --outdir=./app/assets/builds --public-path=assets --minify"
   }
 }
