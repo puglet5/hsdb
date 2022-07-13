@@ -2,6 +2,7 @@
 
 class UploadsController < ApplicationController
   include ActiveStorage::SendZip
+  include ActiveStorage::SetCurrent
 
   before_action :authenticate_user!
   before_action :set_upload, only: %i[show edit update destroy]

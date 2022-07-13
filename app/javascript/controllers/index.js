@@ -12,3 +12,6 @@ application.register("category", CategoryController)
 
 import MetadataController from "./metadata_controller"
 application.register("metadata", MetadataController)
+
+import ImageController from "./image_controller"
+application.register("image", ImageController)
