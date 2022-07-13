@@ -5,7 +5,7 @@
       <!-- Item 1 -->
       <% @upload.images.first(3).each do |image| %>
         <div class="duration-100 ease-in-out inset-0 transition-all transform translate-x-0 z-10" data-carousel-item="">
-          <%= image_tag(image.variant(resize: '1920x1080^', crop: '1920x1080+0+0').processed, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2") %>
+          <%= image_tag image, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" %>
         </div>
       <% end %>
     </div>
@@ -32,7 +32,7 @@
 <% else %>
   <% if @upload.thumbnail.attached? %>
     <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
-      <%= image_tag @upload.thumbnail.variant(resize: '1920x1080^', crop: '1920x1080+0+0').processed, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" %>
+      <%= image_tag @upload.thumbnail, class: "block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" %>
     </div>
   <% end %>
 <% end %>
@@ -40,7 +40,7 @@
   <div class="container mx-auto">
     <div class="text-center my-10">
       <div class="flex justify-center">
-        <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 my-auto">
+        <span class="<%= status_badge_style(@upload.status).to_s %> my-auto" >
           <%= @upload.status %>
         </span>
         <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
