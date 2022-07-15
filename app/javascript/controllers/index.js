@@ -15,3 +15,6 @@ application.register("metadata", MetadataController)
 
 import ImageController from "./image_controller"
 application.register("image", ImageController)
+
+import PopupController from "./popup_controller"
+application.register("popup", PopupController)
