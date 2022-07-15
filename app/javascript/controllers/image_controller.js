@@ -32,8 +32,8 @@ export default class extends Controller {
       const gallery = document.getElementById("gallery")
       // gallery.classList.toggle("opacity-75")
 
-      const divCls = ["opacity-100", "absolute", "max-w-4/5", "top-0", "left-[10%]", "bg-white", "rounded-lg", "border", "border-2", "border-gray-200", "shadow-3xl", "mt-2"]
-      const imgCls = ["opacity-100", "rounded-lg"]
+      const divCls = ["absolute", "max-w-4/5", "top-0", "left-[10%]", "bg-white", "rounded-lg", "border", "border-2", "border-gray-200", "shadow-3xl", "mt-2"]
+      const imgCls = ["rounded-lg"]
 
       div.classList.add(...divCls)
       txt.classList.add("m-2")

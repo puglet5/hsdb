@@ -12,7 +12,7 @@
     <% @discussions_pinned.each do |discussion| %>
       <li class="mb-10 ml-4">
         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+        <p class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
           <% if discussion.user %>
             By
             <%= link_to discussion.user, class: "font-medium" do %>
@@ -23,7 +23,15 @@
               <%= link_to discussion.category.category_name, discussion.category, class: "font-medium" %>
             <% end %>
           <% end %>
-          <%= time_ago_in_words(discussion.created_at) %> ago</time>
+          <%= time_ago_in_words(discussion.created_at) %> ago,
+          last active
+          <% if discussion.replies.any? %>
+            <%= time_ago_in_words(discussion.replies.last.created_at) %>
+          <% else %>
+            <%= time_ago_in_words(discussion.created_at) %>
+          <% end %>
+          ago
+        </p>
         <div class="flex justify-between">
           <%= link_to discussion do %>
             <div class="mb-2 flex">
@@ -55,15 +63,6 @@
             <%= truncate(strip_tags(discussion.content.to_s), length: 140) %>
           </p>
         <% end %>
-        <p class="text-sm text-gray-500 truncate">
-          Last active
-          <% if discussion.replies.any? %>
-            <%= time_ago_in_words(discussion.replies.last.created_at) %>
-          <% else %>
-            <%= time_ago_in_words(discussion.created_at) %>
-          <% end %>
-          ago
-        </p>
       </li>
     <% end %>
   </ol>
@@ -83,7 +82,7 @@
       <% @discussions_unpinned.each do |discussion| %>
         <li class="mb-10 ml-4">
           <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          <p class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
             <% if discussion.user %>
               By
               <%= link_to discussion.user, class: "font-medium" do %>
@@ -94,50 +93,48 @@
                 <%= link_to discussion.category.category_name, discussion.category, class: "font-medium" %>
               <% end %>
             <% end %>
-            <%= time_ago_in_words(discussion.created_at) %> ago</time>
-        </time>
-        <div class="flex justify-between">
-          <%= link_to discussion do %>
-            <div class="flex mb-2">
-              <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 h-6 my-auto rounded mr-2 dark:bg-gray-700 dark:text-gray-300">
-                <%= discussion.replies.count%>
-              </span>
-              <h3 class="text-xl font-bold mr-4 my-1">
-                <%= discussion.title %>
-              </h3>
-            </div>
-          <% end %>
-          <% if discussion_author(discussion) || has_role?(:admin) %>
-            <div class="flex">
-              <%= link_to edit_discussion_path(discussion), class: "text-gray-500 my-auto" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-              <% end %>
-              <%= link_to discussion, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-gray-500 my-auto" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <%= link_to discussion do %>
-          <p>
-            <%= truncate(strip_tags(discussion.content.to_s), length: 140) %>
+            <%= time_ago_in_words(discussion.created_at) %> ago,
+            last active
+            <% if discussion.replies.any? %>
+              <%= time_ago_in_words(discussion.replies.last.created_at) %>
+            <% else %>
+              <%= time_ago_in_words(discussion.created_at) %>
+            <% end %>
+            ago
           </p>
-        <% end %>
-        <p class="text-sm text-gray-500 truncate">
-          Last active
-          <% if discussion.replies.any? %>
-            <%= time_ago_in_words(discussion.replies.last.created_at) %>
-          <% else %>
-            <%= time_ago_in_words(discussion.created_at) %>
+          <div class="flex justify-between">
+            <%= link_to discussion do %>
+              <div class="flex mb-2">
+                <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 h-6 my-auto rounded mr-2 dark:bg-gray-700 dark:text-gray-300">
+                  <%= discussion.replies.count%>
+                </span>
+                <h3 class="text-xl font-bold mr-4 my-1">
+                  <%= discussion.title %>
+                </h3>
+              </div>
+            <% end %>
+            <% if discussion_author(discussion) || has_role?(:admin) %>
+              <div class="flex">
+                <%= link_to edit_discussion_path(discussion), class: "text-gray-500 my-auto" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                <% end %>
+                <%= link_to discussion, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-gray-500 my-auto" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= link_to discussion do %>
+            <p>
+              <%= truncate(strip_tags(discussion.content.to_s), length: 140) %>
+            </p>
           <% end %>
-          ago
-        </p>
-      </li>
-    <% end %>
-  </ol>
-</div>
+        </li>
+      <% end %>
+    </ol>
+  </div>
 <% end %>
