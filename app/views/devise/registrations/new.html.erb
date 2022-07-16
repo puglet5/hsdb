@@ -5,35 +5,35 @@
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-6">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>
-        <%= f.text_field :first_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <%= f.text_field :first_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500" %>
       </div>
       <div class="mb-6">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label>
-        <%= f.text_field :last_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <%= f.text_field :last_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500" %>
       </div>
       <div class="mb-6">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Organization</label>
-        <%= f.text_field :organization, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <%= f.text_field :organization, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500" %>
       </div>
       <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
       <div class="relative mb-6">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
         </div>
-        <%= f.email_field :email, autofocus: false, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"user@example.com" %>
+        <%= f.email_field :email, autofocus: false, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500", placeholder:"user@example.com" %>
       </div>
       <div class="mb-6">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password<% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %></label>
-        <%= f.password_field :password, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",placeholder: "•••••••••" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500",placeholder: "•••••••••" %>
       </div>
       <div class="mb-6">
         <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm password</label>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",placeholder:"•••••••••" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-itmo_primary-500 focus:border-itmo_primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-itmo_primary-500 dark:focus:border-itmo_primary-500",placeholder:"•••••••••" %>
       </div>
       <div class="actions">
-        <%= f.submit "Sign up", class: "text-white bg-itmo_primary-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-itmo_primary-500 dark:hover:bg-itmo_primary-500 dark:focus:ring-blue-800" %>
+        <%= f.submit "Sign up", class: "text-white bg-itmo_primary-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-itmo_primary-200 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-itmo_primary-500 dark:hover:bg-itmo_primary-500 dark:focus:ring-blue-800" %>
       </form>
     </div>
   <% end %>
