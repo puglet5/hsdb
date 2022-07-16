@@ -34,3 +34,16 @@
 [contenteditable] {
   outline: 0px solid transparent;
 }
+
+.field_with_errors input {
+  @apply border border-red-500 focus:ring-red-500 !important
+}
+
+.field_with_errors trix-editor {
+  @apply border border-red-500 focus:ring-red-500 !important
+}
+
+.field_with_errors textarea {
+  @apply border border-red-500 focus:ring-red-500 !important
+}
+

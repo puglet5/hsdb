@@ -12,7 +12,8 @@ class Discussion < ApplicationRecord
 
   has_rich_text :content
 
-  validates :title, presence: true
+  validates :title, :content, presence: true
+  validates :content, length: {minimum: 5}
 
   resourcify
 

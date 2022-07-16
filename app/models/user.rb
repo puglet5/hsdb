@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :password, confirmation: true
+  validates :first_name, :last_name, :email, presence: true
+
 
   after_create :assign_default_role
 

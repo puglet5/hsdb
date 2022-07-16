@@ -1,17 +1,17 @@
-<%= simple_form_for(@discussion) do |f| %>
+<%= simple_form_for @discussion , defaults: { required: false } do |f| %>
   <div class="mb-4 grid grid-cols-12">
     <div class="col-span-10">
       <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
-      <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Discussion title" %>
+      <%= f.input :title, input_html: {class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Discussion title"}, label: false, hint: false %>
     </div>
     <div class="ml-6 col-span-2">
       <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Category</label>
-      <%= f.input_field :category_id, collection: @categories.map { |c| [c.category_name, c.id] }, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+      <%= f.input :category_id, collection: @categories.map { |c| [c.category_name, c.id] }, input_html: {class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}, label: false, hint: false, include_blank: false %>
     </div>
   </div>
   <div class="mb-4">
     <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Content</label>
-    <%= f.rich_text_area :content, required: true, input_html: { class: "textarea" }, wrapper: false, label_html: { class: "label" } %>
+    <%= f.input :content, as: :rich_text_area, input_html: { class: "textarea" }, label: false, hint: false, placeholder: "Discussion content" %>
   </div>
   <div class="flex">
     <button type="submit" class="text-white bg-itmo_primary-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-itmo_primary-500 dark:hover:bg-itmo_primary-500 dark:focus:ring-blue-800">
