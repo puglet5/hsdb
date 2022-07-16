@@ -86,8 +86,8 @@ class UploadsController < ApplicationController
   end
 
   def purge_attachment
-    @image = ActiveStorage::Blob.find_signed(params[:id])
-    @image.attachments.first.purge
+    @blob = ActiveStorage::Blob.find_signed(params[:id])
+    @blob.attachments.first.purge_later
   end
 
   private

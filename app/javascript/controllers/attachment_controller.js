@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
 
-  static targets = ["image"]
+  static targets = ["attachment"]
 
   static values = {
 
@@ -16,9 +16,9 @@ export default class extends Controller {
 
   delete() {
 
-    const img = this.imageTarget
+    const att = this.attachmentTarget
 
-    img.classList.toggle("hidden")
+    att.classList.toggle("hidden")
 
     document.querySelector(`input[value=${this.idValue}]`).remove()
 
