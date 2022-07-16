@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'active_storage-send_zip'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bullet'
 gem 'caxlsx'
@@ -38,9 +39,8 @@ gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'active_storage-send_zip'
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'

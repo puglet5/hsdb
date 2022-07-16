@@ -23,18 +23,16 @@ sample_user.add_role('admin')
 PublicActivity.enabled = false
 
 users = User.order(:created_at).take(5)
-1.times do
-  title = Faker::Lorem.sentence
-  description = Faker::Lorem.paragraph
-  body = Faker::Lorem.paragraph
-  status = 'draft'
-  metadata = Faker::Json.shallow_json(width: 3, options: { key: 'Science.element', value: 'Number.decimal(l_digits: 3, r_digits: 3)' })
-  users.each do |user|
-    up = Upload.create!(title: title, description: description, body: body, status: status, user_id: user.id)
-    up.thumbnail.attach(io: File.open('public/images/rose.jpg'),
-                        filename: 'rose.jpg')
-    up.update!(metadata: metadata)
-  end
+title = Faker::Lorem.sentence
+description = Faker::Lorem.paragraph
+body = Faker::Lorem.paragraph
+status = 'draft'
+metadata = Faker::Json.shallow_json(width: 3, options: { key: 'Science.element', value: 'Number.decimal(l_digits: 3, r_digits: 3)' })
+users.each do |user|
+  up = Upload.create!(title: title, description: description, body: body, status: status, user_id: user.id)
+  up.thumbnail.attach(io: File.open('public/images/rose.jpg'),
+                      filename: 'rose.jpg')
+  up.update!(metadata: metadata)
 end
 
 Category.create!(category_name: 'Info', pinned: true)

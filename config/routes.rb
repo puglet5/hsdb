@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     resources :users
     get 'users/show'
-    get 'uploads/resources/images', to: "uploads#images"
+    get 'uploads/resources/images', to: 'uploads#images'
     resources :categories
     resources :discussions do
       resources :replies

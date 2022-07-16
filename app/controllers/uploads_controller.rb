@@ -24,7 +24,7 @@ class UploadsController < ApplicationController
       end
 
       format.zip do
-        send_zip @upload.images, filename: "#{@upload.title} — #{Time.now.to_formatted_s(:long)}.zip"
+        send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
         # flash[:info] = "Downloading images for #{@upload.title}"
       end
       # format.pdf do
