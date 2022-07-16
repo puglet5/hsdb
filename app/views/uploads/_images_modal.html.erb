@@ -5,9 +5,14 @@
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <!-- Modal header -->
         <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-          <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-            Attached images
-          </h3>
+          <div>
+            <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              Attached images
+            </h3>
+            <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Delete images by pressing the cross icon, no need to update upload
+            </p>
+          </div>
           <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="images-modal">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             <span class="sr-only">Close modal</span>
@@ -16,8 +21,15 @@
         <div class="p-6 space-y-2">
           <div class="grid grid-cols-5 gap-y-1">
             <% @upload.images.all.each do |image| %>
-              <%= tag.div class: "m-2" do %>
-                <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "rounded object-cover w-full" %>
+              <%= tag.div data: {controller: "image", "image-target": "image", "image-id-value": image.signed_id }, class: "m-2" do %>
+                <div class="relative">
+                  <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "rounded object-cover w-full" %>
+                  <%= link_to purge_attachment_upload_path(image.signed_id), data: {}, class: "absolute top-0 right-0", data: {action: "click->image#delete", turbo_method: :delete} do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bg-gray-700 bg-opacity-30 rounded-lg m-0.5 h-6 w-6 hover:bg-gray-900 hover:bg-opacity-30" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  <% end %>
+                </div>
               <% end %>
             <% end %>
           </div>

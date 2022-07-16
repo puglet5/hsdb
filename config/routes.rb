@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     resources :uploads do
       member do
+        delete :purge_attachment
         patch :update_status
       end
     end

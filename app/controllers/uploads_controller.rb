@@ -85,6 +85,11 @@ class UploadsController < ApplicationController
     redirect_to uploads_url, status: :see_other
   end
 
+  def purge_attachment
+    @image = ActiveStorage::Blob.find_signed(params[:id])
+    @image.attachments.first.purge
+  end
+
   private
 
   def set_upload

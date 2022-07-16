@@ -125,12 +125,12 @@
           <% end %>
         </div>
         <div class="mr-4">
-          <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Click on images to zoom</p>
+          <%# <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Click on images to zoom</p> %>
         </div>
       </div>
       <div class="grid grid-cols-5 gap-y-1">
         <% @upload.images.all.each do |image| %>
-          <%= tag.div data: {controller: "image", action: "click->image#imageClick", "image-filename-value": image.filename.to_s, "image-url-value": image.url, "image-metadata-value": JSON.generate(image.metadata) }, class: "m-2" do %>
+          <%= tag.div class: "m-2" do %>
             <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "rounded object-cover w-full", data: {"image-target": "image"} %>
           <% end %>
         <% end %>

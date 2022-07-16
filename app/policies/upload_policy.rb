@@ -17,6 +17,11 @@ class UploadPolicy < ApplicationPolicy
     user.has_role?(:admin) || user.author?(record)
   end
 
+  def purge_attachment?
+    user.has_role?(:admin) || user.author?(record)
+  end
+
+
   def index?
     true
   end

@@ -12,7 +12,11 @@ import "./packs/direct_upload.js"
 import "./packs/metadata_fields.js"
 
 addEventListener("turbo:submit-start", ({ target }) => {
-  for (const field of target.elements) {
-    field.disabled = true
+  if (target.elements) {
+
+    for (const field of target.elements) {
+      field.disabled = true
+    }
+
   }
 })
