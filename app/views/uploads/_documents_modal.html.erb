@@ -20,7 +20,7 @@
         </div>
         <div class="p-6 space-y-2">
           <ul class="list-disc ml-8">
-            <% @upload.documents.all.each do |doc| %>
+            <% @upload.documents.each do |doc| %>
               <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": doc.signed_id }, class: "m-2" do %>
                 <div class="flex">
                   <li>
