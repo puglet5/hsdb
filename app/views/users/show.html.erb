@@ -4,7 +4,7 @@
       <div class="grid grid-cols-12">
         <div class="col-span-3  border-r">
           <div class="flex flex-col justify-center">
-            <span class="relative flex bg-itmo_primary-300 rounded-full w-20 h-20 md:w-40 md:h-40 m-auto">
+            <span class="relative flex bg-primary-300 rounded-full w-20 h-20 md:w-40 md:h-40 m-auto">
               <% if @user.avatar.present? %>
                 <%= image_tag @user.avatar, class: "object-cover rounded-full w-20 h-20 md:w-40 md:h-40" %>
               <% end %>
