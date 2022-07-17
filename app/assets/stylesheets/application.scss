@@ -51,3 +51,7 @@
   @apply bg-gray-500 bg-opacity-75 !important
 }
 
+tr:nth-child(even) {
+  @apply bg-gray-50
+}
+
