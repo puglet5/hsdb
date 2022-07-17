@@ -57,9 +57,15 @@ export default class extends Controller {
       let dashboard = document.querySelector('.uppy-Dashboard-inner')
       dashboard.removeAttribute('style')
 
+      let files_uploaded = 0
+
       uppy.on('complete', (result) => {
+        files_uploaded += result.successful.length
+        let txt = document.querySelector("#uppy-text")
+        txt.innerHTML = `Images uploaded: ${files_uploaded}`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
+          imagePreveiw(element, file)
         })
       })
     }
@@ -73,6 +79,10 @@ export default class extends Controller {
       hiddenField.setAttribute('value', file.response.signed_id)
 
       element.appendChild(hiddenField)
+    }
+
+    const imagePreveiw = (element, file) => {
+
     }
 
 

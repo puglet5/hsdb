@@ -22,7 +22,7 @@
           <div class="grid grid-cols-5 gap-y-1">
             <% @upload.images.all.each do |image| %>
               <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": image.signed_id }, class: "m-2" do %>
-                <div class="relative">
+                <div class="relative" id="modal-image-container">
                   <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "rounded object-cover w-full" %>
                   <%= link_to purge_attachment_upload_path(image.signed_id), data: {}, class: "absolute top-0 right-0", data: {action: "click->attachment#delete", turbo_method: :delete} do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-white bg-gray-700 bg-opacity-30 rounded-lg m-0.5 h-6 w-6 hover:bg-gray-900 hover:bg-opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

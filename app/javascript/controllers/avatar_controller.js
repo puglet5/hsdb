@@ -26,8 +26,6 @@ export default class extends Controller {
         allowMultipleUploadBatches: false,
       })
 
-      console.log(uppy)
-
       uppy.use(ActiveStorageUpload, {
         directUploadUrl: direct_upload_url
       })
