@@ -62,9 +62,16 @@ export default class extends Controller {
     }
 
     const previewAvatar = (element, file) => {
-      let img = this.imageTarget
-      if (img) {
-        img.src = file.preview
+      if (this.hasImageTarget) {
+        this.imageTarget.src = file.preview
+      }
+      else {
+        const avatarDiv = document.getElementById("avatar")
+        let avatar = document.createElement("img")
+        avatar.src = file.preview
+        const cls = ["object-cover", "rounded-full", "w-20", "h-20", "md:w-40", "md:h-40"]
+        avatar.classList.add(...cls)
+        avatarDiv.prepend(avatar)
       }
     }
 

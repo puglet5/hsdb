@@ -2,12 +2,12 @@
   <div class="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
     <% if current_user %>
       <ul>
-        <li>
-          <%= link_to "/#{locale}/users/#{current_user.slug}", class: "flex items-center pl-2 mb-5 w-10 h-10" do %>
-            <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar, class: "w-10 h-10 object-cover rounded-full" %>
-            <% else %>
-            <% end %>
+        <li class="pl-2 mb-5 flex items-center">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: "object-cover rounded-full w-12 h-12 mt-2" %>
+          <% else %>
+          <% end %>
+          <%= link_to "/#{locale}/users/#{current_user.slug}", class: "w-10 h-10" do %>
             <div>
               <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white ml-2"><%= current_user.first_name.to_s %></span>
               <span class="self-center text-s text-gray-500 whitespace-nowrap dark:text-white ml-2 mt-0"><%= current_user.email.to_s %></span>
