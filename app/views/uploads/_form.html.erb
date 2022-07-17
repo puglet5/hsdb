@@ -42,10 +42,10 @@
       </div>
       <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">.svg, .png, .jpg or .gif of any size </p>
     </div>
-    <div data-uppy="upload[images][]" class="row-span-2">
+    <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div"} do %>
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Images</label>
       <div class="flex">
-        <input type="file" title=" " class="hide-file-input-text block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 my-auto" data-behavior="uppy-trigger">
+        <input type="file" title=" " class="hide-file-input-text block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 my-auto" data-uploads-target="trigger">
         <% if params[:action] == "edit" || params[:action] == "update" %>
           <% if @upload.images.any? %>
             <%= tag.div class: "my-auto ml-2 p-2 block text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide", "modal-toggle": "images-modal"} do %>
@@ -61,7 +61,7 @@
         <% end %>
       </div>
       <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">.svg, .png, .jpg or .gif of any size </p>
-    </div>
+    <% end %>
     <div>
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Documents</label>
       <div class="flex">
