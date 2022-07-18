@@ -27,8 +27,8 @@ module Admin
       params[:user][:role_ids] ||= []
 
       if params[:user][:password].blank?
-        params[:user].delete("password")
-        params[:user].delete("password_confirmation")
+        params[:user].delete('password')
+        params[:user].delete('password_confirmation')
       end
 
       if @user.update user_params
@@ -68,13 +68,12 @@ module Admin
     end
 
     def user_params
-      list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :organization, :bio, role_ids: []]
+      list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :organization, :bio, { role_ids: [] }]
       params.require(:user).permit(list_allowed_params)
     end
 
     def authorize_user!
       authorize(@user || User)
     end
-
   end
 end

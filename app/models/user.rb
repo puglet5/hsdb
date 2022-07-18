@@ -19,7 +19,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :first_name, :last_name, :email, presence: true
 
-
   after_create :assign_default_role
 
   accepts_nested_attributes_for :roles,

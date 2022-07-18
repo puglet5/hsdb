@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module ErrorHandling
   extend ActiveSupport::Concern
   included do
-
     rescue_from ActiveRecord::RecordNotFound, with: :notfound
 
     private
