@@ -6,8 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
-#upload_body, #discussion_content {
-  @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2 !important;
+trix-editor {
+  @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2;
   outline: none;
 }
 
@@ -54,4 +54,3 @@
 tr:nth-child(even) {
   @apply bg-gray-50
 }
-
