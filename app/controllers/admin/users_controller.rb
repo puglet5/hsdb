@@ -19,7 +19,9 @@ module Admin
 
     def crate; end
 
-    def edit; end
+    def edit
+      @roles = Role.all
+    end
 
     def update
       params[:user][:role_ids] ||= []
