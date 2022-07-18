@@ -24,11 +24,16 @@ module Admin
     def update
       params[:user][:role_ids] ||= []
 
-      if @user.update_with_password user_params
+      if params[:user][:password].blank?
+        params[:user].delete("password")
+        params[:user].delete("password_confirmation")
+      end
+
+      if @user.update user_params
         flash[:success] = 'User was successfully updated'
         redirect_to admin_users_path
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -61,12 +66,13 @@ module Admin
     end
 
     def user_params
-      list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :password_confirmation, :organization, :bio, :current_password, :role, { role_ids: [] }]
+      list_allowed_params = [:avatar, :email, :first_name, :last_name, :password, :organization, :bio, role_ids: []]
       params.require(:user).permit(list_allowed_params)
     end
 
     def authorize_user!
       authorize(@user || User)
     end
+
   end
 end

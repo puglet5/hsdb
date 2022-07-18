@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     get 'about', to: 'pages#about'
 
     namespace :admin do
-      resources :users, only: %i[index create edit update destroy]
+      resources :users, only: %i[index edit update destroy]
     end
 
     root to: 'pages#home'
