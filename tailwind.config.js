@@ -18,6 +18,9 @@ module.exports = {
     extend: {
       boxShadow: {
         '3xl': '0 0 120px rgba(0, 0, 0, 0.3)',
+      },
+      maxHeight: {
+        '1/2': '50vh',
       }
     },
     minHeight: {
