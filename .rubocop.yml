@@ -9,32 +9,32 @@ AllCops:
   TargetRubyVersion: 3.0
   SuggestExtensions: false
 
-Style/Documentation:
-  Enabled: false
+# Style/Documentation:
+#   Enabled: false
 
-Layout/LineLength:
-  Enabled: false
+# Layout/LineLength:
+#   Enabled: false
 
-Rails/FilePath:
-  EnforcedStyle: arguments
-  Enabled: false
+# Rails/FilePath:
+#   EnforcedStyle: arguments
+#   Enabled: false
 
-Rails/HasAndBelongsToMany:
-  Enabled: false
+# Rails/HasAndBelongsToMany:
+#   Enabled: false
 
-Metrics:
-  Enabled: false
+# Metrics:
+#   Enabled: false
 
-Lint/EmptyBlock:
-  Enabled: false
+# Lint/EmptyBlock:
+#   Enabled: false
 
-Style/MultilineBlockChain:
-  Enabled: false
+# Style/MultilineBlockChain:
+#   Enabled: false
 
-Naming:
-  Enabled: false
+# Naming:
+#   Enabled: false
 
-Rails/OutputSafety:
-  Enabled: false
+# Rails/OutputSafety:
+#   Enabled: false
 
 

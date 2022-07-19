@@ -17,9 +17,11 @@ module ApplicationHelper
     auth_links = ''
 
     if user_signed_in?
-      auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}", class: style.to_s}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}",
+                                            class: style.to_s}</#{tag_type}>"
 
-      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, turbo_method: :delete, class: style}</#{tag_type}>"
+      auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, turbo_method: :delete,
+                                                                                         class: style}</#{tag_type}>"
 
     else
       auth_items.each do |item|
@@ -82,12 +84,16 @@ module ApplicationHelper
 
     if icons == true
       nav_items.each do |item|
-        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url], active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url], active_class}'> #{item[:icon]} </a></#{tag_type}>"
+        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
+                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url],
+                                                                                                                        active_class}'> #{item[:icon]} </a></#{tag_type}>"
       end
     else
 
       nav_items.each do |item|
-        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url], active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
+        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
+                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url],
+                                                                                                                        active_class}'> #{item[:title]} </a></#{tag_type}>"
       end
 
     end
@@ -97,7 +103,9 @@ module ApplicationHelper
   def active?(controller, url, klass)
     if params[:controller] == 'categories'
       klass.to_s if controller == 'discussions'
-    elsif (params[:controller] == controller && !params[:action].in?(%w[home about])) || (params[:action].in?(%w[home about]) && current_page?(url))
+    elsif (params[:controller] == controller && !params[:action].in?(%w[home
+                                                                        about])) || (params[:action].in?(%w[home
+                                                                                                            about]) && current_page?(url))
       klass.to_s
     end
   end

@@ -53,6 +53,9 @@ class User < ApplicationRecord
   end
 
   def avatar_image_type
-    errors.add(:avatar, 'needs to be JPEG or PNG') if avatar.present? && !avatar&.content_type.in?(%("image/jpeg image/png"))
+    if avatar.present? && !avatar&.content_type.in?(%("image/jpeg image/png"))
+      errors.add(:avatar,
+                 'needs to be JPEG or PNG')
+    end
   end
 end
