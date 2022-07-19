@@ -35,6 +35,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
   loadingModalBackLayer.appendChild(txt)
   document.body.appendChild(loadingModalBackLayer)
 
+  document.body.classList.add("overflow-hidden");
 
 })
 
@@ -42,4 +43,5 @@ addEventListener("turbo:submit-end", ({ target }) => {
   if (document.querySelector("loadingModalBackLayer")) {
     document.querySelector("loadingModalBackLayer").remove()
   }
+  document.body.classList.remove("overflow-hidden");
 })
