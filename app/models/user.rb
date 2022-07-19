@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   validates :password, confirmation: true
   validates :first_name, :last_name, :email, presence: true
+  validate :avatar_image_type
 
   after_create :assign_default_role
 
@@ -50,5 +51,9 @@ class User < ApplicationRecord
 
   def must_have_a_role
     errors.add(:roles, 'must have at least one') unless roles.any?
+  end
+
+  def avatar_image_type
+    errors.add(:avatar, 'needs to be JPEG or PNG') unless avatar.content_type.in?(%("image/jpeg image/png"))
   end
 end
