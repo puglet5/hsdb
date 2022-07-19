@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 trix-editor {
-  @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus: ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2;
+  @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2;
   outline: none;
 }
 
@@ -36,15 +36,15 @@ trix-editor {
 }
 
 .field_with_errors input {
-  @apply border border-secondary-500 focus: ring-secondary-500 !important
+  @apply border border-secondary-500 focus:ring-secondary-500 !important
 }
 
 .field_with_errors trix-editor {
-  @apply border border-secondary-500 focus: ring-secondary-500 !important
+  @apply border border-secondary-500 focus:ring-secondary-500 !important
 }
 
 .field_with_errors textarea {
-  @apply border border-secondary-500 focus: ring-secondary-500 !important
+  @apply border border-secondary-500 focus:ring-secondary-500 !important
 }
 
 .uppy-Dashboard-overlay {
@@ -75,4 +75,8 @@ tr:nth-child(even) {
 
 .turbo-progress-bar {
   @apply bg-primary-300 !important
+}
+
+.uppy-Dashboard-AddFiles {
+  @apply border-0 !important
 }
