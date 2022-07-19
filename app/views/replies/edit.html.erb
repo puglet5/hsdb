@@ -1,13 +1,13 @@
-<% if reply_author(@reply) %>
-  <h1 class="">Editing Reply</h1>
+<%= turbo_frame_tag @reply do %>
+  <%= render "shared/errors", obj: @reply %>
   <%= simple_form_for([@discussion, @reply]) do |f| %>
-    <div class="">
-      <div class="">
-        <%= f.input :reply, input_html: { class: "textarea" }, wrapper: false, label_html: { class: "label" } %>
-      </div>
+    <div class="p-4 mt-4 mb-0 pb-1 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600" data-controller="textarea">
+      <%= f.text_area :reply, class: "p-3 text-xs font-normal text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 w-full focus:border-primary-500", autofocus: true, data: {"textarea-target": "input"}, id: "reply-form" %>
+      <button type="submit" class="text-gray-500 mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </button>
     </div>
-    <%= f.button :submit, "Update reply", class: "" %>
   <% end %>
-<% else %>
-  <h1 class="">You can't edit others' replies</h1>
 <% end %>

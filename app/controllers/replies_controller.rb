@@ -2,7 +2,7 @@
 
 class RepliesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reply, only: %i[edit update show destroy]
+  # before_action :set_reply, only: %i[edit update show destroy]
   before_action :set_discussion, only: %i[create edit show update destroy]
 
   def create
@@ -32,7 +32,7 @@ class RepliesController < ApplicationController
   def update
     @reply = @discussion.replies.find(params[:id])
     if @reply.update(reply_params)
-      redirect_to discussion_path(@discussion), notice: 'Reply was successfully updated.'
+      redirect_to discussion_path(@discussion)
     else
       render :edit, status: :unprocessable_entity
     end
