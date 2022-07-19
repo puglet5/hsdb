@@ -168,9 +168,13 @@ const handleEdit = (event) => {
     jsonview.render(tree, document.querySelector('.tree'));
     jsonview.expand(tree);
   }
+
   const container = document.querySelector('.json-container')
-  container.classList.add("json-container-styled");
-  document.getElementById("json-hidden-input").value = jsonData.toString();
+
+  if (container) {
+    container.classList.add("json-container-styled");
+    document.getElementById("json-hidden-input").value = jsonData.toString();
+  }
 
 }
 

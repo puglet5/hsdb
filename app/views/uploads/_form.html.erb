@@ -13,7 +13,7 @@
     <div>
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
       <% if params[:action] == "edit" || params[:action] == "update" %>
-        <%= form.input :title, input_html: {class: "bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)", required: true, disabled: true, readonly: true, hint: false, label: false %>
+        <%= form.input :title, input_html: {class: "bg-gray-100 border border-gray-300 text-gray-500 text-ellipsis text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)", required: true, disabled: true, readonly: true, hint: false, label: false %>
       <% else %>
         <%= form.input :title, input_html: {class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 disabled"}, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)", required: true, hint: false, label: false %>
       <% end %>
@@ -98,7 +98,7 @@
   <% if params[:action] == "new" || params[:action] == "create" %>
     <!-- Metadata fields -->
     <div class="">
-      <button type="button" id="add-fields" class="mt-2 hidden text-black focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-800 font-medium rounded-lg text-sm  text-center "><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <button type="button" id="add-fields" class="mt-2 hidden text-black focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-800 font-medium rounded-lg text-sm  text-center "><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg></button>
     </div>
@@ -107,7 +107,7 @@
       <div class="col-span-7">
         <div class="hidden grid-cols-11 gap-2 container mx-auto" id="metadata-form-template">
           <div class="mx-auto my-auto col-span-1">
-            <button type="button" id="remove-field" class="mb-6 text-black focus:ring-4 focus:outline-none focus:ring-secondary-300 dark:focus:ring-secondary-800 font-medium rounded-lg text-sm text-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <button type="button" id="remove-field" class="mb-6 text-black focus:ring-4 focus:outline-none focus:ring-secondary-300 dark:focus:ring-secondary-800 font-medium rounded-lg text-sm text-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
               </svg></button>
           </div>
