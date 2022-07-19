@@ -57,6 +57,8 @@ group :development do
   gem 'htmlbeautifier'
   gem 'letter_opener'
   gem 'listen', '~> 3.3'
+  gem 'solargraph'
+  gem 'solargraph-rails'
   # gem 'pry-rails'
   gem 'rack-livereload'
   gem 'rack-mini-profiler', '~> 3.0'

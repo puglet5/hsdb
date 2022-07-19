@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   include PublicActivity::Model
   tracked owner: :itself
-  # validate :must_have_a_role
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
@@ -54,8 +53,6 @@ class User < ApplicationRecord
   end
 
   def avatar_image_type
-    if avatar.present?
-      errors.add(:avatar, 'needs to be JPEG or PNG') unless avatar.content_type.in?(%("image/jpeg image/png"))
-    end
+    errors.add(:avatar, 'needs to be JPEG or PNG') if avatar.present? && !avatar&.content_type.in?(%("image/jpeg image/png"))
   end
 end

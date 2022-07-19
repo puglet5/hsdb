@@ -68,3 +68,4 @@ sorbet
 /.env
 .env.test
 .env.development
+rails.rb
