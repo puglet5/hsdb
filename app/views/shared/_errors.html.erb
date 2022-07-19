@@ -1,5 +1,5 @@
-<div class="absolute self-end top-14 right-2">
   <% if obj.errors.full_messages.any? %>
+  <div class="absolute self-end top-14 right-2" data-controller="flash">
     <% msg_num = 0 %>
     <% obj.errors.full_messages.each do |msg| %>
       <div id=<%="toast-#{msg_num}"%>  class="flex items-center  mr-1 mt-1 p-4 max-w-xs text-gray-500 bg-white rounded-lg shadow-lg dark:text-gray-400 dark:bg-gray-800" role="alert">
@@ -17,5 +17,5 @@
       </div>
       <% msg_num += 1 %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
