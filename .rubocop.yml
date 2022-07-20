@@ -9,8 +9,8 @@ AllCops:
   TargetRubyVersion: 3.0
   SuggestExtensions: false
 
-# Style/Documentation:
-#   Enabled: false
+Style/Documentation:
+  Enabled: false
 
 # Layout/LineLength:
 #   Enabled: false
@@ -19,8 +19,8 @@ AllCops:
 #   EnforcedStyle: arguments
 #   Enabled: false
 
-# Rails/HasAndBelongsToMany:
-#   Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
 
 # Metrics:
 #   Enabled: false
