@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @spectrum %>
-
+<p>
+  <strong>Title:</strong>
+  <%= @spectrum.title %>
+  <% @spectrum.csvs.each do |csv| %>
+    <p>
+      <%= csv.filename %>
+    </p>
+  <% end %>
+</p>
 <div>
   <%= link_to "Edit this spectrum", edit_spectrum_path(@spectrum) %> |
   <%= link_to "Back to spectra", spectra_path %>
-
   <%= button_to "Destroy this spectrum", @spectrum, method: :delete %>
 </div>

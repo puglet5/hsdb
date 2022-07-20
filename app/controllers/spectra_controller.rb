@@ -48,6 +48,6 @@ class SpectraController < ApplicationController
   end
 
   def spectrum_params
-    params.require(:spectrum).permit(:title)
+    params.require(:spectrum).permit(:title, csvs: [])
   end
 end

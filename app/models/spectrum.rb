@@ -7,8 +7,21 @@ class Spectrum < RsdbRecord
   tracked owner: proc { |controller, _model| controller.current_user }
 
   belongs_to :user
+  has_many_attached :csvs
   validates :title, presence: true
+  validate :csv_type
 
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
+
+  private
+
+  def csv_type
+    csvs.each do |csv|
+      unless csv.content_type.in?(%("text/csv"))
+        errors.add(:csvs,
+                   'need to be in a .csv file format')
+      end
+    end
+  end
 end

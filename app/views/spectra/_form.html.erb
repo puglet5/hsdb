@@ -1,12 +1,14 @@
-
+<%= render "shared/errors", obj: @spectrum %>
 <%= simple_form_for(@spectrum) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
+  <% f.object.csvs.each do |csv|%>
+    <%= f.hidden_field :csvs, value: csv.signed_id, multiple: true %>
+  <% end %>
   <div class="form-inputs">
     <%= f.input :title %>
   </div>
-
+  <div class="form-inputs">
+    <%= f.file_field :csvs, multiple: true, direct_upload: false %>
+  </div>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
