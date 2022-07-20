@@ -49,7 +49,6 @@ class UploadsController < ApplicationController
     if @upload.save
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
-      ActiveStorage::Blob.unattached.each(&:purge_later)
     else
       # flash.now[:alert] = 'Couldn\'t save the upload: invalid params'
       render :new, status: :unprocessable_entity
@@ -58,12 +57,22 @@ class UploadsController < ApplicationController
 
   def update
     @upload.user = current_user if @upload.user.nil?
-    if @upload.update(upload_params.reject { |k| k['images'] })
+    if @upload.update(upload_params.reject { |k| k['images'] || k['documents'] || k['thumbnail'] })
+
       if upload_params[:images].present?
         upload_params[:images].each do |image|
           @upload.images.attach(image)
         end
       end
+
+      if upload_params[:documents].present?
+        upload_params[:documents].each do |document|
+          @upload.documents.attach(document)
+        end
+      end
+
+      @upload.thumbnail.attach(upload_params[:thumbnail]) if upload_params[:thumbnail].present?
+
       flash[:success] = 'Upload was successfully updated'
       redirect_to @upload
     else
