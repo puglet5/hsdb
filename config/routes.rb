@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :categories, only: :update
     end
 
+    resources :spectra
     resources :users
     get 'users/show'
     get 'uploads/resources/images', to: 'uploads#images'

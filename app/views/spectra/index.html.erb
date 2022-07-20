@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Spectra</h1>
+
+<div id="spectra">
+  <% @spectra.each do |spectrum| %>
+    <%= render spectrum %>
+    <p>
+      <%= link_to "Show this spectrum", spectrum %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New spectrum", new_spectrum_path %>

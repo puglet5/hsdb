@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :discussions, dependent: :nullify
   has_many :uploads, dependent: :nullify
   has_many :categories, through: :discussions
+  has_many :spectra, dependent: :nullify
   has_one_attached :avatar
 
   validates :password, confirmation: true

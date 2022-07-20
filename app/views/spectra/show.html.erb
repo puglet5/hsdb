@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @spectrum %>
+
+<div>
+  <%= link_to "Edit this spectrum", edit_spectrum_path(@spectrum) %> |
+  <%= link_to "Back to spectra", spectra_path %>
+
+  <%= button_to "Destroy this spectrum", @spectrum, method: :delete %>
+</div>
