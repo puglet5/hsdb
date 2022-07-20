@@ -85,15 +85,14 @@ module ApplicationHelper
     if icons == true
       nav_items.each do |item|
         nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
-                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url],
-                                                                                                                        active_class}'> #{item[:icon]} </a></#{tag_type}>"
+                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller],
+                                                                                                                        item[:url], active_class}'> #{item[:icon]} </a></#{tag_type}>"
       end
     else
-
       nav_items.each do |item|
         nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
-                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url],
-                                                                                                                        active_class}'> #{item[:title]} </a></#{tag_type}>"
+                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller],
+                                                                                                                        item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
       end
 
     end
