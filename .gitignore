@@ -69,3 +69,4 @@ sorbet
 .env.test
 .env.development
 rails.rb
+dump.rdb

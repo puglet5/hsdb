@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  authenticate :user, ->(user) { user.has_role?('admin') } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     namespace :api do
       resources :categories, only: :update

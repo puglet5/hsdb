@@ -54,7 +54,7 @@ services:
       - 3000:3000
     stdin_open: true
     tty: true
-    env_file: .env.development
+    env_file: docker.env.development
     entrypoint: dev-entrypoint.sh
     command: ['bin/dev']
     environment:
@@ -74,7 +74,7 @@ services:
       - 3001:3000
     stdin_open: true
     tty: true
-    env_file: .env.test
+    env_file: docker.env.test
     entrypoint: test-entrypoint.sh
     command: ["rails", "-v"]
     environment:
