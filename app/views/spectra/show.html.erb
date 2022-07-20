@@ -2,9 +2,9 @@
   <strong>Title:</strong>
   <%= @spectrum.title %>
   <% @spectrum.csvs.each do |csv| %>
-    <p>
-      <%= csv.filename %>
-    </p>
+    <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
+      <%= tag.div data: {"plot-target": "plot"}%>
+    <% end %>
   <% end %>
 </p>
 <div>
