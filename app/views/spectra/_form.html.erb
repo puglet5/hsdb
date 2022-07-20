@@ -1,8 +1,5 @@
 <%= render "shared/errors", obj: @spectrum %>
 <%= simple_form_for(@spectrum) do |f| %>
-  <% f.object.csvs.each do |csv|%>
-    <%= f.hidden_field :csvs, value: csv.signed_id, multiple: true %>
-  <% end %>
   <div class="form-inputs">
     <%= f.input :title %>
   </div>

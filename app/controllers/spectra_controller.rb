@@ -27,7 +27,14 @@ class SpectraController < ApplicationController
   end
 
   def update
-    if @spectrum.update(spectrum_params)
+    if @spectrum.update(spectrum_params.reject { |k| k['csvs'] })
+
+      if spectrum_params[:csvs].present?
+        spectrum_params[:csvs].each do |csv|
+          @spectrum.csvs.attach(csv)
+        end
+      end
+
       redirect_to @spectrum
       flash[:success] = 'Spectrum was successfully updated.'
     else

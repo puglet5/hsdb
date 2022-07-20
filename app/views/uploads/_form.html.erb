@@ -1,13 +1,4 @@
   <%= simple_form_for @upload do |form| %>
-  <!-- Attachment retention on form resubmit, must stay at the top  -->
-  <% form.object.images.each do |image|%>
-    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
-  <% end %>
-  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached? %>
-  <% form.object.documents.each do |doc|%>
-    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
-  <% end %>
-  <!-- -->
   <label class="block mb-4 text-lg border-b font-medium text-gray-900 dark:text-gray-300">Info</label>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
     <div>
