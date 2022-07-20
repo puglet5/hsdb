@@ -104,6 +104,7 @@ GEM
     choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
+    connection_pool (2.2.5)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
       railties (>= 6.0.0)
@@ -376,6 +377,10 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shellany (0.0.1)
+    sidekiq (6.5.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -431,9 +436,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.6.3)
-      activesupport
-    wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.28)
@@ -444,13 +446,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_storage-send_zip
+  active_storage-send_zip (~> 0.3.4)
   bootsnap (>= 1.4.4)
   bullet
   byebug
   capybara
-  caxlsx
-  caxlsx_rails
+  caxlsx (~> 3.2)
+  caxlsx_rails (~> 0.6.3)
   cssbundling-rails (~> 1.0)
   database_cleaner
   devise (~> 4.8)
@@ -468,7 +470,7 @@ DEPENDENCIES
   jquery-rails (~> 4.4)
   jsbundling-rails (~> 1.0)
   kaminari (~> 1.2, >= 1.2.1)
-  ledermann-rails-settings
+  ledermann-rails-settings (~> 2.5)
   letter_opener
   listen (~> 3.3)
   mini_magick (~> 4.11)
@@ -491,20 +493,18 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   ruby-prof
-  rubyzip (~> 2)
   selenium-webdriver
+  sidekiq (~> 6.5, >= 6.5.1)
   simple_form (~> 5.1)
   solargraph
   solargraph-rails
   spring
-  stimulus-rails
+  stimulus-rails (~> 1.1)
   textacular (~> 5.5)
   turbo-rails (~> 1.1)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  wicked_pdf
-  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.1.2p20
