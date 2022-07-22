@@ -36,5 +36,8 @@ module ITMOHsdb
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_job.queue_adapter = :sidekiq
+    config.action_mailer.deliver_later_queue_name = nil # defaults to "mailers"
+    config.action_mailbox.queues.routing    = nil       # defaults to "action_mailbox_routing"
+    config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
   end
 end
