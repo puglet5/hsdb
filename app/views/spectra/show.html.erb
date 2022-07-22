@@ -13,7 +13,7 @@
     </div>
     <div>
       <% @spectrum.processed_csvs.each do |csv| %>
-        <%= csv.filename %>
+        <%= link_to csv.filename, csv.url %>
       <% end %>
     </div>
     <div>

@@ -6,7 +6,14 @@ class ProcessCsvJob < ApplicationJob
     spectrum = Spectrum.find(record_id)
     if spectrum&.csvs.any?
       spectrum.csvs.each do |csv|
-        spectrum.processed_csvs.attach(csv.blob)
+        csv.open(tmpdir: Rails.root.join('tmp/storage')) do |tmp|
+          processed_file_path = `python lib/assets/spectra_file_converter.py "#{tmp.path}"`.chomp
+          unless processed_file_path == 1
+            spectrum.processed_csvs.attach(io: File.open(processed_file_path), filename: "#{csv.filename}.csv",
+                                           content_type: 'text/csv')
+            FileUtils.rm(processed_file_path)
+          end
+        end
       end
     end
   end

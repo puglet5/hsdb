@@ -14,7 +14,7 @@ class Spectrum < RsdbRecord
   has_many_attached :processed_images
 
   validates :title, presence: true
-  validate :csv_type
+  # validate :csv_type
   validate :image_type
 
   extend FriendlyId
