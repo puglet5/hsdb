@@ -1,14 +1,25 @@
-<p>
-  <strong>Title:</strong>
-  <%= @spectrum.title %>
-  <% @spectrum.csvs.each do |csv| %>
-    <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
-      <%= tag.div data: {"plot-target": "plot"}%>
-    <% end %>
-  <% end %>
-</p>
-<div>
-  <%= link_to "Edit this spectrum", edit_spectrum_path(@spectrum) %> |
-  <%= link_to "Back to spectra", spectra_path %>
-  <%= button_to "Destroy this spectrum", @spectrum, method: :delete %>
-</div>
+<section class="bg-gray-50 dark:bg-gray-900 border">
+  <div class="py-8 px-4 container mx-auto max-w-screen-xllg:py-16 lg:px-12">
+    <h3>
+      <%= @spectrum.title %>
+    </h3>
+    <div class="border-b">
+      <% @spectrum.csvs.each do |csv| %>
+        <%= csv.filename %>
+        <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
+          <%= tag.div data: {"plot-target": "plot"}%>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <% @spectrum.processed_csvs.each do |csv| %>
+        <%= csv.filename %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to "Edit this spectrum", edit_spectrum_path(@spectrum) %> |
+      <%= link_to "Back to spectra", spectra_path %>
+      <%= button_to "Destroy this spectrum", @spectrum, method: :delete %>
+    </div>
+  </div>
+</section>

@@ -21,6 +21,7 @@ class SpectraController < ApplicationController
     @spectrum = current_user.spectra.build(spectrum_params)
 
     if @spectrum.save
+      ProcessCsvJob.perform_later current_user, @spectrum.id
       redirect_to @spectrum
       flash[:success] = 'Spectrum was successfully created'
     else
@@ -57,6 +58,6 @@ class SpectraController < ApplicationController
   end
 
   def spectrum_params
-    params.require(:spectrum).permit(:title, csvs: [])
+    params.require(:spectrum).permit(:title, csvs: [], processed_csvs: [])
   end
 end

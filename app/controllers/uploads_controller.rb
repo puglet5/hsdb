@@ -24,12 +24,9 @@ class UploadsController < ApplicationController
       end
 
       format.zip do
-        send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
         # flash[:info] = "Downloading images for #{@upload.title}"
+        send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
       end
-      # format.pdf do
-      #   render pdf: "Upload_#{@upload.id}", template: "uploads/show.html.erb"
-      # end
     end
   end
 
