@@ -6,7 +6,7 @@ class SpectraController < ApplicationController
   before_action :set_spectrum, only: %i[show edit update destroy]
 
   def index
-    @spectra = Spectrum.all
+    @spectra = Spectrum.all.order('created_at asc')
   end
 
   def show; end

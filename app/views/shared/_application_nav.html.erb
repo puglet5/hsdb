@@ -3,8 +3,12 @@
     <div class="place-self-start">
       <span class="flex flex-row self-center text-xl font-semibold whitespace-nowrap text-primary-500">
         <svg class="w-6 h-6 mr-2 my-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
-        <p class="hidden lg:block <%#= "text-itmo_misc_1-500" if Rails.application.routes.recognize_path(spectra_path)[:controller] == params[:controller]%>">
-          ITMO Heritage Science DB
+        <p class="hidden lg:block">
+          <% unless Rails.application.routes.recognize_path(spectra_path)[:controller] == params[:controller] %>
+            ITMO Heritage Science DB
+          <% else %>
+            ITMO Reference Spectra DB
+          <% end %>
         </p>
       </span>
     </div>
