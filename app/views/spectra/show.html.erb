@@ -1,25 +1,100 @@
-<section class="bg-gray-50 dark:bg-gray-900 border">
-  <div class="py-8 px-4 container mx-auto max-w-screen-xllg:py-16 lg:px-12">
-    <h3>
-      <%= @spectrum.title %>
-    </h3>
-    <div class="border-b">
-      <% @spectrum.csvs.each do |csv| %>
-        <%= csv.filename %>
-        <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
-          <%= tag.div data: {"plot-target": "plot"}%>
-        <% end %>
-      <% end %>
-    </div>
-    <div>
-      <% @spectrum.processed_csvs.each do |csv| %>
-        <%= link_to csv.filename, csv.url %>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to "Edit this spectrum", edit_spectrum_path(@spectrum) %> |
-      <%= link_to "Back to spectra", spectra_path %>
-      <%= button_to "Destroy this spectrum", @spectrum, method: :delete %>
+<section class="bg-gray-50 dark:bg-gray-900 border pb-10">
+  <div class="container mx-auto mt-10">
+    <div class="p-4 bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <div class="flex justify-between">
+        <h3 class="my-auto text-center text-4xl font-bold tracking-tight leading-none text-gray-900 mb-4">
+          <%= @spectrum.title %>
+        </h3>
+        <div class="mt-5 flex lg:mt-0 lg:ml-4">
+          <span class="hidden sm:block">
+            <% if policy(@spectrum).update? %>
+              <%= link_to edit_spectrum_path(@spectrum), class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                Edit
+              <% end %>
+            <% end %>
+          </span>
+          <span class="hidden sm:block  ml-3">
+            <% if policy(@spectrum).destroy? %>
+              <%= link_to spectrum_path(@spectrum), data: {turbo_method: :delete, turbo_confirm: "Delete this spectrum?" }, class: "inline-flex items-center px-4 py-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              <% end %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+      <!-- -->
+      <details class="group transition ease-in-out delay-150" open>
+        <summary class="flex border-b my-4 justify-between">
+          <div class="flex">
+            <svg class="w-6 h-6 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <p class="block text-2xl font-medium text-gray-900 dark:text-gray-300 select-none">Spectra files</p>
+          </div>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+            Files uploaded by user
+          </p>
+        </summary>
+        <div class="ml-2" >
+          <% if @spectrum.csvs.any? %>
+            <% @spectrum.csvs.each do |csv| %>
+              <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 my-auto mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <%= link_to csv.filename, csv.url %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+              There's nothing here yet
+            </p>
+          <% end %>
+        </div>
+      </details>
+      <details class="group">
+        <summary class="flex border-b my-4 justify-between">
+          <div class="flex">
+            <svg class="w-6 h-6 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <p class="block text-2xl font-medium text-gray-900 dark:text-gray-300 select-none">Processed spectra files</p>
+          </div>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+            Automatically processed .csv files (click to preview)
+          </p>
+        </summary>
+        <div class="ml-2">
+          <div class="my-4">
+            <div class="flex p-4 text-sm text-gray-700 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-300 mb-4" role="alert">
+              <svg aria-hidden="true" class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Info</span>
+              <div class="text-gray-500">
+                <span class="font-medium text-gray-900">Info! </span>
+                Processing might take a long time and only occurs for specific file types. Please refer to the documentation.
+              </div>
+            </div>
+            <% if @spectrum.processed_csvs.any? %>
+              <% @spectrum.processed_csvs.each do |csv| %>
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 mr-2 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <%= link_to csv.filename, csv.url %>
+                  <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
+                    <%= tag.div data: {"plot-target": "plot"}%>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+                There's nothing here yet
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
