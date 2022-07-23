@@ -47,8 +47,13 @@ class SpectraController < ApplicationController
 
   def destroy
     @spectrum.destroy
-    redirect_to spectra_url
-    flash[:success] = 'Spectrum was deleted.'
+    flash[:success] = 'Spectrum was successfully deleted'
+    redirect_to spectra_url, status: :see_other
+  end
+
+  def purge_attachment
+    @blob = ActiveStorage::Blob.find_signed(params[:id])
+    @blob.attachments.first.purge_later
   end
 
   private
@@ -58,6 +63,6 @@ class SpectraController < ApplicationController
   end
 
   def spectrum_params
-    params.require(:spectrum).permit(:title, csvs: [], processed_csvs: [])
+    params.require(:spectrum).permit(:title, :metadata, files: [], processed_csvs: [])
   end
 end

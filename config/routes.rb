@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       resources :categories, only: :update
     end
 
-    resources :spectra
+    resources :spectra do
+      member do
+        delete :purge_attachment
+      end
+    end
     resources :users
     get 'users/show'
     get 'uploads/resources/images', to: 'uploads#images'

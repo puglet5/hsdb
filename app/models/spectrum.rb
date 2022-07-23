@@ -8,6 +8,7 @@ class Spectrum < RsdbRecord
 
   belongs_to :user
   has_many_attached :csvs
+  has_many_attached :files
   has_many_attached :processed_csvs
   has_many_attached :documents
   has_many_attached :images
@@ -16,6 +17,7 @@ class Spectrum < RsdbRecord
   validates :title, presence: true
   # validate :csv_type
   validate :image_type
+  validate :json_validity
 
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
@@ -38,5 +40,9 @@ class Spectrum < RsdbRecord
                    'need to be in a specified file formats')
       end
     end
+  end
+
+  def json_validity
+    errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata.to_s)
   end
 end

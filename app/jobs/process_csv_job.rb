@@ -4,8 +4,8 @@ class ProcessCsvJob < ApplicationJob
   def perform(_initiator, record_id)
     PublicActivity.enabled = false
     spectrum = Spectrum.find(record_id)
-    if spectrum&.csvs.any?
-      spectrum.csvs.each do |csv|
+    if spectrum&.files.any?
+      spectrum.files.each do |csv|
         csv.open(tmpdir: Rails.root.join('tmp/storage')) do |tmp|
           processed_file_path = `python lib/assets/spectra_file_converter.py "#{tmp.path}"`.chomp
           unless processed_file_path == 1

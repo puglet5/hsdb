@@ -41,3 +41,13 @@ module ITMOHsdb
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
   end
 end
+
+module JSON
+  def self.is_json?(foo)
+    return false unless foo.is_a?(String)
+
+    JSON.parse(foo).all?
+  rescue JSON::ParserError
+    false
+  end
+end
