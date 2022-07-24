@@ -107,7 +107,8 @@ class UploadsController < ApplicationController
   end
 
   def upload_params
-    params.require(:upload).permit(:title, :body, :description, :status, :thumbnail, :metadata, images: [], documents: [], tag_ids: [])
+    params.require(:upload).permit(:title, :body, :description, :status, :thumbnail, :metadata, images: [],
+                                                                                                documents: [], tag_ids: [])
   end
 
   def authorize_upload
