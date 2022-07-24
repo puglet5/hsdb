@@ -1,21 +1,21 @@
 <%= render "shared/errors", obj: @user %>
 <section class="bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto p-20 max-w-screen-lg">
-    <h2 class="flex justify-center text-4xl mb-8 font-semibold">
+  <div class="container max-w-screen-lg p-20 mx-auto">
+    <h2 class="flex justify-center mb-8 text-4xl font-semibold">
       Edit profile
     </h2>
     <%= form_for(@user, url: admin_user_path(@user), html: { method: :put }, class: "form") do |f| %>
       <div class="grid grid-cols-12">
-        <%= tag.div class: "row-span-2 col-span-3 mr-8 relative", data: {controller: "avatar", "uppy": "user[avatar]", "avatar-target": "div"} do %>
-          <span class="flex bg-primary-300 rounded-full m-auto mb-4 w-40 h-40">
+        <%= tag.div class: "relative col-span-3 row-span-2 mr-8", data: {controller: "avatar", "uppy": "user[avatar]", "avatar-target": "div"} do %>
+          <span class="flex w-40 h-40 m-auto mb-4 rounded-full bg-primary-300">
             <div id="avatar">
               <% if @user.avatar.attached? %>
-                <%= image_tag @user.avatar, class: "object-cover rounded-full w-20 h-20 md:w-40 md:h-40", data: {"avatar-target": "image"} %>
+                <%= image_tag @user.avatar, class: "object-cover w-20 h-20 rounded-full md:w-40 md:h-40", data: {"avatar-target": "image"} %>
               <% end %>
             </div>
             <div class="">
-              <label for="avatar-upload" class="cursor-pointer absolute top-0 right-0" data-avatar-target="trigger">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <label for="avatar-upload" class="absolute top-0 right-0 cursor-pointer" data-avatar-target="trigger">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
               </label>
@@ -23,33 +23,33 @@
             </div>
           </span>
         <% end %>
-        <div class="mb-4 col-span-9">
+        <div class="col-span-9 mb-4">
           <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>
-          <%= f.text_field :first_name, class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"%>
+          <%= f.text_field :first_name, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"%>
         </div>
-        <div class="mb-4 col-span-9">
+        <div class="col-span-9 mb-4">
           <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label>
-          <%= f.text_field :last_name, class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"%>
+          <%= f.text_field :last_name, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"%>
         </div>
       </div>
       <div class="mb-4">
         <label for="organization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Organization</label>
-        <%= f.text_field :organization, class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "ITMO University" %>
+        <%= f.text_field :organization, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "ITMO University" %>
       </div>
       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
       <div class="flex mb-4">
         <div class="grow">
-          <%= f.email_field :email, type: "email", id: "email", class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "name@example.com", autofocus: false, autocomplete: "email" %>
+          <%= f.email_field :email, type: "email", id: "email", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "name@example.com", autofocus: false, autocomplete: "email" %>
         </div>
-        <button id="roleDropdownButton" data-dropdown-toggle="roleDropdown" class="my-auto ml-2 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">Roles<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+        <button id="roleDropdownButton" data-dropdown-toggle="roleDropdown" class="inline-flex items-center px-4 my-auto ml-2 text-sm font-medium text-center text-white rounded-lg py-2.5 bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">Roles<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
         <!-- Dropdown menu -->
-        <div id="roleDropdown" class="hidden z-10 w-60 bg-white rounded-lg shadow dark:bg-gray-700">
-          <ul class="overflow-y-auto px-3 pb-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="roleDropdownButton">
+        <div id="roleDropdown" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
+          <ul class="px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="roleDropdownButton">
             <% @roles.each do |role| %>
               <li>
                 <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                  <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id), class: "w-4 h-4 text-primary-500 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-50" %>
-                  <label for="checkbox-item-11" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"><%= role.name %></label>
+                  <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id), class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-50" %>
+                  <label for="checkbox-item-11" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"><%= role.name %></label>
                 </div>
               </li>
             <% end %>
@@ -63,11 +63,11 @@
       <% end %>
       <div class="mb-4">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-        <%= f.password_field :password, autocomplete: "new-password", type: "password", id: "password", class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "•••••••••" %>
+        <%= f.password_field :password, autocomplete: "new-password", type: "password", id: "password", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "•••••••••" %>
         <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Leave blank if you don't want to change it</p>
       </div>
       <div class="flex">
-        <button type="submit" class="text-white bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Update</button>
+        <button type="submit" class="px-5 text-sm font-medium text-white rounded-lg bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Update</button>
         <%= link_to "Back", "/#{locale}//admin/users", class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
       </div>
     <% end %>

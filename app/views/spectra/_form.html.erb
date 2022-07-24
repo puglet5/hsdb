@@ -1,25 +1,26 @@
 <%= simple_form_for(@spectrum) do |f| %>
   <div id="info" class="mb-8">
-    <label class="block mb-4 text-lg border-b font-medium text-gray-900 dark:text-gray-300">Info</label>
+    <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Info</label>
     <div id="title" class="mb-4">
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
       <% if params[:action] == "edit" || params[:action] == "update" %>
-        <%= f.input :title, input_html: {class: "bg-gray-100 border border-gray-300 text-gray-500 text-ellipsis text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, placeholder: "", required: true, disabled: true, readonly: true, hint: false, label: false %>
+        <%= f.input :title, input_html: {class: "block w-full text-sm text-gray-500 bg-gray-100 border border-gray-300 rounded-lg select-none text-ellipsis focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, placeholder: "", required: true, disabled: true, readonly: true, hint: false, label: false %>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">You can not change title for existing spectrum here. Please contact the admin  </p>
       <% else %>
-        <%= f.input :title, input_html: {class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 disabled"}, placeholder: "", required: true, hint: false, label: false %>
+        <%= f.input :title, input_html: {class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 disabled"}, placeholder: "", required: true, hint: false, label: false %>
       <% end %>
     </div>
     <div>
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Spectra files</label>
       <div class="flex">
-        <%= f.file_field :files, multiple: true, direct_upload: true, class: "block w-full hover:bg-gray-100 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+        <%= f.file_field :files, multiple: true, direct_upload: true, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
         <% if params[:action] == "edit" || params[:action] == "update" %>
           <% if @spectrum.files.any? %>
-            <%= tag.div class: "my-auto ml-2 p-2 block text-sm text-gray-900 bg-gray-50 hover:bg-gray-100  rounded-lg border border-gray-300 cursor-pointer", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "files-modal"} do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "files-modal"} do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
               </svg>
-              <%= tag.div class: "inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
                 Show attached files
               <% end %>
             <% end %>
@@ -27,20 +28,20 @@
           <% end %>
         <% end %>
       </div>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">any plain text file format (.csv's are preferred)</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Any plain text file format (.csv's are preferred).</p>
     </div>
   </div>
   <div id="metadata">
-    <label class="block mb-4 text-lg border-b font-medium text-gray-900 dark:text-gray-300">Metadata</label>
-    <%= f.input :metadata, as: :text, value: JSON.pretty_generate(@spectrum.metadata), input_html: { class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' } %>
-    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">must be a valid JSON object, prefer single-word keys </p>
+    <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Metadata</label>
+    <%= f.input :metadata, as: :text, value: JSON.pretty_generate(@spectrum.metadata), input_html: { class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"}, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' } %>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Must be a valid JSON object, prefer single-word keys </p>
   </div>
   <div class="flex mt-4">
-    <button type="submit" class="text-white bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-200 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-500 dark:hover:bg-primary-500 dark:focus:ring-primary-800">
+    <button type="submit" class="w-full px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-200 sm:w-auto py-2.5 dark:bg-primary-500 dark:hover:bg-primary-500 dark:focus:ring-primary-800">
       <%= f.submit %>
     </button>
     <% if params[:action] == "new" || params[:action] == "create" %>
-      <%= link_to "Back", spectra_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
+      <%= link_to "Back", spectra_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300"%>
     <% elsif params[:action] == "edit" %>
       <%= link_to "Back", @spectrum, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300" %>
     <% end %>

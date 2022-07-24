@@ -1,44 +1,44 @@
 <div class="flex justify-between">
-  <h2 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900">Categories</h2>
+  <h2 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900">Categories</h2>
   <% if has_role?(:admin) %>
     <%= link_to new_category_path, class: "mr-6" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
       </svg>
     <% end %>
   <% end %>
 </div>
-<aside class="block mr-8 ml-2 mt-4 p-2 bg-white rounded-lg border border-gray-200 shadow-md" aria-label="Sidebar">
-  <div class="overflow-y-auto py-4 px-3 bg-gray rounded dark:bg-gray-800">
+<aside class="block p-2 mt-4 ml-2 mr-8 bg-white border border-gray-200 rounded-lg shadow-md" aria-label="Sidebar">
+  <div class="px-3 py-4 overflow-y-auto rounded bg-gray dark:bg-gray-800">
     <ul class="">
       <% @categories.each do |c| %>
         <div class="flex justify-between">
           <div class="flex">
             <div class="my-auto">
               <% if c.category_name == "Other" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               <% elsif c.category_name == "Info" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               <% elsif c.category_name == "Support" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               <% else %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               <% end %>
             </div>
-            <%= link_to c, class: "transition duration-75 group hover:bg-gray-100 flex items-center p-2 text-base font-normal text-gray-900 rounded-lg" do %>
+            <%= link_to c, class: "flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
               <%= c.category_name %>
             <% end %>
           </div>
           <% if c.discussions.count > 0 %>
-            <button type="button" class="p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls=<%= "dropdown-#{c.category_name}"%> data-collapse-toggle=<%= "dropdown-#{c.category_name}"%> >
+            <button type="button" class="p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls=<%= "dropdown-#{c.category_name}"%> data-collapse-toggle=<%= "dropdown-#{c.category_name}"%> >
               <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
           <% end %>
@@ -46,8 +46,8 @@
         <ul id=<%= "dropdown-#{c.category_name}"%> class="hidden">
           <% c.discussions.each do |d| %>
             <li>
-              <%= link_to d, class: "flex items-center p-2 pl-8 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <%= link_to d, class: "flex items-center w-full p-2 pl-8 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
                 <%= d.title.truncate(20) %>
