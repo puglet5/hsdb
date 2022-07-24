@@ -16,7 +16,6 @@
                     </svg>
                   </span>
                 <% end %>
-                <%=   %>
               <% end %>
             </span>
             <h3 class="m-auto mt-2 text-xl font-medium">
@@ -26,8 +25,8 @@
               <%= @user.organization %>
             </p>
             <p class="mx-auto overflow-hidden italic font-normal text-gray-500 text-ellipsis max-w-1/2 hover:overflow-visible">
-              <a href=<%= "mailto:#{@user.email}" %> class="">
-                <%=@user.email%>
+              <a href="<%= "mailto:#{@user.email}" %>">
+                <%= @user.email %>
               </a>
             </p>
           </div>

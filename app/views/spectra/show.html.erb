@@ -38,7 +38,7 @@
             Files uploaded by user
           </p>
         </summary>
-        <div class="ml-2" >
+        <div class="ml-2">
           <% if @spectrum.files.any? %>
             <% @spectrum.files.each do |file| %>
               <div class="flex">
@@ -83,7 +83,7 @@
                   </svg>
                   <%= link_to csv.filename, csv.url %>
                   <%= tag.div class: "", data: {controller: "plot", "plot-url-value": csv.url } do %>
-                    <%= tag.div data: {"plot-target": "plot"}%>
+                    <%= tag.div data: {"plot-target": "plot"} %>
                   <% end %>
                 </div>
               <% end %>

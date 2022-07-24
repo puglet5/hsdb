@@ -15,7 +15,7 @@
         </div>
         <div class="p-6 space-y-2 overflow-auto max-h-1/2">
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-            <%=  upload.thumbnail.filename %>
+            <%= upload.thumbnail.filename %>
           </p>
           <%= image_tag upload.thumbnail.variant(resize: '900x600').processed %>
           <p class="text-base leading-relaxed text-gray-500 break-words dark:text-gray-400">

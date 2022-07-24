@@ -41,7 +41,7 @@
       <%= f.submit %>
     </button>
     <% if params[:action] == "new" || params[:action] == "create" %>
-      <%= link_to "Back", spectra_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300"%>
+      <%= link_to "Back", spectra_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300" %>
     <% elsif params[:action] == "edit" %>
       <%= link_to "Back", @spectrum, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300" %>
     <% end %>
