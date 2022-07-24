@@ -33,5 +33,9 @@
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "yarn build:css:dev && postcss ./app/assets/stylesheets/application.scss --replace --use autoprefixer --no-map --minify",
     "build": "node esbuild.config.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "postcss-nested": "^5.0.6"
   }
 }
