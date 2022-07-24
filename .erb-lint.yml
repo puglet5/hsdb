@@ -1,0 +1,14 @@
+---
+EnableDefaultLinters: true
+linters:
+  RequireInputAutocomplete:
+    enabled: false
+  SpaceIndentation:
+    enabled: false
+  ErbSafety:
+    enabled: true
+  Rubocop:
+    enabled: false
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
