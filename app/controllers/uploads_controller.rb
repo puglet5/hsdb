@@ -54,26 +54,36 @@ class UploadsController < ApplicationController
 
   def update
     @upload.user = current_user if @upload.user.nil?
-    if @upload.update(upload_params.reject { |k| k['images'] || k['documents'] || k['thumbnail'] })
+    @images_count_pre = @upload.images.count unless @images_count_err
+    if @upload.update(upload_params)
 
-      if upload_params[:images].present?
-        upload_params[:images].each do |image|
-          @upload.images.attach(image)
-        end
-      end
+      # if @upload.update(upload_params.reject { |k| k['images'] || k['documents'] || k['thumbnail'] })
 
-      if upload_params[:documents].present?
-        upload_params[:documents].each do |document|
-          @upload.documents.attach(document)
-        end
-      end
+      # if upload_params[:images].present?
+      #   upload_params[:images].each do |image|
+      #     @upload.images.attach(image)
+      #   end
+      # end
 
-      @upload.thumbnail.attach(upload_params[:thumbnail]) if upload_params[:thumbnail].present?
+      # if upload_params[:documents].present?
+      #   upload_params[:documents].each do |document|
+      #     @upload.documents.attach(document)
+      #   end
+      # end
+
+      # @upload.thumbnail.attach(upload_params[:thumbnail]) if upload_params[:thumbnail].present?
 
       flash[:success] = 'Upload was successfully updated'
       redirect_to @upload
     else
+      # flash[:success] = 'Your images have been successfully uploaded' if @upload.images.count > image_count
+      @images_count_err = @upload.images.count
       render :edit, status: :unprocessable_entity
+      # flash.keep
+      sleep(1)
+      puts @images_count_pre
+      puts @images_count_err
+
     end
   end
 

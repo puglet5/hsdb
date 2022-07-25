@@ -62,7 +62,7 @@ export default class extends Controller {
       uppy.on('complete', (result) => {
         files_uploaded += result.successful.length
         let txt = document.querySelector("#uppy-text")
-        txt.innerHTML = `Images uploaded: ${files_uploaded}`
+        txt.innerHTML = `Add ${files_uploaded} images`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
           imagePreveiw(element, file)

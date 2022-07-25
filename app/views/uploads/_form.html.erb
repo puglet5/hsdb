@@ -1,4 +1,13 @@
   <%= simple_form_for @upload do |form| %>
+  <!-- Attachment retention on form resubmit, must stay at the top  -->
+  <% form.object.images.each do |image| %>
+    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
+  <% end %>
+  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached? %>
+  <% form.object.documents.each do |doc| %>
+    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
+  <% end %>
+  <!-- -->
   <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Info</label>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
     <div>
@@ -37,9 +46,22 @@
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Images</label>
       <div class="flex">
         <%= tag.div class: "flex items-center justify-center w-full h-40 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
-          <p id="uppy-text">
-            Browse...
-          </p>
+          <div class="text-center">
+            <% if params[:action] == "edit" || params[:action] == "update" %>
+              <p class="font-medium" id="uppy-text">
+                <% unless @images_count_pre.to_i == @images_count_err.to_i %>
+                  Add <%= @images_count_err.to_i - @images_count_pre.to_i %> images
+                <% else %>
+                  Add images
+                <% end %>
+              </p>
+              <p class="text-sm text-gray-600">
+                (already attached: <%= @images_count_err ? @images_count_pre.to_i : @upload.images.count %>)
+              </p>
+            <% else %>
+              Browse...
+            <% end %>
+          </div>
         <% end %>
         <% if params[:action] == "edit" || params[:action] == "update" %>
           <% if @upload.images.any? %>
@@ -132,7 +154,7 @@
   <% elsif params[:action] == "edit" || params[:action] == "update" %>
     <div class="mb-4">
       <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Metadata</label>
-      <%= form.text_area :metadata, value: JSON.pretty_generate(@upload.metadata), class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' } %>
+      <%= form.text_area :metadata, value: @upload.metadata, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' } %>
     </div>
   <% end %>
   <div class="flex">

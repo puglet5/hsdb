@@ -6,33 +6,42 @@
 @tailwind components;
 @tailwind utilities;
 
-trix-editor {
-  @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2;
-  outline: none;
+
+@layer components {
+
+  trix-editor {
+    @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2;
+    outline: none;
+  }
+
+  .json-container-styled {
+    @apply rounded-lg bg-gray-50 font-sans !important
+  }
+
+  .json-container {
+    @apply font-sans break-all !important
+  }
+
+  .json-string {
+    @apply break-all
+  }
+
+  .line-styled {
+    @apply mt-0 pt-1 bg-gray-50 rounded-lg !important
+  }
+
+  .uppy-Dashboard-overlay {
+    @apply bg-gray-500 bg-opacity-75 !important
+  }
+
+  tr:nth-child(even) {
+    @apply bg-gray-50
+  }
+
 }
 
 .hide-file-input-text {
   color: transparent;
-}
-
-.json-container-styled {
-  @apply rounded-lg bg-gray-50 font-sans !important
-}
-
-.json-container {
-  @apply font-sans break-all !important
-}
-
-.json-string {
-  @apply break-all
-}
-
-.line-styled {
-  @apply mt-0 pt-1 bg-gray-50 rounded-lg !important
-}
-
-[contenteditable] {
-  outline: 0px solid transparent;
 }
 
 .field_with_errors input {
@@ -47,17 +56,13 @@ trix-editor {
   @apply border border-secondary-500 focus:ring-secondary-500 !important
 }
 
-.uppy-Dashboard-overlay {
-  @apply bg-gray-500 bg-opacity-75 !important
-}
-
-tr:nth-child(even) {
-  @apply bg-gray-50
+[contenteditable] {
+  outline: 0px solid transparent;
 }
 
 #loadingModalBackLayer {
   -webkit-animation: fadein 1s;
-          animation: fadein 1s;
+  animation: fadein 1s;
 }
 
 @-webkit-keyframes fadein {
@@ -98,7 +103,7 @@ tr:nth-child(even) {
 
 .flash {
   -webkit-animation: fadeout 5s;
-          animation: fadeout 5s;
+  animation: fadeout 5s;
 }
 
 @-webkit-keyframes fadeout {

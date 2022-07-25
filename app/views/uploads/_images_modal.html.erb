@@ -20,7 +20,7 @@
         </div>
         <div class="p-6 space-y-2">
           <div class="grid grid-cols-5 overflow-auto gap-y-1 max-h-1/2">
-            <% @upload.images.all.each do |image| %>
+            <% @upload.images.each do |image| %>
               <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": image.signed_id }, class: "m-2" do %>
                 <div class="relative" id="modal-image-container">
                   <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "object-cover w-full rounded" %>

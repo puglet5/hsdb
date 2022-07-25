@@ -1,4 +1,4 @@
-  <% if obj.errors.full_messages.any? %>
+<% if obj.errors.full_messages.any? %>
   <div class="absolute self-end top-14 right-2" data-controller="flash">
     <% msg_num = 0 %>
     <% obj.errors.full_messages.each do |msg| %>
