@@ -5,7 +5,7 @@
       <!-- Item 1 -->
       <% @upload.images.first(3).each do |image| %>
         <div class="inset-0 z-10 transition-all duration-100 ease-in-out transform translate-x-0" data-carousel-item="">
-          <%= image_tag image, class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
+          <%= image_tag image.variant(resize: '1920x1080^', crop: '1920x1080+0+0').processed, class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
         </div>
       <% end %>
     </div>
