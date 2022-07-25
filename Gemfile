@@ -73,3 +73,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem "brotli", "~> 0.4.0"
+
+gem "rack-brotli", "~> 1.2"
