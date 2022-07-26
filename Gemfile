@@ -20,7 +20,7 @@ gem 'jsbundling-rails', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'ledermann-rails-settings', '~> 2.5'
 gem 'mini_magick', '~> 4.11'
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.4'
 gem 'propshaft', '~> 0.6'
 gem 'public_activity'
 gem 'puma', '>= 5.6.4'
@@ -59,7 +59,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd'
   gem 'rails-perftest'
-  gem 'rubocop', '~> 1.31.0', require: false
+  gem 'rubocop', '~> 1.32', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'ruby-prof'

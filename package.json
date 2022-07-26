@@ -12,7 +12,7 @@
     "@uppy/dashboard": "^2.4.0",
     "@uppy/image-editor": "^1.4.0",
     "autoprefixer": "^10.4.7",
-    "esbuild": "^0.14.49",
+    "esbuild": "^0.14.50",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.4.7",
     "postcss": "^8.4.14",
