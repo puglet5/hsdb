@@ -22,6 +22,8 @@ class Spectrum < RsdbRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
+  after_commit :parse_json, on: %i[create update]
+
   private
 
   def csv_type
@@ -44,5 +46,14 @@ class Spectrum < RsdbRecord
 
   def json_validity
     errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata.to_s)
+  end
+
+  def parse_json
+    parsed_json = JSON.parse(metadata) if metadata
+    puts metadata
+    puts parsed_json
+    update_column(:metadata, parsed_json) if parsed_json
+  rescue JSON::ParserError => e
+    errors.add(:metadata, 'might not be a valid JSON object')
   end
 end

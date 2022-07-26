@@ -154,7 +154,8 @@
   <% elsif params[:action] == "edit" || params[:action] == "update" %>
     <div class="mb-4">
       <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Metadata</label>
-      <%= form.text_area :metadata, value: @upload.metadata, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' } %>
+      <%= form.input :metadata, as: :text, input_html: { value: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }} %>
+
     </div>
   <% end %>
   <div class="flex">
@@ -163,7 +164,8 @@
     </button>
     <% if params[:action] == "new" || params[:action] == "create" %>
       <%= link_to "Back", uploads_path, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
-    <% elsif params[:action] == "edit" %>
+    <% elsif params[:action] == "edit" || params[:action] == "update" %>
+
       <%= link_to "Back", @upload, class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
     <% end %>
   </div>

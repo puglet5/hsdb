@@ -79,10 +79,6 @@ class UploadsController < ApplicationController
       @images_count_err = @upload.images.count
       render :edit, status: :unprocessable_entity
       # flash.keep
-      sleep(1)
-      puts @images_count_pre
-      puts @images_count_err
-
     end
   end
 

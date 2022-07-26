@@ -33,7 +33,7 @@
   </div>
   <div id="metadata">
     <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Metadata</label>
-    <%= f.input :metadata, as: :text, value: @spectrum.metadata, input_html: {class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }} %>
+    <%= f.input :metadata, as: :text, input_html: { value: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", cols: 20, row: 2, data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }} %>
     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Must be a valid JSON object, prefer single-word keys </p>
   </div>
   <div class="flex mt-4">

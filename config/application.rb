@@ -46,11 +46,15 @@ module ITMOHsdb
 end
 
 module JSON
-  def self.is_json?(foo)
-    return false unless foo.is_a?(String)
-
-    JSON.parse(foo).all?
-  rescue JSON::ParserError
+  def self.is_json?(json)
+    if json.is_a? String
+      JSON.parse(json)
+      true
+    else
+      JSON.parse(JSON.generate(json))
+      true
+    end
+  rescue JSON::ParserError => e
     false
   end
 end

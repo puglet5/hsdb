@@ -14,6 +14,7 @@ class Upload < ApplicationRecord
   belongs_to :user
   validates :title, :description, :body, presence: true
   validate :image_type
+  validate :json_validity
 
   has_rich_text :body
 
@@ -22,9 +23,7 @@ class Upload < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
-  before_save do
-    self.metadata = JSON.parse(metadata) if metadata.is_a?(String)
-  end
+  after_commit :parse_json, on: %i[create update]
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
@@ -39,5 +38,18 @@ class Upload < ApplicationRecord
                    'need to be JPEG or PNG')
       end
     end
+  end
+
+  def json_validity
+    errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata)
+  end
+
+  def parse_json
+    parsed_json = JSON.parse(metadata) if metadata
+    puts metadata
+    puts parsed_json
+    update_column(:metadata, parsed_json) if parsed_json
+  rescue JSON::ParserError => e
+    errors.add(:metadata, 'might not be a valid JSON object')
   end
 end
