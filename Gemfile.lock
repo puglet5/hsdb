@@ -75,7 +75,6 @@ GEM
     backport (1.2.0)
     bcrypt (3.1.18)
     benchmark (0.2.0)
-    bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     brotli (0.4.0)
@@ -133,9 +132,6 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    erd (0.8.1)
-      nokogiri
-      ruby-graphviz
     erubi (1.10.0)
     eventmachine (1.2.7)
     factory_bot (6.2.1)
@@ -396,13 +392,10 @@ GEM
     solargraph-rails (0.3.1)
       activesupport
       solargraph (>= 0.41.1)
-    spring (4.0.0)
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
     subexec (0.2.3)
-    textacular (5.5.1)
-      activerecord (>= 5.0, < 7.1)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.0)
@@ -416,11 +409,6 @@ GEM
     uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.2.0)
-      actionview (>= 6.0.0)
-      activemodel (>= 6.0.0)
-      bindex (>= 0.4.0)
-      railties (>= 6.0.0)
     webdrivers (5.0.0)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
@@ -453,7 +441,6 @@ DEPENDENCIES
   devise (~> 4.8)
   devise-i18n (~> 1.10.1)
   dotenv-rails
-  erd
   factory_bot_rails
   faker
   foreman (~> 0.87.2)
@@ -466,7 +453,6 @@ DEPENDENCIES
   jsbundling-rails (~> 1.0)
   ledermann-rails-settings (~> 2.5)
   letter_opener
-  listen (~> 3.3)
   mini_magick (~> 4.11)
   pagy (~> 5.10.1)
   pg (~> 1.4)
@@ -494,12 +480,9 @@ DEPENDENCIES
   simple_form (~> 5.1)
   solargraph
   solargraph-rails
-  spring
   stimulus-rails (~> 1.1)
-  textacular (~> 5.5)
   turbo-rails (~> 1.1)
   tzinfo-data
-  web-console (>= 4.1.0)
   webdrivers
 
 RUBY VERSION
