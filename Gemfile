@@ -17,9 +17,9 @@ gem 'graphicsmagick', '~> 1.0', '>= 1.0.6'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jquery-rails', '~> 4.4'
 gem 'jsbundling-rails', '~> 1.0'
-gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'ledermann-rails-settings', '~> 2.5'
 gem 'mini_magick', '~> 4.11'
+gem 'pagy', '~> 5.10.1'
 gem 'pg', '~> 1.4'
 gem 'propshaft', '~> 0.6'
 gem 'public_activity'
@@ -74,6 +74,6 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "brotli", "~> 0.4.0"
+gem 'brotli', '~> 0.4.0'
 
-gem "rack-brotli", "~> 1.2"
+gem 'rack-brotli', '~> 1.2'

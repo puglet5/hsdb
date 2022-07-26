@@ -1,6 +1,8 @@
 # frozen_string_literal: false
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   def devise_mapping
     Devise.mappings[:user]
   end

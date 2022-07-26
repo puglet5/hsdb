@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
+  include Pagy::Backend
   include Internationalization
   include Authorization
   include ErrorHandling

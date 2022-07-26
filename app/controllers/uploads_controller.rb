@@ -12,9 +12,8 @@ class UploadsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    # @uploads = Upload.all.page(params[:page]).per(3)
     @q = Upload.includes([:thumbnail_attachment]).ransack(params[:q])
-    @uploads = @q.result(distinct: true).page(params[:page]).per(9)
+    @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC')
   end
 
   def show

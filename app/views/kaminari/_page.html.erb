@@ -1,9 +1,0 @@
-<% if page.current? %>
-  <li class="">
-    <%= content_tag :a, page, class: "z-10 px-3 py-2 leading-tight border text-primary-600 bg-primary-50 border-primary-200 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white" %>
-  </li>
-<% else %>
-  <li class="">
-    <%= link_to page, url, :rel => "next", class: "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white", :remote => remote %>
-  </li>
-<% end %>
