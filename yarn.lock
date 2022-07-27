@@ -177,9 +177,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/core@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "@uppy/core@npm:2.3.1"
+"@uppy/core@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@uppy/core@npm:2.3.2"
   dependencies:
     "@transloadit/prettier-bytes": 0.0.7
     "@uppy/store-default": ^2.1.0
@@ -189,13 +189,13 @@ __metadata:
     namespace-emitter: ^2.0.1
     nanoid: ^3.1.25
     preact: ^10.5.13
-  checksum: 2d910ffa50ca7c670fbac2bd4f080879c694496abb87c5a17639cf70a37817faf9932f5dd05645b6d10c8e5e1e5990032f161127c210a41bf17609c70649d3a1
+  checksum: 22a92371837321ba50012182a6c7d03c127dfbe4e363fb71f4bfe30a9ce18da37599960f66363aa87a37e1b942c0fb2674ac9de0664179813992264a901080a6
   languageName: node
   linkType: hard
 
-"@uppy/dashboard@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@uppy/dashboard@npm:2.4.0"
+"@uppy/dashboard@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@uppy/dashboard@npm:2.4.1"
   dependencies:
     "@transloadit/prettier-bytes": 0.0.7
     "@uppy/informer": ^2.1.0
@@ -210,21 +210,21 @@ __metadata:
     nanoid: ^3.1.25
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^2.3.1
-  checksum: 29b86dac0de1d1d9adbc5568cb05709f5a6fb46e85aebffe361f5bde391cc9ccf9adfce4f73e5455e4c4e62a8e3a83839be14077ef64405e5de5e0df770be316
+    "@uppy/core": ^2.3.2
+  checksum: fc7568dde682dfe4774fdebe6eb6f02eca7788c7c2b3e56380cdb2af59025dc1143c892d3bf47b2d226b2052b969b56aa38a9ba935717dd2bd009e14943df372
   languageName: node
   linkType: hard
 
-"@uppy/image-editor@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "@uppy/image-editor@npm:1.4.0"
+"@uppy/image-editor@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@uppy/image-editor@npm:1.4.1"
   dependencies:
     "@uppy/utils": ^4.1.0
     cropperjs: 1.5.7
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^2.3.1
-  checksum: 25f4bae43e06df335c14483047ee69c68a3c4b0d3395c702e181f5f63ab735782ec8ff9c411695a609eb3316133c9ab99ed90f54e3b1128325f5f4a449f4871e
+    "@uppy/core": ^2.3.2
+  checksum: 59d6d209765688fb1b1726eb4027980e4f153bca7e7f1936497335d5bc144d814b14e0de7183d36748f665ac5c6dc7332b911f3a91135efbd3986032b5d17837
   languageName: node
   linkType: hard
 
@@ -397,9 +397,9 @@ __metadata:
     "@rails/actiontext": ^7.0.3-1
     "@tailwindcss/forms": ^0.5.2
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
-    "@uppy/core": ^2.3.1
-    "@uppy/dashboard": ^2.4.0
-    "@uppy/image-editor": ^1.4.0
+    "@uppy/core": ^2.3.2
+    "@uppy/dashboard": ^2.4.1
+    "@uppy/image-editor": ^1.4.1
     autoprefixer: ^10.4.7
     cssnano: ^5.1.12
     esbuild: ^0.14.50
