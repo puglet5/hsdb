@@ -47,9 +47,9 @@ Then enable automatic sorting in the settings. This will keep TailwindCSS styles
 
 ### Code analysis, linting and formatting
 
-Install [solargraph](https://github.com/castwide/solargraph) and [erb-lint](https://github.com/Shopify/erb-lint). Please don't modify `.solargraph.yml` and `.erb-lint.yml` config files. Also read through [solargraph documentation](https://solargraph.org/) to set it up for working with Rails.
+Install [solargraph](https://github.com/castwide/solargraph) and [erb-lint](https://github.com/Shopify/erb-lint). Don't modify `.solargraph.yml` and `.erb-lint.yml` config files. Also read through [solargraph documentation](https://solargraph.org/) to set it up to work with Rails.
 
-Don't use erb-lint formatting in your code (it is broken for .erb files). Instead use VSCode's formatter provided by official Ruby extension for .rb files and [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) for .html.erb files, erb-lint should only provide linting. User VSCode [extension](https://github.com/aliariff/vscode-erb-beautify) for integraion. Default indentation of two spaces is used, it can be configured in the settings.
+Don't use erb-lint formatting in your code (it is broken for .erb files). Instead use VSCode's formatter provided by official Ruby extension for .rb files and [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) for .html.erb files, erb-lint should only provide linting. Use VSCode [extension](https://github.com/aliariff/vscode-erb-beautify) for integraion. Default indentation of two spaces is used, it can be configured in the settings.
 
 It is important to configure file associations in your settings.json:
 ```json
