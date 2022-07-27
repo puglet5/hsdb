@@ -27,7 +27,7 @@ class ProcessCsvJob < ApplicationJob
 
     spectrum.processing_mixed! if errs < file_count
     spectrum.processing_error! if errs == file_count
-    spectrum.processing_successful! if errs == 0
+    spectrum.processing_successful! if errs.zero?
   end
 
   def process_file(record, file)

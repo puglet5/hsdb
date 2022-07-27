@@ -48,11 +48,9 @@ end
 module JSON
   def self.is_json?(json)
     if json.is_a? String
-      JSON.parse(json)
-      true
-    else
-      JSON.parse(JSON.generate(json))
-      true
+      return true if JSON.parse(json)
+    elsif json.is_a? Hash
+      return true if JSON.parse(JSON.generate(json))
     end
   rescue JSON::ParserError => e
     false

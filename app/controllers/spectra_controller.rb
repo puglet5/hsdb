@@ -44,7 +44,7 @@ class SpectraController < ApplicationController
         end
       end
 
-      if spectrum_params[:files].count >= @spectrum.files.count
+      if spectrum_params[:files].count > file_count
         @spectrum.processing_pending!
         ProcessCsvJob.perform_later current_user, @spectrum.id,
                                     spectrum_params[:files].count - file_count

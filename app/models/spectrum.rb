@@ -47,11 +47,11 @@ class Spectrum < RsdbRecord
   end
 
   def json_validity
-    errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata.to_s)
+    errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata)
   end
 
   def parse_json
-    parsed_json = JSON.parse(metadata) if metadata && metadata&.is_a?(String)
+    parsed_json = JSON.parse(metadata.to_s) if metadata
     update_column(:metadata, parsed_json) if parsed_json
   rescue JSON::ParserError => e
     errors.add(:metadata, 'might not be a valid JSON object')

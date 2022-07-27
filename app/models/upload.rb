@@ -45,7 +45,7 @@ class Upload < ApplicationRecord
   end
 
   def parse_json
-    parsed_json = JSON.parse(metadata) if metadata
+    parsed_json = JSON.parse(metadata.to_s) if metadata
     update_column(:metadata, parsed_json) if parsed_json
   rescue JSON::ParserError => e
     errors.add(:metadata, 'might not be a valid JSON object')
