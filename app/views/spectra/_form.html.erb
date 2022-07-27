@@ -1,4 +1,7 @@
 <%= simple_form_for(@spectrum) do |f| %>
+  <% f.object.files.each do |file| %>
+    <%= f.hidden_field :files, value: file.signed_id, multiple: true %>
+  <% end %>
   <div id="info" class="mb-8">
     <label class="block mb-4 text-lg font-medium text-gray-900 border-b dark:text-gray-300">Info</label>
     <div id="title" class="mb-4">

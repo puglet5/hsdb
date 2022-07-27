@@ -21,7 +21,8 @@ class SpectraController < ApplicationController
     @spectrum = current_user.spectra.build(spectrum_params)
 
     if @spectrum.save
-      ProcessCsvJob.perform_later current_user, @spectrum.id
+      ProcessCsvJob.perform_later current_user, @spectrum.id if spectrum_params[:files].present?
+
       redirect_to @spectrum
       flash[:success] = 'Spectrum was successfully created'
     else
@@ -30,12 +31,18 @@ class SpectraController < ApplicationController
   end
 
   def update
+    file_count = @spectrum.files.count
     if @spectrum.update(spectrum_params.reject { |k| k['csvs'] })
 
       if spectrum_params[:csvs].present?
         spectrum_params[:csvs].each do |csv|
           @spectrum.csvs.attach(csv)
         end
+      end
+
+      if spectrum_params[:files].count >= @spectrum.files.count
+        ProcessCsvJob.perform_later current_user, @spectrum.id,
+                                    spectrum_params[:files].count - file_count
       end
 
       redirect_to @spectrum

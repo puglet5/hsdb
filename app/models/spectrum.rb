@@ -49,9 +49,7 @@ class Spectrum < RsdbRecord
   end
 
   def parse_json
-    parsed_json = JSON.parse(metadata) if metadata
-    puts metadata
-    puts parsed_json
+    parsed_json = JSON.parse(metadata) if metadata && metadata&.is_a?(String)
     update_column(:metadata, parsed_json) if parsed_json
   rescue JSON::ParserError => e
     errors.add(:metadata, 'might not be a valid JSON object')
