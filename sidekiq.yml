@@ -6,4 +6,5 @@ production:
   -critical
   -default
   -low
-:max_retries: 5
+  -spectra_processing
+:max_retries: 3

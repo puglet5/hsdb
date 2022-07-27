@@ -7,9 +7,11 @@
             <%= @spectrum.title %>
           </h2>
           <div class="flex flex-col mt-1 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
+
             <div class="flex items-center mt-2 ml-1 text-sm text-gray-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
+                <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
               </svg>
               <%= @spectrum.files.count %> (<%= @spectrum.processed_csvs.count %> processed)
             </div>
@@ -81,7 +83,7 @@
               <% end %>
             </div>
           </details>
-          <details class="group">
+          <details class="group" open>
             <summary class="flex justify-between my-4 border-b">
               <div class="flex">
                 <svg class="w-6 h-6 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -99,7 +101,13 @@
                   <div class="text-gray-500">
                     <span class="font-medium text-gray-900">Info! </span>
                     Processing might take a long time and only occurs for specific file types. Please refer to the documentation.
+                    <p class="mt-1 font-medium text-gray-900">
+                      Last processing: <%= @spectrum.processing_status%>
+                    </p>
                   </div>
+                </div>
+                <div class="flex items-center mt-2 ml-1 text-sm text-gray-500">
+
                 </div>
                 <% if @spectrum.processed_csvs.any? %>
                   <% @spectrum.processed_csvs.each do |csv| %>

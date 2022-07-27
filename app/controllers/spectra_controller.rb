@@ -21,7 +21,11 @@ class SpectraController < ApplicationController
     @spectrum = current_user.spectra.build(spectrum_params)
 
     if @spectrum.save
-      ProcessCsvJob.perform_later current_user, @spectrum.id if spectrum_params[:files].present?
+
+      if spectrum_params[:files].present?
+        @spectrum.processing_pending!
+        ProcessCsvJob.perform_later current_user, @spectrum.id
+      end
 
       redirect_to @spectrum
       flash[:success] = 'Spectrum was successfully created'
@@ -41,6 +45,7 @@ class SpectraController < ApplicationController
       end
 
       if spectrum_params[:files].count >= @spectrum.files.count
+        @spectrum.processing_pending!
         ProcessCsvJob.perform_later current_user, @spectrum.id,
                                     spectrum_params[:files].count - file_count
       end

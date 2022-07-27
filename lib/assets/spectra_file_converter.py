@@ -13,6 +13,7 @@ def convert_txt(file_path):  # Raman
         txt_read_file.to_csv(processed_file_path, index=None, sep=",")
         return processed_file_path
     except:
+        print(1)
         return 1
 
 
@@ -35,6 +36,7 @@ def convert_mon(file_path):  # Reflectance
         os.remove(file_copy_path)
         return processed_file_path
     except:
+        print(1)
         return 1
 
 
@@ -59,6 +61,7 @@ def convert_spectable(file_path):  # LIBS
         os.remove(file_copy_path)
         return processed_file_path
     except:
+        print(1)
         return 1
 
 
@@ -67,7 +70,11 @@ def main():
 
     csvs_ignored = 0
 
-    file_path = sys.argv[1]
+    try:
+        file_path = sys.argv[1]
+    except:
+        print(1)
+        return 1
 
     file_extension = ""
     for file_type in known_file_types:
@@ -85,6 +92,7 @@ def main():
             else:
                 pass
     if not file_extension:
+        print(1)
         return 1
 
 
