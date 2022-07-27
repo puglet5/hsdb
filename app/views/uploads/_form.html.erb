@@ -59,7 +59,9 @@
                 (already attached: <%= @images_count_err ? @images_count_pre.to_i : @upload.images.count %>)
               </p>
             <% else %>
-              Browse...
+              <p class="font-medium" id="uppy-text">
+                Browse...
+              </p>
             <% end %>
           </div>
         <% end %>
