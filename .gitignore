@@ -58,7 +58,6 @@ erd*
 package-lock.json
 
 app/assets/builds
-.solargraph.yml
 .rufo
 /app/assets/builds/*
 !/app/assets/builds/.keep
