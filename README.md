@@ -37,13 +37,16 @@ If you use VSCode, install Headwind extension and include this in your settings.
 "tailwindCSS.includeLanguages": {
     "erb": "html"
   },
+"tailwindCSS.experimental.classRegex": [
+    "(?:class|cls)[:=] ['\"](.+?)['\"]",
+  ],
 "headwind.classRegex": {
-    "html": "\\bclass\\s*=\\s*[\\\"\\']([_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\']",
-    "erb": "class[:=]\\s*['\"](.+?)['\"]",
+    "html": "\\b(?:class|cls)\\s*=\\s*[\\\"\\']([_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\']",
+    "erb": "(?:class|cls)[:=]\\s*['\"](.+?)['\"]"
   },
 ```
 
-Then enable automatic sorting in the settings. This will keep TailwindCSS styles consistent across the project's views.
+Then enable automatic sorting in the settings. This will keep TailwindCSS styles consistent across the project's views and ensure compatability with .erb files and ViewComponents.
 
 ### Code analysis, linting and formatting
 
