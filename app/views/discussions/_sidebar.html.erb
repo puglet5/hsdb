@@ -1,14 +1,8 @@
 <div class="flex justify-between">
-  <h2 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900">Categories</h2>
-  <% if has_role?(:admin) %>
-    <%= link_to new_category_path, class: "mr-6" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-    <% end %>
-  <% end %>
+  <%= render Typography::H4Component.new(cls: "text-center").with_content("Categories") %>
+  <%= render Links::NewLinkComponent.new(path: new_category_path, cls: "mr-6") if policy(:category).new? %>
 </div>
-<aside class="block p-2 mt-4 ml-2 mr-8 bg-white border border-gray-200 rounded-lg shadow-md" aria-label="Sidebar">
+<aside class="block p-2 mt-4 ml-2 mr-8 text-gray-700 bg-white border border-gray-200 rounded-lg shadow-md" aria-label="Sidebar">
   <div class="px-3 py-4 overflow-y-auto rounded bg-gray dark:bg-gray-800">
     <ul class="">
       <% @categories.each do |c| %>
@@ -16,21 +10,13 @@
           <div class="flex">
             <div class="my-auto">
               <% if c.category_name == "Other" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <%= render Svg::DotsComponent.new(cls: "") %>
               <% elsif c.category_name == "Info" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <%= render Svg::InfoComponent.new(cls: "") %>
               <% elsif c.category_name == "Support" %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <%= render Svg::QuestionComponent.new(cls: "") %>
               <% else %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
+                <%= render Svg::DotsComponent.new(cls: "") %>
               <% end %>
             </div>
             <%= link_to c, class: "flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
