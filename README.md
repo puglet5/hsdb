@@ -73,3 +73,7 @@ If you use rvm (which is strongly encouraged) and have problems with extensions 
   "erb.erb-lint.executePath": "/home/user/.rvm/gems/ruby-3.1.2/wrappers/",
 
 ```
+
+### Debugging
+
+Install [debug gem](https://github.com/ruby/debug) and [VSCode rdbg Ruby Debugger](https://github.com/ruby/vscode-rdbg). Debug config is located in ```.vscode``` folder. Set breakpoints and choose ```Debug Rails server``` to debug. Multiprocess debugging is not possible, so if you want to debug sidekiq job for example, just run debugger without config and pass launch command for the desired process. 
