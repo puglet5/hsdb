@@ -28,7 +28,7 @@
   "browserslist": [
     "defaults"
   ],
-  "packageManager": "yarn@3.1.1",
+  "packageManager": "yarn@3.2.2",
   "scripts": {
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "postcss ./app/assets/builds/application.css -o ./app/assets/builds/application.min.css",

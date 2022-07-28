@@ -68,3 +68,5 @@ sorbet
 .env.development
 rails.rb
 dump.rdb
+
+/vendor/bundle
