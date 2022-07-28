@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Sections::SectionComponent < ViewComponent::Base
-  def initialize(cls: '')
-    @cls = cls
+module Sections
+  class SectionComponent < ViewComponent::Base
+    def initialize(cls: '')
+      @cls = cls
+    end
   end
 end
