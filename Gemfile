@@ -70,5 +70,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
+  gem 'web-console'
 end
