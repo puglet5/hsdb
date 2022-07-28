@@ -23,6 +23,7 @@ module Internationalization
       nil
     end
 
+    # rubocop:disable Style/MultilineBlockChain
     def locale_from_headers
       header = request.env['HTTP_ACCEPT_LANGUAGE']
 
@@ -47,6 +48,7 @@ module Internationalization
         locales.last
       end
     end
+    # rubocop:enable Style/MultilineBlockChain
 
     def match?(str1, str2)
       str1.to_s.casecmp(str2.to_s).zero?

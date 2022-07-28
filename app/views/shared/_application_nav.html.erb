@@ -15,7 +15,7 @@
     <div class="my-auto place-self-center">
       <ul class="flex flex-row mt-0 space-x-8 text-sm font-medium">
         <% if current_user %>
-          <%= nav_helper  "li", "bg-transparent text-primary-300 p-0", "!text-primary-500", true %>
+          <%= nav_helper  "li", "bg-transparent text-primary-300 p-0", "!text-primary-500", icons: true %>
           <li>
             <%= link_to spectra_path, class:"" do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-itmo_misc_1-300 <%= active? Rails.application.routes.recognize_path(spectra_path)[:controller],spectra_path, "!text-itmo_misc_1-500" %>" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

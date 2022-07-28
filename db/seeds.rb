@@ -3,10 +3,10 @@
 require 'faker'
 
 10.times do
-  user = User.create!(first_name: Faker::Name.first_name,
-                      last_name: Faker::Name.last_name,
-                      email: Faker::Internet.email,
-                      password: '123456')
+  User.create!(first_name: Faker::Name.first_name,
+               last_name: Faker::Name.last_name,
+               email: Faker::Internet.email,
+               password: '123456')
 end
 
 sample_user = User.create!(first_name: 'Michael',

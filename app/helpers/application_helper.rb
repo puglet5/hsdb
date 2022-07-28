@@ -15,23 +15,26 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def auth_helper(tag_type, style = '', _active_class)
+  def auth_helper(tag_type, _style, _active_class)
     auth_links = ''
 
     if user_signed_in?
       auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}",
-                                            class: style.to_s}</#{tag_type}>"
+                                            class: _style.to_s}</#{tag_type}>"
 
       auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, turbo_method: :delete,
-                                                                                         class: style}</#{tag_type}>"
+                                                                                         class: _style}</#{tag_type}>"
 
     else
       auth_items.each do |item|
-        auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{style}'> #{item[:title]} </a></#{tag_type}>"
+        auth_links << "<#{tag_type}><a href='#{item[:url]}' class = '#{_style}'> #{item[:title]} </a></#{tag_type}>"
       end
     end
+    # rubocop:disable Rails/OutputSafety
 
     sanitize auth_links.html_safe
+
+    # rubocop:enable Rails/OutputSafety
   end
 
   def set_copyright
@@ -81,32 +84,28 @@ module ApplicationHelper
     ]
   end
 
-  def nav_helper(tag_type, style = '', active_class = '', icons = false)
+  def nav_helper(tag_type, style = '', active_class = '', icons: false)
     nav_links = ''
 
     if icons == true
       nav_items.each do |item|
-        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
-                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller],
-                                                                                                                        item[:url], active_class}'> #{item[:icon]} </a></#{tag_type}>"
+        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url], active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url], active_class}'> #{item[:icon]} </a></#{tag_type}>"
       end
     else
       nav_items.each do |item|
-        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url],
-                                                     active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller],
-                                                                                                                        item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
+        nav_links << "<#{tag_type} class= '#{active? item[:controller], item[:url], active_class}'><a href='#{item[:url]}' class = '#{style} #{active? item[:controller], item[:url], active_class}'> #{item[:title]} </a></#{tag_type}>"
       end
 
     end
+    # rubocop:disable Rails/OutputSafety
     nav_links.html_safe
+    # rubocop:enable Rails/OutputSafety
   end
 
   def active?(controller, url, klass)
     if params[:controller] == 'categories'
       klass.to_s if controller == 'discussions'
-    elsif (params[:controller] == controller && !params[:action].in?(%w[home
-                                                                        about])) || (params[:action].in?(%w[home
-                                                                                                            about]) && current_page?(url))
+    elsif (params[:controller] == controller && !params[:action].in?(%w[home about])) || (params[:action].in?(%w[home about]) && current_page?(url))
       klass.to_s
     end
   end

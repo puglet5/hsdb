@@ -12,8 +12,8 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-# Layout/LineLength:
-#   Enabled: false
+Layout/LineLength:
+  Enabled: false
 
 # Rails/FilePath:
 #   EnforcedStyle: arguments
@@ -22,8 +22,8 @@ Style/Documentation:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
-# Metrics:
-#   Enabled: false
+Metrics:
+  Enabled: false
 
 # Lint/EmptyBlock:
 #   Enabled: false
@@ -31,10 +31,16 @@ Rails/HasAndBelongsToMany:
 # Style/MultilineBlockChain:
 #   Enabled: false
 
-# Naming:
-#   Enabled: false
+Naming:
+  Enabled: false
 
 # Rails/OutputSafety:
 #   Enabled: false
 
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'
+
+Rails/I18nLocaleTexts:
+  Enabled: false
 

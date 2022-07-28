@@ -42,7 +42,7 @@ class ProcessCsvJob < ApplicationJob
         true
       end
     end
-  rescue Exception => e
+  rescue StandardError
     logger.error "Error processing file: #{file.inspect}"
     false
   end

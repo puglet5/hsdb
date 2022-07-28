@@ -83,11 +83,12 @@ class UploadsController < ApplicationController
   end
 
   def update_status
+    return unless @upload.update(status: params[:status])
+
     @upload = Upload.find(params[:id])
-    if @upload.update(status: params[:status])
-      redirect_to @upload
-      flash[:success] = "Status successfully changed to #{@upload.status}"
-    end
+
+    redirect_to @upload
+    flash[:success] = "Status successfully changed to #{@upload.status}"
   end
 
   def destroy

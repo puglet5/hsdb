@@ -53,7 +53,7 @@ module JSON
     when Hash
       return true if JSON.parse(JSON.generate(json))
     end
-  rescue JSON::ParserError => e
+  rescue JSON::ParserError
     false
   end
 end
