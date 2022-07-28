@@ -1,13 +1,14 @@
-<section class="py-20 text-gray-700 border bg-gray-50 dark:bg-gray-900">
+<%= render Sections::SectionComponent.new(cls: "text-gray-700") do %>
+
   <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
-    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Lorem ipsum dolor sit amet. Lorem ipsum dolor  amet.</h1>
+    <%= render Typography::H1Component.new() do %>
+      Lorem ipsum dolor sit amet. Lorem ipsum dolor amet.
+    <% end %>
     <div class="mx-auto text-center md:max-w-xl lg:max-w-3xl">
-      <h3 class="mb-6 text-3xl font-bold text-gray-800">Testimonials</h3>
-      <p class="pb-2 mb-6 md:mb-12 md:pb-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam
-        iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum
-        porro a pariatur veniam.
-      </p>
+      <%= render Typography::H3Component.new().with_content("Testimonials") %>
+      <%= render Typography::PHeroComponent.new() do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+      <% end %>
     </div>
     <div class="grid gap-6 text-center md:grid-cols-3">
       <div>
@@ -68,4 +69,4 @@
       </div>
     </div>
   </div>
-</section>
+<% end %>

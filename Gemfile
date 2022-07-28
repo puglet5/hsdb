@@ -37,6 +37,7 @@ gem 'simple_form', '~> 5.1'
 gem 'stimulus-rails', '~> 1.1'
 gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'view_component', '~> 2.62'
 
 group :development do
   gem 'bullet'

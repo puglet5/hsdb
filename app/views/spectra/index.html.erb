@@ -1,8 +1,10 @@
-<section class="py-20 border bg-gray-50 dark:bg-gray-900">
-  <div class="container max-w-screen-xl px-4 mx-auto lg:px-12">
+<%= render Sections::SectionComponent.new() do %>
+  <%= render Sections::DivContainerComponent.new() do %>
+
     <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
       <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Lorem ipsum dolor sit amet. Lorem ipsum.</h1>
       <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. </p>
+
     </div>
     <div class="flex items-center justify-between py-2 my-4 border-b">
       <h1 class="text-4xl font-extrabold leading-none tracking-tight text-center text-gray-900 ">Reference Spectra</h1>
@@ -50,5 +52,5 @@
         </div>
       <% end %>
     </div>
-  </div>
-</section>
+  <% end %>
+<% end %>

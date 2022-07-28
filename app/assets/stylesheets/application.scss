@@ -214,3 +214,11 @@
 .pagy-combo-nav-js .page.next.disabled {
   @apply text-gray-400 cursor-default;
 }
+
+.flash-info {
+  @apply bg-blue-50 text-primary-500
+}
+
+.flash-error {
+  @apply bg-red-50 text-secondary-500
+}

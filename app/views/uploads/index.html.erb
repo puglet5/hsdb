@@ -1,8 +1,14 @@
-<section class="py-20 mb-20 text-gray-700 border bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto">
+<%= render(Sections::SectionComponent.new(cls: "text-gray-700 ")) do %>
+
+  <%= render(Sections::DivContainerComponent.new(cls: "")) do %>
+
     <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
-      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Lorem ipsum dolor sit amet. Lorem ipsum.</h1>
-      <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. </p>
+      <%= render(Typography::H1Component.new(cls: "mb-4 text-gray-900 dark:text-white")) do %>
+        Lorem ipsum dolor sit amet. Lorem ipsum.
+      <% end %>
+      <%= render(Typography::PHeroComponent.new(cls: "!mb-8 !sm:px-16 !xl:px-48")) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+      <% end %>
     </div>
     <div class="flex justify-center mt-20 ">
       <%= link_to "New", new_upload_path, class: "px-10 my-auto text-sm font-medium text-center text-white rounded-lg shadow-lg grow-0 bg-gradient-to-r from-secondary-500 to-primary-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-500 py-2.5" %>
@@ -15,5 +21,6 @@
     </div>
     <%== pagy_nav @pagy %>
     <%#== pagy_items_selector_js(@pagy, item_name: 'Upload'.pluralize(@pagy.count)) %>
-  </div>
-</section>
+  <% end %>
+
+<% end %>

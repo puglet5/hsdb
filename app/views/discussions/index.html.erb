@@ -1,7 +1,13 @@
-<section class="border bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto mt-10 ">
-    <h1 class="mb-2 text-4xl font-bold leading-none tracking-tight text-center text-gray-900">Forum</h1>
-    <p class="text-lg font-normal text-center text-gray-500 mb-14 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. </p>
+<%= render Sections::SectionComponent.new() do %>
+
+  <%= render Sections::DivContainerComponent.new() do %>
+
+    <%= render Typography::H1Component.new(cls: "text-center").with_content("Forum") %>
+
+    <%= render Typography::PHeroComponent.new(cls: "text-center") do %>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+    <% end %>
+
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-8">
         <%= render "shared/discussions" %>
@@ -10,5 +16,6 @@
         <%= render "sidebar" %>
       </div>
     </div>
-  </div>
-</section>
+  <% end %>
+
+<% end %>
