@@ -1,0 +1,48 @@
+<%= simple_form_for(@spectrum) do |f| %>
+  <!-- Attachment retention on form resubmit -->
+  <% f.object.files.each do |file| %>
+    <%= f.hidden_field :files, value: file.signed_id, multiple: true %>
+  <% end %>
+  <!--  -->
+
+  <div id="info" class="mb-8">
+    <%= render Form::SectionLabelComponent.new().with_content("Info") %>
+
+    <div id="title" class="mb-4">
+      <%= render Form::LabelComponent.new().with_content("Title") %>
+      <%= render Form::TextInputComponent.new(cls: "text-gray-500 !bg-gray-100", form: f, field: :title, required: true, disabled: true, readonly: true) %>
+      <%= render Form::PHelperComponent.new().with_content("You can not change title for existing spectrum here. Please contact the admin.") %>
+    </div>
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Spectra files") %>
+      <div class="flex">
+        <%= render Form::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
+
+        <% if @spectrum.files.any? %>
+          <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "files-modal"} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+            </svg>
+            <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              Show attached files
+            <% end %>
+          <% end %>
+          <%= render "files_modal", spectrum: @spectrum %>
+        <% end %>
+      </div>
+      <%= render Form::PHelperComponent.new().with_content("Any plain text file format (.csv's are preferred).") %>
+    </div>
+  </div>
+
+  <div id="metadata">
+    <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
+    <%= render Form::LabelComponent.new().with_content("Metadata") %>
+    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
+    <%= render Form::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
+  </div>
+
+  <div class="flex mt-4">
+    <%= render Form::SubmitComponent.new(form: f).with_content("") %>
+    <%= render Form::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? spectra_path : @spectrum).with_content("Back") %>
+  </div>
+<% end %>

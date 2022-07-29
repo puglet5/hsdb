@@ -1,16 +1,18 @@
 <%= render Sections::SectionComponent.new() do %>
-
   <%= render Sections::DivContainerComponent.new() do %>
-
     <%= render Typography::H1Component.new(cls: "text-center").with_content("Forum") %>
-
     <%= render Typography::PHeroComponent.new(cls: "text-center") do %>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
     <% end %>
 
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-8">
-        <%= render "shared/discussions" %>
+        <% if @discussions_pinned.count > 0 %>
+          <%= render "shared/pinned_discussions" %>
+        <% end %>
+        <% if @discussions_unpinned.count > 0 %>
+          <%= render "shared/latest_discussions" %>
+        <% end %>
       </div>
       <div class="col-span-4">
         <%= render "sidebar" %>

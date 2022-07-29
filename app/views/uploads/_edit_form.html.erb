@@ -1,11 +1,12 @@
-<%= simple_form_for @upload do |form| %>
+<%= simple_form_for @upload do |f| %>
+
   <!-- Attachment retention on form resubmit, must stay at the top  -->
-  <% form.object.images.each do |image| %>
-    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
+  <% f.object.images.each do |image| %>
+    <%= f.hidden_field :images, value: image.signed_id, multiple: true %>
   <% end %>
-  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached? %>
-  <% form.object.documents.each do |doc| %>
-    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
+  <%= f.hidden_field :thumbnail, value: f.object.thumbnail.signed_id if f.object.thumbnail.attached? %>
+  <% f.object.documents.each do |doc| %>
+    <%= f.hidden_field :documents, value: doc.signed_id, multiple: true %>
   <% end %>
   <!-- -->
 
@@ -14,18 +15,18 @@
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Title") %>
-      <%= render Form::TextInputComponent.new(form: form, field: :title, required: true, disabled: true, readonly: true) %>
+      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, disabled: true, readonly: true) %>
     </div>
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Status") %>
-      <%= form.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
+      <%= f.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
     </div>
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
       <div class="flex">
-        <%= render Form::FileInputComponent.new(form: form, field: :thumbnail, required: false, direct: true, multiple: false) %>
+        <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false) %>
 
         <% if @upload.thumbnail.attached? %>
           <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 p-1.5 bg-gray-50", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "thumbnail-modal"} do %>
@@ -81,7 +82,7 @@
     <div>
       <%= render Form::LabelComponent.new().with_content("Documents") %>
       <div class="flex">
-        <%= render Form::FileInputComponent.new(form: form, field: :documents, required: false, direct: true, multiple: true) %>
+        <%= render Form::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
 
         <% if @upload.documents.any? %>
           <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "documents-modal"} do %>
@@ -101,21 +102,21 @@
 
   <div class="mb-6">
     <%= render Form::LabelComponent.new().with_content("Short description") %>
-    <%= render Form::TextInputComponent.new(form: form, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
+    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
   </div>
 
   <div class="mb-6">
     <%= render Form::LabelComponent.new().with_content("Detailed description") %>
-    <%= render Form::TextInputComponent.new(form: form, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
+    <%= render Form::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
   </div>
 
   <div class="mb-4">
     <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
-    <%= render Form::TextInputComponent.new(form: form, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
   </div>
 
   <div class="flex">
-    <%= render Form::SubmitComponent.new(form: form).with_content("Back") %>
+    <%= render Form::SubmitComponent.new(form: f).with_content("Back") %>
     <%= render Form::BackButtonComponent.new(path: @upload).with_content("Back") %>
   </div>
 <% end %>

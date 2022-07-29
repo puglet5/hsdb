@@ -1,63 +1,57 @@
-<%= simple_form_for @upload do |form| %>
+<%= simple_form_for @upload do |f| %>
   <%= render Form::SectionLabelComponent.new().with_content("Info") %>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Title") %>
-      <%= render Form::TextInputComponent.new(form: form, field: :title, required: true, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)") %>
+      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)") %>
     </div>
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Status") %>
-      <%= form.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
+      <%= f.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
     </div>
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
-      <div class="flex">
-        <%= form.file_field :thumbnail, multiple: false, direct_upload: true, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-      </div>
+      <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false) %>
       <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     </div>
 
     <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div"} do %>
       <%= render Form::LabelComponent.new().with_content("Images") %>
-      <div class="flex">
-        <%= tag.div class: "flex items-center justify-center w-full h-40 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
-          <div class="text-center">
-            <p class="font-medium" id="uppy-text">
-              Browse...
-            </p>
-          </div>
-        <% end %>
-      </div>
+      <%= tag.div class: "flex items-center justify-center w-full h-40 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+        <p class="font-medium text-center" id="uppy-text">
+          Browse...
+        </p>
+      <% end %>
       <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     <% end %>
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Documents") %>
-      <div class="flex">
-        <%= form.file_field :documents, multiple: true, direct_upload: true, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-      </div>
+      <%= render Form::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
       <%= render Form::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
     </div>
 
   </div>
+
   <div class="mb-6">
     <%= render Form::LabelComponent.new().with_content("Short description") %>
-    <%= render Form::TextInputComponent.new(form: form, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
+    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
   </div>
+
   <div class="mb-6">
     <%= render Form::LabelComponent.new().with_content("Detailed description") %>
-    <%= render Form::TextInputComponent.new(form: form, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
+    <%= render Form::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
   </div>
 
   <!-- Metadata fields -->
-  <div class="">
-    <button type="button" id="add-fields" class="hidden mt-2 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-800 "><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg></button>
-  </div>
+  <button type="button" id="add-fields" class="hidden mt-2 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-800 ">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
+  </button>
   <%= render Form::LabelComponent.new().with_content("Metadata") %>
 
   <div class="grid grid-cols-12 gap-4 mb-4 gap-y-0">
@@ -91,8 +85,8 @@
         <div class="tree">
         </div>
         <div class="hidden">
-          <%= form.label :metadata %>
-          <%= form.text_field :metadata, id: "json-hidden-input" %>
+          <%= f.label :metadata %>
+          <%= f.text_field :metadata, id: "json-hidden-input" %>
         </div>
       </div>
     </div>
@@ -100,7 +94,7 @@
   <!-- Metadata fields end -->
 
   <div class="flex">
-    <%= render Form::SubmitComponent.new(form: form).with_content("Back") %>
+    <%= render Form::SubmitComponent.new(form: f).with_content("") %>
     <%= render Form::BackButtonComponent.new(path: uploads_path).with_content("Back") %>
   </div>
 <% end %>
