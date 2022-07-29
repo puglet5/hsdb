@@ -17,8 +17,13 @@ Rails.application.routes.draw do
         delete :purge_attachment
       end
     end
-    resources :users
-    get 'users/show'
+
+    resources :users, only: %i[show] do
+      member do
+        post :update_settings
+      end
+    end
+
     get 'uploads/resources/images', to: 'uploads#images'
     resources :categories
     resources :discussions do

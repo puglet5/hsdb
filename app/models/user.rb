@@ -16,6 +16,11 @@ class User < ApplicationRecord
   has_many :spectra, dependent: :nullify
   has_one_attached :avatar
 
+  has_settings do |s|
+    s.key :pagination, defaults: { per: 10 }
+    s.key :processing, defaults: { enabled: 'false' }
+  end
+
   validates :password, confirmation: true
   validates :first_name, :last_name, :email, presence: true
   validate :avatar_image_type
