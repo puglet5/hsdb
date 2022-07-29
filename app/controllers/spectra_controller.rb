@@ -22,7 +22,7 @@ class SpectraController < ApplicationController
 
     if @spectrum.save
 
-      if spectrum_params[:files].present?
+      if spectrum_params[:files].present? && current_user.settings(:processing).enabled == 'true'
         @spectrum.processing_pending!
         ProcessCsvJob.perform_later current_user, @spectrum.id
       end
@@ -44,7 +44,7 @@ class SpectraController < ApplicationController
         end
       end
 
-      if spectrum_params[:files].count > file_count
+      if spectrum_params[:files].count > file_count && current_user.settings(:processing).enabled == 'true'
         @spectrum.processing_pending!
         ProcessCsvJob.perform_later current_user, @spectrum.id,
                                     spectrum_params[:files].count - file_count

@@ -13,7 +13,7 @@ class UploadsController < ApplicationController
 
   def index
     @q = Upload.includes([:thumbnail_attachment]).ransack(params[:q])
-    @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC')
+    @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC'), items: current_user&.settings(:pagination)&.per || 10
   end
 
   def show
