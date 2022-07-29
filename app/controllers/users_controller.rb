@@ -6,14 +6,15 @@ class UsersController < ApplicationController
   end
 
   def update_settings
+    return unless setting_params
+
     @user = current_user
-    if setting_params
-      setting_params[:settings].each do |key, value|
-        @user.settings(key.to_sym).update! value
-      end
-      redirect_to @user
-      flash[:success] = 'Settings updated!'
+
+    setting_params[:settings].each do |key, value|
+      @user.settings(key.to_sym).update! value
     end
+    redirect_to @user
+    flash[:success] = 'Settings updated!'
   end
 
   private

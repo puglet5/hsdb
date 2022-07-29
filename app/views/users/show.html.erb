@@ -33,17 +33,17 @@
             </div>
           </div>
         </div>
-        <div class="col-span-6 ">
+        <div class="col-span-6">
           <% if policy(@user).update_settings? %>
             <details class="transition ease-in-out delay-150 group" open>
-              <summary class="flex justify-between mb-4">
+              <summary class="flex justify-between">
                 <div class="flex mx-2">
                   <svg class="w-5 h-5 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                   <h4 class="font-semibold text-l">Settings</h4>
                 </div>
 
               </summary>
-              <div class="ml-4 mr-10">
+              <div class="mt-4 ml-4 mr-10">
                 <%= simple_form_for(@user, url: update_settings_user_path, html: { method: :post }) do |f| %>
                   <div class="mb-4">
                     <%= render Form::LabelComponent.new().with_content("Uploads per page") %>
@@ -64,20 +64,21 @@
                     <%= render Form::PHelperComponent.new().with_content("Enables automatic processing for uploaded spectra files. Disabled by default. ") %>
 
                   </div>
-                  <%= render Form::SubmitComponent.new(form: f, cls: "text-xs !p-2 !m-0") do %>
-                    Update settings
-                  <% end %>
-
+                  <div class="mb-4">
+                    <%= render Form::SubmitComponent.new(form: f, cls: "text-xs !p-2 !m-0") do %>
+                      Update settings
+                    <% end %>
+                  </div>
                 <% end %>
-              <% end %>
-            </div>
-          </details>
-          <h4 class="m-4 font-semibold text-l">Recent activity</h4>
-
+              </div>
+            </details>
+          <% end %>
+          <h4 class="m-4 mt-0 font-semibold text-l">Recent activity</h4>
           <%# PublicActivity::Activity.all.where(owner_id: current_user.id).each do |a|%>
             <%#= render_activity(a) %>
             <%# end %>
           </div>
+
           <div class="col-span-3 border-l">
             <% if @user == current_user %>
               <div class="mx-4">
