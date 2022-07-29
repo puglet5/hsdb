@@ -1,0 +1,5 @@
+DatabaseConsistencyCheckers:
+  RedundantIndexChecker:
+    enabled: false
+  ForeignKeyTypeChecker:
+    enabled: false
