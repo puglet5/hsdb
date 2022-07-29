@@ -16,7 +16,9 @@
     <div>
       <%= render Form::LabelComponent.new().with_content("Spectra files") %>
       <div class="flex">
-        <%= render Form::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
+        <div class="w-full">
+          <%= render Form::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
+        </div>
 
         <% if @spectrum.files.any? %>
           <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "files-modal"} do %>
