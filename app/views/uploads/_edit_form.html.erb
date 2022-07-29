@@ -26,8 +26,9 @@
     <div>
       <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
       <div class="flex">
-        <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false) %>
-
+        <div class="w-full">
+          <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*", cls: "") %>
+        </div>
         <% if @upload.thumbnail.attached? %>
           <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 p-1.5 bg-gray-50", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "thumbnail-modal"} do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
@@ -82,7 +83,10 @@
     <div>
       <%= render Form::LabelComponent.new().with_content("Documents") %>
       <div class="flex">
-        <%= render Form::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
+        <div class="w-full">
+
+          <%= render Form::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
+        </div>
 
         <% if @upload.documents.any? %>
           <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "documents-modal"} do %>

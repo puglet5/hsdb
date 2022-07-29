@@ -21,6 +21,9 @@ export default class extends Controller {
         autoProceed: false,
         allowMultipleUploads: true,
         allowMultipleUploadBatches: true,
+        restrictions: {
+          allowedFileTypes: ['image/*'],
+        },
       })
 
       uppy.use(ActiveStorageUpload, {

@@ -6,7 +6,7 @@ import ActiveStorageUpload from 'uppy-activestorage-upload'
 
 export default class extends Controller {
 
-  static targets = [ "image", "trigger", "div" ]
+  static targets = ["image", "trigger", "div"]
 
   connect() {
     const setupUppy = (element) => {
@@ -19,7 +19,8 @@ export default class extends Controller {
 
       let uppy = new Uppy({
         restrictions: {
-        maxNumberOfFiles: 1,
+          maxNumberOfFiles: 1,
+          allowedFileTypes: ['image/*'],
         },
         autoProceed: false,
         allowMultipleUploads: false,

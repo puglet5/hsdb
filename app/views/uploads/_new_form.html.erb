@@ -14,7 +14,7 @@
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
-      <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false) %>
+      <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*") %>
       <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     </div>
 
