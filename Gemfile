@@ -44,6 +44,7 @@ group :development do
   gem 'foreman', '~> 0.87.2'
   gem 'guard-livereload'
   gem 'htmlbeautifier'
+  gem 'immigrant'
   gem 'letter_opener'
   gem 'rack-livereload'
   gem 'rack-mini-profiler', '~> 3.0'

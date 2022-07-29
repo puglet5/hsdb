@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_29_232120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
   end
 
   create_table "discussions", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -104,7 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
   end
 
   create_table "replies", force: :cascade do |t|
-    t.text "reply"
+    t.text "reply", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "discussion_id"
@@ -150,8 +150,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
   end
 
   create_table "uploads", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+    t.string "title", null: false
+    t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -166,7 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
-    t.string "first_name"
+    t.string "first_name", null: false
     t.string "last_name"
     t.string "organization"
     t.datetime "remember_created_at", precision: nil
@@ -193,6 +193,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_174256) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "discussions", "categories", name: "discussions_category_id_fk"
+  add_foreign_key "discussions", "users", name: "discussions_user_id_fk"
+  add_foreign_key "replies", "discussions", name: "replies_discussion_id_fk"
+  add_foreign_key "replies", "users", name: "replies_user_id_fk"
   add_foreign_key "upload_tags", "tags"
   add_foreign_key "upload_tags", "uploads"
+  add_foreign_key "uploads", "users", name: "uploads_user_id_fk"
+  add_foreign_key "users_roles", "roles", name: "users_roles_role_id_fk"
+  add_foreign_key "users_roles", "users", name: "users_roles_user_id_fk"
 end
