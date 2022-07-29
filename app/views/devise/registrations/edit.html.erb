@@ -1,10 +1,9 @@
 <%= render "shared/errors", obj: @user %>
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="container max-w-screen-lg p-20 mx-auto">
-    <h2 class="flex justify-center mb-8 text-4xl font-semibold">
-      Edit profile
-    </h2>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= render Sections::SectionComponent.new(cls: "text-gray-700") do %>
+  <%= render Sections::DivContainerComponent.new(cls: "max-w-screen-lg") do %>
+    <%= render Typography::H3Component.new(cls: "mb-8 text-center !text-4xl").with_content("Edit profile") %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
       <%= f.hidden_field :avatar, value: f.object.avatar.signed_id if f.object.avatar.attached? %>
       <div class="grid grid-cols-12">
         <%= tag.div class: "relative col-span-3 row-span-2 mr-8", data: {controller: "avatar", "uppy": "user[avatar]", "avatar-target": "div"} do %>
@@ -24,23 +23,29 @@
             </div>
           </span>
         <% end %>
+
         <div class="col-span-9 mb-4">
-          <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First name</label>
-          <%= f.text_field :first_name, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" %>
+          <%= render Form::LabelComponent.new().with_content("First name") %>
+          <%= render Form::TextInputComponent.new(form: f, field: :first_name, required: true) %>
         </div>
+
         <div class="col-span-9 mb-4">
-          <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last name</label>
-          <%= f.text_field :last_name, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" %>
+          <%= render Form::LabelComponent.new().with_content("Last name") %>
+          <%= render Form::TextInputComponent.new(form: f, field: :last_name, required: true) %>
         </div>
+
       </div>
+
       <div class="mb-4">
-        <label for="organization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Organization</label>
-        <%= f.text_field :organization, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "ITMO University" %>
+        <%= render Form::LabelComponent.new().with_content("Organization") %>
+        <%= render Form::TextInputComponent.new(form: f, field: :organization, required: false, placeholder: "ITMO University") %>
       </div>
+
       <div class="mb-4">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-        <%= f.email_field :email, type: "email", id: "email", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "name@example.com", autofocus: false, autocomplete: "email" %>
+        <%= render Form::LabelComponent.new().with_content("Email") %>
+        <%= render Form::TextInputComponent.new(form: f, field: :email, required: true, placeholder: "test@example.com") %>
       </div>
+
       <br />
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>
@@ -48,23 +53,27 @@
         </p>
       <% end %>
       <div class="mb-4">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+        <%= render Form::LabelComponent.new().with_content("Password") %>
+
         <%= f.password_field :password, autocomplete: "new-password", type: "password", id: "password", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "•••••••••" %>
         <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Leave blank if you don't want to change it</p>
       </div>
       <div class="mb-4">
-        <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm password</label>
+        <%= render Form::LabelComponent.new().with_content("Confirm password") %>
+
         <%= f.password_field :password_confirmation, autocomplete: "new-password", type: "password", id: "confirm-password", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "•••••••••" %>
       </div>
       <div class="mb-4">
-        <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Current password</label>
+        <%= render Form::LabelComponent.new().with_content("Current password") %>
+
         <%= f.password_field :current_password, autocomplete: "current-password", type: "password", id: "confirm-password", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "•••••••••" %>
         <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400"> Your current password is needed to confirm the changes</p>
       </div>
+
       <div class="flex">
-        <button type="submit" class="px-5 text-sm font-medium text-white rounded-lg bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Update</button>
-        <%= link_to "Back", "/#{locale}/users/#{current_user.slug}", class: "block my-auto ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 " %>
+        <%= render Form::SubmitComponent.new(form: f).with_content("Update") %>
+        <%= render Form::BackButtonComponent.new(path: "/#{locale}/users/#{current_user.slug}").with_content("Back") %>
       </div>
     <% end %>
-  </div>
-</section>
+  <% end %>
+<% end %>
