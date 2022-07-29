@@ -84,8 +84,7 @@
       <%= render Form::LabelComponent.new().with_content("Documents") %>
       <div class="flex">
         <div class="w-full">
-
-          <%= render Form::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
+          <%= render Form::FileInputComponent.new(form: f, field: :documents, direct: true, multiple: true) %>
         </div>
 
         <% if @upload.documents.any? %>
