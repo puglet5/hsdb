@@ -6,7 +6,7 @@
   <%= render Typography::H4Component.new(cls: "text-center").with_content("Pinned") %>
 </div>
 
-<%= render Sections::CardComponent.new(cls: "text-gray-700") do %>
+<%= render Sections::CardComponent.new(cls: "pb-0 mb-8 text-gray-700") do %>
 
   <ol class="relative border-l border-gray-200 dark:border-gray-700">
     <% @discussions_pinned.each do |discussion| %>
