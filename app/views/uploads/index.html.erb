@@ -16,11 +16,12 @@
         <%= render "search_form" %>
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-4 mt-20 gap-y-0 xl:grid-cols-5">
+
+    <div class="mt-20">
+      <%== pagy_nav @pagy %>
       <%= render @uploads %>
+      <%== pagy_nav @pagy %>
     </div>
-    <%== pagy_nav @pagy %>
-    <%#== pagy_items_selector_js(@pagy, item_name: 'Upload'.pluralize(@pagy.count)) %>
   <% end %>
 
 <% end %>
