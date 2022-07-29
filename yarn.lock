@@ -402,7 +402,7 @@ __metadata:
     "@uppy/image-editor": ^1.4.1
     autoprefixer: ^10.4.7
     cssnano: ^5.1.12
-    esbuild: ^0.14.50
+    esbuild: ^0.14.51
     esbuild-rails: ^1.0.3
     flowbite: 1.4.7
     postcss: ^8.4.14
@@ -1109,7 +1109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.50":
+"esbuild@npm:^0.14.51":
   version: 0.14.51
   resolution: "esbuild@npm:0.14.51"
   dependencies:
