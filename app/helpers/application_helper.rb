@@ -15,15 +15,15 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def auth_helper(tag_type, _style, _active_class)
+  def auth_helper(tag_type, style, _active_class)
     auth_links = ''
 
     if user_signed_in?
       auth_links << "<#{tag_type}>#{link_to 'Profile page', "/#{locale}/users/#{current_user.slug}",
-                                            class: _style.to_s}</#{tag_type}>"
+                                            class: style.to_s}</#{tag_type}>"
 
       auth_links << "<#{tag_type}>#{link_to t('auth.logout'), destroy_user_session_path, turbo_method: :delete,
-                                                                                         class: _style}</#{tag_type}>"
+                                                                                         class: style}</#{tag_type}>"
 
     else
       auth_items.each do |item|

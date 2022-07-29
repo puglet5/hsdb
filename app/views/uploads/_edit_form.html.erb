@@ -1,0 +1,121 @@
+<%= simple_form_for @upload do |form| %>
+  <!-- Attachment retention on form resubmit, must stay at the top  -->
+  <% form.object.images.each do |image| %>
+    <%= form.hidden_field :images, value: image.signed_id, multiple: true %>
+  <% end %>
+  <%= form.hidden_field :thumbnail, value: form.object.thumbnail.signed_id if form.object.thumbnail.attached? %>
+  <% form.object.documents.each do |doc| %>
+    <%= form.hidden_field :documents, value: doc.signed_id, multiple: true %>
+  <% end %>
+  <!-- -->
+
+  <%= render Form::SectionLabelComponent.new().with_content("Info") %>
+  <div class="grid gap-6 mb-6 lg:grid-cols-2">
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Title") %>
+      <%= render Form::TextInputComponent.new(form: form, field: :title, required: true, disabled: true, readonly: true) %>
+    </div>
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Status") %>
+      <%= form.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
+    </div>
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
+      <div class="flex">
+        <%= render Form::FileInputComponent.new(form: form, field: :thumbnail, required: false, direct: true, multiple: false) %>
+
+        <% if @upload.thumbnail.attached? %>
+          <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 p-1.5 bg-gray-50", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "thumbnail-modal"} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+            </svg>
+            <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              Show attached thumbnail
+            <% end %>
+          <% end %>
+          <%= render "thumbnail_modal", upload: @upload %>
+        <% end %>
+      </div>
+      <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+    </div>
+
+    <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div"} do %>
+      <%= render Form::LabelComponent.new().with_content("Images") %>
+
+      <div class="flex">
+        <%= tag.div class: "flex items-center justify-center w-full h-40 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+          <div class="text-center">
+
+            <p class="font-medium" id="uppy-text">
+              <% unless @images_count_pre.to_i == @images_count_err.to_i %>
+                Add <%= @images_count_err.to_i - @images_count_pre.to_i %> images
+              <% else %>
+                Add images
+              <% end %>
+            </p>
+            <p class="text-sm text-gray-600">
+              (already attached: <%= @images_count_err ? @images_count_pre.to_i : @upload.images.count %>)
+            </p>
+
+          </div>
+        <% end %>
+
+        <% if @upload.images.any? %>
+          <%= tag.div class: "flex items-center justify-center h-40 my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 hover:bg-gray-100 bg-gray-50", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "images-modal"} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              Show/delete attached images
+            <% end %>
+          <% end %>
+          <%= render "images_modal", upload: @upload %>
+        <% end %>
+      </div>
+      <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+    <% end %>
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Documents") %>
+      <div class="flex">
+        <%= render Form::FileInputComponent.new(form: form, field: :documents, required: false, direct: true, multiple: true) %>
+
+        <% if @upload.documents.any? %>
+          <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#interact", "modal-toggle": "documents-modal"} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+            </svg>
+            <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              Show attached documents
+            <% end %>
+          <% end %>
+          <%= render "documents_modal", upload: @upload %>
+        <% end %>
+      </div>
+      <%= render Form::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <%= render Form::LabelComponent.new().with_content("Short description") %>
+    <%= render Form::TextInputComponent.new(form: form, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
+  </div>
+
+  <div class="mb-6">
+    <%= render Form::LabelComponent.new().with_content("Detailed description") %>
+    <%= render Form::TextInputComponent.new(form: form, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
+  </div>
+
+  <div class="mb-4">
+    <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
+    <%= render Form::TextInputComponent.new(form: form, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+  </div>
+
+  <div class="flex">
+    <%= render Form::SubmitComponent.new(form: form).with_content("Back") %>
+    <%= render Form::BackButtonComponent.new(path: @upload).with_content("Back") %>
+  </div>
+<% end %>
