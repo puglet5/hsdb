@@ -5,77 +5,33 @@ on:
   - pull_request
 
 jobs:
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        ruby:
-          - 2.7
-          - "3.0"
-        node-version:
-        - '16.13.2'
-        database-name:
-        - ITMO_HSDB_test
-        database-password:
-        - postgres
-        database-user:
-        - postgres
-        database-host:
-        - 127.0.0.1
-        database-port:
-        - 5432
-    runs-on: ${{ matrix.os }}
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: ${{ matrix.database-name }}
-          POSTGRES_USER: ${{ matrix.database-user }}
-          POSTGRES_PASSWORD: ${{ matrix.database-password }}
-        ports:
-          - 5432:5432
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
     steps:
-    - name: Check out Git Repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby, Bundler and Rails
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
 
-    - name: Install packages
-      run: |
-        yarn install --check-files
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
 
-    - name: Install graphicsmagick
-      run: sudo apt-get update && sudo apt-get install -y graphicsmagick
+      - name: Run linters
+        run: |
+          bin/rubocop --parallel
 
-    - name: Setup test database
-      env:
-        RAILS_ENV: test
-        DATABASE_NAME_TEST: ${{ matrix.database-name }}
-        DATABASE_USER: ${{ matrix.database-user }}
-        DATABASE_PASSWORD: ${{ matrix.database-password }}
-        DATABASE_HOST: ${{ matrix.database-host }}
-        DATABASE_PORT: ${{ matrix.database-port }}
-        POSTGRES_DB: ${{ matrix.database-name }}
-      run: |
-        bundle exec rails db:migrate
-        bundle exec rails db:seed
-    - name: Run rubocop
-      run: bundle exec rubocop
-    - name: Run rspec
-      run: bundle exec rspec
+      - name: Run security checks
+        run: |
+          bin/bundler-audit --update
+          bin/brakeman -q -w2

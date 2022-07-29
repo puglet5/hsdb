@@ -65,6 +65,8 @@ end
 group :development, :test do
   gem 'better_errors', '~> 2.9'
   gem 'binding_of_caller', '~> 1.0'
+  gem 'brakeman', '~> 5.2'
+  gem 'bundler-audit', '~> 0.9.1'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'database_cleaner'
