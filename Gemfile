@@ -73,4 +73,4 @@ group :development, :test do
   gem 'web-console'
 end
 
-gem "annotate", "~> 3.2"
+gem 'annotate', '~> 3.2'
