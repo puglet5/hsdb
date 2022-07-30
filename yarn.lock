@@ -115,7 +115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:>= 7.0.0-alpha1":
+"@rails/activestorage@npm:>= 7.0.0-alpha1, @rails/activestorage@npm:^7.0.3-1":
   version: 7.0.3
   resolution: "@rails/activestorage@npm:7.0.3"
   dependencies:
@@ -395,6 +395,7 @@ __metadata:
     "@pgrabovets/json-view": ^2.7.1
     "@popperjs/core": ^2.11.5
     "@rails/actiontext": ^7.0.3-1
+    "@rails/activestorage": ^7.0.3-1
     "@tailwindcss/forms": ^0.5.2
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
     "@uppy/core": ^2.3.2
@@ -915,9 +916,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.202":
-  version: 1.4.204
-  resolution: "electron-to-chromium@npm:1.4.204"
-  checksum: a0278e6af121bfcaeb3d0674b0762a2fd7c8f5af4a793e4f3f82275dec4a038e723174c92742be8c125a2c98a39f39b938a981596cc3c23f2eb7a01848e25950
+  version: 1.4.206
+  resolution: "electron-to-chromium@npm:1.4.206"
+  checksum: 1c9b7e867de6a074b389126a655e8edcb1841fb10e44e221164315169d0e53cacb3f90e75ae863f07d74764271720693f5708596f36575c6cd2264651b87bd33
   languageName: node
   linkType: hard
 

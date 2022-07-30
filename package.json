@@ -7,6 +7,7 @@
     "@pgrabovets/json-view": "^2.7.1",
     "@popperjs/core": "^2.11.5",
     "@rails/actiontext": "^7.0.3-1",
+    "@rails/activestorage": "^7.0.3-1",
     "@tailwindcss/forms": "^0.5.2",
     "@uppy/core": "^2.3.2",
     "@uppy/dashboard": "^2.4.1",

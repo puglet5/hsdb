@@ -1,13 +1,10 @@
-require("@rails/activestorage").start();
-
 import "trix"
+import "@rails/actiontext"
 import "flowbite/dist/flowbite.js"
-import "@rails/actiontext";
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./packs/back-to-top.js"
 import "./packs/mini-profiler-fix.js"
-import "./packs/direct_upload.js"
 import "./packs/metadata_fields.js"
 
 addEventListener("turbo:submit-start", ({ target }) => {
