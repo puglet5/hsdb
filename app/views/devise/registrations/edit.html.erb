@@ -71,7 +71,7 @@
       </div>
 
       <div class="flex">
-        <%= render Form::SubmitComponent.new(form: f).with_content("Update") %>
+        <%= render Form::SubmitComponent.new(form: f).with_content("Save") %>
         <%= render Form::BackButtonComponent.new(path: "/#{locale}/users/#{current_user.slug}").with_content("Back") %>
       </div>
     <% end %>

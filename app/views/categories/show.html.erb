@@ -1,5 +1,5 @@
-<section class="border bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto mt-10 ">
+<%= render Sections::SectionComponent.new(cls: "text-gray-700") do %>
+  <%= render Sections::DivContainerComponent.new() do %>
     <div class="flex flex-col">
       <h1 class="mb-2 text-4xl font-bold leading-none tracking-tight text-center text-gray-900">Forum</h1>
       <%= tag.div class: "flex justify-center mb-14", data: {controller: '', "category-loading-class": "disabled", "category-id-value": @category.id}  do %>
@@ -11,6 +11,12 @@
         "a"
       end %>
     <%# end %>
-    <%= render "shared/discussions" %>
+    <% if @discussions_pinned.count > 0 %>
+
+      <%= render "shared/pinned_discussions" %>
+    <% end %>
+    <%= render "shared/latest_discussions" %>
+
   </div>
-</section>
+<% end %>
+<% end %>
