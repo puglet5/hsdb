@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: categories
+#
+#  id            :bigint           not null, primary key
+#  category_name :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  discussion_id :integer
+#  slug          :string
+#  pinned        :boolean          default(FALSE)
+#
 class Category < ApplicationRecord
   include PublicActivity::Model
   include Authorship

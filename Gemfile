@@ -72,3 +72,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'web-console'
 end
+
+gem "annotate", "~> 3.2"

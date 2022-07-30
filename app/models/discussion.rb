@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: discussions
+#
+#  id          :bigint           not null, primary key
+#  title       :string           not null
+#  content     :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  category_id :integer          default(2)
+#  slug        :string
+#  pinned      :boolean          default(FALSE)
+#
 class Discussion < ApplicationRecord
   include PublicActivity::Model
   include Authorship
