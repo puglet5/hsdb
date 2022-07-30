@@ -41,7 +41,6 @@ module ITMOHsdb
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
 
     config.middleware.use Rack::Deflater
-    config.middleware.use Rack::Brotli
   end
 end
 
