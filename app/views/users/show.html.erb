@@ -73,7 +73,11 @@
               </div>
             </details>
           <% end %>
-          <h4 class="m-4 mt-0 font-semibold text-l">Recent activity</h4>
+          <div class="m-4">
+            <h4 class="mt-0 font-semibold text-l">Recent activity</h4>
+            <%= render Form::PHelperComponent.new().with_content("No activity yet. Event like uploads and forum activity will be displayed here.") %>
+          </div>
+
           <%# PublicActivity::Activity.all.where(owner_id: current_user.id).each do |a|%>
             <%#= render_activity(a) %>
             <%# end %>
