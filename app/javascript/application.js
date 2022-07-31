@@ -3,9 +3,7 @@ import "@rails/actiontext"
 import "flowbite/dist/flowbite.js"
 import "@hotwired/turbo-rails"
 import "./controllers"
-import "./packs/back-to-top.js"
 import "./packs/mini-profiler-fix.js"
-import "./packs/metadata_fields.js"
 
 addEventListener("turbo:submit-start", ({ target }) => {
 
