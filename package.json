@@ -39,6 +39,7 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^5.1.12",
+    "eslint": "latest",
     "postcss-nested": "^5.0.6"
   }
 }

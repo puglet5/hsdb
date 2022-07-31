@@ -8,7 +8,7 @@ addEventListener("direct-upload:initialize", event => {
   //     <span class="direct-upload__filename"></span>
   //   </div>
   // `)
-  target.previousElementSibling.querySelector(`.direct-upload__filename`).textContent = file.name
+  target.previousElementSibling.querySelector(".direct-upload__filename").textContent = file.name
 })
 
 addEventListener("direct-upload:start", event => {

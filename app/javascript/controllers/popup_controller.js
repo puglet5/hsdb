@@ -1,5 +1,5 @@
-import { Controller } from "@hotwired/stimulus";
-import { createPopper } from '@popperjs/core';
+import { Controller } from "@hotwired/stimulus"
+import { createPopper } from "@popperjs/core"
 
 export default class extends Controller {
 
@@ -12,8 +12,8 @@ export default class extends Controller {
     this.tooltipTarget.classList.remove("invisible")
     this.tooltipTarget.classList.add("opacity-100")
     createPopper(this.triggerTarget, this.tooltipTarget, {
-      placement: 'top',
-    });
+      placement: "top",
+    })
   }
 
   hide() {

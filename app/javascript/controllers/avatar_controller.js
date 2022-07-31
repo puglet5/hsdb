@@ -1,7 +1,7 @@
-import { Controller } from "@hotwired/stimulus";
-import Uppy from '@uppy/core'
-import Dashboard from '@uppy/dashboard'
-import ActiveStorageUpload from 'uppy-activestorage-upload'
+import { Controller } from "@hotwired/stimulus"
+import Uppy from "@uppy/core"
+import Dashboard from "@uppy/dashboard"
+import ActiveStorageUpload from "uppy-activestorage-upload"
 
 
 export default class extends Controller {
@@ -20,7 +20,7 @@ export default class extends Controller {
       let uppy = new Uppy({
         restrictions: {
           maxNumberOfFiles: 1,
-          allowedFileTypes: ['image/*'],
+          allowedFileTypes: ["image/*"],
         },
         autoProceed: false,
         allowMultipleUploads: false,
@@ -39,10 +39,10 @@ export default class extends Controller {
         proudlyDisplayPoweredByUppy: false
       })
 
-      let dashboard = document.querySelector('.uppy-Dashboard-inner')
-      dashboard.removeAttribute('style')
+      let dashboard = document.querySelector(".uppy-Dashboard-inner")
+      dashboard.removeAttribute("style")
 
-      uppy.on('complete', (result) => {
+      uppy.on("complete", (result) => {
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
           previewAvatar(element, file)
@@ -52,12 +52,12 @@ export default class extends Controller {
     }
 
     const appendUploadedFile = (element, file, field_name) => {
-      const hiddenField = document.createElement('input')
+      const hiddenField = document.createElement("input")
 
-      hiddenField.setAttribute('type', 'hidden')
-      hiddenField.setAttribute('name', field_name)
-      hiddenField.setAttribute('data-pending-upload', true)
-      hiddenField.setAttribute('value', file.response.signed_id)
+      hiddenField.setAttribute("type", "hidden")
+      hiddenField.setAttribute("name", field_name)
+      hiddenField.setAttribute("data-pending-upload", true)
+      hiddenField.setAttribute("value", file.response.signed_id)
 
       element.appendChild(hiddenField)
     }

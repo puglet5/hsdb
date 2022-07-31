@@ -1,14 +1,14 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["images", "thumbnail", "documents"];
+  static targets = ["images", "thumbnail", "documents"]
 
   connect() {
 
   }
 
   interact() {
-    document.querySelector("body").classList.toggle("overflow-hidden");
+    document.querySelector("body").classList.toggle("overflow-hidden")
   }
 }

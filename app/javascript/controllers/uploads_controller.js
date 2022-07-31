@@ -1,8 +1,8 @@
-import { Controller } from "@hotwired/stimulus";
-import Uppy from '@uppy/core'
-import Dashboard from '@uppy/dashboard'
-import ActiveStorageUpload from 'uppy-activestorage-upload'
-import ImageEditor from '@uppy/image-editor'
+import { Controller } from "@hotwired/stimulus"
+import Uppy from "@uppy/core"
+import Dashboard from "@uppy/dashboard"
+import ActiveStorageUpload from "uppy-activestorage-upload"
+import ImageEditor from "@uppy/image-editor"
 
 export default class extends Controller {
 
@@ -22,7 +22,7 @@ export default class extends Controller {
         allowMultipleUploads: true,
         allowMultipleUploadBatches: true,
         restrictions: {
-          allowedFileTypes: ['image/*'],
+          allowedFileTypes: ["image/*"],
         },
       })
 
@@ -57,12 +57,12 @@ export default class extends Controller {
         },
       })
 
-      let dashboard = document.querySelector('.uppy-Dashboard-inner')
-      dashboard.removeAttribute('style')
+      let dashboard = document.querySelector(".uppy-Dashboard-inner")
+      dashboard.removeAttribute("style")
 
       let files_uploaded = 0
 
-      uppy.on('complete', (result) => {
+      uppy.on("complete", (result) => {
         files_uploaded += result.successful.length
         let txt = document.querySelector("#uppy-text")
         txt.innerHTML = `Add ${files_uploaded} images`
@@ -74,17 +74,17 @@ export default class extends Controller {
     }
 
     const appendUploadedFile = (element, file, field_name) => {
-      const hiddenField = document.createElement('input')
+      const hiddenField = document.createElement("input")
 
-      hiddenField.setAttribute('type', 'hidden')
-      hiddenField.setAttribute('name', field_name)
-      hiddenField.setAttribute('data-pending-upload', true)
-      hiddenField.setAttribute('value', file.response.signed_id)
+      hiddenField.setAttribute("type", "hidden")
+      hiddenField.setAttribute("name", field_name)
+      hiddenField.setAttribute("data-pending-upload", true)
+      hiddenField.setAttribute("value", file.response.signed_id)
 
       element.appendChild(hiddenField)
     }
 
-    const imagePreveiw = (element, file) => {
+    const imagePreveiw = () => {
 
     }
 

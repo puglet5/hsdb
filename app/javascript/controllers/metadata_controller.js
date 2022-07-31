@@ -1,5 +1,5 @@
-import { Controller } from "@hotwired/stimulus";
-import jsonview from '@pgrabovets/json-view';
+import { Controller } from "@hotwired/stimulus"
+import jsonview from "@pgrabovets/json-view"
 
 export default class extends Controller {
   static values = {
@@ -8,10 +8,10 @@ export default class extends Controller {
 
   connect() {
     const jsonData = this.jsonValue
-    const tree = jsonview.create(jsonData);
+    const tree = jsonview.create(jsonData)
     if ((jsonData !== "{}")) {
-      jsonview.render(tree, document.querySelector('.tree'));
-      jsonview.collapse(tree);
+      jsonview.render(tree, document.querySelector(".tree"))
+      jsonview.collapse(tree)
     }
   }
 }
