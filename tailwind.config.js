@@ -1,42 +1,43 @@
+/* eslint-disable */
 // const colors = require('tailwindcss/colors')
 
 module.exports = {
-  darkMode: 'class',
+  darkMode: "class",
   mode: "jit",
   content: [
-    './app/views/**/*.html.erb',
-    './app/helpers/**/*.rb',
-    './app/assets/stylesheets/**/*.css',
-    './app/javascript/**/*.js',
+    "./app/views/**/*.html.erb",
+    "./app/helpers/**/*.rb",
+    "./app/assets/stylesheets/**/*.css",
+    "./app/javascript/**/*.js",
   ],
   plugins: [
-    require('flowbite/plugin'),
-    require('@tailwindcss/forms'),
+    require("flowbite/plugin"),
+    require("@tailwindcss/forms"),
   ],
 
   theme: {
     extend: {
       boxShadow: {
-        '3xl': '0 0 120px rgba(0, 0, 0, 0.3)',
+        "3xl": "0 0 120px rgba(0, 0, 0, 0.3)",
       },
       maxHeight: {
-        '1/2': '50vh',
+        "1/2": "50vh",
       },
       minHeight: {
-        '1/2': '50%',
-        '2/3': '66%',
+        "1/2": "50%",
+        "2/3": "66%",
       },
       maxWidth: {
-        '1/2': '50%',
-        '2/3': '66%',
-        '4/5': '80%',
+        "1/2": "50%",
+        "2/3": "66%",
+        "4/5": "80%",
       },
     },
     fontFamily: {
       // 'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
-      "sans": ['ui-monospace'],
-      "sefif": ['ui-monospace'],
-      "mono": ['ui-monospace'],
+      "sans": ["ui-monospace"],
+      "sefif": ["ui-monospace"],
+      "mono": ["ui-monospace"],
 
     },
     container: {

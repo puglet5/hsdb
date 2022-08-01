@@ -35,3 +35,45 @@ jobs:
         run: |
           bundle exec bundler-audit --update
           bundle exec brakeman -q -w2 --skip-files app/jobs/process_csv_job.rb
+          eslint .
+  tests:
+      name: Tests
+      runs-on: ubuntu-latest
+      services:
+        postgres:
+          image: postgres:12.7
+          env:
+            POSTGRES_USER: myapp
+            POSTGRES_DB: myapp_test
+            POSTGRES_PASSWORD: ""
+          ports: ["5432:5432"]
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Setup Ruby and install gems
+          uses: ruby/setup-ruby@v1
+          with:
+            bundler-cache: true
+
+        - name: Setup Node
+          uses: actions/setup-node@v2
+          with:
+            node-version: 16
+            cache: yarn
+
+        - name: Install packages
+          run: |
+            yarn install
+
+        - name: Setup test database
+          env:
+            RAILS_ENV: test
+            PGHOST: localhost
+            PGUSER: myapp
+          run: |
+            bin/rails db:setup
+
+        - name: Run tests
+          run: bin/rspec

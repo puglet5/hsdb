@@ -1,5 +1,7 @@
-const path = require('path')
-const rails = require('esbuild-rails')
+/* eslint-disable */
+
+const path = require("path")
+const rails = require("esbuild-rails")
 
 require("esbuild").build({
   entryPoints: ["application.js"],
