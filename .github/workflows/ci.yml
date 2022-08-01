@@ -30,7 +30,7 @@ jobs:
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
-          eslint .
+          yarn run eslint .
 
       - name: Run security checks
         run: |
@@ -44,9 +44,20 @@ jobs:
           image: postgres:12.7
           env:
             POSTGRES_USER: postgres
-            POSTGRES_DB: hsdb_test
+            POSTGRES_DB: postgres
             POSTGRES_PASSWORD: ""
           ports: ["5432:5432"]
+          options: >-
+            --mount type=tmpfs,destination=/var/lib/postgresql/data
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+        redis:
+          image: redis
+          ports:
+            - 6379:6379
+          options: --entrypoint redis-server
 
       steps:
         - name: Checkout code
@@ -71,9 +82,9 @@ jobs:
           env:
             RAILS_ENV: test
             PGHOST: localhost
-            PGUSER: myapp
+            PGUSER: postgres
           run: |
-            bin/rails db:setup
+            bin/rails db:prepare
 
         - name: Run tests
           run: bin/rspec
