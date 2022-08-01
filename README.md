@@ -88,6 +88,6 @@ Create a testing database and run `bundle exec rspec`.
 
 ### Github Actions
 
-GH Actions setup includes linters, code checks and rspec testing. Refer to the `.github/workflows/ci.yml` and `.github/workflows/codeql-analysis.yml` config files.
+GH Actions setup includes linters, code checks and RSpec testing. Refer to the `.github/workflows/ci.yml` and `.github/workflows/codeql-analysis.yml` config files.
 
 You can test GH Actions locally by installing [act](https://github.com/nektos/act) (you must provide github token with workflow access to run this). *This doesn't work yet (services like postgres and redis are unsupported)*
