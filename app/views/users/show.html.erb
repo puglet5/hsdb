@@ -44,7 +44,7 @@
 
               </summary>
               <div class="mt-4 ml-4 mr-10">
-                <%= simple_form_for(@user, url: update_settings_user_path, html: { method: :post }) do |f| %>
+                <%= simple_form_for(@user, url: update_settings_user_path, html: { method: :patch }) do |f| %>
                   <div class="mb-4">
                     <%= render Form::LabelComponent.new().with_content("Uploads per page") %>
                     <%= fields_for "user[settings[pagination]]" do |sf| %>
