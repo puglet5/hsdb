@@ -88,4 +88,8 @@ jobs:
             RAILS_ENV=test bin/rails db:schema:load
 
         - name: Run tests
-          run: bundle exec rspec; cat log/test.log
+          run: bundle exec rspec
+
+        - name: Print test log if rspec fails
+          if: failure()
+          run: cat log/test.log
