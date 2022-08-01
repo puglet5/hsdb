@@ -30,7 +30,7 @@ jobs:
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
-          yarn run eslint .
+          yarn run eslint -c eslintrc.json .
 
       - name: Run security checks
         run: |
@@ -45,7 +45,7 @@ jobs:
           env:
             POSTGRES_USER: postgres
             POSTGRES_DB: postgres
-            POSTGRES_PASSWORD: ""
+            POSTGRES_PASSWORD: postgres
           ports: ["5432:5432"]
           options: >-
             --mount type=tmpfs,destination=/var/lib/postgresql/data
