@@ -74,6 +74,20 @@ If you use rvm (which is strongly encouraged) and have problems with extensions 
 
 ```
 
+Use ESLint to lint .js files. `.eslintrc.json` is located in project's root directory.
+
 ### Debugging
 
-Install [debug gem](https://github.com/ruby/debug) and [VSCode rdbg Ruby Debugger](https://github.com/ruby/vscode-rdbg). Debug config is located in ```.vscode``` folder. Set breakpoints and choose ```Debug Rails server``` to debug. Multiprocess debugging is not possible, so if you want to debug sidekiq job for example, just run debugger without config and pass launch command for the desired process. 
+Install [debug gem](https://github.com/ruby/debug) and [VSCode rdbg Ruby Debugger](https://github.com/ruby/vscode-rdbg). Debug config is located in ```.vscode``` folder. Set breakpoints and choose ```Debug Rails server``` to debug. Multiprocess debugging is not possible, so if you want to debug sidekiq job for example, just run debugger without config and pass launch command for the desired process.
+
+## Testing
+
+### Locally
+
+Create a testing database and run `bundle exec rspec`.
+
+### Github Actions
+
+GH Actions setup includes linters, code checks and rspec testing. Refer to the `.github/workflows/ci.yml` and `.github/workflows/codeql-analysis.yml` config files.
+
+You can test GH Actions locally by installing [act](https://github.com/nektos/act) (you must provide github token with workflow access to run this). *This doesn't work yet (services like postgres and redis are unsupported)*
