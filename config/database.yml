@@ -40,7 +40,7 @@ test:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_HSDB_test
-    url: <%= ENV['HSDB_TEST'] %>
+    url: postgres://postgres:postgres@localhost/ITMO_HSDB_test
 
   primary_replica:
     host: localhost
@@ -48,7 +48,7 @@ test:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_HSDB_test
-    url: <%= ENV['HSDB_TEST_REPLICA'] %>
+    url: postgres://postgres:postgres@localhost/ITMO_HSDB_test
     replica: true
 
   rsdb:
@@ -57,7 +57,7 @@ test:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_TEST
-    url: <%= ENV['RSDB_TEST'] %>
+    url: postgres://postgres:postgres@localhost/ITMO_RSDB_test
 
   rsdb_replica:
     host: localhost
@@ -65,7 +65,7 @@ test:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_TEST
-    url: <%= ENV['RSDB_TEST_REPLICA'] %>
+    url: postgres://postgres:postgres@localhost/ITMO_RSDB_test
     replica: true
 
 production:

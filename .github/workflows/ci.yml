@@ -30,7 +30,7 @@ jobs:
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
-          yarn run eslint -c eslintrc.json .
+          yarn run eslint -c .eslintrc.json .
 
       - name: Run security checks
         run: |
@@ -44,7 +44,6 @@ jobs:
           image: postgres:12.7
           env:
             POSTGRES_USER: postgres
-            POSTGRES_DB: postgres
             POSTGRES_PASSWORD: postgres
           ports: ["5432:5432"]
           options: >-
