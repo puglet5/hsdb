@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RepliesController, type: :routing do
@@ -11,7 +13,7 @@ RSpec.describe RepliesController, type: :routing do
     end
 
     it 'routes to #show' do
-      expect(get: '/discussions/1/replies/1').to route_to('replies#show', id: '1', discussion_id: '1', discussion_id: '1')
+      expect(get: '/discussions/1/replies/1').to route_to('replies#show', id: '1', discussion_id: '1')
     end
 
     it 'routes to #edit' do
