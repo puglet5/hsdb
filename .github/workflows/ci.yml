@@ -83,7 +83,9 @@ jobs:
             PGHOST: localhost
             PGUSER: postgres
           run: |
-            bin/rails db:prepare
+            RAILS_ENV=test bin/rails db:drop
+            RAILS_ENV=test bin/rails db:create
+            RAILS_ENV=test bin/rails db:schema:load
 
         - name: Run tests
           run: bin/rspec
