@@ -1,1 +1,6 @@
+--color
+--order rand
 --require spec_helper
+--require rails_helper
+--format doc
+--exclude-pattern "spec/components/**/*_spec.rb"

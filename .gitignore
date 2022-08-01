@@ -70,3 +70,4 @@ rails.rb
 dump.rdb
 
 /vendor/bundle
+coverage

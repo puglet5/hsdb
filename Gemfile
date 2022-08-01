@@ -36,6 +36,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
 
 group :development do
+  gem 'annotate', '~> 3.2'
   gem 'bullet'
   gem 'foreman', '~> 0.87.2'
   gem 'guard-livereload'
@@ -50,11 +51,14 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'solargraph'
   gem 'solargraph-rails'
+  gem 'web-console'
 end
 
 group :test do
   gem 'selenium-webdriver'
+  gem 'simplecov', '~> 0.21.2'
   gem 'webdrivers'
+  gem 'webmock'
 end
 
 group :development, :test do
@@ -70,7 +74,4 @@ group :development, :test do
   gem 'faker'
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
-  gem 'web-console'
 end
-
-gem 'annotate', '~> 3.2'
