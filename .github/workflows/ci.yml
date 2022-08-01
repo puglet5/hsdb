@@ -77,6 +77,11 @@ jobs:
           run: |
             yarn install
 
+        - name: Install packages
+          run: |
+            yarn build:dev
+            yarn build:css:dev
+
         - name: Setup test database
           env:
             RAILS_ENV: test
