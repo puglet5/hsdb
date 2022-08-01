@@ -25,17 +25,17 @@ jobs:
 
       - name: Install packages
         run: |
-          yarn install
+          yarn
 
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
+          eslint .
 
       - name: Run security checks
         run: |
           bundle exec bundler-audit --update
           bundle exec brakeman -q -w2 --skip-files app/jobs/process_csv_job.rb
-          eslint .
   tests:
       name: Tests
       runs-on: ubuntu-latest
@@ -43,8 +43,8 @@ jobs:
         postgres:
           image: postgres:12.7
           env:
-            POSTGRES_USER: myapp
-            POSTGRES_DB: myapp_test
+            POSTGRES_USER: postgres
+            POSTGRES_DB: hsdb_test
             POSTGRES_PASSWORD: ""
           ports: ["5432:5432"]
 
