@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Upload, type: :model do
@@ -98,8 +100,5 @@ RSpec.describe Upload, type: :model do
         expect(valid_upload.images.first.persisted?).to eq(false)
       end
     end
-  end
-
-  fdescribe 'ActiveStorage attachments' do
   end
 end
