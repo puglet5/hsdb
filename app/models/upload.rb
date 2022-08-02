@@ -17,6 +17,7 @@
 class Upload < ApplicationRecord
   include PublicActivity::Model
   include Authorship
+  include CustomValidations
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
@@ -52,18 +53,5 @@ class Upload < ApplicationRecord
                    'need to be JPEG or PNG')
       end
     end
-  end
-
-  def json_validity
-    errors.add(:metadata, 'is not a valid JSON object') unless JSON.is_json?(metadata)
-  end
-
-  def parse_json
-    parsed_json = JSON.parse(metadata.to_s) if metadata
-    # rubocop:disable Rails/SkipsModelValidations
-    update_column(:metadata, parsed_json) if parsed_json
-    # rubocop:enable Rails/SkipsModelValidations
-  rescue JSON::ParserError
-    errors.add(:metadata, 'might not be a valid JSON object')
   end
 end
