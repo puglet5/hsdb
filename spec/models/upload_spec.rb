@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+# == Schema Information
+#
+# Table name: uploads
+#
+#  id          :bigint           not null, primary key
+#  title       :string           not null
+#  description :text             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  slug        :string
+#  status      :integer          default("draft")
+#  metadata    :jsonb            not null
 
 RSpec.describe Upload, type: :model do
   let(:user) { create(:user) }
@@ -19,7 +31,7 @@ RSpec.describe Upload, type: :model do
     valid_upload.images.delete_all
   end
 
-  fdescribe 'Field presence validations' do
+  describe 'Field presence validations' do
     it 'is valid with valid attributes' do
       upload = Upload.new valid_attributes
       expect(upload).to be_valid

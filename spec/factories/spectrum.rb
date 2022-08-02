@@ -20,4 +20,3 @@ FactoryBot.define do
     metadata { '{"test_key": "test_value"}' }
   end
 end
-
