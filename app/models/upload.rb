@@ -18,6 +18,7 @@ class Upload < ApplicationRecord
   include PublicActivity::Model
   include Authorship
   include CustomValidations
+  include ParseJson
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
@@ -28,7 +29,7 @@ class Upload < ApplicationRecord
   has_many :tags, through: :upload_tags
   belongs_to :user
   validates :title, :description, :body, presence: true
-  validate :image_type
+  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
   validate :json_validity
 
   has_rich_text :body
@@ -42,16 +43,5 @@ class Upload < ApplicationRecord
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
-  end
-
-  private
-
-  def image_type
-    images.each do |image|
-      unless image.content_type.in?(%("image/jpeg image/png image/svg image/gif"))
-        errors.add(:images,
-                   'need to be JPEG or PNG')
-      end
-    end
   end
 end

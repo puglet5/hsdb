@@ -17,6 +17,7 @@ class Spectrum < RsdbRecord
   include PublicActivity::Model
   include Authorship
   include CustomValidations
+  include ParseJson
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
@@ -29,8 +30,11 @@ class Spectrum < RsdbRecord
   has_many_attached :processed_images
 
   validates :title, presence: true
-  # validate :csv_type
-  validate :image_type
+  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
+  validates :processed_images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
+  validates :csvs, blob: { content_type: ['text/csv'] }
+  validates :processed_csvs, blob: { content_type: ['text/csv'] }
+
   validate :json_validity
 
   extend FriendlyId
