@@ -21,21 +21,24 @@
         <div class="p-6 space-y-2 overflow-auto max-h-1/2">
           <ul class="ml-8 list-disc">
             <% @spectrum.files.each do |file| %>
-              <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": file.signed_id }, class: "m-2" do %>
-                <div class="flex">
-                  <li>
-                    <p class="text-base leading-relaxed text-gray-500 truncate dark:text-gray-400">
-                      <%= link_to rails_blob_path(file, disposition: 'attachment') do %>
-                        <%= file.filename.to_s %>
-                      <% end %>
-                    </p>
-                  </li>
-                  <%= link_to purge_attachment_spectrum_path(file.signed_id), data: {}, class: "my-auto", data: {action: "click->attachment#delete", turbo_method: :delete} do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  <% end %>
-                </div>
+              <% if file.persisted? %>
+
+                <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": file.signed_id }, class: "m-2" do %>
+                  <div class="flex">
+                    <li>
+                      <p class="text-base leading-relaxed text-gray-500 truncate dark:text-gray-400">
+                        <%= link_to rails_blob_path(file, disposition: 'attachment') do %>
+                          <%= file.filename.to_s %>
+                        <% end %>
+                      </p>
+                    </li>
+                    <%= link_to purge_attachment_spectrum_path(file.signed_id), data: {}, class: "my-auto", data: {action: "click->attachment#delete", turbo_method: :delete} do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    <% end %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </ul>
