@@ -3,10 +3,10 @@ include:
 - "app/*.rb"
 - "config/*.rb"
 - "lib/**/*.rb"
+- "spec/**/*"
 exclude:
-- spec/**/*
-- test/**/*
-- vendor/**/*
+- "test/**/*"
+- "vendor/**/*"
 - ".bundle/**/*"
 reporters:
 - rubocop
