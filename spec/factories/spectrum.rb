@@ -12,9 +12,12 @@
 #  updated_at        :datetime         not null
 #  metadata          :jsonb            not null
 #  processing_status :integer          default("none")
-#
+
 FactoryBot.define do
   factory :spectrum do
-    title { 'MyString' }
+    title { 'test title' }
+    user_id factory: :user
+    metadata { '{"test_key": "test_value"}' }
   end
 end
+
