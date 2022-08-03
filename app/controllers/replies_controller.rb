@@ -12,7 +12,7 @@ class RepliesController < ApplicationController
     if @reply.save
       redirect_to discussion_path(@discussion)
     else
-      redirect_to discussion_path(@discussion), notice: 'Reply wasn\'t saved. Please try again.'
+      redirect_to discussion_path(@discussion), status: :unprocessable_entity
     end
   end
 

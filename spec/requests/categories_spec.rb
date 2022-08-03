@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.fdescribe '/categories', type: :request do
+RSpec.describe '/categories', type: :request do
   let(:user) { create(:admin_user) }
 
   let(:valid_attributes) do
@@ -15,7 +15,7 @@ RSpec.fdescribe '/categories', type: :request do
     login_as user
   end
 
-  fdescribe 'GET /index' do
+  describe 'GET /index' do
     it 'renders a successful response' do
       Category.create! valid_attributes
       get categories_url
