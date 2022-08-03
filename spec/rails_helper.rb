@@ -11,6 +11,7 @@ require 'database_cleaner'
 require 'capybara/rspec'
 require 'devise'
 require 'public_activity/testing'
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 PublicActivity.enabled = false
 
@@ -60,5 +61,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
-  config.include Warden::Test::Helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Warden::Test::Helpers, type: :system
+  config.include Warden::Test::Helpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include RequestSpecHelper, type: :request
 end

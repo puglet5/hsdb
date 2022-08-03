@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 gem 'active_storage-send_zip', '~> 0.3.4'
+gem 'activestorage-validator', '~> 0.2.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'brotli', '~> 0.4.0'
 gem 'caxlsx', '~> 3.2'
@@ -55,6 +56,7 @@ group :development do
 end
 
 group :test do
+  gem 'rails-controller-testing', '~> 1.0'
   gem 'selenium-webdriver'
   gem 'simplecov', '~> 0.21.2'
   gem 'webdrivers'
@@ -75,5 +77,3 @@ group :development, :test do
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
 end
-
-gem 'activestorage-validator', '~> 0.2.2'
