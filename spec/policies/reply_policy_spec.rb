@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe DiscussionPolicy do
-  let(:discussion) { build(:discussion, user: user) }
+fdescribe ReplyPolicy do
+  let(:reply) { build(:reply, user: user) }
 
-  subject { described_class.new(user, discussion) }
+  subject { described_class.new(user, reply) }
 
   context 'unauthorized' do
     let(:user) { nil }
@@ -19,7 +19,7 @@ describe DiscussionPolicy do
   context 'authorized, default role, not an author' do
     let(:user) { create(:default_user) }
     let(:another_user) { create(:default_user) }
-    subject { described_class.new(another_user, discussion) }
+    subject { described_class.new(another_user, reply) }
 
     it 'expects user not to be nil' do
       expect(another_user).to_not be_nil
@@ -30,7 +30,7 @@ describe DiscussionPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(another_user.author?(discussion)).to eq(false)
+      expect(another_user.author?(reply)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create show]) }
@@ -39,7 +39,7 @@ describe DiscussionPolicy do
 
   context 'authorized, default role, is an author' do
     let(:user) { create(:default_user) }
-    subject { described_class.new(user, discussion) }
+    subject { described_class.new(user, reply) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -50,7 +50,7 @@ describe DiscussionPolicy do
     end
 
     it 'expects user to be an author' do
-      expect(user.author?(discussion)).to eq(true)
+      expect(user.author?(reply)).to eq(true)
     end
 
     it { is_expected.to permit_actions(%i[create update destroy show]) }
@@ -59,7 +59,7 @@ describe DiscussionPolicy do
   context 'authorized, admin' do
     let(:user) { create(:default_user) }
     let(:admin) { create(:admin_user) }
-    subject { described_class.new(user, discussion) }
+    subject { described_class.new(user, reply) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -70,7 +70,7 @@ describe DiscussionPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(admin.author?(discussion)).to eq(false)
+      expect(admin.author?(reply)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create update destroy show]) }
