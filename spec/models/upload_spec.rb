@@ -31,7 +31,7 @@ RSpec.describe Upload, type: :model do
     valid_upload.images.delete_all
   end
 
-  describe 'Field presence validations' do
+  describe 'field presence validations' do
     it 'is valid with valid attributes' do
       upload = described_class.new valid_attributes
       expect(upload).to be_valid
@@ -114,7 +114,13 @@ RSpec.describe Upload, type: :model do
     end
   end
 
-  describe 'Associations' do
+  describe 'associations' do
     it { should belong_to(:user) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:body) }
+    it { should validate_presence_of(:description) }
   end
 end
