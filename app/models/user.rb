@@ -40,7 +40,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_settings do |s|
-    s.key :pagination, defaults: { per: 10 }
+    s.key :pagination, defaults: { per: '10' }
     s.key :processing, defaults: { enabled: 'false' }
   end
 
