@@ -41,6 +41,16 @@ module ITMOHsdb
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
 
     config.middleware.use Rack::Deflater
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get post put delete options]
+      end
+    end
+
+    config.paths.add File.join('app/api'), glob: File.join('**/*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app/api/*')]
   end
 end
 

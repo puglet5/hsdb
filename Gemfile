@@ -79,3 +79,9 @@ group :development, :test do
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
 end
+
+gem 'grape', '~> 1.6'
+
+gem 'rack-cors', '~> 1.1'
+
+gem 'grape-active_model_serializers', '~> 1.5'

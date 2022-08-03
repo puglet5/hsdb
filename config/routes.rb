@@ -10,11 +10,9 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    namespace :api do
-      resources :categories, only: :update
-    end
+  mount API::Base, at: '/'
 
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     resources :spectra do
       member do
         delete :purge_attachment
