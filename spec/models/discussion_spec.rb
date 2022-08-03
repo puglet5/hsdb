@@ -14,7 +14,7 @@
 #  slug        :string
 #  pinned      :boolean          default(FALSE)
 
-RSpec.fdescribe Discussion, type: :model do
+RSpec.describe Discussion, type: :model do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
 
