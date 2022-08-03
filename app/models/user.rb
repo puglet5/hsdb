@@ -22,7 +22,7 @@
 #  updated_at             :datetime         not null
 #  slug                   :string
 #  bio                    :text
-#
+
 class User < ApplicationRecord
   extend FriendlyId
   rolify
@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   has_many :discussions, dependent: :nullify
   has_many :uploads, dependent: :nullify
-  has_many :categories, through: :discussions
+  has_many :replies, through: :discussions
   has_many :spectra, dependent: :nullify
   has_one_attached :avatar
 
@@ -46,16 +46,10 @@ class User < ApplicationRecord
 
   validates :password, confirmation: true
   validates :first_name, :last_name, :email, presence: true
-  validate :avatar_image_type
-
-  after_create :assign_default_role
+  validates :avatar, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 
   accepts_nested_attributes_for :roles,
                                 allow_destroy: true
-
-  def assign_default_role
-    add_role(:default) if roles.blank?
-  end
 
   friendly_id :full_name_slug, use: %i[slugged finders]
 
@@ -73,18 +67,5 @@ class User < ApplicationRecord
 
   def author?(obj)
     obj.user == self
-  end
-
-  private
-
-  def must_have_a_role
-    errors.add(:roles, 'must have at least one') unless roles.any?
-  end
-
-  def avatar_image_type
-    return unless avatar.present? && !avatar&.content_type.in?(%("image/jpeg image/png"))
-
-    errors.add(:avatar,
-               'needs to be JPEG or PNG')
   end
 end

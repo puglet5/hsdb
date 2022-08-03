@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.fdescribe 'Sessions' do
+RSpec.describe 'Sessions' do
   let(:user) { User.create(email: 'test@test.com', password: 'password', password_confirmation: 'password') }
 
   it 'signs user in and out' do
