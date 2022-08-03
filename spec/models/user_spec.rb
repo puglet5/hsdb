@@ -129,7 +129,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  fdescribe 'Associations' do
+  describe 'Associations' do
     it { should have_many(:spectra) }
     it { should have_many(:uploads) }
     it { should have_many(:replies).through(:discussions) }

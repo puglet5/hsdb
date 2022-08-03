@@ -19,7 +19,7 @@ FactoryBot.define do
     title { 'test title' }
     description { 'test description' }
     body { 'test body' }
-    user_id factory: :user
+    association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }
   end
 end

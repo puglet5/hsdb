@@ -25,10 +25,18 @@
 
 FactoryBot.define do
   factory :user do
-    sequence(:id, 100) { |n| n }
+    sequence(:id) { |n| n }
     first_name { 'test' }
     last_name { 'user' }
-    email { 'test.user@example.com' }
     password { '123456' }
+    sequence(:email) { |n| "test#{n}@test.com" }
+
+    factory :default_user do
+      after(:create) { |user| user.add_role(:default) }
+    end
+
+    factory :admin_user do
+      after(:create) { |user| user.add_role(:admin) }
+    end
   end
 end

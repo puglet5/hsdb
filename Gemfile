@@ -56,8 +56,10 @@ group :development do
 end
 
 group :test do
+  gem 'pundit-matchers', '~> 1.7'
   gem 'rails-controller-testing', '~> 1.0'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 5.1'
   gem 'simplecov', '~> 0.21.2'
   gem 'webdrivers'
   gem 'webmock'
@@ -77,5 +79,3 @@ group :development, :test do
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
 end
-
-gem 'shoulda-matchers', '~> 5.1'
