@@ -18,7 +18,7 @@ RSpec.describe Upload, type: :model do
   let(:user) { create(:user) }
 
   let(:valid_attributes) do
-    { 'title' => 'Test Upload',
+    { 'title' => 'Test described_class',
       'user_id' => user.id,
       'body' => '<p> test upload body </p>',
       'description' => 'Test upload description',
@@ -33,22 +33,22 @@ RSpec.describe Upload, type: :model do
 
   describe 'Field presence validations' do
     it 'is valid with valid attributes' do
-      upload = Upload.new valid_attributes
+      upload = described_class.new valid_attributes
       expect(upload).to be_valid
     end
 
     it 'is not valid without a title' do
-      upload = Upload.new(title: nil, description: 'test description', body: 'test body')
+      upload = described_class.new(title: nil, description: 'test description', body: 'test body')
       expect(upload).to_not be_valid
     end
 
     it 'is not valid without a description' do
-      upload = Upload.new(title: 'test title', description: nil, body: 'test body')
+      upload = described_class.new(title: 'test title', description: nil, body: 'test body')
       expect(upload).to_not be_valid
     end
 
     it 'is not valid without a body' do
-      upload = Upload.new(title: 'test title', description: 'test description', body: nil)
+      upload = described_class.new(title: 'test title', description: 'test description', body: nil)
       expect(upload).to_not be_valid
     end
 

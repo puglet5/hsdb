@@ -34,12 +34,12 @@ RSpec.describe Spectrum, type: :model do
 
   describe 'Field presence validations' do
     it 'is valid with valid attributes' do
-      spectrum = Spectrum.new valid_attributes
+      spectrum = described_class.new valid_attributes
       expect(spectrum).to be_valid
     end
 
     it 'is not valid without a title' do
-      spectrum = Spectrum.new(title: nil)
+      spectrum = described_class.new(title: nil)
       expect(spectrum).to_not be_valid
     end
 
@@ -67,7 +67,7 @@ RSpec.describe Spectrum, type: :model do
     end
   end
 
-  fdescribe 'Processing status' do
+  describe 'Processing status' do
     it 'changes enum status to successful' do
       valid_spectrum.processing_successful!
       expect(valid_spectrum.processing_status).to eq('successful')
