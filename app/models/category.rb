@@ -20,6 +20,8 @@ class Category < ApplicationRecord
   has_many :discussions, dependent: nil
   has_many :users, through: :discussions
 
+  validates :category_name, presence: true
+
   resourcify
 
   extend FriendlyId
