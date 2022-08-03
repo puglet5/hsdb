@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
 
     context 'default settings' do
       it 'has default settings for pagination' do
-        expect(valid_user.settings(:pagination).per).to eq(10)
+        expect(valid_user.settings(:pagination).per).to eq('10')
       end
 
       it 'has default settings for spectra processing' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-fdescribe ReplyPolicy do
+describe ReplyPolicy do
   let(:reply) { build(:reply, user: user) }
 
   subject { described_class.new(user, reply) }

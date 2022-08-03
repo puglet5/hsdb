@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe '/discussions', type: :request do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
