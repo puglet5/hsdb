@@ -77,3 +77,5 @@ group :development, :test do
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
 end
+
+gem 'shoulda-matchers', '~> 5.1'
