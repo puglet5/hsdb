@@ -21,8 +21,6 @@ If you get the following error: `Got permission denied while trying to connect t
 sudo chmod 666 /var/run/docker.sock
 ```
 
----
-
 ### TailwindCSS styling
 
 #### Flowbite
