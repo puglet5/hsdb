@@ -37,6 +37,14 @@ class User < ApplicationRecord
   has_many :uploads, dependent: :nullify
   has_many :replies, through: :discussions
   has_many :spectra, dependent: :nullify
+
+  # rubocop:disable Rails/InverseOf
+  has_many :access_tokens,
+           class_name: 'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all
+  # rubocop:enable Rails/InverseOf
+
   has_one_attached :avatar
 
   has_settings do |s|
@@ -44,6 +52,7 @@ class User < ApplicationRecord
     s.key :processing, defaults: { enabled: 'false' }
   end
 
+  validates :email, format: URI::MailTo::EMAIL_REGEXP
   validates :password, confirmation: true
   validates :first_name, :last_name, :email, presence: true
   validates :avatar, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
@@ -67,5 +76,10 @@ class User < ApplicationRecord
 
   def author?(obj)
     obj.user == self
+  end
+
+  def self.authenticate(email, password)
+    user = User.find_for_authentication(email: email)
+    user&.valid_password?(password) ? user : nil
   end
 end

@@ -6,15 +6,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   authenticate :user, ->(user) { user.has_role?('admin') } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    namespace :api do
-      resources :categories, only: :update
-    end
+  draw :api
 
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     resources :spectra do
       member do
         delete :purge_attachment
