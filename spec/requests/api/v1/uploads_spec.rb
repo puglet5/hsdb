@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-fdescribe Api::V1::UploadsController do
+describe Api::V1::UploadsController do
   describe 'GET #index' do
     context 'when unauthorized' do
       it 'fails with HTTP 401' do
@@ -23,7 +23,6 @@ fdescribe Api::V1::UploadsController do
         expect(response).to be_successful
         expect(JSON.parse(response.body).first).to eq(JSON.parse(upload.to_json))
       end
-      run_test!
     end
   end
 end
