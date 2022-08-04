@@ -13,6 +13,7 @@ gem 'caxlsx', '~> 3.2'
 gem 'caxlsx_rails', '~> 0.6.3'
 gem 'cssbundling-rails', '~> 1.0'
 gem 'devise', '~> 4.8'
+gem 'doorkeeper', '~> 5.5'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jsbundling-rails', '~> 1.0'
@@ -24,6 +25,7 @@ gem 'propshaft', '~> 0.6'
 gem 'public_activity'
 gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1'
+gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 7.0.3'
 gem 'rails-i18n', '~> 7.0.3'
 gem 'ransack', '~> 3.2.1'
@@ -79,9 +81,3 @@ group :development, :test do
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
 end
-
-gem 'grape', '~> 1.6'
-
-gem 'rack-cors', '~> 1.1'
-
-gem 'grape-active_model_serializers', '~> 1.5'

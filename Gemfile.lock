@@ -151,6 +151,8 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     docile (1.4.0)
+    doorkeeper (5.5.4)
+      railties (>= 5)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -529,12 +531,12 @@ DEPENDENCIES
   database_cleaner
   debug (>= 1.0.0)
   devise (~> 4.8)
+  doorkeeper (~> 5.5)
   dotenv-rails
   factory_bot_rails
   faker
   foreman (~> 0.87.2)
   friendly_id (~> 5.4, >= 5.4.2)
-  grape (~> 1.6)
   grape-active_model_serializers (~> 1.5)
   guard-livereload
   htmlbeautifier
