@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  mount API::Base, at: '/'
+  draw :api
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     resources :spectra do
