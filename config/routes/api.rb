@@ -10,6 +10,6 @@ namespace 'api' do
 end
 scope 'api' do
   use_doorkeeper do
-    skip_controllers :authorizations, :applications, :authorized_applications
+    skip_controllers :authorizations, :authorized_applications
   end
 end
