@@ -6,18 +6,21 @@ class UploadsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :fetch_tags, only: %i[new edit update]
-
-  before_action :authorize_upload
   after_action :verify_authorized
 
   def index
-    @q = Upload
-         .with_attached_thumbnail
-         .ransack(params[:q])
+    @uploads = Upload.all
+
+    authorize @uploads
+
+    @q = @uploads.ransack(params[:q])
     @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC'), items: current_user&.settings(:pagination)&.per || 10
   end
 
   def show
+    @upload = Upload.find(params[:id])
+    authorize @upload
+
     respond_to do |format|
       format.html do
         @upload = Upload
@@ -44,6 +47,8 @@ class UploadsController < ApplicationController
 
   def new
     @upload = current_user.uploads.build
+
+    authorize @upload
   end
 
   def edit
@@ -52,12 +57,16 @@ class UploadsController < ApplicationController
               .with_attached_documents
               .find(params[:id])
 
+    authorize @upload
+
     @images = @upload.images.all.with_all_variant_records
     @document = @upload.documents.all
   end
 
   def create
     @upload = current_user.uploads.build(upload_params)
+
+    authorize @upload
 
     if @upload.save
       flash[:success] = 'Upload was successfully created'
@@ -71,6 +80,8 @@ class UploadsController < ApplicationController
     @upload = Upload
               .with_attached_thumbnail
               .find(params[:id])
+
+    authorize @upload
 
     @images = @upload.images.all
     @document = @upload.documents.all
@@ -90,6 +101,8 @@ class UploadsController < ApplicationController
   def update_status
     @upload = Upload.find(params[:id])
 
+    authorize @upload
+
     return unless @upload.update(status: params[:status])
 
     redirect_to @upload
@@ -98,6 +111,9 @@ class UploadsController < ApplicationController
 
   def destroy
     @upload = Upload.find(params[:id])
+
+    authorize @upload
+
     @upload.destroy
     flash[:success] = 'Upload was successfully deleted'
     redirect_to uploads_url, status: :see_other
@@ -126,9 +142,5 @@ class UploadsController < ApplicationController
       documents: [],
       tag_ids: []
     )
-  end
-
-  def authorize_upload
-    authorize(@upload || Upload)
   end
 end
