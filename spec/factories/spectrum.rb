@@ -16,7 +16,7 @@
 FactoryBot.define do
   factory :spectrum do
     title { 'test title' }
-    user_id factory: :user
+    association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }
   end
 end
