@@ -32,4 +32,8 @@ class UploadPolicy < ApplicationPolicy
   def images?
     true
   end
+
+  def images_grid?
+    true
+  end
 end

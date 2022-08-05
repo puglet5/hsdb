@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       member do
         delete :purge_attachment
         patch :update_status
+        get :images_grid
       end
     end
 

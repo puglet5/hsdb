@@ -28,6 +28,7 @@ class UploadsController < ApplicationController
                   .with_attached_images
                   .with_attached_documents
                   .find(params[:id])
+
         @images = @upload
                   .images.all
                   .with_all_variant_records
@@ -39,6 +40,22 @@ class UploadsController < ApplicationController
         send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
       end
     end
+  end
+
+  def images_grid
+    @upload = Upload
+              .with_attached_images
+              .find(params[:id])
+
+    authorize @upload
+
+    @q = @upload
+         .images.all
+         .with_all_variant_records
+
+    @pagy, @grid = pagy @q, items: 20
+
+    render layout: false
   end
 
   def images
