@@ -75,7 +75,7 @@ group :development, :test do
   gem 'brakeman', '~> 5.2'
   gem 'bundler-audit', '~> 0.9.1'
   gem 'capybara'
-  gem 'database_cleaner'
+  gem 'database_cleaner-active_record'
   gem 'debug', '>= 1.0.0'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
