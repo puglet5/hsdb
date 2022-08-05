@@ -76,6 +76,7 @@ group :development, :test do
   gem 'bundler-audit', '~> 0.9.1'
   gem 'capybara'
   gem 'database_cleaner-active_record'
+  gem "database_consistency", "~> 1.1"
   gem 'debug', '>= 1.0.0'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
@@ -84,3 +85,4 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs'
 end
+
