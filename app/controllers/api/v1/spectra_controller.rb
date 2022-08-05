@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        @spectrum = Spectrum.find_by id: params[:id]
+        @spectrum = Spectrum.find_by(id: params[:id]) or not_found
         render json: @spectrum
       end
     end

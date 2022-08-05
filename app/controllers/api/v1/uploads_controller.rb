@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        @upload = Upload.find_by id: params[:id]
+        @upload = Upload.find_by(id: params[:id]) or not_found
         render json: @upload
       end
     end
