@@ -25,7 +25,7 @@ RSpec.describe 'Uploads API' do
   end
 
   path '/api/v1/uploads/{id}' do
-    get 'Retrieves an uploads' do
+    get 'Retrieves an upload' do
       tags 'Uploads'
       produces 'application/json', 'application/xml'
       parameter name: 'id', in: :path, type: :string

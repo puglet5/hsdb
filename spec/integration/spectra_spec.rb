@@ -25,7 +25,7 @@ RSpec.fdescribe 'Spectra API' do
   end
 
   path '/api/v1/spectra/{id}' do
-    get 'Retrieves an spectrum' do
+    get 'Retrieves a spectrum' do
       tags 'Spectra'
       produces 'application/json', 'application/xml'
       parameter name: 'id', in: :path, type: :string
