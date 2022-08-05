@@ -1,4 +1,4 @@
-<% if @images.count >= 3 %>
+<% if @images&.count.to_i >= 3 %>
   <div id="default-carousel" class="relative" data-carousel="static">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden sm:h-64 xl:h-80 2xl:h-96">
@@ -84,7 +84,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
               </svg>
-              <h4 class="mb-4 ml-1 font-medium text-l">Documents (<%= @documents&.count %>)</h4>
+              <h4 class="mb-4 ml-1 font-medium text-l">Documents (<%= @documents&.count.to_i %>)</h4>
             </div>
             <div class="ml-8">
               <ul class="list-disc">
@@ -117,7 +117,7 @@
     <div class="relative w-full mx-auto my-10 md:container md:mx-auto" id="gallery">
       <div class="flex justify-between mb-4 border-b">
         <div class="flex">
-          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @images.count %>)</label>
+          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @images&.count.to_i %>)</label>
           <%= link_to upload_path(format: :zip), class:"my-auto ml-2" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
