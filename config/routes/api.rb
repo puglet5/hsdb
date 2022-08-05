@@ -6,6 +6,7 @@ namespace 'api' do
       post '/', to: 'registrations#create', as: :user_registration
     end
     resources :uploads
+    resources :spectra
   end
 end
 scope 'api' do
