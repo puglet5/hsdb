@@ -10,7 +10,6 @@ exclude:
 - ".bundle/**/*"
 reporters:
 - rubocop
-- require_not_found
 formatter:
   rubocop:
     cops: safe
