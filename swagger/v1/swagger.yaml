@@ -3,9 +3,189 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/api/v1/spectra":
+    get:
+      summary: Lists spectra
+      tags:
+      - Spectra
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: unauthorized
+  "/api/v1/spectra/{id}":
+    get:
+      summary: Retrieves an spectrum
+      tags:
+      - Spectra
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  user_id:
+                    type: integer
+                  slug:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  metadata:
+                    type: object
+                  processing_status:
+                    type: string
+                required:
+                - id
+                - title
+                - user_id
+                - metadata
+                - processing_status
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  user_id:
+                    type: integer
+                  slug:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  metadata:
+                    type: object
+                  processing_status:
+                    type: string
+                required:
+                - id
+                - title
+                - user_id
+                - metadata
+                - processing_status
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
+  "/api/v1/uploads":
+    get:
+      summary: Lists uploads
+      tags:
+      - Uploads
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: unauthorized
+  "/api/v1/uploads/{id}":
+    get:
+      summary: Retrieves an uploads
+      tags:
+      - Uploads
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  user_id:
+                    type: integer
+                  slug:
+                    type: string
+                  status:
+                    type: string
+                  metadata:
+                    type: object
+                required:
+                - id
+                - title
+                - description
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  user_id:
+                    type: integer
+                  slug:
+                    type: string
+                  status:
+                    type: string
+                  metadata:
+                    type: object
+                required:
+                - id
+                - title
+                - description
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
 servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.fdescribe Api::V1::SpectraController do
+RSpec.describe Api::V1::SpectraController do
   before(:each) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
