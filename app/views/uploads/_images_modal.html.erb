@@ -20,7 +20,7 @@
         </div>
         <div class="p-6 space-y-2">
           <div class="grid grid-cols-5 overflow-auto gap-y-1 max-h-1/2">
-            <% @upload.images.each do |image| %>
+            <% @images&.each do |image| %>
               <% if image.persisted? %>
                 <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": image.signed_id }, class: "m-2" do %>
                   <div class="relative" id="modal-image-container">

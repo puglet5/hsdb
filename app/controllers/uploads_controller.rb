@@ -5,25 +5,34 @@ class UploadsController < ApplicationController
   include ActiveStorage::SetCurrent
 
   before_action :authenticate_user!
-  before_action :set_upload, only: %i[show edit update destroy]
   before_action :fetch_tags, only: %i[new edit update]
 
   before_action :authorize_upload
   after_action :verify_authorized
 
   def index
-    @q = Upload.includes([:thumbnail_attachment]).ransack(params[:q])
+    @q = Upload
+         .with_attached_thumbnail
+         .ransack(params[:q])
     @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC'), items: current_user&.settings(:pagination)&.per || 10
   end
 
   def show
     respond_to do |format|
       format.html do
-        @upload = Upload.find(params[:id])
+        @upload = Upload
+                  .with_attached_thumbnail
+                  .with_attached_images
+                  .with_attached_documents
+                  .find(params[:id])
+        @images = @upload
+                  .images.all
+                  .with_all_variant_records
+
+        @document = @upload.documents.all
       end
 
       format.zip do
-        # flash[:info] = "Downloading images for #{@upload.title}"
         send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
       end
     end
@@ -37,7 +46,15 @@ class UploadsController < ApplicationController
     @upload = current_user.uploads.build
   end
 
-  def edit; end
+  def edit
+    @upload = Upload
+              .with_attached_images
+              .with_attached_documents
+              .find(params[:id])
+
+    @images = @upload.images.all.with_all_variant_records
+    @document = @upload.documents.all
+  end
 
   def create
     @upload = current_user.uploads.build(upload_params)
@@ -46,39 +63,27 @@ class UploadsController < ApplicationController
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
     else
-      # flash.now[:alert] = 'Couldn\'t save the upload: invalid params'
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
+    @upload = Upload
+              .with_attached_thumbnail
+              .find(params[:id])
+
+    @images = @upload.images.all
+    @document = @upload.documents.all
+
     @upload.user = current_user if @upload.user.nil?
-    @images_count_pre = @upload.images.count unless @images_count_err
+    @images_count_pre = @images.count unless @images_count_err
+
     if @upload.update(upload_params)
-
-      # if @upload.update(upload_params.reject { |k| k['images'] || k['documents'] || k['thumbnail'] })
-
-      # if upload_params[:images].present?
-      #   upload_params[:images].each do |image|
-      #     @upload.images.attach(image)
-      #   end
-      # end
-
-      # if upload_params[:documents].present?
-      #   upload_params[:documents].each do |document|
-      #     @upload.documents.attach(document)
-      #   end
-      # end
-
-      # @upload.thumbnail.attach(upload_params[:thumbnail]) if upload_params[:thumbnail].present?
-
       flash[:success] = 'Upload was successfully updated'
       redirect_to @upload
     else
-      # flash[:success] = 'Your images have been successfully uploaded' if @upload.images.count > image_count
-      @images_count_err = @upload.images.count
+      @images_count_err = @images.count
       render :edit, status: :unprocessable_entity
-      # flash.keep
     end
   end
 
@@ -92,6 +97,7 @@ class UploadsController < ApplicationController
   end
 
   def destroy
+    @upload = Upload.find(params[:id])
     @upload.destroy
     flash[:success] = 'Upload was successfully deleted'
     redirect_to uploads_url, status: :see_other
@@ -104,17 +110,22 @@ class UploadsController < ApplicationController
 
   private
 
-  def set_upload
-    @upload = Upload.includes([images_attachments: :blob]).find(params[:id])
-  end
-
   def fetch_tags
     @tags = Tag.all
   end
 
   def upload_params
-    params.require(:upload).permit(:title, :body, :description, :status, :thumbnail, :metadata, images: [],
-                                                                                                documents: [], tag_ids: [])
+    params.require(:upload).permit(
+      :title,
+      :body,
+      :description,
+      :status,
+      :thumbnail,
+      :metadata,
+      images: [],
+      documents: [],
+      tag_ids: []
+    )
   end
 
   def authorize_upload
