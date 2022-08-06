@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GenerateVariantsJob < ApplicationJob
   queue_as :default
 
