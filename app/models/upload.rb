@@ -40,11 +40,15 @@ class Upload < ApplicationRecord
   friendly_id :title, use: %i[slugged finders]
 
   after_commit :parse_json, on: %i[create update]
-  after_commit do
-    GenerateVariantsJob.perform_later id
-  end
+  after_commit :process_images, on: %i[create update]
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
+  end
+
+  private
+
+  def process_images
+    GenerateVariantsJob.perform_later id
   end
 end
