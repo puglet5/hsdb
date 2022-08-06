@@ -486,10 +486,10 @@ __metadata:
     esbuild-rails: ^1.0.3
     eslint: ^8.21.0
     flowbite: 1.4.7
-    postcss: ^8.4.14
+    postcss: ^8.4.16
     postcss-cli: ^10.0.0
     postcss-nested: ^5.0.6
-    tailwindcss: ^3.1.7
+    tailwindcss: ^3.1.8
     trix: ^2.0.0-beta.0
     uppy-activestorage-upload: "https://github.com/puglet5/uppy-activestorage-upload"
   languageName: unknown
@@ -2949,6 +2949,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.4.16":
+  version: 8.4.16
+  resolution: "postcss@npm:8.4.16"
+  dependencies:
+    nanoid: ^3.3.4
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.2
+  checksum: 10eee25efd77868036403858577da0cefaf2e0905feeaba5770d5438ccdddba3d01cba8063e96b8aac4c6daa0ed413dd5ae0554a433a3c4db38df1d134cffc1f
+  languageName: node
+  linkType: hard
+
 "preact@npm:^10.5.13":
   version: 10.10.0
   resolution: "preact@npm:10.10.0"
@@ -3333,9 +3344,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.1.7":
-  version: 3.1.7
-  resolution: "tailwindcss@npm:3.1.7"
+"tailwindcss@npm:^3.1.8":
+  version: 3.1.8
+  resolution: "tailwindcss@npm:3.1.8"
   dependencies:
     arg: ^5.0.2
     chokidar: ^3.5.3
@@ -3364,7 +3375,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: adbc9869b72f741e9a0fc281b79710863617a588fd5d897316b676f789b6482c79f46f324223300ca962afbe55bed3ec16a37a6ccf4bb2c99c53cf8c5dd9700d
+  checksum: 86480301fc6ae1e392c2aba8264ab425bd919078176b010fda724518a7c265e950da5f4120c69c9041509c318207985fa9d680b6f5021e23f8214135a61a54b6
   languageName: node
   linkType: hard
 
