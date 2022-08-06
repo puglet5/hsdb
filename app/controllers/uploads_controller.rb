@@ -9,7 +9,10 @@ class UploadsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @uploads = Upload.all
+    @uploads = Upload
+               .all
+               .with_attached_thumbnail
+               .includes(:user)
 
     authorize @uploads
 
@@ -33,7 +36,7 @@ class UploadsController < ApplicationController
                   .images.all
                   .with_all_variant_records
 
-        @document = @upload.documents.all
+        @documents = @upload.documents.all
       end
 
       format.zip do
@@ -77,7 +80,7 @@ class UploadsController < ApplicationController
     authorize @upload
 
     @images = @upload.images.all.with_all_variant_records
-    @document = @upload.documents.all
+    @documents = @upload.documents.all
   end
 
   def create

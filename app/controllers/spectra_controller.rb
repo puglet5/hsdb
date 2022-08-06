@@ -9,7 +9,13 @@ class SpectraController < ApplicationController
     @spectra = Spectrum.all.order('created_at asc')
   end
 
-  def show; end
+  def show
+    @spectrum = Spectrum
+                .with_attached_files
+                .with_attached_csvs
+                .with_attached_processed_csvs
+                .find(params[:id])
+  end
 
   def new
     @spectrum = Spectrum.new
