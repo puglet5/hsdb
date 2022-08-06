@@ -36,7 +36,9 @@ class UploadsController < ApplicationController
                   .images.all
                   .with_all_variant_records
 
-        @documents = @upload.documents.all
+        @documents = @upload
+                     .documents
+                     .all
       end
 
       format.zip do
@@ -79,8 +81,11 @@ class UploadsController < ApplicationController
 
     authorize @upload
 
-    @images = @upload.images.all.with_all_variant_records
     @documents = @upload.documents.all
+    @images = @upload
+              .images
+              .all
+              .with_all_variant_records
   end
 
   def create
@@ -103,8 +108,11 @@ class UploadsController < ApplicationController
 
     authorize @upload
 
-    @images = @upload.images.all
-    @document = @upload.documents.all
+    @documents = @upload.documents.all
+    @images = @upload
+              .images
+              .all
+              .with_all_variant_records
 
     @upload.user = current_user if @upload.user.nil?
     @images_count_pre = @images.count unless @images_count_err
