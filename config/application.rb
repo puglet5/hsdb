@@ -43,6 +43,9 @@ module ITMOHsdb
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
     config.active_storage.track_variants = true
 
+    Rails.application.config.active_storage.analyzers.delete ActiveStorage::Analyzer::ImageAnalyzer
+    Rails.application.config.active_storage.analyzers.append ActiveStorage::Analyzer::ImageAnalyzer::Vips
+
     config.middleware.use Rack::Deflater
 
     config.middleware.insert_before 0, Rack::Cors do
