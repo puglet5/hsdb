@@ -127,6 +127,19 @@ module ApplicationHelper
     end
   end
 
+  def status_badge_color(status)
+    case status
+    when 'draft'
+      'text-yellow-300'
+    when 'active'
+      'text-green-300'
+    when 'archived'
+      'text-gray-300'
+    else
+      'text-primary-300'
+    end
+  end
+
   class Renderer
     def self.copyright(msg)
       # "&copy; #{Time.now.year} | <b>#{name}</b> | #{msg}".html_safe
