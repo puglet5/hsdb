@@ -1,5 +1,9 @@
-<div class="border-bottom mb-4">
-  <h1><%= t('.title') %></h1>
-</div>
+<%= render Sections::SectionComponent.new() do %>
+  <%= render Sections::DivContainerComponent.new() do %>
+    <div class="mb-4 border-bottom">
+      <h1><%= t('.title') %></h1>
+    </div>
 
-<%= render 'form', application: @application %>
+    <%= render 'form', application: @application %>
+  <% end %>
+<% end %>

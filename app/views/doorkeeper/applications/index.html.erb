@@ -1,38 +1,45 @@
-<div class="border-bottom mb-4">
-  <h1><%= t('.title') %></h1>
-</div>
+<%= render Sections::SectionComponent.new() do %>
+  <%= render Sections::DivContainerComponent.new() do %>
+    <%= render Typography::H1Component.new(cls: "text-center").with_content(t('.title')) %>
 
-<p><%= link_to t('.new'), new_oauth_application_path, class: 'btn btn-success' %></p>
+    <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
+      <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Allowed API apps") %>
+      <%= render Links::NewLinkComponent.new(path: new_oauth_application_path, cls: "text-gray-500") %>
+    <% end %>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th><%= t('.name') %></th>
-    <th><%= t('.callback_url') %></th>
-    <th><%= t('.confidential') %></th>
-    <th><%= t('.actions') %></th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @applications.each do |application| %>
-    <tr id="application_<%= application.id %>">
-      <td class="align-middle">
-        <%= link_to application.name, oauth_application_path(application) %>
-      </td>
-      <td class="align-middle">
-        <%= simple_format(application.redirect_uri) %>
-      </td>
-      <td class="align-middle">
-        <%= application.confidential? ? t('doorkeeper.applications.index.confidentiality.yes') : t('doorkeeper.applications.index.confidentiality.no') %>
-      </td>
-      <td class="align-middle">
-        <%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(application), class: 'btn btn-link' %>
-      </td>
-      <td class="align-middle">
-        <%= render 'delete_form', application: application %>
-      </td>
-    </tr>
+    <div class="relative overflow-x-auto border rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+        <thead>
+          <tr>
+            <th scope="col" class="px-6 py-3">#</th>
+            <th scope="col" class="px-6 py-3"><%= t('.name') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.callback_url') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.confidential') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.actions') %></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <% @applications.each do |application| %>
+            <tr id="application_<%= application.id %>" class="border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200">
+              <td class="px-6 py-4">
+                <%= application.id %>
+              </td>
+              <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= link_to application.name, oauth_application_path(application) %>
+              </th>
+              <td class="px-6 py-4">
+                <%= simple_format(application.redirect_uri) %>
+              </td>
+              <td class="px-6 py-4">
+                <%= application.confidential? ? t('doorkeeper.applications.index.confidentiality.yes') : t('doorkeeper.applications.index.confidentiality.no') %>
+              </td>
+              <td class="px-6 py-4">
+                <%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(application), class: 'btn btn-link' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% end %>
-  </tbody>
-</table>
+<% end %>
