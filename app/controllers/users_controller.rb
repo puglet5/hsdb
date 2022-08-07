@@ -20,6 +20,12 @@ class UsersController < ApplicationController
   private
 
   def setting_params
-    params.require(:user).permit(settings: { processing: :enabled, pagination: :per })
+    # TODO: rewrite this to permit all params in settings hash
+    params.require(:user).permit(settings:
+                                  {
+                                    processing: :enabled,
+                                    pagination: :per,
+                                    uploading: :thumbnails
+                                  })
   end
 end

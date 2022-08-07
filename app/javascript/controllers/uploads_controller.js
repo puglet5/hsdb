@@ -8,7 +8,16 @@ export default class extends Controller {
 
   static targets = ["div", "trigger"]
 
+  static values = {
+
+    settings: String
+
+  }
+
   connect() {
+
+    let hasThumbnailsEnabled = this.settingsValue === "true" ? true : false
+
     const setupUppy = (element) => {
       let trigger = this.triggerTarget
 
@@ -31,6 +40,7 @@ export default class extends Controller {
       })
 
       uppy.use(Dashboard, {
+        disableThumbnailGenerator: !hasThumbnailsEnabled,
         trigger: trigger,
         // target: target,
         closeAfterFinish: true,
