@@ -81,7 +81,11 @@ RSpec.describe User, type: :model do
       end
 
       it 'has default settings for spectra processing' do
-        expect(valid_user.settings(:processing).enabled).to eq('false')
+        expect(valid_user.settings(:processing).enabled).to eq(false)
+      end
+
+      it 'has default settings for image uploads' do
+        expect(valid_user.settings(:uploading).thumbnails).to eq(true)
       end
     end
   end

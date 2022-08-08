@@ -9,7 +9,8 @@ RSpec.describe '/users', type: :request do
 
   new_valid_settings = {
     'settings' => {
-      'processing' => { 'enabled' => 'true' },
+      'processing' => { 'enabled' => true },
+      'uploading' => { 'thumbnails' => false },
       'pagination' => { 'per' => '12' }
     }
   }
@@ -36,7 +37,9 @@ RSpec.describe '/users', type: :request do
         patch update_settings_user_url(id: user.id), params: { user: new_valid_settings }
         user.reload
         expect(user.settings(:pagination).per).to eq('12')
-        expect(user.settings(:processing).enabled).to eq('true')
+        expect(user.settings(:processing).enabled).to eq(true)
+        expect(user.settings(:uploading).thumbnails).to eq(false)
+
       end
 
       it 'redirects to the user' do
@@ -53,7 +56,8 @@ RSpec.describe '/users', type: :request do
         expect(response.status).to eq(302)
         user.reload
         expect(user.settings(:pagination).per).to eq('10')
-        expect(user.settings(:processing).enabled).to eq('false')
+        expect(user.settings(:processing).enabled).to eq(false)
+        expect(user.settings(:uploading).thumbnails).to eq(true)
       end
     end
   end
