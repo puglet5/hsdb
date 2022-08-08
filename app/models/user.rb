@@ -28,7 +28,6 @@ class User < ApplicationRecord
   rolify
 
   include PublicActivity::Model
-  tracked owner: :itself
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable

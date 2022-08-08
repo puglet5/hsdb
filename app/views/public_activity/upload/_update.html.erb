@@ -1,19 +1,18 @@
-<div class="stream">
-  <div class="stream-badge">
-    <i class="fa fa-globe"></i>
-  </div>
-  <div class="stream-panel">
-    <div class="stream-info">
+<% if activity.trackable %>
+  <li class="mb-2 ml-4">
+    <div class="absolute w-3 h-3 bg-gray-200 border border-white rounded-full mt-1.5 -left-1.5 dark:border-gray-900 dark:bg-gray-700"></div>
+    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+      Uploads | <%= activity.created_at.strftime("%d %b, %Y at %I:%M %p") %>
+    </time>
+    <div class="flex mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+      <span class="my-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+        </svg>
+      </span>
+      <p class="ml-2">
+        <%= link_to truncate(activity.trackable.title, :length => 71), activity.trackable %>
+      </p>
     </div>
-    <% if activity.trackable %>
-      <i class="fa fa-edit"></i>
-      Edited upload: <%= link_to truncate(activity.trackable.title, :length => 71), activity.trackable %>
-      <small><span class="date">on: <%= activity.created_at.strftime("%d %b, %Y at %I:%M %p") %></span></small>
-    <% else %>
-      <i class="fa fa-window-close"></i>
-      Edited upload (DELETED)
-      <small><span class="date">on: <%= activity.created_at.strftime("%d %b, %Y at %I:%M %p") %></span></small>
-    <% end %>
-  </div>
-</div>
-<hr>
+  </li>
+<% end %>
