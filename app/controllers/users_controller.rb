@@ -11,6 +11,17 @@ class UsersController < ApplicationController
     @user = current_user
 
     setting_params[:settings].each do |key, value|
+      # This is a workaround for the fact that checkboxes in settings form return boolean values as strings instead. Will need to move this bit in a separate concern later.
+
+      # ActiveModel::Type::Boolean.new.cast(nil) = nil, so its safe to have missing keys.
+
+      case key
+      when 'processing'
+        value['enabled'] = ActiveModel::Type::Boolean.new.cast(value['enabled'])
+      when 'uploading'
+        value['thumbnails'] = ActiveModel::Type::Boolean.new.cast(value['thumbnails'])
+      end
+
       @user.settings(key.to_sym).update! value
     end
     redirect_to @user
