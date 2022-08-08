@@ -39,7 +39,6 @@ RSpec.describe '/users', type: :request do
         expect(user.settings(:pagination).per).to eq('12')
         expect(user.settings(:processing).enabled).to eq(true)
         expect(user.settings(:uploading).thumbnails).to eq(false)
-
       end
 
       it 'redirects to the user' do
