@@ -1,6 +1,5 @@
 import "trix"
 import "@rails/actiontext"
-import "flowbite/dist/flowbite.js"
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./packs/mini-profiler-fix.js"

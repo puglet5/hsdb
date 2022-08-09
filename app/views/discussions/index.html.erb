@@ -15,8 +15,8 @@
           <%= render "shared/latest_discussions" %>
         <% else %>
           <div class="flex justify-between border-b">
-            <%= render Typography::H4Component.new(cls: "pb-2 text-center !my-auto").with_content("Latest Discussions") %>
-            <%= render Links::NewLinkComponent.new(path: new_discussion_path, cls: "pb-2 my-auto") %>
+            <%= render Typography::H4Component.new(cls: "text-center").with_content("Latest Discussions") %>
+            <%= render Links::NewLinkComponent.new(path: new_discussion_path) %>
           </div>
         <% end %>
       </div>

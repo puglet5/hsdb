@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["toggle", "modal"]
+  static targets = ["toggle", "dropdown"]
 
   toggle() {
-    this.modalTarget.classList.toggle("hidden")
+    this.dropdownTarget.classList.toggle("hidden")
   }
 
 }

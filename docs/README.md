@@ -26,6 +26,7 @@ sudo chmod 666 /var/run/docker.sock
 #### Flowbite
 Flowbite component library is used (v. 1.4.7) with some modifications to work nicely with Turbo. Apply flowbite.path with `git apply flowbite.patch` to get Flowbite's JavaScript working properly, thought it shall soon be replaced/rewritten with Stimulus.
 
+_As of now, all of Flowbite's JavaScript used in this app is rewritten with Stimulus._
 
 #### Headwind
 If you use VSCode, install Headwind extension and include this in your settings.json file:
