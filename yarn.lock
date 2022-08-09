@@ -173,17 +173,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "@tailwindcss/forms@npm:0.5.2"
-  dependencies:
-    mini-svg-data-uri: ^1.2.3
-  peerDependencies:
-    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1"
-  checksum: 3c4df23491d14b37d8cef88d0f3df80f92b684b801d59c23d600773a4ccac11353a555ca36bea68ae4a82134f9c030d1353c05890a5f0085c1c40c649f806640
-  languageName: node
-  linkType: hard
-
 "@tailwindcss/nesting@npm:^0.0.0-insiders.565cd3e":
   version: 0.0.0-insiders.565cd3e
   resolution: "@tailwindcss/nesting@npm:0.0.0-insiders.565cd3e"
@@ -475,7 +464,6 @@ __metadata:
     "@popperjs/core": ^2.11.5
     "@rails/actiontext": ^7.0.3-1
     "@rails/activestorage": ^7.0.3-1
-    "@tailwindcss/forms": ^0.5.2
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
     "@uppy/core": ^2.3.2
     "@uppy/dashboard": ^2.4.1
@@ -485,7 +473,7 @@ __metadata:
     esbuild: ^0.14.54
     esbuild-rails: ^1.0.3
     eslint: ^8.21.0
-    flowbite: 1.4.7
+    flowbite: 1.5.1
     photoswipe: ^5.3.0
     postcss: ^8.4.16
     postcss-cli: ^10.0.0
@@ -1570,13 +1558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.4.7":
-  version: 1.4.7
-  resolution: "flowbite@npm:1.4.7"
+"flowbite@npm:1.5.1":
+  version: 1.5.1
+  resolution: "flowbite@npm:1.5.1"
   dependencies:
     "@popperjs/core": ^2.9.3
     mini-svg-data-uri: ^1.4.3
-  checksum: 14bd832553e430a4c53bfdb24e135058ef1e2051bc9aa7ee9dc75d2c2cbdecfce4055607194a5742c6f067314a383d4d955e007d667d6c51900c93b54661921f
+  checksum: 3c7d060991132c863f06bd397f13442a0d1bdb24e755bd3ee70e706e9d3c1bb7358cfaffe9ba62a37b11899779c5f73f78ccdbe7750b6d4b2f2a769f9f42aa5b
   languageName: node
   linkType: hard
 
@@ -2151,7 +2139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mini-svg-data-uri@npm:^1.2.3, mini-svg-data-uri@npm:^1.4.3":
+"mini-svg-data-uri@npm:^1.4.3":
   version: 1.4.4
   resolution: "mini-svg-data-uri@npm:1.4.4"
   bin:
