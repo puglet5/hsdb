@@ -14,12 +14,14 @@ Rails.application.routes.draw do
 
   draw :api
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    resources :spectra do
-      member do
-        delete :purge_attachment
-      end
+  concern :attachment_purgeable do
+    member do
+      delete :purge_attachment
     end
+  end
+
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+    resources :spectra, concerns: :attachment_purgeable
 
     resources :users, only: %i[show] do
       member do
@@ -34,9 +36,8 @@ Rails.application.routes.draw do
     end
     devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-    resources :uploads do
+    resources :uploads, concerns: :attachment_purgeable do
       member do
-        delete :purge_attachment
         patch :update_status
         get :images_grid
       end
