@@ -205,16 +205,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/companion-client@npm:^2.0.0":
-  version: 2.2.1
-  resolution: "@uppy/companion-client@npm:2.2.1"
-  dependencies:
-    "@uppy/utils": ^4.1.0
-    namespace-emitter: ^2.0.1
-  checksum: 9f81638afd07d9486355a8e5c489d62bc7613c1e05bb4c6ef0dc3640a044b4cc1949403e49916f090a0a7e712d93fdebeef121f6992235ed4499c13e001f7c5f
-  languageName: node
-  linkType: hard
-
 "@uppy/core@npm:^2.3.2":
   version: 2.3.2
   resolution: "@uppy/core@npm:2.3.2"
@@ -325,7 +315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/utils@npm:^4.0.0, @uppy/utils@npm:^4.1.0":
+"@uppy/utils@npm:^4.1.0":
   version: 4.1.0
   resolution: "@uppy/utils@npm:4.1.0"
   dependencies:
@@ -480,7 +470,7 @@ __metadata:
     postcss-nested: ^5.0.6
     tailwindcss: ^3.1.8
     trix: ^2.0.0-beta.0
-    uppy-activestorage-upload: "https://github.com/puglet5/uppy-activestorage-upload"
+    uppy-activestorage-upload: "https://github.com/excid3/uppy-activestorage-upload"
   languageName: unknown
   linkType: soft
 
@@ -909,6 +899,13 @@ __metadata:
   dependencies:
     css-tree: ^1.1.2
   checksum: 380ba9663da3bcea58dee358a0d8c4468bb6539be3c439dc266ac41c047217f52fd698fb7e4b6b6ccdfb8cf53ef4ceed8cc8ceccb8dfca2aa628319826b5b998
+  languageName: node
+  linkType: hard
+
+"cuid@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "cuid@npm:2.1.8"
+  checksum: 12b85b3f5150a6f0b9e4f345c8d98299d74647419151751fa1132f6702fe2b5388ceceb1c9b49bad7cab1b3ac033c7cedea8ffc034930f90005b8a4345025288
   languageName: node
   linkType: hard
 
@@ -3474,17 +3471,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uppy-activestorage-upload@https://github.com/puglet5/uppy-activestorage-upload":
-  version: 2.0.0
-  resolution: "uppy-activestorage-upload@https://github.com/puglet5/uppy-activestorage-upload.git#commit=60dcbc1150aa513d942edafc15021fa28fb1b865"
+"uppy-activestorage-upload@https://github.com/excid3/uppy-activestorage-upload":
+  version: 0.1.1
+  resolution: "uppy-activestorage-upload@https://github.com/excid3/uppy-activestorage-upload.git#commit=d88e3576c33f05ccab52ec0850e1d2a00f263fd0"
   dependencies:
-    "@uppy/companion-client": ^2.0.0
-    "@uppy/utils": ^4.0.0
-    nanoid: ^3.1.25
+    cuid: ^2.1.8
   peerDependencies:
-    "@rails/activestorage": ^6.0.0
-    "@uppy/core": ^2.0.0
-  checksum: 252fb5c05683ccf949a6703f4061eec913876cbc4d73bc5660b94fc20c04aaad0b14c46c79fa8212b3b0cbab5b1f4e4d33b2daf32ca0d1265b64f9b1819e5ea3
+    "@rails/activestorage": "*"
+    "@uppy/core": "*"
+  checksum: 02b62a8d35c92513a0e38635fe9c3455fc20c16cdd857233c0025e44e26f610722c65b25db0b1c9e593cb383a9c132f35f2b52925876d113aacc3e32b2ef9522
   languageName: node
   linkType: hard
 

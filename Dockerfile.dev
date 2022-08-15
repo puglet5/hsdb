@@ -1,4 +1,4 @@
-FROM ruby:3.0.3-alpine3.15
+FROM ruby:3.1.2-alpine
 
 ENV APP_PATH /var/app
 ENV BUNDLE_VERSION 2.3.9
@@ -6,10 +6,6 @@ ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
 ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_PORT 3000
-
-COPY ./dev-docker-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
-COPY ./test-docker-entrypoint.sh /usr/local/bin/test-entrypoint.sh
-RUN chmod +x /usr/local/bin/dev-entrypoint.sh && chmod +x /usr/local/bin/test-entrypoint.sh
 
 RUN apk -U add --no-cache \
 build-base \
@@ -31,9 +27,8 @@ less \
 RUN gem install bundler --version "$BUNDLE_VERSION" \
 && rm -rf $GEM_HOME/cache/*
 
-# navigate to app directory
 WORKDIR $APP_PATH
-
 EXPOSE $RAILS_PORT
-
-ENTRYPOINT [ "bundle", "exec" ]
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
