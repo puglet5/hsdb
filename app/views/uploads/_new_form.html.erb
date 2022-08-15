@@ -46,6 +46,11 @@
     <%= render Form::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
   </div>
 
+  <div class="mb-6">
+    <%= render Form::LabelComponent.new().with_content("Materials") %>
+    <%= f.collection_select :material_ids, materials, :id, :name, {}, multiple: true %>
+  </div>
+
   <!-- Metadata fields -->
   <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
 
