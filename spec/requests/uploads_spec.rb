@@ -106,7 +106,7 @@ RSpec.describe '/uploads', type: :request do
       end
     end
 
-    context 'with invalid parameters' do
+    fcontext 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template with 422 response (turbo))" do
         upload = Upload.create! valid_attributes
         patch upload_url(id: upload.id), params: { upload: invalid_attributes }

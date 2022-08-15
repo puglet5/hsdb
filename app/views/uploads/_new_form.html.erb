@@ -20,7 +20,7 @@
 
     <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
       <%= render Form::LabelComponent.new().with_content("Images") %>
-      <%= tag.div class: "flex items-center justify-center w-full h-40 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+      <%= tag.div class: "flex items-center justify-center w-full h-40 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
         <p class="font-medium text-center" id="uppy-text">
           Browse...
         </p>
@@ -46,10 +46,12 @@
     <%= render Form::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
   </div>
 
-  <div class="mb-6">
-    <%= render Form::LabelComponent.new().with_content("Materials") %>
-    <%= f.collection_select :material_ids, materials, :id, :name, {}, multiple: true %>
-  </div>
+  <% if materials&.count.to_i > 0 %>
+    <div class="mb-6">
+      <%= render Form::LabelComponent.new().with_content("Materials") %>
+      <%= f.collection_select :material_ids, materials, :id, :name, {}, multiple: true, data: {controller: "select"}, id: "select" %>
+    </div>
+  <% end %>
 
   <!-- Metadata fields -->
   <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
@@ -70,14 +72,14 @@
         <div class="col-span-5">
           <%= render Form::LabelComponent.new().with_content("Field name") %>
           <div class="relative">
-            <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg metadata bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="wavelength, etc." autofocus>
+            <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="wavelength, etc." autofocus>
           </div>
         </div>
         <div class="col-span-5">
           <%= render Form::LabelComponent.new().with_content("Value") %>
 
           <div class="flex">
-            <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 border border-gray-300 rounded-lg metadata bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1064 or [532, 1064]">
+            <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1064 or [532, 1064]">
           </div>
         </div>
       </div>
