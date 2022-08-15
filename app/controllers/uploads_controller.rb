@@ -5,7 +5,9 @@ class UploadsController < ApplicationController
   include ActiveStorage::SetCurrent
 
   before_action :authenticate_user!
-  before_action :fetch_tags, only: %i[new edit update]
+  before_action :fetch_tags, only: %i[new edit]
+  before_action :fetch_materials, only: %i[new edit]
+
   after_action :verify_authorized
 
   def index
@@ -164,6 +166,10 @@ class UploadsController < ApplicationController
     @tags = Tag.all
   end
 
+  def fetch_materials
+    @materials = Material.all
+  end
+
   def upload_params
     params.require(:upload).permit(
       :title,
@@ -174,7 +180,8 @@ class UploadsController < ApplicationController
       :metadata,
       images: [],
       documents: [],
-      tag_ids: []
+      tag_ids: [],
+      material_ids: []
     )
   end
 end

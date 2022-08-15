@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_082507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -103,6 +103,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.bigint "resource_owner_id"
     t.bigint "application_id", null: false
@@ -167,6 +173,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "upload_materials", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_upload_materials_on_material_id"
+    t.index ["upload_id", "material_id"], name: "index_upload_materials_on_upload_id_and_material_id", unique: true
+    t.index ["upload_id"], name: "index_upload_materials_on_upload_id"
+  end
+
   create_table "upload_tags", force: :cascade do |t|
     t.bigint "upload_id", null: false
     t.bigint "tag_id", null: false
@@ -227,6 +243,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "replies", "discussions", name: "replies_discussion_id_fk"
   add_foreign_key "replies", "users", name: "replies_user_id_fk"
+  add_foreign_key "upload_materials", "materials"
+  add_foreign_key "upload_materials", "uploads"
   add_foreign_key "upload_tags", "tags"
   add_foreign_key "upload_tags", "uploads"
   add_foreign_key "uploads", "users", name: "uploads_user_id_fk"
