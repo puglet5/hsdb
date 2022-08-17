@@ -9,7 +9,7 @@ require("esbuild").build({
   minify: true,
   platform: 'browser',
   target: [
-    'es2015',
+    'es2020',
   ],
   outdir: path.join(process.cwd(), "app/assets/builds"),
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
