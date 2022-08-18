@@ -26,6 +26,14 @@ services:
     image: redis:6.2
     volumes:
       - redis_data:/data
+  guard:
+    build: .
+    env_file:
+      - .env
+    command: bundle exec guard --no-bundler-warning --no-interactions -P livereload
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
 
 volumes:
   pg_data:

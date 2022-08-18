@@ -107,9 +107,9 @@ Rails.application.configure do
   config.hosts << '127.0.0.1'
 
   # config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
-  config.middleware.use(Rack::LiveReload, host: '0.0.0.0', source: :vendored)
+  config.middleware.use(Rack::LiveReload, host: 'localhost', source: :vendored)
 
-  config.serve_static_assets = false \
+  config.serve_static_assets = false
 
   config.action_view.image_loading = 'lazy'
 end
