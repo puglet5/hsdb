@@ -1,62 +1,33 @@
-version: '3'
-networks:
-  development:
-  test:
-volumes:
-  db_data:
-  gem_cache:
-  shared_data:
 services:
-  hsdb_redis:
-    image: redis:4.0-alpine
-    command: redis-server
-    networks:
-      - development
-      - test
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
     volumes:
-      - shared_data:/var/shared/redis
-  hsdb_db:
-    image: postgres:12.5-alpine
-    container_name: hsdb_db
-    volumes:
-      - db_data:/var/lib/postgresql/data
-      - shared_data:/var/shared
-    networks:
-      - development
-      - test
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-    ports:
-      - 5099:5432
-  hsdb_livereload:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - 35729:35729
-    volumes:
-      - .:/var/app
-      - shared_data:/var/shared
-      - gem_cache:/usr/local/bundle/gems
-  hsdb_app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: hsdb_app
-    volumes:
-      - .:/var/app
-      - shared_data:/var/shared
-      - gem_cache:/usr/local/bundle/gems
-    networks:
-      - development
-    ports:
-      - 3000:3000
-    stdin_open: true
-    tty: true
-    env_file: .env
-    command: ['bin/dev']
-    environment:
-      RAILS_ENV: development
+      - HISTFILE=/usr/src/app/log/.bash_history
     depends_on:
-      - hsdb_db
+      - db
+      - redis
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  redis:
+    image: redis:6.2
+    volumes:
+      - redis_data:/data
+
+volumes:
+  pg_data:
+  redis_data:
+  bundle:
