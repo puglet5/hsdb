@@ -1,4 +1,4 @@
-<div class="flex justify-between pb-4 border-b">
+<div class="flex justify-between border-b">
   <%= render Typography::H4Component.new(cls: "text-center").with_content("Categories") %>
   <% if policy(:category).new? %>
     <%= render Links::NewLinkComponent.new(path: new_category_path) %>

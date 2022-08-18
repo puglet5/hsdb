@@ -10,6 +10,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
       <% end %>
     </div>
+
     <div class="flex justify-center mt-20 ">
       <%= link_to "New", new_upload_path, class: "px-10 my-auto text-sm font-medium text-center text-white rounded-lg shadow-lg grow-0 bg-gradient-to-r from-secondary-500 to-primary-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-500 py-2.5" %>
       <div class="w-2/3 ml-6">
@@ -17,10 +18,24 @@
       </div>
     </div>
 
-    <div class="mt-20">
-      <%= render @uploads %>
-      <%== pagy_nav @pagy %>
-    </div>
+    <% if @uploads&.count > 0 %>
+      <div class="mt-20">
+        <%= render @uploads %>
+        <% if @pagy.pages > 1 %>
+          <%== pagy_nav @pagy %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="mt-20">
+        <p class="mb-4 text-sm text-center text-gray-400">
+          There are no discussions yet, click
+          <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary-500 to-primary-500">
+            New
+          </span>
+          to create one
+        </p>
+      </div>
+    <% end %>
   <% end %>
 
 <% end %>
