@@ -4,16 +4,46 @@
 
 ## Notes on development
 
-### Docker config
+### Locally
 
-Export appropriate database env variables (see config/database.yml)
 
-Install docker, docker-compose and run:
+
+
+### in Docker
+
+#### Services
+
+Stop your local db services, e.g.:
+```bash
+sudo systemctl stop postgresql redis
+```
+
+#### `.env`
+
+You must export the following environment variables before **initial build**:
+```bash
+PGHOST= # default is "db", defined in docker-compose.yml
+PGUSER=
+PGPASSWORD= # default is "changeme", defined in docker-compose.yml
+REDIS_URL= # should be something like "redis://redis:6379/0",
+# redis hostname is also defined in docker-compose.yml
+```
+
+Initial build:
 
 ```bash
 git clone https://github.com/puglet5/hsdb.git
-cd hsdb/
-docker-compose build && docker-compose up
+cd hsdb
+docker compose build
+# creates and seeds the database
+docker compose run --rm web bin/rails db:setup
+# alternatively, if you don't want to seed the database
+docker compose run --rm web bin/rails db:create && bin/rails db:schema:load
+```
+
+On successive builds:
+```bash
+docker compose up --build
 ```
 
 If you get the following error: `Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock`, execute:
