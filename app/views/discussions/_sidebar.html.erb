@@ -1,51 +1,56 @@
 <div class="flex justify-between pb-4 border-b">
   <%= render Typography::H4Component.new(cls: "text-center").with_content("Categories") %>
-  <%= render Links::NewLinkComponent.new(path: new_category_path) %>
+  <% if policy(:category).new? %>
+    <%= render Links::NewLinkComponent.new(path: new_category_path) %>
+  <% end %>
 </div>
-<aside class="block p-2 mt-4 text-gray-700 bg-white border border-gray-200 rounded-lg shadow-md" aria-label="Sidebar">
-  <div class="px-3 py-4 overflow-y-auto rounded bg-gray dark:bg-gray-800">
-    <ul class="">
-      <% @categories.each do |c| %>
-        <%= tag.div data: {controller: "dropdown"} do %>
-          <div class="flex justify-between">
-            <div class="flex">
-              <div class="my-auto">
-                <% if c.category_name == "Other" %>
-                  <%= render Svg::DotsComponent.new(cls: "") %>
-                <% elsif c.category_name == "Info" %>
-                  <%= render Svg::InfoComponent.new(cls: "") %>
-                <% elsif c.category_name == "Support" %>
-                  <%= render Svg::QuestionComponent.new(cls: "") %>
-                <% else %>
-                  <%= render Svg::DotsComponent.new(cls: "") %>
+
+<% if @categories.any? %>
+  <aside class="block p-2 mt-4 text-gray-700 bg-white border border-gray-200 rounded-lg shadow-md" aria-label="Sidebar">
+    <div class="px-3 py-4 overflow-y-auto rounded bg-gray dark:bg-gray-800">
+      <ul class="">
+        <% @categories.each do |c| %>
+          <%= tag.div data: {controller: "dropdown"} do %>
+            <div class="flex justify-between">
+              <div class="flex">
+                <div class="my-auto">
+                  <% if c.category_name == "Other" %>
+                    <%= render Svg::DotsComponent.new(cls: "") %>
+                  <% elsif c.category_name == "Info" %>
+                    <%= render Svg::InfoComponent.new(cls: "") %>
+                  <% elsif c.category_name == "Support" %>
+                    <%= render Svg::QuestionComponent.new(cls: "") %>
+                  <% else %>
+                    <%= render Svg::DotsComponent.new(cls: "") %>
+                  <% end %>
+                </div>
+                <%= link_to c, class: "flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
+                  <%= c.category_name %>
                 <% end %>
               </div>
-              <%= link_to c, class: "flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
-                <%= c.category_name %>
+              <% if c.discussions.count > 0 %>
+                <button type="button" class="p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" data-action="click->dropdown#toggle">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
               <% end %>
             </div>
-            <% if c.discussions.count > 0 %>
-              <button type="button" class="p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" data-action="click->dropdown#toggle">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-              </button>
+            <%= tag.div class: "hidden", data: { "dropdown-target": "dropdown" } do %>
+              <ul>
+                <% c.discussions.each do |d| %>
+                  <li>
+                    <%= link_to d, class: "flex items-center w-full p-2 pl-8 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      <%= d.title.truncate(20) %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
             <% end %>
-          </div>
-          <%= tag.div class: "hidden", data: { "dropdown-target": "dropdown" } do %>
-            <ul>
-              <% c.discussions.each do |d| %>
-                <li>
-                  <%= link_to d, class: "flex items-center w-full p-2 pl-8 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                    <%= d.title.truncate(20) %>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
           <% end %>
         <% end %>
-      <% end %>
-    </ul>
-  </div>
-</aside>
+      </ul>
+    </div>
+  </aside>
+<% end %>
