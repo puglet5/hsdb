@@ -89,9 +89,9 @@ jobs:
             PGUSER: postgres
             PGPASSWORD: postgres
           run: |
-            bin/rails db:drop
-            bin/rails db:create
-            bin/rails db:schema:load
+            RAILS_ENV=test bin/rails db:drop
+            RAILS_ENV=test bin/rails db:create
+            RAILS_ENV=test bin/rails db:schema:load
 
         - name: Run tests
           run: bundle exec rspec
