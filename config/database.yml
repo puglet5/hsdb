@@ -16,7 +16,6 @@ development:
     username: <%= ENV['PGUSER'] %>
     password: <%= ENV['PGPASSWORD'] %>
 
-
   primary_replica:
     <<: *default
     database: ITMO_HSDB_development
