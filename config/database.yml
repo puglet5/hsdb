@@ -4,42 +4,58 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-
   primary:
     <<: *default
     database: ITMO_HSDB_development
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
 
   rsdb:
     <<: *default
     database: ITMO_RSDB_development
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
+
 
   primary_replica:
     <<: *default
     database: ITMO_HSDB_development
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
     replica: true
 
   rsdb_replica:
     <<: *default
     database: ITMO_RSDB_development
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
     replica: true
 
 test:
   primary:
     <<: *default
     database: ITMO_HSDB_test
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
 
   rsdb:
     <<: *default
     database: ITMO_RSDB_test
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
 
   primary_replica:
     <<: *default
     database: ITMO_HSDB_test
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
     replica: true
 
   rsdb_replica:
     <<: *default
     database: ITMO_RSDB_test
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
     replica: true
 
 production:
