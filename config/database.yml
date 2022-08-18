@@ -5,92 +5,42 @@ default: &default
 
 development:
 
-  # primary:
-  #   <<: *default
-  #   database: ITMO_HSDB_development
-
-  # rsdb:
-  #   <<: *default
-  #   database: ITMO_RSDB_development
-
-  # primary_replica:
-  #   <<: *default
-  #   database: ITMO_HSDB_development
-  #   replica: true
-
-  # rsdb_replica:
-  #   <<: *default
-  #   database: ITMO_RSDB_development
-  #   replica: true
-
   primary:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    <<: *default
     database: ITMO_HSDB_development
-    url: <%= ENV['HSDB_DEVELOPMENT'] %>
-
-  primary_replica:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    database: ITMO_HSDB_development
-    url: <%= ENV['HSDB_DEVELOPMENT_REPLICA'] %>
-    replica: true
 
   rsdb:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    <<: *default
     database: ITMO_RSDB_development
-    url: <%= ENV['RSDB_DEVELOPMENT'] %>
+
+  primary_replica:
+    <<: *default
+    database: ITMO_HSDB_development
+    replica: true
 
   rsdb_replica:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    <<: *default
     database: ITMO_RSDB_development
-    url: <%= ENV['RSDB_DEVELOPMENT_REPLICA'] %>
     replica: true
 
 test:
-  # primary:
-  #   <<: *default
-  #   database: ITMO_HSDB_test
-
-  # rsdb:
-  #   <<: *default
-  #   database: ITMO_RSDB_test
-
-  # primary_replica:
-  #   <<: *default
-  #   database: ITMO_HSDB_test
-  #   replica: true
-
-  # rsdb_replica:
-  #   <<: *default
-  #   database: ITMO_RSDB_test
-  #   replica: true
-
   primary:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    <<: *default
     database: ITMO_HSDB_test
-    url: <%= ENV['HSDB_TEST'] %>
 
   rsdb:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    database: ITMO_RSDB_TEST
-    url: <%= ENV['RSDB_TEST'] %>
+    <<: *default
+    database: ITMO_RSDB_test
+
+  primary_replica:
+    <<: *default
+    database: ITMO_HSDB_test
+    replica: true
+
+  rsdb_replica:
+    <<: *default
+    database: ITMO_RSDB_test
+    replica: true
 
 production:
   primary:
