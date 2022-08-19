@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_15_055537) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_19_192259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -203,6 +203,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_055537) do
     t.string "slug"
     t.integer "status", default: 0
     t.jsonb "metadata", default: "{}", null: false
+    t.string "date"
+    t.date "survey_date"
     t.index ["metadata"], name: "index_uploads_on_metadata", using: :gin
   end
 

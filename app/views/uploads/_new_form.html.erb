@@ -4,7 +4,7 @@
 
     <div>
       <%= render Form::LabelComponent.new().with_content("Title") %>
-      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Mona Lisa by Leonardo da Vinci (c. 1503–1506)") %>
+      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Mona Lisa by Leonardo da Vinci") %>
     </div>
 
     <div>
@@ -52,6 +52,18 @@
       <%= f.collection_select :material_ids, materials, :id, :name, {}, multiple: true, data: {controller: "select"}, id: "select" %>
     </div>
   <% end %>
+
+  <div class="grid grid-cols-2 mb-6 space-x-4">
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Date") %>
+      <%= render Form::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
+    </div>
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Survey date") %>
+      <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
+    </div>
+  </div>
 
   <!-- Metadata fields -->
   <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>

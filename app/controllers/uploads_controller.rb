@@ -178,6 +178,8 @@ class UploadsController < ApplicationController
       :status,
       :thumbnail,
       :metadata,
+      :date,
+      :survey_date,
       images: [],
       documents: [],
       tag_ids: [],

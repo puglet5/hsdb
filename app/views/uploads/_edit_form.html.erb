@@ -126,6 +126,18 @@
     </div>
   <% end %>
 
+  <div class="grid grid-cols-2 mb-6 space-x-4">
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Date") %>
+      <%= render Form::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
+    </div>
+
+    <div>
+      <%= render Form::LabelComponent.new().with_content("Survey date") %>
+      <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
+    </div>
+  </div>
+
   <div class="mb-4">
     <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
     <%= render Form::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
