@@ -86,3 +86,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs'
 end
+
+gem 'rails_performance', '~> 1.0'

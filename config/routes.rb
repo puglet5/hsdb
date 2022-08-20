@@ -7,9 +7,10 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   authenticate :user, ->(user) { user.has_role?('admin') } do
-    mount Rswag::Ui::Engine => '/api-docs'
-    mount Rswag::Api::Engine => '/api-docs'
-    mount Sidekiq::Web => '/sidekiq'
+    mount Rswag::Ui::Engine => 'api-docs'
+    mount Rswag::Api::Engine => 'api-docs'
+    mount Sidekiq::Web => 'admin/sidekiq'
+    mount RailsPerformance::Engine, at: 'admin/performance'
   end
 
   draw :api
