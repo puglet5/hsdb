@@ -76,3 +76,9 @@ module JSON
     false
   end
 end
+
+module YAML
+  class << self
+    alias load unsafe_load if YAML.respond_to? :unsafe_load
+  end
+end
