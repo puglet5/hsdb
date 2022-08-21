@@ -1,0 +1,16 @@
+ActiveRecordDoctor.configure do
+  global :ignore_tables, %w[
+    ar_internal_metadata
+    schema_migrations
+    active_storage_blobs
+    active_storage_attachments
+    action_text_rich_texts
+
+    spectra
+    settings
+    oauth_access_tokens
+    oauth_applications
+    friendly_id_slugs
+    active_storage_variant_records
+  ]
+end

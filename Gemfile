@@ -41,6 +41,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
 
 group :development do
+  gem 'active_record_doctor', '~> 1.10'
   gem 'annotate', '~> 3.2'
   gem 'bullet'
   gem 'foreman', '~> 0.87.2'
