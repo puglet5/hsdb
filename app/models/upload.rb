@@ -25,8 +25,13 @@ class Upload < ApplicationRecord
   has_many_attached :images
   has_one_attached :thumbnail
   has_many_attached :documents
+
   has_many :upload_tags, dependent: :destroy
   has_many :tags, through: :upload_tags
+
+  has_many :upload_materials, dependent: :destroy
+  has_many :materials, through: :upload_materials
+
   belongs_to :user
   validates :title, :description, :body, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }

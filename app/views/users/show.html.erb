@@ -91,12 +91,20 @@
                 <% end %>
               <% end %>
               <% if current_user.has_role?(:admin) %>
-                <%= link_to "/sidekiq" do %>
+                <%= link_to "/admin/sidekiq" do %>
                   <div class="flex my-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <p class="">Sidekiq jobs</p>
+                  </div>
+                <% end %>
+                <%= link_to "/admin/performance" do %>
+                  <div class="flex my-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
+                    </svg>
+                    <p class="">Performance</p>
                   </div>
                 <% end %>
                 <%= link_to rswag_ui_path do %>

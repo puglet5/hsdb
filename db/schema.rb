@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_21_170437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -73,12 +73,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "category_name"
+    t.string "category_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "discussion_id"
     t.string "slug"
     t.boolean "pinned", default: false
+    t.index ["discussion_id"], name: "index_categories_on_discussion_id"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -90,6 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.integer "category_id", default: 2
     t.string "slug"
     t.boolean "pinned", default: false
+    t.index ["category_id"], name: "index_discussions_on_category_id"
+    t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -101,6 +104,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_materials_on_name", unique: true
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -138,6 +148,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.integer "discussion_id"
     t.integer "user_id"
     t.string "slug"
+    t.index ["discussion_id"], name: "index_replies_on_discussion_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -167,6 +179,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "upload_materials", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_upload_materials_on_material_id"
+    t.index ["upload_id", "material_id"], name: "index_upload_materials_on_upload_id_and_material_id", unique: true
+    t.index ["upload_id"], name: "index_upload_materials_on_upload_id"
+  end
+
   create_table "upload_tags", force: :cascade do |t|
     t.bigint "upload_id", null: false
     t.bigint "tag_id", null: false
@@ -186,7 +208,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.string "slug"
     t.integer "status", default: 0
     t.jsonb "metadata", default: "{}", null: false
+    t.string "date"
+    t.date "survey_date"
     t.index ["metadata"], name: "index_uploads_on_metadata", using: :gin
+    t.index ["user_id"], name: "index_uploads_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -195,7 +220,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: nil
     t.string "first_name", null: false
-    t.string "last_name"
+    t.string "last_name", null: false
     t.string "organization"
     t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
@@ -227,6 +252,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_151508) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "replies", "discussions", name: "replies_discussion_id_fk"
   add_foreign_key "replies", "users", name: "replies_user_id_fk"
+  add_foreign_key "upload_materials", "materials"
+  add_foreign_key "upload_materials", "uploads"
   add_foreign_key "upload_tags", "tags"
   add_foreign_key "upload_tags", "uploads"
   add_foreign_key "uploads", "users", name: "uploads_user_id_fk"

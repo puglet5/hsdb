@@ -71,3 +71,5 @@ dump.rdb
 
 /vendor/bundle
 coverage
+
+/db/migrate
