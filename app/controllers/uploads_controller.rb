@@ -176,6 +176,7 @@ class UploadsController < ApplicationController
       :body,
       :description,
       :status,
+      :style_id,
       :thumbnail,
       :metadata,
       :date,

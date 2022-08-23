@@ -8,6 +8,7 @@ ruby '3.1.2'
 gem 'active_record_extended', '~> 3.0'
 gem 'active_storage-send_zip', '~> 0.3.4'
 gem 'activestorage-validator', '~> 0.2.2'
+gem 'amazing_print', '~> 1.4'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'caxlsx', '~> 3.2'
 gem 'caxlsx_rails', '~> 0.6.3'
@@ -29,6 +30,7 @@ gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 7.0.3'
 gem 'rails-i18n', '~> 7.0.3'
 gem 'rails_performance', '~> 1.0'
+gem 'rails_semantic_logger', '~> 4.10'
 gem 'ransack', '~> 3.2.1'
 gem 'redis', '4.7.1'
 gem 'rolify', '~> 6.0'
@@ -87,7 +89,3 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs'
 end
-
-gem "amazing_print", "~> 1.4"
-
-gem "rails_semantic_logger", "~> 4.10"

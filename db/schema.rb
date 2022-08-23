@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_170437) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_23_195109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -173,6 +173,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_170437) do
     t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
   end
 
+  create_table "styles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_styles_on_name", unique: true
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -210,7 +217,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_170437) do
     t.jsonb "metadata", default: "{}", null: false
     t.string "date"
     t.date "survey_date"
+    t.bigint "style_id"
     t.index ["metadata"], name: "index_uploads_on_metadata", using: :gin
+    t.index ["style_id"], name: "index_uploads_on_style_id"
     t.index ["user_id"], name: "index_uploads_on_user_id"
   end
 
@@ -256,6 +265,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_170437) do
   add_foreign_key "upload_materials", "uploads"
   add_foreign_key "upload_tags", "tags"
   add_foreign_key "upload_tags", "uploads"
+  add_foreign_key "uploads", "styles"
   add_foreign_key "uploads", "users", name: "uploads_user_id_fk"
   add_foreign_key "users_roles", "roles", name: "users_roles_role_id_fk"
   add_foreign_key "users_roles", "users", name: "users_roles_user_id_fk"
