@@ -41,20 +41,29 @@
         <div class="grow">
           <%= f.email_field :email, type: "email", id: "email", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg shadow-sm bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light", placeholder: "name@example.com", autofocus: false, autocomplete: "email" %>
         </div>
-        <button id="roleDropdownButton" data-dropdown-toggle="roleDropdown" class="inline-flex items-center px-4 my-auto ml-2 text-sm font-medium text-center text-white rounded-lg py-2.5 bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">Roles<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-        <!-- Dropdown menu -->
-        <div id="roleDropdown" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-          <ul class="px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="roleDropdownButton">
-            <% @roles.each do |role| %>
-              <li>
-                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                  <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id), class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-50" %>
-                  <label for="checkbox-item-11" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"><%= role.name %></label>
-                </div>
-              </li>
+        <%= tag.div data: {controller: "dropdown"} do %>
+          <button class="inline-flex items-center px-4 my-auto ml-2 text-sm font-medium text-center text-white rounded-lg py-2.5 bg-primary-500 hover:bg-primary-800 focus:ring-2" type="button" data-action="click->dropdown#toggle">
+            Roles
+            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <%= tag.div class: "relative hidden", data: { "dropdown-target": "dropdown" } do %>
+            <div class="absolute top-0 right-0 z-10 bg-white rounded-lg shadow w-60 dark:bg-gray-700">
+              <ul class="p-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+                <% @roles.each do |role| %>
+                  <li>
+                    <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                      <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id), class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-50" %>
+                      <label for="checkbox-item-11" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"><%= role.name %></label>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
             <% end %>
-          </ul>
-        </div>
+          </div>
+        <% end %>
       </div>
       <% if devise_mapping.confirmable? && @user.pending_reconfirmation? %>
         <p>
