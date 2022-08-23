@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'active_record_extended', '~> 3.0'
 gem 'active_storage-send_zip', '~> 0.3.4'
 gem 'activestorage-validator', '~> 0.2.2'
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -29,7 +30,7 @@ gem 'rails', '~> 7.0.3'
 gem 'rails-i18n', '~> 7.0.3'
 gem 'rails_performance', '~> 1.0'
 gem 'ransack', '~> 3.2.1'
-gem 'redis', '~> 4.7', '>= 4.7.1'
+gem 'redis', '4.7.1'
 gem 'rolify', '~> 6.0'
 gem 'rswag-api', '~> 2.5', '>= 2.5.1'
 gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
