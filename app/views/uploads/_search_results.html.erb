@@ -5,7 +5,7 @@
       <%== pagy_nav pagy %>
     <% end %>
   </div>
-<% elsif query.result.count == 0 %>
+<% elsif uploads&.count > 0 && query.result.count == 0 %>
   <div class="mt-20">
     <p class="mb-4 text-sm text-center text-gray-400">
       The query returned no results
