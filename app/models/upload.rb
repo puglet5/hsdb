@@ -32,6 +32,8 @@ class Upload < ApplicationRecord
   has_many :upload_materials, dependent: :destroy
   has_many :materials, through: :upload_materials
 
+  belongs_to :style, optional: true
+
   belongs_to :user
   validates :title, :description, :body, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }

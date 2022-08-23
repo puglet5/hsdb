@@ -18,24 +18,8 @@
       </div>
     </div>
 
-    <% if @uploads&.count > 0 %>
-      <div class="mt-20">
-        <%= render @uploads %>
-        <% if @pagy.pages > 1 %>
-          <%== pagy_nav @pagy %>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="mt-20">
-        <p class="mb-4 text-sm text-center text-gray-400">
-          There are no uploads yet, click
-          <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary-500 to-primary-500">
-            New
-          </span>
-          to create one
-        </p>
-      </div>
-    <% end %>
+    <%= render "search_results", uploads: @uploads, pagy: @pagy, query: @query %>
+
   <% end %>
 
 <% end %>

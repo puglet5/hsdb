@@ -18,8 +18,8 @@ class UploadsController < ApplicationController
 
     authorize @uploads
 
-    @q = @uploads.ransack(params[:q])
-    @pagy, @uploads = pagy @q.result(distinct: true).order('created_at DESC'), items: current_user&.settings(:pagination)&.per || 10
+    @query = @uploads.ransack(params[:query])
+    @pagy, @uploads = pagy @query.result(distinct: true).order('created_at DESC'), items: current_user&.settings(:pagination)&.per || 10
   end
 
   def show
@@ -176,6 +176,7 @@ class UploadsController < ApplicationController
       :body,
       :description,
       :status,
+      :style_id,
       :thumbnail,
       :metadata,
       :date,
