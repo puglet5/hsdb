@@ -79,6 +79,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    amazing_print (1.4.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -332,6 +333,10 @@ GEM
       rails
       redis
       redis-namespace
+    rails_semantic_logger (4.10.0)
+      rack
+      railties (>= 5.1)
+      semantic_logger (~> 4.9)
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -417,6 +422,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    semantic_logger (4.11.0)
+      concurrent-ruby (~> 1.0)
     shellany (0.0.1)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
@@ -503,6 +510,7 @@ DEPENDENCIES
   active_record_extended (~> 3.0)
   active_storage-send_zip (~> 0.3.4)
   activestorage-validator (~> 0.2.2)
+  amazing_print (~> 1.4)
   annotate (~> 3.2)
   better_errors (~> 2.9)
   binding_of_caller (~> 1.0)
@@ -548,6 +556,7 @@ DEPENDENCIES
   rails-erd
   rails-i18n (~> 7.0.3)
   rails_performance (~> 1.0)
+  rails_semantic_logger (~> 4.10)
   ransack (~> 3.2.1)
   redis (= 4.7.1)
   rolify (~> 6.0)

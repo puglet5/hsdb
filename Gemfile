@@ -87,3 +87,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs'
 end
+
+gem "amazing_print", "~> 1.4"
+
+gem "rails_semantic_logger", "~> 4.10"
