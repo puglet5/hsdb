@@ -159,10 +159,10 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     e2mmap (0.1.0)
-    elasticsearch (7.10.1)
-      elasticsearch-api (= 7.10.1)
-      elasticsearch-transport (= 7.10.1)
-    elasticsearch-api (7.10.1)
+    elasticsearch (7.13.3)
+      elasticsearch-api (= 7.13.3)
+      elasticsearch-transport (= 7.13.3)
+    elasticsearch-api (7.13.3)
       multi_json
     elasticsearch-model (7.2.1)
       activesupport (> 3)
@@ -175,7 +175,7 @@ GEM
       elasticsearch-model (= 7.2.1)
       hashie
     elasticsearch-rails (7.2.1)
-    elasticsearch-transport (7.10.1)
+    elasticsearch-transport (7.13.3)
       faraday (~> 1)
       multi_json
     em-websocket (0.5.3)
@@ -472,7 +472,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.5.4)
+    sidekiq (6.5.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
