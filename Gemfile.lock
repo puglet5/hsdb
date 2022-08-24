@@ -159,10 +159,10 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     e2mmap (0.1.0)
-    elasticsearch (7.17.1)
-      elasticsearch-api (= 7.17.1)
-      elasticsearch-transport (= 7.17.1)
-    elasticsearch-api (7.17.1)
+    elasticsearch (7.10.1)
+      elasticsearch-api (= 7.10.1)
+      elasticsearch-transport (= 7.10.1)
+    elasticsearch-api (7.10.1)
       multi_json
     elasticsearch-model (7.2.1)
       activesupport (> 3)
@@ -175,7 +175,7 @@ GEM
       elasticsearch-model (= 7.2.1)
       hashie
     elasticsearch-rails (7.2.1)
-    elasticsearch-transport (7.17.1)
+    elasticsearch-transport (7.10.1)
       faraday (~> 1)
       multi_json
     em-websocket (0.5.3)
@@ -573,6 +573,7 @@ DEPENDENCIES
   devise (~> 4.8, >= 4.8.1)
   doorkeeper (~> 5.5, >= 5.5.4)
   dotenv-rails
+  elasticsearch (< 7.14)
   elasticsearch-model (~> 7.2)
   elasticsearch-persistence (~> 7.2)
   elasticsearch-rails (~> 7.2)
