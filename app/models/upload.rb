@@ -20,6 +20,9 @@ class Upload < ApplicationRecord
   include CustomValidations
   include ParseJson
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   tracked owner: proc { |controller, _model| controller.current_user }
 
   has_many_attached :images
