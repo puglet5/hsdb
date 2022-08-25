@@ -1,0 +1,73 @@
+---
+- - :permit
+  - MIT
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:42:33.334736163 Z
+- - :permit
+  - Apache 2.0
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:45:21.107974914 Z
+- - :permit
+  - Simplified BSD
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:46:19.980338932 Z
+- - :permit
+  - Simplified BSD, ruby
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:46:24.361398089 Z
+- - :permit
+  - ruby
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:46:50.423945598 Z
+- - :approve
+  - puma
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:53:12.514563596 Z
+- - :approve
+  - brakeman
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:53:22.401580317 Z
+- - :approve
+  - sidekiq
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:53:56.134672234 Z
+- - :permit
+  - New BSD
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:56:08.544325924 Z
+- - :permit
+  - GPL-2.0
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:56:48.178715074 Z
+- - :permit
+  - ISC
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:57:34.761188164 Z
+- - :permit
+  - WTFPL
+  - :who: 
+    :why: 
+    :versions: []
+    :when: 2022-08-25 14:58:17.331206974 Z

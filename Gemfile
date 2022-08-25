@@ -56,6 +56,7 @@ group :development do
   gem 'htmlbeautifier'
   gem 'immigrant'
   gem 'letter_opener'
+  gem 'license_finder', '~> 7.0'
   gem 'rack-livereload'
   gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd'
