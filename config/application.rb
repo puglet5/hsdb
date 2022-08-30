@@ -3,7 +3,6 @@
 require_relative 'boot'
 
 require 'rails'
-# Pick the frameworks you want:
 require 'active_model/railtie'
 require 'active_job/railtie'
 require 'active_record/railtie'
@@ -16,36 +15,33 @@ require 'action_view/railtie'
 require 'action_cable/engine'
 # require 'rails/test_unit/railtie'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module HSDB
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-
-    Rails.application.config.active_storage.variant_processor = :mini_magick
 
     config.i18n.available_locales = %i[en ru]
     config.i18n.default_locale = :en
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
+
     config.time_zone = 'Moscow'
-    # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_job.queue_adapter = :sidekiq
+
+    # mailers config
     config.action_mailer.deliver_later_queue_name = nil # defaults to "mailers"
     config.action_mailbox.queues.routing    = nil       # defaults to "action_mailbox_routing"
-    config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
-    config.active_storage.track_variants = true
 
+    # active storage config
+    config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
+    config.active_storage.track_variants = true # used to eager load image variants
+
+    # image processing config
+    Rails.application.config.active_storage.variant_processor = :mini_magick
     Rails.application.config.active_storage.analyzers.delete ActiveStorage::Analyzer::ImageAnalyzer
     Rails.application.config.active_storage.analyzers.append ActiveStorage::Analyzer::ImageAnalyzer::Vips
 
+    # gzip compression
     config.middleware.use Rack::Deflater
 
     config.middleware.insert_before 0, Rack::Cors do
@@ -54,9 +50,6 @@ module HSDB
         resource '*', headers: :any, methods: %i[get post put delete options]
       end
     end
-
-    config.paths.add File.join('app/api'), glob: File.join('**/*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app/api/*')]
 
     config.to_prepare do
       Doorkeeper::ApplicationsController.layout 'application'
@@ -77,6 +70,7 @@ module JSON
   end
 end
 
+# fixes rspec error with psych 4 and ruby 3.1
 module YAML
   class << self
     alias load unsafe_load if YAML.respond_to? :unsafe_load
