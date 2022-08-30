@@ -33,7 +33,7 @@ module HSDB
     config.action_mailbox.queues.routing    = nil       # defaults to "action_mailbox_routing"
 
     # active storage config
-    config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror"
+    config.active_storage.queues.mirror     = nil # defaults to "active_storage_mirror"
     config.active_storage.track_variants = true # used to eager load image variants
 
     # image processing config
