@@ -97,3 +97,9 @@ jobs:
         - name: Print test log if rspec fails
           if: failure()
           run: cat log/test.log
+
+        - name: Create Coverage Artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: code-coverage
+            path: coverage/
