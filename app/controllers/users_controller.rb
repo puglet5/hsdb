@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
-    @activities = PublicActivity::Activity.where(owner_id: @user.id).order('created_at DESC').first(5)
+    @activities = PublicActivity::Activity.where(owner_id: @user.id).includes(:trackable).order('created_at DESC').first(5)
   end
 
   def update_settings

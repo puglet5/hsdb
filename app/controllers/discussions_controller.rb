@@ -3,12 +3,12 @@
 class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: %i[show edit update destroy]
-  before_action :find_categories, only: %i[index new update create edit]
   before_action :fetch_discussions, only: %i[index show]
   before_action :authorize_discussion
   after_action :verify_authorized
 
   def index
+    @categories = Category.all.includes([:discussions]).order('created_at asc')
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
@@ -19,10 +19,13 @@ class DiscussionsController < ApplicationController
   end
 
   def new
+    @categories = Category.all
     @discussion = current_user.discussions.build
   end
 
-  def edit; end
+  def edit
+    @categories = Category.all
+  end
 
   def create
     @discussion = current_user.discussions.build(discussion_params)
@@ -56,10 +59,6 @@ class DiscussionsController < ApplicationController
 
   def fetch_discussions
     @discussions = Discussion.all.includes(%i[user category rich_text_content replies]).order('created_at desc')
-  end
-
-  def find_categories
-    @categories = Category.all.includes([:discussions]).order('created_at asc')
   end
 
   def discussion_params
