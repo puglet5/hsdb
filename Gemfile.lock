@@ -497,7 +497,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    solargraph (0.46.0)
+    solargraph (0.44.3)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
@@ -512,9 +512,9 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    solargraph-rails (0.3.1)
+    solargraph-rails (1.0.0.pre.1)
       activesupport
-      solargraph (>= 0.41.1)
+      solargraph (~> 0.44.2)
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
@@ -577,7 +577,7 @@ DEPENDENCIES
   binding_of_caller (~> 1.0)
   bootsnap (>= 1.4.4)
   brakeman (~> 5.2)
-  bullet
+  bullet (~> 7.0, >= 7.0.3)
   bundler-audit (~> 0.9.1)
   capybara
   caxlsx (~> 3.2)
@@ -588,8 +588,8 @@ DEPENDENCIES
   debug (>= 1.0.0)
   devise (~> 4.8, >= 4.8.1)
   doorkeeper (~> 5.5, >= 5.5.4)
-  dotenv-rails
-  elasticsearch (< 7.14)
+  dotenv-rails (~> 2.8)
+  elasticsearch (~> 7.13, < 7.14)
   elasticsearch-model (~> 7.2)
   elasticsearch-persistence (~> 7.2)
   elasticsearch-rails (~> 7.2)
@@ -631,16 +631,16 @@ DEPENDENCIES
   rswag-api (~> 2.5, >= 2.5.1)
   rswag-specs
   rswag-ui (~> 2.5, >= 2.5.1)
-  rubocop (~> 1.32)
-  rubocop-performance
-  rubocop-rails
+  rubocop (~> 1.35, >= 1.35.1)
+  rubocop-performance (~> 1.14, >= 1.14.3)
+  rubocop-rails (~> 2.15, >= 2.15.2)
   selenium-webdriver
   shoulda-matchers (~> 5.1)
   sidekiq (~> 6.5, >= 6.5.1)
   simple_form (~> 5.1)
   simplecov (~> 0.21.2)
-  solargraph
-  solargraph-rails
+  solargraph (~> 0.44.2)
+  solargraph-rails (~> 1.0.0.pre.1)
   stimulus-rails (~> 1.1)
   turbo-rails (~> 1.1)
   tzinfo-data
