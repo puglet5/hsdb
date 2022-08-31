@@ -103,3 +103,8 @@ jobs:
           with:
             name: code-coverage
             path: coverage/
+
+        - name: Simplecov Report
+          uses: aki77/simplecov-report-action@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
