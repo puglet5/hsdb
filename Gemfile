@@ -65,8 +65,8 @@ group :development do
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
   gem 'rubocop-rails', '~> 2.15', '>= 2.15.2', require: false
-  gem 'solargraph', '~> 0.44.2' # ruby language server
-  gem 'solargraph-rails', '~> 1.0.0.pre.1'
+  gem 'solargraph' # ruby language server
+  gem 'solargraph-rails'
   gem 'web-console'
 end
 
