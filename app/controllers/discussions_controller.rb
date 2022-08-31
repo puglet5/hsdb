@@ -4,6 +4,7 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_discussion, only: %i[show edit update destroy]
   before_action :fetch_discussions, only: %i[index show]
+  before_action :fetch_categories, only: %i[edit update create new]
   before_action :authorize_discussion
   after_action :verify_authorized
 
@@ -19,13 +20,10 @@ class DiscussionsController < ApplicationController
   end
 
   def new
-    @categories = Category.all
     @discussion = current_user.discussions.build
   end
 
-  def edit
-    @categories = Category.all
-  end
+  def edit; end
 
   def create
     @discussion = current_user.discussions.build(discussion_params)
@@ -55,6 +53,10 @@ class DiscussionsController < ApplicationController
 
   def set_discussion
     @discussion = Discussion.find(params[:id])
+  end
+
+  def fetch_categories
+    @categories = Category.all
   end
 
   def fetch_discussions
