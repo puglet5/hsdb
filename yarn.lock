@@ -500,7 +500,7 @@ __metadata:
     esbuild: ^0.15.6
     esbuild-rails: ^1.0.3
     eslint: ^8.23.0
-    flowbite: 1.5.2
+    flowbite: 1.5.3
     photoswipe: ^5.3.2
     postcss: ^8.4.16
     postcss-cli: ^10.0.0
@@ -1582,13 +1582,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.5.2":
-  version: 1.5.2
-  resolution: "flowbite@npm:1.5.2"
+"flowbite@npm:1.5.3":
+  version: 1.5.3
+  resolution: "flowbite@npm:1.5.3"
   dependencies:
     "@popperjs/core": ^2.9.3
     mini-svg-data-uri: ^1.4.3
-  checksum: a44f6e65dd82bd7993d0de4192c88e5ed9f311b58dfecf6b3d1405de9114a29fb84a1e8f64577812e2c112c8cae7e243d37c804b052da08eda16cb8eb261e00b
+  checksum: 21de225e77b97b810f902c903404d1931ab3c27f58d7a3c2f25886f2868f8603478dd90afc16175df39f35e87e5497cd465e2d8a3dbfafe6bfff6a4a817e25f5
   languageName: node
   linkType: hard
 
