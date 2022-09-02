@@ -13,6 +13,9 @@
 #  slug        :string
 #  status      :integer          default("draft")
 #  metadata    :jsonb            not null
+#  date        :string
+#  survey_date :date
+#  style_id    :bigint
 #
 class Upload < ApplicationRecord
   include PublicActivity::Model

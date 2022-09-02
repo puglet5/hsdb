@@ -13,6 +13,9 @@
 #  slug        :string
 #  status      :integer          default("draft")
 #  metadata    :jsonb            not null
+#  date        :string
+#  survey_date :date
+#  style_id    :bigint
 #
 FactoryBot.define do
   factory :upload do
@@ -21,5 +24,8 @@ FactoryBot.define do
     body { 'test body' }
     association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }
+    date { 'test string' }
+    survey_date {}
+    association :style, factory: :style, strategy: :build
   end
 end

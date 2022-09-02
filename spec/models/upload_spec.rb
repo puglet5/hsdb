@@ -13,6 +13,10 @@
 #  slug        :string
 #  status      :integer          default("draft")
 #  metadata    :jsonb            not null
+#  date        :string
+#  survey_date :date
+#  style_id    :bigint
+#
 
 RSpec.describe Upload, type: :model do
   let(:user) { create(:user) }
@@ -116,6 +120,10 @@ RSpec.describe Upload, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should belong_to(:style).optional }
+
+    it { should have_many(:materials) }
+    it { should have_many(:upload_materials) }
   end
 
   describe 'validations' do

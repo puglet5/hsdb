@@ -10,7 +10,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  first_name             :string           not null
-#  last_name              :string
+#  last_name              :string           not null
 #  organization           :string
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
@@ -22,6 +22,7 @@
 #  updated_at             :datetime         not null
 #  slug                   :string
 #  bio                    :text
+#
 
 class User < ApplicationRecord
   extend FriendlyId

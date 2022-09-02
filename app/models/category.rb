@@ -5,7 +5,7 @@
 # Table name: categories
 #
 #  id            :bigint           not null, primary key
-#  category_name :string
+#  category_name :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  discussion_id :integer
