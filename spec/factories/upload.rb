@@ -25,7 +25,7 @@ FactoryBot.define do
     association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }
     date { 'test string' }
-    survey_date {}
+    survey_date { 1.hour.ago }
     association :style, factory: :style, strategy: :build
   end
 end
