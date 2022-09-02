@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe Style, type: :model do
-  fdescribe 'associations' do
+  describe 'associations' do
     subject { Material.new(name: 'Test Material') }
 
     it { should have_many(:uploads) }
