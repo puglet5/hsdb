@@ -28,7 +28,10 @@ class Upload < ApplicationRecord
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
-  has_many_attached :images
+  has_many :images, inverse_of: :upload, dependent: :destroy
+  accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
+  has_many :image_attachments, through: :images
+
   has_one_attached :thumbnail
   has_many_attached :documents
 
@@ -42,7 +45,6 @@ class Upload < ApplicationRecord
 
   belongs_to :user
   validates :title, :description, :body, presence: true
-  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
   validate :json_validity
 
   has_rich_text :body
