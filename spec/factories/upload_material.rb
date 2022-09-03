@@ -12,7 +12,7 @@
 #
 FactoryBot.define do
   factory :upload_material do
-    upload { nil }
-    material { nil }
+    association :upload, factory: :upload, strategy: :build
+    association :material, factory: :material, strategy: :build
   end
 end
