@@ -23,14 +23,16 @@
       <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     </div>
 
-    <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
-      <%= render Form::LabelComponent.new().with_content("Images") %>
-      <%= tag.div class: "flex items-center justify-center w-full h-40 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
-        <p class="font-medium text-center" id="uppy-text">
-          Browse...
-        </p>
+    <%= f.simple_fields_for :images do |image_form| %>
+      <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
+        <%= render Form::LabelComponent.new().with_content("Images") %>
+        <%= tag.div class: "flex items-center justify-center w-full h-40 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+          <p class="font-medium text-center" id="uppy-text">
+            Browse...
+          </p>
+        <% end %>
+        <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
       <% end %>
-      <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     <% end %>
 
     <div>
