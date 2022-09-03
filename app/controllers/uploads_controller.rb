@@ -30,12 +30,12 @@ class UploadsController < ApplicationController
       format.html do
         @upload = Upload
                   .with_attached_thumbnail
-                  .with_attached_images
                   .with_attached_documents
+                  .includes(:image_attachments)
                   .find(params[:id])
 
         @images = @upload
-                  .images.all
+                  .image_attachments.all
                   .with_all_variant_records
 
         @documents = @upload
@@ -44,20 +44,20 @@ class UploadsController < ApplicationController
       end
 
       format.zip do
-        send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
+        send_zip @upload.image_attachments, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
       end
     end
   end
 
   def images_grid
     @upload = Upload
-              .with_attached_images
+              .includes(:image_attachments)
               .find(params[:id])
 
     authorize @upload
 
     @q = @upload
-         .images.all
+         .image_attachments.all
          .with_all_variant_records
          .order('created_at ASC')
 
@@ -72,13 +72,14 @@ class UploadsController < ApplicationController
 
   def new
     @upload = current_user.uploads.build
+    @upload.images.build
 
     authorize @upload
   end
 
   def edit
     @upload = Upload
-              .with_attached_images
+              .includes(:image_attachments)
               .with_attached_documents
               .find(params[:id])
 
@@ -86,7 +87,7 @@ class UploadsController < ApplicationController
 
     @documents = @upload.documents.all
     @images = @upload
-              .images
+              .image_attachments
               .all
               .with_all_variant_records
   end
@@ -106,14 +107,16 @@ class UploadsController < ApplicationController
 
   def update
     @upload = Upload
+              .includes(:image_attachments)
               .with_attached_thumbnail
+              .with_attached_documents
               .find(params[:id])
 
     authorize @upload
 
     @documents = @upload.documents.all
     @images = @upload
-              .images
+              .image_attachments
               .all
               .with_all_variant_records
 
@@ -153,9 +156,9 @@ class UploadsController < ApplicationController
   def purge_attachment
     @blob = ActiveStorage::Blob.find_signed(params[:id])
     @attachment = ActiveStorage::Attachment.where(blob_id: @blob.id).first
-    @upload = Upload.find @attachment.record_id
+    @image = Image.find @attachment.record_id
 
-    authorize @upload
+    authorize @image
 
     @blob.attachments.first.purge_later
   end
@@ -181,7 +184,8 @@ class UploadsController < ApplicationController
       :metadata,
       :date,
       :survey_date,
-      images: [],
+      images_attributes: %i[id image],
+      image_attachments: [],
       documents: [],
       tag_ids: [],
       material_ids: []
