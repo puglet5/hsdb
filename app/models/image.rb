@@ -8,6 +8,7 @@
 #  upload_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  range      :integer          default(0)
 #
 class Image < ApplicationRecord
   belongs_to :upload, inverse_of: :images
