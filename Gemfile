@@ -95,3 +95,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
+
+gem 'client_side_validations', '~> 20.0'
+gem 'client_side_validations-simple_form'

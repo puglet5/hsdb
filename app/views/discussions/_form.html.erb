@@ -1,4 +1,4 @@
-<%= simple_form_for @discussion do |f| %>
+<%= simple_form_for @discussion, validate: true do |f| %>
 
   <div class="grid grid-cols-12 mb-4">
 
@@ -22,6 +22,6 @@
   <div class="flex">
     <%= render Form::SubmitComponent.new(form: f).with_content((["new", "create"].include? params[:action]) ? "Create Discussion" : "Save Discussion") %>
     <%= render Form::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? discussions_path : @discussion).with_content("Back") %>
-
   </div>
+
 <% end %>

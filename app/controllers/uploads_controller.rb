@@ -29,14 +29,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.html do
         @upload = Upload
-                  .with_attached_thumbnail
-                  .with_attached_images
-                  .with_attached_documents
                   .find(params[:id])
-
-        @images = @upload
-                  .images.all
-                  .with_all_variant_records
 
         @documents = @upload
                      .documents
@@ -44,20 +37,19 @@ class UploadsController < ApplicationController
       end
 
       format.zip do
-        send_zip @upload.images, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
+        send_zip @upload.image_attachments, filename: "#{@upload.title} — #{Time.zone.now.to_fs(:long)}.zip"
       end
     end
   end
 
   def images_grid
     @upload = Upload
-              .with_attached_images
               .find(params[:id])
 
     authorize @upload
 
     @q = @upload
-         .images.all
+         .image_attachments.all
          .with_all_variant_records
          .order('created_at ASC')
 
@@ -72,13 +64,13 @@ class UploadsController < ApplicationController
 
   def new
     @upload = current_user.uploads.build
+    @upload.images.build
 
     authorize @upload
   end
 
   def edit
     @upload = Upload
-              .with_attached_images
               .with_attached_documents
               .find(params[:id])
 
@@ -86,7 +78,7 @@ class UploadsController < ApplicationController
 
     @documents = @upload.documents.all
     @images = @upload
-              .images
+              .image_attachments
               .all
               .with_all_variant_records
   end
@@ -100,20 +92,23 @@ class UploadsController < ApplicationController
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
     else
+      @upload.images.build
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @upload = Upload
+              .includes(:image_attachments)
               .with_attached_thumbnail
+              .with_attached_documents
               .find(params[:id])
 
     authorize @upload
 
     @documents = @upload.documents.all
     @images = @upload
-              .images
+              .image_attachments
               .all
               .with_all_variant_records
 
@@ -151,13 +146,14 @@ class UploadsController < ApplicationController
   end
 
   def purge_attachment
+    # rename?
     @blob = ActiveStorage::Blob.find_signed(params[:id])
     @attachment = ActiveStorage::Attachment.where(blob_id: @blob.id).first
-    @upload = Upload.find @attachment.record_id
+    @image = Image.find @attachment.record_id
 
-    authorize @upload
+    authorize @image
 
-    @blob.attachments.first.purge_later
+    @image.destroy
   end
 
   private
@@ -181,7 +177,8 @@ class UploadsController < ApplicationController
       :metadata,
       :date,
       :survey_date,
-      images: [],
+      images_attributes: %i[id image],
+      image_attachments: [],
       documents: [],
       tag_ids: [],
       material_ids: []

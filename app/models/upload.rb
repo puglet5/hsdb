@@ -23,12 +23,15 @@ class Upload < ApplicationRecord
   include CustomValidations
   include ParseJson
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
-  has_many_attached :images
+  has_many :images, inverse_of: :upload, dependent: :destroy
+  accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
+  has_many :image_attachments, through: :images
+
   has_one_attached :thumbnail
   has_many_attached :documents
 
@@ -41,8 +44,7 @@ class Upload < ApplicationRecord
   belongs_to :style, optional: true
 
   belongs_to :user
-  validates :title, :description, :body, presence: true
-  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
+  validates :title, :description, presence: true
   validate :json_validity
 
   has_rich_text :body
@@ -57,6 +59,14 @@ class Upload < ApplicationRecord
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
+  end
+
+  def image_count
+    images&.count.to_i
+  end
+
+  def has_images?
+    image_count.positive?
   end
 
   private

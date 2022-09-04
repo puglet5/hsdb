@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_23_195109) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_203159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -104,6 +104,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_195109) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["upload_id"], name: "index_images_on_upload_id"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -257,6 +264,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_195109) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "discussions", "categories", name: "discussions_category_id_fk"
   add_foreign_key "discussions", "users", name: "discussions_user_id_fk"
+  add_foreign_key "images", "uploads"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "replies", "discussions", name: "replies_discussion_id_fk"

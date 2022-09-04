@@ -18,7 +18,7 @@
 #  style_id    :bigint
 #
 
-RSpec.describe Upload, type: :model do
+RSpec.fdescribe Upload, type: :model do
   let(:user) { create(:user) }
 
   let(:valid_attributes) do
@@ -78,57 +78,19 @@ RSpec.describe Upload, type: :model do
     end
   end
 
-  describe 'ActiveStorage attachment type validations' do
-    shared_examples 'single image of valid types' do |filetype|
-      it "accepts image/#{filetype}" do
-        valid_upload.images.attach(io: File.open(file_fixture("test.#{filetype}")), filename: "test.#{filetype}", content_type: "image/#{filetype}")
-        valid_upload.save!
-        expect(valid_upload.errors.messages[:images]).to eq []
-        expect(valid_upload.images.count).to eq(1)
-        expect(valid_upload.images.first.persisted?).to eq(true)
-      end
-    end
-
-    include_examples 'single image of valid types', 'jpeg'
-    include_examples 'single image of valid types', 'png'
-    include_examples 'single image of valid types', 'gif'
-
-    context 'multiple images of valid types' do
-      it 'accepts 2 jpeg images' do
-        2.times do
-          valid_upload.images.attach(io: File.open(file_fixture('test.jpeg')), filename: 'test.jpeg', content_type: 'image/jpeg')
-        end
-        expect(valid_upload.images.count).to eq(2)
-      end
-    end
-
-    context 'invalid files and file types' do
-      it 'doesn\'t accept image/tiff' do
-        valid_upload.images.attach(io: File.open(file_fixture('test.tiff')), filename: 'test.tiff', content_type: 'image/tiff')
-        valid_upload.save
-        expect(valid_upload.errors.messages[:images]).to eq ['is not a valid file format']
-        expect(valid_upload.images.first.persisted?).to eq(false)
-      end
-      it 'doesn\'t accept text/csv' do
-        valid_upload.images.attach(io: File.open(file_fixture('test.csv')), filename: 'test.csv', content_type: 'text/csv')
-        valid_upload.save
-        expect(valid_upload.errors.messages[:images]).to eq ['is not a valid file format']
-        expect(valid_upload.images.first.persisted?).to eq(false)
-      end
-    end
-  end
-
   describe 'associations' do
     it { should belong_to(:user) }
     it { should belong_to(:style).optional }
 
+    it { should have_many(:images) }
+    it { should have_many(:image_attachments) }
     it { should have_many(:materials) }
     it { should have_many(:upload_materials) }
+    it { should accept_nested_attributes_for(:images) }
   end
 
   describe 'validations' do
     it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:body) }
     it { should validate_presence_of(:description) }
   end
 end

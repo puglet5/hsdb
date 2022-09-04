@@ -1,18 +1,7 @@
-<%= simple_form_for @upload do |f| %>
-
-  <!-- Attachment retention on form resubmit, must stay at the top  -->
-  <% f.object.images.each do |image| %>
-    <%= f.hidden_field :images, value: image.signed_id, multiple: true if image.persisted? %>
-  <% end %>
-  <%= f.hidden_field :thumbnail, value: f.object.thumbnail.signed_id if f.object.thumbnail.attached? && f.object.thumbnail.persisted? %>
-  <% f.object.documents.each do |doc| %>
-    <%= f.hidden_field :documents, value: doc.signed_id, multiple: true if doc.persisted? %>
-  <% end %>
-  <!-- -->
+<%= simple_form_for @upload, validate: true do |f| %>
 
   <%= render Form::SectionLabelComponent.new().with_content("Info") %>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
-
     <div>
       <%= render Form::LabelComponent.new().with_content("Title") %>
       <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, disabled: true, readonly: true) %>
@@ -51,7 +40,7 @@
       <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     </div>
 
-    <%= tag.div class: "row-span-2", data: {"uppy": "upload[images][]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
+    <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
       <%= render Form::LabelComponent.new().with_content("Images") %>
 
       <div class="flex">

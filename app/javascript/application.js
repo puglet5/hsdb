@@ -1,6 +1,8 @@
 import "trix"
 import "@rails/actiontext"
 import "@hotwired/turbo-rails"
+import "@client-side-validations/client-side-validations/src"
+import "@client-side-validations/simple-form/src"
 import "./controllers"
 import "./packs/mini-profiler-fix.js"
 import "./packs/turbo_submit_handler.js"

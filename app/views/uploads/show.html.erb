@@ -80,11 +80,11 @@
       </div>
     </div>
   </div>
-  <% if @images&.count.to_i > 0 %>
+  <% if @upload.has_images? %>
     <div class="relative w-full mx-auto my-10 md:container md:mx-auto">
       <div class="flex justify-between mb-4 border-b">
         <div class="flex">
-          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @images&.count.to_i %>)</label>
+          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @upload.image_count %>)</label>
           <%= link_to upload_path(format: :zip), class:"my-auto ml-2" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -111,7 +111,7 @@
     <div class="relative w-full mx-auto my-10 md:container md:mx-auto" id="gallery">
       <div class="flex justify-between mb-4 border-b">
         <div class="flex">
-          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @images&.count.to_i %>)</label>
+          <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">Images (<%= @upload.image_count %>)</label>
         </div>
       </div>
       <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">There are no images yet, click edit button in ther right top corner to upload</p>
