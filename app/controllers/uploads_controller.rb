@@ -29,9 +29,6 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.html do
         @upload = Upload
-                  .with_attached_thumbnail
-                  .with_attached_documents
-                  .includes(:image_attachments)
                   .find(params[:id])
 
         @images = @upload
@@ -51,7 +48,6 @@ class UploadsController < ApplicationController
 
   def images_grid
     @upload = Upload
-              .includes(:image_attachments)
               .find(params[:id])
 
     authorize @upload
@@ -79,7 +75,6 @@ class UploadsController < ApplicationController
 
   def edit
     @upload = Upload
-              .includes(:image_attachments)
               .with_attached_documents
               .find(params[:id])
 
