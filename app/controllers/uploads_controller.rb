@@ -92,6 +92,7 @@ class UploadsController < ApplicationController
       flash[:success] = 'Upload was successfully created'
       redirect_to @upload
     else
+      @upload.images.build
       render :new, status: :unprocessable_entity
     end
   end
