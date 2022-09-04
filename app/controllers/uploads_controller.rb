@@ -146,13 +146,14 @@ class UploadsController < ApplicationController
   end
 
   def purge_attachment
+    # rename?
     @blob = ActiveStorage::Blob.find_signed(params[:id])
     @attachment = ActiveStorage::Attachment.where(blob_id: @blob.id).first
     @image = Image.find @attachment.record_id
 
     authorize @image
 
-    @blob.attachments.first.purge_later
+    @image.destroy
   end
 
   private
