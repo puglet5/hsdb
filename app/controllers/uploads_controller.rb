@@ -31,10 +31,6 @@ class UploadsController < ApplicationController
         @upload = Upload
                   .find(params[:id])
 
-        @images = @upload
-                  .image_attachments.all
-                  .with_all_variant_records
-
         @documents = @upload
                      .documents
                      .all
