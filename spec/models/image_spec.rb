@@ -9,7 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default(0)
-#
+
 require 'rails_helper'
 
 RSpec.describe Image, type: :model do
