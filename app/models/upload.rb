@@ -23,8 +23,8 @@ class Upload < ApplicationRecord
   include CustomValidations
   include ParseJson
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
 
   tracked owner: proc { |controller, _model| controller.current_user }
 
@@ -59,6 +59,14 @@ class Upload < ApplicationRecord
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
+  end
+
+  def image_count
+    images&.count.to_i
+  end
+
+  def has_images?
+    image_count.positive?
   end
 
   private
