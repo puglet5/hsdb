@@ -38,12 +38,14 @@
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "postcss ./app/assets/builds/application.css -o ./app/assets/builds/application.min.css",
     "build:dev": "node esbuild.config.js",
-    "build": "esbuild ./app/assets/builds/application.js --minify > ./app/assets/builds/application.min.js"
+    "build": "esbuild ./app/assets/builds/application.js --minify > ./app/assets/builds/application.min.js",
+    "tailwind-config-viewer": "tailwind-config-viewer -o"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^5.1.13",
     "eslint": "^8.23.0",
-    "postcss-nested": "^5.0.6"
+    "postcss-nested": "^5.0.6",
+    "tailwind-config-viewer": "^1.7.1"
   }
 }
