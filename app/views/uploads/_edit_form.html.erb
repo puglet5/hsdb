@@ -1,4 +1,4 @@
-<%= simple_form_for @upload do |f| %>
+<%= simple_form_for @upload, validate: true do |f| %>
 
   <%= render Form::SectionLabelComponent.new().with_content("Info") %>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">

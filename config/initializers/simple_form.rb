@@ -18,7 +18,7 @@ SimpleForm.setup do |config|
                             hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label
+    b.optional :label
     b.use :input
 
     b.use :error, wrap_with: { tag: :span, class: :errors }
