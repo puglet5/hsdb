@@ -1,4 +1,4 @@
-<%= simple_form_for(@spectrum) do |f| %>
+<%= simple_form_for @spectrum, validate: true do |f| %>
 
   <div id="info" class="mb-8">
     <%= render Form::SectionLabelComponent.new().with_content("Info") %>

@@ -1,4 +1,4 @@
-<%= simple_form_for(@spectrum) do |f| %>
+<%= simple_form_for @spectrum, validate: true do |f| %>
   <!-- Attachment retention on form resubmit -->
   <% f.object.files.each do |file| %>
     <%= f.hidden_field :files, value: file.signed_id, multiple: true if file.persisted? %>
