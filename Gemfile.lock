@@ -495,7 +495,7 @@ GEM
       websocket (~> 1.0)
     semantic_logger (4.11.0)
       concurrent-ruby (~> 1.0)
-    set (1.0.2)
+    set (1.0.3)
     shellany (0.0.1)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
