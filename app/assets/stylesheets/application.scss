@@ -271,3 +271,7 @@ trix-toolbar .trix-button.trix-active {
 .errors {
   @apply hidden
 }
+
+.input.password {
+  @apply w-full
+}
