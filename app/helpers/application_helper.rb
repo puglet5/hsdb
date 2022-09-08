@@ -110,10 +110,6 @@ module ApplicationHelper
     end
   end
 
-  def has_role?(role)
-    current_user&.has_role?(role)
-  end
-
   def status_badge_style(status)
     case status
     when 'draft'
