@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Form::LabelComponent, type: :component do
+RSpec.describe Forms::LabelComponent, type: :component do
   pending "add some examples to (or delete) #{__FILE__}"
 
   # it "renders something useful" do

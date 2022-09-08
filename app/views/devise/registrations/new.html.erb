@@ -26,7 +26,7 @@
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
         <%= f.input :password, autocomplete: "new-password", input_html: { class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" }, placeholder: "•••••••••", validate: { presence: true } %>
         <% if @minimum_password_length %>
-          <%= render Form::PHelperComponent.new().with_content("Must be #{@minimum_password_length} characters minimum") %>
+          <%= render Forms::PHelperComponent.new().with_content("Must be #{@minimum_password_length} characters minimum") %>
         <% end %>
       </div>
       <div class="mb-6">
@@ -35,7 +35,7 @@
       </div>
       <div class="flex actions">
         <%= f.submit "Sign up", class: "w-full px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-200 sm:w-auto py-2.5 dark:bg-primary-500 dark:hover:bg-primary-500 dark:focus:ring-primary-800" %>
-        <%= render Form::BackButtonComponent.new(path: "login").with_content("Back to login") %>
+        <%= render Forms::BackButtonComponent.new(path: "login").with_content("Back to login") %>
       </form>
     </div>
   <% end %>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Form
+module Forms
   class FileInputComponent < ViewComponent::Base
     def initialize(form:, field:, accept: '', label: false, hint: false, required: false, direct: false, value: nil, multiple: false, cls: '')
       @cls = cls

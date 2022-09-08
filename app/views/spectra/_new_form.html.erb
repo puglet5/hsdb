@@ -1,30 +1,30 @@
 <%= simple_form_for @spectrum, validate: true do |f| %>
 
   <div id="info" class="mb-8">
-    <%= render Form::SectionLabelComponent.new().with_content("Info") %>
+    <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
 
     <div id="title" class="mb-4">
-      <%= render Form::LabelComponent.new().with_content("Title") %>
-      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Spectrum title") %>
+      <%= render Forms::LabelComponent.new().with_content("Title") %>
+      <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Spectrum title") %>
     </div>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Spectra files") %>
-      <%= render Form::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
-      <%= render Form::PHelperComponent.new().with_content("Any plain text file format (.csv's are preferred).") %>
+      <%= render Forms::LabelComponent.new().with_content("Spectra files") %>
+      <%= render Forms::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
+      <%= render Forms::PHelperComponent.new().with_content("Any plain text file format (.csv's are preferred).") %>
     </div>
 
   </div>
 
   <div id="metadata">
-    <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
-    <%= render Form::LabelComponent.new().with_content("Metadata") %>
-    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
-    <%= render Form::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
+    <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
+    <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
+    <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
   </div>
 
   <div class="flex mt-4">
-    <%= render Form::SubmitComponent.new(form: f).with_content("Create") %>
-    <%= render Form::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? spectra_path : @spectrum).with_content("Back") %>
+    <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
+    <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? spectra_path : @spectrum).with_content("Back") %>
   </div>
 <% end %>

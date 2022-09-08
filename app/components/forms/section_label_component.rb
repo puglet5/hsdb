@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Form
-  class LabelComponent < ViewComponent::Base
+module Forms
+  class SectionLabelComponent < ViewComponent::Base
     def initialize(cls: '')
       @cls = cls
     end

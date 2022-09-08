@@ -1,27 +1,27 @@
 <%= simple_form_for @upload, validate: true do |f| %>
 
-  <%= render Form::SectionLabelComponent.new().with_content("Info") %>
+  <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
     <div>
-      <%= render Form::LabelComponent.new().with_content("Title") %>
-      <%= render Form::TextInputComponent.new(form: f, field: :title, required: true, disabled: true, readonly: true) %>
+      <%= render Forms::LabelComponent.new().with_content("Title") %>
+      <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, disabled: true, readonly: true) %>
     </div>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Status") %>
+      <%= render Forms::LabelComponent.new().with_content("Status") %>
       <%= f.input :status, default: @upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
     </div>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Style/Category") %>
+      <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
       <%= f.input :style_id, default: upload.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
     </div>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Thumbnail") %>
+      <%= render Forms::LabelComponent.new().with_content("Thumbnail") %>
       <div class="flex">
         <div class="w-full">
-          <%= render Form::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*", cls: "") %>
+          <%= render Forms::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*", cls: "") %>
         </div>
         <% if @upload.thumbnail.attached? && @upload.thumbnail.persisted? %>
           <%= tag.div data: {controller: "modal"} do %>
@@ -34,11 +34,11 @@
           <% end %>
         <% end %>
       </div>
-      <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+      <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     </div>
 
     <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
-      <%= render Form::LabelComponent.new().with_content("Images") %>
+      <%= render Forms::LabelComponent.new().with_content("Images") %>
 
       <div class="flex">
         <%= tag.div class: "flex items-center justify-center w-full h-40 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
@@ -69,14 +69,14 @@
           <% end %>
         <% end %>
       </div>
-      <%= render Form::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+      <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
     <% end %>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Documents") %>
+      <%= render Forms::LabelComponent.new().with_content("Documents") %>
       <div class="flex">
         <div class="w-full">
-          <%= render Form::FileInputComponent.new(form: f, field: :documents, direct: true, multiple: true) %>
+          <%= render Forms::FileInputComponent.new(form: f, field: :documents, direct: true, multiple: true) %>
         </div>
 
         <% if @documents&.count > 0 %>
@@ -90,46 +90,46 @@
           <% end %>
         <% end %>
       </div>
-      <%= render Form::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
+      <%= render Forms::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
     </div>
   </div>
 
   <div class="mb-6">
-    <%= render Form::LabelComponent.new().with_content("Short description") %>
-    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
+    <%= render Forms::LabelComponent.new().with_content("Short description") %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
   </div>
 
   <div class="mb-6">
-    <%= render Form::LabelComponent.new().with_content("Detailed description") %>
-    <%= render Form::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
+    <%= render Forms::LabelComponent.new().with_content("Detailed description") %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :body, required: true, placeholder: "Description to be displayed on object cards") %>
   </div>
 
   <% if materials&.count.to_i > 0 %>
     <div class="mb-6">
-      <%= render Form::LabelComponent.new().with_content("Materials") %>
+      <%= render Forms::LabelComponent.new().with_content("Materials") %>
       <%= f.collection_select :material_ids, materials, :id, :name, {}, multiple: true, data: {controller: "select"}, id: "select" %>
     </div>
   <% end %>
 
   <div class="grid grid-cols-2 mb-6 space-x-4">
     <div>
-      <%= render Form::LabelComponent.new().with_content("Date") %>
-      <%= render Form::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
+      <%= render Forms::LabelComponent.new().with_content("Date") %>
+      <%= render Forms::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
     </div>
 
     <div>
-      <%= render Form::LabelComponent.new().with_content("Survey date") %>
+      <%= render Forms::LabelComponent.new().with_content("Survey date") %>
       <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
     </div>
   </div>
 
   <div class="mb-4">
-    <%= render Form::SectionLabelComponent.new().with_content("Metadata") %>
-    <%= render Form::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+    <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
   </div>
 
   <div class="flex">
-    <%= render Form::SubmitComponent.new(form: f).with_content("Save") %>
-    <%= render Form::BackButtonComponent.new(path: @upload).with_content("Back") %>
+    <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
+    <%= render Forms::BackButtonComponent.new(path: @upload).with_content("Back") %>
   </div>
 <% end %>

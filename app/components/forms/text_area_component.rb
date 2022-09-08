@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Form
+module Forms
   class TextAreaComponent < ViewComponent::Base
     def initialize(cls:, form:, placeholder:, disabled:, readonly:, value:, required:, hint:, label:)
       @cls = cls

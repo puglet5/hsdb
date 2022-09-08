@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Form
+module Forms
   class SubmitComponent < ViewComponent::Base
     def initialize(form:, cls: '')
       @cls = cls

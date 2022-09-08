@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Form
+module Forms
   class TextInputComponent < ViewComponent::Base
     def initialize(form:, field:, label: false, hint: false, required: false, v: nil, readonly: false, disabled: false, placeholder: '', cls: '', as: nil, data: nil)
       @cls = cls

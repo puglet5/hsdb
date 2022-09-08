@@ -59,7 +59,7 @@
               <% if @activities.count > 0 %>
                 <%= render "activities", activities: @activities %>
               <% else %>
-                <%= render Form::PHelperComponent.new().with_content("No activity yet. Events like uploads and forum activity will be displayed here.") %>
+                <%= render Forms::PHelperComponent.new().with_content("No activity yet. Events like uploads and forum activity will be displayed here.") %>
               <% end %>
             </div>
           </details>

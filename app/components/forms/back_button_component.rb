@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Form
+module Forms
   class BackButtonComponent < ViewComponent::Base
     def initialize(cls: '', path: '')
       @cls = cls
