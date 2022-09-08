@@ -4064,7 +4064,7 @@ __metadata:
   peerDependencies:
     "@rails/activestorage": "*"
     "@uppy/core": "*"
-  checksum: 11b351296fe6d4a9c8a26ba8282977787cf6213990b17a02ce4c754b89bb99aa68a6481bc16c17df0bd17b932702a7076a0e4465ccaa2aed8d881ad92cbbe4f9
+  checksum: 69bed6475a07ecb11e0b43d52df24a87025b275ce70b57afd315b3f45ce958d4e1f49cd128c4a0849dd90d86c5f087e7f68d9d033c94cda8cd786589d1b9edea
   languageName: node
   linkType: hard
 
