@@ -46,6 +46,6 @@
     "cssnano": "^5.1.13",
     "eslint": "^8.23.0",
     "postcss-nested": "^5.0.6",
-    "tailwind-config-viewer": "^1.7.1"
+    "tailwind-config-viewer": "^1.7.2"
   }
 }

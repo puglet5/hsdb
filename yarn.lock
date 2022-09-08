@@ -550,7 +550,7 @@ __metadata:
     postcss: ^8.4.16
     postcss-cli: ^10.0.0
     postcss-nested: ^5.0.6
-    tailwind-config-viewer: ^1.7.1
+    tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.1.8
     tom-select: ^2.1.0
     trix: ^2.0.0-beta.0
@@ -3868,9 +3868,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-config-viewer@npm:^1.7.1":
-  version: 1.7.1
-  resolution: "tailwind-config-viewer@npm:1.7.1"
+"tailwind-config-viewer@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "tailwind-config-viewer@npm:1.7.2"
   dependencies:
     "@koa/router": ^9.0.1
     commander: ^6.0.0
@@ -3885,7 +3885,7 @@ __metadata:
   bin:
     tailwind-config-viewer: cli/index.js
     tailwindcss-config-viewer: cli/index.js
-  checksum: e891b8ca2952338789617a33c261bc2f3ceeda28fd280a216dfb88664886fba531bddd992d010b927c7fbd7734d3ace433a08e6fb2f4aa6ad699a2b651b0431d
+  checksum: c1d5cdee07d1d97ad0a5c958b67ab786908e2d1a2290bc52714f4e02fd7a3f3315352721f05f010956f65400bd37a3d318f9b0930c91b3f93436336c543e195e
   languageName: node
   linkType: hard
 
