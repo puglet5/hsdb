@@ -1,5 +1,11 @@
 <%= simple_form_for @upload, validate: true do |f| %>
 
+  <!-- Attachment retention on form resubmit -->
+  <% f.object.documents.each do |file| %>
+    <%= f.hidden_field :documents, value: file.signed_id, multiple: true if file.persisted? %>
+  <% end %>
+  <!--  -->
+
   <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
   <div class="grid gap-6 mb-6 lg:grid-cols-2">
     <div>
