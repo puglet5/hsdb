@@ -34,7 +34,6 @@ gem 'pundit', '~> 2.1' # authorization / policies
 gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 7.0.3'
 gem 'rails-i18n', '~> 7.0.3'
-gem 'rails_performance', '~> 1.0'
 gem 'rails_semantic_logger', '~> 4.10'
 gem 'ransack', '~> 3.2.1' # object-based searching
 gem 'redis', '4.7.1'
