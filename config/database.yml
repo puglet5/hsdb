@@ -17,20 +17,6 @@ development:
     username: <%= ENV['PGUSER'] %>
     password: <%= ENV['PGPASSWORD'] %>
 
-  primary_replica:
-    <<: *default
-    database: ITMO_HSDB_development
-    username: <%= ENV['PGUSER'] %>
-    password: <%= ENV['PGPASSWORD'] %>
-    replica: true
-
-  rsdb_replica:
-    <<: *default
-    database: ITMO_RSDB_development
-    username: <%= ENV['PGUSER'] %>
-    password: <%= ENV['PGPASSWORD'] %>
-    replica: true
-
 test:
   primary:
     <<: *default
@@ -44,20 +30,6 @@ test:
     username: <%= ENV['PGUSER'] %>
     password: <%= ENV['PGPASSWORD'] %>
 
-  primary_replica:
-    <<: *default
-    database: ITMO_HSDB_test
-    username: <%= ENV['PGUSER'] %>
-    password: <%= ENV['PGPASSWORD'] %>
-    replica: true
-
-  rsdb_replica:
-    <<: *default
-    database: ITMO_RSDB_test
-    username: <%= ENV['PGUSER'] %>
-    password: <%= ENV['PGPASSWORD'] %>
-    replica: true
-
 production:
   primary:
     host: <%= ENV['PGHOST'] %>
@@ -67,15 +39,6 @@ production:
     database: ITMO_HSDB_production
     url: <%= ENV['HSDB_PRODUCTION'] %>
 
-  primary_replica:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    database: ITMO_HSDB_production
-    url: <%= ENV['HSDB_PRODUCTION_REPLICA'] %>
-    replica: true
-
   rsdb:
     host: <%= ENV['PGHOST'] %>
     adapter: postgresql
@@ -83,12 +46,3 @@ production:
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_producion
     url: <%= ENV['RSDB_PRODUCTION'] %>
-
-  secondary_replica:
-    host: <%= ENV['PGHOST'] %>
-    adapter: postgresql
-    encoding: utf8
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    database: ITMO_RSDB_producion
-    url: <%= ENV['RSDB_PRODUCTION_REPLICA'] %>
-    replica: true
