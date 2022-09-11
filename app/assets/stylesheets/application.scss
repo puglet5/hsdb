@@ -275,3 +275,7 @@ trix-toolbar .trix-button.trix-active {
 .input.password {
   @apply w-full
 }
+
+.tooltip {
+  transition: opacity 0.2s linear 0.2s;
+}
