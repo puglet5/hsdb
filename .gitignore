@@ -73,3 +73,4 @@ dump.rdb
 coverage
 
 /db/migrate
+tailwind-full.config.js

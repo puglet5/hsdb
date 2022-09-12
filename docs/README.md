@@ -23,6 +23,13 @@ sudo chmod 666 /var/run/docker.sock
 
 ### TailwindCSS styling
 
+####
+
+Generate full TailwindCSS config for reference with:
+```bash
+npx tailwindcss init tailwind-full.config.js --full
+```
+
 #### Flowbite
 Flowbite component library is used (v. 1.4.7) with some modifications to work nicely with Turbo. Apply flowbite.path with `git apply flowbite.patch` to get Flowbite's JavaScript working properly, thought it shall soon be replaced/rewritten with Stimulus.
 
