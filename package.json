@@ -13,7 +13,7 @@
     "@uppy/core": "^3.0.1",
     "@uppy/dashboard": "^3.0.1",
     "@uppy/image-editor": "^2.0.0",
-    "autoprefixer": "^10.4.8",
+    "autoprefixer": "^10.4.9",
     "esbuild": "^0.15.7",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.5.3",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^5.1.13",
-    "eslint": "^8.23.0",
+    "eslint": "^8.23.1",
     "postcss-nested": "^5.0.6",
     "tailwind-config-viewer": "^1.7.2"
   }
