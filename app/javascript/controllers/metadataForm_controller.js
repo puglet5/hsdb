@@ -98,7 +98,6 @@ export default class extends Controller {
 
     // eslint-disable-next-line no-unused-vars
     let json = Object.fromEntries(Object.entries(formatted[0]).filter(([k, _]) => k != ""))
-    console.log(json)
     let strJson = JSON.stringify(json)
 
     if (document.querySelector(".json-container"))

@@ -45,7 +45,6 @@ export default class extends Controller {
           el.setAttribute("rel", "noopener")
 
           pswp.on("change", () => {
-            console.log("change")
             el.href = pswp.currSlide.data.src
           })
         }
