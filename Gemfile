@@ -93,9 +93,8 @@ group :development, :test do
   gem 'debug', '>= 1.0.0'
   gem 'factory_bot_rails'
   gem 'faker', '~> 2.22'
-  gem "fuubar", "~> 2.5"
+  gem 'fuubar', '~> 2.5'
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
-
