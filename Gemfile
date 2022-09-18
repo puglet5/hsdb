@@ -47,6 +47,9 @@ gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
 
+gem 'client_side_validations', '~> 20.0'
+gem 'client_side_validations-simple_form'
+
 group :development do
   gem 'active_record_doctor', '~> 1.10'
   gem 'amazing_print', '~> 1.4'
@@ -90,10 +93,9 @@ group :development, :test do
   gem 'debug', '>= 1.0.0'
   gem 'factory_bot_rails'
   gem 'faker', '~> 2.22'
+  gem "fuubar", "~> 2.5"
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 5.1.2'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
 
-gem 'client_side_validations', '~> 20.0'
-gem 'client_side_validations-simple_form'
