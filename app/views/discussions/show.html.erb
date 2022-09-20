@@ -1,6 +1,6 @@
-<section class="pb-10 border bg-gray-50 dark:bg-gray-900">
+<section class="pb-10 border bg-gray-50 ">
   <div class="container mx-auto mt-10">
-    <div class="p-4 bg-white border rounded-lg shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-4 bg-white border rounded-lg shadow-md sm:p-6  ">
       <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex-1 min-w-0">
           <h2 class="text-5xl font-bold text-gray-900 sm:truncate"><%= @discussion.title %></h2>
@@ -62,11 +62,11 @@
           </span>
         </div>
       </div>
-      <div class="p-4 my-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600">
+      <div class="p-4 my-4 bg-white border border-gray-200 rounded-lg shadow-sm  ">
         <%= @discussion.content %>
       </div>
-      <label class="block mb-4 font-medium text-gray-900 border-b text-m dark:text-gray-300">Actions and replies</label>
-      <ol class="relative border-l border-gray-200 dark:border-gray-700">
+      <label class="block mb-4 font-medium text-gray-900 border-b text-m ">Actions and replies</label>
+      <ol class="relative border-l border-gray-200 ">
         <li class="mb-10 ml-6">
           <% if @discussion.replies.count > 0 %>
             <%= render @discussion.replies.includes([:user]).order("created_at asc") %>

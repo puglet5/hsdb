@@ -222,19 +222,19 @@
 }
 
 .trix-button-row {
-  @apply my-auto w-full bg-gray-100 rounded-t-lg border border-gray-300 border-b-0 dark:bg-gray-700 dark:border-gray-600
+  @apply my-auto w-full bg-gray-100 rounded-t-lg border border-gray-300 border-b-0
 }
 
 .trix-button {
-  @apply p-2 px-0.5 mx-0.5 my-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 border-0 !important
+  @apply p-2 px-0.5 mx-0.5 my-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 border-0 !important
 }
 
-trix-toolbar .trix-button-group{
+trix-toolbar .trix-button-group {
   @apply mb-0 !important
 }
 
 trix-editor {
-  @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 focus:border-2 !important;
+  @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-500 focus:border-primary-500 focus:border-2 !important;
   outline: none;
 }
 
@@ -243,7 +243,7 @@ trix-editor {
 }
 
 .trix-button-group {
-  @apply !border-0
+  @apply  !border-0
 }
 
 trix-toolbar .trix-button:not(:first-child) {
@@ -251,17 +251,17 @@ trix-toolbar .trix-button:not(:first-child) {
 }
 
 .trix-button-group .trix-button-group--block-tools {
-  @apply !border-l !border-solid !important
+  @apply  !border-l !border-solid !important
 }
 
 trix-toolbar .trix-button--icon-bold::before {}
 
 trix-toolbar .trix-button.trix-active {
-  @apply !bg-blue-200
+  @apply  !bg-blue-200
 }
 
 .ts-wrapper .ts-control {
-  @apply !rounded-lg
+  @apply  !rounded-lg
 }
 
 .ts-control.item {

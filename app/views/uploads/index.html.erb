@@ -3,7 +3,7 @@
   <%= render(Sections::DivContainerComponent.new(cls: "")) do %>
 
     <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
-      <%= render(Typography::H1Component.new(cls: "mb-4 text-gray-900 dark:text-white")) do %>
+      <%= render(Typography::H1Component.new(cls: "mb-4 text-gray-900 ")) do %>
         Lorem ipsum dolor sit amet. Lorem ipsum.
       <% end %>
       <%= render(Typography::PHeroComponent.new(cls: "!mb-8 !sm:px-16 !xl:px-48")) do %>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="flex justify-center mt-20 ">
-      <%= link_to "New", new_upload_path, class: "px-10 my-auto text-sm font-medium text-center text-white rounded-lg shadow-lg grow-0 bg-gradient-to-r from-secondary-500 to-primary-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-500 py-2.5" %>
+      <%= link_to "New", new_upload_path, class: "px-10 my-auto text-sm font-medium text-center text-white rounded-lg shadow-lg grow-0 bg-gradient-to-r from-secondary-500 to-primary-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-primary-200  py-2.5" %>
       <div class="w-2/3 ml-6">
         <%= render "search_form" %>
       </div>

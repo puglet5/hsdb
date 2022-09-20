@@ -1,5 +1,5 @@
 <%= tag.div data: {controller: "reply", "reply-target": "reply"} do %>
-  <span class="absolute flex items-center justify-center rounded-full -left-3 bg-primary-300 ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900">
+  <span class="absolute flex items-center justify-center rounded-full -left-3 bg-primary-300 ring-8 ring-white  ">
     <% if reply.user %>
       <% if reply.user.avatar.attached? %>
         <%= image_tag  reply.user.avatar, class:"object-cover w-6 h-6 rounded-full shadow-lg" %>
@@ -7,9 +7,9 @@
     <% end %>
   </span>
   <%= turbo_frame_tag reply do %>
-    <div class="p-4 my-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600">
+    <div class="p-4 my-4 bg-white border border-gray-200 rounded-lg shadow-sm  ">
       <div class="items-center justify-between mb-3 sm:flex">
-        <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">
+        <div class="text-sm font-normal text-gray-500 lex ">
           <% if reply.user %>
             <%= full_name(reply.user) %>
           <% end %>
@@ -39,7 +39,7 @@
           <% end %>
         </div>
       </div>
-      <div class="p-3 text-xs font-normal text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
+      <div class="p-3 text-xs font-normal text-gray-700 border border-gray-200 rounded-lg bg-gray-50   ">
         <%= simple_format reply.reply %>
       </div>
     </div>

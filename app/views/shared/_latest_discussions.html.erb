@@ -4,11 +4,11 @@
 </div>
 <%= render Sections::CardComponent.new(cls: "text-gray-700") do %>
   <% if @discussions_unpinned.count > 0 %>
-    <ol class="relative border-l border-gray-200 dark:border-gray-700">
+    <ol class="relative border-l border-gray-200 ">
       <% @discussions_unpinned.each do |discussion| %>
         <li class="mb-10 ml-4">
-          <div class="absolute w-3 h-3 bg-gray-200 border border-white rounded-full mt-1.5 -left-1.5 dark:border-gray-900 dark:bg-gray-700"></div>
-          <p class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          <div class="absolute w-3 h-3 bg-gray-200 border border-white rounded-full mt-1.5 -left-1.5  "></div>
+          <p class="mb-1 text-sm font-normal leading-none text-gray-400 ">
             <% if discussion.user %>
               By
               <%= link_to discussion.user, class: "font-medium" do %>
@@ -31,7 +31,7 @@
           <div class="flex justify-between">
             <%= link_to discussion do %>
               <div class="flex mb-2">
-                <span class="inline-flex items-center h-6 my-auto mr-2 text-xs font-medium text-gray-800 bg-gray-100 rounded px-2.5 py-0.5 dark:bg-gray-700 dark:text-gray-300">
+                <span class="inline-flex items-center h-6 my-auto mr-2 text-xs font-medium text-gray-800 bg-gray-100 rounded px-2.5 py-0.5  ">
                   <%= discussion.replies.count %>
                 </span>
                 <h3 class="my-1 mr-4 text-xl font-bold">

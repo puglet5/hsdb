@@ -1,5 +1,5 @@
 <aside class="border w-72" aria-label="Sidebar">
-  <div class="px-3 py-4 overflow-y-auto bg-white rounded dark:bg-gray-800">
+  <div class="px-3 py-4 overflow-y-auto bg-white rounded ">
     <% if current_user %>
       <ul>
         <li class="flex items-center pl-2 mb-5">
@@ -9,15 +9,15 @@
           <% end %>
           <%= link_to "/#{locale}/users/#{current_user.slug}", class: "w-10 h-10" do %>
             <div>
-              <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white"><%= current_user.first_name.to_s %></span>
-              <p class="w-48 mt-0 ml-2 mr-2 overflow-hidden text-gray-500 min-w-1/2 whitespace-nowrap text-ellipsis text-s dark:text-white"><%= current_user.email.to_s %></p>
+              <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap "><%= current_user.first_name.to_s %></span>
+              <p class="w-48 mt-0 ml-2 mr-2 overflow-hidden text-gray-500 min-w-1/2 whitespace-nowrap text-ellipsis text-s "><%= current_user.email.to_s %></p>
             </div>
           <% end %>
         </li>
       </ul>
     <% end %>
 
-    <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+    <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 ">
       <li>
         <span class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg select-none group">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -36,10 +36,10 @@
         </ul>
       </li>
     </ul>
-    <ul class="pt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+    <ul class="pt-4 space-y-2 border-t border-gray-200 ">
       <li>
         <%= tag.div data: { controller: "dropdown" } do %>
-          <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
+          <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  " aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
               <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM8.547 4.505a8.25 8.25 0 1011.672 8.214l-.46-.46a2.252 2.252 0 01-.422-.586l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.211.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.654-.261a2.25 2.25 0 01-1.384-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.279-2.132z" clip-rule="evenodd" />
             </svg>
@@ -47,7 +47,7 @@
             <span class="flex-1 ml-3 text-left whitespace-nowrap">
               Language
             </span>
-            <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
+            <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full  ">
               <%= t('language_abbr', locale: locale) %>
             </span>
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
