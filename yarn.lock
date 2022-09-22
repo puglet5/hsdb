@@ -71,20 +71,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^7.2.0-rc.3":
-  version: 7.2.0-rc.3
-  resolution: "@hotwired/turbo-rails@npm:7.2.0-rc.3"
+"@hotwired/turbo-rails@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "@hotwired/turbo-rails@npm:7.2.0"
   dependencies:
-    "@hotwired/turbo": ^7.2.0-rc.3
+    "@hotwired/turbo": ^7.2.0
     "@rails/actioncable": ^7.0
-  checksum: 8de6911add7038eb1262f9c2177801a0b71ff231afeb1f28500c4eaf805852b8e18ae932aff1071a4fc62aeea35a9ca04254cef57c36ac0ba4040de64bc649b6
+  checksum: 8a40ba37c68d3ac45fdd810642820c80ff179568dc1e668b844fe1cdf2b4574d666496c9585af1c0c2863ece37a6c7e726024d6e0ad5de39ff6f15ae83d8bf74
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^7.2.0-rc.3":
-  version: 7.2.0-rc.3
-  resolution: "@hotwired/turbo@npm:7.2.0-rc.3"
-  checksum: 632f796410440468d49bfee05936f75e677bcccdc24a4387cb015b548336a6587a989d78679ff7d91d9b564bc6bc853fc649d4b314c822e1bbb00785242829bf
+"@hotwired/turbo@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "@hotwired/turbo@npm:7.2.0"
+  checksum: cea846f44190e24897b5b142838ca6fef1dcab623832a4af35a3da9e094fb908f44c73c4abc7ba75ca80cac0358c2009fcb17659ae3c97dd955bfb5aa45d8b4b
   languageName: node
   linkType: hard
 
@@ -548,7 +548,7 @@ __metadata:
     "@client-side-validations/client-side-validations": ^0.3.0
     "@client-side-validations/simple-form": ^0.3.1
     "@hotwired/stimulus": ^3.1.0
-    "@hotwired/turbo-rails": ^7.2.0-rc.3
+    "@hotwired/turbo-rails": ^7.2.0
     "@pgrabovets/json-view": ^2.7.1
     "@popperjs/core": ^2.11.6
     "@rails/actiontext": ^7.0.4
