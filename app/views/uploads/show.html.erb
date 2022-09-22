@@ -1,17 +1,13 @@
-<% if @upload.thumbnail.attached? %>
+  <% if @upload.thumbnail.attached? %>
   <div class="relative h-56 overflow-hidden sm:h-64 xl:h-80 2xl:h-96">
     <%= image_tag @upload.thumbnail, class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
   </div>
 <% end %>
-<section class="pb-20 mb-20 text-gray-700 border bg-gray-50 ">
+<section class="max-w-screen-xl pb-20 mx-auto mb-20 text-gray-700 border bg-gray-50">
   <div class="container mx-auto">
     <div class="my-10 text-center">
-      <div class="flex justify-center">
-        <span class="my-auto <%= status_badge_style(@upload.status).to_s %>">
-          <%= @upload.status %>
-        </span>
-        <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
-      </div>
+      <%= render UploadBadgeComponent.new(status: @upload.status).with_content(@upload.status.humanize.downcase) %>
+      <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
       <p><%= @upload.description %></p>
     </div>
     <div class="flex justify-between mb-4 border-b">
@@ -33,13 +29,13 @@
         <% end %>
       </div>
     </div>
-    <div class="p-4 bg-white border rounded-lg shadow-md sm:p-6  ">
+    <div class="p-4 bg-white border rounded-lg shadow-md sm:p-6 ">
       <div class="grid grid-cols-12 pb-4">
         <div class="col-span-6 border-r">
           <div class="m-4">
             <%= @upload.body %>
           </div>
-          <%= link_to uploads_path, class: "block my-auto text-sm font-medium text-gray-500  " do %>
+          <%= link_to uploads_path, class: "block my-auto text-sm font-medium text-gray-500 " do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
             </svg>

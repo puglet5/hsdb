@@ -55,18 +55,18 @@
       <div class="mb-4">
         <%= render Forms::LabelComponent.new().with_content("Password") %>
 
-        <%= f.input :password, autocomplete: "new-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5       " }, placeholder: "•••••••••", validate: false %>
+        <%= f.input :password, autocomplete: "new-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 " }, placeholder: "•••••••••", validate: false %>
         <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 ">Leave blank if you don't want to change it</p>
       </div>
       <div class="mb-4">
         <%= render Forms::LabelComponent.new().with_content("Confirm password") %>
 
-        <%= f.input :password_confirmation, autocomplete: "new-password", type: "password", id: "confirm-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5       " }, placeholder: "•••••••••", validate: false %>
+        <%= f.input :password_confirmation, autocomplete: "new-password", type: "password", id: "confirm-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 " }, placeholder: "•••••••••", validate: false %>
       </div>
       <div class="mb-4">
         <%= render Forms::LabelComponent.new().with_content("Current password") %>
 
-        <%= f.input :current_password, autocomplete: "current-password", type: "password", id: "confirm-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5       " }, placeholder: "•••••••••", validate: { presence: true }, required: true %>
+        <%= f.input :current_password, autocomplete: "current-password", type: "password", id: "confirm-password", input_html: { class: "block w-full text-sm text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 " }, placeholder: "•••••••••", validate: { presence: true }, required: true %>
         <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 "> Your current password is needed to confirm the changes</p>
       </div>
 

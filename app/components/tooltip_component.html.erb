@@ -1,6 +1,6 @@
 <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg cursor-pointer tooltip p-1.5 #{@cls}", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#toggle"} do %>
   <%= content %>
-  <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+  <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-800 rounded-lg shadow-sm opacity-0 tooltip", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
     <%= @tooltip %>
   <% end %>
 <% end %>

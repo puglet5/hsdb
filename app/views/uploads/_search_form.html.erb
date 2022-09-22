@@ -1,10 +1,1 @@
-<%= search_form_for @query, class: "col s11 no-margin no-padding" do |f| %>
-  <div class="flex">
-    <%= f.select :style_id_eq, Style.all.collect{|c| [c.name, c.id]}, {:include_blank => "All categories"}, { class: 'z-10 inline-flex items-center flex-shrink-0 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg py-2.5 hover:bg-gray-200 focus:border-primary-500 focus:ring-0' } %>
 
-    <div class="relative w-full">
-      <%= f.search_field :title_or_description_cont, class: "z-20 block w-full text-sm text-gray-900 border border-gray-300 rounded-r-lg p-2.5 bg-gray-50 border-l-gray-50 focus:border-primary-500 focus:ring-0", placeholder: "Search uploads", required: false %>
-      <button type="submit" class="absolute top-0 right-0 text-sm font-medium text-white border rounded-r-lg p-2.5 bg-primary-500 border-primary-500 hover:bg-primary-500"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-    </div>
-  </div>
-<% end %>

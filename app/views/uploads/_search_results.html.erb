@@ -1,24 +1,25 @@
 <% if uploads&.count > 0 && query.result.count != 0 %>
-  <div class="mt-20">
-    <%= render uploads %>
+  <div class="mt-8">
+    <div class="space-y-8">
+      <%= render uploads %>
+    </div>
     <% if pagy.pages > 1 %>
       <%== pagy_nav pagy %>
     <% end %>
   </div>
 <% elsif uploads&.count > 0 && query.result.count == 0 %>
-  <div class="mt-20">
-    <p class="mb-4 text-sm text-center text-gray-400">
-      The query returned no results
-    </p>
-  </div>
+  <p class="mb-4 text-sm text-center text-gray-400">
+    The query returned no results
+  </p>
 <% else %>
-  <div class="mt-20">
-    <p class="mb-4 text-sm text-center text-gray-400">
-      There are no uploads yet, click
-      <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary-500 to-primary-500">
-        New
-      </span>
-      to create one
+  <div class="relative p-8 text-center bg-white border border-gray-200 rounded-lg">
+    <h2 class="text-2xl font-medium">
+      There's nothing here...
+    </h2>
+
+    <p class="mt-4 text-sm text-gray-500">
+      Created experiments will appear here
     </p>
+
   </div>
 <% end %>
