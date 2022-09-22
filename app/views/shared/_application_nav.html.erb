@@ -82,7 +82,7 @@
         <!-- Dropdown language menu -->
         <%= tag.div data: { "dropdown-target": "dropdown" }, class: "absolute right-0 z-50 hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow top-12" do %>
           <aside class="w-64" aria-label="Sidebar">
-            <%= tag.div data: { controller: "dropdown" } do%>
+            <%= tag.div data: { controller: "dropdown" } do %>
               <div class="overflow-y-auto bg-white rounded ">
                 <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 " data-action="click->dropdown#toggle">
                   <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Language</span>

@@ -46,7 +46,7 @@
         <%= render Forms::TextInputComponent.new(form: f, field: :email, required: true, placeholder: "test@example.com") %>
       </div>
 
-      <br />
+      <br>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>
           Currently waiting confirmation for: <%= resource.unconfirmed_email %>
