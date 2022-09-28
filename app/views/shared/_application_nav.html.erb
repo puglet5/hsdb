@@ -18,7 +18,7 @@
       <ul class="flex flex-row mt-0 space-x-8 text-sm font-medium">
         <% if current_user %>
 
-          <%= render TooltipComponent.new(tooltip: "Home", cls: "p-0 m-0 border-0") do %>
+          <%= render TooltipComponent.new(tooltip: "Home", cls: "p-0 m-0 border-0 ") do %>
             <li class="p-0 bg-transparent text-primary-300">
               <%= link_to root_path do %>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 <%= active_style root_path, "!text-primary-500" %>">
