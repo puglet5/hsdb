@@ -13,7 +13,9 @@
 class Image < ApplicationRecord
   belongs_to :upload, inverse_of: :images, touch: true
 
-  has_one_attached :image
+  has_one_attached :image do |blob|
+    blob.variant :thumbnail, resize: '400x300^', crop: '400x300+0+0', format: :jpg
+  end
 
   validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
 end

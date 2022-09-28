@@ -45,7 +45,10 @@ class User < ApplicationRecord
            dependent: :delete_all
   # rubocop:enable Rails/InverseOf
 
-  has_one_attached :avatar
+  has_one_attached :avatar do |blob|
+    blob.variant :small, resize: '50x50^', crop: '50x50+0+0', format: :jpg
+    blob.variant :medium, resize: '100x100^', crop: '100x100+0+0', format: :jpg
+  end
 
   has_settings do |s|
     s.key :pagination, defaults: { per: '10' }
