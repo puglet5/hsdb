@@ -33,7 +33,7 @@ module Admin
 
       if @user.update user_params
         flash[:success] = 'User was successfully updated'
-        redirect_to admin_users_path
+        redirect_to %i[admin users]
       else
         render :edit, status: :unprocessable_entity
       end
@@ -42,7 +42,7 @@ module Admin
     def destroy
       @user.destroy
       flash[:success] = 'User was successfully deleted'
-      redirect_to admin_users_path, status: :see_other
+      redirect_to %i[admin users], status: :see_other
     end
 
     private

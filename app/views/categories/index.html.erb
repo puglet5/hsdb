@@ -2,9 +2,9 @@
   <%= render Sections::DivContainerComponent.new() do %>
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Forum discussion catoegories") %>
-      <%= render Links::NewLinkComponent.new(path: new_category_path, cls: "text-gray-500") %>
+      <%= render Links::NewLinkComponent.new(path: [:new, :category], cls: "text-gray-500") %>
     <% end %>
-    <table class="w-full text-sm text-left text-gray-500  ">
+    <table class="w-full text-sm text-left text-gray-500 ">
       <thead>
         <tr>
           <th scope="col" class="px-6 py-3">#</th>
@@ -21,7 +21,7 @@
             <td class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap "><%= link_to category.category_name, category %></td>
             <td class="px-6 py-2">
               <div class="flex space-x-2">
-                <%= link_to "Edit", edit_category_path(category) %>
+                <%= link_to "Edit", [:edit, category] %>
                 <%= link_to "Delete", category, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn red" %>
               </div>
             </td>

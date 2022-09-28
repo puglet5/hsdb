@@ -9,12 +9,12 @@
 
     <div>
       <%= render Forms::LabelComponent.new().with_content("Status") %>
-      <%= f.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5   focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+      <%= f.input :status, default: upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
     </div>
 
     <div>
       <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
-      <%= f.input :style_id, default: upload.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5   focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+      <%= f.input :style_id, default: upload.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
     </div>
 
     <div>
@@ -68,7 +68,7 @@
 
     <div>
       <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-      <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5   focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+      <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
     </div>
   </div>
 
@@ -91,14 +91,14 @@
         <div class="col-span-5">
           <%= render Forms::LabelComponent.new().with_content("Field name") %>
           <div class="relative">
-            <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5      " placeholder="wavelength, etc." autofocus>
+            <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="wavelength, etc." autofocus>
           </div>
         </div>
         <div class="col-span-5">
           <%= render Forms::LabelComponent.new().with_content("Value") %>
 
           <div class="flex">
-            <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5      " placeholder="1064 or [532, 1064]">
+            <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="1064 or [532, 1064]">
           </div>
         </div>
       </div>
@@ -120,6 +120,6 @@
 
   <div class="flex">
     <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
-    <%= render Forms::BackButtonComponent.new(path: uploads_path).with_content("Back") %>
+    <%= render Forms::BackButtonComponent.new(path: :uploads).with_content("Back") %>
   </div>
 <% end %>

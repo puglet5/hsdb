@@ -1,4 +1,4 @@
-<tr class="border-b   hover:bg-gray-200">
+<tr class="border-b hover:bg-gray-200">
   <td class="py-4 pl-6">
     <%= user.id %>
   </td>
@@ -21,7 +21,7 @@
   <td class="px-6 py-4">
     <%= time_ago_in_words(user.created_at) %> ago</td>
   <td class="px-6 py-4">
-    <%= link_to admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+    <%= link_to [:admin, user], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <span class="flex my-auto mb-1">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -31,7 +31,7 @@
         </p>
       </span>
     <% end %>
-    <%= link_to edit_admin_user_path(user) do %>
+    <%= link_to [:admin, :edit, user] do %>
       <span class="flex my-auto">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 my-auto" viewBox="0 0 20 20" fill="currentColor">
           <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

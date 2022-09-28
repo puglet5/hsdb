@@ -5,7 +5,7 @@
       <h1 class="my-auto text-2xl font-bold sm:text-3xl ">Recent uploads</h1>
     </div>
     <div class="flex">
-      <%= link_to new_upload_path, class: "flex items-center justify-center p-3 text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-primary-600 focus:outline-none focus:border focus:ring-1" do %>
+      <%= link_to [:new, :upload], class: "flex items-center justify-center p-3 text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-primary-600 focus:outline-none focus:border focus:ring-1" do %>
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-3 text-primary-600">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />

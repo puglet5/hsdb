@@ -12,7 +12,7 @@
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference Spectra") %>
-      <%= render Links::NewLinkComponent.new(path: new_spectrum_path, cls: "text-gray-500") %>
+      <%= render Links::NewLinkComponent.new(path: [:new, :spectrum], cls: "text-gray-500") %>
     <% end %>
 
     <%= render Sections::CardComponent.new() do %>

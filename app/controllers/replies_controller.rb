@@ -10,9 +10,9 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     if @reply.save
-      redirect_to discussion_path(@discussion)
+      redirect_to @discussion
     else
-      redirect_to discussion_path(@discussion), status: :unprocessable_entity
+      redirect_to @discussion, status: :unprocessable_entity
     end
   end
 
@@ -20,14 +20,14 @@ class RepliesController < ApplicationController
 
   def destroy
     @reply.destroy
-    redirect_to discussion_path(@discussion), status: :see_other
+    redirect_to @discussion, status: :see_other
   end
 
   def edit; end
 
   def update
     if @reply.update(reply_params)
-      redirect_to discussion_path(@discussion)
+      redirect_to @discussion
     else
       render :edit, status: :unprocessable_entity
     end

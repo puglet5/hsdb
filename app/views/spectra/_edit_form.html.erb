@@ -47,6 +47,6 @@
 
   <div class="flex mt-4">
     <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
-    <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? spectra_path : @spectrum).with_content("Back") %>
+    <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? :spectra : @spectrum).with_content("Back") %>
   </div>
 <% end %>
