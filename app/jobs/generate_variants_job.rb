@@ -9,7 +9,7 @@ class GenerateVariantsJob < ApplicationJob
     upload&.image_attachments&.each do |image|
       next unless image.representable?
 
-      preview_variant = image.variant(resize: '400x300^', crop: '400x300+0+0')
+      preview_variant = image.variant(:thumbnail)
       preview_variant.process unless preview_variant.processed?
     end
   end

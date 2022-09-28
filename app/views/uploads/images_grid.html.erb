@@ -9,7 +9,7 @@
             </svg>
           </div>
           <a href="<%= image.url %>" data-pswp-width="<%= image.metadata['width'] %>" data-pswp-height="<%= image.metadata['height'] %>" data-cropped="true" target="_blank">
-            <%= image_tag image.variant(resize: '400x300^', crop: '400x300+0+0').processed, class: "relative z-10 object-cover w-full rounded" %>
+            <%= image_tag original_or_variant(image, image.variant(:thumbnail)), class: "relative z-10 object-cover w-full rounded" %>
           </a>
         <% end %>
       <% end %>
