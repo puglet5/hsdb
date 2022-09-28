@@ -111,4 +111,7 @@ Rails.application.configure do
   config.serve_static_assets = false
 
   config.action_view.image_loading = 'lazy'
+
+  # setup sidekiq logger to work with semantic logger
+  config.semantic_logger.add_appender(io: $stdout, formatter: :color) if Sidekiq.server?
 end
