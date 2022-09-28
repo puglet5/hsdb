@@ -11,6 +11,8 @@
 #  range      :integer          default(0)
 #
 class Image < ApplicationRecord
+  include ProcessImage
+
   belongs_to :upload, inverse_of: :images, touch: true
 
   has_one_attached :image do |blob|
@@ -18,4 +20,6 @@ class Image < ApplicationRecord
   end
 
   validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
+
+  after_commit :process_image, on: %i[create update]
 end
