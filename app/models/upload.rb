@@ -30,7 +30,7 @@ class Upload < ApplicationRecord
 
   has_many :images, inverse_of: :upload, dependent: :destroy
   accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
-  has_many :image_attachments, through: :images
+  has_many :image_attachments, through: :images, dependent: :destroy
 
   has_one_attached :thumbnail
   has_many_attached :documents
@@ -41,7 +41,7 @@ class Upload < ApplicationRecord
   has_many :upload_materials, dependent: :destroy
   has_many :materials, through: :upload_materials
 
-  belongs_to :style, optional: true
+  belongs_to :style, optional: true, touch: true
 
   belongs_to :user
   validates :title, :description, presence: true

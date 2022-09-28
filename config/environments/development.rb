@@ -10,7 +10,6 @@ Rails.application.configure do
     Bullet.alert = true
     Bullet.bullet_logger = true
     Bullet.console = true
-    # Bullet.growl         = true
     Bullet.rails_logger = true
     Bullet.add_footer = true
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'PublicActivity::Activity', association: :owner
@@ -43,7 +42,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :memory_store
+    config.cache_store = :redis_cache_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }

@@ -1,7 +1,9 @@
 <% if uploads&.count > 0 && query.result.count != 0 %>
   <div class="mt-8">
     <div class="space-y-8">
-      <%= render uploads %>
+      <% cache uploads do %>
+        <%= render uploads %>
+      <% end %>
     </div>
     <% if pagy.pages > 1 %>
       <%== pagy_nav pagy %>

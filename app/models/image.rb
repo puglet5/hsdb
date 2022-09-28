@@ -11,7 +11,7 @@
 #  range      :integer          default(0)
 #
 class Image < ApplicationRecord
-  belongs_to :upload, inverse_of: :images
+  belongs_to :upload, inverse_of: :images, touch: true
 
   has_one_attached :image
 
