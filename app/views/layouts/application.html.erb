@@ -16,6 +16,9 @@
     <%= render "shared/application_nav" %>
     <%= render "shared/flash" %>
     <%= render "shared/confirm_modal" %>
+    <div class="absolute self-end space-y-4 top-16 right-2">
+      <%= render "shared/clipboard_flash" %>
+    </div>
     <main class="mb-auto">
       <%= yield %>
       <%= render "shared/back_to_top" %>
