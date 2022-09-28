@@ -48,12 +48,12 @@ class UploadsController < ApplicationController
 
     authorize @upload
 
-    @q = @upload
-         .image_attachments.all
-         .with_all_variant_records
-         .order('created_at ASC')
+    @q = @upload.images
+                .all
+                .with_attached_image
+                .order('created_at ASC')
 
-    @pagy, @grid = pagy @q, items: 20
+    @pagy, @images = pagy @q, items: 20
 
     render layout: false
   end

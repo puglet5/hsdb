@@ -4,7 +4,9 @@ class ProcessImageJob < ApplicationJob
   queue_as :default
 
   def perform(obj)
-    puts obj.image&.representable?
-    obj.image.variant(:thumbnail).processed if obj.image&.representable?
+    unless obj.image.variant(:thumbnail).key
+      obj.image.variant(:thumbnail).processed
+      obj.touch
+    end
   end
 end
