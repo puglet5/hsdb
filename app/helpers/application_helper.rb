@@ -19,19 +19,6 @@ module ApplicationHelper
     Renderer.copyright t('footer.itmo')
   end
 
-  def auth_items
-    [
-      {
-        url: new_user_session_path,
-        title: t('auth.login')
-      },
-      {
-        url: new_user_registration_path,
-        title: t('auth.register')
-      }
-    ]
-  end
-
   def get_controller(url)
     Rails.application.routes.recognize_path(url)[:controller]
   end
@@ -46,32 +33,6 @@ module ApplicationHelper
 
   def active_style(url, klass)
     active? get_controller(url), url, klass
-  end
-
-  def status_badge_style(status)
-    case status
-    when 'draft'
-      'bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  '
-    when 'active'
-      'bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  '
-    when 'archived'
-      'bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  '
-    else
-      'bg-primary-100 text-primary-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  '
-    end
-  end
-
-  def status_badge_color(status)
-    case status
-    when 'draft'
-      'text-yellow-300'
-    when 'active'
-      'text-green-300'
-    when 'archived'
-      'text-gray-300'
-    else
-      'text-primary-300'
-    end
   end
 
   def original_or_variant(image, variant)
