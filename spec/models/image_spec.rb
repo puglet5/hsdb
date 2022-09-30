@@ -9,6 +9,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default(0)
+#  category   :integer          default("vis")
+#  status     :integer          default("not_set")
+#
 
 require 'rails_helper'
 
