@@ -6,8 +6,8 @@ class RepliesController < ApplicationController
   before_action :set_reply, only: %i[edit update destroy]
 
   def create
-    @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
-    @reply.user_id = current_user.id
+    @reply = @discussion.replies.build reply_params
+    @reply.user = current_user
 
     if @reply.save
       redirect_to @discussion
