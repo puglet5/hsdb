@@ -13,8 +13,6 @@
 #  status     :integer          default("not_set")
 #
 
-require 'rails_helper'
-
 RSpec.describe Image, type: :model do
   let(:upload) { create(:upload) }
   let(:valid_image) { build(:image, upload: upload) }

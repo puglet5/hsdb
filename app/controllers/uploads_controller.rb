@@ -13,7 +13,6 @@ class UploadsController < ApplicationController
   def index
     @uploads = Upload
                .all
-               .with_attached_thumbnail
                .includes(:user)
 
     authorize @uploads
