@@ -47,8 +47,8 @@ gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
 
-gem 'client_side_validations', '~> 20.0'
-gem 'client_side_validations-simple_form'
+gem 'client_side_validations', '~> 21.0'
+gem 'client_side_validations-simple_form', '~> 15.0'
 
 group :development do
   gem 'active_record_doctor', '~> 1.10'
@@ -67,8 +67,8 @@ group :development do
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
   gem 'rubocop-rails', '~> 2.15', '>= 2.15.2', require: false
-  gem 'solargraph' # ruby language server
-  gem 'solargraph-rails'
+  gem 'solargraph', '~> 0.47.2' # ruby language server
+  gem 'solargraph-rails', '~> 0.3.1'
   gem 'web-console'
 end
 
