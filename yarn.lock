@@ -545,6 +545,7 @@ __metadata:
     esbuild-rails: ^1.0.3
     eslint: ^8.24.0
     flowbite: 1.5.3
+    flowbite-datepicker: ^1.2.2
     jquery: ^3.6.1
     photoswipe: ^5.3.2
     postcss: ^8.4.17
@@ -1748,7 +1749,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.5.3":
+"flowbite-datepicker@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "flowbite-datepicker@npm:1.2.2"
+  dependencies:
+    flowbite: ^1.4.5
+  checksum: 5adef853a0a4d438acb1b6390da607357104b91e88a86edc35b03fb6e350e77b01cbda6f00a607b6fdf6d67c25f96b2ae332036716b53bc4f9d99aefac8f4d50
+  languageName: node
+  linkType: hard
+
+"flowbite@npm:1.5.3, flowbite@npm:^1.4.5":
   version: 1.5.3
   resolution: "flowbite@npm:1.5.3"
   dependencies:
