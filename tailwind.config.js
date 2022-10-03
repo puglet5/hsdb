@@ -7,7 +7,8 @@ module.exports = {
     './app/components/*',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
-    './app/javascript/**/*.js'
+    './app/javascript/**/*.js',
+    './node_modules/flowbite/dist/datepicker.js'
   ],
   plugins: [
     require("flowbite/plugin"),

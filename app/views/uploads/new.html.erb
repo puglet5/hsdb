@@ -70,9 +70,11 @@
           <%= render Forms::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
         </div>
 
-        <div>
-          <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-          <%= f.input :survey_date, as: :date, html5: true, required: false, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+        <div class="mb-4">
+          <%= tag.div data: { controller: "datepicker" } do %>
+            <%= render Forms::LabelComponent.new().with_content("Survey date") %>
+            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full pr-6 text-sm border-gray-300 rounded-lg shadow-sm p-2.5 focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
+          <% end %>
         </div>
       </div>
 
