@@ -48,7 +48,7 @@ class Upload < ApplicationRecord
 
   belongs_to :user
   validates :title, :description, presence: true
-  validate :json_validity
+  # validate :json_validity
 
   has_rich_text :body
 
