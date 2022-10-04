@@ -21,6 +21,8 @@ class UsersController < ApplicationController
         value['enabled'] = ActiveModel::Type::Boolean.new.cast(value['enabled'])
       when 'uploading'
         value['thumbnails'] = ActiveModel::Type::Boolean.new.cast(value['thumbnails'])
+      when 'ui'
+        value['tooltips'] = ActiveModel::Type::Boolean.new.cast(value['tooltips'])
       end
 
       @user.settings(key.to_sym).update! value
@@ -37,7 +39,8 @@ class UsersController < ApplicationController
                                   {
                                     processing: :enabled,
                                     pagination: :per,
-                                    uploading: :thumbnails
+                                    uploading: :thumbnails,
+                                    ui: :tooltips
                                   })
   end
 end

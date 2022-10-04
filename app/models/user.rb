@@ -54,6 +54,7 @@ class User < ApplicationRecord
     s.key :pagination, defaults: { per: '10' }
     s.key :processing, defaults: { enabled: false }
     s.key :uploading,  defaults: { thumbnails: true }
+    s.key :ui, defaults: { tooltips: true }
   end
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP

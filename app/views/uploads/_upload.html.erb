@@ -18,7 +18,7 @@
         <div class="flex flex-row items-center justify-center mx-1 space-x-0">
           <% if policy(upload).edit? %>
             <%= link_to [:edit, upload] do %>
-              <%= render TooltipComponent.new(tooltip: "Edit") do %>
+              <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 my-auto text-gray-400">
                   <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
                   <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
@@ -27,7 +27,7 @@
             <% end %>
           <% end %>
 
-          <%= render TooltipComponent.new(tooltip: "Favorite") do %>
+          <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-400">
               <path d="M17 4.517v9.301L5.433 2.252a41.44 41.44 0 019.637.058C16.194 2.45 17 3.414 17 4.517zM3 17.25V6.182l10.654 10.654L10 15.082l-5.925 2.844A.75.75 0 013 17.25zM3.28 2.22a.75.75 0 00-1.06 1.06l14.5 14.5a.75.75 0 101.06-1.06L3.28 2.22z" />
             </svg>
@@ -35,7 +35,7 @@
 
           <% if policy(upload).destroy? %>
             <%= link_to upload, data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
-              <%= render TooltipComponent.new(tooltip: "Delete") do %>
+              <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-400">
                   <path fill-rule="evenodd" d="M7.22 3.22A.75.75 0 017.75 3h9A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17h-9a.75.75 0 01-.53-.22L.97 10.53a.75.75 0 010-1.06l6.25-6.25zm3.06 4a.75.75 0 10-1.06 1.06L10.94 10l-1.72 1.72a.75.75 0 101.06 1.06L12 11.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L12 8.94l-1.72-1.72z" clip-rule="evenodd" />
                 </svg>
@@ -45,7 +45,7 @@
 
           <%= tag.div data: { controller: "clipboard", action: "click->clipboard#copy" } do %>
             <%= link_to "", upload, class: "hidden" , data: { "clipboard-target": "text" } %>
-            <%= render TooltipComponent.new(tooltip: "Copy link") do %>
+            <%= render TooltipComponent.new(tooltip: "Copy link", user: current_user) do %>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-400 transition" data-clipboard-target="svg">
                 <path d="M7 3.5A1.5 1.5 0 018.5 2h3.879a1.5 1.5 0 011.06.44l3.122 3.12A1.5 1.5 0 0117 6.622V12.5a1.5 1.5 0 01-1.5 1.5h-1v-3.379a3 3 0 00-.879-2.121L10.5 5.379A3 3 0 008.379 4.5H7v-1z" />
                 <path d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-5.879a1.5 1.5 0 00-.44-1.06L9.44 6.439A1.5 1.5 0 008.378 6H4.5z" />
