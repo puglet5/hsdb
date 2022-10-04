@@ -42,5 +42,5 @@ class Spectrum < RsdbRecord
 
   after_commit :parse_json, on: %i[create update]
 
-  enum processing_status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing
+  enum processing_status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing, _default: :none
 end

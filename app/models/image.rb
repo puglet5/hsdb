@@ -17,8 +17,8 @@ class Image < ApplicationRecord
 
   belongs_to :upload, inverse_of: :images, touch: true
 
-  enum status: { not_set: 0, accepted: 1, on_review: 2 }
-  enum category: { vis: 0, ir: 1, uv: 2 }
+  enum status: { not_set: 0, accepted: 1, on_review: 2 }, _default: :not_set
+  enum category: { vis: 0, ir: 1, uv: 2 }, _default: :vis
 
   has_one_attached :image do |blob|
     blob.variant :thumbnail, resize: '400x300^', crop: '400x300+0+0', format: :jpg
