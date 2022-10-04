@@ -36,6 +36,12 @@ module HSDB
     config.active_storage.queues.mirror     = nil # defaults to "active_storage_mirror"
     config.active_storage.track_variants = true # used to eager load image variants
 
+    config.generators do |g|
+      g.view_specs false
+      g.helper_specs false
+      g.component_specs false
+    end
+
     # image processing config
     Rails.application.config.active_storage.variant_processor = :mini_magick
     Rails.application.config.active_storage.analyzers.delete ActiveStorage::Analyzer::ImageAnalyzer
@@ -54,7 +60,6 @@ module HSDB
     config.to_prepare do
       Doorkeeper::ApplicationsController.layout 'application'
     end
-
     config.to_prepare do
       Doorkeeper::ApplicationController.include Internationalization
     end
