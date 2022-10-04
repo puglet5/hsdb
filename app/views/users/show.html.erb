@@ -25,8 +25,8 @@
               <p class="mx-auto font-normal text-gray-500">
                 <%= @user.organization %>
               </p>
-              <p class="mx-auto overflow-hidden italic font-normal text-gray-500 text-ellipsis max-w-1/2 hover:overflow-visible">
-                <a href="<%= "mailto:#{@user.email}" %>">
+              <p class="w-full mx-auto overflow-hidden text-sm font-medium text-gray-500 hover:underline text-ellipsis ">
+                <a href="<%= "mailto:#{@user.email}" %>" class="">
                   <%= @user.email %>
                 </a>
               </p>
@@ -57,46 +57,65 @@
               <% if policy([:admin, :user]).index? %>
                 <%= link_to "/admin/users" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
                     </svg>
-                    <p class="">Users table</p>
+                    <p class="hover:underline">Users table</p>
                   </div>
                 <% end %>
               <% end %>
               <% if policy(:category).index? %>
                 <%= link_to [:categories] do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
+                      <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
                     </svg>
-                    <p class="">Forum categories</p>
+                    <p class="hover:underline">Forum categories</p>
                   </div>
                 <% end %>
               <% end %>
               <% if current_user.has_role?(:admin) %>
                 <%= link_to "/admin/sidekiq" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-building-factory" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12"></path>
+                      <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8"></path>
+                      <path d="M9 5a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1"></path>
+                      <line x1="3" y1="21" x2="22" y2="21"></line>
                     </svg>
-                    <p class="">Sidekiq jobs</p>
+                    <p class="hover:underline">Sidekiq jobs</p>
                   </div>
                 <% end %>
                 <%= link_to rswag_ui_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-api" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M4 13h5"></path>
+                      <path d="M12 16v-8h3a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-3"></path>
+                      <path d="M20 8v8"></path>
+                      <path d="M9 16v-5.5a2.5 2.5 0 0 0 -5 0v5.5"></path>
                     </svg>
-                    <p class="">API Docs</p>
+                    <p class="hover:underline">API Docs</p>
                   </div>
                 <% end %>
                 <%= link_to oauth_applications_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-apps" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+                      <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+                      <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+                      <line x1="14" y1="7" x2="20" y2="7"></line>
+                      <line x1="17" y1="4" x2="17" y2="10"></line>
                     </svg>
-                    <p class="">Apps</p>
+                    <p class="hover:underline">Apps</p>
                   </div>
                 <% end %>
 

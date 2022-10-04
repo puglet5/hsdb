@@ -1,3 +1,8 @@
-<label class="block mb-2 text-sm font-medium text-gray-900 ">
+<label class="flex items-center mb-2 text-sm font-medium justify-items-center text-gray-70 <%= @cls %>">
   <%= content %>
+  <% if @optional %>
+    <p class="ml-1 text-sm font-normal text-gray-500">
+      (optional)
+    </p>
+  <% end %>
 </label>

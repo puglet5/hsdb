@@ -9,12 +9,12 @@
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
 
         <div>
-          <%= render Forms::LabelComponent.new().with_content("Title") %>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Mona Lisa by Leonardo da Vinci") %>
         </div>
 
         <div>
-          <%= render Forms::LabelComponent.new().with_content("Status") %>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
           <%= f.input :status, default: @upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
@@ -31,7 +31,7 @@
 
         <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
-          <%= tag.div class: "flex items-center justify-center w-full h-40 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
             <p class="font-medium text-center" id="uppy-text">
               Browse...
             </p>
@@ -48,7 +48,7 @@
       </div>
 
       <div class="mb-6">
-        <%= render Forms::LabelComponent.new().with_content("Short description") %>
+        <%= render Forms::LabelComponent.new(optional: false).with_content("Short description") %>
         <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
       </div>
 
@@ -95,13 +95,13 @@
             </button>
 
             <div class="col-span-5">
-              <%= render Forms::LabelComponent.new().with_content("Field name") %>
+              <%= render Forms::LabelComponent.new(optional: false).with_content("Field name") %>
               <div class="relative">
                 <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="wavelength, etc." autofocus>
               </div>
             </div>
             <div class="col-span-5">
-              <%= render Forms::LabelComponent.new().with_content("Value") %>
+              <%= render Forms::LabelComponent.new(optional: false).with_content("Value") %>
 
               <div class="flex">
                 <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="1064 or [532, 1064]">
@@ -110,7 +110,7 @@
           </div>
         </div>
         <div class="col-span-5 ">
-          <%= render Forms::LabelComponent.new().with_content("JSON preview") %>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("JSON preview") %>
           <div class="text-gray-900 border border-gray-300 rounded-lg bg-gray-50 min-h-2/3">
             <div class="tree">
             </div>

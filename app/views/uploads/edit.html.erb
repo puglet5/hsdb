@@ -15,12 +15,12 @@
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
       <div class="grid gap-6 mb-6 lg:grid-cols-2">
         <div>
-          <%= render Forms::LabelComponent.new().with_content("Title") %>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, disabled: true, readonly: true) %>
         </div>
 
         <div>
-          <%= render Forms::LabelComponent.new().with_content("Status") %>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
           <%= f.input :status, default: @upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"} %>
         </div>
 
@@ -107,7 +107,7 @@
       </div>
 
       <div class="mb-6">
-        <%= render Forms::LabelComponent.new().with_content("Short description") %>
+        <%= render Forms::LabelComponent.new(optional: false).with_content("Short description") %>
         <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
       </div>
 
@@ -139,7 +139,19 @@
 
       <div class="mb-4">
         <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+
+        <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+        <div class="mb-4">
+          <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+
+          <% unless JSON.is_json?(@upload.metadata) %>
+            <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
+          <% end %>
+          <%= render Forms::PHelperComponent.new(cls: "") do %>
+            Enter metadata to store additional fields in JSON format. Must be a valid JSON object, prefer single-word keys. Learn
+            <a href="https://www.json.org/json-en.html" class="font-bold hover:underline">more</a>.
+          <% end %>
+        </div>
       </div>
 
       <div class="flex">

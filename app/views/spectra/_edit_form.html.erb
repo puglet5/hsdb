@@ -9,7 +9,7 @@
     <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
 
     <div id="title" class="mb-4">
-      <%= render Forms::LabelComponent.new().with_content("Title") %>
+      <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
       <%= render Forms::TextInputComponent.new(cls: "text-gray-500 !bg-gray-100", form: f, field: :title, required: true, disabled: true, readonly: true) %>
       <%= render Forms::PHelperComponent.new().with_content("You can not change title for existing spectrum here. Please contact the admin.") %>
     </div>
