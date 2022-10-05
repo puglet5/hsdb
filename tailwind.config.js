@@ -92,17 +92,10 @@ module.exports = {
         itmo_misc_9: {
           500: "#00914d",
         },
-      }
-    },
-    fontFamily: {
-      // 'sans': 'ALS Schlangesans, Calibri, Muller, sans-serif',
-      "sans": ["ui-monospace"],
-      "sefif": ["ui-monospace"],
-      "mono": ["ui-monospace"],
-
-    },
-    container: {
-      center: true
+      },
+      container: {
+        center: true
+      },
     },
   }
 }
