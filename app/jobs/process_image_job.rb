@@ -18,8 +18,8 @@ class ProcessImageJob < ApplicationJob
     variants = record_type.reflect_on_attachment(attachment_name).variants
     image = record.send(attachment_name)
 
-    variants.keys.each do |k|
-      return if image.variant(k).key
+    variants.each_key do |k|
+      next if image.variant(k).key
 
       image.variant(k).processed
       record.touch
