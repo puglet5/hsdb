@@ -5,7 +5,7 @@
         <ul>
           <li class="flex items-center pl-2 mb-5">
             <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar.variant(:small), class: "object-cover w-12 h-12 mt-2 rounded-full" %>
+              <%= image_tag original_or_variant(current_user.avatar, current_user.avatar.variant(:small)), class: "object-cover w-12 h-12 mt-2 rounded-full" %>
             <% else %>
             <% end %>
             <%= link_to "/#{locale}/users/#{current_user.slug}", class: "w-10 h-10" do %>

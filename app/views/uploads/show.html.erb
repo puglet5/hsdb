@@ -1,6 +1,6 @@
 <% if @upload.thumbnail.attached? %>
   <div class="relative h-56 overflow-hidden sm:h-64 xl:h-80 2xl:h-96">
-    <%= image_tag @upload.thumbnail, class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
+    <%= image_tag original_or_variant(@upload.thumbnail, @upload.thumbnail.variant(:banner)), class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
   </div>
 <% end %>
 
