@@ -2,7 +2,6 @@
 
 class UploadsController < ApplicationController
   include ActiveStorage::SendZip
-  include ActiveStorage::SetCurrent
 
   before_action :authenticate_user!
   before_action :fetch_tags, only: %i[new edit]
