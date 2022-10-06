@@ -68,7 +68,7 @@ class User < ApplicationRecord
 
   friendly_id :full_name_slug, use: %i[slugged finders]
 
-  after_commit -> { process_image id, avatar.attachment&.id }, on: %i[create update]
+  after_commit -> { process_image self, avatar.attachment&.id }, on: %i[create update]
 
   def full_name_slug
     "#{first_name} - #{last_name}"

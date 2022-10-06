@@ -26,5 +26,5 @@ class Image < ApplicationRecord
 
   validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
 
-  after_commit -> { process_image id, image.attachment&.id }, on: %i[create update]
+  after_commit -> { process_image self, image.attachment&.id }, on: %i[create update]
 end
