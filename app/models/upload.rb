@@ -22,6 +22,7 @@ class Upload < ApplicationRecord
   include Authorship
   include CustomValidations
   include ParseJson
+  include ProcessImage
 
   # include Elasticsearch::Model
   # include Elasticsearch::Model::Callbacks
@@ -34,6 +35,7 @@ class Upload < ApplicationRecord
 
   has_one_attached :thumbnail do |blob|
     blob.variant :thumbnail, resize: '400x300^', crop: '400x300+0+0', format: :jpg
+    blob.variant :banner, resize: '1600x900^', crop: '1600x900+0+0', format: :jpg
   end
 
   has_many_attached :documents
@@ -58,6 +60,7 @@ class Upload < ApplicationRecord
   friendly_id :title, use: %i[slugged finders]
 
   after_commit :parse_json, on: %i[create update]
+  after_commit -> { process_image id, thumbnail.attachment&.id }, on: %i[create update]
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?

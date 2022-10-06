@@ -25,10 +25,11 @@
 #
 
 class User < ApplicationRecord
+  include PublicActivity::Model
+  include ProcessImage
+
   extend FriendlyId
   rolify
-
-  include PublicActivity::Model
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
@@ -66,6 +67,8 @@ class User < ApplicationRecord
                                 allow_destroy: true
 
   friendly_id :full_name_slug, use: %i[slugged finders]
+
+  after_commit -> { process_image id, avatar.attachment&.id }, on: %i[create update]
 
   def full_name_slug
     "#{first_name} - #{last_name}"
