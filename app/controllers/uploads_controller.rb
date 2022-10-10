@@ -2,6 +2,7 @@
 
 class UploadsController < ApplicationController
   include ActiveStorage::SendZip
+  include PurgeImage
 
   before_action :authenticate_user!
   before_action :fetch_tags, only: %i[new edit]
@@ -76,9 +77,9 @@ class UploadsController < ApplicationController
 
     @documents = @upload.documents.all
     @images = @upload
-              .image_attachments
+              .images
               .all
-              .with_all_variant_records
+              .with_attached_image
   end
 
   def create
@@ -106,18 +107,21 @@ class UploadsController < ApplicationController
 
     @documents = @upload.documents.all
     @images = @upload
-              .image_attachments
+              .images
               .all
-              .with_all_variant_records
+              .with_attached_image
 
     @upload.user = current_user if @upload.user.nil?
-    @images_count_pre = @images.count unless @images_count_err
 
     if @upload.update(upload_params)
+
+      attachment_params[:purge_images]&.each do |signed_id|
+        purge_image signed_id
+      end
+
       flash[:success] = 'Upload was successfully updated'
       redirect_to @upload
     else
-      @images_count_err = @images.count
       render :edit, status: :unprocessable_entity
     end
   end
@@ -141,17 +145,6 @@ class UploadsController < ApplicationController
     @upload.destroy
     flash[:success] = 'Upload was successfully deleted'
     redirect_to uploads_url, status: :see_other
-  end
-
-  def purge_attachment
-    # rename?
-    @blob = ActiveStorage::Blob.find_signed(params[:id])
-    @attachment = ActiveStorage::Attachment.where(blob_id: @blob.id).first
-    @image = Image.find @attachment.record_id
-
-    authorize @image
-
-    @image.destroy
   end
 
   private
@@ -180,6 +173,12 @@ class UploadsController < ApplicationController
       documents: [],
       tag_ids: [],
       material_ids: []
+    )
+  end
+
+  def attachment_params
+    params.require(:upload).permit(
+      purge_images: []
     )
   end
 end
