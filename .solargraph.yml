@@ -16,3 +16,13 @@ formatter:
 plugins:
 - solargraph-rails
 max_files: 5000
+require:
+- actioncable
+- actionmailer
+- actionpack
+- actionview
+- activejob
+- activemodel
+- activerecord
+- activestorage
+- activesupport
