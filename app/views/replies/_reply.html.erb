@@ -10,9 +10,7 @@
     <div class="p-4 my-4 bg-white border border-gray-200 rounded-lg shadow-sm ">
       <div class="items-center justify-between mb-3 sm:flex">
         <div class="text-sm font-normal text-gray-500 lex ">
-          <% if reply.user %>
-            <%= full_name(reply.user) %>
-          <% end %>
+          <%= reply.user&.full_name %>
           commented:
         </div>
         <div class="flex">

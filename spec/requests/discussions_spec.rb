@@ -32,7 +32,7 @@ RSpec.describe '/discussions', type: :request do
     end
   end
 
-  describe 'GET /show' do
+  fdescribe 'GET /show' do
     it 'renders a successful response' do
       discussion = Discussion.create! valid_attributes
       get discussion_url(id: discussion.id)

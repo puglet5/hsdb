@@ -4,7 +4,7 @@
   </td>
   <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
     <%= link_to user, class: "link" do %>
-      <%= full_name(user) %>
+      <%= user&.full_name %>
       <p class="font-normal text-gray-500">
         <%= user.email %>
       </p>

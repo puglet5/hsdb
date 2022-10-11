@@ -18,7 +18,7 @@
 #  style_id    :bigint
 #
 
-RSpec.fdescribe Upload, type: :model do
+RSpec.describe Upload, type: :model do
   let(:user) { create(:user) }
 
   let(:valid_attributes) do
