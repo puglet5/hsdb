@@ -51,6 +51,28 @@ export default class extends Controller {
   }
 
   handleEdit(form, input) {
+
+    const inputDataToArray = (values) => {
+      let temp_arr = []
+      for (let i = 0; i < values.length; i += 2) {
+        const chunk = values.slice(i, i + 2)
+        temp_arr.push(chunk)
+      }
+      return temp_arr[0].map((_, colIndex) => temp_arr.map(row => row[colIndex]))
+    }
+
+    const arrayToMetadata = (keys, values) => {
+      let metadata = []
+      for (let i = 0; i < values.length; i++) {
+        let d = values[i],
+          o = {}
+        for (let j = 0; j < keys.length; j++)
+          o[keys[j]] = d[j]
+        metadata.push(o)
+      }
+      return metadata
+    }
+
     let formInputs = Array.from(form.closest("form").elements).filter(e => e.classList.contains("metadata"))
 
     let data = [].reduce.call(
@@ -62,42 +84,20 @@ export default class extends Controller {
         else try {
           let jToArr = JSON.parse(element.value)
           data[element.name] = jToArr
-
         }
         catch (e) {
           data[element.name] = element.value
         }
-
         return data
       },
       {},
     )
 
-    let values = Object.values(data)
-    let newObj = []
-    for (let i = 0; i < values.length; i += 2) {
-      const chunk = values.slice(i, i + 2)
-      newObj.push(chunk)
-    }
-    newObj = newObj[0].map((_, colIndex) => newObj.map(row => row[colIndex]))
-
-    let arr = newObj
-    let keys = arr[0]
-    let newArr = arr.slice(1, arr.length)
-    let formatted = [],
-      arrData = newArr,
-      cols = keys,
-      l = cols.length
-    for (let i = 0; i < arrData.length; i++) {
-      let d = arrData[i],
-        o = {}
-      for (let j = 0; j < l; j++)
-        o[cols[j]] = d[j]
-      formatted.push(o)
-    }
+    let arrayFromInputs = inputDataToArray(Object.values(data))
+    let formattedMetadata = arrayToMetadata(arrayFromInputs[0], arrayFromInputs.slice(1, arrayFromInputs.length))
 
     // eslint-disable-next-line no-unused-vars
-    let json = Object.fromEntries(Object.entries(formatted[0]).filter(([k, _]) => k != ""))
+    let json = Object.fromEntries(Object.entries(formattedMetadata[0]).filter(([k, _]) => k != ""))
     let strJson = JSON.stringify(json)
 
     if (document.querySelector(".json-container"))
@@ -116,3 +116,4 @@ export default class extends Controller {
     }
   }
 }
+

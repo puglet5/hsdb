@@ -23,7 +23,7 @@
             <% @upload.documents.each do |doc| %>
               <% if doc.persisted? %>
 
-                <%= tag.div data: {controller: "attachment", "attachment-target": "attachment", "attachment-id-value": doc.signed_id }, class: "m-2" do %>
+                <%= tag.div data: { controller: "attachment", "attachment-target": "attachment", "attachment-id-value": doc.signed_id }, class: "m-2" do %>
                   <div class="flex">
                     <li>
                       <p class="text-base leading-relaxed text-gray-500 truncate ">
