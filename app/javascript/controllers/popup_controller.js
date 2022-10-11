@@ -9,15 +9,19 @@ export default class extends Controller {
   }
 
   show() {
-    this.tooltipTarget.classList.remove("invisible")
-    this.tooltipTarget.classList.add("opacity-100")
-    createPopper(this.triggerTarget, this.tooltipTarget, {
-      placement: "top",
-    })
+    if (this.hasTooltipTarget) {
+      this.tooltipTarget.classList.remove("invisible")
+      this.tooltipTarget.classList.add("opacity-100")
+      createPopper(this.triggerTarget, this.tooltipTarget, {
+        placement: "top",
+      })
+    }
   }
 
   hide() {
-    this.tooltipTarget.classList.add("invisible")
-    this.tooltipTarget.classList.remove("opacity-100")
+    if (this.hasTooltipTarget) {
+      this.tooltipTarget.classList.add("invisible")
+      this.tooltipTarget.classList.remove("opacity-100")
+    }
   }
 }
