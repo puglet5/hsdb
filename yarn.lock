@@ -69,20 +69,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@hotwired/turbo-rails@npm:7.2.0"
+"@hotwired/turbo-rails@npm:^7.2.2":
+  version: 7.2.2
+  resolution: "@hotwired/turbo-rails@npm:7.2.2"
   dependencies:
-    "@hotwired/turbo": ^7.2.0
+    "@hotwired/turbo": ^7.2.2
     "@rails/actioncable": ^7.0
-  checksum: 8a40ba37c68d3ac45fdd810642820c80ff179568dc1e668b844fe1cdf2b4574d666496c9585af1c0c2863ece37a6c7e726024d6e0ad5de39ff6f15ae83d8bf74
+  checksum: ee71f2a0d179dac63927b8f3b47e78252638e63881e5b53267ce31a31e2c34dd1e3cd305fb2c7de6a2bef59378b0e8abd55589becfff4f90fa90ba0ee0455bbc
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@hotwired/turbo@npm:7.2.0"
-  checksum: cea846f44190e24897b5b142838ca6fef1dcab623832a4af35a3da9e094fb908f44c73c4abc7ba75ca80cac0358c2009fcb17659ae3c97dd955bfb5aa45d8b4b
+"@hotwired/turbo@npm:^7.2.2":
+  version: 7.2.2
+  resolution: "@hotwired/turbo@npm:7.2.2"
+  checksum: df6507d949633dc701b067b82cec894a5e51469831a187850c722dbf27b5782c57d2fe56c6f0bbdc54dea0e584e7fff5e7b71d2cbebff2799363eaee3b4d0ef0
   languageName: node
   linkType: hard
 
@@ -171,19 +171,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@orchidjs/sifter@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@orchidjs/sifter@npm:1.0.1"
+"@orchidjs/sifter@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@orchidjs/sifter@npm:1.0.3"
   dependencies:
-    "@orchidjs/unicode-variants": ^1.0.2
-  checksum: 39496861889f918a201c8336fd5f0f754b3c29269cb464997bf08a86c96df275821ab55782ff8679ede707a727475b9bd7bb62ef85f7ba3fd69a02f935c05b13
+    "@orchidjs/unicode-variants": ^1.0.4
+  checksum: 5925ce6e5babb872beaaeb562634f02befea118bf19676a734070647efee0a7eb591f5f4ae280b6bbb5288c7959eb679e9daf2c42a7d9ba1262e9daff3748958
   languageName: node
   linkType: hard
 
-"@orchidjs/unicode-variants@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@orchidjs/unicode-variants@npm:1.0.2"
-  checksum: dc1d8682ecdd15bfc8d0be204eff47b8ff7ca88741ae4b61ebf5bf2e31fb9d22338a40b71a0082b8a965ea6c6b57de0c05683f7b4152e1500a010b7c0ddbf05f
+"@orchidjs/unicode-variants@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@orchidjs/unicode-variants@npm:1.0.4"
+  checksum: a6ad1c66f4e978527ee529086b875bcaa93e23d75a3b894343bd226a2492b1fa2f9faa2a72967e4ab101a5f2c4cf4751b5a6a14086f8a864b35036f178d9aaeb
   languageName: node
   linkType: hard
 
@@ -523,7 +523,7 @@ __metadata:
     "@client-side-validations/client-side-validations": ^0.3.0
     "@client-side-validations/simple-form": ^0.3.1
     "@hotwired/stimulus": ^3.1.0
-    "@hotwired/turbo-rails": ^7.2.0
+    "@hotwired/turbo-rails": ^7.2.2
     "@pgrabovets/json-view": ^2.7.1
     "@popperjs/core": ^2.11.6
     "@rails/actiontext": ^7.0.4
@@ -541,12 +541,12 @@ __metadata:
     flowbite-datepicker: ^1.2.2
     jquery: ^3.6.1
     photoswipe: ^5.3.2
-    postcss: ^8.4.17
+    postcss: ^8.4.18
     postcss-cli: ^10.0.0
     postcss-nested: ^6.0.0
     tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.1.8
-    tom-select: ^2.2.1
+    tom-select: ^2.2.2
     trix: ^2.0.0-beta.0
     uppy-activestorage-upload: "https://github.com/puglet5/uppy-activestorage-upload"
   languageName: unknown
@@ -3445,14 +3445,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.17":
-  version: 8.4.17
-  resolution: "postcss@npm:8.4.17"
+"postcss@npm:^8.4.18":
+  version: 8.4.18
+  resolution: "postcss@npm:8.4.18"
   dependencies:
     nanoid: ^3.3.4
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
-  checksum: a6d9096dd711e17f7b1d18ff5dcb4fdedf3941d5a3dc8b0e4ea873b8f31972d57f73d6da9a8aed7ff389eb52190ed34f6a94f299a7f5ddc68b08a24a48f77eb9
+  checksum: 9349fd99849b2e3d2e134ff949b7770ecb12375f352723ce2bcc06167eba3850ea7844c1b191a85cd915d6a396b4e8ee9a5267e6cc5d8d003d0cbc7a97555d39
   languageName: node
   linkType: hard
 
@@ -3984,13 +3984,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tom-select@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "tom-select@npm:2.2.1"
+"tom-select@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "tom-select@npm:2.2.2"
   dependencies:
-    "@orchidjs/sifter": ^1.0.1
-    "@orchidjs/unicode-variants": ^1.0.2
-  checksum: d51fc44cec81b363aee41dfad0d9ff83414f7521349fd1c422e2ba9b231bc92e6b7e7857e3348bdfa84994c7867f50b2164eae2428a2dac5b1c1102a4a15cbbd
+    "@orchidjs/sifter": ^1.0.3
+    "@orchidjs/unicode-variants": ^1.0.4
+  checksum: 44483e82ff2604c136d41753c4dcc59f794723a6e7910af5711f4332f9d3a48fafc334bca43c5e0b0c9da7ac18d46254196723debc6e39690fe8799934b1fe8c
   languageName: node
   linkType: hard
 
