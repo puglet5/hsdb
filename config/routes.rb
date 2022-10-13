@@ -14,14 +14,8 @@ Rails.application.routes.draw do
 
   draw :api
 
-  concern :attachment_purgeable do
-    member do
-      delete :purge_attachment
-    end
-  end
-
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    resources :spectra, concerns: :attachment_purgeable
+    resources :spectra
 
     resources :users, only: %i[show] do
       member do
