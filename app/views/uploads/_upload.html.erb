@@ -1,25 +1,25 @@
-<div class="max-w-screen-xl px-4 sm:px-6 lg:px-8">
-  <div class="flex w-full bg-white border rounded-lg shadow-md">
-    <div class="flex items-center justify-center mr-4 bg-gray-300 sm:w-96">
+<div class="px-4 max-w-screen-xl sm:px-6 lg:px-8">
+  <div class="flex w-full bg-white rounded-lg border shadow-md">
+    <div class="flex justify-center items-center mr-4 bg-gray-300 sm:w-96">
       <%= link_to upload, class: "w-full h-full" do %>
         <% if upload.thumbnail.attached? %>
           <%= image_tag original_or_variant(upload.thumbnail, upload.thumbnail.variant(:thumbnail)), class: "object-cover w-full h-full rounded-lg rounded-r-none aspect-4/3" %>
         <% else %>
-          <div class="flex items-center justify-center w-full h-full bg-gray-300 ">
+          <div class="flex justify-center items-center w-full h-full bg-gray-300">
             <svg class="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
           </div>
         <% end %>
       <% end %>
     </div>
-    <div class="w-full p-8 pt-4 pr-2 md:pl-0">
+    <div class="p-8 pt-4 pr-2 w-full md:pl-0">
       <div class="flex justify-between">
         <%= render UploadBadgeComponent.new(status: upload.status, cls: "!my-auto").with_content(upload.status.humanize.downcase) %>
 
-        <div class="flex flex-row items-center justify-center mx-1 space-x-0">
+        <div class="flex flex-row justify-center items-center mx-1 space-x-0">
           <% if policy(upload).edit? %>
             <%= link_to [:edit, upload] do %>
               <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 my-auto text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 my-auto w-5 h-5 text-gray-400">
                   <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
                   <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
                 </svg>
@@ -64,7 +64,7 @@
       <div class="flex mb-4 space-x-2">
 
         <div class="flex items-center ml-1 text-sm text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400">
             <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
           </svg>
           <div>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="flex items-center my-auto text-sm text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
             <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
             <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
           </svg>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="flex items-center my-auto text-sm text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
             <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
           </svg>
           <%= link_to upload.user, class: "font-medium hover:underline" do %>
@@ -102,7 +102,7 @@
         </div>
 
         <div class="flex items-center my-auto text-sm text-gray-500">
-          <svg class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
           </svg>
           <%= upload.created_at.to_formatted_s(:long) %>

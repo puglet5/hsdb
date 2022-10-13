@@ -1,6 +1,6 @@
 <%= render "shared/errors", obj: @upload %>
-<section class="bg-gray-50 ">
-  <div class="container max-w-screen-xl p-20 mx-auto">
+<section class="bg-gray-50">
+  <div class="container p-20 mx-auto max-w-screen-xl">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New upload
     </div>
@@ -86,7 +86,7 @@
       <%= tag.div data: { controller: "metadataForm" }, class: "grid grid-cols-12 gap-4 mb-4 gap-y-0" do %>
 
         <div class="col-span-7" data-metadataForm-target="formContainer">
-          <div class="container grid grid-cols-11 mx-auto mb-6 gap-1.5" data-metadataForm-target="fieldRow">
+          <div class="container grid grid-cols-11 gap-1.5 mx-auto mb-6" data-metadataForm-target="fieldRow">
 
             <button data-metadataForm-target="addButton" id="addButton" type="button" class="m-auto text-center text-black rounded-lg text-smfont-medium">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -97,21 +97,21 @@
             <div class="col-span-5">
               <%= render Forms::LabelComponent.new(optional: false).with_content("Field name") %>
               <div class="relative">
-                <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="wavelength, etc." autofocus>
+                <input type="text" name="metadata-field-name" class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 metadata focus:ring-primary-500 focus:border-primary-500" placeholder="wavelength, etc." autofocus>
               </div>
             </div>
             <div class="col-span-5">
               <%= render Forms::LabelComponent.new(optional: false).with_content("Value") %>
 
               <div class="flex">
-                <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg metadata focus:ring-primary-500 focus:border-primary-500 p-2.5 " placeholder="1064 or [532, 1064]">
+                <input type="text" name="metadata-field-value" class="block flex-1 p-2.5 w-full min-w-0 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 metadata focus:ring-primary-500 focus:border-primary-500" placeholder="1064 or [532, 1064]">
               </div>
             </div>
           </div>
         </div>
-        <div class="col-span-5 ">
+        <div class="col-span-5">
           <%= render Forms::LabelComponent.new(optional: false).with_content("JSON preview") %>
-          <div class="text-gray-900 border border-gray-300 rounded-lg bg-gray-50 min-h-2/3">
+          <div class="text-gray-900 bg-gray-50 rounded-lg border border-gray-300 min-h-2/3">
             <div class="tree">
             </div>
             <div class="hidden">

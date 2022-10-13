@@ -4,22 +4,22 @@
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Forum discussion catoegories") %>
       <%= render Links::NewLinkComponent.new(path: [:new, :category], cls: "text-gray-500") %>
     <% end %>
-    <table class="w-full text-sm text-left text-gray-500 ">
+    <table class="w-full text-sm text-left text-gray-500">
       <thead>
         <tr>
-          <th scope="col" class="px-6 py-3">#</th>
-          <th scope="col" class="px-6 py-3">Title</th>
-          <th scope="col" class="px-6 py-3"><%= "Actions" %></th>
+          <th scope="col" class="py-3 px-6">#</th>
+          <th scope="col" class="py-3 px-6">Title</th>
+          <th scope="col" class="py-3 px-6"><%= "Actions" %></th>
         </tr>
       </thead>
       <tbody>
         <% @categories.each do |category| %>
           <tr>
-            <td class="px-6 py-2">
+            <td class="py-2 px-6">
               <%= category.id %>
             </td>
-            <td class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap "><%= link_to category.category_name, category %></td>
-            <td class="px-6 py-2">
+            <td class="py-2 px-6 font-medium text-gray-900 whitespace-nowrap"><%= link_to category.category_name, category %></td>
+            <td class="py-2 px-6">
               <div class="flex space-x-2">
                 <%= link_to "Edit", [:edit, category] %>
                 <%= link_to "Delete", category, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn red" %>

@@ -1,44 +1,44 @@
 <div class="flex items-center">
-  <div id="images-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center hidden w-full h-full bg-gray-500 bg-opacity-75" data-modal-target="modal">
-    <div class="relative max-w-screen-xl p-0 m-10 shadow-2xl h-2/3 md:h-auto">
+  <div id="images-modal" tabindex="-1" class="flex hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full bg-gray-500 bg-opacity-75" data-modal-target="modal">
+    <div class="relative p-0 m-10 max-w-screen-xl h-2/3 shadow-2xl md:h-auto">
       <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow ">
+      <div class="relative bg-white rounded-lg shadow">
         <!-- Modal header -->
-        <div class="flex items-center justify-between p-5 border-b rounded-t ">
+        <div class="flex justify-between items-center p-5 rounded-t border-b">
           <div>
-            <h3 class="text-xl font-medium text-gray-900 ">
+            <h3 class="text-xl font-medium text-gray-900">
               Attached images
             </h3>
-            <p class="text-sm leading-relaxed text-gray-500 ">
+            <p class="text-sm leading-relaxed text-gray-500">
               Delete images by clicking the cross icon, update upload to save chanes
             </p>
           </div>
-          <button type="button" class="inline-flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 p-1.5 " data-modal-toggle="images-modal" data-action="click->modal#toggle">
+          <button type="button" class="inline-flex items-center p-1.5 ml-auto text-sm text-gray-400 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-200" data-modal-toggle="images-modal" data-action="click->modal#toggle">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             <span class="sr-only">Close modal</span>
           </button>
         </div>
         <div class="p-6 space-y-2">
-          <div class="grid grid-cols-5 overflow-auto gap-y-1 max-h-1/2">
+          <div class="grid overflow-auto grid-cols-5 gap-y-1 max-h-1/2">
             <% @images&.each do |image| %>
               <% if image.image.persisted? %>
                 <%= tag.div data: { controller: "purge", purge_target: "div", purge_id_value: image.signed_id, purge_classname_value: @upload.class.name.demodulize.downcase }, class: "m-2" do %>
                   <div class="relative" id="modal-image-container">
 
                     <%= tag.div class: "absolute top-0 left-0 z-0 flex items-center justify-center w-full h-full bg-gray-300 rounded", data: { purge_target: "placeholder" } do %>
-                      <svg class="w-12 h-12 text-gray-200 " xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                      <svg class="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
                     <% end %>
 
                     <%= image_tag original_or_variant(image.image, image.image.variant(:thumbnail)), class: "relative z-10 object-cover w-full rounded", data: { purge_target: "object" } %>
 
                     <%= tag.button type: "button", class: "absolute top-0 right-0 z-20", data: { action: "click->purge#delete", purge_target: "delete" } do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white bg-gray-700 rounded-lg bg-opacity-30 m-0.5 hover:bg-gray-900 hover:bg-opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="m-0.5 w-6 h-6 text-white bg-gray-700 bg-opacity-30 rounded-lg hover:bg-gray-900 hover:bg-opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     <% end %>
 
                     <%= tag.button type: "button", class: "absolute top-0 right-0 z-20 hidden", data: { action: "click->purge#return", purge_target: "return" } do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-white bg-gray-700 rounded-lg bg-opacity-30 m-0.5 hover:bg-gray-900 hover:bg-opacity-30">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="m-0.5 w-6 h-6 text-white bg-gray-700 bg-opacity-30 rounded-lg hover:bg-gray-900 hover:bg-opacity-30">
                         <path fill-rule="evenodd" d="M7.793 2.232a.75.75 0 01-.025 1.06L3.622 7.25h10.003a5.375 5.375 0 010 10.75H10.75a.75.75 0 010-1.5h2.875a3.875 3.875 0 000-7.75H3.622l4.146 3.957a.75.75 0 01-1.036 1.085l-5.5-5.25a.75.75 0 010-1.085l5.5-5.25a.75.75 0 011.06.025z" clip-rule="evenodd" />
                       </svg>
                     <% end %>

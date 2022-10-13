@@ -1,10 +1,10 @@
-<section class="py-20 mb-20 text-gray-700 border bg-gray-50">
+<section class="py-20 mb-20 text-gray-700 bg-gray-50 border">
   <div class="container mx-auto">
-    <div class="p-4 bg-white border rounded-lg shadow-md sm:p-6">
+    <div class="p-4 bg-white rounded-lg border shadow-md sm:p-6">
       <div class="grid grid-cols-12">
         <div class="col-span-3 border-r">
           <div class="flex flex-col justify-center">
-            <span class="relative flex w-20 h-20 m-auto rounded-full bg-primary-300 lg:w-40 lg:h-40">
+            <span class="flex relative m-auto w-20 h-20 rounded-full lg:w-40 lg:h-40 bg-primary-300">
               <% if @user.avatar.present? %>
                 <%= image_tag @user.avatar, class: "object-cover w-20 h-20 rounded-full lg:w-40 lg:h-40" %>
               <% end %>
@@ -25,7 +25,7 @@
               <p class="mx-auto font-normal text-gray-500">
                 <%= @user.organization %>
               </p>
-              <p class="w-full mx-auto overflow-hidden text-sm font-medium text-gray-500 hover:underline text-ellipsis ">
+              <p class="overflow-hidden mx-auto w-full text-sm font-medium text-gray-500 hover:underline text-ellipsis">
                 <a href="<%= "mailto:#{@user.email}" %>" class="">
                   <%= @user.email %>
                 </a>
@@ -38,12 +38,12 @@
             <details class="transition ease-in-out delay-150 group" open>
               <summary class="flex justify-between">
                 <div class="flex mx-2">
-                  <svg class="w-5 h-5 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  <svg class="my-auto w-5 h-5 group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                   <h4 class="font-semibold text-l">Settings</h4>
                 </div>
 
               </summary>
-              <div class="mt-4 ml-4 mr-10">
+              <div class="mt-4 mr-10 ml-4">
                 <%= render "settings_form" %>
               </div>
             </details>
@@ -57,7 +57,7 @@
               <% if policy([:admin, :user]).index? %>
                 <%= link_to "/admin/users" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <circle cx="9" cy="7" r="4"></circle>
                       <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -71,7 +71,7 @@
               <% if policy(:category).index? %>
                 <%= link_to [:categories] do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
                       <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
@@ -83,7 +83,7 @@
               <% if current_user.has_role?(:admin) %>
                 <%= link_to "/admin/sidekiq" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-building-factory" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-building-factory" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12"></path>
                       <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8"></path>
@@ -95,7 +95,7 @@
                 <% end %>
                 <%= link_to rswag_ui_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-api" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-api" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M4 13h5"></path>
                       <path d="M12 16v-8h3a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-3"></path>
@@ -107,7 +107,7 @@
                 <% end %>
                 <%= link_to oauth_applications_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-apps" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-apps" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <rect x="4" y="4" width="6" height="6" rx="1"></rect>
                       <rect x="4" y="14" width="6" height="6" rx="1"></rect>
@@ -127,11 +127,11 @@
     </div>
   </div>
   <div class="container mx-auto">
-    <div class="p-4 mt-8 bg-white border rounded-lg shadow-md sm:p-6 ">
+    <div class="p-4 mt-8 bg-white rounded-lg border shadow-md sm:p-6">
       <details class="transition ease-in-out delay-150 group" open>
         <summary class="flex justify-between mb-2">
           <div class="flex mx-2">
-            <svg class="w-5 h-5 my-auto group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <svg class="my-auto w-5 h-5 group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             <h4 class="mt-0 font-semibold text-l">Recent activity</h4>
           </div>
         </summary>

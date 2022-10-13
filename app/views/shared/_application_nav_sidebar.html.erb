@@ -1,6 +1,6 @@
 <%= cache current_user do %>
-  <aside class="border w-72" aria-label="Sidebar">
-    <div class="px-3 py-4 overflow-y-auto bg-white rounded ">
+  <aside class="w-72 border" aria-label="Sidebar">
+    <div class="overflow-y-auto py-4 px-3 bg-white rounded">
       <% if current_user %>
         <ul>
           <li class="flex items-center pl-2 mb-5">
@@ -10,17 +10,17 @@
             <% end %>
             <%= link_to "/#{locale}/users/#{current_user.slug}", class: "w-10 h-10" do %>
               <div>
-                <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap "><%= current_user.first_name.to_s %></span>
-                <p class="w-48 mt-0 ml-2 mr-2 overflow-hidden text-gray-500 min-w-1/2 whitespace-nowrap text-ellipsis text-s "><%= current_user.email.to_s %></p>
+                <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap"><%= current_user.first_name.to_s %></span>
+                <p class="overflow-hidden mt-0 mr-2 ml-2 w-48 text-gray-500 whitespace-nowrap min-w-1/2 text-ellipsis text-s"><%= current_user.email.to_s %></p>
               </div>
             <% end %>
           </li>
         </ul>
       <% end %>
 
-      <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 ">
+      <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200">
         <li>
-          <span class="flex items-center w-full p-2 text-base font-normal text-gray-600 text-gray-900 transition duration-75 rounded-lg select-none group">
+          <span class="flex items-center p-2 w-full text-base font-normal text-gray-600 text-gray-900 rounded-lg transition duration-75 select-none group">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
@@ -39,10 +39,10 @@
           </ul>
         </li>
       </ul>
-      <ul class="pt-4 space-y-2 border-t border-gray-200 ">
+      <ul class="pt-4 space-y-2 border-t border-gray-200">
         <li>
           <%= tag.div data: { controller: "dropdown" } do %>
-            <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 " aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
+            <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-600 rounded-lg transition duration-75 hover:bg-gray-100 group" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <circle cx="12" cy="12" r="9"></circle>
@@ -55,7 +55,7 @@
               <span class="flex-1 ml-3 text-left whitespace-nowrap">
                 Language
               </span>
-              <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full ">
+              <span class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full">
                 <%= t('language_abbr', locale: locale) %>
               </span>
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
