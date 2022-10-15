@@ -49,11 +49,11 @@
           <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
         </div>
 
-        <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
+        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
 
           <div class="flex">
-            <%= tag.div class: "flex items-center justify-center w-full bg-white border border-gray-300 rounded-lg cursor-pointer p-1.5 hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full bg-white border border-gray-300 rounded-lg cursor-pointer p-1.5 hover:bg-gray-100 py-auto", data: { uploads_target: "trigger" } do %>
               <div class="text-center">
 
                 <div class="flex text-sm font-medium" id="uppy-text">

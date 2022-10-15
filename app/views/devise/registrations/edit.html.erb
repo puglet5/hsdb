@@ -6,11 +6,11 @@
 
       <%= f.hidden_field :avatar, value: f.object.avatar.signed_id if f.object.avatar.attached? %>
       <div class="grid grid-cols-12">
-        <%= tag.div class: "relative col-span-3 row-span-2 mr-8", data: {controller: "avatar", "uppy": "user[avatar]", "avatar-target": "div"} do %>
+        <%= tag.div class: "relative col-span-3 row-span-2 mr-8", data: { controller: "avatar", uppy: "user[avatar]", avatar_target: "div" } do %>
           <span class="flex m-auto mb-4 w-40 h-40 rounded-full bg-primary-300">
             <div id="avatar">
               <% if resource.avatar.attached? %>
-                <%= image_tag resource.avatar, class: "object-cover w-20 h-20 rounded-full md:w-40 md:h-40", data: {"avatar-target": "image"} %>
+                <%= image_tag resource.avatar, class: "object-cover w-20 h-20 rounded-full md:w-40 md:h-40", data: { avatar_target: "image" } %>
               <% end %>
             </div>
             <div class="">

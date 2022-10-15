@@ -29,9 +29,9 @@
           <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
         </div>
 
-        <%= tag.div class: "row-span-2", data: {"uppy": "upload[images_attributes][][image]", controller: "uploads", "uploads-target": "div", "uploads-settings-value": current_user.settings(:uploading).thumbnails } do %>
+        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
-          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: {"uploads-target": "trigger"} do %>
+          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
             <p class="font-medium text-center" id="uppy-text">
               Browse...
             </p>
@@ -49,7 +49,7 @@
 
       <div class="mb-6">
         <%= render Forms::LabelComponent.new(optional: false).with_content("Short description") %>
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }) %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :description, required: true, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', textarea_target: "input" }) %>
       </div>
 
       <div class="mb-6">
@@ -60,7 +60,7 @@
       <% if @materials&.count.to_i > 0 %>
         <div class="mb-6">
           <%= render Forms::LabelComponent.new().with_content("Materials") %>
-          <%= f.collection_select :material_ids, @materials, :id, :name, {}, multiple: true, data: {controller: "select"}, id: "select" %>
+          <%= f.collection_select :material_ids, @materials, :id, :name, {}, multiple: true, data: { controller: "select" }, id: "select" %>
         </div>
       <% end %>
 

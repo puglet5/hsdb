@@ -21,12 +21,12 @@
         </div>
 
         <% if @spectrum.files.any? %>
-          <%= tag.div data: {controller: "modal"} do %>
-            <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: {controller: "popup", "popup-target": "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#toggle", "modal-toggle": "files-modal"} do %>
+          <%= tag.div data: { controller: "modal" }  do %>
+            <%= tag.div class: "block my-auto ml-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-1.5 bg-gray-50 hover:bg-gray-100", data: { controller: "popup", popup_target: "trigger", action: "mouseover->popup#show mouseout->popup#hide click->modal#toggle", modal_toggle: "files-modal" } do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
               </svg>
-              <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ", data: {"popup-target": "tooltip"}, role: "tooltip" do %>
+              <%= tag.div class: "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ", data: { popup_target: "tooltip"}, role: "tooltip" do %>
                 Show attached files
               <% end %>
             <% end %>
@@ -41,7 +41,7 @@
   <div id="metadata">
     <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
     <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: {controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: "input->textarea#resize", textarea_target: "input" }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
     <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
   </div>
 
