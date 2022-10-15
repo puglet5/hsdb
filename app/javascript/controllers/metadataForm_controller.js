@@ -1,6 +1,44 @@
 import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
 
+const parsedDataToArray = (values) => {
+  let temp_arr = []
+  for (let i = 0; i < values.length; i += 2) {
+    const chunk = values.slice(i, i + 2)
+    temp_arr.push(chunk)
+  }
+  return temp_arr[0].map((_, colIndex) => temp_arr.map(row => row[colIndex]))
+}
+
+const arrayToMetadata = (keys, values) => {
+  let metadata = []
+  for (let i = 0; i < values.length; i++) {
+    let d = values[i],
+      o = {}
+    for (let j = 0; j < keys.length; j++)
+      o[keys[j]] = d[j]
+    metadata.push(o)
+  }
+  return metadata
+}
+
+const parseInputData = (inputs) => [].reduce.call(
+  inputs,
+  (data, element) => {
+
+    if (!isNaN(Number(element.value)) && (parseFloat(element.value) === Number(element.value)))
+      data[element.name] = parseFloat(element.value)
+    else try {
+      let jToArr = JSON.parse(element.value)
+      data[element.name] = jToArr
+    }
+    catch (e) {
+      data[element.name] = element.value
+    }
+    return data
+  },
+  {}
+)
 
 export default class extends Controller {
 
@@ -11,9 +49,9 @@ export default class extends Controller {
     let formContainer = this.formContainerTarget
     let railsInput = this.railsInputTarget
 
-    this.formContainerTarget.addEventListener("input", this.handleEdit.bind(event, formContainer, railsInput), false)
+    this.formContainerTarget.addEventListener("input", this.handleEdit.bind(this, formContainer, railsInput), false)
 
-    this.addButtonTarget.addEventListener("click", this.addMetadataFormRow.bind(event, fieldRowClone, formContainer), false)
+    this.addButtonTarget.addEventListener("click", this.addMetadataFormRow.bind(this, fieldRowClone, formContainer), false)
     this.addButtonTarget.classList.add("mt-9")
   }
 
@@ -51,55 +89,19 @@ export default class extends Controller {
   }
 
   handleEdit(form, input) {
-
-    const inputDataToArray = (values) => {
-      let temp_arr = []
-      for (let i = 0; i < values.length; i += 2) {
-        const chunk = values.slice(i, i + 2)
-        temp_arr.push(chunk)
-      }
-      return temp_arr[0].map((_, colIndex) => temp_arr.map(row => row[colIndex]))
-    }
-
-    const arrayToMetadata = (keys, values) => {
-      let metadata = []
-      for (let i = 0; i < values.length; i++) {
-        let d = values[i],
-          o = {}
-        for (let j = 0; j < keys.length; j++)
-          o[keys[j]] = d[j]
-        metadata.push(o)
-      }
-      return metadata
-    }
-
     let formInputs = Array.from(form.closest("form").elements).filter(e => e.classList.contains("metadata"))
-
-    let data = [].reduce.call(
-      formInputs,
-      (data, element) => {
-
-        if (!isNaN(Number(element.value)) && (parseFloat(element.value) === Number(element.value)))
-          data[element.name] = parseFloat(element.value)
-        else try {
-          let jToArr = JSON.parse(element.value)
-          data[element.name] = jToArr
-        }
-        catch (e) {
-          data[element.name] = element.value
-        }
-        return data
-      },
-      {},
-    )
-
-    let arrayFromInputs = inputDataToArray(Object.values(data))
+    let parsedInputData = parseInputData(formInputs)
+    let arrayFromInputs = parsedDataToArray(Object.values(parsedInputData))
     let formattedMetadata = arrayToMetadata(arrayFromInputs[0], arrayFromInputs.slice(1, arrayFromInputs.length))
 
-    // eslint-disable-next-line no-unused-vars
-    let json = Object.fromEntries(Object.entries(formattedMetadata[0]).filter(([k, _]) => k != ""))
+    let json = Object.fromEntries(Object.entries(formattedMetadata[0]).filter(([k]) => k != ""))
     let strJson = JSON.stringify(json)
 
+    this.view(json)
+    input.value = strJson
+  }
+
+  view(json) {
     if (document.querySelector(".json-container"))
       document.querySelector(".json-container").remove()
     const tree = jsonview.create(json)
@@ -109,11 +111,8 @@ export default class extends Controller {
     }
 
     const container = document.querySelector(".json-container")
-
     if (container) {
       container.classList.add("json-container-styled")
-      input.value = strJson
     }
   }
 }
-

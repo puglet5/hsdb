@@ -11,8 +11,6 @@ Turbo.setConfirmMethod(() => {
   let modal = document.getElementById("confirm-modal")
   modal.showModal()
 
-  console.log(modal)
-
   return new Promise((resolve) => {
     modal.addEventListener("close", () => {
       resolve(modal.returnValue == "confirm")
