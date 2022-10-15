@@ -517,7 +517,7 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    solargraph-rails (1.0.0.pre.1)
+    solargraph-rails (1.0.1)
       activesupport
       solargraph (~> 0.44.2)
     sorted_set (1.0.3)
