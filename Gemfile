@@ -32,8 +32,8 @@ gem 'public_activity', '~> 2.0', '>= 2.0.2' # db activity tracking
 gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1' # authorization / policies
 gem 'rack-cors', '~> 1.1'
-gem 'rails', '~> 7.0.3'
-gem 'rails-i18n', '~> 7.0.3'
+gem 'rails', '~> 7.0.4'
+gem 'rails-i18n', '~> 7.0.4'
 gem 'rails_semantic_logger', '~> 4.10'
 gem 'ransack', '~> 3.2.1' # object-based searching
 gem 'redis', '4.7.1'
@@ -68,7 +68,7 @@ group :development do
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
   gem 'rubocop-rails', '~> 2.15', '>= 2.15.2', require: false
   gem 'solargraph', '~> 0.44.2' # ruby language server
-  gem 'solargraph-rails', '~> 1.0.0.pre.1'
+  gem 'solargraph-rails', '~> 1.0.1'
   gem 'web-console'
 end
 
@@ -95,6 +95,6 @@ group :development, :test do
   gem 'faker', '~> 2.22'
   gem 'fuubar', '~> 2.5'
   gem 'listen', '~> 3.7'
-  gem 'rspec-rails', '~> 5.1.2'
+  gem 'rspec-rails', '~> 6'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
