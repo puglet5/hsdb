@@ -234,11 +234,11 @@ body {
 }
 
 .flash-info {
-  @apply bg-blue-50 text-primary-500
+  @apply bg-blue-50 text-primary-500 border-primary-400/50
 }
 
 .flash-error {
-  @apply bg-red-50 text-secondary-500
+  @apply bg-red-50 text-secondary-500 border-secondary-400/50
 }
 
 .trix-button-row {

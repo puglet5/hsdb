@@ -1,4 +1,4 @@
-<div class="absolute right-2 top-14 self-end">
+<div class="absolute right-0 top-10 self-end">
   <% flash.each do |k, v| %>
     <%= render(FlashComponent.new(msg: v, type: k, cls: "flash-info")) %>
   <% end %>
