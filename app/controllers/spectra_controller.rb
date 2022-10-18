@@ -79,6 +79,14 @@ class SpectraController < ApplicationController
   end
 
   def spectrum_params
-    params.require(:spectrum).permit(:title, :metadata, files: [], processed_csvs: [], images: [], processed_images: [], csvs: [])
+    params.require(:spectrum).permit(
+      :title,
+      :metadata,
+      files: [],
+      processed_csvs: [],
+      images: [],
+      processed_images: [],
+      csvs: []
+    )
   end
 end

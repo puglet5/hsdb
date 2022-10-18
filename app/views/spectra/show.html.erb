@@ -55,7 +55,7 @@
       </div>
       <!-- -->
       <div class="grid grid-cols-12 gap-x-8">
-        <div id="files" class="col-span-8">
+        <div id="files" class="col-span-6">
           <details class="transition ease-in-out delay-150 group" open>
             <summary class="flex justify-between my-4 border-b">
               <div class="flex">
@@ -127,17 +127,20 @@
             </div>
           </details>
         </div>
-        <div id="metadata" class="col-span-4 my-4 mx-auto w-full">
-          <div class="flex border-b">
-            <p class="block mr-4 text-2xl font-medium text-gray-900 select-none">Metadata</p>
-            <p class="mt-1 text-sm text-right text-gray-500" id="file_input_help">
-            </p>
-          </div>
-          <pre class="overflow-hidden">
-            <%= ap @spectrum.metadata %>
-          </pre>
+        <div id="charts" class="col-span-6 my-4 mx-auto w-full">
+          <% @spectrum.processed_csvs.each do |processed_csv| %>
+            <%= tag.div data: { controller: "chart", chart_url_value: processed_csv.url  } do %>
+              <button data-action="click->chart#visualize" class="border rounded-lg bg-gray-50 hover:bg-gray-100 p-2">
+                visualize
+              </button>
+
+              <canvas id="canvas-<%= processed_csv.id %>" data-chart-target="canvas">
+              </canvas>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
