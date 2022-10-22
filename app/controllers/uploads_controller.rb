@@ -134,7 +134,7 @@ class UploadsController < ApplicationController
     return unless @upload.update(status: params[:status])
 
     redirect_to @upload
-    flash[:success] = "Status successfully changed to #{@upload.status}"
+    flash.now[:success] = "Status successfully changed to #{@upload.status}"
   end
 
   def destroy

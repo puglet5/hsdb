@@ -5,6 +5,12 @@ class RepliesController < ApplicationController
   before_action :set_discussion, only: %i[create edit show update destroy]
   before_action :set_reply, only: %i[edit update destroy]
 
+  def show; end
+
+  def new; end
+
+  def edit; end
+
   def create
     @reply = @discussion.replies.build reply_params
     @reply.user = current_user
@@ -16,15 +22,6 @@ class RepliesController < ApplicationController
     end
   end
 
-  def new; end
-
-  def destroy
-    @reply.destroy
-    redirect_to @discussion, status: :see_other
-  end
-
-  def edit; end
-
   def update
     if @reply.update(reply_params)
       redirect_to @discussion
@@ -33,7 +30,10 @@ class RepliesController < ApplicationController
     end
   end
 
-  def show; end
+  def destroy
+    @reply.destroy
+    redirect_to @discussion, status: :see_other
+  end
 
   private
 

@@ -32,7 +32,7 @@ class SpectraController < ApplicationController
       end
 
       redirect_to @spectrum
-      flash[:success] = 'Spectrum was successfully created'
+      flash.now[:success] = 'Spectrum was successfully created'
     else
       render :new, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class SpectraController < ApplicationController
       end
 
       redirect_to @spectrum
-      flash[:success] = 'Spectrum was successfully updated.'
+      flash.now[:success] = 'Spectrum was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
