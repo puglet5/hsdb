@@ -16,29 +16,29 @@
     <% end %>
 
     <% if @spectra&.count > 0 %>
-      <% @spectra.each do |spectrum| %>
-        <%= render Sections::CardComponent.new() do %>
-          <div class="m-4 ml-0">
-            <div role="status" class="space-y-8 md:flex md:items-center md:space-y-0 md:space-x-8">
-              <div class="w-full">
-                <div class="mb-4">
+      <div class="grid grid-cols-3 gap-4">
+        <% @spectra.each do |spectrum| %>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-md block max-w-screen-xl">
+            <div class="md:flex md:items-center md:space-y-0 md:space-x-8">
+              <div class="w-full mb-4 m-4">
+                <%= render SpectrumCategoryBadgeComponent.new(category: spectrum.category, cls: "!my-auto").with_content(spectrum.category.humanize.downcase) %>
+                <div id="title" class="mt-4">
                   <%= link_to spectrum do %>
                     <p class="text-lg font-medium">
                       <%= spectrum.title %>
                     </p>
                   <% end %>
+
+                  <p class="font-normal text-sm text-gray-500 mr-8">
+                    <%= spectrum.description.to_plain_text.truncate(100) %>
+                  </p>
                 </div>
-                <div class="mb-2.5 h-2 bg-gray-200 rounded-full max-w-[480px]"></div>
-                <div class="mb-2.5 h-2 bg-gray-200 rounded-full"></div>
-                <div class="mb-2.5 h-2 bg-gray-200 rounded-full max-w-[440px]"></div>
-                <div class="mb-2.5 h-2 bg-gray-200 rounded-full max-w-[460px]"></div>
-                <div class="h-2 bg-gray-200 rounded-full max-w-[360px]"></div>
               </div>
               <span class="sr-only">Loading...</span>
             </div>
           </div>
         <% end %>
-      <% end %>
+      </div>
     <% else %>
       <p class="mb-4 text-sm text-center text-gray-400">
         There are no spectra yet

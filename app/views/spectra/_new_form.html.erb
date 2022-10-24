@@ -12,11 +12,16 @@
       <%= render Forms::LabelComponent.new().with_content("Spectra files") %>
       <%= render Forms::FileInputComponent.new(form: f, field: :files, required: false, direct: true, multiple: true) %>
       <%= render Forms::PHelperComponent.new().with_content("Any plain text file format (.csv's are preferred).") %>
-    </div class="mb-4">
+    </div>
 
-    <div>
+    <div class="mb-6">
       <%= render Forms::LabelComponent.new().with_content("Processed csvs") %>
       <%= render Forms::FileInputComponent.new(form: f, field: :processed_csvs, required: false, direct: true, multiple: true) %>
+    </div>
+
+    <div class="mb-6">
+      <%= render Forms::LabelComponent.new().with_content("Description") %>
+      <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on spectra cards") %>
     </div>
 
   </div>
