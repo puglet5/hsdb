@@ -45,5 +45,5 @@ class Spectrum < RsdbRecord
 
   enum processing_status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing, _default: :none
 
-  enum category: { not_set: 0, ceramics: 1, pigment: 2, other: 3 }, _default: :not_set, _suffix: :category
+  enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
 end
