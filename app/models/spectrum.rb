@@ -30,6 +30,8 @@ class Spectrum < RsdbRecord
   has_many_attached :images
   has_many_attached :processed_images
 
+  has_rich_text :description
+
   validates :title, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
   validates :processed_images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }

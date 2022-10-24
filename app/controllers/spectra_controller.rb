@@ -82,6 +82,8 @@ class SpectraController < ApplicationController
     params.require(:spectrum).permit(
       :title,
       :metadata,
+      :category,
+      :description,
       files: [],
       processed_csvs: [],
       images: [],
