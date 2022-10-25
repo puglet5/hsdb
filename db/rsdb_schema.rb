@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_152016) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_210037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,7 +25,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_152016) do
     t.integer "category", default: 0, null: false
     t.string "origin", default: "", null: false
     t.string "owner", default: "", null: false
+    t.string "sku"
     t.index ["metadata"], name: "index_spectra_on_metadata", using: :gin
+    t.index ["sku"], name: "index_spectra_on_sku"
   end
 
   create_table "spectrum_files", force: :cascade do |t|
