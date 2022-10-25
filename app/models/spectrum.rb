@@ -13,6 +13,8 @@
 #  metadata          :jsonb            not null
 #  processing_status :integer          default("none")
 #  category          :integer          default("not_set"), not null
+#  origin            :string           default(""), not null
+#  owner             :string           default(""), not null
 #
 class Spectrum < RsdbRecord
   include PublicActivity::Model
