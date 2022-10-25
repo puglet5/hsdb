@@ -267,9 +267,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/core@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "@uppy/core@npm:3.0.3"
+"@uppy/core@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@uppy/core@npm:3.0.4"
   dependencies:
     "@transloadit/prettier-bytes": 0.0.9
     "@uppy/store-default": ^3.0.2
@@ -279,7 +279,7 @@ __metadata:
     namespace-emitter: ^2.0.1
     nanoid: ^4.0.0
     preact: ^10.5.13
-  checksum: 4d40afdf734fe8518aa1830f9fa218b88cc8984f2cc14e21e1c19bae6309e2b9abc26f6b229dfcb5d3247e64cd4d337c185b0fe1b93cffb2178dde01e111f3d1
+  checksum: fec1615042896665e469c3820515bc84777c7997c8dcf79847db735412b745df3976870bbb97c4ad0331fbf7502fce8ad84b7297cef7f852684a80d8bffa20a5
   languageName: node
   linkType: hard
 
@@ -529,7 +529,7 @@ __metadata:
     "@rails/actiontext": ^7.0.4
     "@rails/activestorage": ^7.0.4
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
-    "@uppy/core": ^3.0.3
+    "@uppy/core": ^3.0.4
     "@uppy/dashboard": ^3.1.0
     "@uppy/image-editor": ^2.0.1
     autoprefixer: ^10.4.12
@@ -542,7 +542,7 @@ __metadata:
     flowbite: 1.5.3
     flowbite-datepicker: ^1.2.2
     jquery: ^3.6.1
-    photoswipe: ^5.3.2
+    photoswipe: ^5.3.3
     postcss: ^8.4.18
     postcss-cli: ^10.0.0
     postcss-nested: ^6.0.0
@@ -3285,10 +3285,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"photoswipe@npm:^5.3.2":
-  version: 5.3.2
-  resolution: "photoswipe@npm:5.3.2"
-  checksum: c9a369e088b40e7dfac6b3bc402183dee2b3b04971299544910b00bfc97f550080baaf8b0ba1b4229bad8427c80cfa7bff7b693db43d9e6f74808687efe28025
+"photoswipe@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "photoswipe@npm:5.3.3"
+  checksum: b114801f3fc6d245e9813e8832686923de6e8edd1134e434eb3bc298023ac2a6741d9bd0bf4a2edea61d4467a8f56e0adf1a9e300c0c3f8be5664e1171325e01
   languageName: node
   linkType: hard
 
