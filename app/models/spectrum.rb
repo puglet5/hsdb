@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: spectra
+#
+#  id         :bigint           not null, primary key
+#  format     :integer          default("not_set"), not null
+#  status     :integer          default("none"), not null
+#  category   :integer          default("not_set"), not null
+#  sample_id  :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  range      :integer          default("ir"), not null
+#
 class Spectrum < RsdbRecord
   include PublicActivity::Model
   include Authorship
@@ -14,6 +27,8 @@ class Spectrum < RsdbRecord
   enum category: { not_set: 0 }, _default: :not_set, _suffix: :category
 
   has_one_attached :file
+  has_one_attached :settings
 
   validates :file, blob: { content_type: %r{\Atext/.*\z} }
+  validates :settings, blob: { content_type: %r{\Atext/.*\z} }
 end
