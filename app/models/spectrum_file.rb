@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-class SpectrumFile < ApplicationRecord
+class SpectrumFile < RsdbRecord
+  include PublicActivity::Model
+  include Authorship
+  include CustomValidations
+  include ParseJson
+
   belongs_to :spectrum, inverse_of: :spectrum_files, touch: true
 
   enum status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing, _default: :none
