@@ -10,36 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_025_210_037) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_224706) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'samples', force: :cascade do |t|
-    t.string 'title', null: false
-    t.integer 'user_id'
-    t.string 'slug'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.jsonb 'metadata', default: '{}', null: false
-    t.integer 'processing_status', default: 0
-    t.integer 'category', default: 0, null: false
-    t.string 'origin', default: '', null: false
-    t.string 'owner', default: '', null: false
-    t.string 'sku'
-    t.index ['metadata'], name: 'index_samples_on_metadata', using: :gin
-    t.index ['sku'], name: 'index_samples_on_sku'
+  create_table "samples", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "user_id"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "metadata", default: "{}", null: false
+    t.integer "processing_status", default: 0
+    t.integer "category", default: 0, null: false
+    t.string "origin", default: "", null: false
+    t.string "owner", default: "", null: false
+    t.string "sku"
+    t.string "cas_no"
+    t.string "cas_name"
+    t.string "common_names"
+    t.string "compound"
+    t.string "color"
+    t.string "formula"
+    t.string "location"
+    t.date "survey_date"
+    t.index ["metadata"], name: "index_samples_on_metadata", using: :gin
+    t.index ["sku"], name: "index_samples_on_sku"
   end
 
-  create_table 'spectra', force: :cascade do |t|
-    t.integer 'format', default: 0, null: false
-    t.integer 'status', default: 0, null: false
-    t.integer 'category', default: 0, null: false
-    t.bigint 'sample_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'range', default: 0, null: false
-    t.index ['sample_id'], name: 'index_spectra_on_sample_id'
+  create_table "spectra", force: :cascade do |t|
+    t.integer "format", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.integer "category", default: 0, null: false
+    t.bigint "sample_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "range", default: 0, null: false
+    t.index ["sample_id"], name: "index_spectra_on_sample_id"
   end
 
-  add_foreign_key 'spectra', 'samples'
+  add_foreign_key "spectra", "samples"
 end
