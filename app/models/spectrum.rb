@@ -29,7 +29,7 @@ class Spectrum < RsdbRecord
 
   belongs_to :user
   has_many :spectrum_files, inverse_of: :spectrum, dependent: :destroy
-  has_many :file_attachments, through: :spectrum_files, dependent: :destroy
+  has_many :file_attachments, through: :spectrum_files
   accepts_nested_attributes_for :spectrum_files, reject_if: proc { |attributes| attributes['file'].blank? }
 
   has_many_attached :documents

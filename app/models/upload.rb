@@ -31,7 +31,7 @@ class Upload < ApplicationRecord
 
   has_many :images, inverse_of: :upload, dependent: :destroy
   accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
-  has_many :image_attachments, through: :images, dependent: :destroy
+  has_many :image_attachments, through: :images
 
   has_one_attached :thumbnail do |blob|
     blob.variant :thumbnail, resize: '400x300^', crop: '400x300+0+0', format: :jpg
