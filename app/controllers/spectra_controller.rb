@@ -9,9 +9,6 @@ class SpectraController < ApplicationController
 
   def show
     @spectrum = Spectrum
-                .with_attached_files
-                .with_attached_csvs
-                .with_attached_processed_csvs
                 .find(params[:id])
   end
 
@@ -39,21 +36,7 @@ class SpectraController < ApplicationController
   end
 
   def update
-    file_count = @spectrum.files.count
     if @spectrum.update(spectrum_params.reject { |k| k['csvs'] })
-
-      if spectrum_params[:csvs].present?
-        spectrum_params[:csvs].each do |csv|
-          @spectrum.csvs.attach(csv)
-        end
-      end
-
-      if spectrum_params[:files].present? && (spectrum_params[:files].count > file_count && current_user.settings(:processing).enabled == 'true')
-        @spectrum.processing_pending!
-        ProcessCsvJob.perform_later current_user, @spectrum.id,
-                                    spectrum_params[:files].count - file_count
-      end
-
       redirect_to @spectrum
       flash.now[:success] = 'Spectrum was successfully updated.'
     else
@@ -67,11 +50,6 @@ class SpectraController < ApplicationController
     redirect_to spectra_url, status: :see_other
   end
 
-  def purge_attachment
-    @blob = ActiveStorage::Blob.find_signed(params[:id])
-    @blob.attachments.first.purge_later
-  end
-
   private
 
   def set_spectrum
@@ -83,12 +61,12 @@ class SpectraController < ApplicationController
       :title,
       :metadata,
       :category,
+      :origin,
+      :owner,
       :description,
-      files: [],
-      processed_csvs: [],
+      spectrum_file_attributes: %i[id file],
       images: [],
-      processed_images: [],
-      csvs: []
+      documents: []
     )
   end
 end
