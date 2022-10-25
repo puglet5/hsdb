@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_151130) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_152016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,12 +29,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_151130) do
   end
 
   create_table "spectrum_files", force: :cascade do |t|
-    t.integer "format"
-    t.integer "status"
-    t.integer "category"
+    t.integer "format", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.integer "category", default: 0, null: false
     t.bigint "spectrum_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "range", default: 0, null: false
     t.index ["spectrum_id"], name: "index_spectrum_files_on_spectrum_id"
   end
 

@@ -11,7 +11,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  metadata          :jsonb            not null
-#  processing_status :integer          default("none")
+#  processing_status :integer          default(0)
 #  category          :integer          default("not_set"), not null
 #  origin            :string           default(""), not null
 #  owner             :string           default(""), not null
@@ -22,32 +22,26 @@ class Spectrum < RsdbRecord
   include CustomValidations
   include ParseJson
 
+  extend FriendlyId
+  friendly_id :title, use: %i[slugged finders]
+
   tracked owner: proc { |controller, _model| controller.current_user }
 
   belongs_to :user
-  has_many_attached :csvs
-  has_many_attached :files
-  has_many_attached :processed_csvs
+  has_many :spectrum_files, inverse_of: :spectrum, dependent: :destroy
+  has_many :file_attachments, through: :spectrum_files, dependent: :destroy
+  accepts_nested_attributes_for :spectrum_files, reject_if: proc { |attributes| attributes['file'].blank? }
+
   has_many_attached :documents
   has_many_attached :images
-  has_many_attached :processed_images
 
   has_rich_text :description
 
   validates :title, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
-  validates :processed_images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
-  validates :csvs, blob: { content_type: ['text/csv'] }
-  validates :processed_csvs, blob: { content_type: ['text/csv'] }
-
   validate :json_validity
 
-  extend FriendlyId
-  friendly_id :title, use: %i[slugged finders]
-
   after_commit :parse_json, on: %i[create update]
-
-  enum processing_status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing, _default: :none
 
   enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
 end
