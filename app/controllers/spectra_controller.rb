@@ -14,6 +14,7 @@ class SpectraController < ApplicationController
 
   def new
     @spectrum = Spectrum.new
+    @spectrum.spectrum_files.build
   end
 
   def edit; end
@@ -31,6 +32,7 @@ class SpectraController < ApplicationController
       redirect_to @spectrum
       flash.now[:success] = 'Spectrum was successfully created'
     else
+      @spectrum.spectrum_files.build
       render :new, status: :unprocessable_entity
     end
   end
@@ -64,7 +66,7 @@ class SpectraController < ApplicationController
       :origin,
       :owner,
       :description,
-      spectrum_file_attributes: %i[id file],
+      spectrum_files_attributes: %i[id file],
       images: [],
       documents: []
     )

@@ -9,14 +9,14 @@ export default class extends Controller {
   static targets = ["div", "trigger"]
 
   static values = {
-
-    settings: String
-
+    filetype: String,
+    allowedfiletypes: String,
+    allowmultiple: Boolean,
+    thumbnails: Boolean
   }
 
-  connect() {
 
-    let hasThumbnailsEnabled = this.settingsValue === "true" ? true : false
+  connect() {
 
     const setupUppy = (element) => {
       let trigger = this.triggerTarget
@@ -28,10 +28,11 @@ export default class extends Controller {
 
       let uppy = new Uppy({
         autoProceed: false,
-        allowMultipleUploads: true,
-        allowMultipleUploadBatches: true,
+        allowMultipleUploads: this.allowmultipleValue,
+        allowMultipleUploadBatches: this.allowmultipleValue,
         restrictions: {
-          allowedFileTypes: ["image/*"],
+          allowedFileTypes: this.allowedfiletypesValue ? [this.allowedfiletypesValue] : null,
+          maxNumberOfFiles: this.allowmultipleValue ? null : 1
         },
       })
 
@@ -40,7 +41,7 @@ export default class extends Controller {
       })
 
       uppy.use(Dashboard, {
-        disableThumbnailGenerator: !hasThumbnailsEnabled,
+        disableThumbnailGenerator: !this.thumbnailsValue,
         trigger: trigger,
         // target: target,
         closeAfterFinish: true,

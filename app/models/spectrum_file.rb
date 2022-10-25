@@ -15,5 +15,5 @@ class SpectrumFile < RsdbRecord
 
   has_one_attached :file
 
-  validates :file, blob: { content_type: ['text/*'] }
+  validates :file, blob: { content_type: %r{\Atext/.*\z} }
 end
