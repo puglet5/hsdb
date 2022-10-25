@@ -40,10 +40,9 @@ RSpec.describe 'Spectra API' do
                  slug: { type: :string },
                  created_at: { type: :string },
                  updated_at: { type: :string },
-                 metadata: { type: :object },
-                 processing_status: { type: :string }
+                 metadata: { type: :object }
                },
-               required: %w[id title user_id metadata processing_status]
+               required: %w[id title user_id metadata]
 
         let(:application) { FactoryBot.create(:application) }
         let(:user)        { FactoryBot.create(:user) }

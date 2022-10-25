@@ -113,7 +113,7 @@ RSpec.describe '/spectra', type: :request do
     end
   end
 
-  describe 'DELETE /destroy' do
+  fdescribe 'DELETE /destroy' do
     it 'destroys the requested spectrum' do
       spectrum = Spectrum.create! valid_attributes
       expect do

@@ -25,11 +25,9 @@ RSpec.describe Spectrum, type: :model do
   let(:valid_spectrum) { build(:spectrum, user: user) }
 
   before(:each) do
-    valid_spectrum.csvs.delete_all
-    valid_spectrum.files.delete_all
     valid_spectrum.images.delete_all
-    valid_spectrum.processed_images.delete_all
-    valid_spectrum.processed_csvs.delete_all
+    valid_spectrum.documents.delete_all
+    valid_spectrum.spectrum_files.delete_all
   end
 
   describe 'Field presence validations' do
@@ -52,45 +50,10 @@ RSpec.describe Spectrum, type: :model do
       expect(valid_spectrum.metadata).to be_a(Hash).or eq('{}')
     end
 
-    it 'has a default processing status of none' do
-      valid_spectrum.save!
-      expect(valid_spectrum.processing_status).to eq('none')
-    end
-
     it 'has no attachments by default' do
       valid_spectrum.save!
       expect(valid_spectrum.images.any?).to eq(false)
-      expect(valid_spectrum.csvs.attached?).to eq(false)
-      expect(valid_spectrum.files.any?).to eq(false)
-      expect(valid_spectrum.processed_csvs.attached?).to eq(false)
-      expect(valid_spectrum.processed_images.any?).to eq(false)
-    end
-  end
-
-  describe 'Processing status' do
-    it 'changes enum status to successful' do
-      valid_spectrum.processing_successful!
-      expect(valid_spectrum.processing_status).to eq('successful')
-    end
-
-    it 'changes enum status to pending' do
-      valid_spectrum.processing_pending!
-      expect(valid_spectrum.processing_status).to eq('pending')
-    end
-
-    it 'changes enum status to none' do
-      valid_spectrum.processing_none!
-      expect(valid_spectrum.processing_status).to eq('none')
-    end
-
-    it 'changes enum status to error' do
-      valid_spectrum.processing_error!
-      expect(valid_spectrum.processing_status).to eq('error')
-    end
-
-    it 'changes enum status to mixed' do
-      valid_spectrum.processing_mixed!
-      expect(valid_spectrum.processing_status).to eq('mixed')
+      expect(valid_spectrum.spectrum_files.any?).to eq(false)
     end
   end
 
@@ -116,13 +79,6 @@ RSpec.describe Spectrum, type: :model do
         end
         expect(valid_spectrum.images.count).to eq(2)
       end
-
-      it 'accepts 2 jpeg images to processed_images field' do
-        2.times do
-          valid_spectrum.images.attach(io: File.open(file_fixture('test.jpeg')), filename: 'test.jpeg', content_type: 'image/jpeg')
-        end
-        expect(valid_spectrum.images.count).to eq(2)
-      end
     end
 
     context 'invalid files and file types' do
@@ -137,61 +93,6 @@ RSpec.describe Spectrum, type: :model do
         valid_spectrum.save
         expect(valid_spectrum.errors.messages[:images]).to eq ['is not a valid file format']
         expect(valid_spectrum.images.first.persisted?).to eq(false)
-      end
-
-      it 'doesn\'t accept image/tiff to processed_images field' do
-        valid_spectrum.processed_images.attach(io: File.open(file_fixture('test.tiff')), filename: 'test.tiff', content_type: 'image/tiff')
-        valid_spectrum.save
-        expect(valid_spectrum.errors.messages[:processed_images]).to eq ['is not a valid file format']
-        expect(valid_spectrum.processed_images.first.persisted?).to eq(false)
-      end
-      it 'doesn\'t accept text/csv to processed_images field' do
-        valid_spectrum.processed_images.attach(io: File.open(file_fixture('test.csv')), filename: 'test.csv', content_type: 'text/csv')
-        valid_spectrum.save
-        expect(valid_spectrum.errors.messages[:processed_images]).to eq ['is not a valid file format']
-        expect(valid_spectrum.processed_images.first.persisted?).to eq(false)
-      end
-    end
-
-    context 'files and csvs of valid types' do
-      it 'accepts csv files to csvs field' do
-        valid_spectrum.csvs.attach(io: File.open(file_fixture('test.csv')), filename: 'test.csv', content_type: 'text/csv')
-        valid_spectrum.save!
-        expect(valid_spectrum.errors.messages[:csvs]).to eq []
-        expect(valid_spectrum.csvs.count).to eq(1)
-        expect(valid_spectrum.csvs.first.persisted?).to eq(true)
-      end
-
-      it 'accepts csv files to processed_csvs field' do
-        valid_spectrum.processed_csvs.attach(io: File.open(file_fixture('test.csv')), filename: 'test.csv', content_type: 'text/csv')
-        valid_spectrum.save!
-        expect(valid_spectrum.errors.messages[:processed_csvs]).to eq []
-        expect(valid_spectrum.processed_csvs.count).to eq(1)
-        expect(valid_spectrum.processed_csvs.first.persisted?).to eq(true)
-      end
-
-      it 'accepts any files to files field' do
-        valid_spectrum.files.attach(io: File.open(file_fixture('test.csv')), filename: 'test.csv', content_type: 'text/csv')
-        valid_spectrum.save!
-        expect(valid_spectrum.errors.messages[:files]).to eq []
-        expect(valid_spectrum.files.count).to eq(1)
-        expect(valid_spectrum.files.first.persisted?).to eq(true)
-      end
-    end
-
-    context 'csvs and processed_csvs of invalid types' do
-      it 'doesn\'t accept non-csv files to csvs field' do
-        valid_spectrum.csvs.attach(io: File.open(file_fixture('test.png')), filename: 'test.png', content_type: 'image/png')
-        valid_spectrum.save
-        expect(valid_spectrum.errors.messages[:csvs]).to eq ['is not a valid file format']
-        expect(valid_spectrum.csvs.first.persisted?).to eq(false)
-      end
-
-      it 'doesn\'t accept non-csv files to processed_csvs field' do
-        valid_spectrum.processed_csvs.attach(io: File.open(file_fixture('test.png')), filename: 'test.png', content_type: 'image/png')
-        valid_spectrum.save
-        expect(valid_spectrum.errors.messages[:processed_csvs]).to eq ['is not a valid file format']
-        expect(valid_spectrum.processed_csvs.first.persisted?).to eq(false)
       end
     end
   end
