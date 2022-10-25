@@ -16,6 +16,7 @@ development:
     database: ITMO_RSDB_development
     username: <%= ENV['PGUSER'] %>
     password: <%= ENV['PGPASSWORD'] %>
+    migrations_paths: db/rsdb_migrate
 
 test:
   primary:
@@ -29,6 +30,7 @@ test:
     database: ITMO_RSDB_test
     username: <%= ENV['PGUSER'] %>
     password: <%= ENV['PGPASSWORD'] %>
+    migrations_paths: db/rsdb_migrate
 
 production:
   primary:
@@ -46,3 +48,4 @@ production:
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_producion
     url: <%= ENV['RSDB_PRODUCTION'] %>
+    migrations_paths: db/rsdb_migrate
