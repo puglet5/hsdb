@@ -1,47 +1,19 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: spectra
-#
-#  id                :bigint           not null, primary key
-#  title             :string           not null
-#  user_id           :integer
-#  slug              :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  metadata          :jsonb            not null
-#  processing_status :integer          default(0)
-#  category          :integer          default("not_set"), not null
-#  origin            :string           default(""), not null
-#  owner             :string           default(""), not null
-#
 class Spectrum < RsdbRecord
   include PublicActivity::Model
   include Authorship
   include CustomValidations
   include ParseJson
 
-  extend FriendlyId
-  friendly_id :title, use: %i[slugged finders]
+  belongs_to :sample, inverse_of: :spectra, touch: true
 
-  tracked owner: proc { |controller, _model| controller.current_user }
+  enum status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, mixed: 5 }, _prefix: :processing, _default: :none
+  enum range: { not_set: 0, vis: 1, ir: 2, uv: 3, other: 4 }, _default: :ir
+  enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, other: 7 }, _default: :not_set, _suffix: :format
+  enum category: { not_set: 0 }, _default: :not_set, _suffix: :category
 
-  belongs_to :user
-  has_many :spectrum_files, inverse_of: :spectrum, dependent: :destroy
-  has_many :file_attachments, through: :spectrum_files
-  accepts_nested_attributes_for :spectrum_files, reject_if: proc { |attributes| attributes['file'].blank? }
+  has_one_attached :file
 
-  has_many_attached :documents
-  has_many_attached :images
-
-  has_rich_text :description
-
-  validates :title, presence: true
-  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
-  validate :json_validity
-
-  after_commit :parse_json, on: %i[create update]
-
-  enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
+  validates :file, blob: { content_type: %r{\Atext/.*\z} }
 end

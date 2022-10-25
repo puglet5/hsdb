@@ -24,7 +24,7 @@
       <%= f.check_box "settings[processing][enabled]", {multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-2 ", checked: checked }, true, false %>
       <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900">Automatic spectra processing</label>
     </div>
-    <%= render Forms::PHelperComponent.new().with_content("Enables automatic processing for uploaded spectra files. Disabled by default. ") %>
+    <%= render Forms::PHelperComponent.new().with_content("Enables automatic processing for uploaded spectra files. Disabled by default.") %>
   </div>
 
   <div class="mb-4">

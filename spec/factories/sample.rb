@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: spectra
+# Table name: samples
 #
 #  id                :bigint           not null, primary key
 #  title             :string           not null
@@ -14,7 +14,7 @@
 #  processing_status :integer          default("none")
 
 FactoryBot.define do
-  factory :spectrum do
+  factory :sample do
     title { 'test title' }
     association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }

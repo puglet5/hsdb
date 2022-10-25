@@ -5,29 +5,29 @@ class ProcessCsvJob < ApplicationJob
 
   def perform(_initiator, record_id, last_n = nil)
     PublicActivity.enabled = false
-    spectrum = Spectrum.find(record_id)
-    spectrum.processing_ongoing!
+    sample = Sample.find(record_id)
+    sample.processing_ongoing!
     errs = 0
 
     if last_n.nil?
-      file_count = spectrum.files.count
+      file_count = sample.files.count
 
-      spectrum.files.each do |csv|
-        errs += 1 unless process_file(spectrum, csv)
+      sample.files.each do |csv|
+        errs += 1 unless process_file(sample, csv)
       end
 
     else
-      file_count = spectrum.files.last(last_n).count
+      file_count = sample.files.last(last_n).count
 
-      spectrum.files.last(last_n).each do |csv|
-        errs += 1 unless process_file(spectrum, csv)
+      sample.files.last(last_n).each do |csv|
+        errs += 1 unless process_file(sample, csv)
       end
 
     end
 
-    spectrum.processing_mixed! if errs < file_count
-    spectrum.processing_error! if errs == file_count
-    spectrum.processing_successful! if errs.zero?
+    sample.processing_mixed! if errs < file_count
+    sample.processing_error! if errs == file_count
+    sample.processing_successful! if errs.zero?
   end
 
   def process_file(record, file)

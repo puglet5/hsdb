@@ -1,11 +1,11 @@
-<%= simple_form_for @spectrum, validate: true do |f| %>
+<%= simple_form_for @sample, validate: true do |f| %>
 
   <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
   <div id="info" class="mb-4 grid grid-cols-2 gap-4">
 
     <div id="title" class="mb-4">
       <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
-      <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Spectrum title") %>
+      <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Title/name") %>
     </div>
 
     <div id="title" class="mb-4">
@@ -20,12 +20,12 @@
 
     <div>
       <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-      <%= f.input :category, default: @spectrum.category, collection: Spectrum.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+      <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
     </div>
 
     <div class="mb-4 col-span-2">
       <%= render Forms::LabelComponent.new().with_content("Description") %>
-      <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on spectra cards") %>
+      <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on sample cards") %>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
     <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
     <%= tag.div class: "row-span-2",
                 data: {
-                  uppy: "spectrum[spectrum_files_attributes][][file]",
+                  uppy: "sample[spectra_attributes][][file]",
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
@@ -47,19 +47,19 @@
           Browse...
         </p>
       <% end %>
-      <%= render Forms::PHelperComponent.new().with_content("Plain text spectrum files of any format") %>
+      <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
     <% end %>
   </div>
 
   <div id="metadata">
     <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
     <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
+    <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata) %>
     <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
   </div>
 
   <div class="flex mt-4">
     <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
-    <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? :spectra : @spectrum).with_content("Back") %>
+    <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? :samples : @sample).with_content("Back") %>
   </div>
 <% end %>

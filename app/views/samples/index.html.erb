@@ -11,26 +11,26 @@
     </div>
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
-      <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference Spectra") %>
-      <%= render Links::NewLinkComponent.new(path: [:new, :spectrum], cls: "text-gray-500") %>
+      <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference spectra samples") %>
+      <%= render Links::NewLinkComponent.new(path: [:new, :sample], cls: "text-gray-500") %>
     <% end %>
 
-    <% if @spectra&.count > 0 %>
+    <% if @samples&.count > 0 %>
       <div class="grid grid-cols-3 gap-4">
-        <% @spectra.each do |spectrum| %>
+        <% @samples.each do |sample| %>
           <div class="bg-white border border-gray-200 rounded-lg shadow-md block max-w-screen-xl">
             <div class="md:flex md:items-center md:space-y-0 md:space-x-8">
               <div class="w-full mb-4 m-4">
-                <%= render SpectrumCategoryBadgeComponent.new(category: spectrum.category, cls: "!my-auto").with_content(spectrum.category.humanize.downcase) %>
+                <%= render SampleCategoryBadgeComponent.new(category: sample.category, cls: "!my-auto").with_content(sample.category.humanize.downcase) %>
                 <div id="title" class="mt-4">
-                  <%= link_to spectrum do %>
+                  <%= link_to sample do %>
                     <p class="text-lg font-medium">
-                      <%= spectrum.title %>
+                      <%= sample.title %>
                     </p>
                   <% end %>
 
                   <p class="font-normal text-sm text-gray-500 mr-8">
-                    <%= spectrum.description.to_plain_text.truncate(100) %>
+                    <%= sample.description.to_plain_text.truncate(100) %>
                   </p>
                 </div>
               </div>
@@ -45,7 +45,7 @@
           There's nothing here...
         </h2>
         <p class="mt-4 text-sm text-gray-500">
-          New spectra will appear here
+          New samples will appear here
         </p>
       </div>
     <% end %>

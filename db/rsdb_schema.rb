@@ -10,36 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_210037) do
+ActiveRecord::Schema[7.0].define(version: 20_221_025_210_037) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "spectra", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "user_id"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "metadata", default: "{}", null: false
-    t.integer "processing_status", default: 0
-    t.integer "category", default: 0, null: false
-    t.string "origin", default: "", null: false
-    t.string "owner", default: "", null: false
-    t.string "sku"
-    t.index ["metadata"], name: "index_spectra_on_metadata", using: :gin
-    t.index ["sku"], name: "index_spectra_on_sku"
+  create_table 'samples', force: :cascade do |t|
+    t.string 'title', null: false
+    t.integer 'user_id'
+    t.string 'slug'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.jsonb 'metadata', default: '{}', null: false
+    t.integer 'processing_status', default: 0
+    t.integer 'category', default: 0, null: false
+    t.string 'origin', default: '', null: false
+    t.string 'owner', default: '', null: false
+    t.string 'sku'
+    t.index ['metadata'], name: 'index_samples_on_metadata', using: :gin
+    t.index ['sku'], name: 'index_samples_on_sku'
   end
 
-  create_table "spectrum_files", force: :cascade do |t|
-    t.integer "format", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.integer "category", default: 0, null: false
-    t.bigint "spectrum_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "range", default: 0, null: false
-    t.index ["spectrum_id"], name: "index_spectrum_files_on_spectrum_id"
+  create_table 'spectra', force: :cascade do |t|
+    t.integer 'format', default: 0, null: false
+    t.integer 'status', default: 0, null: false
+    t.integer 'category', default: 0, null: false
+    t.bigint 'sample_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'range', default: 0, null: false
+    t.index ['sample_id'], name: 'index_spectra_on_sample_id'
   end
 
-  add_foreign_key "spectrum_files", "spectra"
+  add_foreign_key 'spectra', 'samples'
 end

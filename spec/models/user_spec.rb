@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
         expect(valid_user.settings(:pagination).per).to eq('10')
       end
 
-      it 'has default settings for spectra processing' do
+      it 'has default settings for sample spectra processing' do
         expect(valid_user.settings(:processing).enabled).to eq(false)
       end
 
@@ -135,7 +135,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Associations' do
-    it { should have_many(:spectra) }
+    it { should have_many(:samples) }
     it { should have_many(:uploads) }
     it { should have_many(:replies).through(:discussions) }
     it { should have_many(:discussions) }

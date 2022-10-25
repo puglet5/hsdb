@@ -6,7 +6,7 @@ ActiveRecordDoctor.configure do
     active_storage_attachments
     action_text_rich_texts
 
-    spectra
+    samples
     settings
     oauth_access_tokens
     oauth_applications

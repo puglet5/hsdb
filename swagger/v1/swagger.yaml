@@ -4,11 +4,11 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/spectra":
+  "/api/v1/samples":
     get:
-      summary: Lists spectra
+      summary: Lists samples
       tags:
-      - Spectra
+      - Samples
       parameters:
       - name: Authorization
         in: header
@@ -19,11 +19,11 @@ paths:
           description: ok
         '401':
           description: unauthorized
-  "/api/v1/spectra/{id}":
+  "/api/v1/samples/{id}":
     get:
-      summary: Retrieves an spectrum
+      summary: Retrieves a sample
       tags:
-      - Spectra
+      - Samples
       parameters:
       - name: id
         in: path

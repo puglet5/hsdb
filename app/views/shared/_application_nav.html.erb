@@ -9,7 +9,7 @@
           <path d="M4 12v6a8 3 0 0 0 16 0v-6"></path>
         </svg>
         <p class="hidden lg:block">
-          <% unless Rails.application.routes.recognize_path(:spectra)[:controller] == params[:controller] %>
+          <% unless Rails.application.routes.recognize_path(:samples)[:controller] == params[:controller] %>
             ITMO Heritage Science DB
           <% else %>
             ITMO Reference Spectra DB
@@ -73,10 +73,10 @@
             </li>
           <% end %>
 
-          <%= render TooltipComponent.new(tooltip: "Spectra", cls: "p-0 m-0 border-0", user: current_user) do %>
+          <%= render TooltipComponent.new(tooltip: "Samples", cls: "p-0 m-0 border-0", user: current_user) do %>
             <li>
-              <%= link_to :spectra do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-itmo_misc_1-300 <%= active_style :spectra, "!text-itmo_misc_1-500" %>" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <%= link_to :samples do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-itmo_misc_1-300 <%= active_style :samples, "!text-itmo_misc_1-500" %>" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19"></polyline>
                   <polyline points="4 12 7 8 11 10 16 4 20 8"></polyline>

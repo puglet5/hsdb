@@ -2,10 +2,10 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Spectra API' do
-  path '/api/v1/spectra' do
-    get 'Lists spectra' do
-      tags 'Spectra'
+RSpec.describe 'Samples API' do
+  path '/api/v1/samples' do
+    get 'Lists samples' do
+      tags 'Samples'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, type: :string
 
@@ -24,9 +24,9 @@ RSpec.describe 'Spectra API' do
     end
   end
 
-  path '/api/v1/spectra/{id}' do
-    get 'Retrieves a spectrum' do
-      tags 'Spectra'
+  path '/api/v1/samples/{id}' do
+    get 'Retrieves a sample' do
+      tags 'Samples'
       produces 'application/json', 'application/xml'
       parameter name: 'id', in: :path, type: :string
       parameter name: 'Authorization', in: :header, type: :string
@@ -48,16 +48,16 @@ RSpec.describe 'Spectra API' do
         let(:user)        { FactoryBot.create(:user) }
         let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
         let(:Authorization) { "Bearer #{token.token}" }
-        let(:spectrum) { create(:spectrum) }
-        let(:id) { spectrum.id }
+        let(:sample) { create(:sample) }
+        let(:id) { sample.id }
 
         run_test!
       end
 
       response '401', 'unauthorized' do
         let(:Authorization) { nil }
-        let(:spectrum) { create(:spectrum) }
-        let(:id) { spectrum.id }
+        let(:sample) { create(:sample) }
+        let(:id) { sample.id }
         run_test!
       end
 

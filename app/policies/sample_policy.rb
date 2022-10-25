@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SpectrumPolicy < ApplicationPolicy
+class SamplePolicy < ApplicationPolicy
   def create?
     !user.guest?
   end

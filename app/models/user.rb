@@ -37,7 +37,7 @@ class User < ApplicationRecord
   has_many :discussions, dependent: :nullify
   has_many :uploads, dependent: :nullify
   has_many :replies, through: :discussions
-  has_many :spectra, dependent: :nullify
+  has_many :samples, dependent: :nullify
 
   # rubocop:disable Rails/InverseOf
   has_many :access_tokens,

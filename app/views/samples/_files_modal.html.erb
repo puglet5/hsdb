@@ -20,7 +20,7 @@
         </div>
         <div class="overflow-auto p-6 pace-y-2 max-h-1/2">
           <ul class="ml-8 list-disc">
-            <% @spectrum.files.each do |file| %>
+            <% @sample.files.each do |file| %>
               <% if file.persisted? %>
 
                 <%= tag.div data: { controller: "attachment", "attachment-target": "attachment", "attachment-id-value": file.signed_id }, class: "m-2" do %>

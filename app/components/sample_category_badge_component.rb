@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SpectrumCategoryBadgeComponent < ViewComponent::Base
+class SampleCategoryBadgeComponent < ViewComponent::Base
   attr_reader :category
 
   def initialize(category: '', cls: '')

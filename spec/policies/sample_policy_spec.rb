@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe SpectrumPolicy do
-  let(:spectrum) { build(:spectrum, user: user) }
+describe SamplePolicy do
+  let(:sample) { build(:sample, user: user) }
 
-  subject { described_class.new(user, spectrum) }
+  subject { described_class.new(user, sample) }
 
   context 'unauthorized' do
     let(:user) { nil }
@@ -19,7 +19,7 @@ describe SpectrumPolicy do
   context 'authorized, default role, not an author' do
     let(:user) { create(:default_user) }
     let(:another_user) { create(:default_user) }
-    subject { described_class.new(another_user, spectrum) }
+    subject { described_class.new(another_user, sample) }
 
     it 'expects user not to be nil' do
       expect(another_user).to_not be_nil
@@ -30,7 +30,7 @@ describe SpectrumPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(another_user.author?(spectrum)).to eq(false)
+      expect(another_user.author?(sample)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create index show images]) }
@@ -39,7 +39,7 @@ describe SpectrumPolicy do
 
   context 'authorized, default role, is an author' do
     let(:user) { create(:default_user) }
-    subject { described_class.new(user, spectrum) }
+    subject { described_class.new(user, sample) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -50,7 +50,7 @@ describe SpectrumPolicy do
     end
 
     it 'expects user to be an author' do
-      expect(user.author?(spectrum)).to eq(true)
+      expect(user.author?(sample)).to eq(true)
     end
 
     it { is_expected.to permit_actions(%i[create update destroy index show images]) }
@@ -59,7 +59,7 @@ describe SpectrumPolicy do
   context 'authorized, admin' do
     let(:user) { create(:default_user) }
     let(:admin) { create(:admin_user) }
-    subject { described_class.new(user, spectrum) }
+    subject { described_class.new(user, sample) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -70,7 +70,7 @@ describe SpectrumPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(admin.author?(spectrum)).to eq(false)
+      expect(admin.author?(sample)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create update destroy index show images]) }

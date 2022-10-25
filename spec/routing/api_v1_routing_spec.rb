@@ -12,13 +12,13 @@ RSpec.describe Api::V1, type: :routing do
       end
     end
 
-    context 'spectra' do
+    context 'samples' do
       it 'routes to #index' do
-        expect(get: '/api/v1/spectra').to route_to('api/v1/spectra#index')
+        expect(get: '/api/v1/samples').to route_to('api/v1/samples#index')
       end
 
       it 'routes to #show' do
-        expect(get: '/api/v1/spectra/1').to route_to('api/v1/spectra#show', id: '1')
+        expect(get: '/api/v1/samples/1').to route_to('api/v1/samples#show', id: '1')
       end
     end
 
