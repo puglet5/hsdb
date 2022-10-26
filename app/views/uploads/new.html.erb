@@ -24,25 +24,8 @@
         </div>
 
         <div>
-          <%= render Forms::LabelComponent.new().with_content("Thumbnail") %>
-          <%= render Forms::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*") %>
-          <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
-        </div>
-
-        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails } do %>
-          <%= render Forms::LabelComponent.new().with_content("Images") %>
-          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-            <p class="font-medium text-center" id="uppy-text">
-              Browse...
-            </p>
-          <% end %>
-          <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
-        <% end %>
-
-        <div>
-          <%= render Forms::LabelComponent.new().with_content("Documents") %>
-          <%= render Forms::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
-          <%= render Forms::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
+          <%= render Forms::LabelComponent.new().with_content("Date") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
         </div>
 
       </div>
@@ -65,24 +48,44 @@
       <% end %>
 
       <div class="grid grid-cols-2 mb-6 space-x-4">
-        <div>
-          <%= render Forms::LabelComponent.new().with_content("Date") %>
-          <%= render Forms::TextInputComponent.new(form: f, field: :date, required: false, placeholder: "16th century, c. 1503–1506") %>
-        </div>
-
         <div class="mb-4">
           <%= tag.div data: { controller: "datepicker" } do %>
             <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full pr-6 text-sm border-gray-300 rounded-lg shadow-sm p-2.5 focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
+            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
           <% end %>
+        </div>
+      </div>
+
+      <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
+      <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
+
+        <div>
+          <%= render Forms::LabelComponent.new().with_content("Thumbnail") %>
+          <%= render Forms::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*") %>
+          <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+        </div>
+
+        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails } do %>
+          <%= render Forms::LabelComponent.new().with_content("Images") %>
+          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <p class="font-medium text-center" id="uppy-text">
+              Browse...
+            </p>
+          <% end %>
+          <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+        <% end %>
+
+        <div>
+          <%= render Forms::LabelComponent.new().with_content("Documents") %>
+          <%= render Forms::FileInputComponent.new(form: f, field: :documents, required: false, direct: true, multiple: true) %>
+          <%= render Forms::PHelperComponent.new().with_content(".pdf or any other format (max: 30 MB)") %>
         </div>
       </div>
 
       <!-- Metadata fields -->
       <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
 
-      <%#= render Forms::LabelComponent.new().with_content("Metadata") %>
-
+      <%= render Forms::LabelComponent.new(cls: "mb-4").with_content("Metadata") %>
       <%= tag.div data: { controller: "metadataForm" }, class: "grid grid-cols-12 gap-4 mb-4 gap-y-0" do %>
 
         <div class="col-span-7" data-metadataForm-target="formContainer">
