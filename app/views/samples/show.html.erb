@@ -109,8 +109,8 @@
                 <div class="flex items-center mt-2 ml-1 text-sm text-gray-500">
 
                 </div>
-                <% if @sample.spectra.where(status: :processed).any? %>
-                  <% @sample.spectra.where(status: :processed).each do |sf| %>
+                <% if @sample.spectra.where(status: :successful).any? %>
+                  <% @sample.spectra.where(status: :successful).each do |sf| %>
                     <div class="flex">
                       <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -128,7 +128,7 @@
           </details>
         </div>
         <div id="charts" class="col-span-6 my-4 mx-auto w-full">
-          <% @sample.spectra.where(status: :processed).each do |sf| %>
+          <% @sample.spectra.where(status: :successful).each do |sf| %>
             <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url  } do %>
               <button data-action="click->chart#visualize" class="border rounded-lg bg-gray-50 hover:bg-gray-100 p-2">
                 visualize
