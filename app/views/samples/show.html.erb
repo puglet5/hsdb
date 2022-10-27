@@ -111,6 +111,16 @@
                 </div>
                 <% if @sample.spectra.where(status: :successful).any? %>
                   <% @sample.spectra.where(status: :successful).each do |sf| %>
+                    <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url  } do %>
+                      <button data-action="click->chart#visualize" class="border rounded-lg bg-gray-50 hover:bg-gray-50 p-0" style="float:right">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-area-line" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19"></polyline>
+                          <polyline points="4 12 7 8 11 10 16 4 20 8"></polyline>
+                        </svg>
+                      </button>
+                    <% end %>
+
                     <div class="flex">
                       <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -128,16 +138,9 @@
           </details>
         </div>
         <div id="charts" class="col-span-6 my-4 mx-auto w-full">
-          <% @sample.spectra.where(status: :successful).each do |sf| %>
-            <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url  } do %>
-              <button data-action="click->chart#visualize" class="border rounded-lg bg-gray-50 hover:bg-gray-100 p-2">
-                visualize
-              </button>
+          <canvas id="canvas">
+          </canvas>
 
-              <canvas id="canvas-<%= sf.file.id %>" data-chart-target="canvas">
-              </canvas>
-            <% end %>
-          <% end %>
         </div>
       </div>
     </div>

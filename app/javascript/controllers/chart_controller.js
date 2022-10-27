@@ -9,11 +9,9 @@ export default class extends Controller {
     url: String
   }
 
-  static targets = ["canvas"]
 
   visualize() {
-
-    let canvasId = this.canvasTarget.id
+    if (window.scatterChart) {window.scatterChart.destroy()}
 
     d3.csv(this.urlValue)
       .then(makeChart)
@@ -21,7 +19,8 @@ export default class extends Controller {
     function makeChart(csv) {
 
       // eslint-disable-next-line no-unused-vars
-      let scatterChart = new Chart(canvasId, {
+
+      window.scatterChart = new Chart("canvas", {
         type: "scatter",
         data: {
           datasets: [{
@@ -58,5 +57,4 @@ export default class extends Controller {
       return data
     }
   }
-
 }
