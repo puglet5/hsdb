@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, registerables } from "chart.js"
-import * as d3 from "d3"
+import { csv as importCsv } from "d3"
 
 Chart.register(...registerables)
 
@@ -11,21 +11,19 @@ export default class extends Controller {
 
 
   visualize() {
-    if (window.scatterChart) {window.scatterChart.destroy()}
+    if (window.scatterChart) { window.scatterChart.destroy() }
 
-    d3.csv(this.urlValue)
+    importCsv(this.urlValue)
       .then(makeChart)
 
     function makeChart(csv) {
-
-      // eslint-disable-next-line no-unused-vars
 
       window.scatterChart = new Chart("canvas", {
         type: "scatter",
         data: {
           datasets: [{
             label: "test",
-            data: parseCvs(csv)
+            data: parseCsv(csv)
           }]
         },
         options: {
@@ -35,7 +33,7 @@ export default class extends Controller {
       })
     }
 
-    const parseCvs = (csv) => {
+    const parseCsv = (csv) => {
 
       let xValue = csv.map((d) => {
         return parseFloat(Object.values(d)[0])
