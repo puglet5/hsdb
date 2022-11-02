@@ -13,7 +13,7 @@
                 <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
                 <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
               </svg>
-              <%= @sample.spectra&.count %> (<%= @sample.spectra&.where(status: :processed).count %> processed)
+              <%= @sample.spectra&.count %> (<%= @sample.spectra&.where(status: :successful).count %> processed)
             </div>
             <div class="flex items-center mt-2 text-sm text-gray-500">
               <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -44,7 +44,7 @@
           </span>
           <span class="hidden ml-3 sm:block">
             <% if policy(@sample).destroy? %>
-              <%= link_to @sample, data: {turbo_method: :delete, turbo_confirm: "Delete this sample?" }, class: "inline-flex items-center px-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm py-2.5 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+              <%= link_to @sample, data: { turbo_method: :delete, turbo_confirm: "Delete this sample?" }, class: "inline-flex items-center px-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm py-2.5 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -68,12 +68,28 @@
             </summary>
             <div class="ml-2">
               <% if @sample.spectra.any? %>
-                <% @sample.spectra.each do |file| %>
-                  <div class="flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                    <%= link_to file.file.filename, file.file.url %>
+                <% @sample.spectra.order(updated_at: :desc).each do |sf| %>
+                  <div class="flex justify-between">
+                    <div class="flex justify-between items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span>
+                        <%= sf.file.filename %>
+                      </span>
+                    </div>
+                    <%= render TooltipComponent.new(tooltip: "Download", user: current_user) do %>
+                      <%= link_to sf.file.url, class: "flex justify-between items-center" do %>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-4 h-4 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                          <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                          <path d="M12 17v-6"></path>
+                          <path d="M9.5 14.5l2.5 2.5l2.5 -2.5"></path>
+                        </svg>
+                      <% end %>
+                    <% end %>
                   </div>
                 <% end %>
               <% else %>
@@ -90,7 +106,7 @@
                 <p class="block mr-4 text-2xl font-medium text-gray-900 select-none">Processed files</p>
               </div>
               <p class="mt-1 text-sm text-right text-gray-500" id="file_input_help">
-                Automatically processed .csv files (click to preview)
+                Automatically processed .csv files
               </p>
             </summary>
             <div class="ml-2">
@@ -100,32 +116,50 @@
                   <span class="sr-only">Info</span>
                   <div class="text-gray-500">
                     <span class="font-medium text-gray-900">Info! </span>
-                    Processing might take a long time and only occurs for specific file types. Please refer to the documentation.
+                    Processing might take a long time is only being done for specific file types. Please refer to the documentation.
                     <p class="mt-1 font-medium text-gray-900">
-                      Last processing: <%= @sample.processing_status %>
+                      Last spectrum processing status: <%= @sample.spectra.order(updated_at: :desc).last.status.humanize %>
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center mt-2 ml-1 text-sm text-gray-500">
 
-                </div>
                 <% if @sample.spectra.where(status: :successful).any? %>
                   <% @sample.spectra.where(status: :successful).each do |sf| %>
-                    <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url  } do %>
-                      <button data-action="click->chart#visualize" class="border rounded-lg bg-gray-50 hover:bg-gray-50 p-0" style="float:right">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-area-line" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                          <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19"></polyline>
-                          <polyline points="4 12 7 8 11 10 16 4 20 8"></polyline>
-                        </svg>
-                      </button>
-                    <% end %>
 
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <%= link_to sf.file.filename, sf.file.url %>
+                    <div class="flex justify-between">
+                      <div class="flex justify-between items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span>
+                          <%= sf.file.filename %>
+                        </span>
+                      </div>
+                      <div class="flex">
+                        <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url }, class: "flex justify-between items-center h-5 w-5" do %>
+                          <%= render TooltipComponent.new(tooltip: "Plot spectrum", user: current_user) do %>
+                            <button data-action="click->chart#visualize" class="" style="float:right">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                                <path d="M7 14l3 -3l2 2l3 -3l2 2"></path>
+                              </svg>
+                            </button>
+                          <% end %>
+                        <% end %>
+                        <%= render TooltipComponent.new(tooltip: "Download", user: current_user) do %>
+                          <%= link_to sf.file.url, class: "flex justify-between items-center" do %>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-4 h-4 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                              <path d="M12 17v-6"></path>
+                              <path d="M9.5 14.5l2.5 2.5l2.5 -2.5"></path>
+                            </svg>
+                          <% end %>
+                        <% end %>
+                      </div>
                     </div>
                   <% end %>
                 <% else %>

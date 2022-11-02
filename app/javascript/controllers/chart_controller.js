@@ -18,17 +18,65 @@ export default class extends Controller {
 
     function makeChart(csv) {
 
+      let data = parseCsv(csv)
+
       window.scatterChart = new Chart("canvas", {
         type: "scatter",
         data: {
           datasets: [{
             label: "test",
-            data: parseCsv(csv)
+            data: data,
+            showLine: true,
           }]
         },
         options: {
           animation: false,
-          parsing: false
+          parsing: true,
+          showAllTooltips: true,
+          elements: {
+            point: {
+              radius: 0
+            },
+            line: {
+              backgroundColor: "#000000",
+              borderColor: "#000000",
+              borderWidth: 2
+            }
+          },
+          scales: {
+            y: {
+              min: 0,
+              grid: {
+                borderDash: [8, 4],
+                color: "#e1e1e1"
+              }
+            },
+            x: {
+              grid: {
+                borderDash: [8, 4],
+                color: "#e1e1e1"
+              }
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          tooltip: {
+            position: "nearest",
+          },
+          plugins: {
+            tooltip: {
+              displayColors: false
+            },
+            legend:
+            {
+              labels: {
+                boxWidth: 0,
+              }
+            }
+          }
         }
       })
     }
