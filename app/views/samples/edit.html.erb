@@ -4,6 +4,71 @@
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       Edit sample
     </div>
-    <%= render "edit_form", sample: @sample %>
+    <%= simple_form_for @sample, validate: true do |f| %>
+
+      <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
+      <div id="info" class="mb-4 grid grid-cols-2 gap-4">
+
+        <div id="title" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Sample name") %>
+        </div>
+
+        <div id="title" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("Owner/Organization") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :owner, required: true, placeholder: "Jonh Doe") %>
+        </div>
+
+        <div id="title" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("Origin/Manufacturer") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :origin, required: true, placeholder: "NASA Labs") %>
+        </div>
+
+        <div>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
+          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+        </div>
+
+        <div class="mb-4 col-span-2">
+          <%= render Forms::LabelComponent.new().with_content("Description") %>
+          <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on sample cards") %>
+        </div>
+      </div>
+
+      <div id="files" class="mb-4">
+        <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
+        <%= tag.div class: "row-span-2",
+                data: {
+                  uppy: "sample[spectra_attributes][][file]",
+                  controller: "uploads",
+                  uploads_target: "div",
+                  uploads_filetype_value: "files",
+                  uploads_allowedfiletypes_value: "text/*",
+                  uploads_allowmultiple_value: true,
+                  uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
+                  } do %>
+          <%= render Forms::LabelComponent.new().with_content("Files") %>
+          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <p class="font-medium text-center" id="uppy-text">
+              Browse...
+            </p>
+          <% end %>
+          <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
+        <% end %>
+      </div>
+
+      <div id="metadata">
+        <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
+        <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: "input->textarea#resize", textarea_target: "input" }, v: JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata) %>
+        <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
+      </div>
+
+      <div class="flex mt-4">
+        <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
+        <%= render Forms::BackButtonComponent.new(path: @sample).with_content("Back") %>
+      </div>
+    <% end %>
+
   </div>
 </section>
