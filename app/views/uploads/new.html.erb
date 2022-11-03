@@ -65,7 +65,7 @@
           <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
         </div>
 
-        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails } do %>
+        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
           <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
             <p class="font-medium text-center" id="uppy-text">
