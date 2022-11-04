@@ -136,7 +136,7 @@
                         </span>
                       </div>
                       <div class="flex">
-                        <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url }, class: "flex justify-between items-center h-5 w-5" do %>
+                        <%= tag.div data: { controller: "chart", chart_url_value: sf.file.url, chart_filename_value: sf.file.filename }, class: "flex justify-between items-center h-5 w-5" do %>
                           <%= render TooltipComponent.new(tooltip: "Plot spectrum", user: current_user) do %>
                             <button data-action="click->chart#visualize" class="" style="float:right">
                               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

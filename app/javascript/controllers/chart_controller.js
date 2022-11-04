@@ -7,7 +7,8 @@ Chart.register(...registerables)
 export default class extends Controller {
   static values = {
     url: String,
-    data: Array
+    data: Array,
+    filename: String
   }
 
   async import(url) {
@@ -39,13 +40,13 @@ export default class extends Controller {
 
   async visualize() {
 
-    const makeChart = (data) => {
+    const makeChart = (data, filename) => {
 
       window.scatterChart = new Chart("canvas", {
         type: "scatter",
         data: {
           datasets: [{
-            label: "test",
+            label: filename,
             data: data,
             showLine: true,
           }]
@@ -105,11 +106,26 @@ export default class extends Controller {
     if (window.scatterChart) { window.scatterChart.destroy() }
 
     if (this.hasDataValue) {
-      makeChart(this.dataValue)
+      makeChart(this.dataValue, this.filenameValue)
     } else {
-      let raw = await this.import(this.urlValue)
+      const raw = await this.import(this.urlValue)
       this.dataValue = this.parse(raw)
-      makeChart(this.dataValue)
+      makeChart(this.dataValue, this.filenameValue)
     }
+  }
+
+  getRange(data) {
+    const y = data
+      .map(e => Object.values(e))
+      .map(e => e[1])
+
+    const x = data
+      .map(e => Object.values(e))
+      .map(e => e[0])
+
+    return [
+      [Math.min(...x), Math.max(...x)],
+      [Math.min(...y), Math.max(...y)]
+    ]
   }
 }
