@@ -6,7 +6,7 @@ const rails = require("esbuild-rails")
 require("esbuild").build({
   entryPoints: ["application.js"],
   bundle: true,
-  minify: true,
+  minify: process.argv.includes("--minify"),
   platform: 'browser',
   target: [
     'es2020',
