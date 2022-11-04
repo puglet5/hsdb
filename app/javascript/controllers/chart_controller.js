@@ -1,24 +1,45 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, registerables } from "chart.js"
-import { csv as importCsv } from "d3"
+import { dsv } from "d3"
 
 Chart.register(...registerables)
 
 export default class extends Controller {
   static values = {
-    url: String
+    url: String,
+    data: Array
   }
 
+  async import(url) {
+    return await dsv(",", url, d => { return d })
+  }
 
-  visualize() {
-    if (window.scatterChart) { window.scatterChart.destroy() }
+  parse(raw) {
 
-    importCsv(this.urlValue)
-      .then(makeChart)
+    let xValue = raw.map((d) => {
+      return parseFloat(Object.values(d)[0])
+    })
 
-    function makeChart(csv) {
+    let yValue = raw.map((d) => {
+      return parseFloat(Object.values(d)[1])
+    })
 
-      let data = parseCsv(csv)
+    let data = xValue
+      .map((v, i) => {
+        return [v, yValue[i]]
+      })
+      .map((v) => {
+        let [x, y] = v
+        return { x, y }
+      })
+
+    return data
+
+  }
+
+  async visualize() {
+
+    const makeChart = (data) => {
 
       window.scatterChart = new Chart("canvas", {
         type: "scatter",
@@ -81,26 +102,14 @@ export default class extends Controller {
       })
     }
 
-    const parseCsv = (csv) => {
+    if (window.scatterChart) { window.scatterChart.destroy() }
 
-      let xValue = csv.map((d) => {
-        return parseFloat(Object.values(d)[0])
-      })
-
-      let yValue = csv.map((d) => {
-        return parseFloat(Object.values(d)[1])
-      })
-
-      let data = xValue
-        .map((v, i) => {
-          return [v, yValue[i]]
-        })
-        .map((v) => {
-          let [x, y] = v
-          return { x, y }
-        })
-
-      return data
+    if (this.hasDataValue) {
+      makeChart(this.dataValue)
+    } else {
+      let raw = await this.import(this.urlValue)
+      this.dataValue = this.parse(raw)
+      makeChart(this.dataValue)
     }
   }
 }
