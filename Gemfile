@@ -93,7 +93,7 @@ group :development, :test do
   gem 'database_consistency', '~> 1.1'
   gem 'debug', '>= 1.0.0'
   gem 'factory_bot_rails'
-  gem 'faker', '~> 2.22'
+  gem 'faker', '>= 3'
   gem 'fuubar', '~> 2.5'
   gem 'listen', '~> 3.7'
   gem 'rspec-rails', '~> 6'
