@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 5
+  version: 6
   cacheKey: 8
 
 "@client-side-validations/client-side-validations@npm:^0.3.0":
@@ -2155,7 +2155,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -3922,7 +3922,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -4415,7 +4415,7 @@ __metadata:
   peerDependencies:
     "@rails/activestorage": "*"
     "@uppy/core": "*"
-  checksum: ef7e9a4b0b243fb980cb0613660e8c2073ac4daa7a6e83258ba27fdde4882b8aee80d92ed88997fb0731e37a3b028cc53d3754cf35a065ba629f8f719cb3df56
+  checksum: 8d982286f83e0bfbf73dd97b633d446153c78826bd34bb314a6e472f062e5b37cf8c279e14e64c3f3be60bc194b62adcfa167fd3fe4b4018a99ec111a0589011
   languageName: node
   linkType: hard
 
