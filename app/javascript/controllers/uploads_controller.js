@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import Uppy from "@uppy/core"
 import Dashboard from "@uppy/dashboard"
-import ActiveStorageUpload from "uppy-activestorage-upload"
+import ActiveStorageUpload from "../../../uppy-activestorage-upload"
 import ImageEditor from "@uppy/image-editor"
 
 export default class extends Controller {
