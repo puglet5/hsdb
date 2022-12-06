@@ -550,7 +550,7 @@ __metadata:
     tailwindcss: ^3.2.4
     tom-select: ^2.2.2
     trix: ^2.0.3
-    uppy-activestorage-upload: "file:./uppy-activestorage-upload"
+    uppy-activestorage-upload: "link:./uppy-activestorage-upload"
   languageName: unknown
   linkType: soft
 
@@ -1045,13 +1045,6 @@ __metadata:
   dependencies:
     css-tree: ^1.1.2
   checksum: 380ba9663da3bcea58dee358a0d8c4468bb6539be3c439dc266ac41c047217f52fd698fb7e4b6b6ccdfb8cf53ef4ceed8cc8ceccb8dfca2aa628319826b5b998
-  languageName: node
-  linkType: hard
-
-"cuid@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "cuid@npm:2.1.8"
-  checksum: 12b85b3f5150a6f0b9e4f345c8d98299d74647419151751fa1132f6702fe2b5388ceceb1c9b49bad7cab1b3ac033c7cedea8ffc034930f90005b8a4345025288
   languageName: node
   linkType: hard
 
@@ -4407,17 +4400,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uppy-activestorage-upload@file:./uppy-activestorage-upload::locator=app%40workspace%3A.":
-  version: 0.1.1
-  resolution: "uppy-activestorage-upload@file:./uppy-activestorage-upload#./uppy-activestorage-upload::hash=2969bb&locator=app%40workspace%3A."
-  dependencies:
-    cuid: ^2.1.8
-  peerDependencies:
-    "@rails/activestorage": "*"
-    "@uppy/core": "*"
-  checksum: 232e27b8c4dcee6fb305e46460d6969445cc2b2785c2bd7caaceb8206cf55ce9758b23f549111be647e75b19253357c78521f9eff08d56a8feb33432812cd8e4
+"uppy-activestorage-upload@link:./uppy-activestorage-upload::locator=app%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "uppy-activestorage-upload@link:./uppy-activestorage-upload::locator=app%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "uri-js@npm:^4.2.2":
   version: 4.4.1

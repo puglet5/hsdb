@@ -27,7 +27,7 @@
     "tailwindcss": "^3.2.4",
     "tom-select": "^2.2.2",
     "trix": "^2.0.3",
-    "uppy-activestorage-upload": "file:./uppy-activestorage-upload"
+    "uppy-activestorage-upload": "link:./uppy-activestorage-upload"
   },
   "version": "0.1.0",
   "babel": {
