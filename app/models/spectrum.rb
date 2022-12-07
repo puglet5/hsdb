@@ -29,6 +29,8 @@ class Spectrum < RsdbRecord
   has_one_attached :file
   has_one_attached :settings
 
+  after_commit :parse_json, on: %i[create update]
+
   validates :file, blob: { content_type: %r{\Atext/.*\z} }
   validates :settings, blob: { content_type: %r{\Atext/.*\z} }
 end
