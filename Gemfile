@@ -25,7 +25,7 @@ gem 'jsbundling-rails', '~> 1.0'
 gem 'ledermann-rails-settings', '~> 2.5' # user settings
 gem 'logstasher', '~> 2.1' # generate logstash compatible rails logs
 gem 'mini_magick', '~> 4.11' # image processing
-gem 'pagy', '~> 5.10.1' # pagination
+gem 'pagy', '~> 6.0' # pagination
 gem 'pg', '~> 1.4' # postgres
 gem 'propshaft', '~> 0.6' # asset delivery
 gem 'public_activity', '~> 2.0', '>= 2.0.2' # db activity tracking
@@ -68,8 +68,8 @@ group :development do
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
   gem 'rubocop-rails', '~> 2.15', '>= 2.15.2', require: false
-  gem 'solargraph', '~> 0.44.2' # ruby language server
-  gem 'solargraph-rails', '~> 1.0.1'
+  gem 'solargraph', '~> 0.48' # ruby language server
+  gem 'solargraph-rails', '~> 1.1'
   gem 'web-console'
 end
 
@@ -78,7 +78,7 @@ group :test do
   gem 'rails-controller-testing', '~> 1.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.1' # rails matchers for common tasks
-  gem 'simplecov', '~> 0.21.2' # code coverage reporter
+  gem 'simplecov', '~> 0.22' # code coverage reporter
   gem 'webdrivers'
   gem 'webmock'
 end
