@@ -126,23 +126,4 @@
       </div>
     </div>
   </div>
-  <div class="container mx-auto">
-    <div class="p-4 mt-8 bg-white rounded-lg border shadow-md sm:p-6">
-      <details class="transition ease-in-out delay-150 group" open>
-        <summary class="flex justify-between mb-2">
-          <div class="flex mx-2">
-            <svg class="my-auto w-5 h-5 group-open:rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            <h4 class="mt-0 font-semibold text-l">Recent activity</h4>
-          </div>
-        </summary>
-        <div class="ml-4">
-          <% if @activities.count > 0 %>
-            <%= render "activities", activities: @activities %>
-          <% else %>
-            <%= render Forms::PHelperComponent.new().with_content("No activity yet. Events like uploads and forum activity will be displayed here.") %>
-          <% end %>
-        </div>
-      </details>
-    </div>
-  </div>
 </section>
