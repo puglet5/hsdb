@@ -15,10 +15,7 @@
 #  pinned      :boolean          default(FALSE)
 #
 class Discussion < ApplicationRecord
-  include PublicActivity::Model
   include Authorship
-
-  tracked owner: proc { |controller, _model| controller.current_user }
 
   belongs_to :category
   belongs_to :user

@@ -13,9 +13,6 @@
 #  slug          :string
 #
 class Reply < ApplicationRecord
-  # include PublicActivity::Model
-  # tracked owner: proc { |controller, _model| controller.current_user }
-
   include Authorship
 
   belongs_to :discussion

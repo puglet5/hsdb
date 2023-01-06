@@ -18,16 +18,10 @@
 #  style_id    :bigint
 #
 class Upload < ApplicationRecord
-  include PublicActivity::Model
   include Authorship
   include CustomValidations
   include ParseJson
   include ProcessImage
-
-  # include Elasticsearch::Model
-  # include Elasticsearch::Model::Callbacks
-
-  tracked owner: proc { |controller, _model| controller.current_user }
 
   has_many :images, inverse_of: :upload, dependent: :destroy
   accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }

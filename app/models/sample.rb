@@ -26,15 +26,12 @@
 #  survey_date       :date
 #
 class Sample < RsdbRecord
-  include PublicActivity::Model
   include Authorship
   include CustomValidations
   include ParseJson
 
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
-
-  tracked owner: proc { |controller, _model| controller.current_user }
 
   belongs_to :user
   has_many :spectra, inverse_of: :sample, dependent: :destroy

@@ -13,9 +13,7 @@
 #  pinned        :boolean          default(FALSE)
 #
 class Category < ApplicationRecord
-  include PublicActivity::Model
   include Authorship
-  tracked
 
   has_many :discussions, dependent: nil
   has_many :users, through: :discussions
