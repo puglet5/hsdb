@@ -89,7 +89,7 @@
 
       <div class="flex">
         <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
-        <%= render Forms::BackButtonComponent.new(path: "/#{locale}/users/#{current_user.slug}", cls: "hover:underline").with_content("Back") %>
+        <%= render Forms::BackButtonComponent.new(path: "/users/#{current_user.slug}", cls: "hover:underline").with_content("Back") %>
       </div>
     <% end %>
   <% end %>

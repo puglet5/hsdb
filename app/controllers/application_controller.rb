@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
   include PublicActivity::StoreController
   include Pagy::Backend
-  include Internationalization
+  # include Internationalization
   include Authorization
   include ErrorHandling
 

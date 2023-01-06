@@ -14,35 +14,35 @@ Rails.application.routes.draw do
 
   draw :api
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    resources :samples
+  # scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+  resources :samples
 
-    resources :users, only: %i[show] do
-      member do
-        patch :update_settings
-      end
+  resources :users, only: %i[show] do
+    member do
+      patch :update_settings
     end
-
-    get 'uploads/resources/images', to: 'uploads#images'
-    resources :categories
-    resources :discussions do
-      resources :replies
-    end
-    devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
-
-    resources :uploads do
-      member do
-        patch :update_status
-        get :images_grid
-      end
-    end
-
-    get 'about', to: 'pages#about'
-
-    namespace :admin do
-      resources :users, only: %i[index edit update destroy]
-    end
-
-    root to: 'pages#home'
   end
+
+  get 'uploads/resources/images', to: 'uploads#images'
+  resources :categories
+  resources :discussions do
+    resources :replies
+  end
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
+  resources :uploads do
+    member do
+      patch :update_status
+      get :images_grid
+    end
+  end
+
+  get 'about', to: 'pages#about'
+
+  namespace :admin do
+    resources :users, only: %i[index edit update destroy]
+  end
+
+  root to: 'pages#home'
+  # end
 end

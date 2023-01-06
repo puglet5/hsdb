@@ -60,9 +60,9 @@ module HSDB
     config.to_prepare do
       Doorkeeper::ApplicationsController.layout 'application'
     end
-    config.to_prepare do
-      Doorkeeper::ApplicationController.include Internationalization
-    end
+    # config.to_prepare do
+    #   Doorkeeper::ApplicationController.include Internationalization
+    # end
   end
 end
 
