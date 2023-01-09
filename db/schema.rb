@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_074124) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_230110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -228,6 +228,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_074124) do
     t.string "date"
     t.date "survey_date"
     t.bigint "style_id"
+    t.integer "lock_version"
     t.index ["metadata"], name: "index_uploads_on_metadata", using: :gin
     t.index ["style_id"], name: "index_uploads_on_style_id"
     t.index ["user_id"], name: "index_uploads_on_user_id"

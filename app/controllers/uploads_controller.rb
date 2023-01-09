@@ -124,6 +124,9 @@ class UploadsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  rescue ActiveRecord::StaleObjectError
+    flash[:error] = 'Upload was modified elsewhere'
+    redirect_to [:edit, @upload]
   end
 
   def update_status
@@ -168,6 +171,7 @@ class UploadsController < ApplicationController
       :metadata,
       :date,
       :survey_date,
+      :lock_version,
       images_attributes: %i[id image],
       image_attachments: [],
       documents: [],
