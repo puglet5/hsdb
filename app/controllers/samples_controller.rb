@@ -43,6 +43,9 @@ class SamplesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  rescue ActiveRecord::StaleObjectError
+    flash[:error] = 'Sample was modified elsewhere'
+    redirect_to [:edit, @sample]
   end
 
   def destroy
@@ -65,6 +68,7 @@ class SamplesController < ApplicationController
       :origin,
       :owner,
       :description,
+      :lock_version,
       spectra_attributes: %i[id file],
       images: [],
       documents: []

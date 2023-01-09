@@ -6,6 +6,10 @@
     </div>
     <%= simple_form_for @sample, validate: true do |f| %>
 
+      <!-- Optimistic locking with lock_version -->
+      <%= f.hidden_field :lock_version %>
+      <!--  -->
+
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
       <div id="info" class="mb-4 grid grid-cols-2 gap-4">
 
