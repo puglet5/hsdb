@@ -74,4 +74,10 @@
       </ul>
     </div>
   </aside>
+<% else %>
+  <%= render Sections::CardComponent.new(cls: "text-gray-700 !p-4 !my-4 !mx-0") do %>
+    <p class="text-sm text-center text-gray-400">
+      There are no categories yet
+    </p>
+  <% end %>
 <% end %>

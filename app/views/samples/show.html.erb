@@ -19,7 +19,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-1.5 w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
               </svg>
-              <%= link_to @sample.user, class:"font-medium" do %>
+              <%= link_to @sample.user, class:"font-medium hover:underline" do %>
                 <%= @sample.user&.full_name %>
               <% end %>
             </div>
@@ -118,7 +118,7 @@
                     <span class="font-medium text-gray-900">Info! </span>
                     Processing might take a long time is only being done for specific file types. Please refer to the documentation.
                     <p class="mt-1 font-medium text-gray-900">
-                      Last spectrum processing status: <%= @sample.spectra.order(updated_at: :desc).last&.status&.humanize %>
+                      Last spectrum processing status: <%= @sample.spectra.order(updated_at: :desc).last&.status&.humanize || "None" %>
                     </p>
                   </div>
                 </div>
