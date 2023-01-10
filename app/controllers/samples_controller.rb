@@ -69,6 +69,12 @@ class SamplesController < ApplicationController
       :owner,
       :description,
       :lock_version,
+      :sku,
+      :color,
+      :formula,
+      :cas_no,
+      :cas_name,
+      :survey_date,
       spectra_attributes: %i[id file],
       images: [],
       documents: []

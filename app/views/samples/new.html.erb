@@ -35,6 +35,44 @@
         </div>
       </div>
 
+      <%= render Forms::SectionLabelComponent.new().with_content("Misc") %>
+      <div id="misc" class="mb-4 grid grid-cols-2 gap-4">
+
+        <div id="sku" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("Sku") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :sku, required: false, placeholder: "000ABC") %>
+        </div>
+
+        <div id="color" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("Color") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :color, required: false, placeholder: "Sky blue") %>
+        </div>
+
+        <div id="formula" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("Chemical Formula") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :formula, required: false, placeholder: "CaO") %>
+        </div>
+
+        <div id="cas_no" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("CAS Registry Number") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :cas_no, required: false, placeholder: "20548-54-3") %>
+        </div>
+
+        <div id="cas_name" class="mb-4">
+          <%= render Forms::LabelComponent.new(optional: true).with_content("CAS Name") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :cas_name, required: false, placeholder: "Calcium sulfide") %>
+        </div>
+
+        <div id="survey_date" class="mb-4">
+          <div class="mb-4">
+            <%= tag.div data: { controller: "datepicker" } do %>
+              <%= render Forms::LabelComponent.new().with_content("Survey date") %>
+              <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <div id="files" class="mb-4">
         <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
         <%= tag.div class: "row-span-2",
