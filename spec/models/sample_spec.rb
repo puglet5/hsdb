@@ -24,6 +24,7 @@
 #  formula           :string
 #  location          :string
 #  survey_date       :date
+#  lock_version      :integer
 #
 
 RSpec.describe Sample, type: :model do

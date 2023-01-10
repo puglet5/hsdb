@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default("ir"), not null
+#  metadata   :jsonb            not null
 #
 class Spectrum < RsdbRecord
   include PublicActivity::Model
