@@ -15,7 +15,6 @@
 #  metadata   :jsonb            not null
 #
 class Spectrum < RsdbRecord
-  include PublicActivity::Model
   include Authorship
   include CustomValidations
   include ParseJson
