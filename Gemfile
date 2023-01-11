@@ -99,3 +99,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 6'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
+
+gem 'active_model_serializers', '~> 0.10.13'
