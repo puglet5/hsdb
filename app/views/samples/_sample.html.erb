@@ -1,0 +1,22 @@
+<tr class="border-b hover:bg-gray-200">
+  <td class="py-4 pl-6">
+    <%= sample.id %>
+  </td>
+  <th class="py-4 px-6 font-bold text-gray-700 whitespace-nowrap">
+    <%= link_to sample, class: "link" do %>
+      <%= sample&.title %>
+    <% end %>
+  </th>
+  <td class="py-4 px-6">
+    <%= sample.category.humanize %>
+  </td>
+  <td class="py-4 px-6">
+    <%= sample.compound %>
+  </td>
+  <td class="py-4 px-6">
+    <%= sample.spectra.count %>
+  </td>
+  <td class="py-4 px-6">
+    <%= time_ago_in_words(sample.created_at) %> ago
+  </td>
+</tr>

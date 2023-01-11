@@ -16,29 +16,26 @@
     <% end %>
 
     <% if @samples&.count > 0 %>
-      <div class="grid grid-cols-3 gap-4">
-        <% @samples.each do |sample| %>
-          <div class="bg-white border border-gray-200 rounded-lg shadow-md block max-w-screen-xl">
-            <div class="md:flex md:items-center md:space-y-0 md:space-x-8">
-              <div class="w-full mb-4 m-4">
-                <%= render SampleCategoryBadgeComponent.new(category: sample.category, cls: "!my-auto").with_content(sample.category.humanize.downcase) %>
-                <div id="title" class="mt-4">
-                  <%= link_to sample do %>
-                    <p class="text-lg font-medium">
-                      <%= sample.title %>
-                    </p>
-                  <% end %>
-
-                  <p class="font-normal text-sm text-gray-500 mr-8">
-                    <%= sample.description.to_plain_text.truncate(100) %>
-                  </p>
-                </div>
-              </div>
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        <% end %>
+      <div class="py-2 px-4 mx-auto max-w-screen-xl text-center">
+        <div class="overflow-x-auto relative rounded-lg border">
+          <table class="w-full text-sm text-left text-gray-500">
+            <thead>
+              <tr>
+                <th scope="col" class="py-3 pl-6">#</th>
+                <th scope="col" class="py-3 px-6">Title</th>
+                <th scope="col" class="py-3 px-6">Category</th>
+                <th scope="col" class="py-3 px-6">Compound</th>
+                <th scope="col" class="py-3 px-6">Files</th>
+                <th scope="col" class="py-3 px-6">Added</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white border-b">
+              <%=  render @samples %>
+            </tbody>
+          </table>
+        </div>
       </div>
+
     <% else %>
       <div class="relative p-8 text-center bg-white rounded-lg border border-gray-200">
         <h2 class="text-2xl font-medium">
