@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
-  # before_action :doorkeeper_authorize!
+  before_action :doorkeeper_authorize!
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
   respond_to :json
