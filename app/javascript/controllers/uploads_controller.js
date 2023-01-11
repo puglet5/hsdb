@@ -10,7 +10,7 @@ export default class extends Controller {
 
   static values = {
     filetype: String,
-    allowedfiletypes: String,
+    allowedfiletypes: Array,
     allowmultiple: Boolean,
     thumbnails: Boolean
   }
@@ -31,7 +31,7 @@ export default class extends Controller {
         allowMultipleUploads: this.allowmultipleValue,
         allowMultipleUploadBatches: this.allowmultipleValue,
         restrictions: {
-          allowedFileTypes: this.allowedfiletypesValue ? [this.allowedfiletypesValue] : null,
+          allowedFileTypes: this.allowedfiletypesValue.length ? this.allowedfiletypesValue : null,
           maxNumberOfFiles: this.allowmultipleValue ? null : 1
         },
       })

@@ -81,7 +81,7 @@
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
-                  uploads_allowedfiletypes_value: "text/*",
+                  uploads_allowedfiletypes_value: ["text/*", ".dpt"],
                   uploads_allowmultiple_value: true,
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
