@@ -31,6 +31,6 @@ class Spectrum < RsdbRecord
 
   after_commit :parse_json, on: %i[create update]
 
-  validates :file, blob: { content_type: %r{\Atext/.*\z} }
-  validates :settings, blob: { content_type: %r{\Atext/.*\z} }
+  validates :file, blob: { content_type: ['text/*', 'application/octet-stream'] }
+  validates :settings, blob: { content_type: ['text/*', 'application/octet-stream'] }
 end
