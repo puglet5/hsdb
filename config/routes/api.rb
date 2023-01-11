@@ -7,6 +7,7 @@ namespace 'api' do
     end
     resources :uploads
     resources :samples
+    resources :spectra
   end
 end
 scope 'api' do
