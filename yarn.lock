@@ -683,11 +683,11 @@ __metadata:
     chart.js: ^4.1.2
     cssnano: ^5.1.14
     cuid: ^2.1.8
-    d3: ^7.8.0
+    d3: ^7.8.1
     esbuild: ^0.16.16
     esbuild-rails: ^1.0.3
     eslint: ^8.31.0
-    flowbite: 1.6.0
+    flowbite: 1.6.1
     flowbite-datepicker: ^1.2.2
     jquery: ^3.6.3
     photoswipe: ^5.3.4
@@ -1485,9 +1485,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3@npm:^7.8.0":
-  version: 7.8.0
-  resolution: "d3@npm:7.8.0"
+"d3@npm:^7.8.1":
+  version: 7.8.1
+  resolution: "d3@npm:7.8.1"
   dependencies:
     d3-array: 3
     d3-axis: 3
@@ -1519,7 +1519,7 @@ __metadata:
     d3-timer: 3
     d3-transition: 3
     d3-zoom: 3
-  checksum: 383d2c8aa6a66f3a6c6977b629de8fa1bf3bce829b15c4a769a59096691730a39e7763eb17b0ff4abbf4d1b577212160d7e5d5f1da35591e5ef5399e8398cefa
+  checksum: 14a741cfc98d8c6838fd442af1fc7e91c550f4f6b8dd4b05d67f82e0234be5607ea28416c0b5892c7d1b7b828971a7e67514115529ef09c4c30ff24bb3ca05b1
   languageName: node
   linkType: hard
 
@@ -2090,13 +2090,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.6.0":
-  version: 1.6.0
-  resolution: "flowbite@npm:1.6.0"
+"flowbite@npm:1.6.1":
+  version: 1.6.1
+  resolution: "flowbite@npm:1.6.1"
   dependencies:
     "@popperjs/core": ^2.9.3
     mini-svg-data-uri: ^1.4.3
-  checksum: 13e84a1fe638f3412aa7291a84628c2037456cc1ca2d5b08f6072a0424290cf2fba20f60a0497f0484e5ed3d4de89907f49161f92b7bb8c0efd424398533da48
+  checksum: 757dd06d869b36badb17ee8676819204c825b1350fd2984963ace84e63480ad82361eea5603a2aae611a6a65ad7d6f0072439fa15e908fbfff726fe1f28fc60e
   languageName: node
   linkType: hard
 
