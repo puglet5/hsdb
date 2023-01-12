@@ -99,11 +99,19 @@
         <% end %>
       </div>
 
-      <div id="metadata">
-        <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
-        <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: "input->textarea#resize", textarea_target: "input" }, v: JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata) %>
-        <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
+      <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700").with_content("Metadata") %>
+      <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+      <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: (JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata)  } %>
+
+      <div class="ml-2">
+
+        <% unless JSON.is_json?(@sample.metadata) %>
+          <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
+        <% end %>
+        <%= render Forms::PHelperComponent.new(cls: "") do %>
+          Enter metadata to store additional fields in JSON format. Learn
+          <a href="https://www.json.org/json-en.html" class="font-bold hover:underline">more</a>.
+        <% end %>
       </div>
 
       <div class="flex mt-4">
