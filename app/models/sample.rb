@@ -46,7 +46,6 @@ class Sample < RsdbRecord
 
   validates :title, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
-  validate :json_validity
 
   after_commit :parse_json, on: %i[create update]
 
