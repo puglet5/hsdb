@@ -40,7 +40,7 @@ gem 'redis', '~> 5.0'
 gem 'rolify', '~> 6.0' # user roles
 gem 'rswag-api', '~> 2.5', '>= 2.5.1' # api testing and documentation
 gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
-gem 'sidekiq', '~> 7.0' # background jobs
+gem 'sidekiq', '< 7.0' # background jobs
 gem 'simple_form', '~> 5.1' # form helpers
 gem 'stimulus-rails', '~> 1.1'
 gem 'turbo-rails', '~> 1.1'
