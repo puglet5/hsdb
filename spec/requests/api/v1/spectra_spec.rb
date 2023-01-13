@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::SamplesController do
+RSpec.describe Api::V1::SpectraController do
   before(:each) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -11,17 +11,18 @@ RSpec.describe Api::V1::SamplesController do
   let(:application) { FactoryBot.create(:application) }
   let(:user)        { FactoryBot.create(:user) }
   let(:sample)      { FactoryBot.create(:sample, user: user) }
+  let(:spectrum)    { FactoryBot.create(:spectrum, sample: sample) }
   let(:token)       { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
 
   before(:each) do
-    @serializer = SampleSerializer.new(sample)
+    @serializer = SpectrumSerializer.new(spectrum)
     @serialization = ActiveModelSerializers::Adapter.create(@serializer)
   end
 
   describe 'GET #index' do
     context 'when unauthorized' do
       it 'fails with HTTP 401' do
-        get '/api/v1/samples'
+        get '/api/v1/spectra'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -30,10 +31,10 @@ RSpec.describe Api::V1::SamplesController do
       subject { JSON.parse(@serialization.to_json) }
 
       it 'succeeds' do
-        sample.save!
-        get '/api/v1/samples', params: {}, headers: { Authorization: "Bearer #{token.token}" }
+        spectrum.save!
+        get '/api/v1/spectra', params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject['sample']).to eq(JSON.parse(response.body)['samples'].first)
+        expect(subject['spectrum']).to eq(JSON.parse(response.body)['spectra'].first)
       end
     end
   end
@@ -41,7 +42,7 @@ RSpec.describe Api::V1::SamplesController do
   describe 'GET #show' do
     context 'when unauthorized' do
       it 'fails with HTTP 401' do
-        get '/api/v1/samples/1'
+        get '/api/v1/spectra/1'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -50,7 +51,7 @@ RSpec.describe Api::V1::SamplesController do
       subject { JSON.parse(@serialization.to_json) }
 
       it 'succeeds' do
-        get "/api/v1/samples/#{sample.id}", params: {}, headers: { Authorization: "Bearer #{token.token}" }
+        get "/api/v1/spectra/#{spectrum.id}", params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
         expect(subject).to eq(JSON.parse(response.body))
       end

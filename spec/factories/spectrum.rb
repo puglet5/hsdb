@@ -14,26 +14,10 @@
 #  range      :integer          default("ir"), not null
 #  metadata   :jsonb            not null
 #
-class SpectrumSerializer < ActiveModel::Serializer
-  include Rails.application.routes.url_helpers
 
-  def file_url
-    return nil unless object.file.attached?
-
-    rails_blob_path(object&.file, only_path: true)
+FactoryBot.define do
+  factory :spectrum do
+    association :sample, factory: :sample, strategy: :build
+    metadata { '{"test_key": "test_value"}' }
   end
-
-  def filename
-    object&.file&.filename
-  end
-
-  class SampleSerializer < ActiveModel::Serializer
-    attributes :id, :title
-  end
-
-  attributes :id, :format, :status, :category, :range, :metadata
-  attributes :file_url
-  attributes :filename
-
-  belongs_to :sample, serializer: SampleSerializer
 end
