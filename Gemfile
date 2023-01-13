@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.3'
 
+gem 'active_model_serializers', '~> 0.10.13'
 gem 'active_record_extended', '~> 3.0'
 gem 'active_storage-send_zip', '~> 0.3.4'
 gem 'activestorage-validator', '~> 0.2.2'
@@ -99,5 +100,3 @@ group :development, :test do
   gem 'rspec-rails', '~> 6'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
-
-gem 'active_model_serializers', '~> 0.10.13'
