@@ -24,6 +24,9 @@ end
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
+  config.include ActiveModelSerializers::Test::Schema
+  config.include ActiveModelSerializers::Test::Serializer
+
   # HSDB
   config.before(:suite) do
     DatabaseCleaner[:active_record, db: :primary]

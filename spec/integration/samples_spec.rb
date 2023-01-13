@@ -34,15 +34,29 @@ RSpec.describe 'Samples API' do
       response '200', 'ok' do
         schema type: :object,
                properties: {
-                 id: { type: :integer },
-                 title: { type: :string },
-                 user_id: { type: :integer },
-                 slug: { type: :string },
-                 created_at: { type: :string },
-                 updated_at: { type: :string },
-                 metadata: { type: :object }
+                 sample: {
+                   id: { type: :integer },
+                   title: { type: :string },
+                   sku: { type: :string },
+                   metadata: { type: :object },
+                   processing_status: { type: :integer },
+                   category: { type: :string },
+                   origin: { type: :string },
+                   owner: { type: :string },
+                   compound: { type: :string },
+                   survey_date: { type: :string },
+                   spectra_count: { type: :integer },
+                   documents_count: { type: :integer },
+                   images_count: { type: :integer },
+                   user: {
+                     id: { type: :integer },
+                     email: { type: :string },
+                     first_name: { type: :string },
+                     last_name: { type: :string }
+                   }
+                 }
                },
-               required: %w[id title user_id metadata]
+               required: %w[sample]
 
         let(:application) { FactoryBot.create(:application) }
         let(:user)        { FactoryBot.create(:user) }
