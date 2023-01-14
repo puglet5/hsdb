@@ -47,7 +47,7 @@
         </div>
       <% end %>
 
-      <div class="grid grid-cols-2 mb-6 space-x-4">
+      <div id="survey_date" class="grid grid-cols-2 mb-6 space-x-4">
         <div class="mb-4">
           <%= tag.div data: { controller: "datepicker" } do %>
             <%= render Forms::LabelComponent.new().with_content("Survey date") %>
