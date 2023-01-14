@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.fdescribe 'Spectra API' do
+RSpec.describe 'Spectra API' do
   path '/api/v1/spectra' do
     get 'Lists spectra' do
       tags 'Spectra'

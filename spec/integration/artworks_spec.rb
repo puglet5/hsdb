@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.fdescribe 'Artworks API' do
+RSpec.describe 'Artworks API' do
   path '/api/v1/artworks' do
     get 'Lists artworks' do
       tags 'Artworks'

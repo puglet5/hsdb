@@ -27,6 +27,8 @@ RSpec.describe Api::V1::ArtworksController do
     end
 
     context 'when authorized' do
+      subject { JSON.parse(@serialization.to_json) }
+
       it 'succeeds' do
         artwork.save!
         get '/api/v1/artworks', params: {}, headers: { Authorization: "Bearer #{token.token}" }
