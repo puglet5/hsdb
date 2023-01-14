@@ -6,8 +6,15 @@
 
 ### Locally
 
+Initialize git submodules
+```bash
+git submodule update --init
+```
 
-
+Enable caching in development
+```bash
+bin/rails dev:cache
+```
 
 ### in Docker
 
