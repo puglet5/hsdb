@@ -15,11 +15,11 @@
         </div>
         <div class="overflow-auto p-6 space-y-2 max-h-1/2">
           <p class="text-base leading-relaxed text-gray-500">
-            <%= upload.thumbnail.filename %>
+            <%= artwork.thumbnail.filename %>
           </p>
-          <%= image_tag upload.thumbnail.variant(resize: '900x600').processed.url %>
+          <%= image_tag artwork.thumbnail.variant(resize: '900x600').processed.url %>
           <p class="text-base leading-relaxed text-gray-500 break-words">
-            <%= upload.thumbnail.metadata %>
+            <%= artwork.thumbnail.metadata %>
           </p>
         </div>
       </div>

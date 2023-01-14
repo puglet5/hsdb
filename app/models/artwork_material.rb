@@ -2,18 +2,15 @@
 
 # == Schema Information
 #
-# Table name: upload_materials
+# Table name: artwork_materials
 #
 #  id          :bigint           not null, primary key
-#  upload_id   :bigint           not null
+#  artwork_id   :bigint           not null
 #  material_id :bigint           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-
-RSpec.describe UploadMaterial, type: :model do
-  describe 'associations' do
-    it { should belong_to(:material) }
-    it { should belong_to(:upload) }
-  end
+class ArtworkMaterial < ApplicationRecord
+  belongs_to :artwork
+  belongs_to :material
 end

@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Style < ApplicationRecord
-  has_many :uploads, dependent: nil
+  has_many :artworks, dependent: nil
 
   validates :name, presence: true, uniqueness: true
 end

@@ -1,10 +1,10 @@
-<%= render "shared/errors", obj: @upload %>
+<%= render "shared/errors", obj: @artwork %>
 <section class="bg-gray-50">
   <div class="container p-20 mx-auto max-w-screen-xl">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
-      New upload
+      New artwork
     </div>
-    <%= simple_form_for @upload, validate: true do |f| %>
+    <%= simple_form_for @artwork, validate: true do |f| %>
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
 
@@ -15,12 +15,12 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
-          <%= f.input :status, default: @upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
-          <%= f.input :style_id, default: @upload.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
         <div>
@@ -65,7 +65,7 @@
           <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
         </div>
 
-        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
+        <%= tag.div class: "row-span-2", data: { uppy: "artwork[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
           <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
             <p class="font-medium text-center" id="uppy-text">
@@ -129,7 +129,7 @@
 
       <div class="flex">
         <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
-        <%= render Forms::BackButtonComponent.new(path: :uploads).with_content("Back") %>
+        <%= render Forms::BackButtonComponent.new(path: :artworks).with_content("Back") %>
       </div>
     <% end %>
 

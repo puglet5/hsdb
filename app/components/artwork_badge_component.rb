@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UploadBadgeComponent < ViewComponent::Base
+class ArtworkBadgeComponent < ViewComponent::Base
   attr_reader :status
 
   def initialize(status: '', cls: '')

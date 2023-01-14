@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
         expect(valid_user.settings(:processing).enabled).to eq(false)
       end
 
-      it 'has default settings for image uploads' do
+      it 'has default settings for image artworks' do
         expect(valid_user.settings(:uploading).thumbnails).to eq(true)
       end
     end
@@ -136,7 +136,7 @@ RSpec.describe User, type: :model do
 
   describe 'Associations' do
     it { should have_many(:samples) }
-    it { should have_many(:uploads) }
+    it { should have_many(:artworks) }
     it { should have_many(:replies).through(:discussions) }
     it { should have_many(:discussions) }
     it { should accept_nested_attributes_for(:roles) }

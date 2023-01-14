@@ -25,8 +25,8 @@ RSpec.describe Material, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:upload_materials) }
-    it { should have_many(:uploads) }
+    it { should have_many(:artwork_materials) }
+    it { should have_many(:artworks) }
   end
 
   describe 'validations' do

@@ -1,28 +1,28 @@
-<% if @upload.thumbnail.attached? %>
+<% if @artwork.thumbnail.attached? %>
   <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
-    <%= image_tag original_or_variant(@upload.thumbnail, @upload.thumbnail.variant(:banner)), class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
+    <%= image_tag original_or_variant(@artwork.thumbnail, @artwork.thumbnail.variant(:banner)), class: "absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" %>
   </div>
 <% end %>
 
 <section class="pb-20 mx-auto mb-20 text-gray-700 bg-gray-50 border">
   <div class="container px-10 mx-auto max-w-screen-xl">
     <div class="my-10 text-center">
-      <%= render UploadBadgeComponent.new(status: @upload.status).with_content(@upload.status.humanize.downcase) %>
-      <h5 class="text-2xl font-extrabold"><%= @upload.title %></h5>
-      <p><%= @upload.description %></p>
+      <%= render ArtworkBadgeComponent.new(status: @artwork.status).with_content(@artwork.status.humanize.downcase) %>
+      <h5 class="text-2xl font-extrabold"><%= @artwork.title %></h5>
+      <p><%= @artwork.description %></p>
     </div>
     <div class="flex justify-between mb-4 border-b">
       <label class="block text-lg font-medium text-gray-900">Info</label>
       <div class="flex my-auto mr-4">
-        <% if policy(@upload).update? %>
-          <%= link_to [:edit, @upload] do %>
+        <% if policy(@artwork).update? %>
+          <%= link_to [:edit, @artwork] do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           <% end %>
         <% end %>
-        <% if policy(@upload).destroy? %>
-          <%= link_to @upload, data: { turbo_method: :delete, turbo_confirm: "Delete upload?" } do %>
+        <% if policy(@artwork).destroy? %>
+          <%= link_to @artwork, data: { turbo_method: :delete, turbo_confirm: "Delete artwork?" } do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -34,9 +34,9 @@
       <div class="grid grid-cols-12 pb-4">
         <div class="col-span-6 border-r">
           <div class="m-4">
-            <%= @upload.body %>
+            <%= @artwork.body %>
           </div>
-          <%= link_to [:uploads], class: "block my-auto text-sm font-medium text-gray-500" do %>
+          <%= link_to [:artworks], class: "block my-auto text-sm font-medium text-gray-500" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
             </svg>
@@ -68,7 +68,7 @@
         <div class="col-span-3">
           <div class="mx-4">
             <h4 class="mb-4 font-medium text-l">Metadata</h4>
-            <%= tag.div data: { controller: 'metadata', "metadata-json-value": @upload.metadata } do %>
+            <%= tag.div data: { controller: 'metadata', "metadata-json-value": @artwork.metadata } do %>
               <div class="tree">
               </div>
             <% end %>
@@ -76,12 +76,12 @@
         </div>
       </div>
     </div>
-    <% if @upload.has_images? %>
+    <% if @artwork.has_images? %>
       <div class="relative my-10 mx-auto w-full md:container md:mx-auto">
         <div class="flex justify-between mb-4 border-b">
           <div class="flex">
-            <label class="block text-lg font-medium text-gray-900">Images (<%= @upload.image_count %>)</label>
-            <%= link_to upload_path(format: :zip), class:"my-auto ml-2" do %>
+            <label class="block text-lg font-medium text-gray-900">Images (<%= @artwork.image_count %>)</label>
+            <%= link_to artwork_path(format: :zip), class:"my-auto ml-2" do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
               </svg>
@@ -91,7 +91,7 @@
             <%# <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">Click on images to zoom</p> %>
           </div>
         </div>
-        <%= turbo_frame_tag :images_grid, src: images_grid_upload_path, loading: "lazy" do %>
+        <%= turbo_frame_tag :images_grid, src: images_grid_artwork_path, loading: "lazy" do %>
           <div class="grid grid-cols-5 gap-2">
             <% 20.times do %>
               <%= tag.div class: "relative w-full h-full py-auto aspect-4/3" do %>
@@ -109,10 +109,10 @@
     <div class="relative my-10 mx-auto w-full md:container md:mx-auto" id="gallery">
       <div class="flex justify-between mb-4 border-b">
         <div class="flex">
-          <label class="block text-lg font-medium text-gray-900">Images (<%= @upload.image_count %>)</label>
+          <label class="block text-lg font-medium text-gray-900">Images (<%= @artwork.image_count %>)</label>
         </div>
       </div>
-      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">There are no images yet, click edit button in ther right top corner to upload</p>
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">There are no images yet, click edit button in ther right top corner to artwork</p>
     </div>
   <% end %>
 </section>

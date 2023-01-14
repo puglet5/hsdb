@@ -1,0 +1,5 @@
+<% @artworks.each do |artwork| %>
+  <% artwork.images.each do |img| %>
+    <%= image_tag img, class: "w-40" %>
+  <% end %>
+<% end %>

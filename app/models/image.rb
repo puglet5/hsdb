@@ -5,7 +5,7 @@
 # Table name: images
 #
 #  id         :bigint           not null, primary key
-#  upload_id  :bigint           not null
+#  artwork_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default(0)
@@ -15,7 +15,7 @@
 class Image < ApplicationRecord
   include ProcessImage
 
-  belongs_to :upload, inverse_of: :images, touch: true
+  belongs_to :artwork, inverse_of: :images, touch: true
 
   enum status: { not_set: 0, accepted: 1, on_review: 2 }, _default: :not_set
   enum category: { vis: 0, ir: 1, uv: 2 }, _default: :vis

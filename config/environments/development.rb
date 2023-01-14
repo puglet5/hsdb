@@ -13,7 +13,7 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'PublicActivity::Activity', association: :owner
-    Bullet.add_safelist type: :unused_eager_loading, class_name: 'Upload', association: :images_attachments
+    Bullet.add_safelist type: :unused_eager_loading, class_name: 'Artwork', association: :images_attachments
     Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment', association: :blob
   end
 

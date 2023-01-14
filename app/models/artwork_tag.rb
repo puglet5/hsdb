@@ -2,15 +2,15 @@
 
 # == Schema Information
 #
-# Table name: upload_tags
+# Table name: artwork_tags
 #
 #  id         :bigint           not null, primary key
-#  upload_id  :bigint           not null
+#  artwork_id  :bigint           not null
 #  tag_id     :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class UploadTag < ApplicationRecord
-  belongs_to :upload
+class ArtworkTag < ApplicationRecord
+  belongs_to :artwork
   belongs_to :tag
 end
