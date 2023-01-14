@@ -5,7 +5,7 @@
 # Table name: artwork_tags
 #
 #  id         :bigint           not null, primary key
-#  artwork_id  :bigint           not null
+#  artwork_id :bigint           not null
 #  tag_id     :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
