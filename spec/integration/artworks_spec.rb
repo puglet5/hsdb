@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Artworks API' do
+RSpec.fdescribe 'Artworks API' do
   path '/api/v1/artworks' do
     get 'Lists artworks' do
       tags 'Artworks'
@@ -34,17 +34,31 @@ RSpec.describe 'Artworks API' do
       response '200', 'ok' do
         schema type: :object,
                properties: {
-                 id: { type: :integer },
-                 title: { type: :string },
-                 description: { type: :string },
-                 created_at: { type: :string },
-                 updated_at: { type: :string },
-                 user_id: { type: :integer },
-                 slug: { type: :string },
-                 status: { type: :string },
-                 metadata: { type: :object }
+                 artwork: {
+                   id: { type: :integer },
+                   title: { type: :string },
+                   description: { type: :string },
+                   date: { type: :string },
+                   survey_date: { type: :date },
+                   status: { type: :string },
+                   metadata: { type: :object },
+                   user: {
+                     id: { type: :integer },
+                     emain: { type: :string },
+                     first_name: { type: :string },
+                     last_name: { type: :string }
+                   },
+                   style: {
+                     id: { type: :integer },
+                     name: { type: :string }
+                   },
+                   tags: { type: :array },
+                   materials_count: { type: :integer },
+                   images_count: { type: :integer },
+                   images: { type: :array }
+                 }
                },
-               required: %w[id title description]
+               required: %w[artwork]
 
         let(:application) { FactoryBot.create(:application) }
         let(:user)        { FactoryBot.create(:user) }
