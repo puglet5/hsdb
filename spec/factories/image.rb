@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :image do
-    association :upload, factory: :upload, strategy: :build
+    association :artwork, factory: :artwork, strategy: :build
   end
 end

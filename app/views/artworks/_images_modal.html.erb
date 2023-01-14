@@ -10,7 +10,7 @@
               Attached images
             </h3>
             <p class="text-sm leading-relaxed text-gray-500">
-              Delete images by clicking the cross icon, update upload to save chanes
+              Delete images by clicking the cross icon, update artwork to save chanes
             </p>
           </div>
           <button type="button" class="inline-flex items-center p-1.5 ml-auto text-sm text-gray-400 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-200" data-modal-toggle="images-modal" data-action="click->modal#toggle">
@@ -22,7 +22,7 @@
           <div class="grid overflow-auto grid-cols-5 gap-y-1 max-h-1/2">
             <% @images&.each do |image| %>
               <% if image.image.persisted? %>
-                <%= tag.div data: { controller: "purge", purge_target: "div", purge_id_value: image.signed_id, purge_classname_value: @upload.class.name.demodulize.downcase }, class: "m-2" do %>
+                <%= tag.div data: { controller: "purge", purge_target: "div", purge_id_value: image.signed_id, purge_classname_value: @artwork.class.name.demodulize.downcase }, class: "m-2" do %>
                   <div class="relative" id="modal-image-container">
 
                     <%= tag.div class: "absolute top-0 left-0 z-0 flex items-center justify-center w-full h-full bg-gray-300 rounded", data: { purge_target: "placeholder" } do %>

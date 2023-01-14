@@ -10,8 +10,8 @@
 #  updated_at :datetime         not null
 #
 class Material < ApplicationRecord
-  has_many :upload_materials, dependent: :destroy
-  has_many :uploads, through: :upload_materials
+  has_many :artwork_materials, dependent: :destroy
+  has_many :artworks, through: :artwork_materials
 
   validates :name, presence: true, uniqueness: true
 end

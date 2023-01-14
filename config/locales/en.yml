@@ -4,7 +4,7 @@ en:
   nav:
     home: Home
     about: About
-    uploads: Uploads
+    artworks: Artworks
     forum: Forum
   auth:
     login: Login
@@ -12,10 +12,10 @@ en:
     logout: Logout
   footer:
     itmo: ITMO University
-  uploads:
+  artworks:
     index:
-      upload: Upload
-      new: New Upload
+      artwork: Artwork
+      new: New Artwork
   events: Events
   enter-a-url: Enter a URL…
   unlink: Unlink

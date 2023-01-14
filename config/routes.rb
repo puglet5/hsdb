@@ -23,14 +23,14 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'uploads/resources/images', to: 'uploads#images'
+  get 'artworks/resources/images', to: 'artworks#images'
   resources :categories
   resources :discussions do
     resources :replies
   end
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  resources :uploads do
+  resources :artworks do
     member do
       patch :update_status
       get :images_grid

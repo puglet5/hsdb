@@ -1,8 +1,8 @@
-<% if uploads&.count > 0 && query.result.count != 0 %>
+<% if artworks&.count > 0 && query.result.count != 0 %>
   <div class="mt-8">
     <div class="space-y-8">
-      <% cache uploads do %>
-        <%= render uploads %>
+      <% cache artworks do %>
+        <%= render artworks %>
       <% end %>
     </div>
     <% if pagy.pages > 1 %>
@@ -26,7 +26,7 @@
       There's nothing here...
     </h2>
     <p class="mt-4 text-sm text-gray-500">
-      New uploads will appear here
+      New artworks will appear here
     </p>
   </div>
 <% end %>

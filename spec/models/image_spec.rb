@@ -5,7 +5,7 @@
 # Table name: images
 #
 #  id         :bigint           not null, primary key
-#  upload_id  :bigint           not null
+#  artwork_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default(0)
@@ -14,8 +14,8 @@
 #
 
 RSpec.describe Image, type: :model do
-  let(:upload) { create(:upload) }
-  let(:valid_image) { build(:image, upload: upload) }
+  let(:artwork) { create(:artwork) }
+  let(:valid_image) { build(:image, artwork: artwork) }
 
   describe 'ActiveStorage attachment type validations' do
     shared_examples 'single image of valid types' do |filetype|
@@ -49,6 +49,6 @@ RSpec.describe Image, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:upload) }
+    it { should belong_to(:artwork) }
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe UploadPolicy do
-  let(:upload) { build(:upload, user: user) }
+describe ArtworkPolicy do
+  let(:artwork) { build(:artwork, user: user) }
 
-  subject { described_class.new(user, upload) }
+  subject { described_class.new(user, artwork) }
 
   context 'unauthorized' do
     let(:user) { nil }
@@ -19,7 +19,7 @@ describe UploadPolicy do
   context 'authorized, default role, not an author' do
     let(:user) { create(:default_user) }
     let(:another_user) { create(:default_user) }
-    subject { described_class.new(another_user, upload) }
+    subject { described_class.new(another_user, artwork) }
 
     it 'expects user not to be nil' do
       expect(another_user).to_not be_nil
@@ -30,7 +30,7 @@ describe UploadPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(another_user.author?(upload)).to eq(false)
+      expect(another_user.author?(artwork)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create index show images]) }
@@ -39,7 +39,7 @@ describe UploadPolicy do
 
   context 'authorized, default role, is an author' do
     let(:user) { create(:default_user) }
-    subject { described_class.new(user, upload) }
+    subject { described_class.new(user, artwork) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -50,7 +50,7 @@ describe UploadPolicy do
     end
 
     it 'expects user to be an author' do
-      expect(user.author?(upload)).to eq(true)
+      expect(user.author?(artwork)).to eq(true)
     end
 
     it { is_expected.to permit_actions(%i[create update update_status destroy purge_attachment index show images]) }
@@ -59,7 +59,7 @@ describe UploadPolicy do
   context 'authorized, admin' do
     let(:user) { create(:default_user) }
     let(:admin) { create(:admin_user) }
-    subject { described_class.new(user, upload) }
+    subject { described_class.new(user, artwork) }
 
     it 'expects user not to be nil' do
       expect(user).to_not be_nil
@@ -70,7 +70,7 @@ describe UploadPolicy do
     end
 
     it 'expects user not to be an author' do
-      expect(admin.author?(upload)).to eq(false)
+      expect(admin.author?(artwork)).to eq(false)
     end
 
     it { is_expected.to permit_actions(%i[create update update_status destroy purge_attachment index show images]) }

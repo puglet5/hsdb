@@ -10,7 +10,7 @@
   </div>
 
   <div class="mb-4">
-    <%= render Forms::LabelComponent.new().with_content("Uploads per page") %>
+    <%= render Forms::LabelComponent.new().with_content("Artworks per page") %>
     <%= fields_for "user[settings[pagination]]" do |sf| %>
       <%= sf.number_field :per, { min: 5, max: 50, value: @user.settings(:pagination).per, class: "block w-1/3 text-sm text-gray-900 border border-gray-300 rounded-lg select-none bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 ", onKeyDown: "return false"} %>
     <% end %>

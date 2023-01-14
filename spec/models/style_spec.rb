@@ -14,7 +14,7 @@ RSpec.describe Style, type: :model do
   describe 'associations' do
     subject { Material.new(name: 'Test Material') }
 
-    it { should have_many(:uploads) }
+    it { should have_many(:artworks) }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
   end

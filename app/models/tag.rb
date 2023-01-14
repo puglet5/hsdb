@@ -10,6 +10,6 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
-  has_many :upload_tags, dependent: :destroy
-  has_many :uploads, through: :upload_tags
+  has_many :artwork_tags, dependent: :destroy
+  has_many :artworks, through: :artwork_tags
 end

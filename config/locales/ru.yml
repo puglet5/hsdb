@@ -4,7 +4,7 @@ ru:
   nav:
     home: "Главная"
     about: "Контакты"
-    uploads: "Загрузки"
+    artworks: "Загрузки"
     forum: "Форум"
   auth:
     login: "Войти"
@@ -12,7 +12,7 @@ ru:
     logout: "Выйти"
   footer:
     itmo: "Университет ИТМО"
-  uploads:
+  artworks:
     index:
-      uploads: "Загрузки"
+      artworks: "Загрузки"
       new: "Загрузить"

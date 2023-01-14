@@ -46,10 +46,10 @@
             </li>
           <% end %>
 
-          <%= render TooltipComponent.new(tooltip: "Uploads", cls: "p-0 m-0 border-0", user: current_user) do %>
+          <%= render TooltipComponent.new(tooltip: "Artworks", cls: "p-0 m-0 border-0", user: current_user) do %>
             <li class="p-0 bg-transparent text-primary-300">
-              <%= link_to :uploads do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 <%= active_style :uploads, "!text-primary-500" %>" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <%= link_to :artworks do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 <%= active_style :artworks, "!text-primary-500" %>" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M3 21v-4a4 4 0 1 1 4 4h-4"></path>
                   <path d="M21 3a16 16 0 0 0 -12.8 10.2"></path>

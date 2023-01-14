@@ -35,7 +35,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :discussions, dependent: :nullify
-  has_many :uploads, dependent: :nullify
+  has_many :artworks, dependent: :nullify
   has_many :replies, through: :discussions
   has_many :samples, dependent: :nullify
 

@@ -1,10 +1,10 @@
-<%= render "shared/errors", obj: @upload %>
+<%= render "shared/errors", obj: @artwork %>
 <section class="bg-gray-50">
   <div class="container p-20 mx-auto max-w-screen-xl">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
-      Edit upload
+      Edit artwork
     </div>
-    <%= simple_form_for @upload, validate: true, data: {turbo: false} do |f| %>
+    <%= simple_form_for @artwork, validate: true, data: {turbo: false} do |f| %>
 
       <!-- Attachment retention on form resubmit -->
       <% f.object.documents.each do |file| %>
@@ -26,12 +26,12 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
-          <%= f.input :status, default: @upload.status, collection: Upload.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
-          <%= f.input :style_id, default: @upload.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
         <div>
@@ -76,7 +76,7 @@
             <div class="w-full">
               <%= render Forms::FileInputComponent.new(form: f, field: :thumbnail, required: false, direct: true, multiple: false, accept: "image/*", cls: "") %>
             </div>
-            <% if @upload.thumbnail.attached? && @upload.thumbnail.persisted? %>
+            <% if @artwork.thumbnail.attached? && @artwork.thumbnail.persisted? %>
               <%= tag.div data: { controller: "modal" } do %>
                 <%= tag.div data: { action:"click->modal#toggle" } do %>
                   <%= render TooltipComponent.new(tooltip: "Show attached thumbnail", cls: "ml-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100", user: current_user) do %>
@@ -85,14 +85,14 @@
                     </svg>
                   <% end %>
                 <% end %>
-                <%= render "thumbnail_modal", upload: @upload %>
+                <%= render "thumbnail_modal", artwork: @artwork %>
               <% end %>
             <% end %>
           </div>
           <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
         </div>
 
-        <%= tag.div class: "row-span-2", data: { uppy: "upload[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
+        <%= tag.div class: "row-span-2", data: { uppy: "artwork[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
 
           <div class="flex">
@@ -118,7 +118,7 @@
                     </svg>
                   <% end %>
                 <% end %>
-                <%= render "images_modal", upload: @upload %>
+                <%= render "images_modal", artwork: @artwork %>
               <% end %>
             <% end %>
           </div>
@@ -141,7 +141,7 @@
                     </svg>
                   <% end %>
                 <% end %>
-                <%= render "documents_modal", upload: @upload %>
+                <%= render "documents_modal", artwork: @artwork %>
               <% end %>
             <% end %>
           </div>
@@ -153,9 +153,9 @@
 
       <%= render Forms::LabelComponent.new(cls: "mb-4").with_content("Metadata") %>
       <div class="mb-4">
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@upload.metadata) ? JSON.generate(@upload.metadata) : @upload.metadata) %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@artwork.metadata) ? JSON.generate(@artwork.metadata) : @artwork.metadata) %>
 
-        <% unless JSON.is_json?(@upload.metadata) %>
+        <% unless JSON.is_json?(@artwork.metadata) %>
           <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
         <% end %>
         <%= render Forms::PHelperComponent.new(cls: "") do %>
@@ -166,7 +166,7 @@
 
       <div class="flex">
         <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
-        <%= render Forms::BackButtonComponent.new(path: @upload).with_content("Back") %>
+        <%= render Forms::BackButtonComponent.new(path: @artwork).with_content("Back") %>
       </div>
     <% end %>
 

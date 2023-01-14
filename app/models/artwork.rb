@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: uploads
+# Table name: artworks
 #
 #  id           :bigint           not null, primary key
 #  title        :string           not null
@@ -18,13 +18,13 @@
 #  style_id     :bigint
 #  lock_version :integer
 #
-class Upload < ApplicationRecord
+class Artwork < ApplicationRecord
   include Authorship
   include CustomValidations
   include ParseJson
   include ProcessImage
 
-  has_many :images, inverse_of: :upload, dependent: :destroy
+  has_many :images, inverse_of: :artwork, dependent: :destroy
   accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
   has_many :image_attachments, through: :images
 
@@ -35,11 +35,11 @@ class Upload < ApplicationRecord
 
   has_many_attached :documents
 
-  has_many :upload_tags, dependent: :destroy
-  has_many :tags, through: :upload_tags
+  has_many :artwork_tags, dependent: :destroy
+  has_many :tags, through: :artwork_tags
 
-  has_many :upload_materials, dependent: :destroy
-  has_many :materials, through: :upload_materials
+  has_many :artwork_materials, dependent: :destroy
+  has_many :materials, through: :artwork_materials
 
   belongs_to :style, optional: true, touch: true
 

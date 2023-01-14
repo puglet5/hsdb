@@ -2,10 +2,10 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Uploads API' do
-  path '/api/v1/uploads' do
-    get 'Lists uploads' do
-      tags 'Uploads'
+RSpec.describe 'Artworks API' do
+  path '/api/v1/artworks' do
+    get 'Lists artworks' do
+      tags 'Artworks'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, type: :string
 
@@ -24,9 +24,9 @@ RSpec.describe 'Uploads API' do
     end
   end
 
-  path '/api/v1/uploads/{id}' do
-    get 'Retrieves an upload' do
-      tags 'Uploads'
+  path '/api/v1/artworks/{id}' do
+    get 'Retrieves an artwork' do
+      tags 'Artworks'
       produces 'application/json', 'application/xml'
       parameter name: 'id', in: :path, type: :string
       parameter name: 'Authorization', in: :header, type: :string
@@ -50,16 +50,16 @@ RSpec.describe 'Uploads API' do
         let(:user)        { FactoryBot.create(:user) }
         let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
         let(:Authorization) { "Bearer #{token.token}" }
-        let(:upload) { create(:upload) }
-        let(:id) { upload.id }
+        let(:artwork) { create(:artwork) }
+        let(:id) { artwork.id }
 
         run_test!
       end
 
       response '401', 'unauthorized' do
         let(:Authorization) { nil }
-        let(:upload) { create(:upload) }
-        let(:id) { upload.id }
+        let(:artwork) { create(:artwork) }
+        let(:id) { artwork.id }
         run_test!
       end
 

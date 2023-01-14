@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: uploads
+# Table name: artworks
 #
 #  id          :bigint           not null, primary key
 #  title       :string           not null
@@ -18,7 +18,7 @@
 #  style_id    :bigint
 #
 FactoryBot.define do
-  factory :upload do
+  factory :artwork do
     title { 'test title' }
     description { 'test description' }
     body { 'test body' }

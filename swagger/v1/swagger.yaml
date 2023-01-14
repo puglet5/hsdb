@@ -94,11 +94,11 @@ paths:
           description: unauthorized
         '404':
           description: not found
-  "/api/v1/uploads":
+  "/api/v1/artworks":
     get:
-      summary: Lists uploads
+      summary: Lists artworks
       tags:
-      - Uploads
+      - Artworks
       parameters:
       - name: Authorization
         in: header
@@ -109,11 +109,11 @@ paths:
           description: ok
         '401':
           description: unauthorized
-  "/api/v1/uploads/{id}":
+  "/api/v1/artworks/{id}":
     get:
-      summary: Retrieves an uploads
+      summary: Retrieves an artworks
       tags:
-      - Uploads
+      - Artworks
       parameters:
       - name: id
         in: path

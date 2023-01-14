@@ -2,13 +2,13 @@
 
 RSpec.describe Api::V1, type: :routing do
   describe 'routing' do
-    context 'uploads' do
+    context 'artworks' do
       it 'routes to #index' do
-        expect(get: '/api/v1/uploads').to route_to('api/v1/uploads#index')
+        expect(get: '/api/v1/artworks').to route_to('api/v1/artworks#index')
       end
 
       it 'routes to #show' do
-        expect(get: '/api/v1/uploads/1').to route_to('api/v1/uploads#show', id: '1')
+        expect(get: '/api/v1/artworks/1').to route_to('api/v1/artworks#show', id: '1')
       end
     end
 

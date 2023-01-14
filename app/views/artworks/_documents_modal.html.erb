@@ -20,7 +20,7 @@
         </div>
         <div class="overflow-auto p-6 space-y-2 max-h-1/2">
           <ul class="ml-8 list-disc">
-            <% @upload.documents.each do |doc| %>
+            <% @artwork.documents.each do |doc| %>
               <% if doc.persisted? %>
 
                 <%= tag.div data: { controller: "attachment", "attachment-target": "attachment", "attachment-id-value": doc.signed_id }, class: "m-2" do %>
