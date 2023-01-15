@@ -39,7 +39,7 @@ jobs:
       - name: Run security checks
         run: |
           bundle exec bundler-audit --update
-          bundle exec brakeman -q -w2 --skip-files app/jobs/process_csv_job.rb
+          bundle exec brakeman -q -w2
   tests:
       name: Tests
       runs-on: ubuntu-latest
