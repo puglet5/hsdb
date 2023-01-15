@@ -22,12 +22,6 @@ class SamplesController < ApplicationController
     @sample = current_user.samples.build(sample_params)
 
     if @sample.save
-
-      # if sample_params[:files]&.present? && current_user.settings(:processing).enabled == 'true'
-      #   @sample.processing_pending!
-      #   ProcessCsvJob.perform_later current_user, @sample.id
-      # end
-
       redirect_to @sample
       flash.now[:success] = 'Sample was successfully created'
     else

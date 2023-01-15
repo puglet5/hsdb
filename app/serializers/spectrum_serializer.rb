@@ -5,7 +5,7 @@
 # Table name: spectra
 #
 #  id         :bigint           not null, primary key
-#  format     :integer          default("not_set"), not null
+#  format     :integer          default("0"), not null
 #  status     :integer          default("raw"), not null
 #  category   :integer          default("not_set"), not null
 #  sample_id  :bigint           not null

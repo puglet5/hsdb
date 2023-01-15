@@ -11,7 +11,6 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  metadata          :jsonb            not null
-#  processing_status :integer          default(0)
 #  category          :integer          default("not_set"), not null
 #  origin            :string           default(""), not null
 #  owner             :string           default(""), not null

@@ -6,15 +6,13 @@ RSpec.describe '/samples', type: :request do
   let(:valid_attributes) do
     { 'title' => 'Test Sample',
       'user_id' => user.id,
-      'metadata' => '{}',
-      'processing_status' => 1 }
+      'metadata' => '{}' }
   end
 
   let(:invalid_attributes) do
     { 'title' => nil,
       'user_id' => user.id,
-      'metadata' => '{}',
-      'processing_status' => 1 }
+      'metadata' => '{}' }
   end
 
   before :each do
@@ -85,8 +83,7 @@ RSpec.describe '/samples', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        { 'title' => 'Updated Test Sample',
-          'processing_status' => 2 }
+        { 'title' => 'Updated Test Sample' }
       end
 
       it 'updates the requested sample' do
