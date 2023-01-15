@@ -25,7 +25,7 @@ RSpec.fdescribe 'Spectra API' do
   end
 
   path '/api/v1/spectra/{id}' do
-    get 'Retrieves a spectrum' do
+    get 'Retrieves spectrum' do
       tags 'Spectra'
       produces 'application/json', 'application/xml'
       parameter name: 'id', in: :path, type: :string
@@ -35,14 +35,14 @@ RSpec.fdescribe 'Spectra API' do
         schema type: :object,
                properties: {
                  id: { type: :integer },
-                 format: { type: :string },
-                 status: { type: :string },
-                 category: { type: :string },
-                 range: { type: :string },
-                 metadata: { type: :object },
-                 file_url: { type: :string },
-                 filename: { type: :string },
-                 sample: { type: :object }
+                 format: { type: :string, nullable: true },
+                 status: { type: :string, nullable: true },
+                 category: { type: :string, nullable: true },
+                 range: { type: :string, nullable: true },
+                 metadata: { type: :object, nullable: false },
+                 file_url: { type: :string, nullable: true },
+                 filename: { type: :string, nullable: true },
+                 sample: { type: :object, nullable: false }
                },
                required: %w[spectrum]
 
@@ -60,6 +60,7 @@ RSpec.fdescribe 'Spectra API' do
         let(:Authorization) { nil }
         let(:spectrum) { create(:spectrum) }
         let(:id) { spectrum.id }
+
         run_test!
       end
 
@@ -69,20 +70,77 @@ RSpec.fdescribe 'Spectra API' do
         let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
         let(:Authorization) { "Bearer #{token.token}" }
         let(:id) { 'invalid' }
+
+        run_test!
+      end
+    end
+
+    patch 'Updates spectrum' do
+      tags 'Spectra'
+      consumes 'application/json'
+      parameter name: 'id', in: :path, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
+      parameter name: :spectrum, in: :body, schema: {
+        type: :object,
+        properties: {
+          format: { type: :string, nullable: true },
+          status: { type: :string, nullable: true },
+          category: { type: :string, nullable: true },
+          range: { type: :string, nullable: true },
+          metadata: { type: :object, nullable: true },
+          file_url: { type: :string, nullable: true },
+          filename: { type: :string, nullable: true }
+        }
+      }
+
+      response '200', 'spectrum updated' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user)        { FactoryBot.create(:user) }
+        let(:sample) { build(:sample, user: user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:to_be_updated) { create(:spectrum) }
+        let(:id) { to_be_updated.id }
+        let(:spectrum) { { status: 'successful' } }
+
+        run_test!
+      end
+
+      response '404', 'not found' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user)        { FactoryBot.create(:user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:id) { 'invalid' }
+        let(:spectrum) { create(:spectrum) }
+
+        run_test!
+      end
+
+      response '400', 'bad request' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user) { FactoryBot.create(:user) }
+        let(:sample) { build(:sample, user: user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:to_be_updated) { create(:spectrum) }
+        let(:id) { to_be_updated.id }
+        let(:spectrum) { nil }
+
         run_test!
       end
     end
   end
 
   path '/api/v1/spectra' do
-    post 'Creates a spectrum' do
+    post 'Creates spectrum' do
       tags 'Spectra'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, type: :string
       parameter name: :spectrum, in: :body, schema: {
         type: :object,
         properties: {
-          sample_id: { type: :integer }
+          sample_id: { type: :integer, nullable: false }
         },
         required: %w[sample_id]
       }

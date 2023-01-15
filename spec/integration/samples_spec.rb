@@ -38,7 +38,6 @@ RSpec.describe 'Samples API' do
                  title: { type: :string },
                  sku: { type: :string },
                  metadata: { type: :object },
-                 processing_status: { type: :integer },
                  category: { type: :string },
                  origin: { type: :string },
                  owner: { type: :string },

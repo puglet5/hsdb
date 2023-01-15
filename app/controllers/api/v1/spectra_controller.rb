@@ -23,6 +23,16 @@ module Api
         end
       end
 
+      def update
+        @spectrum = Spectrum.find_by(id: params[:id]) or not_found
+
+        if @spectrum.update(spectrum_params)
+          render json: @spectrum, status: :ok
+        else
+          render json: { errors: @spectrum.errors }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def spectrum_params

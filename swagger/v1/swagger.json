@@ -313,9 +313,6 @@
                     "metadata": {
                       "type": "object"
                     },
-                    "processing_status": {
-                      "type": "integer"
-                    },
                     "category": {
                       "type": "string"
                     },
@@ -364,9 +361,6 @@
                     },
                     "metadata": {
                       "type": "object"
-                    },
-                    "processing_status": {
-                      "type": "integer"
                     },
                     "category": {
                       "type": "string"
@@ -437,7 +431,7 @@
         }
       },
       "post": {
-        "summary": "Creates a spectrum",
+        "summary": "Creates spectrum",
         "tags": [
           "Spectra"
         ],
@@ -468,7 +462,8 @@
                 "type": "object",
                 "properties": {
                   "sample_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "nullable": false
                   }
                 },
                 "required": [
@@ -482,7 +477,7 @@
     },
     "/api/v1/spectra/{id}": {
       "get": {
-        "summary": "Retrieves a spectrum",
+        "summary": "Retrieves spectrum",
         "tags": [
           "Spectra"
         ],
@@ -515,28 +510,36 @@
                       "type": "integer"
                     },
                     "format": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "status": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "category": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "range": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "metadata": {
-                      "type": "object"
+                      "type": "object",
+                      "nullable": false
                     },
                     "file_url": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "filename": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "sample": {
-                      "type": "object"
+                      "type": "object",
+                      "nullable": false
                     }
                   },
                   "required": [
@@ -552,28 +555,36 @@
                       "type": "integer"
                     },
                     "format": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "status": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "category": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "range": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "metadata": {
-                      "type": "object"
+                      "type": "object",
+                      "nullable": false
                     },
                     "file_url": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "filename": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "sample": {
-                      "type": "object"
+                      "type": "object",
+                      "nullable": false
                     }
                   },
                   "required": [
@@ -588,6 +599,82 @@
           },
           "404": {
             "description": "not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates spectrum",
+        "tags": [
+          "Spectra"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "spectrum updated"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "422": {
+            "description": "unprocessable entity"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "format": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "status": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "category": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "range": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "nullable": false
+                  },
+                  "file_url": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
           }
         }
       }
