@@ -37,7 +37,7 @@ class SamplesController < ApplicationController
   end
 
   def update
-    if @sample.update(sample_params.reject { |k| k['csvs'] })
+    if @sample.update(sample_params)
       redirect_to @sample
       flash.now[:success] = 'Sample was successfully updated.'
     else
