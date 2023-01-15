@@ -4,6 +4,130 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/artworks":
+    get:
+      summary: Lists artworks
+      tags:
+      - Artworks
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: unauthorized
+  "/api/v1/artworks/{id}":
+    get:
+      summary: Retrieves an artwork
+      tags:
+      - Artworks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  artwork:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    date:
+                      type: string
+                    survey_date:
+                      type: date
+                    status:
+                      type: string
+                    metadata:
+                      type: object
+                    user:
+                      id:
+                        type: integer
+                      emain:
+                        type: string
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                    style:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                    tags:
+                      type: array
+                    materials_count:
+                      type: integer
+                    images_count:
+                      type: integer
+                    images:
+                      type: array
+                required:
+                - artwork
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  artwork:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    date:
+                      type: string
+                    survey_date:
+                      type: date
+                    status:
+                      type: string
+                    metadata:
+                      type: object
+                    user:
+                      id:
+                        type: integer
+                      emain:
+                        type: string
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                    style:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                    tags:
+                      type: array
+                    materials_count:
+                      type: integer
+                    images_count:
+                      type: integer
+                    images:
+                      type: array
+                required:
+                - artwork
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
   "/api/v1/samples":
     get:
       summary: Lists samples
@@ -19,6 +143,32 @@ paths:
           description: ok
         '401':
           description: unauthorized
+    post:
+      summary: Creates a sample
+      tags:
+      - Samples
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: sample created
+        '400':
+          description: bad request
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+              - title
   "/api/v1/samples/{id}":
     get:
       summary: Retrieves a sample
@@ -46,24 +196,34 @@ paths:
                     type: integer
                   title:
                     type: string
-                  user_id:
-                    type: integer
-                  slug:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
+                  sku:
                     type: string
                   metadata:
                     type: object
                   processing_status:
+                    type: integer
+                  category:
                     type: string
+                  origin:
+                    type: string
+                  owner:
+                    type: string
+                  compound:
+                    type: string
+                  survey_date:
+                    type: string
+                  spectra_count:
+                    type: integer
+                  documents_count:
+                    type: integer
+                  images_count:
+                    type: integer
+                  user:
+                    type: object
                 required:
                 - id
                 - title
-                - user_id
-                - metadata
-                - processing_status
+                - user
             application/xml:
               schema:
                 type: object
@@ -72,33 +232,43 @@ paths:
                     type: integer
                   title:
                     type: string
-                  user_id:
-                    type: integer
-                  slug:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
+                  sku:
                     type: string
                   metadata:
                     type: object
                   processing_status:
+                    type: integer
+                  category:
                     type: string
+                  origin:
+                    type: string
+                  owner:
+                    type: string
+                  compound:
+                    type: string
+                  survey_date:
+                    type: string
+                  spectra_count:
+                    type: integer
+                  documents_count:
+                    type: integer
+                  images_count:
+                    type: integer
+                  user:
+                    type: object
                 required:
                 - id
                 - title
-                - user_id
-                - metadata
-                - processing_status
+                - user
         '401':
           description: unauthorized
         '404':
           description: not found
-  "/api/v1/artworks":
+  "/api/v1/spectra":
     get:
-      summary: Lists artworks
+      summary: Lists spectra
       tags:
-      - Artworks
+      - Spectra
       parameters:
       - name: Authorization
         in: header
@@ -109,11 +279,37 @@ paths:
           description: ok
         '401':
           description: unauthorized
-  "/api/v1/artworks/{id}":
-    get:
-      summary: Retrieves an artworks
+    post:
+      summary: Creates a spectrum
       tags:
-      - Artworks
+      - Spectra
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: spectrum created
+        '400':
+          description: bad request
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sample_id:
+                  type: integer
+              required:
+              - sample_id
+  "/api/v1/spectra/{id}":
+    get:
+      summary: Retrieves a spectrum
+      tags:
+      - Spectra
       parameters:
       - name: id
         in: path
@@ -134,52 +330,48 @@ paths:
                 properties:
                   id:
                     type: integer
-                  title:
-                    type: string
-                  description:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                  user_id:
-                    type: integer
-                  slug:
+                  format:
                     type: string
                   status:
                     type: string
+                  category:
+                    type: string
+                  range:
+                    type: string
                   metadata:
                     type: object
+                  file_url:
+                    type: string
+                  filename:
+                    type: string
+                  sample:
+                    type: object
                 required:
-                - id
-                - title
-                - description
+                - spectrum
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
                     type: integer
-                  title:
-                    type: string
-                  description:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                  user_id:
-                    type: integer
-                  slug:
+                  format:
                     type: string
                   status:
                     type: string
+                  category:
+                    type: string
+                  range:
+                    type: string
                   metadata:
                     type: object
+                  file_url:
+                    type: string
+                  filename:
+                    type: string
+                  sample:
+                    type: object
                 required:
-                - id
-                - title
-                - description
+                - spectrum
         '401':
           description: unauthorized
         '404':

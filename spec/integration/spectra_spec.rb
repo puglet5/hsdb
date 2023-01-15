@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Spectra API' do
+RSpec.fdescribe 'Spectra API' do
   path '/api/v1/spectra' do
     get 'Lists spectra' do
       tags 'Spectra'
@@ -34,20 +34,15 @@ RSpec.describe 'Spectra API' do
       response '200', 'ok' do
         schema type: :object,
                properties: {
-                 spectrum: {
-                   id: { type: :integer },
-                   format: { type: :string },
-                   status: { type: :string },
-                   category: { type: :string },
-                   range: { type: :string },
-                   metadata: { type: :object },
-                   file_url: { type: :string },
-                   filename: { type: :string },
-                   sample: {
-                     id: { type: :integer },
-                     title: { type: :string }
-                   }
-                 }
+                 id: { type: :integer },
+                 format: { type: :string },
+                 status: { type: :string },
+                 category: { type: :string },
+                 range: { type: :string },
+                 metadata: { type: :object },
+                 file_url: { type: :string },
+                 filename: { type: :string },
+                 sample: { type: :object }
                },
                required: %w[spectrum]
 
@@ -74,6 +69,54 @@ RSpec.describe 'Spectra API' do
         let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
         let(:Authorization) { "Bearer #{token.token}" }
         let(:id) { 'invalid' }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/spectra' do
+    post 'Creates a spectrum' do
+      tags 'Spectra'
+      consumes 'application/json'
+      parameter name: 'Authorization', in: :header, type: :string
+      parameter name: :spectrum, in: :body, schema: {
+        type: :object,
+        properties: {
+          sample_id: { type: :integer }
+        },
+        required: %w[sample_id]
+      }
+
+      response '200', 'spectrum created' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user)        { FactoryBot.create(:user) }
+        let(:sample) { build(:sample, user: user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:spectrum) { create(:spectrum) }
+
+        run_test!
+      end
+
+      response '400', 'bad request' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user)        { FactoryBot.create(:user) }
+        let(:sample) { build(:sample, user: user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:spectrum) { nil }
+
+        run_test!
+      end
+
+      response '422', 'unprocessable entity' do
+        let(:application) { FactoryBot.create(:application) }
+        let(:user)        { FactoryBot.create(:user) }
+        let(:sample) { build(:sample, user: user) }
+        let(:token) { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
+        let(:Authorization) { "Bearer #{token.token}" }
+        let(:spectrum) { Spectrum.new(sample_id: nil) }
+
         run_test!
       end
     end
