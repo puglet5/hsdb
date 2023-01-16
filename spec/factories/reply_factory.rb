@@ -8,9 +8,14 @@
 #  reply         :text             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  discussion_id :integer
-#  user_id       :integer
+#  discussion_id :integer          indexed
+#  user_id       :integer          indexed
 #  slug          :string
+#
+# Indexes
+#
+#  index_replies_on_discussion_id  (discussion_id)
+#  index_replies_on_user_id        (user_id)
 #
 FactoryBot.define do
   factory :reply do

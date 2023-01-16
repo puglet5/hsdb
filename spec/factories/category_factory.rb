@@ -16,20 +16,9 @@
 #
 #  index_categories_on_discussion_id  (discussion_id)
 #
-class Category < ApplicationRecord
-  include Authorship
-
-  has_many :discussions, dependent: nil
-  has_many :users, through: :discussions
-
-  validates :category_name, presence: true
-
-  resourcify
-
-  extend FriendlyId
-  friendly_id :category_name, use: %i[slugged finders]
-
-  def should_generate_new_friendly_id?
-    slug.blank? || category_name_changed?
+FactoryBot.define do
+  factory :category do
+    category_name { 'test' }
+    pinned { false }
   end
 end

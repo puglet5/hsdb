@@ -30,25 +30,11 @@
 #  index_samples_on_metadata  (metadata) USING gin
 #  index_samples_on_sku       (sku)
 #
-class SampleSerializer < ActiveModel::Serializer
-  include Rails.application.routes.url_helpers
 
-  class UserSerializer < ActiveModel::Serializer
-    attributes :id, :email, :first_name, :last_name
+FactoryBot.define do
+  factory :sample do
+    title { 'test title' }
+    association :user, factory: :user, strategy: :build
+    metadata { '{"test_key": "test_value"}' }
   end
-
-  attributes :id, :title, :sku, :metadata, :category, :origin, :owner, :compound, :survey_date
-  has_many :spectra, key: :spectra_count do
-    object.spectra.count
-  end
-
-  has_many :documents, key: :documents_count do
-    object.documents.count
-  end
-
-  has_many :images, key: :images_count do
-    object.images.count
-  end
-
-  belongs_to :user, serializer: UserSerializer
 end

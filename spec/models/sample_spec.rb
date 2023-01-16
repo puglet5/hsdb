@@ -10,11 +10,11 @@
 #  slug         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  metadata     :jsonb            not null
+#  metadata     :jsonb            not null, indexed
 #  category     :integer          default("not_set"), not null
 #  origin       :string           default(""), not null
 #  owner        :string           default(""), not null
-#  sku          :string
+#  sku          :string           indexed
 #  cas_no       :string
 #  cas_name     :string
 #  common_names :string
@@ -24,6 +24,11 @@
 #  location     :string
 #  survey_date  :date
 #  lock_version :integer
+#
+# Indexes
+#
+#  index_samples_on_metadata  (metadata) USING gin
+#  index_samples_on_sku       (sku)
 #
 
 RSpec.describe Sample, type: :model do

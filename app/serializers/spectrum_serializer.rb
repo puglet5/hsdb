@@ -5,14 +5,19 @@
 # Table name: spectra
 #
 #  id         :bigint           not null, primary key
-#  format     :integer          default("0"), not null
+#  format     :integer          default("not_set"), not null
 #  status     :integer          default("raw"), not null
 #  category   :integer          default("not_set"), not null
-#  sample_id  :bigint           not null
+#  sample_id  :bigint           not null, indexed
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  range      :integer          default("ir"), not null
-#  metadata   :jsonb            not null
+#  metadata   :jsonb            not null, indexed
+#
+# Indexes
+#
+#  index_spectra_on_metadata   (metadata) USING gin
+#  index_spectra_on_sample_id  (sample_id)
 #
 class SpectrumSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
