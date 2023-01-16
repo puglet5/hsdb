@@ -26,7 +26,7 @@ module ApplicationHelper
   def active?(controller, url, klass)
     if params[:controller] == 'categories'
       klass.to_s if controller == 'discussions'
-    elsif (params[:controller] == controller && !params[:action].in?(%w[home about])) || (params[:action].in?(%w[home about]) && current_page?(url))
+    elsif (params[:controller] == controller && !params[:action].in?(%w[home])) || (params[:action].in?(%w[home]) && current_page?(url))
       klass.to_s
     end
   end

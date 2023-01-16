@@ -37,8 +37,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'about', to: 'pages#about'
-
   namespace :admin do
     resources :users, only: %i[index edit update destroy]
   end
