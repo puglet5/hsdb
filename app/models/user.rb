@@ -25,10 +25,10 @@
 #
 
 class User < ApplicationRecord
-  include PublicActivity::Model
   include ProcessImage
 
   extend FriendlyId
+
   rolify
 
   devise :database_authenticatable, :registerable,

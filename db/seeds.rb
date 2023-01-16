@@ -20,8 +20,6 @@ Role.create!(name: 'admin')
 
 sample_user.add_role('admin')
 
-PublicActivity.enabled = false
-
 users = User.order(:created_at).take(5)
 2.times do
   title = Faker::Lorem.sentence

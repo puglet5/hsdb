@@ -30,7 +30,6 @@ gem 'mini_magick', '~> 4.11' # image processing
 gem 'pagy', '~> 6.0' # pagination
 gem 'pg', '~> 1.4' # postgres
 gem 'propshaft', '~> 0.6' # asset delivery
-gem 'public_activity', '~> 2.0', '>= 2.0.2' # db activity tracking
 gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1' # authorization / policies
 gem 'rack-cors', '~> 1.1'
