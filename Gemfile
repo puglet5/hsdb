@@ -21,6 +21,7 @@ gem 'dotenv-rails', '~> 2.8'
 # gem 'elasticsearch-persistence', '~> 7.2'
 # gem 'elasticsearch-rails', '~> 7.2'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+gem 'has_scope', '~> 0.8.0'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jsbundling-rails', '~> 1.0'
 gem 'ledermann-rails-settings', '~> 2.5' # user settings
