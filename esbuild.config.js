@@ -2,8 +2,9 @@
 
 const path = require("path")
 const rails = require("esbuild-rails")
+const esbuild = require("esbuild");
 
-require("esbuild").build({
+esbuild.context({
   entryPoints: ["application.js"],
   bundle: true,
   minify: process.argv.includes("--minify"),
@@ -13,6 +14,8 @@ require("esbuild").build({
   ],
   outdir: path.join(process.cwd(), "app/assets/builds"),
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
-  watch: process.argv.includes("--watch"),
   plugins: [rails()],
-}).catch(() => process.exit(1))
+}).then(context => {
+  context.watch().then((context) => {
+  })
+})

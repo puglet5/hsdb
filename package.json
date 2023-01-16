@@ -17,7 +17,7 @@
     "chart.js": "^4.1.2",
     "cuid": "^2.1.8",
     "d3": "^7.8.1",
-    "esbuild": "^0.16.17",
+    "esbuild": "^0.17.0",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.6.2",
     "flowbite-datepicker": "^1.2.2",
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^5.1.14",
-    "eslint": "^8.31.0",
+    "eslint": "^8.32.0",
     "postcss-nested": "^6.0.0",
     "tailwind-config-viewer": "^1.7.2"
   }
