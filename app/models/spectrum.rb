@@ -19,6 +19,10 @@ class Spectrum < RsdbRecord
   include CustomValidations
   include ParseJson
 
+  scope :by_status, ->(status) { where(status: status) }
+  scope :by_format, ->(format) { where(format: format) }
+  scope :by_range,  ->(range)  { where(range: range) }
+
   belongs_to :sample, inverse_of: :spectra, touch: true
 
   enum status: { raw: 0, successful: 1, pending: 2, ongoing: 3, error: 4, other: 5 }, _prefix: :processing, _default: :raw

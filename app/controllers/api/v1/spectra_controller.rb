@@ -3,8 +3,12 @@
 module Api
   module V1
     class SpectraController < ApiController
+      has_scope :by_status
+      has_scope :by_range
+      has_scope :by_format
+
       def index
-        @spectra = Spectrum.all
+        @spectra = apply_scopes(Spectrum).all
         render json: @spectra
       end
 
