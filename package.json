@@ -17,7 +17,7 @@
     "chart.js": "^4.1.2",
     "cuid": "^2.1.8",
     "d3": "^7.8.1",
-    "esbuild": "^0.17.0",
+    "esbuild": "^0.17.1",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.6.2",
     "flowbite-datepicker": "^1.2.2",
