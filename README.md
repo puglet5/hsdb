@@ -60,6 +60,12 @@ sudo chmod 666 /var/run/docker.sock
 
 ### TailwindCSS styling
 
+#### Inline fold VS Code extension
+Regex capture group to work with erb syntax:
+```regex
+class[:=]\s*(({(`|))|(['"`]))(.*?)(\2|(\4)})
+```
+
 #### Flowbite
 Flowbite component library is used (v. 1.4.7) with some modifications to work nicely with Turbo. Apply flowbite.path with `git apply flowbite.patch` to get Flowbite's JavaScript working properly, thought it shall soon be replaced/rewritten with Stimulus.
 
