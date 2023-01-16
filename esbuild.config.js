@@ -16,6 +16,11 @@ esbuild.context({
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
   plugins: [rails()],
 }).then(context => {
-  context.watch().then((context) => {
-  })
+  if (process.argv.includes("--watch"))
+    context.watch().then((context) => {
+    })
+  else
+    context.rebuild().then(() => {
+      context.dispose()
+    })
 })
