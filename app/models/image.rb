@@ -19,6 +19,10 @@
 class Image < ApplicationRecord
   include ProcessImage
 
+  scope :by_status, ->(status) { where(status: status) }
+  scope :by_category, ->(category) { where(category: category) }
+  scope :orphaned, -> { where.missing(:artwork) }
+
   belongs_to :artwork, inverse_of: :images, touch: true
 
   enum status: { not_set: 0, accepted: 1, on_review: 2 }, _default: :not_set

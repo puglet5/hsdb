@@ -30,6 +30,14 @@ class Artwork < ApplicationRecord
   include ParseJson
   include ProcessImage
 
+  scope :by_status, ->(status) { where(status: status) }
+  scope :with_images, -> { where.associated(:images) }
+  scope :with_no_images, -> { where.missing(:images) }
+
+  # dates are passes in ISO 8601 format, i.e. YYYY-MM-DD.
+  scope :by_survey_period, ->(start_date, end_date) { where('survey_date BETWEEN ? and ?', start_date, end_date) }
+  scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
+
   has_many :images, inverse_of: :artwork, dependent: :destroy
   accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['image'].blank? }
   has_many :image_attachments, through: :images

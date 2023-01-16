@@ -38,6 +38,13 @@ class Sample < RsdbRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
+  scope :by_category, ->(category) { where(category: category) }
+  scope :by_origin, ->(origin) { where(origin: origin) }
+
+  # dates are passes in ISO 8601 format, i.e. YYYY-MM-DD.
+  scope :by_survey_period, ->(start_date, end_date) { where('survey_date BETWEEN ? and ?', start_date, end_date) }
+  scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
+
   belongs_to :user
   has_many :spectra, inverse_of: :sample, dependent: :destroy
   has_many :file_attachments, through: :spectra
