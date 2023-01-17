@@ -39,10 +39,13 @@ class Spectrum < RsdbRecord
 
   enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, other: 7 }, _default: :not_set, _suffix: :format
 
-  enum category: { not_set: 0 }, _default: :not_set, _suffix: :category
+  enum category: { not_set: 0, reference: 1 }, _default: :not_set, _suffix: :category
 
   has_one_attached :file
   has_one_attached :settings
+
+  has_rich_text :description
+  has_rich_text :equipment
 
   after_commit :parse_json, on: %i[create update]
 end
