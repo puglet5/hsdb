@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
+ActiveRecord::Schema[7.0].define(version: 20_230_117_192_620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_trgm'
   enable_extension 'plpgsql'
@@ -77,9 +77,19 @@ ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
     t.bigint 'material_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['material_id'], name: 'index_artwork_materials_on_material_id'
     t.index %w[artwork_id material_id], name: 'index_artwork_materials_on_artwork_id_and_material_id', unique: true
     t.index ['artwork_id'], name: 'index_artwork_materials_on_artwork_id'
+    t.index ['material_id'], name: 'index_artwork_materials_on_material_id'
+  end
+
+  create_table 'artwork_tags', force: :cascade do |t|
+    t.bigint 'artwork_id', null: false
+    t.bigint 'tag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[artwork_id tag_id], name: 'index_artwork_tags_on_artwork_id_and_tag_id', unique: true
+    t.index ['artwork_id'], name: 'index_artwork_tags_on_artwork_id'
+    t.index ['tag_id'], name: 'index_artwork_tags_on_tag_id'
   end
 
   create_table 'artworks', force: :cascade do |t|
@@ -100,16 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
     t.index ['user_id'], name: 'index_artworks_on_user_id'
   end
 
-  create_table 'artwork_tags', force: :cascade do |t|
-    t.bigint 'artwork_id', null: false
-    t.bigint 'tag_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['tag_id'], name: 'index_artwork_tags_on_tag_id'
-    t.index %w[artwork_id tag_id], name: 'index_artwork_tags_on_artwork_id_and_tag_id', unique: true
-    t.index ['artwork_id'], name: 'index_artwork_tags_on_artwork_id'
-  end
-
   create_table 'categories', force: :cascade do |t|
     t.string 'category_name', null: false
     t.datetime 'created_at', null: false
@@ -117,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
     t.integer 'discussion_id'
     t.string 'slug'
     t.boolean 'pinned', default: false
+    t.integer 'lock_version'
     t.index ['discussion_id'], name: 'index_categories_on_discussion_id'
   end
 
@@ -129,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
     t.integer 'category_id', default: 2
     t.string 'slug'
     t.boolean 'pinned', default: false
+    t.integer 'lock_version'
     t.index ['category_id'], name: 'index_discussions_on_category_id'
     t.index ['user_id'], name: 'index_discussions_on_user_id'
   end
@@ -266,15 +268,15 @@ ActiveRecord::Schema[7.0].define(version: 20_230_114_120_031) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
-  add_foreign_key 'artwork_materials', 'artworks', column: 'artwork_id'
+  add_foreign_key 'artwork_materials', 'artworks'
   add_foreign_key 'artwork_materials', 'materials'
+  add_foreign_key 'artwork_tags', 'artworks'
+  add_foreign_key 'artwork_tags', 'tags'
   add_foreign_key 'artworks', 'styles'
   add_foreign_key 'artworks', 'users', name: 'artworks_user_id_fk'
-  add_foreign_key 'artwork_tags', 'artworks', column: 'artwork_id'
-  add_foreign_key 'artwork_tags', 'tags'
   add_foreign_key 'discussions', 'categories', name: 'discussions_category_id_fk'
   add_foreign_key 'discussions', 'users', name: 'discussions_user_id_fk'
-  add_foreign_key 'images', 'artworks', column: 'artwork_id'
+  add_foreign_key 'images', 'artworks'
   add_foreign_key 'oauth_access_tokens', 'oauth_applications', column: 'application_id'
   add_foreign_key 'oauth_access_tokens', 'users', column: 'resource_owner_id'
   add_foreign_key 'replies', 'discussions', name: 'replies_discussion_id_fk'

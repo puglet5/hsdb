@@ -2,6 +2,37 @@
   <%= render "shared/errors", obj: @discussion %>
   <div class="container p-20 mx-auto">
     <h1 class="flex justify-center mb-6 text-4xl font-semibold">Edit Discussion</h1>
-    <%= render "form", discussion: @discussion %>
+    <%= simple_form_for @discussion, validate: true do |f| %>
+
+      <!-- Optimistic locking with lock_version -->
+      <%= f.hidden_field :lock_version %>
+      <!--  -->
+
+      <div class="grid grid-cols-12 mb-4">
+
+        <div class="col-span-10">
+          <%= render Forms::LabelComponent.new().with_content("Title") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Discussion title") %>
+        </div>
+
+        <div class="col-span-2 ml-6">
+          <%= render Forms::LabelComponent.new().with_content("Category") %>
+          <%= f.input :category_id, collection: @categories.map { |c| [c.category_name, c.id] }, input_html: {class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 "}, label: false, hint: false, include_blank: false %>
+        </div>
+
+      </div>
+
+      <div class="mb-4">
+        <%= render Forms::LabelComponent.new().with_content("Content") %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :content, required: true, placeholder: "Discussion content") %>
+      </div>
+
+      <div class="flex">
+        <%= render Forms::SubmitComponent.new(form: f).with_content((["new", "create"].include? params[:action]) ? "Create Discussion" : "Save Discussion") %>
+        <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? :discussions : @discussion).with_content("Back") %>
+      </div>
+
+    <% end %>
+
   </div>
 </section>

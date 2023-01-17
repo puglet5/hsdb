@@ -73,7 +73,12 @@ class DiscussionsController < ApplicationController
   end
 
   def discussion_params
-    params.require(:discussion).permit(:title, :content, :category_id)
+    params.require(:discussion).permit(
+      :title,
+      :content,
+      :category_id,
+      :lock_version
+    )
   end
 
   def authorize_discussion

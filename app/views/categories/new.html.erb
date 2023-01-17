@@ -4,6 +4,19 @@
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New category
     </div>
-    <%= render "form", category: @category %>
+    <%= simple_form_for @category, validate: true do |f| %>
+      <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
+      <div class="grid gap-6 mb-6 lg:grid-cols-2">
+        <div>
+          <%= render Forms::LabelComponent.new().with_content("Title") %>
+          <%= render Forms::TextInputComponent.new(form: f, field: :category_name, required: true, disabled: false, readonly: false) %>
+        </div>
+      </div>
+      <div class="flex">
+        <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
+        <%= render Forms::BackButtonComponent.new(path: @category).with_content("Back") %>
+      </div>
+    <% end %>
+
   </div>
 </section>
