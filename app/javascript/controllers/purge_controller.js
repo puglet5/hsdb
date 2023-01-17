@@ -21,7 +21,7 @@ export default class extends Controller {
 
     let input = document.createElement("input")
     input.classList.add("hidden")
-    input.name = `${this.classnameValue}[purge_images][]`
+    input.name = `${this.classnameValue}[purge_attachments][]`
     input.setAttribute("value", this.idValue)
     input.setAttribute("data-purge-target", "input")
     this.divTarget.appendChild(input)

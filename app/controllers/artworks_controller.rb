@@ -115,7 +115,7 @@ class ArtworksController < ApplicationController
 
     if @artwork.update(artwork_params)
 
-      attachment_params[:purge_images]&.each do |signed_id|
+      attachment_params[:purge_attachments]&.each do |signed_id|
         purge_image signed_id
       end
 
@@ -182,7 +182,7 @@ class ArtworksController < ApplicationController
 
   def attachment_params
     params.require(:artwork).permit(
-      purge_images: []
+      purge_attachments: []
     )
   end
 end
