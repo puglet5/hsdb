@@ -9,9 +9,9 @@ class SampleCategoryBadgeComponent < ViewComponent::Base
   end
 
   CATEGORIES = {
-    'pigments' => 'text-gray-700 bg-gradient-to-r from-sky-200 via-amber-200 to-secondary-200',
+    'pigments' => 'text-sky-800 bg-sky-100',
     'ceramics' => 'text-amber-800 bg-amber-100',
-    'other' => 'text-sky-800 bg-sky-100',
+    'other' => 'text-lime-800 bg-lime-100',
     'not_set' => 'text-gray-800 bg-gray-100'
   }.freeze
 

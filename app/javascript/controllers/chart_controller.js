@@ -8,8 +8,11 @@ export default class extends Controller {
   static values = {
     url: String,
     data: Array,
-    filename: String
+    filename: String,
+    id: Number
   }
+
+  static targets = ["canvas"]
 
   async import(url) {
     return await dsv(",", url, d => { return d })
@@ -40,9 +43,11 @@ export default class extends Controller {
 
   async visualize() {
 
+    let id = this.idValue
+
     const makeChart = (data, filename) => {
 
-      window.scatterChart = new Chart("canvas", {
+      window.scatterChart = new Chart(`canvas-${id}`, {
         type: "scatter",
         data: {
           datasets: [{
@@ -107,6 +112,8 @@ export default class extends Controller {
 
     if (this.hasDataValue) {
       makeChart(this.dataValue, this.filenameValue)
+      console.log(this.dataValue, this.filenameValue)
+
     } else {
       const raw = await this.import(this.urlValue)
       this.dataValue = this.parse(raw)

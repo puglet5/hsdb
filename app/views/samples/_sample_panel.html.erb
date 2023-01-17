@@ -1,0 +1,103 @@
+<div class="ml-2 text-gray-500 grid grid-cols-2 border-b">
+  <div>
+    <div class="flex space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <rect x="4" y="5" width="16" height="16" rx="2"></rect>
+        <line x1="16" y1="3" x2="16" y2="7"></line>
+        <line x1="8" y1="3" x2="8" y2="7"></line>
+        <line x1="4" y1="11" x2="20" y2="11"></line>
+        <rect x="8" y="15" width="2" height="2"></rect>
+      </svg>
+      <span class="text-gray-700">Survey date</span>
+    </div>
+    <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+      <%= sample.survey_date || "Not set" %>
+    </div>
+  </div>
+
+  <div id="origin">
+    <span class="text-gray-700">Origin</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.origin || "Not set" %>
+    </div>
+  </div>
+
+  <div id="owner">
+    <span class="text-gray-700">Owner</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.owner || "Not set" %>
+    </div>
+  </div>
+
+  <div id="sku">
+    <span class="text-gray-700">SKU</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.sku || "Not set" %>
+    </div>
+  </div>
+
+  <div id="cas_no">
+    <span class="text-gray-700">CAS №</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.cas_no || "Not set" %>
+    </div>
+  </div>
+
+  <div id="cas_name">
+    <span class="text-gray-700">CAS Name</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.cas_name || "Not set" %>
+    </div>
+  </div>
+
+  <div id="common_names">
+    <span class="text-gray-700">Common Names</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.common_names || "Not set" %>
+    </div>
+  </div>
+
+  <div id="compound">
+    <span class="text-gray-700">Compound</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.compound || "Not set" %>
+    </div>
+  </div>
+
+  <div id="color">
+    <span class="text-gray-700">Color</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.color || "Not set" %>
+    </div>
+  </div>
+
+  <div id="formula">
+    <span class="text-gray-700">Chemical formula</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.formula || "Not set" %>
+    </div>
+  </div>
+
+  <div id="location">
+    <span class="text-gray-700">Location</span>
+    <div class="p-2 ml-2 text-sm text-justify">
+      <%= sample.location || "Not set" %>
+    </div>
+  </div>
+
+</div>
+
+<div id="metadata" class="mt-2">
+  <div class="flex space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M7 4a2 2 0 0 0 -2 2v3a2 3 0 0 1 -2 3a2 3 0 0 1 2 3v3a2 2 0 0 0 2 2"></path>
+      <path d="M17 4a2 2 0 0 1 2 2v3a2 3 0 0 0 2 3a2 3 0 0 0 -2 3v3a2 2 0 0 1 -2 2"></path>
+    </svg>
+    <span class="text-gray-700">Metadata</span>
+  </div>
+  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+    <%= ap sample.metadata || "Not set" %>
+  </div>
+</div>

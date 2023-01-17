@@ -75,24 +75,62 @@
 
       <div id="files" class="mb-4">
         <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
-        <%= tag.div class: "row-span-2",
+        <div class="grid grid-cols-2 gap-4">
+          <%= tag.div class: "",
                 data: {
                   uppy: "sample[spectra_attributes][][file]",
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
-                  uploads_allowedfiletypes_value: ["text/*", ".dpt"],
+                  uploads_allowedfiletypes_value: [".dpt", "text/*", ".raw", ".mon", ".csv", ".spectable", ".txt"],
                   uploads_allowmultiple_value: true,
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
-          <%= render Forms::LabelComponent.new().with_content("Files") %>
-          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-            <p class="font-medium text-center" id="uppy-text">
-              Browse...
-            </p>
+            <%= render Forms::LabelComponent.new().with_content("Spectra files") %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+              <p class="font-medium text-center" id="uppy-text">
+                Browse...
+              </p>
+            <% end %>
+            <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
           <% end %>
-          <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
-        <% end %>
+
+          <%= tag.div class: "",
+                data: {
+                  uppy: "sample[images][]",
+                  controller: "uploads",
+                  uploads_target: "div",
+                  uploads_filetype_value: "files",
+                  uploads_allowmultiple_value: true,
+                  uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
+                  } do %>
+            <%= render Forms::LabelComponent.new().with_content("Images") %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+              <p class="font-medium text-center" id="uppy-text">
+                Browse...
+              </p>
+            <% end %>
+            <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
+          <% end %>
+
+          <%= tag.div class: "",
+                data: {
+                  uppy: "sample[documents][]",
+                  controller: "uploads",
+                  uploads_target: "div",
+                  uploads_filetype_value: "files",
+                  uploads_allowmultiple_value: true,
+                  uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
+                  } do %>
+            <%= render Forms::LabelComponent.new().with_content("Documents") %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+              <p class="font-medium text-center" id="uppy-text">
+                Browse...
+              </p>
+            <% end %>
+            <%= render Forms::PHelperComponent.new().with_content("Documents in .pdf or any other format (maximum file size: 30 MB)") %>
+          <% end %>
+        </div>
       </div>
 
       <div id="metadata">

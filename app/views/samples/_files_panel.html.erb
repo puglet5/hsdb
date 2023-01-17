@@ -1,0 +1,41 @@
+<div class="ml-2">
+  <div class="flex space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M15 3v4a1 1 0 0 0 1 1h4"></path>
+      <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z"></path>
+      <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2"></path>
+    </svg>
+    <span>Documents</span>
+  </div>
+  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+    <% if sample.documents.any? %>
+      <% sample.documents&.each do |doc| %>
+        <%= doc.filename %>
+      <% end %>
+    <% else %>
+      None attached
+    <% end %>
+  </div>
+</div>
+<div class="ml-2">
+  <div class="flex space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <line x1="15" y1="8" x2="15.01" y2="8"></line>
+      <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+      <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+      <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+    </svg>
+    <span>Images</span>
+  </div>
+  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+    <% if sample.images.any? %>
+      <% sample.images&.each do |img| %>
+        <%= img.filename %>
+      <% end %>
+    <% else %>
+      None attached
+    <% end %>
+  </div>
+</div>

@@ -9,6 +9,7 @@ class SamplesController < ApplicationController
 
   def show
     @sample = Sample.find(params[:id])
+    @spectra = @sample.spectra
   end
 
   def new
@@ -32,6 +33,11 @@ class SamplesController < ApplicationController
 
   def update
     if @sample.update(sample_params)
+
+      attachment_params[:purge_attachments]&.each do |signed_id|
+        purge_attachment signed_id
+      end
+
       redirect_to @sample
       flash.now[:success] = 'Sample was successfully updated.'
     else
@@ -54,6 +60,11 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
   end
 
+  def purge_attachment(signed_id)
+    @blob = ActiveStorage::Blob.find_signed signed_id
+    @blob.attachments.first.purge_later
+  end
+
   def sample_params
     params.require(:sample).permit(
       :title,
@@ -70,8 +81,15 @@ class SamplesController < ApplicationController
       :cas_name,
       :survey_date,
       spectra_attributes: %i[id file],
+
       images: [],
       documents: []
+    )
+  end
+
+  def attachment_params
+    params.require(:sample).permit(
+      purge_attachments: []
     )
   end
 end

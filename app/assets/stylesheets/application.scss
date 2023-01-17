@@ -299,3 +299,7 @@ trix-toolbar .trix-button.trix-active {
 .tooltip {
   transition: opacity 0.2s linear 0.2s;
 }
+
+.active-tab {
+  @apply !bg-primary-100 !text-primary-600 hover:!bg-primary-100 !important
+}
