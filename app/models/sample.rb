@@ -38,6 +38,10 @@ class Sample < RsdbRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
+  def should_generate_new_friendly_id?
+    slug.blank? || title_changed?
+  end
+
   scope :by_category, ->(category) { where(category: category) }
   scope :by_origin, ->(origin) { where(origin: origin) }
 
