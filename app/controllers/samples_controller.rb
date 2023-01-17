@@ -2,35 +2,46 @@
 
 class SamplesController < ApplicationController
   before_action :set_sample, only: %i[show edit update destroy]
+  after_action :verify_authorized
 
   breadcrumb 'Home', :root_path
   breadcrumb 'Samples', :samples_path, match: :exact
 
   def index
     @samples = Sample.all.order('created_at asc')
+
+    authorize @samples
   end
 
   def show
     @sample = Sample.find(params[:id])
     @spectra = @sample.spectra
 
+    authorize @sample
+
     breadcrumb @sample.title, sample_path(@sample), match: :exclusive
   end
 
   def new
-    @sample = Sample.new
+    @sample = current_user.samples.build
     @sample.spectra.build
+
+    authorize @sample
 
     breadcrumb 'New Sample', new_sample_path(@sample), match: :exclusive
   end
 
   def edit
+    authorize @sample
+
     breadcrumb @sample.title, sample_path(@sample), match: :exclusive
     breadcrumb 'Edit', edit_sample_path(@sample), match: :exclusive
   end
 
   def create
     @sample = current_user.samples.build(sample_params)
+
+    authorize @sample
 
     if @sample.save
       redirect_to @sample
@@ -42,6 +53,8 @@ class SamplesController < ApplicationController
   end
 
   def update
+    authorize @sample
+
     if @sample.update(sample_params)
 
       attachment_params[:purge_attachments]&.each do |signed_id|
@@ -59,6 +72,8 @@ class SamplesController < ApplicationController
   end
 
   def destroy
+    authorize @sample
+
     @sample.destroy
     flash[:success] = 'Sample was successfully deleted'
     redirect_to samples_url, status: :see_other
