@@ -16,6 +16,7 @@ gem 'cssbundling-rails', '~> 1.0'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'doorkeeper', '~> 5.5', '>= 5.5.4' # api oauth
 gem 'dotenv-rails', '~> 2.8'
+gem 'loaf', '~> 0.10.0'
 # gem 'elasticsearch', '~> 7.13', '< 7.14'
 # gem 'elasticsearch-model', '~> 7.2'
 # gem 'elasticsearch-persistence', '~> 7.2'

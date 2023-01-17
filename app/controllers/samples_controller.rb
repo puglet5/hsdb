@@ -3,6 +3,9 @@
 class SamplesController < ApplicationController
   before_action :set_sample, only: %i[show edit update destroy]
 
+  breadcrumb 'Home', :root_path
+  breadcrumb 'Samples', :samples_path, match: :exact
+
   def index
     @samples = Sample.all.order('created_at asc')
   end
@@ -10,14 +13,21 @@ class SamplesController < ApplicationController
   def show
     @sample = Sample.find(params[:id])
     @spectra = @sample.spectra
+
+    breadcrumb @sample.title, sample_path(@sample), match: :exclusive
   end
 
   def new
     @sample = Sample.new
     @sample.spectra.build
+
+    breadcrumb 'New Sample', new_sample_path(@sample), match: :exclusive
   end
 
-  def edit; end
+  def edit
+    breadcrumb @sample.title, sample_path(@sample), match: :exclusive
+    breadcrumb 'Edit', edit_sample_path(@sample), match: :exclusive
+  end
 
   def create
     @sample = current_user.samples.build(sample_params)

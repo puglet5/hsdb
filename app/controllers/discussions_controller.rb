@@ -8,6 +8,8 @@ class DiscussionsController < ApplicationController
   before_action :authorize_discussion
   after_action :verify_authorized
 
+  breadcrumb 'Forum', :discussions_path, match: :exact, only: %i[show new edit]
+
   def index
     @categories = Category.all.includes([:discussions]).order('created_at asc')
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
@@ -17,13 +19,20 @@ class DiscussionsController < ApplicationController
   def show
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
+
+    breadcrumb @discussion.title, discussion_path(@discussion), match: :exclusive
   end
 
   def new
     @discussion = current_user.discussions.build
+
+    breadcrumb 'New Discussion', new_discussion_path(@discussion), match: :exclusive
   end
 
-  def edit; end
+  def edit
+    breadcrumb @discussion.title, discussion_path(@discussion), match: :exclusive
+    breadcrumb 'Edit', edit_discussion_path(@discussion), match: :exclusive
+  end
 
   def create
     @discussion = current_user.discussions.build(discussion_params)

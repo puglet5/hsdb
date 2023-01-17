@@ -22,6 +22,7 @@ class UsersController < ApplicationController
         value['thumbnails'] = ActiveModel::Type::Boolean.new.cast(value['thumbnails'])
       when 'ui'
         value['tooltips'] = ActiveModel::Type::Boolean.new.cast(value['tooltips'])
+        value['breadcrumbs'] = ActiveModel::Type::Boolean.new.cast(value['breadcrumbs'])
       end
 
       @user.settings(key.to_sym).update! value
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
                                     processing: :enabled,
                                     pagination: :per,
                                     uploading: :thumbnails,
-                                    ui: :tooltips
+                                    ui: %i[tooltips breadcrumbs]
                                   })
   end
 end

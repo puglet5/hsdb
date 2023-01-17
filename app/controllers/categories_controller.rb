@@ -5,31 +5,29 @@ class CategoriesController < ApplicationController
   before_action :fetch_categories, only: %i[index show]
   before_action :authorize_category
   after_action :verify_authorized
-  # access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
 
-  # GET /categories
+  breadcrumb 'Forum', :discussions_path, match: :exact, only: %i[show new edit]
+
   def index
     @discussions = Discussion.all.includes(%i[user category rich_text_content replies]).order('created_at desc')
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
 
-  # GET /categories/1
   def show
     @discussions = Discussion.where(category_id: @category.id).includes(%i[user category rich_text_content replies])
     @discussions_unpinned = @discussions.where(category_id: @category.id, pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(category_id: @category.id, pinned: true).order('created_at desc')
+
+    breadcrumb @category.category_name, category_path(@category), match: :exclusive
   end
 
-  # GET /categories/new
   def new
     @category = Category.new
   end
 
-  # GET /categories/1/edit
   def edit; end
 
-  # POST /categories
   def create
     @category = Category.new(category_params)
 
@@ -40,7 +38,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
       redirect_to [:categories], notice: 'Category was successfully updated.'
@@ -49,7 +46,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
   def destroy
     @category.destroy
     redirect_to [:categories], notice: 'Category was successfully deleted.', status: :see_other
@@ -57,7 +53,6 @@ class CategoriesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
   end
@@ -66,7 +61,6 @@ class CategoriesController < ApplicationController
     @categories = Category.all.includes([:discussions]).order('created_at asc')
   end
 
-  # Only allow a trusted parameter "white list" through.
   def category_params
     params.require(:category).permit(:category_name)
   end

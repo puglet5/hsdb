@@ -269,6 +269,8 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    loaf (0.10.0)
+      railties (>= 3.2)
     logstasher (2.1.5)
       activesupport (>= 5.2)
       request_store
@@ -594,6 +596,7 @@ DEPENDENCIES
   letter_opener
   license_finder (~> 7.0)
   listen (~> 3.7)
+  loaf (~> 0.10.0)
   logstasher (~> 2.1)
   mini_magick (~> 4.11)
   pagy (~> 6.0)
