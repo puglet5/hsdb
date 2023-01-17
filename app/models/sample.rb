@@ -34,6 +34,7 @@ class Sample < RsdbRecord
   include Authorship
   include CustomValidations
   include ParseJson
+  include ProcessImage
 
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
@@ -55,7 +56,9 @@ class Sample < RsdbRecord
   accepts_nested_attributes_for :spectra, reject_if: proc { |attributes| attributes['file'].blank? }
 
   has_many_attached :documents
-  has_many_attached :images
+  has_many_attached :images do |blob|
+    blob.variant :thumbnail, resize: '400x300^', crop: '400x300+0+0', format: :jpg
+  end
 
   has_rich_text :description
 
@@ -63,6 +66,7 @@ class Sample < RsdbRecord
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
 
   after_commit :parse_json, on: %i[create update]
+  after_commit -> { images.each { |image| process_image self, image&.id } }, on: %i[create update]
 
   enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
 end
