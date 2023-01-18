@@ -1,0 +1,37 @@
+<%= render "shared/errors", obj: @spectrum %>
+<section class="bg-gray-50">
+  <div class="container p-20 mx-auto">
+    <div class="flex justify-center mb-6 text-4xl font-semibold">
+      New spectrum
+    </div>
+    <%= simple_form_for [@sample, @spectrum], validate: true do |f| %>
+
+      <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
+      <div id="info" class="mb-4 grid grid-cols-2 gap-4">
+
+        <div>
+          <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
+          <%= f.input :category, default: @spectrum.category, collection: Spectrum.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+        </div>
+
+        <div class="mb-4 col-span-2">
+          <%= render Forms::LabelComponent.new().with_content("Description") %>
+          <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on spectrum cards") %>
+        </div>
+      </div>
+
+      <div id="metadata">
+        <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
+        <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata) %>
+        <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
+      </div>
+
+      <div class="flex mt-4">
+        <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
+        <%= render Forms::BackButtonComponent.new(path: @sample).with_content("Back") %>
+      </div>
+    <% end %>
+
+  </div>
+</section>

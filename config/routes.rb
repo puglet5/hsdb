@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   draw :api
 
   # scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-  resources :samples
+  resources :samples do
+    resources :spectra
+  end
 
   resources :users, only: %i[show] do
     member do
