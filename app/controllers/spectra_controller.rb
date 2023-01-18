@@ -12,6 +12,16 @@ class SpectraController < ApplicationController
     breadcrumb 'New Spectrum', [:new, @sample, :spectrum], match: :exclusive
   end
 
+  def edit
+    @spectrum = @sample.spectra.find(params[:id])
+
+    breadcrumb 'Home', :root_path
+    breadcrumb 'Samples', :samples_path, match: :exact
+    breadcrumb @sample.title, sample_path(@sample), match: :exact
+    breadcrumb "#{@spectrum.range.upcase}, .#{@spectrum.format}", [@sample, @spectrum], match: :exact
+    breadcrumb 'Edit', [:edit, @sample, @spectrum], match: :exclusive
+  end
+
   def create
     @spectrum = @sample.spectra.build(spectrum_params)
 
@@ -20,6 +30,17 @@ class SpectraController < ApplicationController
       flash.now[:success] = 'Spectrum added!'
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @spectrum = @sample.spectra.find(params[:id])
+
+    if @spectrum.update(spectrum_params)
+      redirect_to @sample
+      flash.now[:success] = 'Spectrum updated!'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
