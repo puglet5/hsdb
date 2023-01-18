@@ -12,7 +12,7 @@
       <p><%= @artwork.description %></p>
     </div>
     <div class="flex justify-between mb-4 border-b">
-      <label class="block text-lg font-medium text-gray-900">Info</label>
+      <label class="block text-lg font-medium text-gray-700">Info</label>
       <div class="flex my-auto mr-4">
         <% if policy(@artwork).update? %>
           <%= link_to [:edit, @artwork] do %>
@@ -30,7 +30,7 @@
         <% end %>
       </div>
     </div>
-    <div class="p-4 bg-white rounded-lg border shadow-md sm:p-6">
+    <div class="p-4 bg-white rounded-md border shadow-sm sm:p-6">
       <div class="grid grid-cols-12 pb-4">
         <div class="col-span-6 border-r">
           <div class="m-4">
@@ -80,7 +80,7 @@
       <div class="relative my-10 mx-auto w-full md:container md:mx-auto">
         <div class="flex justify-between mb-4 border-b">
           <div class="flex">
-            <label class="block text-lg font-medium text-gray-900">Images (<%= @artwork.image_count %>)</label>
+            <label class="block text-lg font-medium text-gray-700">Images (<%= @artwork.image_count %>)</label>
             <%= link_to artwork_path(format: :zip), class:"my-auto ml-2" do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -109,7 +109,7 @@
     <div class="relative my-10 mx-auto w-full md:container md:mx-auto" id="gallery">
       <div class="flex justify-between mb-4 border-b">
         <div class="flex">
-          <label class="block text-lg font-medium text-gray-900">Images (<%= @artwork.image_count %>)</label>
+          <label class="block text-lg font-medium text-gray-700">Images (<%= @artwork.image_count %>)</label>
         </div>
       </div>
       <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">There are no images yet, click edit button in ther right top corner to artwork</p>

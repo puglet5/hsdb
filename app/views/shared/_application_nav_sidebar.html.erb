@@ -8,12 +8,10 @@
               <%= image_tag original_or_variant(current_user.avatar, current_user.avatar.variant(:small)), class: "object-cover w-12 h-12 mt-2 rounded-full" %>
             <% else %>
             <% end %>
-            <%= link_to "/users/#{current_user.slug}", class: "w-10 h-10" do %>
-              <div>
-                <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap"><%= current_user.first_name.to_s %></span>
-                <p class="overflow-hidden mt-0 mr-2 ml-2 w-48 text-gray-500 whitespace-nowrap min-w-1/2 text-ellipsis text-s"><%= current_user.email.to_s %></p>
-              </div>
-            <% end %>
+            <div class="w-10 h-10">
+              <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap"><%= current_user.first_name.to_s %></span>
+              <p class="overflow-hidden mt-0 mr-2 ml-2 w-48 text-gray-500 whitespace-nowrap min-w-1/2 text-ellipsis text-s"><%= current_user.email.to_s %></p>
+            </div>
           </li>
         </ul>
       <% end %>

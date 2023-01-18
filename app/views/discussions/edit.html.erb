@@ -17,7 +17,7 @@
 
         <div class="col-span-2 ml-6">
           <%= render Forms::LabelComponent.new().with_content("Category") %>
-          <%= f.input :category_id, collection: @categories.map { |c| [c.category_name, c.id] }, input_html: {class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 p-2.5 "}, label: false, hint: false, include_blank: false %>
+          <%= f.input :category_id, collection: @categories.map { |c| [c.category_name, c.id] }, input_html: {class: "block w-full text-sm text-gray-700 border border-gray-300 rounded-md bg-gray-50 focus:ring-primary-600 focus:border-primary-600 p-2.5 "}, label: false, hint: false, include_blank: false %>
         </div>
 
       </div>

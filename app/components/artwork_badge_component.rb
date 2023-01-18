@@ -11,7 +11,7 @@ class ArtworkBadgeComponent < ViewComponent::Base
   STATUSES = {
     'active' => 'text-sky-800 bg-sky-100',
     'draft' => 'text-yellow-800 bg-yellow-100',
-    'archived' => 'text-gray-800 bg-gray-100'
+    'archived' => 'text-gray-700 bg-gray-100'
   }.freeze
 
   def color(status)

@@ -7,7 +7,7 @@
       <%= render Links::NewLinkComponent.new(path: new_oauth_application_path, cls: "text-gray-500") %>
     <% end %>
 
-    <div class="overflow-x-auto relative rounded-lg border">
+    <div class="overflow-x-auto relative rounded-md border">
       <table class="w-full text-sm text-left text-gray-500">
         <thead>
           <tr>
@@ -24,7 +24,7 @@
               <td class="py-4 px-6">
                 <%= application.id %>
               </td>
-              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+              <th class="py-4 px-6 font-medium text-gray-700 whitespace-nowrap">
                 <%= link_to application.name, oauth_application_path(application) %>
               </th>
               <td class="py-4 px-6">

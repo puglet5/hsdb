@@ -7,36 +7,32 @@
         <div>
           <h1 class="my-auto text-2xl font-bold sm:text-3xl">Recent artworks</h1>
         </div>
-        <div class="flex">
-          <%= link_to [:new, :artwork], class: "flex items-center justify-center p-3 text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-primary-600 focus:outline-none focus:border focus:ring-1" do %>
+        <div class="flex text-gray-500">
+          <%= link_to [:new, :artwork], class: "flex items-center justify-center p-3 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:ring-primary-600  focus:border focus:ring-1" do %>
 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-3 w-6 h-6 text-primary-600">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus mr-3 flex-shrink-0 w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+              <line x1="9" y1="12" x2="15" y2="12"></line>
+              <line x1="12" y1="9" x2="12" y2="15"></line>
             </svg>
             <span class="w-full text-sm font-medium">Add new artwork</span>
 
           <% end %>
 
-          <%# <form class="my-auto ml-4 w-96">
-        <label for="index-search" class="mb-2 sr-only">Search</label>
-        <div class="relative">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </div>
-          <input type="search" id="default-search" class="" placeholder="Search Objects, Files" required>
-
-        </div>
-      </form> %>
           <%= search_form_for @query, class: "my-auto ml-4 w-96" do |f| %>
-            <%#= f.select :style_id_eq, Style.all.collect{|c| [c.name, c.id]}, {:include_blank => "All categories"}, { class: 'z-10 inline-flex items-center flex-shrink-0 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg py-2.5 hover:bg-gray-200 focus:border-primary-500 focus:ring-0' } %>
             <label for="index-search" class="mb-2 sr-only">Search</label>
             <div class="relative">
               <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search flex-shrink-0 w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="10" cy="10" r="7"></circle>
+                  <line x1="21" y1="21" x2="15" y2="15"></line>
+                </svg>
               </div>
-              <%= f.search_field :title_or_description_cont, class: "block w-full p-4 pl-10 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-600 focus:border-primary-600", placeholder: "Search artworks", required: false %>
+              <%= f.search_field :title_or_description_cont, class: "block w-full p-4 pl-10 text-sm font-medium text-gray-700 bg-white border rounded-md border-gray-300  hover:bg-gray-100 focus:ring-0 focus:border-primary-600", placeholder: "Search artworks", required: false %>
 
-              <button type="submit" class="absolute right-2.5 bottom-2.5 py-2 px-4 text-sm font-medium text-white rounded-lg focus:ring-4 focus:outline-none bg-primary-600 hover:bg-primary-800 focus:ring-primary-600">Search</button>
+              <button type="submit" class="absolute right-2.5 bottom-2.5 py-2 px-4 text-sm font-medium text-white rounded-md   bg-primary-600 hover:bg-primary-800 focus:ring-primary-600">Search</button>
             </div>
           </div>
         <% end %>

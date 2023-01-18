@@ -2,12 +2,12 @@
   <span class="flex absolute -left-3 justify-center items-center rounded-full ring-8 ring-white bg-primary-300">
     <% if reply.user %>
       <% if reply.user.avatar.attached? %>
-        <%= image_tag  reply.user.avatar, class:"object-cover w-6 h-6 rounded-full shadow-lg" %>
+        <%= image_tag  reply.user.avatar, class:"object-cover w-6 h-6 rounded-full shadow-sm" %>
       <% end %>
     <% end %>
   </span>
   <%= turbo_frame_tag reply do %>
-    <div class="p-4 my-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+    <div class="p-4 my-4 bg-white rounded-md border border-gray-200 shadow-sm">
       <div class="justify-between items-center mb-3 sm:flex">
         <div class="text-sm font-normal text-gray-500 lex">
           <%= reply.user&.full_name %>
@@ -37,7 +37,7 @@
           <% end %>
         </div>
       </div>
-      <div class="p-3 text-xs font-normal text-gray-700 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="p-3 text-xs font-normal text-gray-700 bg-gray-50 rounded-md border border-gray-200">
         <%= simple_format reply.reply %>
       </div>
     </div>

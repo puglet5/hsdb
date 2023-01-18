@@ -37,7 +37,7 @@ class Spectrum < RsdbRecord
 
   enum range: { not_set: 0, vis: 1, ir: 2, uv: 3, other: 4 }, _default: :ir
 
-  enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, other: 7 }, _default: :not_set, _suffix: :format
+  enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, dpt: 7, other: 99 }, _default: :not_set, _suffix: :format
 
   enum category: { not_set: 0, reference: 1 }, _default: :not_set, _suffix: :category
 

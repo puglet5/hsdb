@@ -11,18 +11,7 @@ export default class extends Controller {
 
   async copy() {
     await navigator.clipboard.writeText(this.textTarget.href)
-    this.blink()
     this.message()
-  }
-
-  blink() {
-    const svg = this.svgTarget
-    svg.classList.remove("text-gray-400")
-    svg.classList.add("text-primary-600")
-    setTimeout(function () {
-      svg.classList.remove("text-primary-600")
-      svg.classList.add("text-gray-400")
-   }, 500)
   }
 
   message() {

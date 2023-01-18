@@ -1,7 +1,7 @@
   <%= simple_form_for [@discussion, @discussion.replies.build], remote: true, validate: true do |f| %>
-  <%= f.input :reply, as: :text, input_html: { class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 " }, placeholder: "Leave a reply..." %>
+  <%= f.input :reply, as: :text, input_html: { class: "block w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2.5 bg-gray-50 focus:ring-primary-600 focus:border-primary-600 " }, placeholder: "Leave a reply..." %>
   <div class="flex m-2 ml-0">
-    <button type="submit" class="inline-flex items-center p-1.5 px-4 mr-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none bg-primary-500 hover:bg-primary-800 focus:ring-primary-200">
+    <button type="submit" class="inline-flex items-center p-1.5 px-4 mr-2 text-sm font-medium text-center text-white rounded-md   bg-primary-500 hover:bg-primary-800 focus:ring-primary-200">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>

@@ -24,21 +24,31 @@
         </span>
       </div>
     </div>
-    <div id="controls" class="flex flex-row justify-center items-center mx-1 space-x-0">
-      <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
+    <div id="controls" class="flex flex-row justify-center items-center mx-1 space-x-1">
+      <% if policy(spectrum).edit? %>
         <%= link_to [:edit, @sample, spectrum] do %>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 my-auto w-5 h-5 text-gray-400">
-            <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
-            <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
-          </svg>
+          <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+              <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+              <path d="M16 5l3 3"></path>
+            </svg>
+          <% end %>
         <% end %>
       <% end %>
 
-      <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
-        <%= link_to [@sample, spectrum], data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-400">
-            <path fill-rule="evenodd" d="M7.22 3.22A.75.75 0 017.75 3h9A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17h-9a.75.75 0 01-.53-.22L.97 10.53a.75.75 0 010-1.06l6.25-6.25zm3.06 4a.75.75 0 10-1.06 1.06L10.94 10l-1.72 1.72a.75.75 0 101.06 1.06L12 11.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L12 8.94l-1.72-1.72z" clip-rule="evenodd" />
-          </svg>
+      <% if policy(spectrum).destroy? %>
+        <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
+          <%= link_to [@sample, spectrum], data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M4 7h16"></path>
+              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+              <path d="M10 12l4 4m0 -4l-4 4"></path>
+            </svg>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -86,61 +96,62 @@
     <span>Files</span>
   </div>
   <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum.file.url, chart_filename_value: spectrum.file.filename, chart_id_value: spectrum.id } do %>
-    <%= tag.div class: "ml-4" do %>
-      <div class="flex justify-between">
-        <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
-          <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
-            <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <line x1="3" y1="4" x2="21" y2="4"></line>
-                <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-                <line x1="12" y1="16" x2="12" y2="20"></line>
-                <line x1="9" y1="20" x2="15" y2="20"></line>
-                <path d="M8 12l3 -3l2 2l3 -3"></path>
-              </svg>
-            <% end %>
+    <div class="flex justify-between space-x-2">
+
+      <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
+        <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
+          <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="3" y1="4" x2="21" y2="4"></line>
+              <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+              <line x1="12" y1="16" x2="12" y2="20"></line>
+              <line x1="9" y1="20" x2="15" y2="20"></line>
+              <path d="M8 12l3 -3l2 2l3 -3"></path>
+            </svg>
           <% end %>
-        <% else %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 m-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <line x1="3" y1="4" x2="21" y2="4"></line>
-            <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-            <line x1="12" y1="16" x2="12" y2="20"></line>
-            <line x1="9" y1="20" x2="15" y2="20"></line>
-            <path d="M8 12l3 -3l2 2l3 -3"></path>
-          </svg>
         <% end %>
-        <div class="w-full text-sm text-gray-500 my-auto">
-          <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
-            <%= spectrum.file.filename %>
-          <% end %>
-        </div>
-      </div>
-      <div id="settings" class="ml-1.5 flex spece-x-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <% else %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <circle cx="12" cy="14" r="2"></circle>
-          <path d="M12 10.5v1.5"></path>
-          <path d="M12 16v1.5"></path>
-          <path d="M15.031 12.25l-1.299 .75"></path>
-          <path d="M10.268 15l-1.3 .75"></path>
-          <path d="M15 15.803l-1.285 -.773"></path>
-          <path d="M10.285 12.97l-1.285 -.773"></path>
-          <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-          <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+          <line x1="3" y1="4" x2="21" y2="4"></line>
+          <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+          <line x1="12" y1="16" x2="12" y2="20"></line>
+          <line x1="9" y1="20" x2="15" y2="20"></line>
+          <path d="M8 12l3 -3l2 2l3 -3"></path>
         </svg>
-        <% if spectrum.settings.attached? %>
-          <%= link_to spectrum.settings.url, class: "font-bold hover:underline text-sm text-gray-500" do %>
-            <%= spectrum.settings.filename %>
-          <% end %>
-        <% else %>
-          <span class="ml-1.5 text-sm text-gray-500 my-auto">
-            Not provided
-          </span>
+      <% end %>
+
+      <div class="w-full text-sm text-gray-500 my-auto">
+        <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
+          <%= spectrum.file.filename %>
         <% end %>
       </div>
-    <% end %>
+    </div>
+
+    <div id="settings" class="flex space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="14" r="2"></circle>
+        <path d="M12 10.5v1.5"></path>
+        <path d="M12 16v1.5"></path>
+        <path d="M15.031 12.25l-1.299 .75"></path>
+        <path d="M10.268 15l-1.3 .75"></path>
+        <path d="M15 15.803l-1.285 -.773"></path>
+        <path d="M10.285 12.97l-1.285 -.773"></path>
+        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+      </svg>
+      <% if spectrum.settings.attached? %>
+        <%= link_to spectrum.settings.url, class: "font-bold hover:underline text-sm text-gray-500" do %>
+          <%= spectrum.settings.filename %>
+        <% end %>
+      <% else %>
+        <span class=" text-sm text-gray-500 my-auto">
+          Not provided
+        </span>
+      <% end %>
+    </div>
     <%= render "spectrum_modal", spectrum: spectrum %>
   <% end %>
 

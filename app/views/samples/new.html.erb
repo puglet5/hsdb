@@ -26,7 +26,7 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5  focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
         </div>
 
         <div class="mb-4 col-span-2">
@@ -67,7 +67,7 @@
           <div class="mb-4">
             <%= tag.div data: { controller: "datepicker" } do %>
               <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-              <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
+              <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
             <% end %>
           </div>
         </div>
@@ -87,7 +87,7 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Spectra files") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
               <p class="font-medium text-center" id="uppy-text">
                 Browse...
               </p>
@@ -105,7 +105,7 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Images") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
               <p class="font-medium text-center" id="uppy-text">
                 Browse...
               </p>
@@ -123,7 +123,7 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Documents") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
               <p class="font-medium text-center" id="uppy-text">
                 Browse...
               </p>
