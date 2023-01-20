@@ -3,16 +3,28 @@
 
     <div class="px-4 mx-auto max-w-screen-xl text-center lg:px-12">
       <%= render Typography::H1Component.new() do %>
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor amet.
+        Spectral Database Index
       <% end %>
       <%= render Typography::PHeroComponent.new() do %>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+        Listed below are all samples present in database sorted by date added. Click on column headers to sort by corresponding attribute.
+
+        Use search to find and filter samples.
       <% end %>
     </div>
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference spectra samples") %>
-      <%= render Links::NewLinkComponent.new(path: [:new, :sample], cls: "text-gray-500") %>
+
+      <%= render TooltipComponent.new(tooltip: "New Sample", user: current_user) do %>
+        <%= link_to [:new, :sample], class: "my-auto" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus w-6 h-6 text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="9" y1="12" x2="15" y2="12"></line>
+            <line x1="12" y1="9" x2="12" y2="15"></line>
+          </svg>
+        <% end %>
+      <% end %>
     <% end %>
 
     <% if @samples&.count > 0 %>

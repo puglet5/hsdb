@@ -1,5 +1,5 @@
 <%= render "shared/errors", obj: @sample %>
-<section class="bg-gray-50">
+<section>
   <div class="container p-20 mx-auto">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New sample
@@ -26,7 +26,7 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5  focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div class="mb-4 col-span-2">

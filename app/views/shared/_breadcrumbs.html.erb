@@ -1,5 +1,5 @@
 <% if breadcrumb_trail.count.positive? && current_user&.settings(:ui)&.breadcrumbs %>
-  <nav aria-label="breadcrumb" class="flex px-5 py-1 text-gray-500 justify-center bg-gray-50">
+  <nav aria-label="breadcrumb" class="flex px-5 py-1 text-gray-500 justify-center ">
     <ol class="flex px-5 py-3 text-gray-500 rounded-md" aria-label="Breadcrumb">
       <% breadcrumb_trail do |crumb| %>
         <li class="inline-flex items-center">
