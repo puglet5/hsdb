@@ -1,6 +1,6 @@
 <%= render "shared/errors", obj: @artwork %>
 <section>
-  <div class="container p-20 mx-auto max-w-screen-xl">
+  <div class="container max-w-screen-xl p-20 mx-auto">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       Edit artwork
     </div>
@@ -26,12 +26,12 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
-          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600" }, hint: false, label: false %>
+          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600" }, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
-          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600 peer" }, hint: false, label: false %>
+          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
@@ -62,7 +62,7 @@
         <div class="mb-4">
           <%= tag.div data: { controller: "datepicker" } do %>
             <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" }, value: @artwork.survey_date&.strftime("%d/%m/%Y") }, placeholder: "DD/MM/YYYY" %>
+            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { datepicker_target: "input" }, value: @artwork.survey_date&.strftime("%d/%m/%Y") }, placeholder: "DD/MM/YYYY" %>
           <% end %>
         </div>
       </div>

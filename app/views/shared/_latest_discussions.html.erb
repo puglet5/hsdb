@@ -1,8 +1,8 @@
-<div class="flex justify-between border-b pb-2">
+<div class="flex justify-between pb-2 border-b">
   <%= render Typography::H3Component.new(cls: "text-center !m-0").with_content("Latest Discussions") %>
   <%= render TooltipComponent.new(tooltip: "New Discussion", user: current_user) do %>
     <%= link_to [:new, :discussion], class: "my-auto" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus w-6 h-6 text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <circle cx="12" cy="12" r="9"></circle>
         <line x1="9" y1="12" x2="15" y2="12"></line>
@@ -16,7 +16,7 @@
     <ol class="relative border-l border-gray-200">
       <% @discussions_unpinned.each do |discussion| %>
         <li class="mb-10 ml-4">
-          <div class="absolute -left-1.5 mt-2.5 w-3 h-3 bg-gray-200 rounded-full border border-white"></div>
+          <div class="absolute w-3 h-3 bg-gray-200 border border-white rounded-full -left-1.5 mt-2.5"></div>
           <div class="flex justify-between">
             <p class="my-auto text-sm font-normal leading-none text-gray-400">
               <% if discussion.user %>
@@ -38,11 +38,11 @@
               <% end %>
               ago
             </p>
-            <div class="flex flex-row justify-center items-center mx-1 space-x-1">
+            <div class="flex flex-row items-center justify-center mx-1 space-x-1">
               <% if policy(discussion).edit? %>
                 <%= link_to [:edit, discussion] do %>
                   <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
                       <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
@@ -53,7 +53,7 @@
               <% end %>
 
               <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                 </svg>
@@ -62,7 +62,7 @@
               <% if policy(discussion).destroy? %>
                 <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
                   <%= link_to discussion, data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M4 7h16"></path>
                       <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
@@ -76,7 +76,7 @@
               <%= tag.div data: { controller: "clipboard", action: "click->clipboard#copy" } do %>
                 <%= link_to "", discussion, class: "hidden" , data: { "clipboard-target": "text" } %>
                 <%= render TooltipComponent.new(tooltip: "Copy link", user: current_user) do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="icon icon-tabler icon-tabler-clipboard flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-clipboard text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
                     <rect x="9" y="3" width="6" height="4" rx="2"></rect>
@@ -90,7 +90,7 @@
           <div class="flex justify-between">
             <%= link_to discussion do %>
               <div class="flex mb-2">
-                <span class="inline-flex items-center py-0.5 px-2.5 my-auto mr-2 h-6 text-xs font-medium text-gray-700 bg-gray-100 rounded">
+                <span class="inline-flex items-center h-6 my-auto mr-2 text-xs font-medium text-gray-700 bg-gray-100 rounded py-0.5 px-2.5">
                   <%= discussion.replies.count %>
                 </span>
                 <h3 class="my-1 mr-4 text-xl font-bold hover:underline">

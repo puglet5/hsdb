@@ -1,5 +1,5 @@
 <% if resource.errors.any? %>
-  <div class="absolute right-2 top-14 self-end">
+  <div class="absolute self-end right-2 top-14">
     <% resource.errors.full_messages.each do |msg| %>
       <%= render(FlashComponent.new(msg: msg, type: 'error', cls: "flash-error")) %>
     <% end %>

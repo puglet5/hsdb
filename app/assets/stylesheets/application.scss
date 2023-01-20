@@ -24,7 +24,7 @@ body {
 }
 
 .datepicker-cell.selected {
-  @apply !bg-primary-600
+  @apply !bg-primary-500
 }
 
 @layer components {
@@ -253,7 +253,7 @@ trix-toolbar .trix-button-group {
 }
 
 trix-editor {
-  @apply block p-2.5 w-full text-sm text-gray-700 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-600 focus:border-primary-600 focus:ring-1 !important;
+  @apply block p-2.5 w-full text-sm text-gray-700 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-500 focus:border-primary-600 focus:ring-1 !important;
   outline: none;
 }
 

@@ -1,10 +1,10 @@
 <section class="py-20 mb-20 text-gray-700 ">
   <div class="container mx-auto">
-    <div class="p-4 bg-white rounded-md border shadow-sm sm:p-6">
+    <div class="p-4 bg-white border rounded-md shadow-sm sm:p-6">
       <div class="grid grid-cols-12">
         <div class="col-span-3 border-r">
           <div class="flex flex-col justify-center">
-            <span class="flex relative m-auto w-20 h-20 rounded-full lg:w-40 lg:h-40 bg-primary-300">
+            <span class="relative flex w-20 h-20 m-auto rounded-full lg:w-40 lg:h-40 bg-primary-300">
               <% if @user.avatar.present? %>
                 <%= image_tag @user.avatar, class: "object-cover w-20 h-20 rounded-full lg:w-40 lg:h-40" %>
               <% end %>
@@ -27,7 +27,7 @@
               <p class="mx-auto font-normal text-gray-500">
                 <%= @user.organization %>
               </p>
-              <p class="overflow-hidden mx-auto w-full text-sm font-medium text-gray-500 hover:underline text-ellipsis">
+              <p class="w-full mx-auto overflow-hidden text-sm font-medium text-gray-500 hover:underline text-ellipsis">
                 <a href="<%= "mailto:#{@user.email}" %>" class="">
                   <%= @user.email %>
                 </a>
@@ -38,9 +38,9 @@
         <div class="col-span-6">
           <% if policy(@user).update_settings? %>
 
-            <h4 class="font-semibold text-l mx-2">Settings</h4>
+            <h4 class="mx-2 font-semibold text-l">Settings</h4>
 
-            <div class="mt-4 mr-10 ml-4">
+            <div class="mt-4 ml-4 mr-10">
               <%= render "settings_form" %>
             </div>
           <% end %>
@@ -53,7 +53,7 @@
               <% if policy([:admin, :user]).index? %>
                 <%= link_to "/admin/users" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <circle cx="9" cy="7" r="4"></circle>
                       <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -67,7 +67,7 @@
               <% if policy(:category).index? %>
                 <%= link_to [:categories] do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
                       <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
@@ -79,7 +79,7 @@
               <% if current_user.has_role?(:admin) %>
                 <%= link_to "/admin/sidekiq" do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-building-factory" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-building-factory" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12"></path>
                       <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8"></path>
@@ -91,7 +91,7 @@
                 <% end %>
                 <%= link_to rswag_ui_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-api" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-api" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M4 13h5"></path>
                       <path d="M12 16v-8h3a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-3"></path>
@@ -103,7 +103,7 @@
                 <% end %>
                 <%= link_to oauth_applications_path do %>
                   <div class="flex my-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden mr-2 w-6 h-6 text-gray-500 lg:block icon-tabler-apps" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 mr-2 text-gray-500 lg:block icon-tabler-apps" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <rect x="4" y="4" width="6" height="6" rx="1"></rect>
                       <rect x="4" y="14" width="6" height="6" rx="1"></rect>

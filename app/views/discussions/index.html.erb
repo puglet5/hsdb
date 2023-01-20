@@ -12,11 +12,11 @@
     <% if @discussions_unpinned.count > 0 %>
       <%= render "shared/latest_discussions" %>
     <% else %>
-      <div class="flex justify-between border-b pb-2">
+      <div class="flex justify-between pb-2 border-b">
         <%= render Typography::H3Component.new(cls: "text-center !m-0").with_content("Latest Discussions") %>
         <%= render TooltipComponent.new(tooltip: "New Discussion", user: current_user) do %>
           <%= link_to [:new, :discussion], class: "my-auto" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus w-6 h-6 text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <circle cx="12" cy="12" r="9"></circle>
               <line x1="9" y1="12" x2="15" y2="12"></line>
@@ -25,7 +25,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="relative p-8 my-4 text-center bg-white rounded-md border border-gray-200">
+      <div class="relative p-8 my-4 text-center bg-white border border-gray-200 rounded-md">
         <h2 class="text-2xl font-medium">
           There's nothing here...
         </h2>

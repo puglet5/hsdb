@@ -1,12 +1,12 @@
 <% if breadcrumb_trail.count.positive? && current_user&.settings(:ui)&.breadcrumbs %>
-  <nav aria-label="breadcrumb" class="flex px-5 py-1 text-gray-500 justify-center ">
+  <nav aria-label="breadcrumb" class="flex justify-center px-5 py-1 text-gray-500 ">
     <ol class="flex px-5 py-3 text-gray-500 rounded-md" aria-label="Breadcrumb">
       <% breadcrumb_trail do |crumb| %>
         <li class="inline-flex items-center">
 
-          <%= link_to crumb.name, crumb.url, class: "text-xs font-bold text-gray-500 hover:underline ml-2" %>
+          <%= link_to crumb.name, crumb.url, class: "ml-2 text-xs font-bold text-gray-500 hover:underline" %>
           <% unless crumb.current? %>
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-400 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <svg aria-hidden="true" class="w-5 h-5 ml-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd">
               </path>
             </svg>

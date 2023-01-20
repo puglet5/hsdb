@@ -34,12 +34,12 @@
       </div>
 
       <div class="flex items-center mb-4">
-        <%= f.input :remember_me, as: :boolean, label: false, input_html: { class: "w-4 h-4 my-auto bg-white border-gray-300 rounded 100 text-primary-600 focus:ring-1 focus:ring-primary-600" } if devise_mapping.rememberable? %>
+        <%= f.input :remember_me, as: :boolean, label: false, input_html: { class: "w-4 h-4 my-auto bg-white border-gray-300 rounded 100 text-primary-600 focus:ring-1 focus:ring-primary-500" } if devise_mapping.rememberable? %>
         <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-500">Remember me</label>
       </div>
 
       <div class="flex items-center justify-between">
-        <%= f.submit "Log in", class: "inline-block px-5 py-3 mr-3 text-sm font-medium text-white rounded-md bg-primary-600 focus:ring-primary-600  focus:border focus:ring-1 outline-none border border-white" %>
+        <%= f.submit "Log in", class: "inline-block px-5 py-3 mr-3 text-sm font-medium text-white border border-white rounded-md outline-none bg-primary-500 focus:ring-primary-500 focus:border focus:ring-1" %>
         <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
           <p class="ml-3 text-sm text-gray-500">
             No account?

@@ -21,7 +21,7 @@
       <!--  -->
 
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
-      <div id="info" class="mb-4 grid grid-cols-2 gap-4">
+      <div id="info" class="grid grid-cols-2 gap-4 mb-4">
 
         <div id="title" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
@@ -40,17 +40,17 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600 peer" }, hint: false, label: false %>
+          <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
-        <div class="mb-4 col-span-2">
+        <div class="col-span-2 mb-4">
           <%= render Forms::LabelComponent.new().with_content("Description") %>
           <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on sample cards") %>
         </div>
       </div>
 
       <%= render Forms::SectionLabelComponent.new().with_content("Misc") %>
-      <div id="misc" class="mb-4 grid grid-cols-2 gap-4">
+      <div id="misc" class="grid grid-cols-2 gap-4 mb-4">
 
         <div id="sku" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Sku") %>
@@ -81,7 +81,7 @@
           <div class="mb-4">
             <%= tag.div data: { controller: "datepicker" } do %>
               <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-              <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" }, value: @sample.survey_date&.strftime("%d/%m/%Y") }, placeholder: "DD/MM/YYYY" %>
+              <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { datepicker_target: "input" }, value: @sample.survey_date&.strftime("%d/%m/%Y") }, placeholder: "DD/MM/YYYY" %>
             <% end %>
           </div>
         </div>
@@ -128,7 +128,7 @@
 
               <% if @sample.images&.count.to_i > 0 %>
                 <%= tag.div data: { controller: "modal" } do %>
-                  <%= tag.div data: { action:"click->modal#toggle" }, class: "ml-2 flex items-center justify-center my-auto bg-white border border-gray-300 rounded-md px-1.5" do %>
+                  <%= tag.div data: { action:"click->modal#toggle" }, class: "flex items-center justify-center my-auto ml-2 bg-white border border-gray-300 rounded-md px-1.5" do %>
                     <%= render TooltipComponent.new(tooltip: "Show/delete attached images", user: current_user) do %>
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -168,7 +168,7 @@
 
       <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700").with_content("Metadata") %>
       <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-      <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: (JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata)  } %>
+      <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: (JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata)  } %>
 
       <div class="ml-2">
 

@@ -1,16 +1,16 @@
 <%= render Sections::SectionComponent.new() do %>
   <%= render Sections::DivContainerComponent.new() do %>
 
-    <div class="px-4 mx-auto max-w-screen-xl text-gray-700 sm:px-6 lg:px-8">
+    <div class="max-w-screen-xl px-4 mx-auto text-gray-700 sm:px-6 lg:px-8">
 
-      <div class="flex justify-between items-center mb-8">
+      <div class="flex items-center justify-between mb-8">
         <div>
           <h1 class="my-auto text-2xl font-bold sm:text-3xl">Recent artworks</h1>
         </div>
         <div class="flex text-gray-500">
-          <%= link_to [:new, :artwork], class: "flex items-center justify-center p-3 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:ring-primary-600  focus:border focus:ring-1" do %>
+          <%= link_to [:new, :artwork], class: "flex items-center justify-center p-3 bg-white border border-gray-300 rounded-md group hover:bg-gray-100 focus:ring-primary-500 focus:border focus:ring-1" do %>
 
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus mr-3 flex-shrink-0 w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 mr-3 icon icon-tabler icon-tabler-circle-plus group-hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <circle cx="12" cy="12" r="9"></circle>
               <line x1="9" y1="12" x2="15" y2="12"></line>
@@ -22,17 +22,17 @@
 
           <%= search_form_for @query, class: "my-auto ml-4 w-96" do |f| %>
             <label for="index-search" class="mb-2 sr-only">Search</label>
-            <div class="relative">
-              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search flex-shrink-0 w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-500 group-hover:text-primary-500 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <circle cx="10" cy="10" r="7"></circle>
                   <line x1="21" y1="21" x2="15" y2="15"></line>
                 </svg>
               </div>
-              <%= f.search_field :title_or_description_cont, class: "block w-full p-4 pl-10 text-sm font-medium text-gray-700 bg-white border rounded-md border-gray-300  hover:bg-gray-100 focus:ring-0 focus:border-primary-600", placeholder: "Search artworks", required: false %>
+              <%= f.search_field :title_or_description_cont, class: "block w-full p-4 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:ring-0 focus:border-primary-600", placeholder: "Search artworks", required: false %>
 
-              <button type="submit" class="absolute right-2.5 bottom-2.5 py-2 px-4 text-sm font-medium text-white rounded-md   bg-primary-600 hover:bg-primary-800 focus:ring-primary-600">Search</button>
+              <button type="submit" class="absolute px-4 py-2 text-sm font-medium text-white rounded-md right-2.5 bottom-2.5 bg-primary-500 hover:bg-primary-600 focus:ring-primary-500">Search</button>
             </div>
           </div>
         <% end %>

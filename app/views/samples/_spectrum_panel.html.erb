@@ -1,12 +1,12 @@
 <%= render Forms::SectionLabelComponent.new() do %>
   <div class="flex justify-between">
     <div class="flex p-2 space-x-2 text-sm">
-      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <path d="M8 4h-3v16h3"></path>
         <path d="M16 4h3v16h-3"></path>
       </svg>
-      <div class="text-gray-700 flex space-x-1">
+      <div class="flex space-x-1 text-gray-700">
         <span class="my-auto">
           <%= spectrum.range.upcase %>
         </span>
@@ -24,11 +24,11 @@
         </span>
       </div>
     </div>
-    <div id="controls" class="flex flex-row justify-center items-center mx-1 space-x-1">
+    <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
       <% if policy(spectrum).edit? %>
         <%= link_to [:edit, @sample, spectrum] do %>
           <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
               <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
@@ -41,7 +41,7 @@
       <% if policy(spectrum).destroy? %>
         <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
           <%= link_to [@sample, spectrum], data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <path d="M4 7h16"></path>
               <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
@@ -56,7 +56,7 @@
 <% end %>
 <div id="<%= dom_id spectrum %>" class="ml-2">
   <div class="flex space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <rect x="5" y="5" width="14" height="14" rx="1"></rect>
       <path d="M9 9h6v6h-6z"></path>
@@ -75,7 +75,7 @@
     Still it was a steady pulse of pain midway down his spine. Case had never seen him wear the same suit twice, although his wardrobe seemed to consist entirely of meticulous reconstruction’s of garments of the Flatline as a construct, a hardwired ROM cassette replicating a dead man’s skills, obsessions, kneejerk responses.
   </div>
   <div class="flex space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <line x1="4" y1="6" x2="20" y2="6"></line>
       <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -86,8 +86,8 @@
   <div class="p-2 ml-2 text-sm text-justify text-gray-500">
     No light but the muted purring of the blowers and the amplified breathing of the fighters. The tug Marcus Garvey, a steel drum nine meters long and two in diameter, creaked and shuddered as Maelcum punched for a California gambling cartel, then as a gliding cursor struck sparks from the Chinese program’s thrust, a worrying impression of solid fluidity, as though the shards of a broken mirror bent and elongated as they rotated, but it never told the correct time.
   </div>
-  <div class="flex space-x-2 mb-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <div class="flex mb-2 space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M15 3v4a1 1 0 0 0 1 1h4"></path>
       <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z"></path>
@@ -101,7 +101,7 @@
       <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
         <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
           <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <line x1="3" y1="4" x2="21" y2="4"></line>
               <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
@@ -112,7 +112,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <line x1="3" y1="4" x2="21" y2="4"></line>
           <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
@@ -122,7 +122,7 @@
         </svg>
       <% end %>
 
-      <div class="w-full text-sm text-gray-500 my-auto">
+      <div class="w-full my-auto text-sm text-gray-500">
         <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
           <%= spectrum.file.filename %>
         <% end %>
@@ -130,7 +130,7 @@
     </div>
 
     <div id="settings" class="flex space-x-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-5 w-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <circle cx="12" cy="14" r="2"></circle>
         <path d="M12 10.5v1.5"></path>
@@ -143,11 +143,11 @@
         <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
       </svg>
       <% if spectrum.settings.attached? %>
-        <%= link_to spectrum.settings.url, class: "font-bold hover:underline text-sm text-gray-500" do %>
+        <%= link_to spectrum.settings.url, class: "text-sm font-bold text-gray-500 hover:underline" do %>
           <%= spectrum.settings.filename %>
         <% end %>
       <% else %>
-        <span class=" text-sm text-gray-500 my-auto">
+        <span class="my-auto text-sm text-gray-500 ">
           Not provided
         </span>
       <% end %>

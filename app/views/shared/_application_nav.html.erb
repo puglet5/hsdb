@@ -1,8 +1,8 @@
-<nav class="relative py-2.5 px-2 bg-white border border-gray-200 sm:px-4 shadow-xs">
+<nav class="relative px-2 bg-white border border-gray-200 shadow-xs py-2.5 sm:px-4">
   <div class="grid grid-cols-3 gap-4">
-    <div class="place-self-start my-auto">
+    <div class="my-auto place-self-start">
       <span class="flex flex-row self-center text-xl font-semibold whitespace-nowrap text-primary-500">
-        <svg xmlns="http://www.w3.org/2000/svg" class="my-auto mr-2 w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 my-auto mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
           <path d="M4 6v6a8 3 0 0 0 16 0v-6"></path>
@@ -17,7 +17,7 @@
         </p>
       </span>
     </div>
-    <div class="place-self-center my-auto">
+    <div class="my-auto place-self-center">
       <ul class="flex flex-row mt-0 space-x-8 text-sm font-medium">
         <% if current_user %>
           <%= render TooltipComponent.new(tooltip: "Home", cls: "p-0 m-0 border-0", user: current_user) do %>
@@ -78,7 +78,7 @@
     <%= tag.div data: { controller: "dropdown" }, class: "flex my-auto place-self-end" do %>
       <% if current_user %>
         <%= tag.div data: { controller: "dropdown" } do %>
-          <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0   text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
+          <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0 text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
             <span class="sr-only">Open user menu</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

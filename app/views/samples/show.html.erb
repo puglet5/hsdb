@@ -1,14 +1,14 @@
 <%= render Sections::SectionComponent.new(cls: "!py-0") do %>
-  <div class="py-24 px-4 mx-auto text-gray-700 sm:px-6 lg:px-8">
+  <div class="px-4 py-24 mx-auto text-gray-700 sm:px-6 lg:px-8">
 
     <%= tag.div data: { controller: "tabs", tabs_active_class: "active-tab" } do %>
-      <div class="grid grid-cols-12 max-w-screen-2xl mx-auto rounded-md border shadow-sm">
+      <div class="grid grid-cols-12 mx-auto border rounded-md shadow-sm max-w-screen-2xl">
 
-        <div class="col-span-3 w-full bg-white rounded-l-lg">
+        <div class="w-full col-span-3 bg-white rounded-l-lg">
           <div class="flex justify-between">
             <ul class="flex flex-wrap w-full text-sm">
               <li class="w-full border-b">
-                <div class="flex flex-col justify-center items-center h-16 text-lg font-medium">
+                <div class="flex flex-col items-center justify-center h-16 text-lg font-medium">
                   <div class="flex space-x-2">
                     <span class="my-auto">
                       Sample
@@ -18,16 +18,16 @@
               </li>
               <li class="w-full">
                 <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "active-tab hover:bg-gray-100" do %>
-                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block p-4 w-full" data-action="click->tabs#switch">Info</button>
+                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Info</button>
                 <% end %>
               </li>
               <li class="w-full">
                 <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "hover:bg-gray-100" do %>
-                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block p-4 w-full" data-action="click->tabs#switch">Files</button>
+                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Files</button>
                 <% end %>
               </li>
               <li class="w-full border-y">
-                <div class="flex flex-col justify-center items-center h-16 text-lg font-medium">
+                <div class="flex flex-col items-center justify-center h-16 text-lg font-medium">
                   <div class="flex space-x-1">
                     <span class="my-auto">
                       Spectra
@@ -46,7 +46,7 @@
                 <% @spectra.each do |spectrum| %>
                   <li class="w-full">
                     <%= tag.div data: { "tabs-target": "tab" }, id: "spectrum-#{spectrum.id}-tab", class: "hover:bg-gray-100" do %>
-                      <div class="inline-block p-4 w-full text-center cursor-pointer" data-action="click->tabs#switch">
+                      <div class="inline-block w-full p-4 text-center cursor-pointer" data-action="click->tabs#switch">
                         <%= spectrum.range.upcase %>, .<%= spectrum.format %>
                       </div>
                     <% end %>
@@ -57,7 +57,7 @@
           </div>
         </div>
 
-        <div class="col-span-9 w-full bg-white rounded-r-lg border-l">
+        <div class="w-full col-span-9 bg-white border-l rounded-r-lg">
 
           <div id="sample" class="p-8 pt-4 border-b">
             <div class="flex justify-between">
@@ -75,17 +75,17 @@
                 </div>
                 <span class="my-auto mr-2 text-xs font-medium text-gray-500">
                   by
-                  <%= link_to @sample.user, class: "hover:underline font-bold" do %>
+                  <%= link_to @sample.user, class: "font-bold hover:underline" do %>
                     <%= @sample.user.full_name %>
                   <% end %>
                 </span>
 
               </div>
-              <div id="controls" class="flex flex-row justify-center items-center mx-1 space-x-1">
+              <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
                 <% if policy(@sample).edit? %>
                   <%= link_to [:edit, @sample] do %>
                     <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
                         <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
@@ -96,7 +96,7 @@
                 <% end %>
 
                 <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                   </svg>
@@ -105,7 +105,7 @@
                 <% if policy(@sample).destroy? %>
                   <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
                     <%= link_to @sample, data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M4 7h16"></path>
                         <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
@@ -119,7 +119,7 @@
                 <%= tag.div data: { controller: "clipboard", action: "click->clipboard#copy" } do %>
                   <%= link_to "", @sample, class: "hidden" , data: { "clipboard-target": "text" } %>
                   <%= render TooltipComponent.new(tooltip: "Copy link", user: current_user) do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="icon icon-tabler icon-tabler-clipboard flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-clipboard text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
                       <rect x="9" y="3" width="6" height="4" rx="2"></rect>
