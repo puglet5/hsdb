@@ -18,6 +18,7 @@
 #
 class Image < ApplicationRecord
   include ProcessImage
+  include ArTransactionChanges
 
   scope :by_status, ->(status) { where(status: status) }
   scope :by_category, ->(category) { where(category: category) }
@@ -34,5 +35,5 @@ class Image < ApplicationRecord
 
   validates :image, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
 
-  after_commit -> { process_image self, image&.id }, on: %i[create update]
+  after_commit -> { process_image self, image&.id }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 end
