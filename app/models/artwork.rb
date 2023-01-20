@@ -29,6 +29,7 @@ class Artwork < ApplicationRecord
   include CustomValidations
   include ParseJson
   include ProcessImage
+  include ArTransactionChanges
 
   scope :by_status, ->(status) { where(status: status) }
   scope :with_images, -> { where.associated(:images) }
@@ -68,7 +69,7 @@ class Artwork < ApplicationRecord
   friendly_id :title, use: %i[slugged finders]
 
   after_commit :parse_json, on: %i[create update]
-  after_commit -> { process_image self, thumbnail&.id }, on: %i[create update]
+  after_commit -> { process_image self, thumbnail&.id }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?

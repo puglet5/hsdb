@@ -7,33 +7,33 @@
       <%= render Links::NewLinkComponent.new(path: new_oauth_application_path, cls: "text-gray-500") %>
     <% end %>
 
-    <div class="overflow-x-auto relative rounded-lg border">
+    <div class="relative overflow-x-auto border rounded-md">
       <table class="w-full text-sm text-left text-gray-500">
         <thead>
           <tr>
-            <th scope="col" class="py-3 px-6">#</th>
-            <th scope="col" class="py-3 px-6"><%= t('.name') %></th>
-            <th scope="col" class="py-3 px-6"><%= t('.callback_url') %></th>
-            <th scope="col" class="py-3 px-6"><%= t('.confidential') %></th>
-            <th scope="col" class="py-3 px-6"><%= t('.actions') %></th>
+            <th scope="col" class="px-6 py-3">#</th>
+            <th scope="col" class="px-6 py-3"><%= t('.name') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.callback_url') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.confidential') %></th>
+            <th scope="col" class="px-6 py-3"><%= t('.actions') %></th>
           </tr>
         </thead>
         <tbody class="bg-white border-b">
           <% @applications.each do |application| %>
             <tr id="application_<%= application.id %>" class="border-b hover:bg-gray-200">
-              <td class="py-4 px-6">
+              <td class="px-6 py-4">
                 <%= application.id %>
               </td>
-              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+              <th class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap">
                 <%= link_to application.name, oauth_application_path(application) %>
               </th>
-              <td class="py-4 px-6">
+              <td class="px-6 py-4">
                 <%= simple_format(application.redirect_uri) %>
               </td>
-              <td class="py-4 px-6">
+              <td class="px-6 py-4">
                 <%= application.confidential? ? t('doorkeeper.applications.index.confidentiality.yes') : t('doorkeeper.applications.index.confidentiality.no') %>
               </td>
-              <td class="py-4 px-6">
+              <td class="px-6 py-4">
                 <%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(application), class: 'btn btn-link' %>
               </td>
             </tr>

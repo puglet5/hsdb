@@ -8,7 +8,8 @@ class DiscussionsController < ApplicationController
   before_action :authorize_discussion
   after_action :verify_authorized
 
-  breadcrumb 'Forum', :discussions_path, match: :exact, only: %i[show new edit]
+  breadcrumb 'Home', :root_path
+  breadcrumb 'Forum', :discussions_path, match: :exact
 
   def index
     @categories = Category.all.includes([:discussions]).order('created_at asc')

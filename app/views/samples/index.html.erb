@@ -1,32 +1,44 @@
 <%= render Sections::SectionComponent.new() do %>
   <%= render Sections::DivContainerComponent.new() do %>
 
-    <div class="px-4 mx-auto max-w-screen-xl text-center lg:px-12">
+    <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
       <%= render Typography::H1Component.new() do %>
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor amet.
+        Spectral Database Index
       <% end %>
       <%= render Typography::PHeroComponent.new() do %>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+        Listed below are all samples present in database sorted by date added. Click on column headers to sort by corresponding attribute.
+
+        Use search to find and filter samples.
       <% end %>
     </div>
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference spectra samples") %>
-      <%= render Links::NewLinkComponent.new(path: [:new, :sample], cls: "text-gray-500") %>
+
+      <%= render TooltipComponent.new(tooltip: "New Sample", user: current_user) do %>
+        <%= link_to [:new, :sample], class: "my-auto" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="9" y1="12" x2="15" y2="12"></line>
+            <line x1="12" y1="9" x2="12" y2="15"></line>
+          </svg>
+        <% end %>
+      <% end %>
     <% end %>
 
     <% if @samples&.count > 0 %>
-      <div class="py-2 px-4 mx-auto max-w-screen-xl text-center">
-        <div class="overflow-x-auto relative rounded-lg border">
+      <div class="max-w-screen-xl px-4 py-2 mx-auto text-center">
+        <div class="relative overflow-x-auto border rounded-md">
           <table class="w-full text-sm text-left text-gray-500">
             <thead>
-              <tr>
+              <tr class="bg-gray-100 border-b border-gray-300">
                 <th scope="col" class="py-3 pl-6">#</th>
-                <th scope="col" class="py-3 px-6">Title</th>
-                <th scope="col" class="py-3 px-6">Category</th>
-                <th scope="col" class="py-3 px-6">Compound</th>
-                <th scope="col" class="py-3 px-6">Files</th>
-                <th scope="col" class="py-3 px-6">Added</th>
+                <th scope="col" class="px-6 py-3">Title</th>
+                <th scope="col" class="px-6 py-3">Category</th>
+                <th scope="col" class="px-6 py-3">Compound</th>
+                <th scope="col" class="px-6 py-3">Files</th>
+                <th scope="col" class="px-6 py-3">Added</th>
               </tr>
             </thead>
             <tbody class="bg-white border-b">
@@ -37,7 +49,7 @@
       </div>
 
     <% else %>
-      <div class="relative p-8 text-center bg-white rounded-lg border border-gray-200">
+      <div class="relative p-8 text-center bg-white border border-gray-200 rounded-md">
         <h2 class="text-2xl font-medium">
           There's nothing here...
         </h2>

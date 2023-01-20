@@ -1,5 +1,5 @@
 <%= render "shared/errors", obj: @spectrum %>
-<section class="bg-gray-50">
+<section>
   <div class="container p-20 mx-auto">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New spectrum
@@ -7,34 +7,34 @@
     <%= simple_form_for [@sample, @spectrum], validate: true do |f| %>
 
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
-      <div id="info" class="mb-4 grid grid-cols-2 gap-4">
+      <div id="info" class="grid grid-cols-2 gap-4 mb-4">
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-          <%= f.input :category, default: @spectrum.category, collection: Spectrum.categories.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :category, default: @spectrum.category, collection: Spectrum.categories.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Range") %>
-          <%= f.input :range, default: @spectrum.range, collection: Spectrum.ranges.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :range, default: @spectrum.range, collection: Spectrum.ranges.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
-          <%= f.input :status, default: @spectrum.status, collection: Spectrum.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :status, default: @spectrum.status, collection: Spectrum.statuses.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("File format") %>
-          <%= f.input :format, default: @spectrum.format, collection: Spectrum.formats.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :format, default: @spectrum.format, collection: Spectrum.formats.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
-        <div class="mb-4 col-span-2">
+        <div class="col-span-2 mb-4">
           <%= render Forms::LabelComponent.new().with_content("Description") %>
           <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "General description") %>
         </div>
 
-        <div class="mb-4 col-span-2">
+        <div class="col-span-2 mb-4">
           <%= render Forms::LabelComponent.new().with_content("Equipment") %>
           <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :equipment, required: false, placeholder: "Equipment description") %>
         </div>
@@ -53,7 +53,7 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
               <p class="font-medium text-center" id="uppy-text">
                 Browse...
               </p>
@@ -71,7 +71,7 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Equipment settings") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
               <p class="font-medium text-center" id="uppy-text">
                 Browse...
               </p>

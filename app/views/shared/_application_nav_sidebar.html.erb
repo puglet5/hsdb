@@ -1,6 +1,6 @@
 <%= cache current_user do %>
-  <aside class="w-72 border" aria-label="Sidebar">
-    <div class="overflow-y-auto py-4 px-3 bg-white rounded">
+  <aside class="border w-72" aria-label="Sidebar">
+    <div class="px-3 py-4 overflow-y-auto bg-white rounded">
       <% if current_user %>
         <ul>
           <li class="flex items-center pl-2 mb-5">
@@ -8,12 +8,10 @@
               <%= image_tag original_or_variant(current_user.avatar, current_user.avatar.variant(:small)), class: "object-cover w-12 h-12 mt-2 rounded-full" %>
             <% else %>
             <% end %>
-            <%= link_to "/users/#{current_user.slug}", class: "w-10 h-10" do %>
-              <div>
-                <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap"><%= current_user.first_name.to_s %></span>
-                <p class="overflow-hidden mt-0 mr-2 ml-2 w-48 text-gray-500 whitespace-nowrap min-w-1/2 text-ellipsis text-s"><%= current_user.email.to_s %></p>
-              </div>
-            <% end %>
+            <div class="w-10 h-10">
+              <span class="self-center ml-2 text-xl font-semibold whitespace-nowrap"><%= current_user.first_name.to_s %></span>
+              <p class="w-48 mt-0 ml-2 mr-2 overflow-hidden text-gray-500 whitespace-nowrap min-w-1/2 text-ellipsis text-s"><%= current_user.email.to_s %></p>
+            </div>
           </li>
         </ul>
       <% end %>
@@ -21,7 +19,7 @@
       <ul class="pt-2 mt-2 border-t border-gray-200">
         <li>
           <%= link_to current_user do %>
-            <div class="flex space-x-4 px-4 py-2 text-sm hover:bg-gray-100">
+            <div class="flex px-4 py-2 space-x-4 text-sm hover:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-500">
                 <path fill-rule="evenodd" d="M8.34 1.804A1 1 0 019.32 1h1.36a1 1 0 01.98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 011.262.125l.962.962a1 1 0 01.125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 01.804.98v1.361a1 1 0 01-.804.98l-1.473.295a6.95 6.95 0 01-.587 1.416l.834 1.25a1 1 0 01-.125 1.262l-.962.962a1 1 0 01-1.262.125l-1.25-.834a6.953 6.953 0 01-1.416.587l-.294 1.473a1 1 0 01-.98.804H9.32a1 1 0 01-.98-.804l-.295-1.473a6.957 6.957 0 01-1.416-.587l-1.25.834a1 1 0 01-1.262-.125l-.962-.962a1 1 0 01-.125-1.262l.834-1.25a6.957 6.957 0 01-.587-1.416l-1.473-.294A1 1 0 011 10.68V9.32a1 1 0 01.804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 01.125-1.262l.962-.962A1 1 0 015.38 3.03l1.25.834a6.957 6.957 0 011.416-.587l.294-1.473zM13 10a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd" />
               </svg>
@@ -33,7 +31,7 @@
         </li>
         <li>
           <%= link_to destroy_user_session_path, turbo_method: :delete do %>
-            <div class="flex space-x-4 px-4 py-2 text-sm hover:bg-gray-100">
+            <div class="flex px-4 py-2 space-x-4 text-sm hover:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-500">
                 <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clip-rule="evenodd" />
                 <path fill-rule="evenodd" d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z" clip-rule="evenodd" />

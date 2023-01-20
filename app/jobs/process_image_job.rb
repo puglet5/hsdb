@@ -16,7 +16,10 @@ class ProcessImageJob < ApplicationJob
       next if attachment.variant(k).key
 
       attachment.variant(k).processed
-      # initiator.touch
+
+      # rubocop:disable Rails/SkipsModelValidations
+      initiator.touch
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 end

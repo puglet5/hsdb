@@ -1,6 +1,6 @@
 <%= render "shared/errors", obj: @artwork %>
-<section class="bg-gray-50">
-  <div class="container p-20 mx-auto max-w-screen-xl">
+<section>
+  <div class="container max-w-screen-xl p-20 mx-auto">
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New artwork
     </div>
@@ -15,12 +15,12 @@
 
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Status") %>
-          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :status, default: @artwork.status, collection: Artwork.statuses.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
           <%= render Forms::LabelComponent.new().with_content("Style/Category") %>
-          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: {class: "block w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none py-2.5 focus:outline-none focus:ring-0 focus:border-gray-200 peer"}, hint: false, label: false %>
+          <%= f.input :style_id, default: @artwork.style_id, collection: Style.all.map { |s| [s.name, s.id] }, :include_blank => "None", input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
 
         <div>
@@ -51,7 +51,7 @@
         <div class="mb-4">
           <%= tag.div data: { controller: "datepicker" } do %>
             <%= render Forms::LabelComponent.new().with_content("Survey date") %>
-            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
+            <%= f.input :survey_date, as: :string, label: false, hint: false, required: true, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { datepicker_target: "input" } }, placeholder: "DD/MM/YYYY" %>
           <% end %>
         </div>
       </div>
@@ -67,7 +67,7 @@
 
         <%= tag.div class: "row-span-2", data: { uppy: "artwork[images_attributes][][image]", controller: "uploads", uploads_target: "div", uploads_settings_value: current_user.settings(:uploading).thumbnails, uploads_allowmultiple_value: true } do %>
           <%= render Forms::LabelComponent.new().with_content("Images") %>
-          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-lg cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+          <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
             <p class="font-medium text-center" id="uppy-text">
               Browse...
             </p>
@@ -89,9 +89,9 @@
       <%= tag.div data: { controller: "metadataForm" }, class: "grid grid-cols-12 gap-4 mb-4 gap-y-0" do %>
 
         <div class="col-span-7" data-metadataForm-target="formContainer">
-          <div class="container grid grid-cols-11 gap-1.5 mx-auto mb-6" data-metadataForm-target="fieldRow">
+          <div class="container grid grid-cols-11 mx-auto mb-6 gap-1.5" data-metadataForm-target="fieldRow">
 
-            <button data-metadataForm-target="addButton" id="addButton" type="button" class="m-auto text-center text-black rounded-lg text-smfont-medium">
+            <button data-metadataForm-target="addButton" id="addButton" type="button" class="m-auto text-center text-black rounded-md text-smfont-medium">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
@@ -100,21 +100,21 @@
             <div class="col-span-5">
               <%= render Forms::LabelComponent.new(optional: false).with_content("Field name") %>
               <div class="relative">
-                <input type="text" name="metadata-field-name" class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 metadata focus:ring-primary-500 focus:border-primary-500" placeholder="wavelength, etc." autofocus>
+                <input type="text" name="metadata-field-name" class="block w-full text-sm text-gray-700 bg-white border border-gray-300 rounded-md p-2.5 metadata focus:ring-primary-500 focus:border-primary-600" placeholder="wavelength, etc." autofocus>
               </div>
             </div>
             <div class="col-span-5">
               <%= render Forms::LabelComponent.new(optional: false).with_content("Value") %>
 
               <div class="flex">
-                <input type="text" name="metadata-field-value" class="block flex-1 p-2.5 w-full min-w-0 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 metadata focus:ring-primary-500 focus:border-primary-500" placeholder="1064 or [532, 1064]">
+                <input type="text" name="metadata-field-value" class="flex-1 block w-full min-w-0 text-sm text-gray-700 bg-white border border-gray-300 rounded-md p-2.5 metadata focus:ring-primary-500 focus:border-primary-600" placeholder="1064 or [532, 1064]">
               </div>
             </div>
           </div>
         </div>
         <div class="col-span-5">
           <%= render Forms::LabelComponent.new(optional: false).with_content("JSON preview") %>
-          <div class="text-gray-900 bg-gray-50 rounded-lg border border-gray-300 min-h-2/3">
+          <div class="text-gray-700 border border-gray-300 rounded-md bg-gray-50 min-h-2/3">
             <div class="tree">
             </div>
             <div class="hidden">

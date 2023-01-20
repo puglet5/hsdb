@@ -1,34 +1,40 @@
 <%= render Sections::SectionComponent.new() do %>
   <%= render Sections::DivContainerComponent.new() do %>
-    <%= render Typography::H1Component.new(cls: "text-center").with_content("Forum") %>
+    <%= render Typography::H1Component.new(cls: "text-center").with_content("DB Forum") %>
     <%= render Typography::PHeroComponent.new(cls: "text-center") do %>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue.
+      Create a new discussion below or reply to an existing one. Discussions are sorted by categories selected in a sidebar on the right
     <% end %>
 
-    <div class="grid grid-cols-12 gap-8">
-      <div class="col-span-8">
-        <% if @discussions_pinned.count > 0 %>
-          <%= render "shared/pinned_discussions" %>
-        <% end %>
+    <% if @discussions_pinned.count > 0 %>
+      <%= render "shared/pinned_discussions" %>
+    <% end %>
 
-        <% if @discussions_unpinned.count > 0 %>
-          <%= render "shared/latest_discussions" %>
-        <% else %>
-          <div class="flex justify-between border-b">
-            <%= render Typography::H4Component.new(cls: "text-center").with_content("Latest Discussions") %>
-            <%= render Links::NewLinkComponent.new(path: [:new, :discussion]) %>
-          </div>
-          <%= render Sections::CardComponent.new(cls: "text-gray-700 !p-4 !my-4 !mx-0") do %>
-            <p class="text-sm text-center text-gray-400">
-              There are no discussions yet
-            </p>
+    <% if @discussions_unpinned.count > 0 %>
+      <%= render "shared/latest_discussions" %>
+    <% else %>
+      <div class="flex justify-between pb-2 border-b">
+        <%= render Typography::H3Component.new(cls: "text-center !m-0").with_content("Latest Discussions") %>
+        <%= render TooltipComponent.new(tooltip: "New Discussion", user: current_user) do %>
+          <%= link_to [:new, :discussion], class: "my-auto" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+              <line x1="9" y1="12" x2="15" y2="12"></line>
+              <line x1="12" y1="9" x2="12" y2="15"></line>
+            </svg>
           <% end %>
         <% end %>
       </div>
-      <div class="col-span-4">
-        <%= render "sidebar" %>
+      <div class="relative p-8 my-4 text-center bg-white border border-gray-200 rounded-md">
+        <h2 class="text-2xl font-medium">
+          There's nothing here...
+        </h2>
+        <p class="mt-4 text-sm text-gray-500">
+          New discussions will appear here
+        </p>
       </div>
-    </div>
+    <% end %>
+
   <% end %>
 
 <% end %>

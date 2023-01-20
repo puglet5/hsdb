@@ -9,6 +9,6 @@ export default class extends Controller {
 
     input.type = input.type === "password" ? "text" : "password"
 
-    this.svgTarget.classList.toggle("!text-primary-700")
+    this.svgTarget.classList.toggle("!text-primary-500")
   }
 }

@@ -6,21 +6,24 @@
 
       <%= f.hidden_field :avatar, value: f.object.avatar.signed_id if f.object.avatar.attached? %>
       <div class="grid grid-cols-12">
-        <%= tag.div class: "relative col-span-3 row-span-2 mr-8 my-auto", data: { controller: "avatar", uppy: "user[avatar]", avatar_target: "div" } do %>
-          <span class="flex m-auto mb-4 w-40 h-40 rounded-full bg-primary-300">
+        <%= tag.div class: "relative col-span-3 row-span-2 my-auto mr-8", data: { controller: "avatar", uppy: "user[avatar]", avatar_target: "div" } do %>
+          <span class="flex w-40 h-40 m-auto mb-4 rounded-full bg-primary-300">
             <div id="avatar">
               <% if resource.avatar.attached? %>
                 <%= image_tag resource.avatar, class: "object-cover w-20 h-20 rounded-full md:w-40 md:h-40", data: { avatar_target: "image" } %>
               <% end %>
             </div>
-            <div class="">
-              <label for="avatar-upload" class="absolute top-0 right-0 cursor-pointer" data-avatar-target="trigger">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-              </label>
-              <%= f.file_field :avatar, direct_upload: true, id: "avatar-upload", class: "hidden" %>
-            </div>
+            <%= render TooltipComponent.new(tooltip: "New Avatar", user: current_user) do %>
+              <div class="">
+                <label for="avatar-upload" class="absolute top-0 right-0 cursor-pointer" data-avatar-target="trigger">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-300 hover:text-primary-500 focus:text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </label>
+                <%= f.file_field :avatar, direct_upload: true, id: "avatar-upload", class: "hidden" %>
+              </div>
+            <% end %>
+
           </span>
         <% end %>
 
@@ -54,18 +57,18 @@
         </p>
       <% end %>
 
-      <div class="grid grid-cols-2 gap-x-4 mb-4">
+      <div class="grid grid-cols-2 mb-4 gap-x-4">
 
         <div class="">
           <%= render Forms::LabelComponent.new().with_content("Password") %>
 
-          <%= f.input :password, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600 " }, placeholder: "•••••••••", validate: false %>
+          <%= f.input :password, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 " }, placeholder: "•••••••••", validate: false %>
           <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">Leave blank if you don't want to change it</p>
         </div>
         <div class="mb-4">
           <%= render Forms::LabelComponent.new().with_content("Confirm password") %>
 
-          <%= f.input :password_confirmation, type: "password", id: "confirm-password", input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600 " }, placeholder: "•••••••••", validate: false %>
+          <%= f.input :password_confirmation, type: "password", id: "confirm-password", input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 " }, placeholder: "•••••••••", validate: false %>
         </div>
       </div>
 
@@ -74,10 +77,10 @@
 
         <%= tag.div class: "relative", data: { controller: "password" } do %>
 
-          <%= f.input :current_password, required: false, input_html: { autocomplete: "current-password", class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-primary-600 focus:border-primary-600", data: { "password-target": "input" } }, placeholder: "Enter password", label: false, validate: false %>
+          <%= f.input :current_password, required: false, input_html: { autocomplete: "current-password", class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { "password-target": "input" } }, placeholder: "Enter password", label: false, validate: false %>
 
           <%= tag.span class: "absolute inset-y-0 inline-flex items-center right-4", data: { action: "click->password#toggle"} do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-password-target="svg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-300 hover:text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-password-target="svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>

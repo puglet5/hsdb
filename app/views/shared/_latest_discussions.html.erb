@@ -1,71 +1,104 @@
-<div class="flex justify-between border-b">
-  <%= render Typography::H4Component.new(cls: "mb-0 text-center").with_content("Latest Discussions") %>
-  <%= render Links::NewLinkComponent.new(path: [:new, :discussion], cls: "my-auto") %>
+<div class="flex justify-between pb-2 border-b">
+  <%= render Typography::H3Component.new(cls: "text-center !m-0").with_content("Latest Discussions") %>
+  <%= render TooltipComponent.new(tooltip: "New Discussion", user: current_user) do %>
+    <%= link_to [:new, :discussion], class: "my-auto" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="9"></circle>
+        <line x1="9" y1="12" x2="15" y2="12"></line>
+        <line x1="12" y1="9" x2="12" y2="15"></line>
+      </svg>
+    <% end %>
+  <% end %>
 </div>
-<%= render Sections::CardComponent.new(cls: "text-gray-700") do %>
+<%= render Sections::CardComponent.new(cls: "text-gray-700 !mt-4 !pt-4") do %>
   <% if @discussions_unpinned.count > 0 %>
     <ol class="relative border-l border-gray-200">
       <% @discussions_unpinned.each do |discussion| %>
         <li class="mb-10 ml-4">
-          <div class="absolute -left-1.5 mt-1.5 w-3 h-3 bg-gray-200 rounded-full border border-white"></div>
-          <p class="mb-1 text-sm font-normal leading-none text-gray-400">
-            <% if discussion.user %>
-              By
-              <%= link_to discussion.user, class: "font-medium" do %>
-                <%= (discussion.user&.first_name) + " " + (discussion&.user.last_name) %>
+          <div class="absolute w-3 h-3 bg-gray-200 border border-white rounded-full -left-1.5 mt-2.5"></div>
+          <div class="flex justify-between">
+            <p class="my-auto text-sm font-normal leading-none text-gray-400">
+              <% if discussion.user %>
+                By
+                <%= link_to discussion.user, class: "font-bold hover:underline" do %>
+                  <%= (discussion.user&.first_name) + " " + (discussion&.user.last_name) %>
+                <% end %>
+                in
+                <% if discussion.category %>
+                  <%= link_to discussion.category.category_name, discussion.category, class: "font-bold hover:underline" %>
+                <% end %>
               <% end %>
-              in
-              <% if discussion.category %>
-                <%= link_to discussion.category.category_name, discussion.category, class: "font-medium" %>
+              <%= time_ago_in_words(discussion.created_at) %> ago,
+              last active
+              <% if discussion.replies.any? %>
+                <%= time_ago_in_words(discussion.replies.last.created_at) %>
+              <% else %>
+                <%= time_ago_in_words(discussion.created_at) %>
               <% end %>
-            <% end %>
-            <%= time_ago_in_words(discussion.created_at) %> ago,
-            last active
-            <% if discussion.replies.any? %>
-              <%= time_ago_in_words(discussion.replies.last.created_at) %>
-            <% else %>
-              <%= time_ago_in_words(discussion.created_at) %>
-            <% end %>
-            ago
-          </p>
+              ago
+            </p>
+            <div class="flex flex-row items-center justify-center mx-1 space-x-1">
+              <% if policy(discussion).edit? %>
+                <%= link_to [:edit, discussion] do %>
+                  <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                      <path d="M16 5l3 3"></path>
+                    </svg>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                </svg>
+              <% end %>
+
+              <% if policy(discussion).destroy? %>
+                <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
+                  <%= link_to discussion, data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M4 7h16"></path>
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                      <path d="M10 12l4 4m0 -4l-4 4"></path>
+                    </svg>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= tag.div data: { controller: "clipboard", action: "click->clipboard#copy" } do %>
+                <%= link_to "", discussion, class: "hidden" , data: { "clipboard-target": "text" } %>
+                <%= render TooltipComponent.new(tooltip: "Copy link", user: current_user) do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-clipboard text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                    <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                  </svg>
+                <% end %>
+              <% end %>
+
+            </div>
+          </div>
+
           <div class="flex justify-between">
             <%= link_to discussion do %>
               <div class="flex mb-2">
-                <span class="inline-flex items-center py-0.5 px-2.5 my-auto mr-2 h-6 text-xs font-medium text-gray-800 bg-gray-100 rounded">
+                <span class="inline-flex items-center h-6 my-auto mr-2 text-xs font-medium text-gray-700 bg-gray-100 rounded py-0.5 px-2.5">
                   <%= discussion.replies.count %>
                 </span>
-                <h3 class="my-1 mr-4 text-xl font-bold">
+                <h3 class="my-1 mr-4 text-xl font-bold hover:underline">
                   <%= discussion.title %>
                 </h3>
               </div>
             <% end %>
-            <div class="flex">
-              <% if policy(discussion).edit? %>
 
-                <%= link_to [:edit, discussion], class: "my-auto text-gray-500" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                    <path d="M16 5l3 3"></path>
-                  </svg>
-                <% end %>
-
-              <% end %>
-
-              <% if policy(discussion).destroy? %>
-
-                <%= link_to discussion, data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "my-auto text-gray-500" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M20 6a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-11l-5 -5a1.5 1.5 0 0 1 0 -2l5 -5z"></path>
-                    <path d="M12 10l4 4m0 -4l-4 4"></path>
-                  </svg>
-
-                <% end %>
-
-              <% end %>
-            </div>
           </div>
           <%= link_to discussion do %>
             <p>
