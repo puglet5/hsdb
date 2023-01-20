@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<%= tag.html class: current_user&.settings(:ui)&.dark ? "dark" : nil do %>
   <head>
     <title>hsdb</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,4 +26,4 @@
     </main>
     <%= render "shared/application_footer" %>
   </body>
-</html>
+<% end %>

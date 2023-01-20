@@ -46,6 +46,16 @@
     </div>
     <%= render Forms::PHelperComponent.new().with_content("Toggles navigation breadcrumbs") %>
   </div>
+
+  <div class="mb-4">
+    <div class="flex items-center">
+      <%= hidden_field_tag "user[settings[ui][dark]]", false %>
+      <% checked =  @user.settings(:ui).dark ? "checked" : 0 %>
+      <%= f.check_box "settings[ui][dark]", { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
+      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Dark mode</label>
+    </div>
+    <%= render Forms::PHelperComponent.new().with_content("Enables dark mode on the website") %>
+  </div>
   <div class="mb-4">
     <%= render Forms::SubmitComponent.new(form: f, cls: "text-xs !p-2 !m-0") do %>
       Update settings
