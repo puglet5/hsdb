@@ -48,4 +48,18 @@ class Spectrum < RsdbRecord
   has_rich_text :equipment
 
   after_commit :parse_json, on: %i[create update]
+  after_commit :infer_format, on: :create
+
+  private
+
+  def infer_format
+    return unless file.attached? && file.persisted?
+
+    format = file.filename.to_s.split('.').last
+    if Spectrum.formats.key? format
+      update format: format
+    else
+      update format: 'other'
+    end
+  end
 end
