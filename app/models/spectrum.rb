@@ -28,7 +28,7 @@ class Spectrum < RsdbRecord
   scope :by_format, ->(format) { where(format: format) }
   scope :by_range,  ->(range)  { where(range: range) }
 
-  # dates are passes in ISO 8601 format, i.e. YYYY-MM-DD.
+  # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
 
   belongs_to :sample, inverse_of: :spectra, touch: true

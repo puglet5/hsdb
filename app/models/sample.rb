@@ -47,7 +47,7 @@ class Sample < RsdbRecord
   scope :by_category, ->(category) { where(category: category) }
   scope :by_origin, ->(origin) { where(origin: origin) }
 
-  # dates are passes in ISO 8601 format, i.e. YYYY-MM-DD.
+  # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_survey_period, ->(start_date, end_date) { where('survey_date BETWEEN ? and ?', start_date, end_date) }
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
 

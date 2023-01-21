@@ -35,7 +35,7 @@ class Artwork < ApplicationRecord
   scope :with_images, -> { where.associated(:images) }
   scope :with_no_images, -> { where.missing(:images) }
 
-  # dates are passes in ISO 8601 format, i.e. YYYY-MM-DD.
+  # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_survey_period, ->(start_date, end_date) { where('survey_date BETWEEN ? and ?', start_date, end_date) }
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
 
