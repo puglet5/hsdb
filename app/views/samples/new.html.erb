@@ -136,7 +136,7 @@
       <div id="metadata">
         <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
         <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@sample.metadata) ? JSON.generate(@sample.metadata) : @sample.metadata) %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: display_metadata_value(@sample)) %>
         <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
       </div>
 

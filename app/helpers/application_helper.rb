@@ -43,6 +43,10 @@ module ApplicationHelper
     end
   end
 
+  def display_metadata_value(object)
+    JSON.is_json?(object.metadata) && !object.errors.count.positive? ? JSON.generate(object.metadata) : object.metadata
+  end
+
   class Renderer
     def self.copyright(msg)
       "#{Time.zone.now.year} | #{msg}"

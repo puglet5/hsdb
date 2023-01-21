@@ -84,7 +84,7 @@
       <div id="metadata">
         <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700").with_content("Metadata") %>
         <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-        <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: (JSON.is_json?(@spectrum.metadata) ? JSON.generate(@spectrum.metadata) : @spectrum.metadata)  } %>
+        <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: display_metadata_value(@spectrum) } %>
 
         <div class="ml-2">
 

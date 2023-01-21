@@ -153,7 +153,7 @@
 
       <%= render Forms::LabelComponent.new(cls: "mb-4").with_content("Metadata") %>
       <div class="mb-4">
-        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: JSON.is_json?(@artwork.metadata) ? JSON.generate(@artwork.metadata) : @artwork.metadata) %>
+        <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: display_metadata_value(@artwork)) %>
 
         <% unless JSON.is_json?(@artwork.metadata) %>
           <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
