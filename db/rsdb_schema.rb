@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_200731) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_21_181447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_200731) do
     t.datetime "updated_at", null: false
     t.integer "range", default: 0, null: false
     t.jsonb "metadata", default: "{}", null: false
+    t.string "filename"
     t.index ["metadata"], name: "index_spectra_on_metadata", using: :gin
     t.index ["sample_id"], name: "index_spectra_on_sample_id"
   end
