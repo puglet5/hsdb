@@ -19,7 +19,7 @@
     "d3": "^7.8.2",
     "esbuild": "^0.17.4",
     "esbuild-rails": "^1.0.3",
-    "flowbite": "1.6.2",
+    "flowbite": "1.6.3",
     "flowbite-datepicker": "^1.2.2",
     "jquery": "^3.6.3",
     "photoswipe": "^5.3.4",

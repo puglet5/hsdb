@@ -687,7 +687,7 @@ __metadata:
     esbuild: ^0.17.4
     esbuild-rails: ^1.0.3
     eslint: ^8.32.0
-    flowbite: 1.6.2
+    flowbite: 1.6.3
     flowbite-datepicker: ^1.2.2
     jquery: ^3.6.3
     photoswipe: ^5.3.4
@@ -2090,13 +2090,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.6.2":
-  version: 1.6.2
-  resolution: "flowbite@npm:1.6.2"
+"flowbite@npm:1.6.3":
+  version: 1.6.3
+  resolution: "flowbite@npm:1.6.3"
   dependencies:
     "@popperjs/core": ^2.9.3
     mini-svg-data-uri: ^1.4.3
-  checksum: 47ba03ad46e31b5fc281a181e1e0163e3735b0f9615509fc12684abdf7e14fae77bd046e502dc3e356e1f32ad4ef956aab79a48e5d97538611e54e57f172ebcb
+  checksum: 2e728f6d207d8eeef67bc2ee056ef2567c8112ec4ad7e337350285c07ee5c7ff0d044e6390935ba2641ed48665fb43fdf432a93366f3455bc514ab6407aade15
   languageName: node
   linkType: hard
 
