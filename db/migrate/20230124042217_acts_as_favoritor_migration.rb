@@ -13,14 +13,14 @@ class ActsAsFavoritorMigration < ActiveRecord::Migration[7.0]
     end
 
     add_index :favorites,
-              ['favoritor_id', 'favoritor_type'],
+              %w[favoritor_id favoritor_type],
               name: 'fk_favorites'
     add_index :favorites,
-              ['favoritable_id', 'favoritable_type'],
+              %w[favoritable_id favoritable_type],
               name: 'fk_favoritables'
     add_index :favorites,
-              ['favoritable_type', 'favoritable_id', 'favoritor_type',
-              'favoritor_id', 'scope'],
+              %w[favoritable_type favoritable_id favoritor_type
+                 favoritor_id scope],
               name: 'uniq_favorites__and_favoritables', unique: true
   end
 

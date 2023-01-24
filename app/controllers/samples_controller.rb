@@ -61,11 +61,10 @@ class SamplesController < ApplicationController
 
     if current_user.favorited? @sample
       current_user.unfavorite @sample
-      redirect_to @sample
     else
       current_user.favorite @sample
-      redirect_to @sample
     end
+    redirect_to @sample
   end
 
   def update

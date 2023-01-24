@@ -166,11 +166,10 @@ class ArtworksController < ApplicationController
 
     if current_user.favorited? @artwork
       current_user.unfavorite @artwork
-      redirect_to request.referer
     else
       current_user.favorite @artwork
-      redirect_to request.referer
     end
+    redirect_to request.referer
   end
 
   private

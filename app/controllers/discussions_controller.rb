@@ -65,11 +65,10 @@ class DiscussionsController < ApplicationController
 
     if current_user.favorited? @discussion
       current_user.unfavorite @discussion
-      redirect_to request.referer
     else
       current_user.favorite @discussion
-      redirect_to request.referer
     end
+    redirect_to request.referer
   end
 
   private
