@@ -6,17 +6,31 @@ import ImageEditor from "@uppy/image-editor"
 
 export default class extends Controller {
 
-  static targets = ["div", "trigger"]
+  static targets = ["div", "trigger", "text"]
 
   static values = {
     filetype: String,
     allowedfiletypes: Array,
     allowmultiple: Boolean,
-    thumbnails: Boolean
+    thumbnails: Boolean,
   }
 
 
   connect() {
+
+    const appendUploadedFile = (element, file, field_name) => {
+      const hiddenField = document.createElement("input")
+
+      hiddenField.setAttribute("type", "hidden")
+      hiddenField.setAttribute("name", field_name)
+      hiddenField.setAttribute("data-pending-upload", true)
+      hiddenField.setAttribute("value", file.response.signed_id)
+
+      element.appendChild(hiddenField)
+    }
+
+    const pluralize = (count, noun, suffix = "s") =>
+      `${count} ${noun}${count !== 1 ? suffix : ""}`
 
     const setupUppy = (element) => {
       let trigger = this.triggerTarget
@@ -43,7 +57,6 @@ export default class extends Controller {
       uppy.use(Dashboard, {
         disableThumbnailGenerator: !this.thumbnailsValue,
         trigger: trigger,
-        // target: target,
         closeAfterFinish: true,
         inline: false,
         showProgressDetails: true,
@@ -75,30 +88,13 @@ export default class extends Controller {
 
       uppy.on("complete", (result) => {
         files_uploaded += result.successful.length
-        let txt = document.querySelector("#uppy-text")
-        txt.innerHTML = `Add ${files_uploaded} images`
+        let txt = document.querySelector(`#${this.textTarget.id}`)
+        txt.innerHTML = `Add ${pluralize(files_uploaded, "file")}`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
-          imagePreveiw(element, file)
         })
       })
     }
-
-    const appendUploadedFile = (element, file, field_name) => {
-      const hiddenField = document.createElement("input")
-
-      hiddenField.setAttribute("type", "hidden")
-      hiddenField.setAttribute("name", field_name)
-      hiddenField.setAttribute("data-pending-upload", true)
-      hiddenField.setAttribute("value", file.response.signed_id)
-
-      element.appendChild(hiddenField)
-    }
-
-    const imagePreveiw = () => {
-
-    }
-
 
     setupUppy(this.divTarget)
   }

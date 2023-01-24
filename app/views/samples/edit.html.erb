@@ -102,9 +102,9 @@
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Spectra files") %>
             <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <p class="font-medium text-center" id="uppy-text">
+              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "files-text" do %>
                 Browse...
-              </p>
+              <% end %>
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
           <% end %>
@@ -121,9 +121,9 @@
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
               <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-                <p class="font-medium text-center" id="uppy-text">
+                <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "images-text" do %>
                   Browse...
-                </p>
+                <% end %>
               <% end %>
 
               <% if @sample.images&.count.to_i > 0 %>
@@ -157,9 +157,9 @@
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Documents") %>
             <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <p class="font-medium text-center" id="uppy-text">
+              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "documents-text" do %>
                 Browse...
-              </p>
+              <% end %>
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content("Documents in .pdf or any other format (maximum file size: 30 MB)") %>
           <% end %>

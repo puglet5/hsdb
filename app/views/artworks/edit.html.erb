@@ -97,16 +97,9 @@
 
           <div class="flex">
             <%= tag.div class: "flex items-center justify-center w-full bg-white border border-gray-300 rounded-md cursor-pointer p-1.5 hover:bg-gray-100 py-auto", data: { uploads_target: "trigger" } do %>
-              <div class="text-center">
-
-                <div class="flex text-sm font-medium" id="uppy-text">
-                  Add images
-                  <div class="my-auto ml-2 font-normal text-gray-500">
-                    (attached: <%= @images_count_err ? @images_count_pre.to_i : @images&.count %>)
-                  </div>
-                </div>
-
-              </div>
+              <%= tag.p class: "font-medium text-sm", data: { uploads_target: "text" }, id: "images-text" do %>
+                Browse...
+              <% end %>
             <% end %>
 
             <% if @images&.count.to_i > 0 %>

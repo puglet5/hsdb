@@ -54,9 +54,9 @@
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>
             <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <p class="font-medium text-center" id="uppy-text">
+              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "file-text" do %>
                 Browse...
-              </p>
+              <% end %>
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
           <% end %>
@@ -72,9 +72,9 @@
                   } do %>
             <%= render Forms::LabelComponent.new().with_content("Equipment settings") %>
             <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <p class="font-medium text-center" id="uppy-text">
+              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "settings-text" do %>
                 Browse...
-              </p>
+              <% end %>
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content("Equipment settings files of any text format") %>
           <% end %>
