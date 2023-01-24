@@ -47,7 +47,7 @@ class Spectrum < RsdbRecord
   has_rich_text :description
   has_rich_text :equipment
 
-  after_commit { self.filename ||= file.filename }
+  after_commit -> { self.filename ||= file.filename }, on: %i[create update]
   after_commit :parse_json, on: %i[create update]
   after_commit :infer_format, on: :create
 
