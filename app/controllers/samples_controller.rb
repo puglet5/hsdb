@@ -4,8 +4,8 @@ class SamplesController < ApplicationController
   before_action :set_sample, only: %i[show edit update destroy]
   after_action :verify_authorized
 
-  breadcrumb 'Home', :root_path
-  breadcrumb 'Samples', :samples_path, match: :exact
+  breadcrumb 'Home', :root
+  breadcrumb 'Samples', :samples, match: :exact
 
   def index
     @samples = Sample.all.order('created_at asc')
@@ -22,7 +22,7 @@ class SamplesController < ApplicationController
 
     authorize @sample
 
-    breadcrumb @sample.title, sample_path(@sample), match: :exclusive
+    breadcrumb @sample.title, @sample, match: :exclusive
   end
 
   def new
@@ -31,14 +31,14 @@ class SamplesController < ApplicationController
 
     authorize @sample
 
-    breadcrumb 'New Sample', new_sample_path(@sample), match: :exclusive
+    breadcrumb 'New Sample', %i[new sample], match: :exclusive
   end
 
   def edit
     authorize @sample
 
-    breadcrumb @sample.title, sample_path(@sample), match: :exclusive
-    breadcrumb 'Edit', edit_sample_path(@sample), match: :exclusive
+    breadcrumb @sample.title, @sample, match: :exclusive
+    breadcrumb 'Edit', [:edit, @sample], match: :exclusive
   end
 
   def create

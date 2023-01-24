@@ -8,8 +8,8 @@ class DiscussionsController < ApplicationController
   before_action :authorize_discussion
   after_action :verify_authorized
 
-  breadcrumb 'Home', :root_path
-  breadcrumb 'Forum', :discussions_path, match: :exact
+  breadcrumb 'Home', :root
+  breadcrumb 'Forum', :discussions, match: :exact
 
   def index
     @categories = Category.all.includes([:discussions]).order('created_at asc')
@@ -21,18 +21,18 @@ class DiscussionsController < ApplicationController
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
 
-    breadcrumb @discussion.title, discussion_path(@discussion), match: :exclusive
+    breadcrumb @discussion.title, @discussion, match: :exclusive
   end
 
   def new
     @discussion = current_user.discussions.build
 
-    breadcrumb 'New Discussion', new_discussion_path(@discussion), match: :exclusive
+    breadcrumb 'New Discussion', %i[new discussion], match: :exclusive
   end
 
   def edit
-    breadcrumb @discussion.title, discussion_path(@discussion), match: :exclusive
-    breadcrumb 'Edit', edit_discussion_path(@discussion), match: :exclusive
+    breadcrumb @discussion.title, @discussion, match: :exclusive
+    breadcrumb 'Edit', [:edit, @discussion], match: :exclusive
   end
 
   def create

@@ -6,19 +6,19 @@ class SpectraController < ApplicationController
   def new
     @spectrum = Spectrum.new
 
-    breadcrumb 'Home', :root_path
-    breadcrumb 'Samples', :samples_path, match: :exact
-    breadcrumb @sample.title, sample_path(@sample), match: :exact
+    breadcrumb 'Home', :root
+    breadcrumb 'Samples', :samples, match: :exact
+    breadcrumb @sample.title, @sample, match: :exact
     breadcrumb 'New Spectrum', [:new, @sample, :spectrum], match: :exclusive
   end
 
   def edit
     @spectrum = @sample.spectra.find(params[:id])
 
-    breadcrumb 'Home', :root_path
-    breadcrumb 'Samples', :samples_path, match: :exact
-    breadcrumb @sample.title, sample_path(@sample), match: :exact
-    breadcrumb "#{@spectrum.range.upcase}, .#{@spectrum.format}", [@sample, @spectrum], match: :exact
+    breadcrumb 'Home', :root
+    breadcrumb 'Samples', :samples, match: :exact
+    breadcrumb @sample.title, @sample, match: :exact
+    breadcrumb "#{@spectrum.range.upcase}, .#{@spectrum.format}", @sample, match: :exact
     breadcrumb 'Edit', [:edit, @sample, @spectrum], match: :exclusive
   end
 

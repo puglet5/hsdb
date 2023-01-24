@@ -10,8 +10,8 @@ class ArtworksController < ApplicationController
 
   after_action :verify_authorized
 
-  breadcrumb 'Home', :root_path
-  breadcrumb 'Artworks', :artworks_path, match: :exact
+  breadcrumb 'Home', :root
+  breadcrumb 'Artworks', :artworks, match: :exact
 
   def index
     @artworks = Artwork
@@ -43,7 +43,7 @@ class ArtworksController < ApplicationController
       end
     end
 
-    breadcrumb @artwork.title, artwork_path(@artwork), match: :exclusive
+    breadcrumb @artwork.title, @artwork, match: :exclusive
   end
 
   def images_grid
@@ -72,7 +72,7 @@ class ArtworksController < ApplicationController
 
     authorize @artwork
 
-    breadcrumb 'New Artwork', new_artwork_path(@artwork), match: :exclusive
+    breadcrumb 'New Artwork', %i[new artwork], match: :exclusive
   end
 
   def edit
@@ -88,8 +88,8 @@ class ArtworksController < ApplicationController
               .all
               .with_attached_image
 
-    breadcrumb @artwork.title, artwork_path(@artwork), match: :exclusive
-    breadcrumb 'Edit', edit_artwork_path(@artwork), match: :exclusive
+    breadcrumb @artwork.title, @artwork, match: :exclusive
+    breadcrumb 'Edit', [:edit, @artwork], match: :exclusive
   end
 
   def create
