@@ -61,11 +61,9 @@ class SamplesController < ApplicationController
 
     if current_user.favorited? @sample
       current_user.unfavorite @sample
-      flash[:success] = 'Sample unfavorited!'
       redirect_to @sample
     else
       current_user.favorite @sample
-      flash[:success] = 'Sample favorited!'
       redirect_to @sample
     end
   end

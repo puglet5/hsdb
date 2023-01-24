@@ -1,9 +1,7 @@
 <% if artworks&.count > 0 && query.result.count != 0 %>
   <div class="mt-8">
     <div class="space-y-8">
-      <% cache artworks do %>
-        <%= render artworks %>
-      <% end %>
+      <%= render artworks %>
     </div>
     <% if pagy.pages > 1 %>
       <div class="mt-8">

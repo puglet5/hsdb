@@ -59,6 +59,19 @@ class DiscussionsController < ApplicationController
     redirect_to discussions_url, notice: 'Discussion was successfully deleted.', status: :see_other
   end
 
+  def favorite
+    @discussion = Discussion.find params[:id]
+    authorize @discussion
+
+    if current_user.favorited? @discussion
+      current_user.unfavorite @discussion
+      redirect_to request.referer
+    else
+      current_user.favorite @discussion
+      redirect_to request.referer
+    end
+  end
+
   private
 
   def set_discussion

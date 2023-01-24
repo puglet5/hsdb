@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :samples do
     resources :spectra
     member do
-      patch "favorite", to: "samples#favorite"
+      patch :favorite
     end
   end
 
@@ -32,12 +32,16 @@ Rails.application.routes.draw do
   resources :categories
   resources :discussions do
     resources :replies
+    member do
+      patch :favorite
+    end
   end
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   resources :artworks do
     member do
       patch :update_status
+      patch :favorite
       get :images_grid
     end
   end

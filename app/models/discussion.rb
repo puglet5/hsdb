@@ -22,6 +22,8 @@
 class Discussion < ApplicationRecord
   include Authorship
 
+  acts_as_favoritable
+
   belongs_to :category
   belongs_to :user
   has_many :replies, dependent: :destroy

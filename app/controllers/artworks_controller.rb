@@ -160,6 +160,19 @@ class ArtworksController < ApplicationController
     redirect_to artworks_url, status: :see_other
   end
 
+  def favorite
+    @artwork = Artwork.find params[:id]
+    authorize @artwork
+
+    if current_user.favorited? @artwork
+      current_user.unfavorite @artwork
+      redirect_to request.referer
+    else
+      current_user.favorite @artwork
+      redirect_to request.referer
+    end
+  end
+
   private
 
   def fetch_tags

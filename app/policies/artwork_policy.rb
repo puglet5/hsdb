@@ -36,4 +36,8 @@ class ArtworkPolicy < ApplicationPolicy
   def images_grid?
     true
   end
+
+  def favorite?
+    true
+  end
 end
