@@ -48,7 +48,7 @@ class SamplesController < ApplicationController
 
     if @sample.save
       redirect_to @sample
-      flash.now[:success] = 'Sample was successfully created'
+      flash[:success] = 'Sample added!'
     else
       @sample.spectra.build
       render :new, status: :unprocessable_entity
@@ -65,12 +65,12 @@ class SamplesController < ApplicationController
       end
 
       redirect_to @sample
-      flash.now[:success] = 'Sample was successfully updated.'
+      flash[:success] = 'Sample updated!'
     else
       render :edit, status: :unprocessable_entity
     end
   rescue ActiveRecord::StaleObjectError
-    flash[:error] = 'Sample was modified elsewhere'
+    flash[:error] = 'Error! Sample was modified elsewhere.'
     redirect_to [:edit, @sample]
   end
 
@@ -78,7 +78,7 @@ class SamplesController < ApplicationController
     authorize @sample
 
     @sample.destroy
-    flash[:success] = 'Sample was successfully deleted'
+    flash[:success] = 'Sample deleted!'
     redirect_to samples_url, status: :see_other
   end
 

@@ -27,7 +27,7 @@ class SpectraController < ApplicationController
 
     if @spectrum.save
       redirect_to @sample
-      flash.now[:success] = 'Spectrum added!'
+      flash[:success] = 'Spectrum added!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class SpectraController < ApplicationController
 
     if @spectrum.update(spectrum_params)
       redirect_to @sample
-      flash.now[:success] = 'Spectrum updated!'
+      flash[:success] = 'Spectrum updated!'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class SpectraController < ApplicationController
     @spectrum = @sample.spectra.find(params[:id])
 
     @spectrum.destroy
-    flash[:success] = 'Spectrum removed!'
+    flash[:success] = 'Spectrum deleted!'
     redirect_to @sample, status: :see_other
   end
 
