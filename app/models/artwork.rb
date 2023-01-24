@@ -31,6 +31,8 @@ class Artwork < ApplicationRecord
   include ProcessImage
   include ArTransactionChanges
 
+  acts_as_favoritable
+
   scope :by_status, ->(status) { where(status: status) }
   scope :with_images, -> { where.associated(:images) }
   scope :with_no_images, -> { where.missing(:images) }

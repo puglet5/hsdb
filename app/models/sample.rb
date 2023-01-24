@@ -37,6 +37,8 @@ class Sample < RsdbRecord
   include ProcessImage
   include ArTransactionChanges
 
+  acts_as_favoritable
+
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
