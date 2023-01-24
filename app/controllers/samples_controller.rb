@@ -55,6 +55,21 @@ class SamplesController < ApplicationController
     end
   end
 
+  def favorite
+    @sample = Sample.find params[:id]
+    authorize @sample
+
+    if current_user.favorited? @sample
+      current_user.unfavorite @sample
+      flash[:success] = 'Sample unfavorited!'
+      redirect_to @sample
+    else
+      current_user.favorite @sample
+      flash[:success] = 'Sample favorited!'
+      redirect_to @sample
+    end
+  end
+
   def update
     authorize @sample
 

@@ -24,4 +24,8 @@ class SamplePolicy < ApplicationPolicy
   def images?
     true
   end
+
+  def favorite?
+    true
+  end
 end

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
   resources :samples do
     resources :spectra
+    member do
+      patch "favorite", to: "samples#favorite"
+    end
   end
 
   resources :users, only: %i[show] do
