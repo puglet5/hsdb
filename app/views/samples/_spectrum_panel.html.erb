@@ -8,7 +8,7 @@
       </svg>
       <div class="flex space-x-1 text-gray-700">
         <span class="my-auto">
-          <%= spectrum.range.upcase %>
+          <%= ApplicationHelper.humanize_range spectrum.range %>
         </span>
         <div class="my-auto">
           &middot;
@@ -20,7 +20,7 @@
           &middot;
         </div>
         <span class="my-auto">
-          .<%= spectrum.format %>
+          <%= ApplicationHelper.humanize_file_format spectrum.format %>
         </span>
       </div>
     </div>
@@ -71,9 +71,15 @@
     </svg>
     <span>Equipment</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
-    Still it was a steady pulse of pain midway down his spine. Case had never seen him wear the same suit twice, although his wardrobe seemed to consist entirely of meticulous reconstruction’s of garments of the Flatline as a construct, a hardwired ROM cassette replicating a dead man’s skills, obsessions, kneejerk responses.
-  </div>
+  <% unless spectrum.equipment.blank? %>
+    <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+      <%= spectrum.equipment %>
+    </div>
+  <% else %>
+    <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+      Not provided
+    </div>
+  <% end %>
   <div class="flex space-x-2">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -83,9 +89,15 @@
     </svg>
     <span>Description</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
-    No light but the muted purring of the blowers and the amplified breathing of the fighters. The tug Marcus Garvey, a steel drum nine meters long and two in diameter, creaked and shuddered as Maelcum punched for a California gambling cartel, then as a gliding cursor struck sparks from the Chinese program’s thrust, a worrying impression of solid fluidity, as though the shards of a broken mirror bent and elongated as they rotated, but it never told the correct time.
-  </div>
+  <% unless spectrum.description.blank? %>
+    <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+      <%= spectrum.description %>
+    </div>
+  <% else %>
+    <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+      Not provided
+    </div>
+  <% end %>
   <div class="flex mb-2 space-x-2">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -95,22 +107,39 @@
     </svg>
     <span>Files</span>
   </div>
-  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum.file.url, chart_filename_value: spectrum.file.filename, chart_id_value: spectrum.id } do %>
-    <div class="flex justify-between space-x-2">
 
-      <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
-        <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
-          <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <line x1="3" y1="4" x2="21" y2="4"></line>
-              <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-              <line x1="12" y1="16" x2="12" y2="20"></line>
-              <line x1="9" y1="20" x2="15" y2="20"></line>
-              <path d="M8 12l3 -3l2 2l3 -3"></path>
-            </svg>
+  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.file&.url, chart_filename_value: spectrum&.file&.filename, chart_id_value: spectrum.id } do %>
+    <div class="flex justify-between space-x-2 ml-2">
+
+      <% if spectrum.file.attached? && spectrum.file.persisted? %>
+        <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
+          <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
+            <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <line x1="3" y1="4" x2="21" y2="4"></line>
+                <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+                <line x1="12" y1="16" x2="12" y2="20"></line>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <path d="M8 12l3 -3l2 2l3 -3"></path>
+              </svg>
+            <% end %>
           <% end %>
+        <% else %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="3" y1="4" x2="21" y2="4"></line>
+            <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+            <line x1="12" y1="16" x2="12" y2="20"></line>
+            <line x1="9" y1="20" x2="15" y2="20"></line>
+            <path d="M8 12l3 -3l2 2l3 -3"></path>
+          </svg>
         <% end %>
+        <div class="w-full my-auto text-sm text-gray-500">
+          <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
+            <%= spectrum.file.filename %>
+          <% end %>
+        </div>
       <% else %>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -120,16 +149,16 @@
           <line x1="9" y1="20" x2="15" y2="20"></line>
           <path d="M8 12l3 -3l2 2l3 -3"></path>
         </svg>
+        <div class="w-full my-auto text-sm text-gray-500">
+          <span class="my-auto text-sm text-gray-500 ">
+            Not provided
+          </span>
+        </div>
       <% end %>
 
-      <div class="w-full my-auto text-sm text-gray-500">
-        <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
-          <%= spectrum.file.filename %>
-        <% end %>
-      </div>
     </div>
 
-    <div id="settings" class="flex space-x-2">
+    <div id="settings" class="flex space-x-2 ml-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <circle cx="12" cy="14" r="2"></circle>

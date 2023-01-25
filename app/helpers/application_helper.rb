@@ -52,4 +52,16 @@ module ApplicationHelper
       "#{Time.zone.now.year} | #{msg}"
     end
   end
+
+  def self.humanize_file_format(str)
+    return str.humanize if %w[other not_set].include? str
+
+    ".#{str}"
+  end
+
+  def self.humanize_range(str)
+    return str.humanize if %w[other not_set].include? str
+
+    str.upcase
+  end
 end

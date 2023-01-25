@@ -8,10 +8,12 @@
     </svg>
     <span>Documents</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+  <div class="p-2 ml-2 text-sm text-justify text-gray-500 flex flex-col space-y-2 w-fit">
     <% if sample.documents.any? %>
       <% sample.documents&.each do |doc| %>
-        <%= doc.filename %>
+        <%= link_to doc.url, class: "font-bold hover:underline" do %>
+          <%= doc.filename %>
+        <% end %>
       <% end %>
     <% else %>
       None attached
@@ -29,10 +31,12 @@
     </svg>
     <span>Images</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500">
+  <div class="p-2 ml-2 text-sm text-justify text-gray-500 flex flex-col space-y-2 w-fit">
     <% if sample.images.any? %>
       <% sample.images&.each do |img| %>
-        <%= img.filename %>
+        <%= link_to img.url, class: "font-bold hover:underline" do %>
+          <%= img.filename %>
+        <% end %>
       <% end %>
     <% else %>
       None attached

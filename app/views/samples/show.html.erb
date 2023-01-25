@@ -47,7 +47,7 @@
                   <li class="w-full">
                     <%= tag.div data: { "tabs-target": "tab" }, id: "spectrum-#{spectrum.id}-tab", class: "hover:bg-gray-100" do %>
                       <div class="inline-block w-full p-4 text-center cursor-pointer" data-action="click->tabs#switch">
-                        <%= spectrum.range.upcase %>, .<%= spectrum.format %>
+                        <%= ApplicationHelper.humanize_range spectrum.range %>, <%= ApplicationHelper.humanize_file_format spectrum.format %>
                       </div>
                     <% end %>
                   </li>
@@ -59,7 +59,7 @@
 
         <div class="w-full col-span-9 bg-white border-l rounded-r-lg">
 
-          <div id="sample" class="p-8 pt-4 border-b">
+          <div id="sample" class="px-8 py-4 border-b">
             <div class="flex justify-between">
               <div class="flex">
 
@@ -144,9 +144,9 @@
               </div>
             </div>
             <h2 class="mb-2 text-2xl font-semibold md:mt-2"> <%= @sample.title %></h2>
-            <p class="mt-4 text-sm text-gray-500">
-              <%= @sample.description.to_plain_text %>
-            </p>
+            <div class="!mt-4 !text-sm !text-gray-500">
+              <%= @sample.description %>
+            </div>
           </div>
 
           <div id="panels" class="rounded-br-lg">

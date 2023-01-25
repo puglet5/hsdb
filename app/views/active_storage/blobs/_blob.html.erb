@@ -1,20 +1,27 @@
-<figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
+<figure class="!flex !flex-col !justify-center !items-center attachment attachment--<%= blob.representable? ? "preview" : "" %> attachment--<%= blob.filename.extension %>">
   <% if blob.image? %>
-    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [800, 600] : [1024, 768]) %>
-  <% end %>
-  <% if blob.video? %>
+    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [400, 300] : [400, 300]) %>
+  <% elsif blob.video? %>
     <%= video_tag url_for(blob.attachable),
                   preload: "auto",
                   controls: "controls",
                   width: "640",
                   height: "360" %>
   <% end %>
-  <figcaption class="attachment__caption">
+
+  <figcaption class="attachment__caption !m-2">
     <% if caption = blob.try(:caption) %>
       <%= caption %>
     <% else %>
-      <span class="attachment__name"><%= blob.filename %></span>
-      <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>
+      <div class="flex space-x-2 !text-sm text-gray-500">
+        <span class="!my-auto attachment__name !font-medium hover:!underline">
+          <%= link_to blob.filename, blob.url %>
+        </span>
+        <div class="my-auto">
+          &middot;
+        </div>
+        <span class="!my-auto"><%= number_to_human_size blob.byte_size %></span>
+      </div>
     <% end %>
   </figcaption>
 </figure>
