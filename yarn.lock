@@ -414,32 +414,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/core@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@uppy/core@npm:3.0.4"
+"@uppy/core@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@uppy/core@npm:3.0.5"
   dependencies:
     "@transloadit/prettier-bytes": 0.0.9
     "@uppy/store-default": ^3.0.2
-    "@uppy/utils": ^5.0.2
+    "@uppy/utils": ^5.1.2
     lodash.throttle: ^4.1.1
     mime-match: ^1.0.2
     namespace-emitter: ^2.0.1
     nanoid: ^4.0.0
     preact: ^10.5.13
-  checksum: fec1615042896665e469c3820515bc84777c7997c8dcf79847db735412b745df3976870bbb97c4ad0331fbf7502fce8ad84b7297cef7f852684a80d8bffa20a5
+  checksum: 79c9b9d7b642b683a79660c3cde57e5b084322ff69a48922f2eed7b6db4c8995f342f3d3831c2ccde37a4196cdef05f7aa845fcd16769f56db8fc2f932e25859
   languageName: node
   linkType: hard
 
-"@uppy/dashboard@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@uppy/dashboard@npm:3.2.0"
+"@uppy/dashboard@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "@uppy/dashboard@npm:3.2.1"
   dependencies:
     "@transloadit/prettier-bytes": 0.0.7
     "@uppy/informer": ^3.0.1
     "@uppy/provider-views": ^3.0.2
     "@uppy/status-bar": ^3.0.1
     "@uppy/thumbnail-generator": ^3.0.2
-    "@uppy/utils": ^5.1.0
+    "@uppy/utils": ^5.1.2
     classnames: ^2.2.6
     is-shallow-equal: ^1.0.1
     lodash.debounce: ^4.0.8
@@ -447,8 +447,8 @@ __metadata:
     nanoid: ^4.0.0
     preact: ^10.5.13
   peerDependencies:
-    "@uppy/core": ^3.0.4
-  checksum: a77da0f230ca7d9593dd4dddfe24919b74a0eb18e6247617994e94aa1d48e769917bf3117bba58cecee6ffb548b2498483a5f25935bc336417a6a0b5068f99ea
+    "@uppy/core": ^3.0.5
+  checksum: b75659ec6f8541400b1a3ca61199116930efa317e050b7123428a0034fca02a7c3240f5765ab20e435ecf0ae3ef152a9f67dd6c0ad2754a49cd02ce0e331ff8b
   languageName: node
   linkType: hard
 
@@ -530,6 +530,15 @@ __metadata:
   dependencies:
     lodash.throttle: ^4.1.1
   checksum: 6e6e6e4e1f501abba4c2518b289c9c17cd972266b2ec19029c1bc2da8d503d2278da8866272481f6dda44ef201f9900dd5193156e95faee403d851e388000807
+  languageName: node
+  linkType: hard
+
+"@uppy/utils@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@uppy/utils@npm:5.1.2"
+  dependencies:
+    lodash.throttle: ^4.1.1
+  checksum: 5534033f6e84c17c5a16ad25869b6f2dae69df578fe3293f6165dd2d8dcd28641fabc6a2d6757e1bcd84c9d6130d024d3d363626c28caf44848a23a53bd787cd
   languageName: node
   linkType: hard
 
@@ -676,8 +685,8 @@ __metadata:
     "@rails/actiontext": ^7.0.4-1
     "@rails/activestorage": ^7.0.4-1
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
-    "@uppy/core": ^3.0.4
-    "@uppy/dashboard": ^3.2.0
+    "@uppy/core": ^3.0.5
+    "@uppy/dashboard": ^3.2.1
     "@uppy/image-editor": ^2.1.0
     autoprefixer: ^10.4.13
     chart.js: ^4.2.0
