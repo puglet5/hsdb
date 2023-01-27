@@ -1,4 +1,4 @@
-  <%= simple_form_for [@discussion, @discussion.replies.build], remote: true, validate: true do |f| %>
+<%= simple_form_for [@discussion, @discussion.replies.build], remote: true, validate: true do |f| %>
   <%= f.input :reply, as: :text, input_html: { class: "block w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2.5 bg-gray-50 focus:ring-primary-500 focus:border-primary-600 " }, placeholder: "Leave a reply..." %>
   <div class="flex m-2 ml-0">
     <button type="submit" class="inline-flex items-center px-4 mr-2 text-sm font-medium text-center text-white rounded-md p-1.5 bg-primary-500 hover:bg-primary-600 focus:ring-primary-200">

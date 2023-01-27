@@ -20,21 +20,38 @@
               (edited <%= time_ago_in_words reply.updated_at %> ago)
             <% end %>
           </time>
-          <% if policy(reply).edit? %>
-            <div class="flex mr-2">
-              <%= link_to [:edit, reply.discussion, reply] do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mb-1 text-gray-400 mx-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
+
+          <div class="flex mr-2">
+
+            <% if policy(reply).edit? %>
+              <%= link_to [:edit, @discussion, reply] do %>
+                <%= render TooltipComponent.new(tooltip: "Edit", user: current_user, cls: "!p-0 !pt-1.5 -mt-1.5") do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-4 h-4 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                    <path d="M16 5l3 3"></path>
+                  </svg>
+                <% end %>
               <% end %>
-              <%= link_to [reply.discussion, reply],
+            <% end %>
+
+            <% if policy(reply).destroy? %>
+              <%= render TooltipComponent.new(tooltip: "Delete", user: current_user, cls: "!p-0 !pt-1.5 -mt-1.5") do %>
+                <%= link_to [reply.discussion, reply],
                            data: { turbo_method: :delete, turbo_confirm: "Are you sure ?", "reply-target": "delete" } do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 mb-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-4 h-4 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 7h16"></path>
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                    <path d="M10 12l4 4m0 -4l-4 4"></path>
+                  </svg>
+                <% end %>
               <% end %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
+
         </div>
       </div>
       <div class="p-3 text-xs font-normal text-gray-700 border border-gray-200 rounded-md bg-gray-50">

@@ -3,13 +3,76 @@
     <div class="p-4 bg-white border rounded-md shadow-sm sm:p-6">
       <div class="lg:flex lg:justify-between lg:items-center">
         <div class="flex-1 min-w-0">
-          <h2 class="text-5xl font-bold text-gray-700 sm:truncate"><%= @discussion.title %></h2>
+          <div class="flex justify-between">
+            <h2 class="text-4xl font-bold text-gray-700 sm:truncate"><%= @discussion.title %></h2>
+            <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
+              <% if policy(@discussion).edit? %>
+                <%= link_to [:edit, @discussion] do %>
+                  <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                      <path d="M16 5l3 3"></path>
+                    </svg>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <% if policy(@discussion).favorite? %>
+                <% if current_user.favorited?(@discussion) %>
+                  <%= render TooltipComponent.new(tooltip: "Unfavorite", user: current_user) do %>
+                    <%= link_to [:favorite, @discussion], data: { turbo_method: :patch } do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star-filled flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" fill="currentColor"></path>
+                      </svg>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
+                    <%= link_to [:favorite, @discussion], data: { turbo_method: :patch } do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                      </svg>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <% if policy(@discussion).destroy? %>
+                <%= render TooltipComponent.new(tooltip: "Delete", user: current_user) do %>
+                  <%= link_to @discussion, data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-trash-x text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M4 7h16"></path>
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                      <path d="M10 12l4 4m0 -4l-4 4"></path>
+                    </svg>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= tag.div data: { controller: "clipboard", action: "click->clipboard#copy" } do %>
+                <%= link_to "", @discussion, class: "hidden" , data: { "clipboard-target": "text" } %>
+                <%= render TooltipComponent.new(tooltip: "Copy link", user: current_user) do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" data-clipboard-target="svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-clipboard text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                    <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                  </svg>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
           <div class="flex flex-col mt-1 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
             <div class="flex items-center mt-2 ml-1 text-sm text-gray-500">
               <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd" />
               </svg>
-              <%= link_to @discussion.category, class:"font-medium" do %>
+              <%= link_to @discussion.category, class:"font-medium hover:underline" do %>
                 <%= @discussion.category.category_name %>
               <% end %>
             </div>
@@ -28,7 +91,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
               </svg>
-              <%= link_to @discussion.user, class:"font-medium" do %>
+              <%= link_to @discussion.user, class:"font-medium hover:underline" do %>
                 <%= @discussion.user&.full_name %>
               <% end %>
             </div>
@@ -40,27 +103,7 @@
             </div>
           </div>
         </div>
-        <div class="flex mt-5 lg:mt-0 lg:ml-4">
-          <span class="hidden sm:block">
-            <% if policy(@discussion).update? %>
-              <%= link_to [:edit, @discussion], class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-                Edit
-              <% end %>
-            <% end %>
-          </span>
-          <span class="hidden ml-3 sm:block">
-            <% if policy(@discussion).destroy? %>
-              <%= link_to @discussion, data: { turbo_method: :delete, turbo_confirm: "Delete this discussion?" }, class: "inline-flex items-center px-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm py-2.5 hover:bg-gray-50 focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              <% end %>
-            <% end %>
-          </span>
-        </div>
+
       </div>
       <div class="p-4 my-4 bg-white border border-gray-200 rounded-md shadow-sm">
         <%= @discussion.content %>
@@ -81,3 +124,4 @@
     </div>
   </div>
 </section>
+
