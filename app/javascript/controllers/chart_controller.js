@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, registerables } from "chart.js"
-import { dsv } from "d3"
+import Papa from "papaparse"
 
 Chart.register(...registerables)
 
@@ -15,16 +15,19 @@ export default class extends Controller {
   static targets = ["canvas"]
 
   async import(url) {
-    return await dsv(",", url, d => { return d })
+    return await fetch(url)
+      .then((response) => response.text())
   }
 
   parse(raw) {
 
-    let xValue = raw.map((d) => {
+    let parsed = Papa.parse(raw).data
+
+    let xValue = parsed.map((d) => {
       return parseFloat(Object.values(d)[0])
     })
 
-    let yValue = raw.map((d) => {
+    let yValue = parsed.map((d) => {
       return parseFloat(Object.values(d)[1])
     })
 
@@ -112,8 +115,6 @@ export default class extends Controller {
 
     if (this.hasDataValue) {
       makeChart(this.dataValue, this.filenameValue)
-      console.log(this.dataValue, this.filenameValue)
-
     } else {
       const raw = await this.import(this.urlValue)
       this.dataValue = this.parse(raw)
