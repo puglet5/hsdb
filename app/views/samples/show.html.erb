@@ -44,13 +44,7 @@
               </li>
               <% unless @spectra.nil? %>
                 <% @spectra.each do |spectrum| %>
-                  <li class="w-full">
-                    <%= tag.div data: { "tabs-target": "tab" }, id: "spectrum-#{spectrum.id}-tab", class: "hover:bg-gray-100" do %>
-                      <div class="inline-block w-full p-4 text-center cursor-pointer" data-action="click->tabs#switch">
-                        <%= ApplicationHelper.humanize_range spectrum.range %>, <%= ApplicationHelper.humanize_file_format spectrum.format %>
-                      </div>
-                    <% end %>
-                  </li>
+                  <%= render "spectrum_tab", spectrum: spectrum %>
                 <% end %>
               <% end %>
             </ul>
