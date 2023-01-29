@@ -59,7 +59,6 @@ class SpectraController < ApplicationController
     params.require(:spectrum).permit(
       :file,
       :format,
-      :status,
       :category,
       :range,
       :metadata,
