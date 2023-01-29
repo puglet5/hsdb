@@ -11,6 +11,7 @@
 #  discussion_id :integer          indexed
 #  slug          :string
 #  pinned        :boolean          default(FALSE)
+#  lock_version  :integer
 #
 # Indexes
 #
