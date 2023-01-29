@@ -141,6 +141,7 @@ RSpec.describe User, type: :model do
 
   describe 'Associations' do
     it { should have_many(:samples) }
+    it { should have_many(:spectra) }
     it { should have_many(:artworks) }
     it { should have_many(:replies).through(:discussions) }
     it { should have_many(:discussions) }
