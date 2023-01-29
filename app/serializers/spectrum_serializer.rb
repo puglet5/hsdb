@@ -14,11 +14,13 @@
 #  range      :integer          default("not_set"), not null
 #  metadata   :jsonb            not null, indexed
 #  filename   :string
+#  user_id    :bigint           not null, indexed
 #
 # Indexes
 #
 #  index_spectra_on_metadata   (metadata) USING gin
 #  index_spectra_on_sample_id  (sample_id)
+#  index_spectra_on_user_id    (user_id)
 #
 class SpectrumSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers

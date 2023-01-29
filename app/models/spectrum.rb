@@ -14,11 +14,13 @@
 #  range      :integer          default("not_set"), not null
 #  metadata   :jsonb            not null, indexed
 #  filename   :string
+#  user_id    :bigint           not null, indexed
 #
 # Indexes
 #
 #  index_spectra_on_metadata   (metadata) USING gin
 #  index_spectra_on_sample_id  (sample_id)
+#  index_spectra_on_user_id    (user_id)
 #
 class Spectrum < RsdbRecord
   include Authorship
@@ -34,6 +36,7 @@ class Spectrum < RsdbRecord
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
 
   belongs_to :sample, inverse_of: :spectra, touch: true
+  belongs_to :user, inverse_of: :spectra
 
   enum status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, other: 5 }, _prefix: :processing, _default: :none
 
@@ -53,7 +56,8 @@ class Spectrum < RsdbRecord
   before_save -> { self.filename ||= file.filename }
   after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
-  after_commit -> { request_processing self }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
+  after_commit -> { request_processing self }, on: %i[create],
+                                               if: ->(s) { s.file.attached? && s.file.persisted? }
 
   private
 

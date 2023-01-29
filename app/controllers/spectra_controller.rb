@@ -24,6 +24,7 @@ class SpectraController < ApplicationController
 
   def create
     @spectrum = @sample.spectra.build(spectrum_params)
+    @spectrum.user = current_user
 
     if @spectrum.save
       redirect_to @sample

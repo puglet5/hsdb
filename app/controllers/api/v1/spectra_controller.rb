@@ -19,6 +19,7 @@ module Api
 
       def create
         @spectrum = Spectrum.new(spectrum_params)
+        @spectrum.user = current_user
 
         if @spectrum.save!
           render json: @spectrum, status: :ok

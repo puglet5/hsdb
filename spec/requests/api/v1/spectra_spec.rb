@@ -11,7 +11,7 @@ RSpec.describe Api::V1::SpectraController do
   let(:application) { FactoryBot.create(:application) }
   let(:user)        { FactoryBot.create(:user) }
   let(:sample)      { FactoryBot.create(:sample, user: user) }
-  let(:spectrum)    { FactoryBot.create(:spectrum, sample: sample) }
+  let(:spectrum)    { FactoryBot.create(:spectrum, sample: sample, user: user) }
   let(:token)       { FactoryBot.create(:access_token, application: application, resource_owner_id: user.id) }
 
   before(:each) do
