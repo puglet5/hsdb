@@ -22,7 +22,7 @@
 class Spectrum < RsdbRecord
   include Authorship
   include CustomValidations
-  include ParseJson
+  include ParseMetadata
 
   scope :by_status, ->(status) { where(status: status) }
   scope :by_format, ->(format) { where(format: format) }
@@ -49,7 +49,7 @@ class Spectrum < RsdbRecord
   has_rich_text :equipment
 
   after_commit -> { self.filename ||= file.filename }, on: %i[create update]
-  after_commit :parse_json, on: %i[create update]
+  after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
 
   private

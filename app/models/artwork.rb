@@ -27,7 +27,7 @@
 class Artwork < ApplicationRecord
   include Authorship
   include CustomValidations
-  include ParseJson
+  include ParseMetadata
   include ProcessImage
   include ArTransactionChanges
 
@@ -70,7 +70,7 @@ class Artwork < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: %i[slugged finders]
 
-  after_commit :parse_json, on: %i[create update]
+  after_commit :parse_metadata, on: %i[create update]
   after_commit -> { process_image self, thumbnail&.id }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 
   def should_generate_new_friendly_id?

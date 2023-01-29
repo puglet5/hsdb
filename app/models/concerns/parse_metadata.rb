@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module ParseJson
+module ParseMetadata
   extend ActiveSupport::Concern
 
   included do
-    def parse_json
+    def parse_metadata
       parsed_json = JSON.parse(metadata.to_s) if metadata
       # rubocop:disable Rails/SkipsModelValidations
       update_column(:metadata, parsed_json) if parsed_json

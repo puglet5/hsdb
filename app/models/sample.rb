@@ -33,7 +33,7 @@
 class Sample < RsdbRecord
   include Authorship
   include CustomValidations
-  include ParseJson
+  include ParseMetadata
   include ProcessImage
   include ArTransactionChanges
 
@@ -68,7 +68,7 @@ class Sample < RsdbRecord
   validates :title, presence: true
   validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] }
 
-  after_commit :parse_json, on: %i[create update]
+  after_commit :parse_metadata, on: %i[create update]
   after_commit -> { images.each { |image| process_image self, image&.id } }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 
   enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
