@@ -6,7 +6,7 @@ class SendProcessingRequestJob < ApplicationJob
   def perform(initiator)
     return unless initiator
 
-    record_type = initiator.class.name.downcase
+    record_type = initiator.class.name
     record_id = initiator.id
 
     ProcessingRequestSender.call record_type, record_id

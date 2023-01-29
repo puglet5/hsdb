@@ -8,14 +8,22 @@ class ProcessingRequestSender < ApplicationService
   attr_reader :record_id, :record_type
 
   def initialize(record_type, record_id)
-    @record_type = record_type
+    @record_type = record_type.downcase
     @record_id = record_id
+    @record = (Object.const_get record_type).find record_id
   end
 
   def call
+    @record.processing_pending!
+
     request_url = "#{URL}/processing/#{@record_id}?record_type=#{record_type}"
-    response = Faraday.post(request_url)
-    handle_response(response)
+    begin
+      response = Faraday.post(request_url)
+      handle_response(response)
+    rescue Faraday::ConnectionFailed => e
+      Rails.logger.error("Server connection failed for #{record_type} with id #{record_id}: #{e}")
+      @record.processing_error!
+    end
   end
 
   private
@@ -23,6 +31,6 @@ class ProcessingRequestSender < ApplicationService
   def handle_response(response)
     return unless response.status != 202
 
-    Rails.logger.info(response.body)
+    @record.processing_ongoing!
   end
 end
