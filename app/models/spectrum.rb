@@ -24,6 +24,7 @@ class Spectrum < RsdbRecord
   include CustomValidations
   include ParseMetadata
 
+  default_scope { order(created_at: :desc) }
   scope :by_status, ->(status) { where(status: status) }
   scope :by_format, ->(format) { where(format: format) }
   scope :by_range,  ->(range)  { where(range: range) }

@@ -46,6 +46,7 @@ class Sample < RsdbRecord
     slug.blank? || title_changed?
   end
 
+  default_scope { order(created_at: :desc) }
   scope :by_category, ->(category) { where(category: category) }
   scope :by_origin, ->(origin) { where(origin: origin) }
 
