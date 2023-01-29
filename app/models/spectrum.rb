@@ -51,6 +51,7 @@ class Spectrum < RsdbRecord
   after_commit -> { self.filename ||= file.filename }, on: %i[create update]
   after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
+  after_commit -> { request_processing self }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
 
   private
 
@@ -63,5 +64,9 @@ class Spectrum < RsdbRecord
     else
       update format: 'other'
     end
+  end
+
+  def request_processing(initiator)
+    SendProcessingRequestJob.perform_later initiator
   end
 end

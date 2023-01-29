@@ -108,10 +108,10 @@
     <span>Files</span>
   </div>
 
-  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.file&.url, chart_filename_value: spectrum&.file&.filename, chart_id_value: spectrum.id } do %>
+  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.processed_file&.url, chart_filename_value: spectrum&.processed_file&.filename, chart_id_value: spectrum.id } do %>
     <div class="flex justify-between space-x-2 ml-2">
 
-      <% if spectrum.file.attached? && spectrum.file.persisted? %>
+      <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
         <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
           <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
             <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
@@ -136,8 +136,8 @@
           </svg>
         <% end %>
         <div class="w-full my-auto text-sm text-gray-500">
-          <%= link_to spectrum.file.url, class: "font-bold hover:underline" do %>
-            <%= spectrum.file.filename %>
+          <%= link_to spectrum.processed_file.url, class: "font-bold hover:underline" do %>
+            <%= spectrum.processed_file.filename %>
           <% end %>
         </div>
       <% else %>
@@ -151,37 +151,54 @@
         </svg>
         <div class="w-full my-auto text-sm text-gray-500">
           <span class="my-auto text-sm text-gray-500 ">
-            Not provided
+            Not available
           </span>
         </div>
       <% end %>
 
     </div>
-
-    <div id="settings" class="flex space-x-2 ml-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <circle cx="12" cy="14" r="2"></circle>
-        <path d="M12 10.5v1.5"></path>
-        <path d="M12 16v1.5"></path>
-        <path d="M15.031 12.25l-1.299 .75"></path>
-        <path d="M10.268 15l-1.3 .75"></path>
-        <path d="M15 15.803l-1.285 -.773"></path>
-        <path d="M10.285 12.97l-1.285 -.773"></path>
-        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
-      </svg>
-      <% if spectrum.settings.attached? %>
-        <%= link_to spectrum.settings.url, class: "text-sm font-bold text-gray-500 hover:underline" do %>
-          <%= spectrum.settings.filename %>
-        <% end %>
-      <% else %>
-        <span class="my-auto text-sm text-gray-500 ">
-          Not provided
-        </span>
-      <% end %>
-    </div>
     <%= render "spectrum_modal", spectrum: spectrum %>
   <% end %>
+
+  <div id="settings" class="flex space-x-2 ml-2 pb-1.5">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+      <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+    </svg>
+    <% if spectrum.file.attached? %>
+      <%= link_to spectrum.file.url, class: "text-sm font-bold text-gray-500 hover:underline" do %>
+        <%= spectrum.file.filename %>
+      <% end %>
+    <% else %>
+      <span class="my-auto text-sm text-gray-500 ">
+        Not provided
+      </span>
+    <% end %>
+  </div>
+
+  <div id="settings" class="flex space-x-2 ml-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <circle cx="12" cy="14" r="2"></circle>
+      <path d="M12 10.5v1.5"></path>
+      <path d="M12 16v1.5"></path>
+      <path d="M15.031 12.25l-1.299 .75"></path>
+      <path d="M10.268 15l-1.3 .75"></path>
+      <path d="M15 15.803l-1.285 -.773"></path>
+      <path d="M10.285 12.97l-1.285 -.773"></path>
+      <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+      <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+    </svg>
+    <% if spectrum.settings.attached? %>
+      <%= link_to spectrum.settings.url, class: "text-sm font-bold text-gray-500 hover:underline" do %>
+        <%= spectrum.settings.filename %>
+      <% end %>
+    <% else %>
+      <span class="my-auto text-sm text-gray-500 ">
+        Not provided
+      </span>
+    <% end %>
+  </div>
 
 </div>
