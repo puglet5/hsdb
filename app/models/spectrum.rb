@@ -48,7 +48,7 @@ class Spectrum < RsdbRecord
   has_rich_text :description
   has_rich_text :equipment
 
-  after_commit -> { self.filename ||= file.filename }, on: %i[create update]
+  before_save -> { self.filename ||= file.filename }
   after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
   after_commit -> { request_processing self }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
