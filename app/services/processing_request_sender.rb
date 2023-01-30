@@ -15,13 +15,12 @@ class ProcessingRequestSender < ApplicationService
 
   def call
     @record.processing_pending!
-
     request_url = "#{URL}/processing/#{@record_id}?record_type=#{record_type}"
     begin
       response = Faraday.post(request_url)
       handle_response(response)
     rescue Faraday::ConnectionFailed => e
-      Rails.logger.error("Server connection failed for #{record_type} with id #{record_id}: #{e}")
+      Rails.logger.error("Server connection failed for #{@record_type} with id #{@record_id}: #{e}")
       @record.processing_error!
     end
   end

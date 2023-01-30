@@ -3,6 +3,11 @@
 class SpectraController < ApplicationController
   before_action :set_sample
 
+  def show
+    @spectrum = @sample.spectra.find_by id: params[:id]
+    render partial: 'samples/spectrum_tab', locals: { spectrum: @spectrum }
+  end
+
   def new
     @spectrum = Spectrum.new
 

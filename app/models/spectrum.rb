@@ -68,6 +68,8 @@ class Spectrum < RsdbRecord
                                                        s.user.settings(:processing).enabled == true
                                                    }
 
+  after_update_commit -> { Turbo::StreamsChannel.broadcast_update_to('processing', target: self, partial: 'samples/spectrum_tab_frame', locals: { spectrum: self, sample: sample }) }
+
   private
 
   def infer_format

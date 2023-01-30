@@ -44,7 +44,7 @@
               </li>
               <% unless @spectra.nil? %>
                 <% @spectra.each do |spectrum| %>
-                  <%= render "spectrum_tab", spectrum: spectrum %>
+                  <%= render "spectrum_tab_frame", spectrum: spectrum, sample: @sample %>
                 <% end %>
               <% end %>
             </ul>
