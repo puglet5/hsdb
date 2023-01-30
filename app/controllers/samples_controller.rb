@@ -5,7 +5,7 @@ class SamplesController < ApplicationController
   after_action :verify_authorized
 
   breadcrumb 'Home', :root
-  breadcrumb 'Samples', :samples
+  breadcrumb 'Samples', :samples, match: :exclusive
 
   def index
     samples = Sample.all.order('created_at asc')
@@ -29,9 +29,10 @@ class SamplesController < ApplicationController
 
   def new
     @sample = current_user.samples.build
-    @sample.spectra.build
 
     authorize @sample
+
+    @sample.spectra.build
 
     breadcrumb 'New Sample', %i[new sample], match: :exclusive
   end
@@ -39,12 +40,15 @@ class SamplesController < ApplicationController
   def edit
     authorize @sample
 
+    @sample.spectra.build
+
     breadcrumb @sample.title, @sample, match: :exclusive
     breadcrumb 'Edit', [:edit, @sample], match: :exclusive
   end
 
   def create
     @sample = current_user.samples.build(sample_params)
+    @sample.spectra.each { |s| s.user = current_user }
 
     authorize @sample
 
@@ -52,7 +56,7 @@ class SamplesController < ApplicationController
       redirect_to @sample
       flash[:success] = 'Sample added!'
     else
-      @sample.spectra.build
+      @spectra = @sample.spectra.build
       render :new, status: :unprocessable_entity
     end
   end
@@ -72,7 +76,13 @@ class SamplesController < ApplicationController
   def update
     authorize @sample
 
-    if @sample.update(sample_params)
+    @sample.spectra.build(sample_params[:spectra_attributes])
+    @spectra = @sample.spectra.select { |s| !s.persisted? }
+    @spectra.each { |s| s.user = current_user }
+
+    if @sample.update(sample_params.except(:spectra_attributes))
+
+      @spectra.each { |s| s.save! }
 
       attachment_params[:purge_attachments]&.each do |signed_id|
         purge_attachment signed_id
