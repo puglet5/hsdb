@@ -4,26 +4,27 @@
 #
 # Table name: samples
 #
-#  id           :bigint           not null, primary key
-#  title        :string           not null
-#  user_id      :integer
-#  slug         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  metadata     :jsonb            not null, indexed
-#  category     :integer          default("not_set"), not null
-#  origin       :string           default(""), not null
-#  owner        :string           default(""), not null
-#  sku          :string           indexed
-#  cas_no       :string
-#  cas_name     :string
-#  common_names :string
-#  compound     :string
-#  color        :string
-#  formula      :string
-#  location     :string
-#  survey_date  :date
-#  lock_version :integer
+#  id                     :bigint           not null, primary key
+#  title                  :string           not null
+#  user_id                :integer
+#  slug                   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  metadata               :jsonb            not null, indexed
+#  category               :integer          default("not_set"), not null
+#  origin                 :string           default(""), not null
+#  owner                  :string           default(""), not null
+#  sku                    :string           indexed
+#  cas_no                 :string
+#  cas_name               :string
+#  common_names           :string
+#  compound               :string
+#  color                  :string
+#  formula                :string
+#  location               :string
+#  survey_date            :date
+#  lock_version           :integer
+#  plain_text_description :text
 #
 # Indexes
 #
@@ -71,6 +72,8 @@ class Sample < RsdbRecord
 
   after_commit :parse_metadata, on: %i[create update]
   after_commit -> { images.each { |image| process_image self, image&.id } }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
+
+  before_save { self.plain_text_description = description&.body&.to_plain_text }
 
   enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
 end
