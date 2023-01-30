@@ -62,12 +62,10 @@ group :development do
   gem 'bullet', '~> 7.0', '>= 7.0.3' # detect ineffective db queries
   gem 'erb_lint', '~> 0.3.0'
   gem 'foreman', '~> 0.87.2'
-  gem 'guard-livereload' # reload browser on file changes
   gem 'htmlbeautifier' # erb formatter
   gem 'immigrant' # generate db migrations
   gem 'letter_opener' # mail in development
   gem 'license_finder', '~> 7.0' # find dependencies' licenses
-  gem 'rack-livereload'
   gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd' # generate er diagrams
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
