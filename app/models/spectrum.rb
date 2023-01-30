@@ -4,17 +4,19 @@
 #
 # Table name: spectra
 #
-#  id         :bigint           not null, primary key
-#  format     :integer          default("not_set"), not null
-#  status     :integer          default("none"), not null
-#  category   :integer          default("not_set"), not null
-#  sample_id  :bigint           not null, indexed
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  range      :integer          default("not_set"), not null
-#  metadata   :jsonb            not null, indexed
-#  filename   :string
-#  user_id    :bigint           not null, indexed
+#  id                     :bigint           not null, primary key
+#  format                 :integer          default("not_set"), not null
+#  status                 :integer          default("none"), not null
+#  category               :integer          default("not_set"), not null
+#  sample_id              :bigint           not null, indexed
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  range                  :integer          default("not_set"), not null
+#  metadata               :jsonb            not null, indexed
+#  filename               :string
+#  user_id                :bigint           not null, indexed
+#  plain_text_description :text
+#  plain_text_equipment   :text
 #
 # Indexes
 #
@@ -54,6 +56,9 @@ class Spectrum < RsdbRecord
   has_rich_text :equipment
 
   before_save -> { self.filename ||= file.filename }
+  before_save { self.plain_text_description = description&.body&.to_plain_text }
+  before_save { self.plain_text_equipment = equipment&.body&.to_plain_text }
+
   after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
   after_commit -> { request_processing self }, on: %i[create],
