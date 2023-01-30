@@ -4,26 +4,27 @@
 #
 # Table name: samples
 #
-#  id           :bigint           not null, primary key
-#  title        :string           not null
-#  user_id      :integer
-#  slug         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  metadata     :jsonb            not null, indexed
-#  category     :integer          default("not_set"), not null
-#  origin       :string           default(""), not null
-#  owner        :string           default(""), not null
-#  sku          :string           indexed
-#  cas_no       :string
-#  cas_name     :string
-#  common_names :string
-#  compound     :string
-#  color        :string
-#  formula      :string
-#  location     :string
-#  survey_date  :date
-#  lock_version :integer
+#  id                     :bigint           not null, primary key
+#  title                  :string           not null
+#  user_id                :integer
+#  slug                   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  metadata               :jsonb            not null, indexed
+#  category               :integer          default("not_set"), not null
+#  origin                 :string           default(""), not null
+#  owner                  :string           default(""), not null
+#  sku                    :string           indexed
+#  cas_no                 :string
+#  cas_name               :string
+#  common_names           :string
+#  compound               :string
+#  color                  :string
+#  formula                :string
+#  location               :string
+#  survey_date            :date
+#  lock_version           :integer
+#  plain_text_description :text
 #
 # Indexes
 #

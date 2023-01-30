@@ -15,48 +15,40 @@
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference spectra samples") %>
 
-      <%= render TooltipComponent.new(tooltip: "New Sample", user: current_user) do %>
-        <%= link_to [:new, :sample], class: "my-auto" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <circle cx="12" cy="12" r="9"></circle>
-            <line x1="9" y1="12" x2="15" y2="12"></line>
-            <line x1="12" y1="9" x2="12" y2="15"></line>
-          </svg>
+      <div class="flex">
+        <%= render TooltipComponent.new(tooltip: "New Sample", user: current_user) do %>
+          <%= link_to [:new, :sample], class: "my-auto" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-circle-plus text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+              <line x1="9" y1="12" x2="15" y2="12"></line>
+              <line x1="12" y1="9" x2="12" y2="15"></line>
+            </svg>
+          <% end %>
         <% end %>
-      <% end %>
+
+        <%= search_form_for @query, class: "my-auto ml-4 w-96", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
+          <label for="index-search" class="mb-2 sr-only">Search</label>
+          <div class="relative group flex-row-reverse">
+
+            <%= f.search_field :title_or_plain_text_description_cont, class: "peer block w-full p-4 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
+
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 peer-focus:!text-primary-500 group-hover:!text-primary-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <circle cx="10" cy="10" r="7"></circle>
+                <line x1="21" y1="21" x2="15" y2="15"></line>
+              </svg>
+            </div>
+
+            <button type="submit" class="absolute px-4 py-2 text-sm font-medium text-white rounded-md right-2.5 bottom-2.5 bg-primary-500 hover:bg-primary-600 focus:ring-primary-500">Search</button>
+          </div>
+        <% end %>
+      </div>
     <% end %>
 
-    <% if @samples&.count > 0 %>
-      <div class="max-w-screen-xl px-4 py-2 mx-auto text-center">
-        <div class="relative overflow-x-auto border rounded-md">
-          <table class="w-full text-sm text-left text-gray-500">
-            <thead>
-              <tr class="bg-gray-100 border-b border-gray-300">
-                <th scope="col" class="py-3 pl-6">#</th>
-                <th scope="col" class="px-6 py-3">Title</th>
-                <th scope="col" class="px-6 py-3">Category</th>
-                <th scope="col" class="px-6 py-3">Compound</th>
-                <th scope="col" class="px-6 py-3">Files</th>
-                <th scope="col" class="px-6 py-3">Added</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white border-b">
-              <%= render @samples %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    <% else %>
-      <div class="relative p-8 text-center bg-white border border-gray-200 rounded-md">
-        <h2 class="text-2xl font-medium">
-          There's nothing here...
-        </h2>
-        <p class="mt-4 text-sm text-gray-500">
-          New samples will appear here
-        </p>
-      </div>
+    <%= turbo_frame_tag "sample_table" do %>
+      <%= render "search_results", samples: @samples, query: @query %>
     <% end %>
   <% end %>
 <% end %>

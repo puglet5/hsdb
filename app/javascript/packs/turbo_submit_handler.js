@@ -1,12 +1,4 @@
-document.addEventListener("turbo:submit-start", ({ target }) => {
-
-  if (target.elements) {
-
-    for (const field of target.elements) {
-      field.disabled = true
-    }
-
-  }
+document.addEventListener("turbo:submit-start", () => {
 
   const loadingModalBackLayer = document.createElement("div")
   const cls = ["text-white", "bg-gray-500", "bg-opacity-75", "fixed", "h-full", "top-0", "right-0", "z-50", "w-full", "flex", "items-center", "justify-center", "flex-col", "space-y-6", "overflow-visible"]
@@ -32,4 +24,5 @@ document.addEventListener("turbo:submit-end", () => {
     document.getElementById("loadingModalBackLayer").remove()
   }
   document.body.classList.remove("overflow-hidden")
+
 })

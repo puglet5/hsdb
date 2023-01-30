@@ -16,6 +16,7 @@
     "autoprefixer": "^10.4.13",
     "chart.js": "^4.2.0",
     "cuid": "^2.1.8",
+    "debounce": "^1.2.1",
     "esbuild": "^0.17.5",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.6.3",

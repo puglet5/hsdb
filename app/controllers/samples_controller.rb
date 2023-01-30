@@ -5,10 +5,12 @@ class SamplesController < ApplicationController
   after_action :verify_authorized
 
   breadcrumb 'Home', :root
-  breadcrumb 'Samples', :samples, match: :exact
+  breadcrumb 'Samples', :samples
 
   def index
-    @samples = Sample.all.order('created_at asc')
+    samples = Sample.all.order('created_at asc')
+    @query = samples.ransack(params[:query])
+    @samples = @query.result(distinct: true).order('created_at DESC')
 
     authorize @samples
   end
