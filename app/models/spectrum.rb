@@ -57,7 +57,11 @@ class Spectrum < RsdbRecord
   after_commit :parse_metadata, on: %i[create update]
   after_commit :infer_format, on: :create
   after_commit -> { request_processing self }, on: %i[create],
-                                               if: ->(s) { s.file.attached? && s.file.persisted? }
+                                               if: lambda { |s|
+                                                     s.file.attached? &&
+                                                       s.file.persisted? &&
+                                                       s.user.settings(:processing).enabled == true
+                                                   }
 
   private
 

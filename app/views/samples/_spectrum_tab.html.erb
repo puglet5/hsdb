@@ -2,7 +2,7 @@
   <%= tag.div data: { "tabs-target": "tab" }, id: "spectrum-#{spectrum.id}-tab", class: "hover:bg-gray-100" do %>
     <div class="flex items-center justify-center w-full p-4 text-center cursor-pointer space-x-2" data-action="click->tabs#switch">
       <%= render SpectrumStatusBadgeComponent.new(status: spectrum.status, user: current_user) %>
-      <span>
+      <span class="py-1.5">
         <%= ApplicationHelper.humanize_range spectrum.range %>,
         <%= ApplicationHelper.humanize_file_format spectrum.format %>
       </span>
