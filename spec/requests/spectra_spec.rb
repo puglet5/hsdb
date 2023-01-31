@@ -53,14 +53,14 @@ RSpec.fdescribe '/samples', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        { 'format' => 'csv' }
+        { 'category' => 'reference' }
       end
 
       it 'updates the requested sample' do
         spectrum = Spectrum.create! valid_attributes
         patch sample_spectrum_url(id: spectrum.id, sample_id: sample.id), params: { spectrum: new_attributes }
         spectrum.reload
-        expect(spectrum.attributes).to include({ 'format' => 'csv' })
+        expect(spectrum.attributes).to include({ 'category' => 'reference' })
       end
 
       it 'redirects to the sample' do
@@ -76,14 +76,6 @@ RSpec.fdescribe '/samples', type: :request do
         spectrum = Spectrum.create! valid_attributes
         patch sample_spectrum_url(id: spectrum.id, sample_id: sample.id), params: { spectrum: nil }
         expect(response.status).to eq(400)
-      end
-    end
-
-    context 'with invalid enum' do
-      it 'raises internal server error' do
-        spectrum = Spectrum.create! valid_attributes
-        patch sample_spectrum_url(id: spectrum.id, sample_id: sample.id), params: { spectrum: { 'format' => 'invalid' } }
-        expect(response.status).to eq(500)
       end
     end
   end
