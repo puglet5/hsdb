@@ -254,6 +254,43 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_042217) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "upload_materials", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_upload_materials_on_material_id"
+    t.index ["upload_id", "material_id"], name: "index_upload_materials_on_upload_id_and_material_id", unique: true
+    t.index ["upload_id"], name: "index_upload_materials_on_upload_id"
+  end
+
+  create_table "upload_tags", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_upload_tags_on_tag_id"
+    t.index ["upload_id", "tag_id"], name: "index_upload_tags_on_upload_id_and_tag_id", unique: true
+    t.index ["upload_id"], name: "index_upload_tags_on_upload_id"
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "slug"
+    t.integer "status", default: 0
+    t.jsonb "metadata", default: "{}", null: false
+    t.string "date"
+    t.date "survey_date"
+    t.bigint "style_id"
+    t.index ["metadata"], name: "index_uploads_on_metadata", using: :gin
+    t.index ["style_id"], name: "index_uploads_on_style_id"
+    t.index ["user_id"], name: "index_uploads_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -299,6 +336,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_042217) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "replies", "discussions", name: "replies_discussion_id_fk"
   add_foreign_key "replies", "users", name: "replies_user_id_fk"
+  add_foreign_key "upload_materials", "uploads"
+  add_foreign_key "upload_tags", "uploads"
   add_foreign_key "users_roles", "roles", name: "users_roles_role_id_fk"
   add_foreign_key "users_roles", "users", name: "users_roles_user_id_fk"
 end

@@ -271,6 +271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/hashes@npm:^1.1.5":
+  version: 1.2.0
+  resolution: "@noble/hashes@npm:1.2.0"
+  checksum: 8ca080ce557b8f40fb2f78d3aedffd95825a415ac8e13d7ffe3643f8626a8c2d99a3e5975b555027ac24316d8b3c02a35b8358567c0c23af681e6573602aa434
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -331,6 +338,15 @@ __metadata:
   version: 1.0.4
   resolution: "@orchidjs/unicode-variants@npm:1.0.4"
   checksum: a6ad1c66f4e978527ee529086b875bcaa93e23d75a3b894343bd226a2492b1fa2f9faa2a72967e4ab101a5f2c4cf4751b5a6a14086f8a864b35036f178d9aaeb
+  languageName: node
+  linkType: hard
+
+"@paralleldrive/cuid2@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@paralleldrive/cuid2@npm:2.0.1"
+  dependencies:
+    "@noble/hashes": ^1.1.5
+  checksum: 700e6d719f88e8ff3237dd72f106bb394e50149eeada9008694a7f91e05db1369ff0a4bb8248024d1764fcf964ce3035cc8ea9cfaab51694669925f542d07d74
   languageName: node
   linkType: hard
 
@@ -680,6 +696,7 @@ __metadata:
     "@client-side-validations/simple-form": ^0.3.1
     "@hotwired/stimulus": ^3.2.1
     "@hotwired/turbo-rails": ^7.2.5
+    "@paralleldrive/cuid2": ^2.0.1
     "@pgrabovets/json-view": ^2.7.1
     "@popperjs/core": ^2.11.6
     "@rails/actiontext": ^7.0.4-1
@@ -691,7 +708,6 @@ __metadata:
     autoprefixer: ^10.4.13
     chart.js: ^4.2.0
     cssnano: ^5.1.14
-    cuid: ^2.1.8
     debounce: ^1.2.1
     esbuild: ^0.17.5
     esbuild-rails: ^1.0.3
@@ -1205,13 +1221,6 @@ __metadata:
   dependencies:
     css-tree: ^1.1.2
   checksum: 380ba9663da3bcea58dee358a0d8c4468bb6539be3c439dc266ac41c047217f52fd698fb7e4b6b6ccdfb8cf53ef4ceed8cc8ceccb8dfca2aa628319826b5b998
-  languageName: node
-  linkType: hard
-
-"cuid@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "cuid@npm:2.1.8"
-  checksum: 12b85b3f5150a6f0b9e4f345c8d98299d74647419151751fa1132f6702fe2b5388ceceb1c9b49bad7cab1b3ac033c7cedea8ffc034930f90005b8a4345025288
   languageName: node
   linkType: hard
 
