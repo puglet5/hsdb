@@ -76,13 +76,13 @@ class SamplesController < ApplicationController
   def update
     authorize @sample
 
-    @sample.spectra.build(sample_params[:spectra_attributes])
-    @spectra = @sample.spectra.reject(&:persisted?)
-    @spectra.each { |s| s.user = current_user }
+    unless sample_params[:spectra_attributes].nil?
+      @spectra = @sample.spectra.build(sample_params[:spectra_attributes])
+      @spectra.each { |s| s.user = current_user }
+    end
 
     if @sample.update(sample_params.except(:spectra_attributes))
-
-      @spectra.each(&:save!)
+      @spectra.each(&:save!) unless @spectra.nil?
 
       attachment_params[:purge_attachments]&.each do |signed_id|
         purge_attachment signed_id
