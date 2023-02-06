@@ -82,7 +82,7 @@ class SamplesController < ApplicationController
     end
 
     if @sample.update(sample_params.except(:spectra_attributes))
-      @spectra.each(&:save!) unless @spectra.nil?
+      @spectra&.each(&:save!)
 
       attachment_params[:purge_attachments]&.each do |signed_id|
         purge_attachment signed_id
