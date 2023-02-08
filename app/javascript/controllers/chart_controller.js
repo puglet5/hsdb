@@ -75,6 +75,10 @@ export default class extends Controller {
           },
           scales: {
             y: {
+              title: {
+                text: "Intensity, a.u.",
+                display: true
+              },
               min: 0,
               grid: {
                 borderDash: [8, 4],
@@ -82,6 +86,10 @@ export default class extends Controller {
               }
             },
             x: {
+              title: {
+                text: "Energy, keV",
+                display: true
+              },
               grid: {
                 borderDash: [8, 4],
                 color: "#e1e1e1"
