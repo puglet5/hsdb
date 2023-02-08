@@ -17,7 +17,7 @@
     "autoprefixer": "^10.4.13",
     "chart.js": "^4.2.0",
     "debounce": "^1.2.1",
-    "esbuild": "^0.17.5",
+    "esbuild": "^0.17.6",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.6.3",
     "flowbite-datepicker": "^1.2.2",
@@ -26,7 +26,7 @@
     "photoswipe": "^5.3.5",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
-    "tailwindcss": "^3.2.4",
+    "tailwindcss": "^3.2.6",
     "tom-select": "^2.2.2",
     "trix": "^2.0.4",
     "uppy-activestorage-upload": "link:./uppy-activestorage-upload"
