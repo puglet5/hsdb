@@ -4,7 +4,41 @@
     <div class="flex justify-center mb-6 text-4xl font-semibold">
       New sample
     </div>
-    <%= simple_form_for @sample, validate: true do |f| %>
+    <%= simple_form_for @sample, validate: true, html: { id: "main-form" } do |f| %>
+
+      <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700") do %>
+        <div class="flex">
+          Choose sample type:
+        </div>
+      <% end %>
+
+      <%= turbo_frame_tag :form do %>
+
+        <%= tag.div data: { controller: "sample-form" }, id: "category-selector" do %>
+          <%= f.button :button, "Validate", formaction: :new, formmethod: :get, data: { sample_form_target: "validate", turbo_frame: :form }, class: "hidden" %>
+          <div class="input radio_buttons sample_category">
+            <%= f.input :is_reference, as: :hidden, input_html: { value: @sample.is_reference? } %>
+            <ul class="grid gap-6 my-4 w-full md:grid-cols-2" data-action="change->sample-form#submit">
+              <li>
+                <label for="sample_reference" class="inline-flex items-center justify-between w-full p-5 bg-white border rounded-lg cursor-pointer hover:text-gray-600 hover:bg-gray-100 select-none <%= @sample.is_reference? ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-200' %>">
+                  <input type="radio" id="sample_reference" name="sample[is_reference]" value="1" class="peer hidden" <%= "disabled" if @sample.is_reference? %>>
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Reference</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="sample_not_reference" class="inline-flex items-center justify-between w-full p-5 bg-white border rounded-lg cursor-pointer hover:text-primary-600 hover:bg-gray-100 select-none <%= !@sample.is_reference? ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-200' %>">
+                  <input type="radio" id="sample_not_reference" name="sample[is_reference]" value="0" class="peer hidden" <%= "disabled" if !@sample.is_reference? %>>
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Generic</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
 
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
       <div id="info" class="mb-4 grid grid-cols-2 gap-4">

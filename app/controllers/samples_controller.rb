@@ -28,7 +28,7 @@ class SamplesController < ApplicationController
   end
 
   def new
-    @sample = current_user.samples.build
+    @sample = current_user.samples.build sample_params
 
     authorize @sample
 
@@ -118,7 +118,7 @@ class SamplesController < ApplicationController
   end
 
   def sample_params
-    params.require(:sample).permit(
+    params.fetch(:sample, {}).permit(
       :title,
       :metadata,
       :category,
@@ -132,8 +132,8 @@ class SamplesController < ApplicationController
       :cas_no,
       :cas_name,
       :survey_date,
+      :is_reference,
       spectra_attributes: %i[id file],
-
       images: [],
       documents: []
     )
