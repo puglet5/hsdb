@@ -37,7 +37,7 @@ class Spectrum < RsdbRecord
   # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }
 
-  belongs_to :sample, inverse_of: :spectra, touch: true
+  belongs_to :sample, inverse_of: :spectra
   belongs_to :user, inverse_of: :spectra
 
   enum status: { none: 0, successful: 1, pending: 2, ongoing: 3, error: 4, other: 5 }, _prefix: :processing, _default: :none
