@@ -53,14 +53,14 @@ RSpec.fdescribe '/samples', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        { 'category' => 'reference' }
+        { 'category' => 'raman' }
       end
 
       it 'updates the requested sample' do
         spectrum = Spectrum.create! valid_attributes
         patch sample_spectrum_url(id: spectrum.id, sample_id: sample.id), params: { spectrum: new_attributes }
         spectrum.reload
-        expect(spectrum.attributes).to include({ 'category' => 'reference' })
+        expect(spectrum.attributes).to include({ 'category' => 'raman' })
       end
 
       it 'redirects to the sample' do
