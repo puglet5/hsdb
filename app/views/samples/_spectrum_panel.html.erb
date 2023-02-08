@@ -14,7 +14,7 @@
           &middot;
         </div>
         <span class="my-auto">
-          <%= spectrum.category.humanize %>
+          <%= ApplicationHelper.humanize_category spectrum.category %>
         </span>
         <div class="my-auto">
           &middot;
@@ -112,7 +112,7 @@
     <div class="flex justify-between space-x-2 ml-2">
 
       <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
-        <% if spectrum.csv_format? || spectrum.dpt_format? || spectrum.processing_successful? %>
+        <% if spectrum.processing_successful? %>
           <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
             <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
