@@ -25,6 +25,7 @@
 #  survey_date            :date
 #  lock_version           :integer
 #  plain_text_description :text
+#  is_reference           :boolean
 #
 # Indexes
 #
