@@ -64,4 +64,10 @@ module ApplicationHelper
 
     str.upcase
   end
+
+  def self.humanize_category(str)
+    return str.humanize if %w[other not_set].include? str
+
+    str.upcase
+  end
 end

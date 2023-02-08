@@ -23,7 +23,7 @@ class SpectraController < ApplicationController
     breadcrumb 'Home', :root
     breadcrumb 'Samples', :samples, match: :exact
     breadcrumb @sample.title, @sample, match: :exact
-    breadcrumb "#{@spectrum.range.upcase}, .#{@spectrum.format}", @sample, match: :exact
+    breadcrumb "#{ApplicationHelper.humanize_category @spectrum.category}, #{ApplicationHelper.humanize_file_format @spectrum.format}", @sample, match: :exact
     breadcrumb 'Edit', [:edit, @sample, @spectrum], match: :exclusive
   end
 

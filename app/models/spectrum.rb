@@ -59,8 +59,9 @@ class Spectrum < RsdbRecord
   before_save { self.plain_text_description = description&.body&.to_plain_text }
   before_save { self.plain_text_equipment = equipment&.body&.to_plain_text }
 
+  after_create :infer_format
+  after_create :infer_category
   after_commit :parse_metadata, on: %i[create update]
-  after_commit :infer_format, on: :create
   after_commit -> { request_processing self }, on: %i[create],
                                                if: lambda { |s|
                                                      s.file.attached? &&
@@ -73,13 +74,28 @@ class Spectrum < RsdbRecord
   private
 
   def infer_format
-    return unless file.attached? && file.persisted?
+    return unless file.attached?
 
-    format = file.filename.to_s.split('.').last
-    if Spectrum.formats.key? format
-      update format: format
+    file_format = file.filename.to_s.split('.').last
+
+    if Spectrum.formats.key? file_format
+      update format: file_format
     else
       update format: 'other'
+    end
+  end
+
+  def infer_category
+    return unless file.attached?
+
+    file_format = file.filename.to_s.split('.').last
+    case file_format
+    when 'dat'
+      xrf_type!
+    when 'dpt'
+      ftir_type!
+    else
+      other_type!
     end
   end
 

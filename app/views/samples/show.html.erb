@@ -49,7 +49,7 @@
                       <div class="flex items-center justify-center w-full p-4 text-center cursor-pointer space-x-2" data-action="click->tabs#switch">
                         <%= render "spectrum_tab_frame", spectrum: spectrum, sample: @sample %>
                         <span class="py-1.5">
-                          <%= ApplicationHelper.humanize_range spectrum.range %>,
+                          <%= ApplicationHelper.humanize_category spectrum.category %>,
                           <%= ApplicationHelper.humanize_file_format spectrum.format %>
                         </span>
                       </div>
