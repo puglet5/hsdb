@@ -16,6 +16,7 @@
     "@uppy/image-editor": "^2.1.0",
     "autoprefixer": "^10.4.13",
     "chart.js": "^4.2.0",
+    "chartjs-plugin-zoom": "^2.0.0",
     "debounce": "^1.2.1",
     "esbuild": "^0.17.6",
     "esbuild-rails": "^1.0.3",

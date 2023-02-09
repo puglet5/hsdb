@@ -1,8 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, registerables } from "chart.js"
+import zoomPlugin from "chartjs-plugin-zoom"
+
 import Papa from "papaparse"
 
 Chart.register(...registerables)
+Chart.register(zoomPlugin)
 
 export default class extends Controller {
   static values = {
@@ -15,6 +18,98 @@ export default class extends Controller {
 
   static targets = ["canvas"]
   normalized = false
+  options = {
+    animation: false,
+    parsing: true,
+    showAllTooltips: true,
+    layout: {
+      padding: {
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: 20
+      },
+    },
+    elements: {
+      point: {
+        radius: 0
+      },
+      line: {
+        backgroundColor: "#000000",
+        borderColor: "#000000",
+        borderWidth: 2
+      }
+    },
+    scales: {
+      y: {
+        title: {
+          text: "Intensity, a.u.",
+          display: true
+        },
+        min: 0,
+        grid: {
+          borderDash: [8, 4],
+          color: "#e1e1e1"
+        }
+      },
+      x: {
+        title: {
+          text: "Energy, keV",
+          display: true
+        },
+        grid: {
+          borderDash: [8, 4],
+          color: "#e1e1e1"
+        }
+      }
+    },
+    interaction: {
+      mode: "nearest",
+      axis: "x",
+      intersect: false
+    },
+    plugins: {
+      tooltip: {
+        displayColors: false,
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.formattedValue
+          },
+          title: function () {
+            return
+          }
+        }
+      },
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: false
+          },
+          mode: "xy",
+        },
+        pan: {
+          enabled: true
+        },
+        limits: {
+          x: { min: "original", max: "original" },
+          y: { min: "original", max: "original" }
+        },
+        animation: {
+          duration: 100,
+          easing: "easeOutCubic"
+        }
+      },
+      legend:
+      {
+        labels: {
+          boxWidth: 0,
+        }
+      }
+    }
+  }
 
   async import(url) {
     return await fetch(url)
@@ -58,79 +153,10 @@ export default class extends Controller {
             label: filename,
             data: data,
             showLine: true,
-            lineTension: 0.8
+            lineTension: 0
           }]
         },
-        options: {
-          animation: false,
-          parsing: true,
-          showAllTooltips: true,
-          layout: {
-            padding: {
-              left: 20,
-              right: 20,
-              top: 20,
-              bottom: 20
-            },
-          },
-          elements: {
-            point: {
-              radius: 0
-            },
-            line: {
-              backgroundColor: "#000000",
-              borderColor: "#000000",
-              borderWidth: 2
-            }
-          },
-          scales: {
-            y: {
-              title: {
-                text: "Intensity, a.u.",
-                display: true
-              },
-              min: 0,
-              grid: {
-                borderDash: [8, 4],
-                color: "#e1e1e1"
-              }
-            },
-            x: {
-              title: {
-                text: "Energy, keV",
-                display: true
-              },
-              grid: {
-                borderDash: [8, 4],
-                color: "#e1e1e1"
-              }
-            }
-          },
-          interaction: {
-            mode: "nearest",
-            axis: "x",
-            intersect: false
-          },
-          plugins: {
-            tooltip: {
-              displayColors: false,
-              callbacks: {
-                label: function (tooltipItem) {
-                  return tooltipItem.formattedValue
-                },
-                title: function () {
-                  return
-                }
-              }
-            },
-            legend:
-            {
-              labels: {
-                boxWidth: 0,
-              }
-            }
-          }
-        }
+        options: this.options
       })
     }
 
@@ -162,7 +188,8 @@ export default class extends Controller {
 
   normalize() {
     if (!this.normalized) {
-      console.log("normalized")
+      window.scatterChart.resetZoom()
+
       this.normalized = true
 
       let data = this.dataValue
@@ -183,6 +210,7 @@ export default class extends Controller {
   }
 
   reset() {
+    window.scatterChart.resetZoom()
     if (this.normalized) {
       this.normalized = false
       this.dataValue = this.initialDataValue

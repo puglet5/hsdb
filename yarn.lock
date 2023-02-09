@@ -707,6 +707,7 @@ __metadata:
     "@uppy/image-editor": ^2.1.0
     autoprefixer: ^10.4.13
     chart.js: ^4.2.0
+    chartjs-plugin-zoom: ^2.0.0
     cssnano: ^5.1.14
     debounce: ^1.2.1
     esbuild: ^0.17.6
@@ -941,6 +942,17 @@ __metadata:
   dependencies:
     "@kurkle/color": ^0.3.0
   checksum: 281b023c013de8700a5208a45d35248b02119fadb574d0c104c7e0720605e085195ce546fd3aa27625e9db1188fdd5f7491a411463b9c30b7654a5f4b13d8d80
+  languageName: node
+  linkType: hard
+
+"chartjs-plugin-zoom@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "chartjs-plugin-zoom@npm:2.0.0"
+  dependencies:
+    hammerjs: ^2.0.8
+  peerDependencies:
+    chart.js: ">=3.2.0"
+  checksum: 5d18567e968adb5347c3d506491d90e5a28132bb35155cef483be9de9bf7a5961b87fc1d72e1aed7ef88976ddcef45623fcad73cbb4fb3fbcecfc71774ebd541
   languageName: node
   linkType: hard
 
@@ -1996,6 +2008,13 @@ __metadata:
   version: 1.0.4
   resolution: "grapheme-splitter@npm:1.0.4"
   checksum: 0c22ec54dee1b05cd480f78cf14f732cb5b108edc073572c4ec205df4cd63f30f8db8025afc5debc8835a8ddeacf648a1c7992fe3dcd6ad38f9a476d84906620
+  languageName: node
+  linkType: hard
+
+"hammerjs@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "hammerjs@npm:2.0.8"
+  checksum: b092da7d1565a165d7edb53ef0ce212837a8b11f897aa3cf81a7818b66686b0ab3f4747fbce8fc8a41d1376594639ce3a054b0fd4889ca8b5b136a29ca500e27
   languageName: node
   linkType: hard
 
