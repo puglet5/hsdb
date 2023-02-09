@@ -210,12 +210,16 @@ export default class extends Controller {
   }
 
   reset() {
-    window.scatterChart.resetZoom()
     if (this.normalized) {
       this.normalized = false
       this.dataValue = this.initialDataValue
       this.visualize()
     }
     else return
+  }
+
+  resetZoom() {
+    window.scatterChart.resetZoom()
+
   }
 }
