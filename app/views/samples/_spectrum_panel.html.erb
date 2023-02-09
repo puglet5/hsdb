@@ -25,6 +25,46 @@
       </div>
     </div>
     <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
+
+      <% if policy(spectrum).request_processing? %>
+        <% unless spectrum.processing_pending? || spectrum.processing_ongoing? %>
+
+          <%= link_to [:request_processing, @sample, spectrum], data: { turbo_method: :get, turbo_confirm: "Are you sure ?" } do %>
+            <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
+                <path d="M9 9h6v6h-6z"></path>
+                <path d="M3 10h2"></path>
+                <path d="M3 14h2"></path>
+                <path d="M10 3v2"></path>
+                <path d="M14 3v2"></path>
+                <path d="M21 10h-2"></path>
+                <path d="M21 14h-2"></path>
+                <path d="M14 21v-2"></path>
+                <path d="M10 21v-2"></path>
+              </svg>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu flex-shrink-0 w-5 h-5 text-gray-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
+              <path d="M9 9h6v6h-6z"></path>
+              <path d="M3 10h2"></path>
+              <path d="M3 14h2"></path>
+              <path d="M10 3v2"></path>
+              <path d="M14 3v2"></path>
+              <path d="M21 10h-2"></path>
+              <path d="M21 14h-2"></path>
+              <path d="M14 21v-2"></path>
+              <path d="M10 21v-2"></path>
+            </svg>
+          <% end %>
+        <% end %>
+      <% end %>
+
       <% if policy(spectrum).edit? %>
         <%= link_to [:edit, @sample, spectrum] do %>
           <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>

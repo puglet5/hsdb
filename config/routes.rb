@@ -16,7 +16,11 @@ Rails.application.routes.draw do
 
   # scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
   resources :samples do
-    resources :spectra
+    resources :spectra do
+      member do
+        get :request_processing
+      end
+    end
     member do
       patch :favorite
     end

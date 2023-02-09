@@ -16,4 +16,8 @@ class SpectrumPolicy < ApplicationPolicy
   def destroy?
     user.has_role?(:admin) || user.author?(record.sample)
   end
+
+  def request_processing?
+    user.has_role?(:admin) || user.author?(record.sample)
+  end
 end

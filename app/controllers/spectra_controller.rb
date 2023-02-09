@@ -58,6 +58,11 @@ class SpectraController < ApplicationController
     redirect_to @sample, status: :see_other
   end
 
+  def request_processing
+    @spectrum = @sample.spectra.find(params[:id])
+    SendProcessingRequestJob.perform_later @spectrum
+  end
+
   private
 
   def spectrum_params
