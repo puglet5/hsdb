@@ -16,8 +16,9 @@ export default class extends Controller {
     id: Number
   }
 
-  static targets = ["canvas"]
+  static targets = ["canvas", "interpolateButton", "normalizeButton"]
   normalized = false
+  cubicInterpolationMode = undefined
   options = {
     animation: false,
     parsing: true,
@@ -153,7 +154,8 @@ export default class extends Controller {
             label: filename,
             data: data,
             showLine: true,
-            lineTension: 0
+            lineTension: 0,
+            cubicInterpolationMode: this.cubicInterpolationMode,
           }]
         },
         options: this.options
@@ -186,7 +188,7 @@ export default class extends Controller {
     ]
   }
 
-  normalize() {
+  toggleNormalize() {
     if (!this.normalized) {
       window.scatterChart.resetZoom()
 
@@ -206,20 +208,39 @@ export default class extends Controller {
       ))
       this.visualize()
     }
-    else return
+    else {
+      window.scatterChart.resetZoom()
+
+      this.normalized = false
+      this.dataValue = this.initialDataValue
+      this.visualize()
+    }
+    this.normalizeButtonTarget.classList.toggle("hidden")
   }
 
   reset() {
     if (this.normalized) {
       this.normalized = false
       this.dataValue = this.initialDataValue
-      this.visualize()
     }
-    else return
+    this.cubicInterpolationMode = undefined
+    window.scatterChart.resetZoom()
+    this.visualize()
   }
 
   resetZoom() {
     window.scatterChart.resetZoom()
+  }
 
+  toggleInterpolate() {
+    window.scatterChart.resetZoom()
+    if (this.cubicInterpolationMode == undefined) {
+      this.cubicInterpolationMode = "monotone"
+    }
+    else {
+      this.cubicInterpolationMode = undefined
+    }
+    this.interpolateButtonTarget.classList.toggle("hidden")
+    this.visualize()
   }
 }
