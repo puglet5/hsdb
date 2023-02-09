@@ -8,30 +8,32 @@ export default class extends Controller {
   static values = {
     url: String,
     data: Array,
+    initialData: Array,
     filename: String,
     id: Number
   }
 
   static targets = ["canvas"]
+  normalized = false
 
   async import(url) {
     return await fetch(url)
       .then((response) => response.text())
   }
 
-  parse(raw) {
+  parse(rawData) {
 
-    let parsed = Papa.parse(raw).data
+    let data = Papa.parse(rawData).data
 
-    let xValue = parsed.map((d) => {
+    let xValue = data.map((d) => {
       return parseFloat(Object.values(d)[0])
     })
 
-    let yValue = parsed.map((d) => {
+    let yValue = data.map((d) => {
       return parseFloat(Object.values(d)[1])
     })
 
-    let data = xValue
+    let parsedData = xValue
       .map((v, i) => {
         return [v, yValue[i]]
       })
@@ -40,8 +42,7 @@ export default class extends Controller {
         return { x, y }
       })
 
-    return data
-
+    return parsedData
   }
 
   async visualize() {
@@ -57,12 +58,21 @@ export default class extends Controller {
             label: filename,
             data: data,
             showLine: true,
+            lineTension: 0.8
           }]
         },
         options: {
           animation: false,
           parsing: true,
           showAllTooltips: true,
+          layout: {
+            padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20
+            },
+          },
           elements: {
             point: {
               radius: 0
@@ -101,12 +111,17 @@ export default class extends Controller {
             axis: "x",
             intersect: false
           },
-          tooltip: {
-            position: "nearest",
-          },
           plugins: {
             tooltip: {
-              displayColors: false
+              displayColors: false,
+              callbacks: {
+                label: function (tooltipItem) {
+                  return tooltipItem.formattedValue
+                },
+                title: function () {
+                  return
+                }
+              }
             },
             legend:
             {
@@ -140,8 +155,39 @@ export default class extends Controller {
       .map(e => e[0])
 
     return [
-      [Math.min(...x), Math.max(...x)],
+      [x[0], x.slice(-2)[0]],
       [Math.min(...y), Math.max(...y)]
     ]
+  }
+
+  normalize() {
+    if (!this.normalized) {
+      console.log("normalized")
+      this.normalized = true
+
+      let data = this.dataValue
+      let range = this.getRange(data)
+      let normalizedY = data.map(e => e["y"] / range[1][1])
+
+      this.initialDataValue = this.dataValue
+
+      this.dataValue = data.map((e, i) => (
+        {
+          x: e["x"],
+          y: normalizedY[i],
+        }
+      ))
+      this.visualize()
+    }
+    else return
+  }
+
+  reset() {
+    if (this.normalized) {
+      this.normalized = false
+      this.dataValue = this.initialDataValue
+      this.visualize()
+    }
+    else return
   }
 }
