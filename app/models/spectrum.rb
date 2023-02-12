@@ -68,7 +68,6 @@ class Spectrum < RsdbRecord
                                                        s.file.persisted? &&
                                                        s.user.settings(:processing).enabled == true
                                                    }
-
   after_update_commit :broadcast_later
 
   private

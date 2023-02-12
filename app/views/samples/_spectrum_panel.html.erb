@@ -28,7 +28,7 @@
       </div>
       <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
 
-        <% if policy(spectrum).request_processing? %>
+        <% if policy(spectrum).request_processing? && spectrum.file.attached? && spectrum.file.persisted? %>
           <% unless spectrum.processing_pending? || spectrum.processing_ongoing? %>
 
             <%= link_to [:request_processing, sample, spectrum] do %>

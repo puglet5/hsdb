@@ -69,7 +69,7 @@
             <% end %>
           </div>
         </div>
-        <% if spectrum.file.attached? && spectrum.file.persisted? %>
+        <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
           <%= tag.canvas id: "canvas-#{spectrum.id}" %>
         <% end %>
       </div>
