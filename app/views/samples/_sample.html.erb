@@ -3,8 +3,8 @@
     <%= sample.id %>
   </td>
   <th class="px-6 py-4 font-bold text-gray-700 whitespace-nowrap">
-    <%= link_to sample, class: "link" do %>
-      <%= sample&.title %>
+    <%= link_to sample, class: "hover:underline" do %>
+      <%= highlight(sample&.title, params.dig(:query, :title_or_plain_text_description_i_cont)&.strip) %>
     <% end %>
   </th>
   <td class="px-6 py-4">
@@ -15,6 +15,9 @@
   </td>
   <td class="px-6 py-4">
     <%= sample.spectra.count %>
+  </td>
+  <td class="px-6 py-4">
+    <%= sample.spectra.count + sample.images.count + sample.documents.count %>
   </td>
   <td class="px-6 py-4">
     <%= time_ago_in_words(sample.created_at) %> ago

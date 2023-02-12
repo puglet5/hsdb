@@ -13,7 +13,7 @@
     </div>
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
-      <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Reference spectra samples") %>
+      <%= render Typography::H3Component.new(cls: "!my-auto").with_content("Reference spectra samples") %>
 
       <div class="flex">
         <%= render TooltipComponent.new(tooltip: "New Sample", user: current_user) do %>
@@ -27,11 +27,13 @@
           <% end %>
         <% end %>
 
-        <%= search_form_for @query, class: "my-auto ml-4 w-96", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
+        <%= search_form_for @query, class: "my-auto ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
+          <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
+
           <label for="index-search" class="mb-2 sr-only">Search</label>
           <div class="relative group flex-row-reverse">
 
-            <%= f.search_field :title_or_plain_text_description_cont, class: "peer block w-full p-4 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
+            <%= f.search_field :title_or_plain_text_description_i_cont, class: "peer block p-4 w-64 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
 
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 peer-focus:!text-primary-500 group-hover:!text-primary-500">
               <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -40,8 +42,6 @@
                 <line x1="21" y1="21" x2="15" y2="15"></line>
               </svg>
             </div>
-
-            <button type="submit" class="absolute px-4 py-2 text-sm font-medium text-white rounded-md right-2.5 bottom-2.5 bg-primary-500 hover:bg-primary-600 focus:ring-primary-500">Search</button>
           </div>
         <% end %>
       </div>

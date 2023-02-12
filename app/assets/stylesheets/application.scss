@@ -311,3 +311,9 @@ trix-toolbar .trix-button.trix-active {
   @apply flex items-center justify-center flex-col
 }
 
+mark {
+  @apply bg-primary-100 rounded-sm inline pr-1 pl-1 py-0;
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+}
+
