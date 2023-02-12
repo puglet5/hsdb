@@ -62,6 +62,7 @@ group :development do
   gem 'bullet', '~> 7.0', '>= 7.0.3' # detect ineffective db queries
   gem 'erb_lint', '~> 0.3.0'
   gem 'foreman', '~> 0.87.2'
+  gem 'hotwire-livereload', '~> 1.2'
   gem 'htmlbeautifier' # erb formatter
   gem 'immigrant' # generate db migrations
   gem 'letter_opener' # mail in development

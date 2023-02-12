@@ -122,4 +122,6 @@ Rails.application.configure do
   config.rails_semantic_logger.ap_options = { multiline: true }
   config.rails_semantic_logger.format = :color
   config.log_tags = nil
+
+  config.hotwire_livereload.reload_method = :turbo_stream
 end

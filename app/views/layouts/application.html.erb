@@ -11,6 +11,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application" %>
+    <%= action_cable_meta_tag %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
   <body class="flex flex-col justify-between h-screen text-gray-700" data-controller="btt">
     <%= render "shared/application_nav" %>

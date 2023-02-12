@@ -213,6 +213,9 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashdiff (1.0.1)
+    hotwire-livereload (1.2.3)
+      listen (>= 3.0.0)
+      rails (>= 6.0.0)
     htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
     i18n (1.12.0)
@@ -566,6 +569,7 @@ DEPENDENCIES
   friendly_id (~> 5.4, >= 5.4.2)
   fuubar (~> 2.5)
   has_scope (~> 0.8.0)
+  hotwire-livereload (~> 1.2)
   htmlbeautifier
   image_processing (~> 1.12, >= 1.12.1)
   immigrant
