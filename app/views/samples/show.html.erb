@@ -163,8 +163,8 @@
             <% end %>
 
             <% @spectra&.each do |spectrum| %>
-              <%= tag.div data: { "tabs-target": "panel" }, id: "spectrum-#{spectrum.id}-panel", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
-                <%= render "spectrum_panel", spectrum: spectrum %>
+              <%= tag.div data: { "tabs-target": "panel" }, id: "spectrum_#{spectrum.id}_panel-wrapper", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
+                <%= render "spectrum_panel_frame", spectrum: spectrum, sample: @sample %>
               <% end %>
             <% end %>
 

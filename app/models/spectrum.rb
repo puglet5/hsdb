@@ -69,9 +69,14 @@ class Spectrum < RsdbRecord
                                                        s.user.settings(:processing).enabled == true
                                                    }
 
-  after_update_commit -> { Turbo::StreamsChannel.broadcast_update_to('processing', target: self, partial: 'samples/spectrum_tab_frame', locals: { spectrum: self, sample: sample }) }
+  after_update_commit :broadcast_later
 
   private
+
+  def broadcast_later
+    broadcast_update_to('processing', target: "spectrum_#{id}", partial: 'samples/spectrum_tab_frame', locals: { spectrum: self, sample: sample })
+    broadcast_update_to('processing', target: "spectrum_#{id}_panel", partial: 'samples/spectrum_panel_frame', locals: { spectrum: self, sample: sample })
+  end
 
   def infer_format
     return unless file.attached?

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :spectra do
       member do
         get :request_processing
+        get :show_tab
+        get :show_panel
       end
     end
     member do

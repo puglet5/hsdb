@@ -14,7 +14,6 @@ class ProcessingRequestSender < ApplicationService
   end
 
   def call
-    @record.processing_pending!
     request_url = "#{URL}/processing/#{@record_id}?record_type=#{record_type}"
     begin
       response = Faraday.post(request_url)

@@ -3,9 +3,14 @@
 class SpectraController < ApplicationController
   before_action :set_sample
 
-  def show
+  def show_tab
     @spectrum = @sample.spectra.find_by id: params[:id]
     render partial: 'samples/spectrum_tab', locals: { spectrum: @spectrum }
+  end
+
+  def show_panel
+    @spectrum = @sample.spectra.find_by id: params[:id]
+    render partial: 'samples/spectrum_panel', locals: { spectrum: @spectrum, sample: @sample }
   end
 
   def new
@@ -60,7 +65,13 @@ class SpectraController < ApplicationController
 
   def request_processing
     @spectrum = @sample.spectra.find(params[:id])
+    @spectrum.processing_pending!
     SendProcessingRequestJob.perform_later @spectrum
+    respond_to do |format|
+      format.html do
+        render partial: 'samples/spectrum_panel', locals: { spectrum: @spectrum, sample: @sample }
+      end
+    end
   end
 
   private
