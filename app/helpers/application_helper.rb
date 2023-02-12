@@ -66,7 +66,9 @@ module ApplicationHelper
   end
 
   def self.humanize_category(str)
-    return str.humanize if %w[other not_set].include? str
+    return str.humanize if %w[other not_set raman].include? str
+
+    return 'THz' if %w[thz].include? str
 
     str.upcase
   end

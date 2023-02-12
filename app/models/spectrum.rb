@@ -46,7 +46,7 @@ class Spectrum < RsdbRecord
 
   enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, dpt: 7, other: 99 }, _default: :not_set, _suffix: :format
 
-  enum category: { not_set: 0, xrf: 1, xrd: 2, ftir: 3, libs: 4, raman: 5, other: 99 }, _default: :not_set, _suffix: :type
+  enum category: { not_set: 0, xrf: 1, xrd: 2, ftir: 3, libs: 4, raman: 5, thz: 6, other: 99 }, _default: :not_set, _suffix: :type
 
   has_one_attached :file
   has_one_attached :processed_file
