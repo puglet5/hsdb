@@ -15,10 +15,10 @@
     "@uppy/dashboard": "^3.2.1",
     "@uppy/image-editor": "^2.1.0",
     "autoprefixer": "^10.4.13",
-    "chart.js": "^4.2.0",
+    "chart.js": "^4.2.1",
     "chartjs-plugin-zoom": "^2.0.0",
     "debounce": "^1.2.1",
-    "esbuild": "^0.17.6",
+    "esbuild": "^0.17.7",
     "esbuild-rails": "^1.0.3",
     "flowbite": "1.6.3",
     "flowbite-datepicker": "^1.2.2",
@@ -50,7 +50,7 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^5.1.14",
-    "eslint": "^8.33.0",
+    "eslint": "^8.34.0",
     "postcss-nested": "^6.0.0",
     "tailwind-config-viewer": "^1.7.2"
   }
