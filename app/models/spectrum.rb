@@ -29,6 +29,17 @@ class Spectrum < RsdbRecord
   include CustomValidations
   include ParseMetadata
 
+  AXES_SPEC = {
+    not_set: { labels: ['', ''], reverse: false },
+    xrf: { labels: ['Energy, kEv', 'Intensity, a.u.'], reverse: false },
+    xrd: { labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false },
+    ftir: { labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true },
+    libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false },
+    raman: { labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false },
+    thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false },
+    other: { labels: ['', ''], reverse: false }
+  }.freeze
+
   default_scope { order(created_at: :desc) }
   scope :by_status, ->(status) { where(status: status) }
   scope :by_format, ->(format) { where(format: format) }

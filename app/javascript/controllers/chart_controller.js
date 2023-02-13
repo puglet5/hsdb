@@ -13,7 +13,8 @@ export default class extends Controller {
     data: Array,
     initialData: Array,
     filename: String,
-    id: Number
+    id: Number,
+    axesSpec: Object
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton"]
@@ -44,7 +45,7 @@ export default class extends Controller {
     scales: {
       y: {
         title: {
-          text: "Intensity, a.u.",
+          text: this.axesSpecValue["labels"][1],
           display: true
         },
         min: 0,
@@ -55,13 +56,14 @@ export default class extends Controller {
       },
       x: {
         title: {
-          text: "Energy, keV",
+          text: this.axesSpecValue["labels"][0],
           display: true
         },
         grid: {
           borderDash: [8, 4],
           color: "#e1e1e1"
-        }
+        },
+        reverse: this.axesSpecValue["reverse"]
       }
     },
     interaction: {
@@ -110,6 +112,10 @@ export default class extends Controller {
         }
       }
     }
+  }
+
+  connect() {
+    console.log(this.axesSpecValue)
   }
 
   async import(url) {
