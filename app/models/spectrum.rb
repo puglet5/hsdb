@@ -37,6 +37,7 @@ class Spectrum < RsdbRecord
     libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false },
     raman: { labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false },
     thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false },
+    reflectance: { labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false },
     other: { labels: ['', ''], reverse: false }
   }.freeze
 
@@ -57,7 +58,7 @@ class Spectrum < RsdbRecord
 
   enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, dpt: 7, other: 99 }, _default: :not_set, _suffix: :format
 
-  enum category: { not_set: 0, xrf: 1, xrd: 2, ftir: 3, libs: 4, raman: 5, thz: 6, other: 99 }, _default: :not_set, _suffix: :type
+  enum category: { not_set: 0, xrf: 1, xrd: 2, ftir: 3, libs: 4, raman: 5, thz: 6, reflectance: 7, other: 99 }, _default: :not_set, _suffix: :type
 
   has_one_attached :file
   has_one_attached :processed_file
@@ -101,7 +102,7 @@ class Spectrum < RsdbRecord
   end
 
   def infer_category
-    return unless file.attached?
+    return unless file.attached? || !not_set_type?
 
     file_format = file.filename.to_s.split('.').last
     case file_format
@@ -109,6 +110,14 @@ class Spectrum < RsdbRecord
       xrf_type!
     when 'dpt'
       ftir_type!
+    when 'spectable'
+      libs_type!
+    when 'mon'
+      reflectance_type!
+    when 'txt'
+      raman_type!
+    when 'csv'
+      not_set_type!
     else
       other_type!
     end
