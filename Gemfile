@@ -36,7 +36,7 @@ gem 'pg', '~> 1.4' # postgres
 gem 'propshaft', '~> 0.6' # asset delivery
 gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1' # authorization / policies
-gem 'rack-cors', '~> 1.1'
+gem 'rack-cors', '~> 2.0'
 gem 'rails', '~> 7.0.4'
 gem 'rails-i18n', '~> 7.0.4'
 gem 'rails_semantic_logger', '~> 4.10'

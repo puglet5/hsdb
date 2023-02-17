@@ -1,7 +1,7 @@
 <div class="container flex justify-center">
   <div class="max-w-md p-6 mt-24 mb-auto bg-white border border-gray-200 rounded-md shadow-sm w-96">
     <h1 class="mb-4 text-3xl font-bold">Log in</h1>
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), local: true, html: { data: { turbo: false }, class: "max-w-md mx-auto mt-8 mb-0 space-y-4" }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "max-w-md mx-auto mt-8 mb-0 space-y-4" }) do |f| %>
 
       <div>
         <label for="email" class="sr-only">Email</label>
