@@ -29,7 +29,7 @@
       <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
 
         <% if policy(spectrum).request_processing? && spectrum.file.attached? && spectrum.file.persisted? %>
-          <% unless spectrum.processing_pending? || spectrum.processing_ongoing? %>
+          <% unless spectrum.processing_pending? || spectrum.processing_ongoing? || spectrum.processing_successful? %>
 
             <%= link_to [:request_processing, sample, spectrum] do %>
               <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
