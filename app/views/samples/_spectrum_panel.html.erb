@@ -33,7 +33,7 @@
 
             <%= link_to [:request_processing, sample, spectrum] do %>
               <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-cpu text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
                   <path d="M9 9h6v6h-6z"></path>
@@ -50,7 +50,7 @@
             <% end %>
           <% else %>
             <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu flex-shrink-0 w-5 h-5 text-gray-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 icon icon-tabler icon-tabler-cpu" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
                 <path d="M9 9h6v6h-6z"></path>
@@ -151,7 +151,7 @@
     </div>
 
     <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.processed_file&.url, chart_filename_value: spectrum&.processed_file&.filename, chart_id_value: spectrum.id, chart_axes_spec_value: Spectrum::AXES_SPEC[spectrum.category.to_sym] } do %>
-      <div class="flex justify-between space-x-2 ml-2">
+      <div class="flex justify-between ml-2 space-x-2">
 
         <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
           <% if spectrum.processing_successful? %>
@@ -202,8 +202,8 @@
       <%= render "samples/spectrum_modal", spectrum: spectrum %>
     <% end %>
 
-    <div id="settings" class="flex space-x-2 ml-2 pb-1.5">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <div id="settings" class="flex ml-2 space-x-2 pb-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500 icon icon-tabler icon-tabler-file" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
         <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
@@ -219,7 +219,7 @@
       <% end %>
     </div>
 
-    <div id="settings" class="flex space-x-2 ml-2">
+    <div id="settings" class="flex ml-2 space-x-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <circle cx="12" cy="14" r="2"></circle>

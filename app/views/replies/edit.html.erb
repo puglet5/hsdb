@@ -1,8 +1,8 @@
 <%= turbo_frame_tag @reply do %>
   <%= render "shared/errors", obj: @reply %>
   <%= simple_form_for [@discussion, @reply], validate: true do |f| %>
-    <div class="p-4 pb-1 mt-4 mb-0 bg-white rounded-lg border border-gray-200 shadow-sm" data-controller="textarea">
-      <%= f.input :reply, as: :text, input_html: { class: "w-full p-3 text-xs font-normal text-gray-700 border border-gray-200 rounded-lg bg-gray-50    focus:border-primary-500", id: "reply-form", data: { textarea_target: "input" } }, autofocus: true %>
+    <div class="p-4 pb-1 mt-4 mb-0 bg-white border border-gray-200 rounded-lg shadow-sm" data-controller="textarea">
+      <%= f.input :reply, as: :text, input_html: { class: "w-full p-3 text-xs font-normal text-gray-700 border border-gray-200 rounded-lg bg-gray-50 focus:border-primary-500", id: "reply-form", data: { textarea_target: "input" } }, autofocus: true %>
       <button type="submit" class="mt-2 text-gray-500">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />

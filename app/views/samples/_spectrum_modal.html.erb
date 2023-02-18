@@ -8,10 +8,10 @@
           <h3 class="text-xl font-medium text-gray-700">
             <%= spectrum.processed_file.filename %>
           </h3>
-          <div class="flex relative">
+          <div class="relative flex">
             <%= render TooltipComponent.new(tooltip: "Normalize", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleNormalize">
-                <svg xmlns="http://www.w3.org/2000/svg" data-chart-target="normalizeButton" class="icon icon-tabler icon-tabler-fold w-5 h-5 peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" data-chart-target="normalizeButton" class="w-5 h-5 icon icon-tabler icon-tabler-fold peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 3v6l3 -3m-6 0l3 3"></path>
                   <path d="M12 21v-6l3 3m-6 0l3 -3"></path>
@@ -20,7 +20,7 @@
                   <path d="M14 12l1 0"></path>
                   <path d="M19 12l1 0"></path>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-vertical w-5 h-5 hidden peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-5 h-5 icon icon-tabler icon-tabler-arrows-vertical peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M8 7l4 -4l4 4"></path>
                   <path d="M8 17l4 4l4 -4"></path>
@@ -30,12 +30,12 @@
             <% end %>
             <%= render TooltipComponent.new(tooltip: "Interpolate", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleInterpolate">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph w-5 h-5 peer" data-chart-target="interpolateButton" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 icon icon-tabler icon-tabler-graph peer" data-chart-target="interpolateButton" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
                   <path d="M7 14l3 -3l2 2l3 -3l2 2"></path>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph-off w-5 h-5 hidden peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-5 h-5 icon icon-tabler icon-tabler-graph-off peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M8 4h10a2 2 0 0 1 2 2v10m-.586 3.414a2 2 0 0 1 -1.414 .586h-12a2 2 0 0 1 -2 -2v-12c0 -.547 .22 -1.043 .576 -1.405"></path>
                   <path d="M7 14l3 -3l2 2l.5 -.5m2 -2l.5 -.5l2 2"></path>
@@ -45,7 +45,7 @@
             <% end %>
             <%= render TooltipComponent.new(tooltip: "Reset zoom", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#resetZoom">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-zoom-reset h-5 w-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 icon icon-tabler icon-tabler-zoom-reset" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M21 21l-6 -6"></path>
                   <path d="M3.268 12.043a7.017 7.017 0 0 0 6.634 4.957a7.012 7.012 0 0 0 7.043 -6.131a7 7 0 0 0 -5.314 -7.672a7.021 7.021 0 0 0 -8.241 4.403"></path>
@@ -55,7 +55,7 @@
             <% end %>
             <%= render TooltipComponent.new(tooltip: "Reset", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#reset">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 icon icon-tabler icon-tabler-rotate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"></path>
                 </svg>

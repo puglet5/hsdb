@@ -8,7 +8,7 @@
     </svg>
     <span>Documents</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500 flex flex-col space-y-2 w-fit">
+  <div class="flex flex-col p-2 ml-2 space-y-2 text-sm text-justify text-gray-500 w-fit">
     <% if sample.documents.any? %>
       <% sample.documents&.each do |doc| %>
         <%= link_to doc.url, class: "font-bold hover:underline" do %>
@@ -31,7 +31,7 @@
     </svg>
     <span>Images</span>
   </div>
-  <div class="p-2 ml-2 text-sm text-justify text-gray-500 flex flex-col space-y-2 w-fit">
+  <div class="flex flex-col p-2 ml-2 space-y-2 text-sm text-justify text-gray-500 w-fit">
     <% if sample.images.any? %>
       <% sample.images&.each do |img| %>
         <%= link_to img.url, class: "font-bold hover:underline" do %>
