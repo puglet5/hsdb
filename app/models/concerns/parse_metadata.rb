@@ -5,6 +5,9 @@ module ParseMetadata
 
   included do
     def parse_metadata
+      return unless metadata
+      return if metadata.is_a?(Hash)
+
       parsed_json = JSON.parse(metadata.to_s) if metadata
       # rubocop:disable Rails/SkipsModelValidations
       update_column(:metadata, parsed_json) if parsed_json

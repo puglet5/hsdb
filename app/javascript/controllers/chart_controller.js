@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
-
+import ChartDataLabels from "chartjs-plugin-datalabels"
 import Papa from "papaparse"
 
 Chart.register(...registerables)
 Chart.register(zoomPlugin)
+Chart.register(ChartDataLabels)
 
 export default class extends Controller {
   static values = {
@@ -14,12 +15,14 @@ export default class extends Controller {
     initialData: Array,
     filename: String,
     id: Number,
-    axesSpec: Object
+    axesSpec: Object,
+    labels: Object
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton"]
   normalized = false
   cubicInterpolationMode = undefined
+
   options = {
     animation: false,
     parsing: true,
@@ -81,6 +84,26 @@ export default class extends Controller {
           title: function () {
             return
           }
+        },
+      },
+      datalabels: {
+        anchor: "center",
+        align: "top",
+        clip: true,
+        borderRadius: 2,
+        labels: {
+          value: {},
+          title: {
+            color: "black",
+            backgroundColor: "rgba(34, 81, 163, .1)",
+          }
+        },
+        display: (context) => {
+          let values = Object.keys(this.labelsValue).map(Number)
+          return (values.includes(context.dataIndex))
+        },
+        formatter: (value, context) => {
+          return this.labelsValue[context.dataIndex]
         }
       },
       zoom: {
@@ -112,10 +135,6 @@ export default class extends Controller {
         }
       }
     }
-  }
-
-  connect() {
-    console.log(this.axesSpecValue)
   }
 
   async import(url) {
@@ -162,7 +181,7 @@ export default class extends Controller {
             showLine: true,
             lineTension: 0,
             cubicInterpolationMode: this.cubicInterpolationMode,
-          }]
+          }],
         },
         options: this.options
       })
