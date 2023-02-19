@@ -720,7 +720,7 @@ __metadata:
     photoswipe: ^5.3.5
     postcss: ^8.4.21
     postcss-cli: ^10.1.0
-    postcss-nested: ^6.0.0
+    postcss-nested: ^6.0.1
     tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.2.7
     tom-select: ^2.2.2
@@ -3294,7 +3294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nested@npm:6.0.0, postcss-nested@npm:^6.0.0":
+"postcss-nested@npm:6.0.0":
   version: 6.0.0
   resolution: "postcss-nested@npm:6.0.0"
   dependencies:
@@ -3313,6 +3313,17 @@ __metadata:
   peerDependencies:
     postcss: ^8.2.14
   checksum: dbcbfd11e514f485ac0d2b649b32bcbd855665a88a76f697f8be6c5017aa0260954ecccd2475bbd5865a5d248eae9a4e6e10d2d51927621d05430381aa37e43b
+  languageName: node
+  linkType: hard
+
+"postcss-nested@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "postcss-nested@npm:6.0.1"
+  dependencies:
+    postcss-selector-parser: ^6.0.11
+  peerDependencies:
+    postcss: ^8.2.14
+  checksum: 7ddb0364cd797de01e38f644879189e0caeb7ea3f78628c933d91cc24f327c56d31269384454fc02ecaf503b44bfa8e08870a7c4cc56b23bc15640e1894523fa
   languageName: node
   linkType: hard
 
