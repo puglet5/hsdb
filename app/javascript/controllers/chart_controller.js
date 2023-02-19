@@ -3,6 +3,7 @@ import { Chart, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import Papa from "papaparse"
+import { blur } from "d3-array"
 
 Chart.register(...registerables)
 Chart.register(zoomPlugin)
@@ -16,10 +17,10 @@ export default class extends Controller {
     filename: String,
     id: Number,
     axesSpec: Object,
-    labels: Object
+    labels: Object,
   }
 
-  static targets = ["canvas", "interpolateButton", "normalizeButton"]
+  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider"]
   normalized = false
   cubicInterpolationMode = undefined
 
@@ -148,11 +149,11 @@ export default class extends Controller {
 
     let xValue = data.map((d) => {
       return parseFloat(Object.values(d)[0])
-    })
+    }).filter(value => !Number.isNaN(value))
 
     let yValue = data.map((d) => {
       return parseFloat(Object.values(d)[1])
-    })
+    }).filter(value => !Number.isNaN(value))
 
     let parsedData = xValue
       .map((v, i) => {
@@ -266,6 +267,27 @@ export default class extends Controller {
       this.cubicInterpolationMode = undefined
     }
     this.interpolateButtonTarget.classList.toggle("hidden")
+    this.visualize()
+  }
+
+  applyGaussianFilter() {
+    window.scatterChart.resetZoom()
+
+    let radius = this.gaussianFilterSliderTarget.value
+
+    if (radius < 0 || radius > 10) { return }
+
+    let data = this.hasInitialDataValue ? this.initialDataValue : this.dataValue
+    let normalizedY = blur(data.map(e => e["y"]), radius)
+
+    this.initialDataValue = data
+
+    this.dataValue = data.map((e, i) => (
+      {
+        x: e["x"],
+        y: normalizedY[i],
+      }
+    ))
     this.visualize()
   }
 }
