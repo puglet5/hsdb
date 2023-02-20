@@ -75,7 +75,6 @@ export default class extends Controller {
       }
     }
 
-
     setupUppy(this.divTarget)
   }
 

@@ -15,7 +15,6 @@ export default class extends Controller {
     thumbnails: Boolean,
   }
 
-
   connect() {
 
     const appendUploadedFile = (element, file, field_name) => {
@@ -98,5 +97,4 @@ export default class extends Controller {
 
     setupUppy(this.divTarget)
   }
-
 }

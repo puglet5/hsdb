@@ -7,5 +7,4 @@ export default class extends Controller {
   toggle() {
     this.modalTarget.classList.toggle("hidden")
   }
-
 }

@@ -10,6 +10,7 @@ Chart.register(zoomPlugin)
 Chart.register(ChartDataLabels)
 
 export default class extends Controller {
+
   static values = {
     url: String,
     data: Array,
@@ -21,6 +22,7 @@ export default class extends Controller {
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider"]
+
   normalized = false
   cubicInterpolationMode = undefined
 
