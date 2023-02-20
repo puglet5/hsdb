@@ -247,12 +247,14 @@ export default class extends Controller {
   }
 
   reset() {
-    if (this.normalized) {
-      this.normalized = false
-      this.dataValue = this.initialDataValue
-    }
+    this.normalized = false
+    this.dataValue = this.initialDataValue ? this.initialDataValue : this.dataValue
     this.cubicInterpolationMode = undefined
     window.scatterChart.resetZoom()
+    this.gaussianFilterSliderTarget.value = 0
+    this.interpolateButtonTarget.classList.remove("hidden")
+    this.normalizeButtonTarget.classList.remove("hidden")
+
     this.visualize()
   }
 
