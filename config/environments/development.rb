@@ -124,4 +124,6 @@ Rails.application.configure do
   config.log_tags = nil
 
   config.hotwire_livereload.reload_method = :turbo_stream
+
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 end
