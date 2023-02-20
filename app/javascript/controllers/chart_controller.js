@@ -18,13 +18,14 @@ export default class extends Controller {
     filename: String,
     id: Number,
     axesSpec: Object,
-    labels: Object,
+    labels: Array,
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider"]
 
   normalized = false
   cubicInterpolationMode = undefined
+  displayLabelValues = this.labelsValue.map(o => o.position).map(Number)
 
   options = {
     animation: false,
@@ -102,11 +103,10 @@ export default class extends Controller {
           }
         },
         display: (context) => {
-          let values = Object.keys(this.labelsValue).map(Number)
-          return (values.includes(context.dataIndex))
+          return (this.displayLabelValues.includes(context.dataIndex))
         },
-        formatter: (value, context) => {
-          return this.labelsValue[context.dataIndex]
+        formatter: (value) => {
+          return parseFloat(value["y"]).toFixed(3)
         }
       },
       zoom: {
