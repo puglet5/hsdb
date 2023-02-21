@@ -4,6 +4,10 @@
 
 ## Notes on development
 
+```bash
+git config --global core.autocrlf input
+```
+
 ### Locally
 
 Initialize git submodules
