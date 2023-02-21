@@ -6,6 +6,7 @@
     "@client-side-validations/simple-form": "^0.3.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.5",
+    "@paralleldrive/cuid2": "^2.1.0",
     "@pgrabovets/json-view": "^2.7.1",
     "@popperjs/core": "^2.11.6",
     "@rails/actiontext": "^7.0.4-1",
