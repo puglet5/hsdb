@@ -31,7 +31,7 @@
         <% if policy(spectrum).request_processing? && spectrum.file.attached? && spectrum.file.persisted? %>
           <% unless spectrum.processing_pending? || spectrum.processing_ongoing? || spectrum.processing_successful? %>
 
-            <%= link_to [:request_processing, sample, spectrum] do %>
+            <%= link_to [:request_processing, sample, spectrum], data: { turbo_method: :get, turbo_confirm: "Are you sure ?"} do %>
               <%= render TooltipComponent.new(tooltip: "Request processing", user: current_user) do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-cpu text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
