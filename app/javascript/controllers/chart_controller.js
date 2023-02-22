@@ -59,7 +59,8 @@ export default class extends Controller {
         grid: {
           borderDash: [8, 4],
           color: "#e1e1e1"
-        }
+        },
+        grace: "1%"
       },
       x: {
         title: {
@@ -99,14 +100,14 @@ export default class extends Controller {
           value: {},
           title: {
             color: "black",
-            backgroundColor: "rgba(34, 81, 163, .1)",
+            // backgroundColor: "rgba(34, 81, 163, .1)",
           }
         },
         display: (context) => {
-          return (this.displayLabelValues.includes(context.dataIndex))
+          return (this.displayLabelValues.includes(context.dataIndex) ? "auto" : false)
         },
         formatter: (value) => {
-          return parseFloat(value["y"]).toFixed(3)
+          return parseFloat(value["x"]).toFixed(1)
         }
       },
       zoom: {
@@ -248,7 +249,7 @@ export default class extends Controller {
 
   reset() {
     this.normalized = false
-    this.dataValue = this.initialDataValue ? this.initialDataValue : this.dataValue
+    this.dataValue = this.hasInitialDataValue ? this.initialDataValue : this.dataValue
     this.cubicInterpolationMode = undefined
     window.scatterChart.resetZoom()
     this.gaussianFilterSliderTarget.value = 0
