@@ -169,7 +169,7 @@ class ArtworksController < ApplicationController
     else
       current_user.favorite @artwork
     end
-    redirect_to request.referer
+    redirect_to(request.referer || :root)
   end
 
   private

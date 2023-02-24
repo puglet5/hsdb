@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'artworks/resources/images', to: 'artworks#images'
+  get '/resources/artworks/images', to: 'artworks#images'
   resources :categories
   resources :discussions do
     resources :replies
