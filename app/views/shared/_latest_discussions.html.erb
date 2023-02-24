@@ -52,7 +52,7 @@
                 <% end %>
               <% end %>
 
-              <%= turbo_frame_tag "#{discussion}_favorite" do %>
+              <%= turbo_frame_tag "discussion_#{discussion.id}_favorite" do %>
                 <% if policy(discussion).favorite? %>
                   <% if current_user.favorited?(discussion) %>
                     <%= render TooltipComponent.new(tooltip: "Unfavorite", user: current_user) do %>
