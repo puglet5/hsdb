@@ -12,6 +12,21 @@
             <%= render TooltipComponent.new(tooltip: "Low pass filter", user: current_user) do %>
               <input id="default-range" type="range" value="0" max="10" min="0" step="1" class="mr-6 my-auto w-16 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer text-gray-500" data-action="input->chart#applyGaussianFilter" data-chart-target="gaussianFilterSlider">
             <% end %>
+            <%= render TooltipComponent.new(tooltip: "Toggle data labels", user: current_user) do %>
+              <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleLabels">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tags-off w-5 h-5 peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-chart-target="showLabelsButton">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <circle cx="8.5" cy="8.5" r="1" fill="currentColor"></circle>
+                  <path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag-off hidden w-5 h-5 peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M7.792 7.793a1 1 0 0 0 1.414 1.414"></path>
+                  <path d="M4.88 4.877a2.99 2.99 0 0 0 -.88 2.123v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l2.416 -2.416m2 -2l.416 -.416a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-2.859"></path>
+                  <path d="M3 3l18 18"></path>
+                </svg>
+              </button>
+            <% end %>
             <%= render TooltipComponent.new(tooltip: "Normalize", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleNormalize">
                 <svg xmlns="http://www.w3.org/2000/svg" data-chart-target="normalizeButton" class="w-5 h-5 icon icon-tabler icon-tabler-fold peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

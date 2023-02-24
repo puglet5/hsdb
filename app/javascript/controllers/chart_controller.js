@@ -21,9 +21,10 @@ export default class extends Controller {
     labels: Array,
   }
 
-  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider"]
+  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton"]
 
   normalized = false
+  showLabels = true
   cubicInterpolationMode = undefined
   displayLabelValues = this.labelsValue.map(o => o.position).map(Number)
 
@@ -104,7 +105,10 @@ export default class extends Controller {
           }
         },
         display: (context) => {
-          return (this.displayLabelValues.includes(context.dataIndex) ? "auto" : false)
+          if (this.showLabels == true)
+            return (this.displayLabelValues.includes(context.dataIndex) ? "auto" : false)
+          else
+            return false
         },
         formatter: (value) => {
           return parseFloat(value["x"]).toFixed(1)
@@ -293,6 +297,13 @@ export default class extends Controller {
         y: normalizedY[i],
       }
     ))
+    this.visualize()
+  }
+
+  toggleLabels() {
+    window.scatterChart.resetZoom()
+    this.showLabels = !this.showLabels
+    this.showLabelsButtonTarget.classList.toggle("hidden")
     this.visualize()
   }
 }
