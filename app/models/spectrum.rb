@@ -85,8 +85,9 @@ class Spectrum < RsdbRecord
   private
 
   def broadcast_later
-    broadcast_update_later_to('processing', target: "spectrum_#{id}", partial: 'samples/spectrum_tab_frame', locals: { spectrum: self, sample: sample })
-    broadcast_update_later_to('processing', target: "spectrum_#{id}_panel", partial: 'samples/spectrum_panel_frame', locals: { spectrum: self, sample: sample })
+    broadcast_update_later_to('processing', target: "spectrum_#{id}", partial: 'samples/spectrum_processing_indicator_frame', locals: { spectrum: self, sample: sample })
+    broadcast_update_later_to('processing', target: "spectrum_#{id}_request_processing_button", partial: 'samples/spectrum_request_processing_button_frame', locals: { spectrum: self, sample: sample })
+    broadcast_update_later_to('processing', target: "spectrum_#{id}_chart_area", partial: 'samples/spectrum_chart_area_frame', locals: { spectrum: self, sample: sample })
   end
 
   def infer_format

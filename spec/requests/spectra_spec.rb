@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.fdescribe '/samples', type: :request do
+RSpec.describe '/samples/spectra', type: :request do
   let(:user) { create(:user) }
-  let(:sample) { create(:sample) }
+  let(:sample) { create(:sample, user: user) }
 
   let(:valid_attributes) do
     { 'sample_id' => sample.id,
