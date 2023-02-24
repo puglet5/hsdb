@@ -1,6 +1,6 @@
 <%= turbo_stream_from "processing" %>
 
-<%= turbo_frame_tag "spectrum_#{spectrum.id}_request_processing_button", src: show_request_processing_button_sample_spectrum_path(sample, spectrum, frame: true) do %>
+<%= turbo_frame_tag "spectrum_#{spectrum.id}_request_processing_button", src: show_request_processing_button_sample_spectrum_path(sample, spectrum, frame: true), loading: :lazy do %>
   <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-400 icon icon-tabler icon-tabler-cpu" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
     <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
