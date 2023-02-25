@@ -7,17 +7,23 @@ export default class extends Controller {
   static targets = ["tab", "panel"]
 
   connect() {
-    if (localStorage.active_tab) {
-      let active = this.tabTargets.find(x => x.id === localStorage.getItem("active_tab"))
-      let active_id = this.tabTargets.indexOf(active)
-
-      active.classList.add(...this.activeClasses)
-      this.panelTargets[active_id].classList.remove("hidden")
-
-    } else {
+    if (!localStorage.active_tab) {
       this.tabTargets[0].classList.add(...this.activeClasses)
       this.panelTargets[0].classList.remove("hidden")
+      return
     }
+
+    let active = this.tabTargets.find(x => x.id === localStorage.getItem("active_tab"))
+
+    if (active == undefined) {
+      this.tabTargets[0].classList.add(...this.activeClasses)
+      this.panelTargets[0].classList.remove("hidden")
+      return
+    }
+
+    let active_id = this.tabTargets.indexOf(active)
+    active.classList.add(...this.activeClasses)
+    this.panelTargets[active_id].classList.remove("hidden")
   }
 
   switch(e) {
