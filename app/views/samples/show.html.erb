@@ -17,13 +17,13 @@
                 </div>
               </li>
               <li class="w-full">
-                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "active-tab hover:bg-gray-100" do %>
+                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "hover:bg-gray-100" do %>
                   <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Info</button>
                 <% end %>
               </li>
               <li class="w-full">
-                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "hover:bg-gray-100" do %>
-                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Files</button>
+                <%= tag.div data: { "tabs-target": "tab" }, id: "files-tab", class: "hover:bg-gray-100" do %>
+                  <button type="button" role="tab" aria-controls="files" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Files</button>
                 <% end %>
               </li>
               <li class="w-full border-y">
@@ -156,7 +156,7 @@
           </div>
 
           <div id="panels" class="rounded-br-lg">
-            <%= tag.div data: { "tabs-target": "panel" }, id: "info-panel", class: "p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
+            <%= tag.div data: { "tabs-target": "panel" }, id: "info-panel", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
               <%= render "sample_panel", sample: @sample %>
             <% end %>
 
