@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_210032) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_25_205705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_210032) do
     t.bigint "user_id", null: false
     t.text "plain_text_description"
     t.text "plain_text_equipment"
+    t.string "task_id"
     t.index ["metadata"], name: "index_spectra_on_metadata", using: :gin
     t.index ["sample_id"], name: "index_spectra_on_sample_id"
     t.index ["user_id"], name: "index_spectra_on_user_id"
