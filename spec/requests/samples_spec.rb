@@ -97,7 +97,7 @@ RSpec.describe '/samples', type: :request do
         sample = Sample.create! valid_attributes
         patch sample_url(id: sample.id), params: { sample: new_attributes }
         sample.reload
-        expect(response).to redirect_to(sample_url(id: sample.friendly_id))
+        expect(response).to redirect_to(sample_url(id: sample.id))
       end
     end
 
