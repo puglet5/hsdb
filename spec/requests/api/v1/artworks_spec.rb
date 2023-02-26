@@ -33,7 +33,7 @@ RSpec.describe Api::V1::ArtworksController do
         artwork.save!
         get '/api/v1/artworks', params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject['artwork']).to eq(JSON.parse(response.body)['artworks'].first)
+        expect(subject['artwork']).to eq(response.parsed_body['artworks'].first)
       end
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::ArtworksController do
         artwork.save!
         get "/api/v1/artworks/#{artwork.id}", params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject).to eq(JSON.parse(response.body))
+        expect(subject).to eq(response.parsed_body)
       end
     end
   end
