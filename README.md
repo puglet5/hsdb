@@ -4,11 +4,14 @@
 
 ## Notes on development
 
+Notice:
+This repository is adopting conventional commits [specification](https://www.conventionalcommits.org/en/v1.0.0/#summary).
+
+### Locally
+
 ```bash
 git config --global core.autocrlf input
 ```
-
-### Locally
 
 Initialize git submodules
 ```bash
@@ -45,11 +48,12 @@ Initial build:
 ```bash
 git clone https://github.com/puglet5/hsdb.git
 cd hsdb
+
 docker compose build
-# creates and seeds the database
-docker compose run --rm web bin/rails db:setup
-# alternatively, if you don't want to seed the database
-docker compose run --rm web bin/rails db:create && bin/rails db:schema:load
+docker compose run --rm web bin/rails db:create
+docker compose run --rm web bin/rails db:schema:load
+docker compose run --rm web bin/rails db:seed
+docker compose run --rm web bin/rails dev:cache
 ```
 
 On successive builds:
