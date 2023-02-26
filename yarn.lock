@@ -717,6 +717,7 @@ __metadata:
     eslint: ^8.34.0
     flowbite: 1.6.3
     flowbite-datepicker: ^1.2.2
+    hotkeys-js: ^3.10.1
     jquery: ^3.6.3
     papaparse: ^5.3.2
     photoswipe: ^5.3.6
@@ -2392,6 +2393,13 @@ __metadata:
   dependencies:
     function-bind: ^1.1.1
   checksum: b9ad53d53be4af90ce5d1c38331e712522417d017d5ef1ebd0507e07c2fbad8686fffb8e12ddecd4c39ca9b9b47431afbb975b8abf7f3c3b82c98e9aad052792
+  languageName: node
+  linkType: hard
+
+"hotkeys-js@npm:^3.10.1":
+  version: 3.10.1
+  resolution: "hotkeys-js@npm:3.10.1"
+  checksum: f6ca367fbcc52e6d6a4f735ada8d6ebfd38d7a1bc5574ffb3dafb5e7a0b5ad1d2a23b46c59eb482b09aca4ca76152738d1be32553580a3e8c7dad6f46a0fa738
   languageName: node
   linkType: hard
 

@@ -61,7 +61,7 @@ export default class extends Controller {
           borderDash: [8, 4],
           color: "#e1e1e1"
         },
-        grace: "1%"
+        grace: "5%"
       },
       x: {
         title: {
