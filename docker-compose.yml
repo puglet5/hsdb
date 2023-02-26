@@ -1,36 +1,47 @@
+---
 services:
-  web:
-    build: .
-    tty: true
-    command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
-    volumes:
-      - .:/usr/src/app
-      - bundle:/usr/local/bundle
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-    environment:
-      - HISTFILE=/usr/src/app/log/.bash_history
-    depends_on:
-      - db
-      - redis
   db:
-    restart: always
-    image: postgres:13
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=changeme
       - POSTGRES_HOST_AUTH_METHOD=trust
+    image: postgres:15
+    networks:
+      - default
+    ports:
+      - '5432:5432'
+    restart: always
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql@15/data
   redis:
-    image: redis:6.2
+    image: redis:7
+    networks:
+      - default
     volumes:
       - redis_data:/data
-
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - ISTFILE=/usr/src/app/log/.bash_history
+      - PGHOST=db
+      - POSTGRES_PASSWORD=changeme
+    networks:
+      - default
+    ports:
+      - '3000:3000'
+    tty: true
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+networks:
+  default:
+    driver: bridge
 volumes:
-  pg_data:
-  redis_data:
-  bundle:
+  bundle: null
+  pg_data: null
+  redis_data: null
