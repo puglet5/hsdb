@@ -43,7 +43,6 @@ production:
     username: <%= ENV['PGUSER_PROD'] %>
     password: <%= ENV['PGPASSWORD_PROD'] %>
 
-
   rsdb:
     host: localhost
     adapter: postgresql
