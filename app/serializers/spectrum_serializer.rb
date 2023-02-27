@@ -17,12 +17,17 @@
 #  user_id                :bigint           not null, indexed
 #  plain_text_description :text
 #  plain_text_equipment   :text
+#  task_id                :string
 #
 # Indexes
 #
 #  index_spectra_on_metadata   (metadata) USING gin
 #  index_spectra_on_sample_id  (sample_id)
 #  index_spectra_on_user_id    (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (sample_id => samples.id)
 #
 class SpectrumSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers

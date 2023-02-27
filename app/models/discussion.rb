@@ -20,6 +20,11 @@
 #  index_discussions_on_category_id  (category_id)
 #  index_discussions_on_user_id      (user_id)
 #
+# Foreign Keys
+#
+#  discussions_category_id_fk  (category_id => categories.id)
+#  discussions_user_id_fk      (user_id => users.id)
+#
 class Discussion < ApplicationRecord
   include Authorship
 

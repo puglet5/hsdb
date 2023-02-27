@@ -16,6 +16,11 @@
 #  index_artwork_materials_on_artwork_id_and_material_id  (artwork_id,material_id) UNIQUE
 #  index_artwork_materials_on_material_id                 (material_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (artwork_id => artworks.id)
+#  fk_rails_...  (material_id => materials.id)
+#
 
 RSpec.describe ArtworkMaterial, type: :model do
   describe 'associations' do

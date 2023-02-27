@@ -16,6 +16,10 @@
 #
 #  index_images_on_artwork_id  (artwork_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (artwork_id => artworks.id)
+#
 FactoryBot.define do
   factory :image do
     association :artwork, factory: :artwork, strategy: :build

@@ -24,6 +24,11 @@
 #  index_artworks_on_style_id  (style_id)
 #  index_artworks_on_user_id   (user_id)
 #
+# Foreign Keys
+#
+#  artworks_user_id_fk  (user_id => users.id)
+#  fk_rails_...         (style_id => styles.id)
+#
 class ArtworkSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 

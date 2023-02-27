@@ -16,6 +16,11 @@
 #  index_artwork_tags_on_artwork_id_and_tag_id  (artwork_id,tag_id) UNIQUE
 #  index_artwork_tags_on_tag_id                 (tag_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (artwork_id => artworks.id)
+#  fk_rails_...  (tag_id => tags.id)
+#
 class ArtworkTag < ApplicationRecord
   belongs_to :artwork
   belongs_to :tag

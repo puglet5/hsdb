@@ -16,6 +16,10 @@
 #
 #  index_images_on_artwork_id  (artwork_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (artwork_id => artworks.id)
+#
 
 RSpec.describe Image, type: :model do
   let(:artwork) { create(:artwork) }
