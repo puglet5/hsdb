@@ -3,7 +3,7 @@
 require 'faraday'
 
 class ProcessingRequestSender < ApplicationService
-  include Rails.application.routes.url_helpers
+  URL = 'http://localhost:8000'
 
   attr_reader :record_id, :record_type
 
@@ -16,7 +16,7 @@ class ProcessingRequestSender < ApplicationService
   def call
     return unless @record
 
-    request_url = "#{root_url}/processing/#{@record_id}?record_type=#{record_type}"
+    request_url = "#{URL}/processing/#{@record_id}?record_type=#{record_type}"
     @record.processing_pending!
     begin
       response = Faraday.post request_url
