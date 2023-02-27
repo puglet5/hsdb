@@ -16,11 +16,11 @@ class SamplesController < ApplicationController
   end
 
   def show
-    @sample = Sample.find(params[:id])
-    @spectra = @sample
-               .spectra
-               .with_attached_file
-               .with_attached_settings
+    @sample = Sample.with_attached_documents
+                    .with_attached_images
+                    .includes(:spectra)
+                    .find(params[:id])
+    @spectra = @sample.spectra
 
     authorize @sample
 

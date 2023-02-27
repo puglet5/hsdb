@@ -41,13 +41,6 @@ class Sample < RsdbRecord
 
   acts_as_favoritable
 
-  extend FriendlyId
-  friendly_id :title, use: %i[slugged finders]
-
-  def should_generate_new_friendly_id?
-    slug.blank? || title_changed?
-  end
-
   default_scope { order(created_at: :desc) }
   scope :by_category, ->(category) { where(category: category) }
   scope :by_origin, ->(origin) { where(origin: origin) }

@@ -19,8 +19,9 @@ Rails.application.routes.draw do
     resources :spectra do
       member do
         get :request_processing
-        get :show_tab
-        get :show_panel
+        get :show_processing_indicator
+        get :show_request_processing_button
+        get :show_chart_area
       end
     end
     member do
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'artworks/resources/images', to: 'artworks#images'
+  get '/resources/artworks/images', to: 'artworks#images'
   resources :categories
   resources :discussions do
     resources :replies

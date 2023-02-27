@@ -34,7 +34,7 @@ RSpec.describe Api::V1::SpectraController do
         spectrum.save!
         get '/api/v1/spectra', params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject['spectrum']).to eq(JSON.parse(response.body)['spectra'].first)
+        expect(subject['spectrum']).to eq(response.parsed_body['spectra'].first)
       end
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::SpectraController do
       it 'succeeds' do
         get "/api/v1/spectra/#{spectrum.id}", params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject).to eq(JSON.parse(response.body))
+        expect(subject).to eq(response.parsed_body)
       end
     end
   end

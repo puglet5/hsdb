@@ -17,13 +17,13 @@
                 </div>
               </li>
               <li class="w-full">
-                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "active-tab hover:bg-gray-100" do %>
+                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "hover:bg-gray-100" do %>
                   <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Info</button>
                 <% end %>
               </li>
               <li class="w-full">
-                <%= tag.div data: { "tabs-target": "tab" }, id: "info-tab", class: "hover:bg-gray-100" do %>
-                  <button type="button" role="tab" aria-controls="info" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Files</button>
+                <%= tag.div data: { "tabs-target": "tab" }, id: "files-tab", class: "hover:bg-gray-100" do %>
+                  <button type="button" role="tab" aria-controls="files" aria-selected="true" class="inline-block w-full p-4" data-action="click->tabs#switch">Files</button>
                 <% end %>
               </li>
               <li class="w-full border-y">
@@ -47,7 +47,7 @@
                   <li class="w-full">
                     <%= tag.div data: { "tabs-target": "tab" }, id: "spectrum-#{spectrum.id}-tab", class: "hover:bg-gray-100" do %>
                       <div class="flex items-center justify-center w-full p-4 text-center cursor-pointer space-x-2" data-action="click->tabs#switch">
-                        <%= render "spectrum_tab_frame", spectrum: spectrum, sample: @sample %>
+                        <%= render "spectrum_processing_indicator_frame", spectrum: spectrum, sample: @sample %>
                         <span class="py-1.5">
                           <%= ApplicationHelper.humanize_category spectrum.category %>,
                           <%= ApplicationHelper.humanize_file_format spectrum.format %>
@@ -99,23 +99,25 @@
                   <% end %>
                 <% end %>
 
-                <% if policy(@sample).favorite? %>
-                  <% if current_user.favorited?(@sample) %>
-                    <%= render TooltipComponent.new(tooltip: "Unfavorite", user: current_user) do %>
-                      <%= link_to [:favorite, @sample], data: { turbo_method: :patch } do %>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star-filled flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                          <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" fill="currentColor"></path>
-                        </svg>
+                <%= turbo_frame_tag "favorite" do %>
+                  <% if policy(@sample).favorite? %>
+                    <% if current_user.favorited?(@sample) %>
+                      <%= render TooltipComponent.new(tooltip: "Unfavorite", user: current_user) do %>
+                        <%= link_to [:favorite, @sample], data: { turbo_method: :patch } do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star-filled flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" fill="currentColor"></path>
+                          </svg>
+                        <% end %>
                       <% end %>
-                    <% end %>
-                  <% else %>
-                    <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
-                      <%= link_to [:favorite, @sample], data: { turbo_method: :patch } do %>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                          <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-                        </svg>
+                    <% else %>
+                      <%= render TooltipComponent.new(tooltip: "Favorite", user: current_user) do %>
+                        <%= link_to [:favorite, @sample], data: { turbo_method: :patch } do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-star text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                          </svg>
+                        <% end %>
                       <% end %>
                     <% end %>
                   <% end %>
@@ -154,7 +156,7 @@
           </div>
 
           <div id="panels" class="rounded-br-lg">
-            <%= tag.div data: { "tabs-target": "panel" }, id: "info-panel", class: "p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
+            <%= tag.div data: { "tabs-target": "panel" }, id: "info-panel", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
               <%= render "sample_panel", sample: @sample %>
             <% end %>
 
@@ -162,18 +164,17 @@
               <%= render "files_panel", sample: @sample %>
             <% end %>
 
-            <% @spectra&.each do |spectrum| %>
-              <%= tag.div data: { "tabs-target": "panel" }, id: "spectrum_#{spectrum.id}_panel-wrapper", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
-                <%= render "spectrum_panel_frame", spectrum: spectrum, sample: @sample %>
+            <% cache @spectra do %>
+              <% @spectra&.each do |spectrum| %>
+                <%= tag.div data: { "tabs-target": "panel" }, id: "spectrum_#{spectrum.id}_panel-wrapper", class: "hidden p-4 bg-white rounded-br-lg md:p-8 md:pt-4" do %>
+                  <%= render "spectrum_panel", spectrum: spectrum, sample: @sample %>
+                <% end %>
               <% end %>
             <% end %>
 
           </div>
-
         </div>
-
       </div>
     <% end %>
-
   </div>
 <% end %>

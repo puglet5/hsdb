@@ -4,11 +4,6 @@ export default class extends Controller {
 
   static targets = ["text", "svg"]
 
-
-  connect() {
-
-  }
-
   async copy() {
     await navigator.clipboard.writeText(this.textTarget.href)
     this.message()

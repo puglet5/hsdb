@@ -5,7 +5,6 @@ export default class extends Controller {
 
   static targets = ["input"]
 
-
   connect() {
     new Datepicker(this.inputTarget, {
       autohide: true,

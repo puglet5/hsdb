@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
 
 export default class extends Controller {
+
   static values = {
     json: String
   }

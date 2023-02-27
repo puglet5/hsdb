@@ -33,7 +33,7 @@ RSpec.describe Api::V1::SamplesController do
         sample.save!
         get '/api/v1/samples', params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject['sample']).to eq(JSON.parse(response.body)['samples'].first)
+        expect(subject['sample']).to eq(response.parsed_body['samples'].first)
       end
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe Api::V1::SamplesController do
       it 'succeeds' do
         get "/api/v1/samples/#{sample.id}", params: {}, headers: { Authorization: "Bearer #{token.token}" }
         expect(response).to be_successful
-        expect(subject).to eq(JSON.parse(response.body))
+        expect(subject).to eq(response.parsed_body)
       end
     end
   end

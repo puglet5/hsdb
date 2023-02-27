@@ -10,6 +10,7 @@ Chart.register(zoomPlugin)
 Chart.register(ChartDataLabels)
 
 export default class extends Controller {
+
   static values = {
     url: String,
     data: Array,
@@ -17,12 +18,15 @@ export default class extends Controller {
     filename: String,
     id: Number,
     axesSpec: Object,
-    labels: Object,
+    labels: Array,
   }
 
-  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider"]
+  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton"]
+
   normalized = false
+  showLabels = true
   cubicInterpolationMode = undefined
+  displayLabelValues = this.labelsValue.map(o => o.position).map(Number)
 
   options = {
     animation: false,
@@ -56,7 +60,8 @@ export default class extends Controller {
         grid: {
           borderDash: [8, 4],
           color: "#e1e1e1"
-        }
+        },
+        grace: "5%"
       },
       x: {
         title: {
@@ -96,15 +101,17 @@ export default class extends Controller {
           value: {},
           title: {
             color: "black",
-            backgroundColor: "rgba(34, 81, 163, .1)",
+            // backgroundColor: "rgba(34, 81, 163, .1)",
           }
         },
         display: (context) => {
-          let values = Object.keys(this.labelsValue).map(Number)
-          return (values.includes(context.dataIndex))
+          if (this.showLabels == true)
+            return (this.displayLabelValues.includes(context.dataIndex) ? "auto" : false)
+          else
+            return false
         },
-        formatter: (value, context) => {
-          return this.labelsValue[context.dataIndex]
+        formatter: (value) => {
+          return parseFloat(value["x"]).toFixed(1)
         }
       },
       zoom: {
@@ -245,12 +252,14 @@ export default class extends Controller {
   }
 
   reset() {
-    if (this.normalized) {
-      this.normalized = false
-      this.dataValue = this.initialDataValue
-    }
+    this.normalized = false
+    this.dataValue = this.hasInitialDataValue ? this.initialDataValue : this.dataValue
     this.cubicInterpolationMode = undefined
     window.scatterChart.resetZoom()
+    this.gaussianFilterSliderTarget.value = 0
+    this.interpolateButtonTarget.classList.remove("hidden")
+    this.normalizeButtonTarget.classList.remove("hidden")
+
     this.visualize()
   }
 
@@ -288,6 +297,13 @@ export default class extends Controller {
         y: normalizedY[i],
       }
     ))
+    this.visualize()
+  }
+
+  toggleLabels() {
+    window.scatterChart.resetZoom()
+    this.showLabels = !this.showLabels
+    this.showLabelsButtonTarget.classList.toggle("hidden")
     this.visualize()
   }
 }

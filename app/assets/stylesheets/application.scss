@@ -307,8 +307,8 @@ trix-toolbar .trix-button.trix-active {
   @apply w-[300px]
 }
 
-.attachment--preview {
-  @apply flex items-center justify-center flex-col
+figure {
+  @apply flex items-center justify-between flex-col !important
 }
 
 mark {

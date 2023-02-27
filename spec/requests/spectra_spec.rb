@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.fdescribe '/samples', type: :request do
+RSpec.describe '/samples/spectra', type: :request do
   let(:user) { create(:user) }
-  let(:sample) { create(:sample) }
+  let(:sample) { create(:sample, user: user) }
 
   let(:valid_attributes) do
     { 'sample_id' => sample.id,
@@ -45,7 +45,7 @@ RSpec.fdescribe '/samples', type: :request do
 
       it 'redirects to the sample' do
         post sample_spectra_url(sample_id: sample.id), params: { spectrum: valid_attributes }
-        expect(response).to redirect_to(sample_url(id: sample.friendly_id))
+        expect(response).to redirect_to(sample_url(id: sample.id))
       end
     end
   end
@@ -67,7 +67,7 @@ RSpec.fdescribe '/samples', type: :request do
         spectrum = Spectrum.create! valid_attributes
         patch sample_spectrum_url(id: spectrum.id, sample_id: sample.id), params: { spectrum: new_attributes }
         spectrum.reload
-        expect(response).to redirect_to(sample_url(id: sample.friendly_id))
+        expect(response).to redirect_to(sample_url(id: sample.id))
       end
     end
 
