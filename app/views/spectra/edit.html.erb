@@ -1,57 +1,68 @@
-<%= render "shared/errors", obj: @spectrum %>
-<section>
-  <div class="container p-20 mx-auto">
-    <div class="flex justify-center mb-6 text-4xl font-semibold">
-      Edit spectrum
-    </div>
-    <%= simple_form_for [@sample, @spectrum], validate: true do |f| %>
+<%= turbo_frame_tag "spectrum_action_modal", target: "_top" do %>
+  <div id="edit_spectrum_modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto bg-gray-500 bg-opacity-75 md:inset-0" data-turbo-modal-target="modal" data-controller="turbo-modal">
+    <div class="relative w-full h-auto max-w-screen-xl m-10 shadow-2xl">
+      <%= render "shared/errors", obj: @spectrum %>
+      <section class="relative bg-gray-50 rounded-md shadow">
+        <div class="container px-8 py-12 mx-auto">
+          <div class="flex justify-between mb-6 text-4xl font-semibold relative">
+            <span>
+              Edit spectrum
+            </span>
+            <%= render TooltipComponent.new(tooltip: "Close", user: current_user) do %>
+              <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->turbo-modal#close">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </button>
+            <% end %>
+          </div>
+          <%= simple_form_for [@sample, @spectrum], validate: true do |f| %>
 
-      <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
-      <div id="info" class="grid grid-cols-2 gap-4 mb-4">
+            <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
+            <div id="info" class="grid grid-cols-2 gap-4 mb-4">
 
-        <div>
-          <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
-          <%= f.input :category, default: @spectrum.category, collection: SpectraHelper::HUMANIZED_CATEGORIES_COLLECTION, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
-        </div>
+              <div>
+                <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
+                <%= f.input :category, default: @spectrum.category, collection: SpectraHelper::HUMANIZED_CATEGORIES_COLLECTION, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
+              </div>
 
-        <div>
-          <%= render Forms::LabelComponent.new(optional: false).with_content("Range") %>
-          <%= f.input :range, default: @spectrum.range, collection: SpectraHelper::HUMANIZED_RANGES_COLLECTION, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
-        </div>
+              <div>
+                <%= render Forms::LabelComponent.new(optional: false).with_content("Range") %>
+                <%= f.input :range, default: @spectrum.range, collection: SpectraHelper::HUMANIZED_RANGES_COLLECTION, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
+              </div>
 
-        <div class="col-span-2 mb-4">
-          <%= render Forms::LabelComponent.new().with_content("Description") %>
-          <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "General description") %>
-        </div>
+              <div class="col-span-2 mb-4">
+                <%= render Forms::LabelComponent.new().with_content("Description") %>
+                <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "General description") %>
+              </div>
 
-        <div class="col-span-2 mb-4">
-          <%= render Forms::LabelComponent.new().with_content("Equipment") %>
-          <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :equipment, required: false, placeholder: "Equipment description") %>
-        </div>
-      </div>
+              <div class="col-span-2 mb-4">
+                <%= render Forms::LabelComponent.new().with_content("Equipment") %>
+                <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :equipment, required: false, placeholder: "Equipment description") %>
+              </div>
+            </div>
 
-      <div id="files" class="mb-4">
-        <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
-        <div class="grid grid-cols-2 gap-4">
-          <%= tag.div class: "",
+            <div id="files" class="mb-4">
+              <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
+              <div class="grid grid-cols-2 gap-4">
+                <%= tag.div class: "",
                 data: {
                   uppy: "spectrum[file]",
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
+                  uploads_allowedfiletypes_value: [".dpt", "text/*", ".raw", ".mon", ".csv", ".spectable", ".txt", ".dat"],
                   uploads_allowmultiple_value: false,
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
-            <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "file-text" do %>
-                Browse...
-              <% end %>
-            <% end %>
-            <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
-          <% end %>
+                  <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>
+                  <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+                    <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "file-text" do %>
+                      Browse...
+                    <% end %>
+                  <% end %>
+                  <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
+                <% end %>
 
-          <%= tag.div class: "",
+                <%= tag.div class: "",
                 data: {
                   uppy: "spectrum[settings]",
                   controller: "uploads",
@@ -60,39 +71,44 @@
                   uploads_allowmultiple_value: false,
                   uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
-            <%= render Forms::LabelComponent.new().with_content("Equipment settings") %>
-            <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
-              <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "settings-text" do %>
-                Browse...
-              <% end %>
-            <% end %>
-            <%= render Forms::PHelperComponent.new().with_content("Equipment settings files of any text format") %>
+                  <%= render Forms::LabelComponent.new().with_content("Equipment settings") %>
+                  <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
+                    <%= tag.p class: "font-medium", data: { uploads_target: "text" }, id: "settings-text" do %>
+                      Browse...
+                    <% end %>
+                  <% end %>
+                  <%= render Forms::PHelperComponent.new().with_content("Equipment settings files of any text format") %>
+                <% end %>
+              </div>
+            </div>
+
+            <div id="metadata">
+              <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700").with_content("Metadata") %>
+              <%= render Forms::LabelComponent.new().with_content("Metadata") %>
+              <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: display_metadata_value(@spectrum) } %>
+
+              <div class="ml-2">
+
+                <% unless JSON.is_json?(@spectrum.metadata) %>
+                  <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
+                <% end %>
+                <%= render Forms::PHelperComponent.new(cls: "") do %>
+                  Enter metadata to store additional fields in JSON format. Learn
+                  <a href="https://www.json.org/json-en.html" class="font-bold hover:underline">more</a>.
+                <% end %>
+              </div>
+            </div>
+
+            <div class="flex mt-4">
+              <button rel="next" type="submit" class="w-full px-5 text-sm font-medium text-center text-white rounded-md bg-primary-500 hover:bg-primary-600  focus:ring-primary-200 sm:w-auto py-2.5">
+                Save
+              </button>
+            </div>
           <% end %>
+
         </div>
-      </div>
-
-      <div id="metadata">
-        <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700").with_content("Metadata") %>
-        <%= render Forms::LabelComponent.new().with_content("Metadata") %>
-        <%= f.input :metadata, as: :text, label: false, hint: false, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, value: display_metadata_value(@spectrum) } %>
-
-        <div class="ml-2">
-
-          <% unless JSON.is_json?(@spectrum.metadata) %>
-            <%= render Forms::PHelperComponent.new(cls: "!text-amber-600").with_content("Provided metadata doesn't appear to be valid. Check the contents or contact the admin. Invalid metadata can't be indexed or searched!") %>
-          <% end %>
-          <%= render Forms::PHelperComponent.new(cls: "") do %>
-            Enter metadata to store additional fields in JSON format. Learn
-            <a href="https://www.json.org/json-en.html" class="font-bold hover:underline">more</a>.
-          <% end %>
-        </div>
-      </div>
-
-      <div class="flex mt-4">
-        <%= render Forms::SubmitComponent.new(form: f).with_content("Save") %>
-        <%= render Forms::BackButtonComponent.new(path: @sample).with_content("Back") %>
-      </div>
-    <% end %>
-
+      </section>
+    </div>
   </div>
-</section>
+
+<% end %>

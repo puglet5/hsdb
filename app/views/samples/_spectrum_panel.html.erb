@@ -28,7 +28,7 @@
       <%= render "samples/spectrum_request_processing_button_frame", spectrum: spectrum, sample: sample %>
 
       <% if policy(spectrum).edit? %>
-        <%= link_to [:edit, sample, spectrum] do %>
+        <%= link_to [:edit, sample, spectrum], data: { turbo_frame: "spectrum_action_modal" } do %>
           <%= render TooltipComponent.new(tooltip: "Edit", user: current_user) do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-edit text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

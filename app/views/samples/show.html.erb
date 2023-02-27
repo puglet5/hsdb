@@ -1,6 +1,8 @@
 <%= render Sections::SectionComponent.new(cls: "!py-0") do %>
   <div class="px-4 py-24 mx-auto text-gray-700 sm:px-6 lg:px-8">
 
+    <%= turbo_frame_tag "spectrum_action_modal", target: "_top" %>
+
     <%= tag.div data: { controller: "tabs", tabs_active_class: "active-tab" } do %>
       <div class="grid grid-cols-12 mx-auto border rounded-md shadow-sm max-w-screen-2xl">
 
@@ -33,7 +35,7 @@
                       Spectra
                     </span>
                     <%= render TooltipComponent.new(tooltip: "New Spectrum", user: current_user) do %>
-                      <%= link_to [:new, @sample, :spectrum], class: "my-auto" do %>
+                      <%= link_to [:new, @sample, :spectrum], class: "my-auto", data: { turbo_frame: "spectrum_action_modal" } do %>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-300 hover:text-primary-500 focus:text-primary-500">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
