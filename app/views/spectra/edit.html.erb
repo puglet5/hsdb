@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "spectrum_action_modal", target: "_top" do %>
-  <div id="edit_spectrum_modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto bg-gray-500 bg-opacity-75 md:inset-0" data-turbo-modal-target="modal" data-controller="turbo-modal">
-    <div class="relative w-full h-auto max-w-screen-xl m-10 shadow-2xl">
+  <div id="edit_spectrum_modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full h-full bg-gray-500 bg-opacity-75 md:inset-0 overflow-y-scroll overflow-visible overflow-x-hidden" data-turbo-modal-target="modal" data-controller="turbo-modal">
+    <div class="relative w-full max-h-full max-w-screen-xl m-10 shadow-2xl">
       <%= render "shared/errors", obj: @spectrum %>
-      <section class="relative bg-gray-50 rounded-md shadow">
+      <section class="relative bg-gray-50 rounded-md shadow h-full">
         <div class="container px-8 py-12 mx-auto">
           <div class="flex justify-between mb-6 text-4xl font-semibold relative">
             <span>
