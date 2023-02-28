@@ -149,6 +149,149 @@
                     </svg>
                   <% end %>
                 <% end %>
+
+                <%= tag.div data: { controller: "dropdown" } do %>
+                  <%= render TooltipComponent.new(tooltip: "More", user: current_user) do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto icon icon-tabler icon-tabler-dots-vertical flex-shrink-0 w-5 h-5 text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-action="click->dropdown#toggle">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                      <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                      <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                    </svg>
+                  <% end %>
+                  <!-- Dropdown menu -->
+                  <%= tag.div class: "relative hidden", data: { dropdown_target: "dropdown" } do %>
+                    <div class="absolute top-0 right-0 z-10 bg-white rounded-md shadow w-60 text-sm text-gray-500">
+                      <div class="text-center w-full p-2 border-b">Downloads</div>
+                      <ul class="p-3 overflow-y-auto  grid grid-cols-3 justify-items-center w-full">
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <% if @raw_files.any? %>
+                            <%= render TooltipComponent.new(tooltip: "Download all raw spectra files", user: current_user) do %>
+                              <%= link_to sample_path(format: :zip, data: :raw), class: "flex space-x-2" do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-123 w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M3 10l2 -2v8"></path>
+                                  <path d="M9 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3"></path>
+                                  <path d="M17 8h2.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-1.5h1.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-2.5"></path>
+                                </svg>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <%= render TooltipComponent.new(tooltip: "Download all raw spectra files", user: current_user) do %>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-123 w-5 h-5 my-auto text-gray-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M3 10l2 -2v8"></path>
+                                <path d="M9 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3"></path>
+                                <path d="M17 8h2.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-1.5h1.5a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1 -1.5 1.5h-2.5"></path>
+                              </svg>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <% if @processed_files.any? %>
+                            <%= render TooltipComponent.new(tooltip: "Download all processed spectra files", user: current_user) do %>
+                              <%= link_to sample_path(format: :zip, data: :prc), class: "flex space-x-2" do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-csv w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1"></path>
+                                  <path d="M17 8l2 8l2 -8"></path>
+                                  <path d="M7 10a2 2 0 1 0 -4 0v4a2 2 0 1 0 4 0"></path>
+                                </svg>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <%= render TooltipComponent.new(tooltip: "Download all processed spectra files", user: current_user) do %>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-csv w-5 h-5 my-auto text-gray-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1"></path>
+                                <path d="M17 8l2 8l2 -8"></path>
+                                <path d="M7 10a2 2 0 1 0 -4 0v4a2 2 0 1 0 4 0"></path>
+                              </svg>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <% if @sample.images.any? %>
+                            <%= render TooltipComponent.new(tooltip: "Download all images", user: current_user) do %>
+                              <%= link_to sample_path(format: :zip, data: :img), class: "flex space-x-2" do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-png w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M21 8h-2a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2v-4h-1"></path>
+                                  <path d="M3 16v-8h2a2 2 0 1 1 0 4h-2"></path>
+                                  <path d="M10 16v-8l4 8v-8"></path>
+                                </svg>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <%= render TooltipComponent.new(tooltip: "Download all images", user: current_user) do %>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-png w-5 h-5 my-auto text-gray-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M21 8h-2a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2v-4h-1"></path>
+                                <path d="M3 16v-8h2a2 2 0 1 1 0 4h-2"></path>
+                                <path d="M10 16v-8l4 8v-8"></path>
+                              </svg>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <% if @sample.documents.any? %>
+                            <%= render TooltipComponent.new(tooltip: "Download all documents", user: current_user) do %>
+                              <%= link_to sample_path(format: :zip, data: :doc), class: "flex space-x-2" do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-txt w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M3 8h4"></path>
+                                  <path d="M5 8v8"></path>
+                                  <path d="M17 8h4"></path>
+                                  <path d="M19 8v8"></path>
+                                  <path d="M10 8l4 8"></path>
+                                  <path d="M10 16l4 -8"></path>
+                                </svg>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <%= render TooltipComponent.new(tooltip: "Download all documents", user: current_user) do %>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-txt w-5 h-5 my-auto text-gray-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M3 8h4"></path>
+                                <path d="M5 8v8"></path>
+                                <path d="M17 8h4"></path>
+                                <path d="M19 8v8"></path>
+                                <path d="M10 8l4 8"></path>
+                                <path d="M10 16l4 -8"></path>
+                              </svg>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <%= render TooltipComponent.new(tooltip: "Download sample info as JSON", user: current_user) do %>
+                            <%= link_to sample_path(format: :zip, data: :json), class: "flex space-x-2" do %>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tex w-5 h-5 my-auto text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M9 8v-1h-6v1"></path>
+                                <path d="M6 15v-8"></path>
+                                <path d="M21 15l-5 -8"></path>
+                                <path d="M16 15l5 -8"></path>
+                                <path d="M14 11h-4v8h4"></path>
+                                <path d="M10 15h3"></path>
+                              </svg>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <li class="m-auto ml-2 w-full flex justify-center items-center">
+                          <%= render TooltipComponent.new(tooltip: "Download sample info as PDF", user: current_user) do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pdf w-5 h-5 my-auto text-gray-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M10 8v8h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-2z"></path>
+                              <path d="M3 12h2a2 2 0 1 0 0 -4h-2v8"></path>
+                              <path d="M17 12h3"></path>
+                              <path d="M21 8h-4v8"></path>
+                            </svg>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
             </div>
             <h2 class="mb-2 text-2xl font-semibold md:mt-2"> <%= @sample.title %></h2>

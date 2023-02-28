@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SamplesController < ApplicationController
+  include ActiveStorage::SendZip
+
   before_action :set_sample, only: %i[show edit update destroy]
   after_action :verify_authorized
 
@@ -24,7 +26,39 @@ class SamplesController < ApplicationController
 
     authorize @sample
 
-    breadcrumb @sample.title, @sample, match: :exclusive
+    @raw_files = @spectra&.select \
+    { |s| s.file.attached? } \
+                         &.map(&:file)
+
+    @processed_files = @spectra&.select \
+      { |s| s.processed_file.attached? } \
+                               &.map(&:processed_file)
+
+    json_data = SampleSerializer.new(@sample).to_json
+
+    respond_to do |format|
+      format.html do
+        breadcrumb @sample.title, @sample, match: :exclusive
+      end
+      format.zip do
+        redirect_to @sample unless params['data']
+
+        case params['data']
+        when 'raw'
+          send_zip @raw_files, filename: "#{@sample.title} — Raw Spectra — #{Time.zone.now.to_fs(:short)}.zip"
+        when 'prc'
+          send_zip @processed_files, filename: "#{@sample.title} — Processed Spectra — #{Time.zone.now.to_fs(:short)}.zip"
+        when 'img'
+          send_zip @sample.images, filename: "#{@sample.title} — Images — #{Time.zone.now.to_fs(:short)}.zip"
+        when 'doc'
+          send_zip @sample.documents, filename: "#{@sample.title} — Documents — #{Time.zone.now.to_fs(:short)}.zip"
+        when 'json'
+          send_data json_data, filename: "#{@sample.title} — #{Time.zone.now.to_fs(:short)}.json"
+        else
+          redirect_to @sample
+        end
+      end
+    end
   end
 
   def new
