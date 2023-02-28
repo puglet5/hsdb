@@ -56,6 +56,7 @@ export default class extends Controller {
       uppy.use(Dashboard, {
         disableThumbnailGenerator: !this.thumbnailsValue,
         trigger: trigger,
+        target: this.divTarget,
         closeAfterFinish: true,
         inline: false,
         showProgressDetails: true,
