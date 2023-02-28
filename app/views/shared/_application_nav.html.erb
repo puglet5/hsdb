@@ -75,7 +75,7 @@
         <% end %>
       </ul>
     </div>
-    <%= tag.div data: { controller: "dropdown" }, class: "flex my-auto place-self-end" do %>
+    <%= tag.div class: "flex my-auto place-self-end" do %>
       <% if current_user %>
         <%= tag.div data: { controller: "dropdown" } do %>
           <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0 text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
