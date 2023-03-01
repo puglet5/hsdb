@@ -1,4 +1,4 @@
-<%= simple_form_for @user, url: update_settings_user_path, html: { method: :patch }, validate: true do |f| %>
+<%= simple_form_for @user, url: update_settings_user_path, html: { method: :patch }, validate: true, data: { turbo: false } do |f| %>
   <div class="mb-4">
     <div class="flex items-center">
       <%= hidden_field_tag "user[settings[uploading][thumbnails]]", false %>
