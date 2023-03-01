@@ -37,6 +37,46 @@ RSpec.describe '/samples', type: :request do
     end
   end
 
+  fdescribe 'GET /show.zip raw' do
+    it 'renders a successful response' do
+      sample = Sample.create! valid_attributes
+      get sample_url(id: sample.id, format: :zip, data: :raw)
+      expect(response).to be_successful
+    end
+  end
+
+  fdescribe 'GET /show.zip prc' do
+    it 'renders a successful response' do
+      sample = Sample.create! valid_attributes
+      get sample_url(id: sample.id, format: :zip, data: :prc)
+      expect(response).to be_successful
+    end
+  end
+
+  fdescribe 'GET /show.zip json' do
+    it 'renders a successful response' do
+      sample = Sample.create! valid_attributes
+      get sample_url(id: sample.id, format: :zip, data: :json)
+      expect(response).to be_successful
+    end
+  end
+
+  fdescribe 'GET /show.zip img' do
+    it 'renders a successful response' do
+      sample = Sample.create! valid_attributes
+      get sample_url(id: sample.id, format: :zip, data: :img)
+      expect(response).to be_successful
+    end
+  end
+
+  fdescribe 'GET /show.zip doc' do
+    it 'renders a successful response' do
+      sample = Sample.create! valid_attributes
+      get sample_url(id: sample.id, format: :zip, data: :doc)
+      expect(response).to be_successful
+    end
+  end
+
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_sample_url
