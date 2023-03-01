@@ -19,6 +19,7 @@ export default class extends Controller {
     id: Number,
     axesSpec: Object,
     labels: Array,
+    dark: Boolean
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton"]
@@ -45,8 +46,8 @@ export default class extends Controller {
         radius: 0
       },
       line: {
-        backgroundColor: "#000000",
-        borderColor: "#000000",
+        backgroundColor: this.darkValue ? "#ffffff" : "#000000",
+        borderColor: this.darkValue ? "#ffffff" : "#000000",
         borderWidth: 2
       }
     },
@@ -59,7 +60,7 @@ export default class extends Controller {
         min: 0,
         grid: {
           borderDash: [8, 4],
-          color: "#e1e1e1"
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
         },
         grace: "5%"
       },
@@ -70,7 +71,7 @@ export default class extends Controller {
         },
         grid: {
           borderDash: [8, 4],
-          color: "#e1e1e1"
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
         },
         reverse: this.axesSpecValue["reverse"]
       }
@@ -100,7 +101,7 @@ export default class extends Controller {
         labels: {
           value: {},
           title: {
-            color: "black",
+            color: this.darkValue ? "white" : "black",
             // backgroundColor: "rgba(34, 81, 163, .1)",
           }
         },

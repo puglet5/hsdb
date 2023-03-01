@@ -1,6 +1,6 @@
 <% if samples&.count > 0 && query.result.count != 0 %>
   <div class="max-w-screen-xl px-4 py-2 mx-auto text-center">
-    <div class="relative overflow-x-auto border rounded-md">
+    <div class="relative overflow-x-auto border-x border-t rounded-md">
       <table class="w-full text-sm text-left text-gray-500">
         <thead>
           <tr class="bg-gray-100 border-b border-gray-300">
@@ -22,7 +22,7 @@
     </div>
   </div>
 <% elsif query.result.count == 0 && params[:query] %>
-  <div class="relative p-8 text-center bg-white border border-gray-200 rounded-md">
+  <div class="relative p-8 text-center bg-white border-gray-200 rounded-md">
     <h2 class="text-2xl font-medium">
       There's nothing here...
     </h2>
@@ -31,7 +31,7 @@
     </p>
   </div>
 <% else %>
-  <div class="relative p-8 text-center bg-white border border-gray-200 rounded-md">
+  <div class="relative p-8 text-center bg-white border-gray-200 rounded-md">
     <h2 class="text-2xl font-medium">
       There's nothing here...
     </h2>

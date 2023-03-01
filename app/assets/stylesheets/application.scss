@@ -4,6 +4,7 @@
 @import '@uppy/image-editor/dist/style.css';
 @import 'photoswipe/dist/photoswipe.css';
 @import 'tom-select/dist/css/tom-select.css';
+@import 'dark.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -241,11 +242,11 @@ body {
 }
 
 .trix-button-row {
-  @apply my-auto w-full bg-gray-100 rounded-t-lg border border-gray-300 border-b-0
+  @apply my-auto w-full bg-gray-100 rounded-t-lg border border-gray-300 border-b-0 dark:border-zinc-600
 }
 
 .trix-button {
-  @apply p-2 px-0.5 mx-0.5 my-1 text-gray-500 rounded cursor-pointer hover:text-gray-700 hover:bg-gray-100 border-0 !important
+  @apply p-2 px-0.5 mx-0.5 my-1 text-gray-500 rounded cursor-pointer hover:text-gray-700 hover:bg-gray-100 border-0 dark:border-zinc-600 dark:hover:bg-zinc-700 !important
 }
 
 trix-toolbar .trix-button-group {
@@ -253,7 +254,7 @@ trix-toolbar .trix-button-group {
 }
 
 trix-editor {
-  @apply block p-2.5 w-full text-sm text-gray-700 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-500 focus:border-primary-600 focus:ring-1 !important;
+  @apply block p-2.5 w-full text-sm text-gray-700 bg-white rounded-b-lg rounded-t-none border border-gray-300 focus:ring-primary-500 focus:border-primary-600 focus:ring-1 dark:border-zinc-600 !important;
   outline: none;
 }
 
@@ -270,13 +271,11 @@ trix-toolbar .trix-button:not(:first-child) {
 }
 
 .trix-button-group .trix-button-group--block-tools {
-  @apply !border-l !border-solid !important
+  @apply !border-l !border-solid dark:border-zinc-600 !important
 }
 
-trix-toolbar .trix-button--icon-bold::before {}
-
 trix-toolbar .trix-button.trix-active {
-  @apply !bg-blue-200
+  @apply !bg-blue-200 dark:!bg-zinc-600
 }
 
 .ts-wrapper .ts-control {
@@ -300,7 +299,7 @@ trix-toolbar .trix-button.trix-active {
 }
 
 .active-tab {
-  @apply !bg-primary-100 !text-primary-600 hover:!bg-primary-100 !important
+  @apply !bg-primary-100 !text-primary-600 hover:!bg-primary-100 dark:!bg-zinc-700 dark:!text-rose-500 dark:hover:!bg-zinc-700 !important
 }
 
 .attachment--preview img {
@@ -320,3 +319,4 @@ mark {
 .trix-button-row {
   @apply overflow-hidden
 }
+

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "spectrum_#{spectrum.id}_chart_area" do %>
-  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.processed_file&.url, chart_filename_value: spectrum&.processed_file&.filename, chart_id_value: spectrum.id, chart_axes_spec_value: Spectrum::AXES_SPEC[spectrum.category.to_sym], chart_labels_value: spectrum.metadata["peaks"] } do %>
+  <%= tag.div data: { controller: "modal chart", chart_url_value: spectrum&.processed_file&.url, chart_filename_value: spectrum&.processed_file&.filename, chart_id_value: spectrum.id, chart_axes_spec_value: Spectrum::AXES_SPEC[spectrum.category.to_sym], chart_labels_value: spectrum.metadata["peaks"], chart_dark_value: current_user.settings(:ui).dark } do %>
     <div class="flex justify-between ml-2 space-x-2">
 
       <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
