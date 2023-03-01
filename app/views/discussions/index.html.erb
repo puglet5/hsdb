@@ -2,7 +2,8 @@
   <%= render Sections::DivContainerComponent.new() do %>
     <%= render Typography::H1Component.new(cls: "text-center").with_content("DB Forum") %>
     <%= render Typography::PHeroComponent.new(cls: "text-center") do %>
-      Create a new discussion below or reply to an existing one. Discussions are sorted by categories selected in a sidebar on the right
+    
+      Create a new discussion below or reply to an existing one.
     <% end %>
 
     <% if @discussions_pinned.count > 0 %>

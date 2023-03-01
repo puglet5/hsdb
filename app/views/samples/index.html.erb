@@ -5,11 +5,18 @@
       <%= render Typography::H1Component.new() do %>
         Spectral Database Index
       <% end %>
-      <%= render Typography::PHeroComponent.new() do %>
+      <div class="pb-2 mb-6 text-lg font-normal text-gray-500 md:mb-12 md:pb-0 lg:text-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block icon icon-tabler icon-tabler-info-square w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M12 8l.01 0"></path>
+          <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
+          <path d="M11 12l1 0l0 4l1 0"></path>
+        </svg>
+
         Listed below are all samples present in database sorted by date added. Click on column headers to sort by corresponding attribute.
 
         Use search to find and filter samples.
-      <% end %>
+      </div>
     </div>
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
