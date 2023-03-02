@@ -5,7 +5,7 @@
     "@client-side-validations/client-side-validations": "^0.3.0",
     "@client-side-validations/simple-form": "^0.3.1",
     "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^7.2.5",
+    "@hotwired/turbo-rails": "^7.3.0",
     "@paralleldrive/cuid2": "^2.2.0",
     "@pgrabovets/json-view": "^2.7.1",
     "@popperjs/core": "^2.11.6",
