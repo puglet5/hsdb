@@ -16,7 +16,8 @@ class ArtworksController < ApplicationController
   def index
     @artworks = Artwork
                 .all
-                .includes(:user)
+                .includes(:user, :style)
+                .with_attached_thumbnail
 
     authorize @artworks
 
