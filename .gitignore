@@ -72,3 +72,5 @@ dump.rdb
 coverage
 
 tailwind-full.config.js
+
+meta.json
