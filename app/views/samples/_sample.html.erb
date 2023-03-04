@@ -3,7 +3,8 @@
     <%= sample.id %>
   </td>
   <th class="px-6 py-4 font-bold text-gray-700 whitespace-nowrap">
-    <%= link_to sample, class: "hover:underline" do %>
+    <%= link_to sample, class: "hover:underline", data: { turbo: false } do %>
+
       <%= highlight(sample&.title, params.dig(:query, :title_or_plain_text_description_i_cont)&.strip) %>
     <% end %>
   </th>

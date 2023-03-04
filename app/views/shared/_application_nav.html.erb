@@ -78,7 +78,8 @@
     <%= tag.div class: "flex my-auto place-self-end space-x-2" do %>
       <% if current_user %>
         <%= turbo_frame_tag :dark, data: { turbo_action: :advance } do %>
-          <%= simple_form_for current_user, url: update_settings_user_path(current_user), html: { method: :patch }, validate: true, data: { turbo: true } do |f| %>
+          <%= simple_form_for current_user, url: update_settings_user_path(current_user), html: { method: :patch }, validate: true, data: { turbo: false } do |f| %>
+
             <%= hidden_field_tag "user[settings[ui][dark]]", false %>
             <% checked =  !current_user.settings(:ui).dark ? "checked" : 0 %>
             <%= f.check_box "settings[ui][dark]", { multiple: false, class: "hidden", checked: checked }, true, false %>
