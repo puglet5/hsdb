@@ -45,6 +45,15 @@ class Sample < RsdbRecord
   scope :by_category, ->(category) { where(category: category) }
   scope :by_origin, ->(origin) { where(origin: origin) }
 
+  scope :with_spectra, -> { where.associated(:spectra) }
+  # converting an array to ActiveRecord::Relation so it is consumable by Ransack
+  scope :with_images, -> { Sample.where(id: select { |s| s.images.any? }.map(&:id)) }
+  scope :with_documents, -> { Sample.where(id: select { |s| s.documents.any? }.map(&:id)) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[with_spectra with_images with_documents]
+  end
+
   # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_survey_period, ->(start_date, end_date) { where('survey_date BETWEEN ? and ?', start_date, end_date) }
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }

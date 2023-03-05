@@ -34,26 +34,74 @@
           <% end %>
         <% end %>
 
-        <%= search_form_for @query, class: "my-auto ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
-          <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
-
-          <label for="index-search" class="mb-2 sr-only">Search</label>
-          <div class="relative group flex-row-reverse">
-
-            <%= f.search_field :title_or_plain_text_description_i_cont, class: "peer block p-4 w-64 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
-
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 peer-focus:!text-primary-500 group-hover:!text-primary-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <circle cx="10" cy="10" r="7"></circle>
-                <line x1="21" y1="21" x2="15" y2="15"></line>
-              </svg>
-            </div>
-          </div>
-        <% end %>
       </div>
     <% end %>
 
+    <%= search_form_for @query, class: "my-auto mb-2 ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
+      <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
+
+      <label for="index-search" class="mb-2 sr-only">Search</label>
+      <div class="relative group flex-row-reverse">
+
+        <%= f.search_field :title_or_plain_text_description_i_cont, class: "peer block p-3 w-64 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
+
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 peer-focus:!text-primary-500 group-hover:!text-primary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="10" cy="10" r="7"></circle>
+            <line x1="21" y1="21" x2="15" y2="15"></line>
+          </svg>
+        </div>
+      </div>
+
+      <div class="my-auto">
+        <%= render TooltipComponent.new(tooltip: "With spectra", user: current_user, cls: "!p-0") do %>
+          <%= f.check_box :with_spectra, { class: "hidden peer" }, "true", nil %>
+          <label for="query_with_spectra" class=" peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+            <div class="block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                <path d="M7 14l3 -3l2 2l3 -3l2 2"></path>
+              </svg>
+            </div>
+          </label>
+        <% end %>
+      </div>
+
+      <div class="my-auto">
+        <%= render TooltipComponent.new(tooltip: "With images", user: current_user, cls: "!p-0") do %>
+          <%= f.check_box :with_images, { class: "hidden peer" }, "true", nil %>
+          <label for="query_with_images" class=" peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+            <div class="block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M15 8l.01 0"></path>
+                <path d="M4 4m0 3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3z"></path>
+                <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+                <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+              </svg>
+            </div>
+          </label>
+        <% end %>
+      </div>
+
+      <div class="my-auto">
+        <%= render TooltipComponent.new(tooltip: "With documents", user: current_user, cls: "!p-0") do %>
+          <%= f.check_box :with_documents, { class: "hidden peer" }, "true", nil %>
+          <label for="query_with_documents" class="peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+            <div class="block">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M15 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z"></path>
+                <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2"></path>
+              </svg>
+            </div>
+          </label>
+        <% end %>
+      </div>
+    <% end %>
     <%= turbo_frame_tag "sample_table" do %>
       <%= render "search_results", samples: @samples, query: @query %>
     <% end %>

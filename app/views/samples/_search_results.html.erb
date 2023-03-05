@@ -5,12 +5,12 @@
         <thead>
           <tr class="bg-gray-100 border-b border-gray-300">
             <th scope="col" class="py-3 pl-6">#</th>
-            <th scope="col" class="px-6 py-3">Title</th>
-            <th scope="col" class="px-6 py-3">Category</th>
+            <th scope="col" class="px-6 py-3"><%= sort_link @query, :title, "Title", default_order: :desc, class: "flex items-center" %></th>
+            <th scope="col" class="px-6 py-3"><%= sort_link @query, :category, "Category", class: "flex items-center" %></th>
             <th scope="col" class="px-6 py-3">Compound</th>
             <th scope="col" class="px-6 py-3">Spectra</th>
             <th scope="col" class="px-6 py-3">Files</th>
-            <th scope="col" class="px-6 py-3">Added</th>
+            <th scope="col" class="px-6 py-3"><%= sort_link @query, :created_at, "Added", class: "flex items-center" %></th>
           </tr>
         </thead>
         <tbody class="bg-white border-b">
@@ -22,7 +22,7 @@
     </div>
   </div>
 <% elsif query.result.count == 0 && params[:query] %>
-  <div class="relative p-8 text-center bg-white border-gray-200 rounded-md">
+  <div class="ml-4 border relative p-8 text-center bg-white border-gray-200 rounded-md">
     <h2 class="text-2xl font-medium">
       There's nothing here...
     </h2>
@@ -31,7 +31,7 @@
     </p>
   </div>
 <% else %>
-  <div class="relative p-8 text-center bg-white border-gray-200 rounded-md">
+  <div class="relative ml-4 border p-8 text-center bg-white border-gray-200 rounded-md">
     <h2 class="text-2xl font-medium">
       There's nothing here...
     </h2>
