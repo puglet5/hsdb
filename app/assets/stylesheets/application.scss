@@ -157,7 +157,7 @@ body {
 }
 
 .pagy-nav {
-  @apply flex space-x-2;
+  @apply flex space-x-2 select-none;
 }
 
 .pagy-nav .page a,
