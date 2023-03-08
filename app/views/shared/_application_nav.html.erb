@@ -78,14 +78,14 @@
     <%= tag.div class: "flex my-auto place-self-end space-x-2" do %>
       <% if current_user %>
         <%= turbo_frame_tag :dark, data: { turbo_action: :advance } do %>
-          <%= simple_form_for current_user, url: update_settings_user_path(current_user), html: { method: :patch }, validate: true, data: { turbo: false } do |f| %>
+          <%= simple_form_for current_user, url: update_settings_user_path(current_user), html: { method: :patch, class: "my-auto flex items-center justify-center" }, validate: true, data: { turbo: false } do |f| %>
 
             <%= hidden_field_tag "user[settings[ui][dark]]", false %>
             <% checked =  !current_user.settings(:ui).dark ? "checked" : 0 %>
             <%= f.check_box "settings[ui][dark]", { multiple: false, class: "hidden", checked: checked }, true, false %>
             <% if !current_user.settings(:ui).dark %>
-              <%= render TooltipComponent.new(tooltip: "Dark mode", cls: "p-0 m-0 border-0", user: current_user) do %>
-                <button type="submit">
+              <%= render TooltipComponent.new(tooltip: "Dark mode", user: current_user, cls: "!inline-flex") do %>
+                <button type="submit" class="my-auto h-full">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
@@ -95,7 +95,7 @@
                 </button>
               <% end %>
             <% else %>
-              <%= render TooltipComponent.new(tooltip: "Light mode", cls: "p-0 m-0 border-0", user: current_user) do %>
+              <%= render TooltipComponent.new(tooltip: "Light mode", user: current_user) do %>
                 <button type="submit">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-filled text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -114,7 +114,8 @@
             <% end %>
           <% end %>
         <% end %>
-        <%= tag.div data: { controller: "dropdown" }, class: "py-1.5" do %>
+
+        <%= tag.div data: { controller: "dropdown" }, class: "my-auto" do %>
           <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0 text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
             <span class="sr-only">Open user menu</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

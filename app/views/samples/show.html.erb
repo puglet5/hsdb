@@ -161,9 +161,9 @@
                   <% end %>
                   <!-- Dropdown menu -->
                   <%= tag.div class: "relative hidden", data: { dropdown_target: "dropdown" } do %>
-                    <div class="absolute top-0 right-0 z-10 bg-white rounded-md shadow w-60 text-sm text-gray-500">
+                    <div class="absolute top-0 right-0 z-10 bg-white rounded-md shadow w-60 text-sm text-gray-500 border">
                       <div class="text-center w-full p-2 border-b">Downloads</div>
-                      <ul class="p-3 overflow-y-auto  grid grid-cols-3 justify-items-center w-full">
+                      <ul class="p-3 overflow-y-auto gap-3 grid grid-cols-3 justify-items-center w-full">
                         <li class="m-auto ml-2 w-full flex justify-center items-center">
                           <% if @raw_files.any? %>
                             <%= render TooltipComponent.new(tooltip: "Download all raw spectra files", user: current_user) do %>
