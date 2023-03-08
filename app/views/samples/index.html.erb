@@ -37,7 +37,7 @@
       </div>
     <% end %>
 
-    <%= search_form_for @query, class: "my-auto mb-2 ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"} do |f| %>
+    <%= search_form_for @query, class: "my-auto mb-2 ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"}, autocomplete: false, autofocus: true do |f| %>
       <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
 
       <label for="index-search" class="mb-2 sr-only">Search</label>

@@ -11,10 +11,11 @@ class SamplesController < ApplicationController
 
   def index
     samples = Sample.all.order('created_at asc')
-    @query = samples.ransack(params[:query])
-    @samples = @query.result(distinct: true).order('created_at DESC')
 
-    authorize @samples
+    authorize samples
+
+    @query = samples.ransack(params[:query])
+    @pagy, @samples = pagy @query.result(distinct: true).order('created_at DESC'), items: 20
   end
 
   def show

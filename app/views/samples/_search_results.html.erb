@@ -20,6 +20,13 @@
         </tbody>
       </table>
     </div>
+
+    <% if @pagy.pages > 1 %>
+      <div id="pagination" class="my-2">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+
   </div>
 <% elsif query.result.count == 0 && params[:query] %>
   <div class="ml-4 border relative p-8 text-center bg-white border-gray-200 rounded-md">
