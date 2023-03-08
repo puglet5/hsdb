@@ -156,20 +156,15 @@ body {
   }
 }
 
-.pagy-nav,
-.pagy-nav-js {
+.pagy-nav {
   @apply flex space-x-2;
 }
 
 .pagy-nav .page a,
 .pagy-nav .page.active,
 .pagy-nav .page.prev.disabled,
-.pagy-nav .page.next.disabled,
-.pagy-nav-js .page a,
-.pagy-nav-js .page.active,
-.pagy-nav-js .page.prev.disabled,
-.pagy-nav-js .page.next.disabled {
-  @apply block rounded-md px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-sm;
+.pagy-nav .page.next.disabled {
+  @apply block rounded-md px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-sm dark:bg-zinc-700;
 
   &:hover {
     @apply bg-gray-300;
@@ -181,9 +176,7 @@ body {
 }
 
 .pagy-nav .page.prev.disabled,
-.pagy-nav .page.next.disabled,
-.pagy-nav-js .page.prev.disabled,
-.pagy-nav-js .page.next.disabled {
+.pagy-nav .page.next.disabled {
   @apply text-gray-400 cursor-default;
 
   &:hover {
@@ -195,42 +188,16 @@ body {
   }
 }
 
-.pagy-nav .page.active,
-.pagy-nav-js .page.active {
-  @apply text-white cursor-default bg-gray-400;
+.pagy-nav .page.active {
+  @apply text-white cursor-default bg-gray-400 dark:bg-zinc-500;
 
   &:hover {
     @apply text-white bg-gray-400;
   }
 
   &:active {
-    @apply bg-gray-400 text-white;
+    @apply bg-rose-400 text-white;
   }
-}
-
-
-.pagy-combo-nav-js {
-  @apply flex max-w-4/5 rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-sm;
-}
-
-.pagy-combo-nav-js .pagy-combo-input {
-  @apply bg-white px-2 rounded-md
-}
-
-.pagy-combo-nav-js .page.prev,
-.pagy-combo-nav-js .page.next {
-  &:hover {
-    @apply text-gray-700;
-  }
-
-  &:active {
-    @apply text-gray-700;
-  }
-}
-
-.pagy-combo-nav-js .page.prev.disabled,
-.pagy-combo-nav-js .page.next.disabled {
-  @apply text-gray-400 cursor-default;
 }
 
 .flash-info {

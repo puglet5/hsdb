@@ -202,3 +202,11 @@ button.text-gray-400 svg {
 .hover\:bg-gray-50 {
   @apply dark:hover:bg-zinc-700
 }
+
+.peer-checked\:text-primary-500 {
+  @apply dark:peer-checked:text-rose-500
+}
+
+.peer-checked\:border-primary-500 {
+  @apply dark:peer-checked:border-rose-500
+}
