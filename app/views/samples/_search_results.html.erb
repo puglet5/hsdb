@@ -23,7 +23,7 @@
 
     <% if @pagy.pages > 1 %>
       <div id="pagination" class="my-2">
-        <%== pagy_nav @pagy %>
+        <%== pagy_nav @pagy, link_extra: 'data-turbo-action="advance"' %>
       </div>
     <% end %>
 
