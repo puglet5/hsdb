@@ -42,7 +42,7 @@ gem 'rails-i18n', '~> 7.0.4'
 gem 'rails_semantic_logger', '~> 4.10'
 gem 'ransack', '~> 3.2.1' # object-based searching
 gem 'redis', '~> 5.0'
-gem 'redis-client', '~> 0.12.2'
+gem 'redis-client', '~> 0.14'
 gem 'rolify', '~> 6.0' # user roles
 gem 'rswag-api', '~> 2.5', '>= 2.5.1' # api testing and documentation
 gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
