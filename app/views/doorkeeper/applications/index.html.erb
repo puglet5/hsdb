@@ -4,7 +4,11 @@
 
     <%= render Typography::UnderlineFlexHeadingComponent.new() do %>
       <%= render Typography::H3Component.new(cls: "my-auto mb-0").with_content("Allowed API apps") %>
-      <%= render Links::NewLinkComponent.new(path: new_oauth_application_path, cls: "text-gray-500") %>
+      <%= link_to new_oauth_application_path, class: "#{@cls}" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+      <% end %>
     <% end %>
 
     <div class="relative overflow-x-auto border rounded-md">
