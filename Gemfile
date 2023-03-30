@@ -61,7 +61,7 @@ group :development do
   gem 'amazing_print', '~> 1.4'
   gem 'annotate', '~> 3.2' # db schema annotations for models and tests
   gem 'bullet', '~> 7.0', '>= 7.0.3' # detect ineffective db queries
-  gem 'erb_lint', '~> 0.3.0'
+  gem 'erb_lint', '~> 0.4'
   gem 'foreman', '~> 0.87.2'
   gem 'hotwire-livereload', '~> 1.2'
   gem 'htmlbeautifier' # erb formatter
