@@ -8,7 +8,7 @@ ruby '3.2.1'
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'active_record_extended', '~> 3.0'
 gem 'active_storage-send_zip', '~> 0.3.4'
-gem 'activestorage-validator', '~> 0.2.2'
+gem 'activestorage-validator', '~> 0.3'
 gem 'acts_as_favoritor', '~> 6.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'caxlsx', '~> 3.2' # .xlsx generation
