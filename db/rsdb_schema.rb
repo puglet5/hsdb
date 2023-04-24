@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_25_205705) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_24_220323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_205705) do
     t.date "survey_date"
     t.integer "lock_version"
     t.text "plain_text_description"
-    t.boolean "is_reference"
+    t.boolean "is_reference", default: false, null: false
     t.index ["metadata"], name: "index_samples_on_metadata", using: :gin
     t.index ["sku"], name: "index_samples_on_sku"
   end
