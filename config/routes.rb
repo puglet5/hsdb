@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     member do
       patch :favorite
     end
+    collection do
+      get 'compare'
+    end
   end
 
   resources :users, only: %i[show] do

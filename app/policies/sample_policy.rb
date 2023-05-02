@@ -28,4 +28,8 @@ class SamplePolicy < ApplicationPolicy
   def favorite?
     true
   end
+
+  def compare?
+    true
+  end
 end

@@ -18,6 +18,14 @@ class SamplesController < ApplicationController
     @pagy, @samples = pagy @query.result(distinct: true).order('created_at DESC'), items: 20
   end
 
+  def compare
+    @spectra = Spectrum.find(params[:ids])
+
+    breadcrumb 'Compare', %i[compare samples], match: :exclusive
+
+    authorize Sample
+  end
+
   def show
     @sample = Sample.with_attached_documents
                     .with_attached_images
