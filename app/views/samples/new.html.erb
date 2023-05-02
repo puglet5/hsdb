@@ -5,15 +5,12 @@
       New sample
     </div>
     <%= simple_form_for @sample, validate: true, html: { id: "main-form" } do |f| %>
-
       <%= render Forms::SectionLabelComponent.new(cls: "text-gray-700") do %>
         <div class="flex">
           Choose sample type:
         </div>
       <% end %>
-
       <%= turbo_frame_tag :form do %>
-
         <%= tag.div data: { controller: "sample-form" }, id: "category-selector" do %>
           <%= f.button :button, "Validate", formaction: :new, formmethod: :get, data: { sample_form_target: "validate", turbo_frame: :form }, class: "hidden" %>
           <div class="input radio_buttons sample_category">
@@ -39,64 +36,51 @@
           </div>
         <% end %>
       <% end %>
-
       <%= render Forms::SectionLabelComponent.new().with_content("Info") %>
       <div id="info" class="mb-4 grid grid-cols-2 gap-4">
-
         <div id="title" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: false).with_content("Title") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :title, required: true, placeholder: "Sample name") %>
         </div>
-
         <div id="title" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Owner/Organization") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :owner, required: true, placeholder: "Jonh Doe") %>
         </div>
-
         <div id="title" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Origin/Manufacturer") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :origin, required: true, placeholder: "NASA Labs") %>
         </div>
-
         <div>
           <%= render Forms::LabelComponent.new(optional: false).with_content("Category/Type") %>
           <%= f.input :category, default: @sample.category, collection: Sample.categories.keys.map { |s| [s.humanize, s] }, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
         </div>
-
         <div class="mb-4 col-span-2">
           <%= render Forms::LabelComponent.new().with_content("Description") %>
           <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "Description to be displayed on sample cards") %>
         </div>
       </div>
-
       <%= render Forms::SectionLabelComponent.new().with_content("Misc") %>
       <div id="misc" class="mb-4 grid grid-cols-2 gap-4">
-
         <div id="sku" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Sku") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :sku, required: false, placeholder: "000ABC") %>
         </div>
-
         <div id="color" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Color") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :color, required: false, placeholder: "Sky blue") %>
         </div>
-
         <div id="formula" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("Chemical Formula") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :formula, required: false, placeholder: "CaO") %>
         </div>
-
         <div id="cas_no" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("CAS Registry Number") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :cas_no, required: false, placeholder: "20548-54-3") %>
         </div>
-
         <div id="cas_name" class="mb-4">
           <%= render Forms::LabelComponent.new(optional: true).with_content("CAS Name") %>
           <%= render Forms::TextInputComponent.new(form: f, field: :cas_name, required: false, placeholder: "Calcium sulfide") %>
         </div>
-
         <div id="survey_date" class="mb-4">
           <div class="mb-4">
             <%= tag.div data: { controller: "datepicker" } do %>
@@ -106,7 +90,6 @@
           </div>
         </div>
       </div>
-
       <div id="files" class="mb-4">
         <%= render Forms::SectionLabelComponent.new().with_content("Files") %>
         <div class="grid grid-cols-2 gap-4">
@@ -128,7 +111,6 @@
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content("Plain text spectra files of any format") %>
           <% end %>
-
           <%= tag.div class: "",
                 data: {
                   uppy: "sample[images][]",
@@ -146,7 +128,6 @@
             <% end %>
             <%= render Forms::PHelperComponent.new().with_content(".svg, .png, .jpg or .gif of any size") %>
           <% end %>
-
           <%= tag.div class: "",
                 data: {
                   uppy: "sample[documents][]",
@@ -166,19 +147,16 @@
           <% end %>
         </div>
       </div>
-
       <div id="metadata">
         <%= render Forms::SectionLabelComponent.new().with_content("Metadata") %>
         <%= render Forms::LabelComponent.new().with_content("Metadata") %>
         <%= render Forms::TextInputComponent.new(form: f, as: :text, field: :metadata, required: false, placeholder: "Description to be displayed on object cards", data: { controller: "textarea", action: 'input->textarea#resize', 'textarea-target': 'input' }, v: display_metadata_value(@sample)) %>
         <%= render Forms::PHelperComponent.new().with_content("Must be a valid JSON object, prefer single-word keys ") %>
       </div>
-
       <div class="flex mt-4">
         <%= render Forms::SubmitComponent.new(form: f).with_content("Create") %>
         <%= render Forms::BackButtonComponent.new(path: (["new", "create"].include? params[:action]) ? :samples : @sample).with_content("Back") %>
       </div>
     <% end %>
-
   </div>
 </section>

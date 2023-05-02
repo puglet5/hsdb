@@ -12,14 +12,16 @@ Chart.register(ChartDataLabels)
 export default class extends Controller {
 
   static values = {
-    url: String,
+    urls: Array,
     data: Array,
     initialData: Array,
-    filename: String,
-    id: Number,
+    filenames: Array,
+    ids: Array,
     axesSpec: Object,
     labels: Array,
-    dark: Boolean
+    dark: Boolean,
+    compare: Boolean,
+    canvasId: String
   }
 
   static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton"]
@@ -27,128 +29,19 @@ export default class extends Controller {
   normalized = false
   showLabels = true
   cubicInterpolationMode = undefined
-  displayLabelValues = this.labelsValue.map(o => o.position).map(Number)
+  displayLabelValues = this.labelsValue.map(e => e.map(o => o.position).map(Number))
 
-  options = {
-    animation: false,
-    parsing: true,
-    showAllTooltips: true,
-    layout: {
-      padding: {
-        left: 20,
-        right: 20,
-        top: 20,
-        bottom: 20
-      },
-    },
-    elements: {
-      point: {
-        radius: 0
-      },
-      line: {
-        backgroundColor: this.darkValue ? "#ffffff" : "#000000",
-        borderColor: this.darkValue ? "#ffffff" : "#000000",
-        borderWidth: 2
-      }
-    },
-    scales: {
-      y: {
-        title: {
-          text: this.axesSpecValue["labels"][1],
-          display: true
-        },
-        min: 0,
-        grid: {
-          borderDash: [8, 4],
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
-        },
-        grace: "5%"
-      },
-      x: {
-        title: {
-          text: this.axesSpecValue["labels"][0],
-          display: true
-        },
-        grid: {
-          borderDash: [8, 4],
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
-        },
-        reverse: this.axesSpecValue["reverse"]
-      }
-    },
-    interaction: {
-      mode: "nearest",
-      axis: "x",
-      intersect: false
-    },
-    plugins: {
-      tooltip: {
-        displayColors: false,
-        callbacks: {
-          label: function (tooltipItem) {
-            return tooltipItem.formattedValue
-          },
-          title: function () {
-            return
-          }
-        },
-      },
-      datalabels: {
-        anchor: "center",
-        align: "top",
-        clip: true,
-        borderRadius: 2,
-        labels: {
-          value: {},
-          title: {
-            color: this.darkValue ? "white" : "black",
-            // backgroundColor: "rgba(34, 81, 163, .1)",
-          }
-        },
-        display: (context) => {
-          if (this.showLabels == true)
-            return (this.displayLabelValues.includes(context.dataIndex) ? "auto" : false)
-          else
-            return false
-        },
-        formatter: (value) => {
-          return parseFloat(value["x"]).toFixed(1)
-        }
-      },
-      zoom: {
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: false
-          },
-          mode: "xy",
-        },
-        pan: {
-          enabled: true
-        },
-        limits: {
-          x: { min: "original", max: "original" },
-          y: { min: "original", max: "original" }
-        },
-        animation: {
-          duration: 100,
-          easing: "easeOutCubic"
-        }
-      },
-      legend:
-      {
-        labels: {
-          boxWidth: 0,
-        }
-      }
+  connect() {
+    if (this.compareValue) {
+      this.visualize()
+      this.disableControls()
     }
   }
 
   async import(url) {
-    return await fetch(url)
-      .then((response) => response.text())
+    return Promise.all(url.map(u => fetch(u))).then(responses =>
+      Promise.all(responses.map(res => res.text()))
+    )
   }
 
   parse(rawData) {
@@ -177,33 +70,155 @@ export default class extends Controller {
 
   async visualize() {
 
-    let id = this.idValue
+    let id = this.canvasIdValue
 
-    const makeChart = (data, filename) => {
+    const makeChart = (data, filenames) => {
 
       window.scatterChart = new Chart(`canvas-${id}`, {
         type: "scatter",
         data: {
-          datasets: [{
-            label: filename,
-            data: data,
+          datasets: data.map((d, i) => ({
+            label: filenames[i],
+            data: d,
             showLine: true,
             lineTension: 0,
             cubicInterpolationMode: this.cubicInterpolationMode,
-          }],
+            datalabels: {
+              anchor: "center",
+              align: "top",
+              clip: true,
+              borderRadius: 2,
+              labels: {
+                value: {},
+                title: {
+                  color: this.darkValue ? "white" : "black",
+                  // backgroundColor: "rgba(34, 81, 163, .1)",
+                }
+              },
+              display: (context) => {
+                if (this.showLabels == true)
+                  return (this.displayLabelValues[i].includes(context.dataIndex) ? "auto" : false)
+                else
+                  return false
+              },
+              formatter: (value) => {
+                return parseFloat(value["x"]).toFixed(1)
+              }
+            },
+          })),
         },
-        options: this.options
+        options: {
+          animation: false,
+          parsing: true,
+          responsive: true,
+          showAllTooltips: true,
+          layout: {
+            padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20
+            },
+          },
+          elements: {
+            point: {
+              radius: 0
+            },
+            line: this.compareValue ? {
+              borderWidth: 2
+            } :
+              {
+                backgroundColor: this.darkValue ? "#ffffff" : "#000000",
+                borderColor: this.darkValue ? "#ffffff" : "#000000",
+                borderWidth: 2
+              }
+          },
+          scales: {
+            y: {
+              title: {
+                text: this.axesSpecValue["labels"][1],
+                display: true
+              },
+              min: 0,
+              grid: {
+                borderDash: [8, 4],
+                color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
+              },
+              grace: "5%"
+            },
+            x: {
+              title: {
+                text: this.axesSpecValue["labels"][0],
+                display: true
+              },
+              grid: {
+                borderDash: [8, 4],
+                color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
+              },
+              reverse: this.axesSpecValue["reverse"]
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            tooltip: {
+              displayColors: !this.compareValue,
+              callbacks: {
+                label: function (tooltipItem) {
+                  return tooltipItem.formattedValue
+                },
+                title: function () {
+                  return
+                }
+              },
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: false
+                },
+                mode: "xy",
+              },
+              pan: {
+                enabled: true
+              },
+              limits: {
+                x: { min: "original", max: "original" },
+                y: { min: "original", max: "original" }
+              },
+              animation: {
+                duration: 100,
+                easing: "easeOutCubic"
+              }
+            },
+            legend:
+            {
+              labels: {
+                boxWidth: 0,
+              }
+            },
+            datalabels: {
+              display: false
+            }
+          }
+        }
       })
     }
 
     if (window.scatterChart) { window.scatterChart.destroy() }
 
     if (this.hasDataValue) {
-      makeChart(this.dataValue, this.filenameValue)
+      makeChart(this.dataValue, this.filenamesValue)
     } else {
-      const raw = await this.import(this.urlValue)
-      this.dataValue = this.parse(raw)
-      makeChart(this.dataValue, this.filenameValue)
+      const raw = await this.import(this.urlsValue)
+      this.dataValue = raw.map(r => this.parse(r))
+      makeChart(this.dataValue, this.filenamesValue)
     }
   }
 
@@ -223,23 +238,25 @@ export default class extends Controller {
   }
 
   toggleNormalize() {
+    if (this.compareValue) return
+
     if (!this.normalized) {
       window.scatterChart.resetZoom()
 
       this.normalized = true
 
-      let data = this.dataValue
+      let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
       let range = this.getRange(data)
       let normalizedY = data.map(e => e["y"] / range[1][1])
 
-      this.initialDataValue = this.dataValue
+      this.initialDataValue = [data]
 
-      this.dataValue = data.map((e, i) => (
+      this.dataValue = [data.map((e, i) => (
         {
           x: e["x"],
           y: normalizedY[i],
         }
-      ))
+      ))]
       this.visualize()
     }
     else {
@@ -281,23 +298,25 @@ export default class extends Controller {
   }
 
   applyGaussianFilter() {
+    if (this.compareValue) return
+
     window.scatterChart.resetZoom()
 
     let radius = this.gaussianFilterSliderTarget.value
 
     if (radius < 0 || radius > 10) { return }
 
-    let data = this.hasInitialDataValue ? this.initialDataValue : this.dataValue
+    let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
     let normalizedY = blur(data.map(e => e["y"]), radius)
 
-    this.initialDataValue = data
+    this.initialDataValue = [data]
 
-    this.dataValue = data.map((e, i) => (
+    this.dataValue = [data.map((e, i) => (
       {
         x: e["x"],
         y: normalizedY[i],
       }
-    ))
+    ))]
     this.visualize()
   }
 
@@ -306,5 +325,12 @@ export default class extends Controller {
     this.showLabels = !this.showLabels
     this.showLabelsButtonTarget.classList.toggle("hidden")
     this.visualize()
+  }
+
+  disableControls() {
+    this.normalizeButtonTarget.parentElement.disabled = true
+    this.normalizeButtonTarget.parentElement.classList.add("!text-gray-300")
+    this.gaussianFilterSliderTarget.disabled = true
+    console.log(this.gaussianFilterSliderTarget)
   }
 }
