@@ -89,7 +89,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'better_errors', '~> 2.9'
+  gem 'better_errors', '< 2.10'
   gem 'binding_of_caller', '~> 1.0' # for better_errors
   gem 'brakeman', '~> 5.2'
   gem 'bundler-audit', '~> 0.9.1'
