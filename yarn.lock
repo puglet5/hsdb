@@ -31,6 +31,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csstools/selector-specificity@npm:^2.0.0":
+  version: 2.2.0
+  resolution: "@csstools/selector-specificity@npm:2.2.0"
+  peerDependencies:
+    postcss-selector-parser: ^6.0.10
+  checksum: 97c89f23b3b527d7bd51ed299969ed2b9fbb219a367948b44aefec228b8eda6ae0ad74fe8a82f9aac8ff32cfd00bb6d0c98d1daeab2e8fc6d5c4af25e5be5673
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm64@npm:0.17.18":
   version: 0.17.18
   resolution: "@esbuild/android-arm64@npm:0.17.18"
@@ -784,7 +793,7 @@ __metadata:
     photoswipe: ^5.3.7
     postcss: ^8.4.23
     postcss-cli: ^10.1.0
-    postcss-nested: ^6.0.1
+    postcss-nesting: ^11.2.2
     tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.3.2
     tom-select: ^2.2.2
@@ -3824,6 +3833,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-nesting@npm:^11.2.2":
+  version: 11.2.2
+  resolution: "postcss-nesting@npm:11.2.2"
+  dependencies:
+    "@csstools/selector-specificity": ^2.0.0
+    postcss-selector-parser: ^6.0.10
+  peerDependencies:
+    postcss: ^8.4
+  checksum: 84149edbfe9b0adf069b7ddf06d21fc7a543e7f44b97c3975d8b1f088dddc20853689cb859d5be06000cca83bdc56929b13581bfdaf1971cfafa492add867831
+  languageName: node
+  linkType: hard
+
 "postcss-normalize-charset@npm:^6.0.0":
   version: 6.0.0
   resolution: "postcss-normalize-charset@npm:6.0.0"
@@ -3966,6 +3987,16 @@ __metadata:
   peerDependencies:
     postcss: ^8.1.0
   checksum: ed450a6fbf03c42d43ceec1d6ff3e1671441a00abf1f81b919c8d23761250d6809bac42e5ade06c8e4ca137cb1e27e3cb3f74ded3d4b79d332807f6abe4ee57c
+  languageName: node
+  linkType: hard
+
+"postcss-selector-parser@npm:^6.0.10":
+  version: 6.0.12
+  resolution: "postcss-selector-parser@npm:6.0.12"
+  dependencies:
+    cssesc: ^3.0.0
+    util-deprecate: ^1.0.2
+  checksum: f166ed4350511f6fb4a7e82aaaa6dfd81a1e648d4567ca15a3ca87b7ea2e55a8c136fb0ae9456b7b88a390c160f05d06bd1c69f47d7e331b53b70941e06e90fe
   languageName: node
   linkType: hard
 

@@ -54,7 +54,7 @@
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "cssnano": "^6.0.1",
     "eslint": "^8.40.0",
-    "postcss-nested": "^6.0.1",
+    "postcss-nesting": "^11.2.2",
     "tailwind-config-viewer": "^1.7.2"
   }
 }
