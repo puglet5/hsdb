@@ -52,8 +52,8 @@
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "cssnano": "^5.1.15",
-    "eslint": "^8.39.0",
+    "cssnano": "^6.0.1",
+    "eslint": "^8.40.0",
     "postcss-nested": "^6.0.1",
     "tailwind-config-viewer": "^1.7.2"
   }
