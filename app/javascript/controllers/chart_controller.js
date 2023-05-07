@@ -21,20 +21,23 @@ export default class extends Controller {
     labels: Array,
     dark: Boolean,
     compare: Boolean,
-    canvasId: String
+    canvasId: String,
+    dataStep: Number,
+    controlsDisabled: Boolean
   }
 
-  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton"]
+  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton", "derivativeButton"]
 
   normalized = false
+  derivativePlot = false
   showLabels = true
   cubicInterpolationMode = undefined
   displayLabelValues = this.labelsValue.map(e => e.map(o => o.position).map(Number))
 
   connect() {
     if (this.compareValue) {
-      this.visualize()
       this.disableControls()
+      this.visualize()
     }
   }
 
@@ -47,6 +50,7 @@ export default class extends Controller {
   parse(rawData) {
 
     let data = Papa.parse(rawData).data
+    this.dataStepValue = data[0][0] - data[1][0]
 
     let xValue = data.map((d) => {
       return parseFloat(Object.values(d)[0])
@@ -96,7 +100,7 @@ export default class extends Controller {
                 }
               },
               display: (context) => {
-                if (this.showLabels == true)
+                if (this.showLabels)
                   return (this.displayLabelValues[i].includes(context.dataIndex) ? "auto" : false)
                 else
                   return false
@@ -307,14 +311,14 @@ export default class extends Controller {
     if (radius < 0 || radius > 10) { return }
 
     let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
-    let normalizedY = blur(data.map(e => e["y"]), radius)
+    let smoothedY = blur(data.map(e => e["y"]), radius)
 
     this.initialDataValue = [data]
 
     this.dataValue = [data.map((e, i) => (
       {
         x: e["x"],
-        y: normalizedY[i],
+        y: smoothedY[i],
       }
     ))]
     this.visualize()
@@ -328,9 +332,61 @@ export default class extends Controller {
   }
 
   disableControls() {
+    this.controlsDisabledValue = true
     this.normalizeButtonTarget.parentElement.disabled = true
     this.normalizeButtonTarget.parentElement.classList.add("!text-gray-300")
     this.gaussianFilterSliderTarget.disabled = true
-    console.log(this.gaussianFilterSliderTarget)
+  }
+
+  enableControls() {
+    this.controlsDisabledValue = false
+    this.normalizeButtonTarget.parentElement.disabled = false
+    this.normalizeButtonTarget.parentElement.classList.remove("!text-gray-300")
+    this.gaussianFilterSliderTarget.disabled = false
+  }
+
+  toggleSecondDerivative() {
+    this.derivativePlot = !this.derivativePlot
+    if (this.derivativePlot) {
+      this.toggleNormalize()
+      this.compareValue = true
+      this.disableControls()
+      window.scatterChart.resetZoom()
+
+      let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
+
+      this.initialDataValue = [data]
+
+      let derY = data.flatMap((e, i) => i < data.length - 4 ? (2 * e["y"] - 5 * data[(i + 1)]["y"] + 4 * data[(i + 2)]["y"] - data[(i + 3)]["y"]) / (this.dataStepValue ** 2) : 0)
+      let smoothedDerY = blur(derY, 2)
+      let [min, max] = [Math.min(...smoothedDerY), Math.max(...smoothedDerY)]
+      let rescaledSmoothedDerY = smoothedDerY.map(e => (e - min) / (max - min))
+
+      this.dataValue = [this.dataValue[0], data.map((e, i) => (
+        {
+          x: e["x"],
+          y: rescaledSmoothedDerY[i],
+        }
+      ))]
+
+      console.log(this.normalized)
+
+      this.displayLabelValues.push([])
+      this.filenamesValue = [...this.filenamesValue, "2nd Derivative"]
+
+      this.visualize()
+    }
+    else {
+      this.compareValue = false
+      window.scatterChart.resetZoom()
+      this.toggleNormalize()
+      this.enableControls()
+      this.dataValue = this.initialDataValue
+      this.displayLabelValues.pop()
+      this.filenamesValue.pop()
+
+      this.visualize()
+    }
+    this.derivativeButtonTarget.classList.toggle("hidden")
   }
 }

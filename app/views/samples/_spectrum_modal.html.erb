@@ -12,6 +12,22 @@
             <%= render TooltipComponent.new(tooltip: "Low pass filter", user: current_user) do %>
               <input id="default-range" type="range" value="0" max="10" min="0" step="1" class="mr-6 my-auto w-16 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer text-gray-500" data-action="input->chart#applyGaussianFilter" data-chart-target="gaussianFilterSlider">
             <% end %>
+            <%= render TooltipComponent.new(tooltip: "Toggle second derivative", user: current_user) do %>
+              <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleSecondDerivative">
+
+                <svg xmlns="http://www.w3.org/2000/svg" data-chart-target="derivativeButton" class="w-5 h-5 icon icon-tabler icon-tabler-exposure-plus-2 peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 9a4 4 0 1 1 8 0c0 1.098 -.564 2.025 -1.159 2.815l-6.841 7.185h8"></path>
+                  <path d="M3 12h6"></path>
+                  <path d="M6 9v6"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-exposure-minus-2 hidden w-5 h-5 icon icon-tabler icon-tabler-arrows-vertical peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 9a4 4 0 1 1 8 0c0 1.098 -.564 2.025 -1.159 2.815l-6.841 7.185h8"></path>
+                  <path d="M3 12h6"></path>
+                </svg>
+              </button>
+            <% end %>
             <%= render TooltipComponent.new(tooltip: "Toggle data labels", user: current_user) do %>
               <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleLabels">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tags-off w-5 h-5 peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-chart-target="showLabelsButton">
