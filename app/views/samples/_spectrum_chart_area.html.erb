@@ -2,12 +2,12 @@
   <%= tag.div data: {
                       controller: "modal chart",
                       chart_urls_value: [spectrum&.processed_file&.url],
-                      chart_filenames_value: [spectrum&.processed_file&.filename],
+                      chart_filenames_value: ["#{spectrum.sample.title} (#{spectrum&.processed_file&.filename})"],
                       chart_ids_value: [spectrum.id],
                       chart_axes_spec_value: Spectrum::AXES_SPEC[spectrum.category.to_sym],
                       chart_labels_value: [spectrum.metadata["peaks"]],
                       chart_dark_value: current_user.settings(:ui).dark,
-                    chart_canvas_id_value: spectrum.id.to_s,
+                      chart_canvas_id_value: spectrum.id.to_s,
                       chart_compare_value: false
                     } do %>
     <div class="flex justify-between ml-2 space-x-2">

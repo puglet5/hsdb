@@ -106,7 +106,7 @@ export default class extends Controller {
                   return false
               },
               formatter: (value) => {
-                return parseFloat(value["x"]).toFixed(1)
+                return parseFloat(value["x"]).toFixed(0)
               }
             },
           })),

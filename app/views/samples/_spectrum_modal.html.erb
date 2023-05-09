@@ -6,7 +6,7 @@
         <!-- Modal header -->
         <div class="flex items-center justify-between p-5 border-b rounded-t">
           <h3 class="text-xl font-medium text-gray-700">
-            <%= spectrum.processed_file.filename %>
+            <%= spectrum.sample.title %>
           </h3>
           <div class="relative flex">
             <%= render TooltipComponent.new(tooltip: "Low pass filter", user: current_user) do %>
