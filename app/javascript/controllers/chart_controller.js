@@ -13,8 +13,8 @@ export default class extends Controller {
 
   static values = {
     urls: Array,
-    data: Array,
-    initialData: Array,
+    currentPlotData: Array,
+    unmodifiedPlotData: Array,
     filenames: Array,
     ids: Array,
     axesSpec: Object,
@@ -26,13 +26,26 @@ export default class extends Controller {
     controlsDisabled: Boolean
   }
 
-  static targets = ["canvas", "interpolateButton", "normalizeButton", "gaussianFilterSlider", "showLabelsButton", "derivativeButton"]
+  static targets = [
+    "canvas",
+    "interpolateButton",
+    "normalizeButton",
+    "gaussianFilterSlider",
+    "showLabelsButton",
+    "derivativePlotButton",
+    "transmissionPlotButton",
+    "reverseXAxisButton"
+  ]
 
   normalized = false
+  normalizeFactor = undefined
+  labelAlignment = "top"
   derivativePlot = false
+  transmissionPlot = false
   showLabels = true
   cubicInterpolationMode = undefined
   displayLabelValues = this.labelsValue.map(e => e.map(o => o.position).map(Number))
+  reverseXAxis = this.axesSpecValue["reverse"]
 
   connect() {
     if (this.compareValue) {
@@ -47,7 +60,7 @@ export default class extends Controller {
     )
   }
 
-  parse(rawData) {
+  parseCSV(rawData) {
 
     let data = Papa.parse(rawData).data
     this.dataStepValue = data[0][0] - data[1][0]
@@ -74,6 +87,17 @@ export default class extends Controller {
 
   async visualize() {
 
+    if (!this.hasCurrentPlotDataValue && !this.hasUnmodifiedPlotDataValue) {
+      const raw = await this.import(this.urlsValue)
+      this.unmodifiedPlotDataValue = raw.map(r => this.parseCSV(r))
+    }
+
+    if (this.hasUnmodifiedPlotDataValue && !this.hasCurrentPlotDataValue) {
+      this.currentPlotDataValue = this.unmodifiedPlotDataValue
+    }
+
+    if (window.scatterChart) { window.scatterChart.destroy() }
+
     let id = this.canvasIdValue
 
     const makeChart = (data, filenames) => {
@@ -89,9 +113,10 @@ export default class extends Controller {
             cubicInterpolationMode: this.cubicInterpolationMode,
             datalabels: {
               anchor: "center",
-              align: "top",
+              align: this.labelAlignment,
               clip: true,
               borderRadius: 2,
+              backgroundColor: "rgba(255, 255, 255, .75)",
               labels: {
                 value: {},
                 title: {
@@ -139,27 +164,33 @@ export default class extends Controller {
           },
           scales: {
             y: {
+              border: { dash: [4, 4] },
               title: {
-                text: this.axesSpecValue["labels"][1],
+                text: this.transmissionPlot ? "Transmission, %" : this.axesSpecValue["labels"][1],
                 display: true
               },
               min: 0,
               grid: {
-                borderDash: [8, 4],
-                color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
+                color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+                tickBorderDash: [0, 0],
+                tickLength: 10,
+                tickWidth: 1,
               },
               grace: "5%"
             },
             x: {
+              border: { dash: [4, 4] },
               title: {
                 text: this.axesSpecValue["labels"][0],
                 display: true
               },
               grid: {
-                borderDash: [8, 4],
-                color: this.darkValue ? "#1e1e1e" : "#e1e1e1"
+                color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+                tickBorderDash: [0, 0],
+                tickLength: 10,
+                tickWidth: 1,
               },
-              reverse: this.axesSpecValue["reverse"]
+              reverse: this.reverseXAxis
             }
           },
           interaction: {
@@ -169,6 +200,7 @@ export default class extends Controller {
           },
           plugins: {
             tooltip: {
+              animation: false,
               displayColors: !this.compareValue,
               callbacks: {
                 label: function (tooltipItem) {
@@ -215,15 +247,7 @@ export default class extends Controller {
       })
     }
 
-    if (window.scatterChart) { window.scatterChart.destroy() }
-
-    if (this.hasDataValue) {
-      makeChart(this.dataValue, this.filenamesValue)
-    } else {
-      const raw = await this.import(this.urlsValue)
-      this.dataValue = raw.map(r => this.parse(r))
-      makeChart(this.dataValue, this.filenamesValue)
-    }
+    makeChart(this.currentPlotDataValue, this.filenamesValue)
   }
 
   getRange(data) {
@@ -247,35 +271,39 @@ export default class extends Controller {
     if (!this.normalized) {
       window.scatterChart.resetZoom()
 
-      this.normalized = true
-
-      let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
+      let data = this.currentPlotDataValue[0]
       let range = this.getRange(data)
-      let normalizedY = data.map(e => e["y"] / range[1][1])
+      this.normalizeFactor = range[1][1]
+      let normalizedY = data.map(e => e["y"] / this.normalizeFactor)
 
-      this.initialDataValue = [data]
-
-      this.dataValue = [data.map((e, i) => (
+      this.currentPlotDataValue = [data.map((e, i) => (
         {
           x: e["x"],
           y: normalizedY[i],
         }
       ))]
-      this.visualize()
     }
     else {
       window.scatterChart.resetZoom()
 
-      this.normalized = false
-      this.dataValue = this.initialDataValue
-      this.visualize()
+      let data = this.currentPlotDataValue[0]
+      let denormalizedY = data.map(e => e["y"] * this.normalizeFactor)
+
+      this.currentPlotDataValue = [data.map((e, i) => (
+        {
+          x: e["x"],
+          y: denormalizedY[i],
+        }
+      ))]
     }
+    this.normalized = !this.normalized
+    this.visualize()
     this.normalizeButtonTarget.classList.toggle("hidden")
   }
 
-  reset() {
+  resetAll() {
     this.normalized = false
-    this.dataValue = this.hasInitialDataValue ? this.initialDataValue : this.dataValue
+    this.currentPlotDataValue = this.hasUnmodifiedPlotDataValue ? this.unmodifiedPlotDataValue : this.currentPlotDataValue
     this.cubicInterpolationMode = undefined
     window.scatterChart.resetZoom()
     this.gaussianFilterSliderTarget.value = 0
@@ -310,17 +338,16 @@ export default class extends Controller {
 
     if (radius < 0 || radius > 10) { return }
 
-    let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
+    let data = this.unmodifiedPlotDataValue[0]
     let smoothedY = blur(data.map(e => e["y"]), radius)
 
-    this.initialDataValue = [data]
-
-    this.dataValue = [data.map((e, i) => (
+    this.currentPlotDataValue = [data.map((e, i) => (
       {
         x: e["x"],
         y: smoothedY[i],
       }
     ))]
+
     this.visualize()
   }
 
@@ -335,6 +362,8 @@ export default class extends Controller {
     this.controlsDisabledValue = true
     this.normalizeButtonTarget.parentElement.disabled = true
     this.normalizeButtonTarget.parentElement.classList.add("!text-gray-300")
+    this.transmissionPlotButtonTarget.parentElement.disabled = true
+    this.transmissionPlotButtonTarget.parentElement.classList.add("!text-gray-300")
     this.gaussianFilterSliderTarget.disabled = true
   }
 
@@ -342,51 +371,89 @@ export default class extends Controller {
     this.controlsDisabledValue = false
     this.normalizeButtonTarget.parentElement.disabled = false
     this.normalizeButtonTarget.parentElement.classList.remove("!text-gray-300")
+    this.transmissionPlotButtonTarget.parentElement.disabled = false
+    this.transmissionPlotButtonTarget.parentElement.classList.remove("!text-gray-300")
     this.gaussianFilterSliderTarget.disabled = false
   }
 
-  toggleSecondDerivative() {
+  toggleSecondDerivativePlot() {
     this.derivativePlot = !this.derivativePlot
+
+    if (this.normalized) this.toggleNormalize()
+    this.normalizeButtonTarget.classList.toggle("hidden")
+
     if (this.derivativePlot) {
       this.toggleNormalize()
       this.compareValue = true
       this.disableControls()
       window.scatterChart.resetZoom()
 
-      let data = this.hasInitialDataValue ? this.initialDataValue[0] : this.dataValue[0]
-
-      this.initialDataValue = [data]
+      let data = this.currentPlotDataValue[0]
 
       let derY = data.flatMap((e, i) => i < data.length - 4 ? (2 * e["y"] - 5 * data[(i + 1)]["y"] + 4 * data[(i + 2)]["y"] - data[(i + 3)]["y"]) / (this.dataStepValue ** 2) : 0)
       let smoothedDerY = blur(derY, 2)
       let [min, max] = [Math.min(...smoothedDerY), Math.max(...smoothedDerY)]
       let rescaledSmoothedDerY = smoothedDerY.map(e => (e - min) / (max - min))
 
-      this.dataValue = [this.dataValue[0], data.map((e, i) => (
+      this.currentPlotDataValue = [this.currentPlotDataValue[0], data.map((e, i) => (
         {
           x: e["x"],
           y: rescaledSmoothedDerY[i],
         }
       ))]
 
-      console.log(this.normalized)
-
       this.displayLabelValues.push([])
       this.filenamesValue = [...this.filenamesValue, "2nd Derivative"]
-
-      this.visualize()
     }
     else {
       this.compareValue = false
       window.scatterChart.resetZoom()
       this.toggleNormalize()
       this.enableControls()
-      this.dataValue = this.initialDataValue
+      this.currentPlotDataValue = [this.currentPlotDataValue[0]]
       this.displayLabelValues.pop()
       this.filenamesValue.pop()
-
-      this.visualize()
     }
-    this.derivativeButtonTarget.classList.toggle("hidden")
+
+    this.visualize()
+    this.derivativePlotButtonTarget.classList.toggle("hidden")
+  }
+
+  toggleTransmissionPlot() {
+
+    if (this.normalized) this.toggleNormalize()
+    this.normalizeButtonTarget.classList.toggle("hidden")
+
+    if (!this.transmissionPlot) {
+      window.scatterChart.resetZoom()
+
+      let data = this.currentPlotDataValue[0]
+      let range = this.getRange(data)
+      let normalizedY = data.map(e => e["y"] / range[1][1])
+      let transmY = normalizedY.map((e) => (10 ** (-e)) * 100)
+
+      this.currentPlotDataValue = [data.map((e, i) => (
+        {
+          x: e["x"],
+          y: transmY[i],
+        }
+      ))]
+
+      this.labelAlignment = "bottom"
+    }
+    else {
+      this.labelAlignment = "top"
+      this.currentPlotDataValue = this.unmodifiedPlotDataValue
+    }
+
+    this.transmissionPlot = !this.transmissionPlot
+    this.visualize()
+    this.transmissionPlotButtonTarget.classList.toggle("hidden")
+  }
+
+  toggleReverseXAxis() {
+    window.scatterChart.resetZoom()
+    this.reverseXAxis = !this.reverseXAxis
+    this.visualize()
   }
 }
