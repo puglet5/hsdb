@@ -11,6 +11,10 @@ export default class extends Controller {
   readonly hasTriggerTarget: boolean
   readonly hasTooltipTarget: boolean
 
+  connect(): void {
+    this.tooltipTarget.classList.add("hidden")
+  }
+
   show() {
     if (this.hasTooltipTarget) {
       this.tooltipTarget.classList.remove("hidden")
