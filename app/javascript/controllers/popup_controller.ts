@@ -13,8 +13,7 @@ export default class extends Controller {
 
   show() {
     if (this.hasTooltipTarget) {
-      this.tooltipTarget.classList.remove("invisible")
-      this.tooltipTarget.classList.add("opacity-100")
+      this.tooltipTarget.classList.remove("hidden")
       createPopper(this.triggerTarget, this.tooltipTarget, {
         placement: "top",
       })
@@ -23,8 +22,7 @@ export default class extends Controller {
 
   hide() {
     if (this.hasTooltipTarget) {
-      this.tooltipTarget.classList.add("invisible")
-      this.tooltipTarget.classList.remove("opacity-100")
+      this.tooltipTarget.classList.add("hidden")
     }
   }
 }
