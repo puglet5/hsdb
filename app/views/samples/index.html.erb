@@ -1,11 +1,11 @@
 <%= render Sections::SectionComponent.new() do %>
   <%= render Sections::DivContainerComponent.new() do %>
 
-    <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12">
+    <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12 pb-2 mb-6 md:mb-12 md:pb-0">
       <%= render Typography::H1Component.new() do %>
         Spectral Database Index
       <% end %>
-      <div class="pb-2 mb-6 text-lg font-normal text-gray-500 md:mb-12 md:pb-0 lg:text-xl">
+      <div class="text-lg font-normal text-gray-500 lg:text-xl mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" class="inline-block icon icon-tabler icon-tabler-info-square w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <path d="M12 8l.01 0"></path>
@@ -16,6 +16,12 @@
         Listed below are all samples present in database sorted by date added. Click on column headers to sort by corresponding attribute.
 
         Use search to find and filter samples.
+      </div>
+
+      <div class="text-gray-500 border-b">
+        <span>
+          Total samples: <%= Sample.count %> with <%= pluralize(Spectrum.count, "spectrum") %>
+        </span>
       </div>
     </div>
 
