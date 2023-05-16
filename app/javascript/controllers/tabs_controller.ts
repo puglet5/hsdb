@@ -4,7 +4,12 @@ export default class extends Controller {
 
   static classes = ["active"]
 
+  activeClasses: string[]
+
   static targets = ["tab", "panel"]
+
+  readonly tabTargets!: HTMLElement[]
+  readonly panelTargets!: HTMLElement[]
 
   connect() {
     if (!localStorage.active_tab) {

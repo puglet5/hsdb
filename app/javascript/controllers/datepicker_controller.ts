@@ -5,6 +5,8 @@ export default class extends Controller {
 
   static targets = ["input"]
 
+  readonly inputTarget!: HTMLElement
+
   connect() {
     new Datepicker(this.inputTarget, {
       autohide: true,

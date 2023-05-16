@@ -6,6 +6,8 @@ export default class extends Controller {
 
   static targets = ["validate"]
 
+  readonly validateTarget!: HTMLElement
+
   connect() {
     this.validateTarget.hidden = true
     $("#main-form").enableClientSideValidations()

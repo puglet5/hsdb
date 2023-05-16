@@ -6,14 +6,27 @@ import ImageEditor from "@uppy/image-editor"
 
 export default class extends Controller {
 
-  static targets = ["div", "trigger", "text"]
-
   static values = {
     filetype: String,
     allowedfiletypes: Array,
     allowmultiple: Boolean,
     thumbnails: Boolean,
   }
+
+  filetypeValueValue: string
+  allowedfiletypesValue: string[]
+  allowmultipleValue: boolean
+  thumbnailsValue: boolean
+
+  static targets = ["div", "trigger", "text"]
+
+  readonly triggerTarget!: HTMLElement
+  readonly textTarget!: HTMLElement
+  readonly divTarget!: HTMLElement
+
+  readonly hasTriggerTarget: boolean
+  readonly hasDivTarget: boolean
+  readonly hasTextTarget: boolean
 
   connect() {
 
@@ -22,7 +35,7 @@ export default class extends Controller {
 
       hiddenField.setAttribute("type", "hidden")
       hiddenField.setAttribute("name", field_name)
-      hiddenField.setAttribute("data-pending-upload", true)
+      hiddenField.setAttribute("data-pending-upload", "true")
       hiddenField.setAttribute("value", file.response.signed_id)
 
       element.appendChild(hiddenField)
@@ -34,7 +47,7 @@ export default class extends Controller {
     const setupUppy = (element) => {
       let trigger = this.triggerTarget
 
-      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
+      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']")!.getAttribute("content")
       let field_name = element.dataset.uppy
 
       trigger.addEventListener("click", (e) => e.preventDefault())
@@ -49,6 +62,7 @@ export default class extends Controller {
         },
       })
 
+      // @ts-expect-error
       uppy.use(ActiveStorageUpload, {
         directUploadUrl: direct_upload_url
       })
@@ -57,9 +71,9 @@ export default class extends Controller {
         disableThumbnailGenerator: !this.thumbnailsValue,
         trigger: trigger,
         target: this.divTarget,
-        closeAfterFinish: true,
+        closeAfterFinish: false,
         inline: false,
-        showProgressDetails: true,
+        showProgressDetails: false,
         fileManagerSelectionType: "both",
         proudlyDisplayPoweredByUppy: false
       })
@@ -81,15 +95,15 @@ export default class extends Controller {
         },
       })
 
-      let dashboard = document.querySelector(".uppy-Dashboard-inner")
+      let dashboard = document.querySelector(".uppy-Dashboard-inner")!
       dashboard.removeAttribute("style")
 
       let files_uploaded = 0
 
       uppy.on("complete", (result) => {
         files_uploaded += result.successful.length
-        let txt = document.querySelector(`#${this.textTarget.id}`)
-        txt.innerHTML = `Add ${pluralize(files_uploaded, "file")}`
+        let filecountText = document.querySelector(`#${this.textTarget.id}`)!
+        filecountText.innerHTML = `Add ${pluralize(files_uploaded, "file")}`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
         })

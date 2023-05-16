@@ -5,8 +5,9 @@ const rails = require("esbuild-rails")
 const esbuild = require("esbuild");
 
 esbuild.context({
-  entryPoints: ["application.js"],
+  entryPoints: ["application.ts"],
   bundle: true,
+  treeShaking: true,
   minify: process.argv.includes("--minify"),
   platform: 'browser',
   target: [

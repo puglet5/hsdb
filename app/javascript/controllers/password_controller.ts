@@ -4,6 +4,10 @@ export default class extends Controller {
 
   static targets = ["input", "svg"]
 
+  readonly inputTarget!: HTMLInputElement
+  readonly svgTarget!: HTMLElement
+
+
   toggle() {
     const input = this.inputTarget
 

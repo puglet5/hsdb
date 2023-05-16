@@ -6,8 +6,10 @@ export default class extends Controller {
 
   static targets = ["modal"]
 
-  uppy_db_arr = undefined
-  uppy_states_arr = undefined
+  readonly modalTarget!: HTMLElement
+
+  uppy_db_arr: HTMLCollectionOf<Element>
+  uppy_states_arr: boolean[]
 
   connect() {
     hotkeys("escape", (event) => {

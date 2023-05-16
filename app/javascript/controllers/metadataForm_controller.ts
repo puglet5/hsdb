@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
 
 const parsedDataToArray = (values) => {
-  let temp_arr = []
+  let temp_arr: any[] = []
   for (let i = 0; i < values.length; i += 2) {
     const chunk = values.slice(i, i + 2)
     temp_arr.push(chunk)
@@ -11,7 +11,7 @@ const parsedDataToArray = (values) => {
 }
 
 const arrayToMetadata = (keys, values) => {
-  let metadata = []
+  let metadata: any[] = []
   for (let i = 0; i < values.length; i++) {
     let d = values[i],
       o = {}
@@ -42,7 +42,23 @@ const parseInputData = (inputs) => [].reduce.call(
 
 export default class extends Controller {
 
-  static targets = ["addButton", "fieldRow", "formContainer", "clonedFieldRow", "railsInput", "jsonContainer"]
+  static targets = [
+    "addButton",
+    "fieldRow",
+    "formContainer",
+    "clonedFieldRow",
+    "railsInput",
+    "jsonContainer"
+  ]
+
+  readonly addButtonTarget!: HTMLElement
+  readonly fieldRowTarget!: HTMLElement
+  readonly formContainerTarget!: HTMLElement
+  readonly clonedFieldRowTarget!: HTMLElement
+  readonly clonedFieldRowTargets!: HTMLElement[]
+  readonly railsInputTarget!: HTMLElement
+  readonly jsonContainerTarget!: HTMLElement
+
 
   connect() {
     let fieldRowClone = this.fieldRowTarget
@@ -67,7 +83,7 @@ export default class extends Controller {
 
   clonedFieldRowTargetConnected() {
     let lastCloned = this.clonedFieldRowTargets[this.clonedFieldRowTargets.length - 1]
-    let addButton = lastCloned.querySelector("#addButton")
+    let addButton = lastCloned.querySelector("#addButton")!
     addButton.setAttribute("id", "removeButton")
     addButton.classList.remove("mt-9")
     addButton.textContent = ""
@@ -75,12 +91,12 @@ export default class extends Controller {
     addButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>`
     addButton.addEventListener("click", function () { this.parentNode.remove() }, false)
 
-    let childInputs = this.formContainerTarget.querySelectorAll("input.metadata")
+    let childInputNodes: NodeListOf<HTMLInputElement> = this.formContainerTarget.querySelectorAll("input.metadata")
 
-    for (let i = 0; i < childInputs.length; i++) {
-      let theName = childInputs[i].name
+    for (let i = 0; i < childInputNodes.length; i++) {
+      let theName = childInputNodes[i].name
       if (theName)
-        childInputs[i].name = `metadata-${i}`
+        childInputNodes[i].name = `metadata-${i}`
     }
   }
 
@@ -89,7 +105,8 @@ export default class extends Controller {
   }
 
   handleEdit(form, input) {
-    let formInputs = Array.from(form.closest("form").elements).filter(e => e.classList.contains("metadata"))
+    let inputNodes: NodeListOf<HTMLInputElement> = form.closest("form").elements
+    let formInputs: any[] = Array.from(inputNodes).filter(e => e.classList.contains("metadata"))
     let parsedInputData = parseInputData(formInputs)
     let arrayFromInputs = parsedDataToArray(Object.values(parsedInputData))
     let formattedMetadata = arrayToMetadata(arrayFromInputs[0], arrayFromInputs.slice(1, arrayFromInputs.length))
@@ -103,7 +120,7 @@ export default class extends Controller {
 
   view(json) {
     if (document.querySelector(".json-container"))
-      document.querySelector(".json-container").remove()
+      document.querySelector(".json-container")!.remove()
     const tree = jsonview.create(json)
     if ((Object.keys(json).length !== 0)) {
       jsonview.render(tree, document.querySelector(".tree"))

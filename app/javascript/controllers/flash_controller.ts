@@ -2,7 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["close", "flash"]
+  static targets = ["flash"]
+
+  readonly flashTarget!: HTMLElement
 
   connect() {
     const flash = this.element

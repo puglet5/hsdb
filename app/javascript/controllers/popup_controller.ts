@@ -5,8 +5,11 @@ export default class extends Controller {
 
   static targets = ["trigger", "tooltip"]
 
-  connect() {
-  }
+  readonly triggerTarget!: HTMLElement
+  readonly tooltipTarget!: HTMLElement
+
+  readonly hasTriggerTarget: boolean
+  readonly hasTooltipTarget: boolean
 
   show() {
     if (this.hasTooltipTarget) {

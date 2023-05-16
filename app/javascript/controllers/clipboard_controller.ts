@@ -2,15 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["text", "svg"]
+  static targets = ["text"]
+
+  readonly textTarget!: HTMLAnchorElement
 
   async copy() {
     await navigator.clipboard.writeText(this.textTarget.href)
-    this.message()
+    this.flashMessage()
   }
 
-  message() {
-    const flash = document.querySelector("#clipboard-flash")
+  flashMessage() {
+    const flash = document.querySelector("#clipboard-flash")!
     flash.classList.remove("hidden")
     setTimeout(function () {
       flash.classList.add("hidden")

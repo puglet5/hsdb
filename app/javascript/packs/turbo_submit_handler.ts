@@ -21,7 +21,7 @@ document.addEventListener("turbo:submit-start", () => {
 
 document.addEventListener("turbo:submit-end", () => {
   if (document.getElementById("loadingModalBackLayer")) {
-    document.getElementById("loadingModalBackLayer").remove()
+    document.getElementById("loadingModalBackLayer")!.remove()
   }
   document.body.classList.remove("overflow-hidden")
 

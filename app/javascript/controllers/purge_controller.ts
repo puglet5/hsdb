@@ -2,12 +2,29 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["delete", "object", "return", "div", "input", "placeholder"]
-
   static values = {
     classname: String,
     id: String
   }
+
+  classnameValue: string
+  idValue: string
+
+  static targets = [
+    "delete",
+    "object",
+    "return",
+    "div",
+    "input",
+    "placeholder"
+  ]
+
+  readonly deleteTarget!: HTMLElement
+  readonly objectTarget!: HTMLElement
+  readonly returnTarget!: HTMLElement
+  readonly divTarget!: HTMLElement
+  readonly inputTarget!: HTMLElement
+  readonly placeholderTarget!: HTMLElement
 
   greyout() {
     this.objectTarget.classList.toggle("opacity-25")

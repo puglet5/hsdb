@@ -4,6 +4,8 @@ export default class extends Controller {
 
     static targets = ["input"]
 
+    readonly inputTarget!: HTMLInputElement
+
     connect() {
         this.inputTarget.style.resize = "none"
         this.inputTarget.style.minHeight = `${this.inputTarget.scrollHeight}px`

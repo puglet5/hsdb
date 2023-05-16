@@ -3,7 +3,9 @@ import hotkeys from "hotkeys-js"
 
 export default class extends Controller {
 
-  static targets = ["toggle", "dropdown"]
+  static targets = ["dropdown"]
+
+  readonly dropdownTarget!: HTMLElement
 
   connect() {
     hotkeys("escape", (event) => {

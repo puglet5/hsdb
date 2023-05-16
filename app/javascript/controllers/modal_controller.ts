@@ -4,9 +4,12 @@ import hotkeys from "hotkeys-js"
 
 export default class extends Controller {
 
-  static targets = ["toggle", "modal"]
+  static targets = ["modal"]
 
-  modal = document.getElementById("confirm-modal")
+  readonly modalTarget!: HTMLElement
+
+  // @ts-expect-error
+  modal: HTMLDialogElement = document.getElementById("confirm-modal")!
 
   connect() {
     hotkeys("escape", (event) => {

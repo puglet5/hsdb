@@ -7,11 +7,19 @@ export default class extends Controller {
 
   static targets = ["image", "trigger", "div"]
 
+  readonly imageTarget!: HTMLImageElement
+  readonly triggerTarget!: HTMLElement
+  readonly divTarget!: HTMLElement
+
+  readonly hasImageTarget: boolean
+  readonly hasTriggerTarget: boolean
+  readonly hasDivTarget: boolean
+
   connect() {
     const setupUppy = (element) => {
       let trigger = this.triggerTarget
 
-      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
+      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']")!.getAttribute("content")
       let field_name = element.dataset.uppy
 
       trigger.addEventListener("click", (e) => e.preventDefault())
@@ -26,19 +34,20 @@ export default class extends Controller {
         allowMultipleUploadBatches: false,
       })
 
+      // @ts-expect-error
       uppy.use(ActiveStorageUpload, {
         directUploadUrl: direct_upload_url
       })
 
       uppy.use(Dashboard, {
-        trigger: trigger,
+        trigger: "#trigger",
         closeAfterFinish: true,
         inline: false,
         showProgressDetails: true,
         proudlyDisplayPoweredByUppy: false
       })
 
-      let dashboard = document.querySelector(".uppy-Dashboard-inner")
+      let dashboard = document.querySelector(".uppy-Dashboard-inner")!
       dashboard.removeAttribute("style")
 
       uppy.on("complete", (result) => {
@@ -46,7 +55,6 @@ export default class extends Controller {
           appendUploadedFile(element, file, field_name)
           previewAvatar(element, file)
         })
-        uppy.reset()
       })
     }
 
@@ -55,7 +63,7 @@ export default class extends Controller {
 
       hiddenField.setAttribute("type", "hidden")
       hiddenField.setAttribute("name", field_name)
-      hiddenField.setAttribute("data-pending-upload", true)
+      hiddenField.setAttribute("data-pending-upload", "true")
       hiddenField.setAttribute("value", file.response.signed_id)
 
       element.appendChild(hiddenField)
@@ -66,7 +74,7 @@ export default class extends Controller {
         this.imageTarget.src = file.preview
       }
       else {
-        const avatarDiv = document.getElementById("avatar")
+        const avatarDiv = document.getElementById("avatar")!
         let avatar = document.createElement("img")
         avatar.src = file.preview
         const cls = ["object-cover", "rounded-full", "w-20", "h-20", "md:w-40", "md:h-40"]

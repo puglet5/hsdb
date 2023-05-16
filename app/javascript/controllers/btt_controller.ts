@@ -4,12 +4,14 @@ export default class extends Controller {
 
   connect() {
 
-    const scrollFunction = () => {
+    let bttButton = document.getElementById("btn-back-to-top")!
+
+    const scrollListen = () => {
       if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        mybutton.classList.remove("hidden")
+        bttButton.classList.remove("hidden")
       }
       else {
-        mybutton.classList.add("hidden")
+        bttButton.classList.add("hidden")
       }
     }
 
@@ -18,10 +20,7 @@ export default class extends Controller {
       document.documentElement.scrollTop = 0
     }
 
-    let mybutton = document.getElementById("btn-back-to-top")
-
-    window.onscroll = () => scrollFunction()
-
-    mybutton.addEventListener("click", backToTop)
+    window.onscroll = () => scrollListen()
+    bttButton.addEventListener("click", backToTop)
   }
 }

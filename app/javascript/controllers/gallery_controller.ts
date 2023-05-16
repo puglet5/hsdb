@@ -3,7 +3,7 @@ import PhotoSwipeLightbox from "photoswipe/lightbox"
 
 export default class extends Controller {
 
-  static targets = [ "wrapper" ]
+  static targets = ["wrapper"]
 
   connect() {
 
@@ -19,7 +19,7 @@ export default class extends Controller {
 
     const lightbox = new PhotoSwipeLightbox(options)
 
-    lightbox.on("uiRegister", function() {
+    lightbox.on("uiRegister", function () {
       lightbox.pswp.ui.registerElement({
         name: "download-button",
         order: 8,

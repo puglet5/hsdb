@@ -7,6 +7,8 @@ export default class extends Controller {
     json: String
   }
 
+  jsonValue: Object
+
   connect() {
     const jsonData = this.jsonValue
     const tree = jsonview.create(jsonData)

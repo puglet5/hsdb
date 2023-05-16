@@ -10,5 +10,4 @@ export default class extends Controller {
     }
     new TomSelect("#select", config)
   }
-
 }
