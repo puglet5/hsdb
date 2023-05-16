@@ -558,19 +558,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uppy/image-editor@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@uppy/image-editor@npm:2.1.1"
-  dependencies:
-    "@uppy/utils": ^5.1.3
-    cropperjs: 1.5.7
-    preact: ^10.5.13
-  peerDependencies:
-    "@uppy/core": ^3.1.0
-  checksum: b1278060ce8a2ea6745d5a1abbc9d1962b4e75abcaeb68bc8c7533c9a1bfddf4536c5d8d3545c9b57345a78147452e6c7c35f5f25d932df10d8fba841c3ae762
-  languageName: node
-  linkType: hard
-
 "@uppy/informer@npm:^3.0.1":
   version: 3.0.2
   resolution: "@uppy/informer@npm:3.0.2"
@@ -767,7 +754,6 @@ __metadata:
     "@tailwindcss/nesting": ^0.0.0-insiders.565cd3e
     "@uppy/core": 3.1.1
     "@uppy/dashboard": 3.3.1
-    "@uppy/image-editor": 2.1.1
     autoprefixer: ^10.4.14
     chart.js: ^4.3.0
     chartjs-plugin-datalabels: ^2.2.0
@@ -1179,13 +1165,6 @@ __metadata:
     depd: ~2.0.0
     keygrip: ~1.1.0
   checksum: 806055a44f128705265b1bc6a853058da18bf80dea3654ad99be20985b1fa1b14f86c1eef73644aab8071241f8a78acd57202b54c4c5c70769fc694fbb9c4edc
-  languageName: node
-  linkType: hard
-
-"cropperjs@npm:1.5.7":
-  version: 1.5.7
-  resolution: "cropperjs@npm:1.5.7"
-  checksum: e3b90ed6e51595e7181696a8c1a9fe5dab3f88fb33bda612fc0e4ec76fa51237c1581063dbacb8010265b71095bb94d9600c9c74e776ece4c34012d29ef4632c
   languageName: node
   linkType: hard
 
@@ -2635,11 +2614,11 @@ __metadata:
   linkType: hard
 
 "is-core-module@npm:^2.12.0":
-  version: 2.12.0
-  resolution: "is-core-module@npm:2.12.0"
+  version: 2.12.1
+  resolution: "is-core-module@npm:2.12.1"
   dependencies:
     has: ^1.0.3
-  checksum: f7f7eb2ab71fd769ee9fb2385c095d503aa4b5ce0028c04557de03f1e67a87c85e5bac1f215945fc3c955867a139a415a3ec4c4234a0bffdf715232660f440a6
+  checksum: f04ea30533b5e62764e7b2e049d3157dc0abd95ef44275b32489ea2081176ac9746ffb1cdb107445cf1ff0e0dfcad522726ca27c27ece64dadf3795428b8e468
   languageName: node
   linkType: hard
 
