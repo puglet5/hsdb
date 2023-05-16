@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 import Uppy from "@uppy/core"
 import Dashboard from "@uppy/dashboard"
 import ActiveStorageUpload from "../../../uppy-activestorage-upload"
-import ImageEditor from "@uppy/image-editor"
 
 export default class extends Controller {
 
@@ -52,7 +51,7 @@ export default class extends Controller {
 
       trigger.addEventListener("click", (e) => e.preventDefault())
 
-      let uppy = new Uppy({
+      const uppy = new Uppy({
         autoProceed: false,
         allowMultipleUploads: this.allowmultipleValue,
         allowMultipleUploadBatches: this.allowmultipleValue,
@@ -69,6 +68,7 @@ export default class extends Controller {
 
       uppy.use(Dashboard, {
         disableThumbnailGenerator: !this.thumbnailsValue,
+        // @ts-expect-error
         trigger: trigger,
         target: this.divTarget,
         closeAfterFinish: false,
@@ -78,32 +78,15 @@ export default class extends Controller {
         proudlyDisplayPoweredByUppy: false
       })
 
-      uppy.use(ImageEditor, {
-        target: Dashboard,
-        quality: 1,
-        cropperOptions: {
-          viewMode: 0,
-          background: false,
-          autoCropArea: 1,
-          responsive: true,
-          croppedCanvasOptions: {},
-        },
-        actions: {
-          cropSquare: false,
-          cropWidescreen: false,
-          cropWidescreenVertical: false,
-        },
-      })
-
       let dashboard = document.querySelector(".uppy-Dashboard-inner")!
       dashboard.removeAttribute("style")
 
-      let files_uploaded = 0
+      let filesCount = 0
 
       uppy.on("complete", (result) => {
-        files_uploaded += result.successful.length
+        filesCount += result.successful.length
         let filecountText = document.querySelector(`#${this.textTarget.id}`)!
-        filecountText.innerHTML = `Add ${pluralize(files_uploaded, "file")}`
+        filecountText.innerHTML = `Add ${pluralize(filesCount, "file")}`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
         })
