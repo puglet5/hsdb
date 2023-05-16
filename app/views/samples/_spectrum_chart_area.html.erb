@@ -1,5 +1,8 @@
-<%= turbo_frame_tag "spectrum_#{spectrum.id}_chart_area" do %>
-  <%= tag.div data: {
+ <%= turbo_frame_tag "spectrum_#{spectrum.id}_chart_area" do %>
+  <div class="flex ml-2 space-x-2 my-auto">
+    <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
+
+      <%= tag.div data: {
                       controller: "modal chart",
                       chart_urls_value: [spectrum&.processed_file&.url],
                       chart_filenames_value: ["#{spectrum.sample.title} (#{spectrum&.processed_file&.filename})"],
@@ -10,54 +13,52 @@
                       chart_canvas_id_value: spectrum.id.to_s,
                       chart_compare_value: false
                     } do %>
-    <div class="flex justify-between ml-2 space-x-2">
-
-      <% if spectrum.processed_file.attached? && spectrum.processed_file.persisted? %>
-        <% if spectrum.processing_successful? %>
-          <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
-            <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <line x1="3" y1="4" x2="21" y2="4"></line>
-                <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-                <line x1="12" y1="16" x2="12" y2="20"></line>
-                <line x1="9" y1="20" x2="15" y2="20"></line>
-                <path d="M8 12l3 -3l2 2l3 -3"></path>
-              </svg>
+        <div class="flex justify-between space-x-2 my-auto">
+          <% if spectrum.processing_successful? %>
+            <%= render TooltipComponent.new(tooltip: "Show plot", user: current_user) do %>
+              <%= tag.div data: { action: "click->modal#toggle click->chart#visualize" } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-primary-300 hover:text-primary-500 focus:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="3" y1="4" x2="21" y2="4"></line>
+                  <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+                  <line x1="12" y1="16" x2="12" y2="20"></line>
+                  <line x1="9" y1="20" x2="15" y2="20"></line>
+                  <path d="M8 12l3 -3l2 2l3 -3"></path>
+                </svg>
+              <% end %>
             <% end %>
+          <% else %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="3" y1="4" x2="21" y2="4"></line>
+              <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+              <line x1="12" y1="16" x2="12" y2="20"></line>
+              <line x1="9" y1="20" x2="15" y2="20"></line>
+              <path d="M8 12l3 -3l2 2l3 -3"></path>
+            </svg>
           <% end %>
-        <% else %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <line x1="3" y1="4" x2="21" y2="4"></line>
-            <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-            <line x1="12" y1="16" x2="12" y2="20"></line>
-            <line x1="9" y1="20" x2="15" y2="20"></line>
-            <path d="M8 12l3 -3l2 2l3 -3"></path>
-          </svg>
-        <% end %>
-        <div class="w-full my-auto text-sm text-gray-500">
-          <%= link_to spectrum.processed_file.url, class: "font-bold hover:underline" do %>
-            <%= spectrum.processed_file.filename %>
-          <% end %>
+          <div class="w-full my-auto text-sm text-gray-500">
+            <%= link_to spectrum.processed_file.url, class: "font-bold hover:underline" do %>
+              <%= spectrum.processed_file.filename %>
+            <% end %>
+          </div>
         </div>
-      <% else %>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <line x1="3" y1="4" x2="21" y2="4"></line>
-          <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
-          <line x1="12" y1="16" x2="12" y2="20"></line>
-          <line x1="9" y1="20" x2="15" y2="20"></line>
-          <path d="M8 12l3 -3l2 2l3 -3"></path>
-        </svg>
-        <div class="w-full my-auto text-sm text-gray-500">
-          <span class="my-auto text-sm text-gray-500 ">
-            Not available
-          </span>
-        </div>
+        <%= render "samples/spectrum_modal", spectrum: spectrum %>
       <% end %>
-
-    </div>
-    <%= render "samples/spectrum_modal", spectrum: spectrum %>
-  <% end %>
+    <% else %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <line x1="3" y1="4" x2="21" y2="4"></line>
+        <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
+        <line x1="12" y1="16" x2="12" y2="20"></line>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <path d="M8 12l3 -3l2 2l3 -3"></path>
+      </svg>
+      <div class="w-full my-auto text-sm text-gray-500">
+        <span class="my-auto text-sm text-gray-500 ">
+          Not available
+        </span>
+      </div>
+    <% end %>
+  </div>
 <% end %>

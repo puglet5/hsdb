@@ -1,8 +1,8 @@
 <%= turbo_stream_from "processing" %>
 
 <%= turbo_frame_tag "spectrum_#{spectrum.id}_chart_area", src: show_chart_area_sample_spectrum_path(sample, spectrum, frame: true), loading: :lazy do %>
-  <div class="flex justify-between ml-2 space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 my-1.5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <div class="flex ml-2 space-x-2 my-auto text-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <line x1="3" y1="4" x2="21" y2="4"></line>
       <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10"></path>
@@ -10,10 +10,8 @@
       <line x1="9" y1="20" x2="15" y2="20"></line>
       <path d="M8 12l3 -3l2 2l3 -3"></path>
     </svg>
-    <div class="w-full my-auto text-sm text-gray-500">
-      <span class="my-auto text-sm text-gray-500 ">
-        Loading...
-      </span>
+    <div class="flex justify-between space-x-2 my-auto">
+      Loading...
     </div>
   </div>
 <% end %>
