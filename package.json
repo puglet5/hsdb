@@ -10,8 +10,8 @@
     "@paralleldrive/cuid2": "^2.2.0",
     "@pgrabovets/json-view": "^2.7.1",
     "@popperjs/core": "^2.11.7",
-    "@rails/actiontext": "^7.0.4-1",
-    "@rails/activestorage": "^7.0.4-1",
+    "@rails/actiontext": "7.0.5",
+    "@rails/activestorage": "7.0.4",
     "@uppy/core": "3.1.1",
     "@uppy/dashboard": "3.3.1",
     "autoprefixer": "^10.4.14",
@@ -30,7 +30,7 @@
     "photoswipe": "^5.3.7",
     "tailwindcss": "^3.3.2",
     "tom-select": "^2.2.2",
-    "trix": "^2.0.5",
+    "trix": "^1.3.1",
     "uppy-activestorage-upload": "./uppy-activestorage-upload"
   },
   "version": "0.1.0",
@@ -40,7 +40,7 @@
   "browserslist": [
     "defaults"
   ],
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@3.5.1",
   "scripts": {
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "yarn build:css:dev && postcss ./app/assets/builds/application.css -o ./app/assets/builds/application.min.css",
@@ -50,11 +50,15 @@
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@types/node": "^20.2.5",
     "cssnano": "^6.0.1",
     "eslint": "^8.41.0",
     "postcss": "^8.4.23",
     "postcss-cli": "^10.1.0",
     "postcss-nesting": "^11.2.2",
     "tailwind-config-viewer": "^1.7.2"
+  },
+  "engines": {
+    "node": ">=16.0.0 <19.0.0"
   }
 }

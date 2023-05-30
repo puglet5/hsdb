@@ -43,3 +43,5 @@ wercker.yml
 
 # misc
 *.md
+
+!**/yaml/dist/**/doc

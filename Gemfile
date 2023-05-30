@@ -37,6 +37,7 @@ gem 'propshaft', '~> 0.6' # asset delivery
 gem 'puma', '>= 5.6.4'
 gem 'pundit', '~> 2.1' # authorization / policies
 gem 'rack-cors', '~> 2.0'
+gem 'rack-mini-profiler', '~> 3.0'
 gem 'rails', '~> 7.0.4'
 gem 'rails-i18n', '~> 7.0.4'
 gem 'rails_semantic_logger', '~> 4.10'
@@ -52,7 +53,6 @@ gem 'stimulus-rails', '~> 1.1'
 gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
-gem 'rack-mini-profiler', '~> 3.0'
 
 gem 'client_side_validations', '~> 21.0'
 gem 'client_side_validations-simple_form', '~> 15.0'
@@ -105,10 +105,10 @@ group :development, :test do
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
 
-gem "capistrano", "~> 3.17"
-gem "capistrano-rails", "~> 1.6"
-gem "capistrano-rvm", "~> 0.1.2"
-gem "capistrano3-puma", "~> 5"
-gem "capistrano-bundler", "~> 2.1"
+gem 'capistrano', '~> 3.17'
+gem 'capistrano3-puma', '~> 5'
+gem 'capistrano-bundler', '~> 2.1'
+gem 'capistrano-rails', '~> 1.6'
+gem 'capistrano-rvm', '~> 0.1.2'
 
-gem "capistrano-git-with-submodules", "~> 2.0"
+gem 'capistrano-git-with-submodules', '~> 2.0'
