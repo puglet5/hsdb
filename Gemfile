@@ -52,6 +52,7 @@ gem 'stimulus-rails', '~> 1.1'
 gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'view_component', '~> 2.62'
+gem 'rack-mini-profiler', '~> 3.0'
 
 gem 'client_side_validations', '~> 21.0'
 gem 'client_side_validations-simple_form', '~> 15.0'
@@ -68,7 +69,6 @@ group :development do
   gem 'immigrant' # generate db migrations
   gem 'letter_opener' # mail in development
   gem 'license_finder', '~> 7.0' # find dependencies' licenses
-  gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd' # generate er diagrams
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
@@ -104,3 +104,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 6'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
+
+gem "capistrano", "~> 3.17"
+gem "capistrano-rails", "~> 1.6"
+gem "capistrano-rvm", "~> 0.1.2"
+gem "capistrano3-puma", "~> 5"
+gem "capistrano-bundler", "~> 2.1"
+
+gem "capistrano-git-with-submodules", "~> 2.0"

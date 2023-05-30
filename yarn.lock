@@ -445,7 +445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paralleldrive/cuid2@npm:^2.2.0":
+"@paralleldrive/cuid2@npm:^2.0.1, @paralleldrive/cuid2@npm:^2.2.0":
   version: 2.2.0
   resolution: "@paralleldrive/cuid2@npm:2.2.0"
   dependencies:
@@ -469,36 +469,36 @@ __metadata:
   linkType: hard
 
 "@popperjs/core@npm:^2.11.7, @popperjs/core@npm:^2.9.3":
-  version: 2.11.7
-  resolution: "@popperjs/core@npm:2.11.7"
-  checksum: 5b6553747899683452a1d28898c1b39173a4efd780e74360bfcda8eb42f1c5e819602769c81a10920fc68c881d07fb40429604517d499567eac079cfa6470f19
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
   languageName: node
   linkType: hard
 
 "@rails/actioncable@npm:^7.0":
-  version: 7.0.4
-  resolution: "@rails/actioncable@npm:7.0.4"
-  checksum: b31cae40511a3df4d3048779255219b92f7dd89514f3c9f2da2b219b9b0635261b17b05031c7070756d319bf9165d4d6c021a820b110d53a3e6c441a062accdd
+  version: 7.0.5
+  resolution: "@rails/actioncable@npm:7.0.5"
+  checksum: 8e8495194b498ce27f1be7cfb0b4fe4d3445b7f9ba7fabb384b7a3cec7768fc12e1233f4e390f2c6d44ae19722e6a5c65451adc64a1ed3525f963bcf739ee54b
   languageName: node
   linkType: hard
 
 "@rails/actiontext@npm:^7.0.4-1":
-  version: 7.0.4
-  resolution: "@rails/actiontext@npm:7.0.4"
+  version: 7.0.5
+  resolution: "@rails/actiontext@npm:7.0.5"
   dependencies:
     "@rails/activestorage": ">= 7.0.0-alpha1"
   peerDependencies:
     trix: ^1.3.1
-  checksum: 028c877a4d859c5272f1f981a899ec3a8b74222a5f2e50b9b398c950680b8ee302bc0f6ab67428e7839e2d18a8557eb2c62f1e229654c29701393989bad9f9ed
+  checksum: 7a37bf55a37e7fa74db5345f8a89363a1636b0596557503360967d3d1d838f740950e8994331636a4714effae95f338fd06ddbe4e8c9a8bd12512b9f01e658fd
   languageName: node
   linkType: hard
 
 "@rails/activestorage@npm:>= 7.0.0-alpha1, @rails/activestorage@npm:^7.0.4-1":
-  version: 7.0.4
-  resolution: "@rails/activestorage@npm:7.0.4"
+  version: 7.0.5
+  resolution: "@rails/activestorage@npm:7.0.5"
   dependencies:
     spark-md5: ^3.0.1
-  checksum: f99eaf856782babbf54a79fdf22e797592ad2a90e83b35125cd2c546c56b9f1c2ee8fc9e9b73098356fbfbca05ea2ba832207d455d3ed6e57513ba33ccb74ea2
+  checksum: 57906778b180af14f0395f179a2908f293541f22acf35edc3b9b94c62db226412f160fcba7b43238263f7c54e652babbba37197ed8747c08176abc7900f8a153
   languageName: node
   linkType: hard
 
@@ -812,7 +812,7 @@ __metadata:
     tailwindcss: ^3.3.2
     tom-select: ^2.2.2
     trix: ^2.0.5
-    uppy-activestorage-upload: "link:./uppy-activestorage-upload"
+    uppy-activestorage-upload: ./uppy-activestorage-upload
   languageName: unknown
   linkType: soft
 
@@ -931,16 +931,16 @@ __metadata:
   linkType: hard
 
 "browserslist@npm:^4.0.0, browserslist@npm:^4.21.4, browserslist@npm:^4.21.5":
-  version: 4.21.5
-  resolution: "browserslist@npm:4.21.5"
+  version: 4.21.7
+  resolution: "browserslist@npm:4.21.7"
   dependencies:
-    caniuse-lite: ^1.0.30001449
-    electron-to-chromium: ^1.4.284
-    node-releases: ^2.0.8
-    update-browserslist-db: ^1.0.10
+    caniuse-lite: ^1.0.30001489
+    electron-to-chromium: ^1.4.411
+    node-releases: ^2.0.12
+    update-browserslist-db: ^1.0.11
   bin:
     browserslist: cli.js
-  checksum: 9755986b22e73a6a1497fd8797aedd88e04270be33ce66ed5d85a1c8a798292a65e222b0f251bafa1c2522261e237d73b08b58689d4920a607e5a53d56dc4706
+  checksum: 3d0d025e6d381c4db5e71b538258952660ba574c060832095f182a9877ca798836fa550736269e669a2080e486f0cfdf5d3bcf2769b9f7cf123f6c6b8c005f8f
   languageName: node
   linkType: hard
 
@@ -1006,10 +1006,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001449, caniuse-lite@npm:^1.0.30001464":
-  version: 1.0.30001487
-  resolution: "caniuse-lite@npm:1.0.30001487"
-  checksum: b5a9e72ec165765fb3e07913cc389685ce8a30ac48967f99baec773a4353d2037fb534241e87b3c95d40a5081079be2263710b784883183bb2998b73f7202233
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001464, caniuse-lite@npm:^1.0.30001489":
+  version: 1.0.30001491
+  resolution: "caniuse-lite@npm:1.0.30001491"
+  checksum: ce8e1343dd2ba058902b58dffa7f3695fd251a7ef51a7f0903ab8e62b32becd9f7f590cbebb3f1966cdfff0c2fc8e7154ac116e0b39730bd2f2e17103f5e6c3b
   languageName: node
   linkType: hard
 
@@ -1829,10 +1829,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.4.284":
-  version: 1.4.396
-  resolution: "electron-to-chromium@npm:1.4.396"
-  checksum: 868f49ad1b83774349bc7cc4a9c5ca62692f205ce36d7b23834e0e4e22460227032d555f5bcc00c74d260487eee42b194e58f0fa2c0b87eb3ef0cd6952a08182
+"electron-to-chromium@npm:^1.4.411":
+  version: 1.4.413
+  resolution: "electron-to-chromium@npm:1.4.413"
+  checksum: 6d702b84e2c5fb8d97cbaec759556c4f801572e62eab2098919061e2f3e7cbca71b9f170a4efb023001d4fd59e8603b4d7004dafc64d89c9f19db4642fdbd012
   languageName: node
   linkType: hard
 
@@ -3343,10 +3343,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-releases@npm:^2.0.8":
-  version: 2.0.10
-  resolution: "node-releases@npm:2.0.10"
-  checksum: d784ecde25696a15d449c4433077f5cce620ed30a1656c4abf31282bfc691a70d9618bae6868d247a67914d1be5cc4fde22f65a05f4398cdfb92e0fc83cadfbc
+"node-releases@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "node-releases@npm:2.0.12"
+  checksum: b8c56db82c4642a0f443332b331a4396dae452a2ac5a65c8dbd93ef89ecb2fbb0da9d42ac5366d4764973febadca816cf7587dad492dce18d2a6b2af59cda260
   languageName: node
   linkType: hard
 
@@ -4058,20 +4058,20 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.4.23":
-  version: 8.4.23
-  resolution: "postcss@npm:8.4.23"
+  version: 8.4.24
+  resolution: "postcss@npm:8.4.24"
   dependencies:
     nanoid: ^3.3.6
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
-  checksum: 8bb9d1b2ea6e694f8987d4f18c94617971b2b8d141602725fedcc2222fdc413b776a6e1b969a25d627d7b2681ca5aabb56f59e727ef94072e1b6ac8412105a2f
+  checksum: 814e2126dacfea313588eda09cc99a9b4c26ec55c059188aa7a916d20d26d483483106dc5ff9e560731b59f45c5bb91b945dfadc670aed875cc90ddbbf4e787d
   languageName: node
   linkType: hard
 
 "preact@npm:^10.5.13":
-  version: 10.14.1
-  resolution: "preact@npm:10.14.1"
-  checksum: 2babea9a7a48c93fbdc1bc2b4ec599070585cdf253bbfc2f37ebdd3a3c85c503a92af2be175344a46d1e0439820702b92ad60e9140abefc49c43871f906e8461
+  version: 10.15.1
+  resolution: "preact@npm:10.15.1"
+  checksum: dabad11843b19b40b11846a25ff0b1fc4bc58268909e01a7faddb341a40983d24fbe7d44ad6e2c5d35e43091963af616800552fec9af44dd0a2f0f698d1bba1f
   languageName: node
   linkType: hard
 
@@ -4238,9 +4238,9 @@ __metadata:
   linkType: hard
 
 "robust-predicates@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "robust-predicates@npm:3.0.1"
-  checksum: 45e9de2df4380da84a2a561d4fd54ea92194e878b93ed19d5e4bc90f4e834a13755e846c8516bab8360190309696f0564a0150386c52ef01f70f2b388449dac5
+  version: 3.0.2
+  resolution: "robust-predicates@npm:3.0.2"
+  checksum: 36854c1321548ceca96d36ad9d6e0a5a512986029ec6929ad6ed3ec1612c22cc8b46cc72d2c5674af42e8074a119d793f6f0ea3a5b51373e3ab926c64b172d7a
   languageName: node
   linkType: hard
 
@@ -4449,11 +4449,11 @@ __metadata:
   linkType: hard
 
 "strip-ansi@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "strip-ansi@npm:7.0.1"
+  version: 7.1.0
+  resolution: "strip-ansi@npm:7.1.0"
   dependencies:
     ansi-regex: ^6.0.1
-  checksum: 257f78fa433520e7f9897722731d78599cb3fce29ff26a20a5e12ba4957463b50a01136f37c43707f4951817a75e90820174853d6ccc240997adc5df8f966039
+  checksum: 859c73fcf27869c22a4e4d8c6acfe690064659e84bef9458aa6d13719d09ca88dcfd40cbf31fd0be63518ea1a643fe070b4827d353e09533a5b0b9fd4553d64d
   languageName: node
   linkType: hard
 
@@ -4582,8 +4582,8 @@ __metadata:
   linkType: hard
 
 "tar@npm:^6.1.11, tar@npm:^6.1.2":
-  version: 6.1.14
-  resolution: "tar@npm:6.1.14"
+  version: 6.1.15
+  resolution: "tar@npm:6.1.15"
   dependencies:
     chownr: ^2.0.0
     fs-minipass: ^2.0.0
@@ -4591,7 +4591,7 @@ __metadata:
     minizlib: ^2.1.1
     mkdirp: ^1.0.3
     yallist: ^4.0.0
-  checksum: a1be0815a9bdc97dfca7c6c2d71d1b836f8ba9314684e2c412832f0f59cc226d4c13da303d6bc30925e82f634cc793f40da79ae72f3e96fb87c23d0f4efd5207
+  checksum: f23832fceeba7578bf31907aac744ae21e74a66f4a17a9e94507acf460e48f6db598c7023882db33bab75b80e027c21f276d405e4a0322d58f51c7088d428268
   languageName: node
   linkType: hard
 
@@ -4725,7 +4725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"update-browserslist-db@npm:^1.0.10":
+"update-browserslist-db@npm:^1.0.11":
   version: 1.0.11
   resolution: "update-browserslist-db@npm:1.0.11"
   dependencies:
@@ -4739,11 +4739,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uppy-activestorage-upload@link:./uppy-activestorage-upload::locator=app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "uppy-activestorage-upload@link:./uppy-activestorage-upload::locator=app%40workspace%3A."
+"uppy-activestorage-upload@file:./uppy-activestorage-upload::locator=app%40workspace%3A.":
+  version: 0.1.1
+  resolution: "uppy-activestorage-upload@file:./uppy-activestorage-upload#./uppy-activestorage-upload::hash=684c8e&locator=app%40workspace%3A."
+  dependencies:
+    "@paralleldrive/cuid2": ^2.0.1
+  peerDependencies:
+    "@rails/activestorage": "*"
+    "@uppy/core": "*"
+  checksum: 1b8b58a6895bf622e38a861de0d2e5b00d2f835e19eae02a22828124103cddde3136a1fb840310cb131408ca9ebc2ffea1a46804b11266af7e3215b3f3fa6194
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "uri-js@npm:^4.2.2":
   version: 4.4.1
@@ -4846,9 +4852,9 @@ __metadata:
   linkType: hard
 
 "yaml@npm:^2.1.1":
-  version: 2.2.2
-  resolution: "yaml@npm:2.2.2"
-  checksum: d90c235e099e30094dcff61ba3350437aef53325db4a6bcd04ca96e1bfe7e348b191f6a7a52b5211e2dbc4eeedb22a00b291527da030de7c189728ef3f2b4eb3
+  version: 2.3.1
+  resolution: "yaml@npm:2.3.1"
+  checksum: 2c7bc9a7cd4c9f40d3b0b0a98e370781b68b8b7c4515720869aced2b00d92f5da1762b4ffa947f9e795d6cd6b19f410bd4d15fdd38aca7bd96df59bd9486fb54
   languageName: node
   linkType: hard
 
