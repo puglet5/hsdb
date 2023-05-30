@@ -104,3 +104,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 6'
   gem 'rswag-specs', '~> 2.5', '>= 2.5.1'
 end
+
+gem "capistrano", "~> 3.17"
+gem "capistrano-rails", "~> 1.6"
+gem "capistrano-rvm", "~> 0.1.2"
+gem "capistrano-passenger", "~> 0.2.1"
