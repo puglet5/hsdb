@@ -112,5 +112,3 @@ gem "capistrano3-puma", "~> 5"
 gem "capistrano-bundler", "~> 2.1"
 
 gem "capistrano-git-with-submodules", "~> 2.0"
-
-gem "sshkit", "~> 1.21"

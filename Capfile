@@ -8,9 +8,6 @@ install_plugin Capistrano::SCM::Git
 require "capistrano/scm/git-with-submodules"
 install_plugin Capistrano::SCM::Git::WithSubmodules
 
-
-require 'sshkit/sudo'
-
 require "capistrano/rails"
 require "capistrano/bundler"
 require "capistrano/rvm"

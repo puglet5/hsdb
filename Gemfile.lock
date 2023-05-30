@@ -641,7 +641,6 @@ DEPENDENCIES
   simplecov (~> 0.22)
   solargraph (~> 0.48)
   solargraph-rails (~> 1.1)
-  sshkit (~> 1.21)
   stimulus-rails (~> 1.1)
   turbo-rails (~> 1.1)
   tzinfo-data
