@@ -35,21 +35,21 @@ test:
 
 production:
   primary:
-    host: <%= ENV['PGHOST'] %>
+    host: localhost
     adapter: postgresql
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_HSDB_production
-    url: <%= ENV['HSDB_PRODUCTION'] %>
+    username: deploy
     password: <%= ENV['PGPASSWORD_PROD'] %>
 
 
   rsdb:
-    host: <%= ENV['PGHOST'] %>
+    host: localhost
     adapter: postgresql
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_producion
-    url: <%= ENV['RSDB_PRODUCTION'] %>
+    username: deploy
     password: <%= ENV['PGPASSWORD_PROD'] %>
     migrations_paths: db/rsdb_migrate
