@@ -40,7 +40,7 @@ production:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_HSDB_production
-    username: deploy
+    username: <%= ENV['PGUSER_PROD'] %>
     password: <%= ENV['PGPASSWORD_PROD'] %>
 
 
@@ -50,6 +50,6 @@ production:
     encoding: utf8
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     database: ITMO_RSDB_producion
-    username: deploy
-    password: <%= ENV['PGPASSWORD_PROD'] %>
+    username: <%= ENV['PGUSER_PROD'] %>
+    password: <%= ENV['PGPASSWORD_PROD'] %>E
     migrations_paths: db/rsdb_migrate
