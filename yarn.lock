@@ -4758,13 +4758,13 @@ __metadata:
 
 "uppy-activestorage-upload@file:./uppy-activestorage-upload::locator=app%40workspace%3A.":
   version: 0.1.1
-  resolution: "uppy-activestorage-upload@file:./uppy-activestorage-upload#./uppy-activestorage-upload::hash=9af43e&locator=app%40workspace%3A."
+  resolution: "uppy-activestorage-upload@file:./uppy-activestorage-upload#./uppy-activestorage-upload::hash=684c8e&locator=app%40workspace%3A."
   dependencies:
     "@paralleldrive/cuid2": ^2.0.1
   peerDependencies:
     "@rails/activestorage": "*"
     "@uppy/core": "*"
-  checksum: 0e579a14754758fac3a4035a6e40753e2a4f28ac4f0d85267ccdad2ec37fabae00517fae0027f7c76a6d3c6356987822949d2cd809e20d218138e543ad1694d6
+  checksum: 1b8b58a6895bf622e38a861de0d2e5b00d2f835e19eae02a22828124103cddde3136a1fb840310cb131408ca9ebc2ffea1a46804b11266af7e3215b3f3fa6194
   languageName: node
   linkType: hard
 
