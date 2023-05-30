@@ -30,3 +30,5 @@ set :puma_init_active_record, true
 
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "public/uploads"
+
+Rake::Task["deploy:assets:backup_manifest"].clear_actions
