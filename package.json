@@ -46,7 +46,7 @@
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "yarn build:css:dev && postcss ./app/assets/builds/application.css -o ./app/assets/builds/application.css",
     "build:dev": "node esbuild.config.js",
-    "build": "yarn build:dev && esbuild ./app/assets/builds/application.js --minify > ./app/assets/builds/application.js",
+    "build": "yarn build:dev && esbuild ./app/assets/builds/application.js --minify > ./app/assets/builds/application.min.js",
     "tailwind-config-viewer": "tailwind-config-viewer -o"
   },
   "devDependencies": {

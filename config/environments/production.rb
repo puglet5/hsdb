@@ -4,6 +4,11 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.session_store(
+    :cookie_store,
+    secure: false
+  )
+
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -46,6 +51,9 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
+  config.force_ssl = false
+
+  config.ssl_options = { redirect: false, secure_cookies: false, hsts: false }
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
