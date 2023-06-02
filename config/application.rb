@@ -47,9 +47,6 @@ module HSDB
     Rails.application.config.active_storage.analyzers.delete ActiveStorage::Analyzer::ImageAnalyzer
     Rails.application.config.active_storage.analyzers.append ActiveStorage::Analyzer::ImageAnalyzer::Vips
 
-    # gzip compression
-    config.middleware.use Rack::Deflater
-
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
