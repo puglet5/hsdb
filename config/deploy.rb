@@ -28,7 +28,7 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 
-append :linked_files, "config/master.key"
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "public/uploads"
+append :linked_files, *%w[config/master.key]
+set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/assets public/uploads]
 
 Rake::Task["deploy:assets:backup_manifest"].clear_actions
