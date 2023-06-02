@@ -202,6 +202,7 @@ export default class extends Controller {
           })),
         },
         options: {
+          locale: 'fr',
           animation: false,
           responsive: true,
           layout: {
