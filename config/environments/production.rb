@@ -9,7 +9,6 @@ Rails.application.configure do
     secure: false
   )
 
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -49,8 +48,8 @@ Rails.application.configure do
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
   config.action_cable.disable_request_forgery_protection = true
-  config.action_cable.url = "ws://192.168.0.100/cable"
-  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+  config.action_cable.url = 'ws://192.168.0.100/cable'
+  config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
