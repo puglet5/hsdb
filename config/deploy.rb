@@ -31,4 +31,8 @@ set :puma_init_active_record, true
 append :linked_files, *%w[config/master.key]
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/assets public/uploads]
 
+set :assets_manifests, -> {
+    [release_path.join("public", fetch(:assets_prefix), '.manifest.json')]
+}
+
 Rake::Task["deploy:assets:backup_manifest"].clear_actions
