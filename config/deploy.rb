@@ -15,7 +15,7 @@ set :puma_workers,    0
 
 set :rvm_ruby_version, '3.2.1'
 
-set :pty,             true
+set :pty,             false
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
@@ -31,6 +31,8 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_enable_socket_service, true
 set :puma_daemonize, true
+
+set :sidekiq_service_unit_user => :user
 
 append :linked_files, *%w[config/master.key]
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/assets public/uploads]
