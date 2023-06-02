@@ -13,7 +13,5 @@ Rails.application.config.assets.version = '1.0'
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-Rails.application.config.assets.paths  = ["/home/hslab/Documents/hsdb/app/assets/builds",
-"/home/hslab/Documents/hsdb/app/assets/fonts",
-"/home/hslab/Documents/hsdb/app/assets/images",
-"/home/hslab/Documents/hsdb/app/assets/stylesheets"]
+Rails.application.config.assets.paths << [Rails.root.join('app/assets/fonts'), Rails.root.join('app/assets/builds'), Rails.root.join('app/assets/images')]
+
