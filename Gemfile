@@ -108,8 +108,7 @@ end
 gem 'capistrano', '~> 3.17'
 gem 'capistrano3-puma', '~> 5'
 gem 'capistrano-bundler', '~> 2.1'
-gem 'capistrano-rails', '~> 1.6'
-gem 'capistrano-rvm', '~> 0.1.2'
 gem 'capistrano-git-with-submodules', '~> 2.0'
+gem 'capistrano-rails', '~> 1.6'
 gem 'capistrano-rails-console', '~> 2.3'
-
+gem 'capistrano-rvm', '~> 0.1.2'
