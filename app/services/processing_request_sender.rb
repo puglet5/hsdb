@@ -3,7 +3,7 @@
 require 'faraday'
 
 class ProcessingRequestSender < ApplicationService
-  URL = 'http://localhost:8000'
+  URL = 'http://0.0.0.0:8000'
 
   attr_reader :record_id, :record_type
 
