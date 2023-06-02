@@ -8,8 +8,8 @@
     <%= csp_meta_tag %>
     <%= tag.meta name: "direct-upload-url", content: rails_direct_uploads_path %>
     <%= tag.meta name: "psj", action: action_name, controller: controller_name %>
-    <%= stylesheet_link_tag "application.min.css", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application.min.js", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application.min", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application.min", "data-turbo-track": "reload", defer: true %>
 
     <%= action_cable_meta_tag %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
