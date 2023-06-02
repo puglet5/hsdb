@@ -66,9 +66,9 @@ export default class extends Controller {
         directUploadUrl: direct_upload_url
       })
 
+      // @ts-expect-error
       uppy.use(Dashboard, {
         disableThumbnailGenerator: !this.thumbnailsValue,
-        // @ts-expect-error
         trigger: trigger,
         target: this.divTarget,
         closeAfterFinish: false,
