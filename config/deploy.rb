@@ -29,8 +29,6 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w[~/.ssh
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
-set :puma_enable_socket_service, true
-set :puma_daemonize, true
 
 append :linked_files, *%w[config/master.key]
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/assets public/uploads]

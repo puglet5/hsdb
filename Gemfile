@@ -114,5 +114,3 @@ gem 'capistrano-rvm', '~> 0.1.2'
 gem 'capistrano-git-with-submodules', '~> 2.0'
 
 gem 'capistrano-rails-console', '~> 2.3'
-
-gem 'capistrano-sidekiq', '~> 2.3'
