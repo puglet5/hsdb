@@ -61,14 +61,14 @@ export default class extends Controller {
         },
       })
 
-      // @ts-expect-error
       uppy.use(ActiveStorageUpload, {
+        // @ts-ignore
         directUploadUrl: direct_upload_url
       })
 
-      // @ts-expect-error
       uppy.use(Dashboard, {
         disableThumbnailGenerator: !this.thumbnailsValue,
+        // @ts-ignore
         trigger: trigger,
         target: this.divTarget,
         closeAfterFinish: false,

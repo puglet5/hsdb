@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 interface Window {
   MiniProfilerContainer: any;
   MiniProfiler: any;

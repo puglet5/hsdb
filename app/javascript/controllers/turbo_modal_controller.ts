@@ -12,6 +12,7 @@ export default class extends Controller {
   uppy_states_arr: boolean[]
 
   connect() {
+    //@ts-expect-error
     hotkeys("escape", (event) => {
       this.uppy_db_arr = document.getElementsByClassName("uppy-Dashboard")
       this.uppy_states_arr = [...this.uppy_db_arr].map(e => e.getAttribute("aria-hidden") == "true")

@@ -34,8 +34,8 @@ export default class extends Controller {
         allowMultipleUploadBatches: false,
       })
 
-      // @ts-expect-error
       uppy.use(ActiveStorageUpload, {
+        // @ts-ignore
         directUploadUrl: direct_upload_url
       })
 
