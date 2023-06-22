@@ -1,7 +1,7 @@
 {
   "name": "app",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@client-side-validations/client-side-validations": "^0.3.0",
     "@client-side-validations/simple-form": "^0.3.1",

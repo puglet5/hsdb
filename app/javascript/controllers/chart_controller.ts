@@ -6,7 +6,6 @@ import Papa from "papaparse"
 import { blur } from "d3-array"
 
 Chart.register(...registerables)
-// @ts-ignore
 Chart.register(zoomPlugin)
 Chart.register(ChartDataLabels)
 

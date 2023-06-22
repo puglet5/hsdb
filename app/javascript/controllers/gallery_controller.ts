@@ -17,7 +17,6 @@ export default class extends Controller {
       pswpModule: () => import("photoswipe")
     }
 
-    // @ts-ignore
     const lightbox = new PhotoSwipeLightbox(options)
 
     lightbox.on("uiRegister", function () {
@@ -39,7 +38,6 @@ export default class extends Controller {
           el.setAttribute("rel", "noopener")
 
           pswp.on("change", () => {
-            // @ts-ignore
             el.href = pswp.currSlide.data.src
           })
         }

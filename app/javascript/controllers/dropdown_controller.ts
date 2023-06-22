@@ -8,7 +8,6 @@ export default class extends Controller {
   readonly dropdownTarget!: HTMLElement
 
   connect() {
-    // @ts-ignore
     hotkeys("escape", (event) => {
       event.preventDefault()
       this.close()

@@ -1,6 +1,6 @@
 import { application } from "./application.ts"
 // Support for globs in esbuild is added by esbuild-rails plugin
-// @ts-ignore
+// @ts-expect-error
 import controllers from "./**/*_controller.*"
 
 controllers.forEach((controller) => {

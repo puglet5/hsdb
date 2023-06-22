@@ -8,11 +8,10 @@ export default class extends Controller {
 
   readonly modalTarget!: HTMLElement
 
-  // @ts-ignore
+  // @ts-expect-error
   modal: HTMLDialogElement = document.getElementById("confirm-modal")!
 
   connect() {
-    // @ts-ignore
     hotkeys("escape", (event) => {
       event.preventDefault()
       this.close()
