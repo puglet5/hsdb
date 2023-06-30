@@ -1,8 +1,7 @@
-/* eslint-disable */
-
-const path = require("path")
-const rails = require("esbuild-rails")
-const esbuild = require("esbuild");
+import path from "path"
+import rails from "esbuild-rails"
+import esbuild from "esbuild"
+import process from "process"
 
 esbuild.context({
   entryPoints: ["application.ts"],
