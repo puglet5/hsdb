@@ -1,12 +1,12 @@
 <%= render Sections::SectionComponent.new() do %>
   <%= render Sections::DivContainerComponent.new() do %>
 
-    <div class="max-w-screen-xl px-4 mx-auto text-center lg:px-12 pb-2 mb-6 md:mb-12 md:pb-0">
+    <div class="max-w-screen-xl px-4 pb-2 mx-auto mb-6 text-center lg:px-12 md:mb-12 md:pb-0">
       <%= render Typography::H1Component.new() do %>
         Spectral Database Index
       <% end %>
-      <div class="text-lg font-normal text-gray-500 lg:text-xl mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block icon icon-tabler icon-tabler-info-square w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <div class="mb-4 text-lg font-normal text-gray-500 lg:text-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 icon icon-tabler icon-tabler-info-square" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <path d="M12 8l.01 0"></path>
           <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
@@ -43,15 +43,15 @@
       </div>
     <% end %>
 
-    <%= search_form_for @query, class: "my-auto mb-2 ml-4 max-w-max flex-grow flex space-x-4", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit"}, autocomplete: false, autofocus: true do |f| %>
-      <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
+    <%= search_form_for @query, class: "flex flex-grow my-auto mb-2 ml-4 space-x-4 max-w-max", data: { turbo_frame: "sample_table", turbo_action: "advance", controller: "search", action: "input->search#submit" }, autocomplete: false, autofocus: true do |f| %>
+      <%= f.select :category_eq, Sample.categories.map {|c| [c[0].humanize, c[1]]}, { include_blank: 'All' }, { class: "block p-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md focus:ring-1 focus:border-primary-600 focus:ring-primary-600" } %>
 
       <label for="index-search" class="mb-2 sr-only">Search</label>
-      <div class="relative group flex-row-reverse">
+      <div class="relative flex-row-reverse group">
 
-        <%= f.search_field :title_or_plain_text_description_i_cont, class: "peer block p-3 w-64 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md  focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
+        <%= f.search_field :title_or_plain_text_description_i_cont, class: "block w-64 p-3 pl-10 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md peer focus:ring-1 focus:border-primary-600 focus:ring-primary-600", placeholder: "Search samples", required: false %>
 
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 peer-focus:!text-primary-500 group-hover:!text-primary-500">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 pointer-events-none peer-focus:!text-primary-500 group-hover:!text-primary-500">
           <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <circle cx="10" cy="10" r="7"></circle>
@@ -63,7 +63,7 @@
       <div class="my-auto">
         <%= render TooltipComponent.new(tooltip: "With spectra", user: current_user, cls: "!p-0") do %>
           <%= f.check_box :with_spectra, { class: "hidden peer" }, "true", nil %>
-          <label for="query_with_spectra" class=" peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+          <label for="query_with_spectra" class="inline-flex items-center justify-between w-full px-2 text-gray-500 bg-white border border-gray-300 rounded-lg cursor-pointer peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 p-2.5">
             <div class="block">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -78,7 +78,7 @@
       <div class="my-auto">
         <%= render TooltipComponent.new(tooltip: "With images", user: current_user, cls: "!p-0") do %>
           <%= f.check_box :with_images, { class: "hidden peer" }, "true", nil %>
-          <label for="query_with_images" class=" peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+          <label for="query_with_images" class="inline-flex items-center justify-between w-full px-2 text-gray-500 bg-white border border-gray-300 rounded-lg cursor-pointer peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 p-2.5">
             <div class="block">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -95,7 +95,7 @@
       <div class="my-auto">
         <%= render TooltipComponent.new(tooltip: "With documents", user: current_user, cls: "!p-0") do %>
           <%= f.check_box :with_documents, { class: "hidden peer" }, "true", nil %>
-          <label for="query_with_documents" class="peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 inline-flex items-center justify-between w-full px-2 text-gray-500 p-2.5 bg-white border-gray-300  border rounded-lg cursor-pointer">
+          <label for="query_with_documents" class="inline-flex items-center justify-between w-full px-2 text-gray-500 bg-white border border-gray-300 rounded-lg cursor-pointer peer-checked:text-primary-500 peer-checked:border-primary-500 hover:bg-gray-50 p-2.5">
             <div class="block">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
