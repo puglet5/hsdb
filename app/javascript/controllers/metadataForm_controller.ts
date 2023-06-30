@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
 
 const parsedDataToArray = (values) => {
-  let temp_arr: any[] = []
+  const temp_arr: any[] = []
   for (let i = 0; i < values.length; i += 2) {
     const chunk = values.slice(i, i + 2)
     temp_arr.push(chunk)
@@ -11,9 +11,9 @@ const parsedDataToArray = (values) => {
 }
 
 const arrayToMetadata = (keys, values) => {
-  let metadata: any[] = []
+  const metadata: any[] = []
   for (let i = 0; i < values.length; i++) {
-    let d = values[i],
+    const d = values[i],
       o = {}
     for (let j = 0; j < keys.length; j++)
       o[keys[j]] = d[j]
@@ -29,7 +29,7 @@ const parseInputData = (inputs) => [].reduce.call(
     if (!isNaN(Number(element.value)) && (parseFloat(element.value) === Number(element.value)))
       data[element.name] = parseFloat(element.value)
     else try {
-      let jToArr = JSON.parse(element.value)
+      const jToArr = JSON.parse(element.value)
       data[element.name] = jToArr
     }
     catch (e) {
@@ -61,9 +61,9 @@ export default class extends Controller {
 
 
   connect() {
-    let fieldRowClone = this.fieldRowTarget
-    let formContainer = this.formContainerTarget
-    let railsInput = this.railsInputTarget
+    const fieldRowClone = this.fieldRowTarget
+    const formContainer = this.formContainerTarget
+    const railsInput = this.railsInputTarget
 
     this.formContainerTarget.addEventListener("input", this.handleEdit.bind(this, formContainer, railsInput), false)
 
@@ -72,7 +72,7 @@ export default class extends Controller {
   }
 
   addMetadataFormRow(clone, container) {
-    let clonedFormRow = clone.cloneNode(true)
+    const clonedFormRow = clone.cloneNode(true)
     clonedFormRow.querySelectorAll("label").forEach(e => e.remove())
     clonedFormRow.querySelectorAll("input").forEach(e => {
       e.value = ""
@@ -82,8 +82,8 @@ export default class extends Controller {
   }
 
   clonedFieldRowTargetConnected() {
-    let lastCloned = this.clonedFieldRowTargets[this.clonedFieldRowTargets.length - 1]
-    let addButton = lastCloned.querySelector("#addButton")!
+    const lastCloned = this.clonedFieldRowTargets[this.clonedFieldRowTargets.length - 1]
+    const addButton = lastCloned.querySelector("#addButton")!
     addButton.setAttribute("id", "removeButton")
     addButton.classList.remove("mt-9")
     addButton.textContent = ""
@@ -91,10 +91,10 @@ export default class extends Controller {
     addButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>`
     addButton.addEventListener("click", function () { this.parentNode.remove() }, false)
 
-    let childInputNodes: NodeListOf<HTMLInputElement> = this.formContainerTarget.querySelectorAll("input.metadata")
+    const childInputNodes: NodeListOf<HTMLInputElement> = this.formContainerTarget.querySelectorAll("input.metadata")
 
     for (let i = 0; i < childInputNodes.length; i++) {
-      let theName = childInputNodes[i].name
+      const theName = childInputNodes[i].name
       if (theName)
         childInputNodes[i].name = `metadata-${i}`
     }
@@ -105,14 +105,14 @@ export default class extends Controller {
   }
 
   handleEdit(form, input) {
-    let inputNodes: NodeListOf<HTMLInputElement> = form.closest("form").elements
-    let formInputs: any[] = Array.from(inputNodes).filter(e => e.classList.contains("metadata"))
-    let parsedInputData = parseInputData(formInputs)
-    let arrayFromInputs = parsedDataToArray(Object.values(parsedInputData))
-    let formattedMetadata = arrayToMetadata(arrayFromInputs[0], arrayFromInputs.slice(1, arrayFromInputs.length))
+    const inputNodes: NodeListOf<HTMLInputElement> = form.closest("form").elements
+    const formInputs: any[] = Array.from(inputNodes).filter(e => e.classList.contains("metadata"))
+    const parsedInputData = parseInputData(formInputs)
+    const arrayFromInputs = parsedDataToArray(Object.values(parsedInputData))
+    const formattedMetadata = arrayToMetadata(arrayFromInputs[0], arrayFromInputs.slice(1, arrayFromInputs.length))
 
-    let json = Object.fromEntries(Object.entries(formattedMetadata[0]).filter(([k]) => k != ""))
-    let strJson = JSON.stringify(json)
+    const json = Object.fromEntries(Object.entries(formattedMetadata[0]).filter(([k]) => k != ""))
+    const strJson = JSON.stringify(json)
 
     this.view(json)
     input.value = strJson

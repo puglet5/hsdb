@@ -8,17 +8,16 @@ esbuild.context({
   bundle: true,
   treeShaking: true,
   minify: process.argv.includes("--minify"),
-  platform: 'browser',
+  platform: "browser",
   target: [
-    'es2020',
+    "es2020",
   ],
   outdir: path.join(process.cwd(), "app/assets/builds"),
   absWorkingDir: path.join(process.cwd(), "app/javascript"),
   plugins: [rails()],
 }).then(context => {
   if (process.argv.includes("--watch"))
-    context.watch().then((context) => {
-    })
+    context.watch().then(() => { return })
   else
     context.rebuild().then(() => {
       context.dispose()

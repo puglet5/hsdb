@@ -101,12 +101,12 @@ export default class extends Controller {
   readonly hasTransmissionPlotButtonTarget!: boolean
   readonly hasReverseXAxisButtonTarget!: boolean
 
-  normalized: boolean = false
-  normalizeFactor: number = 1
-  labelAlignment: string = "top"
-  derivativePlot: boolean = false
-  transmissionPlot: boolean = false
-  showLabels: boolean = true
+  normalized = false
+  normalizeFactor = 1
+  labelAlignment = "top"
+  derivativePlot = false
+  transmissionPlot = false
+  showLabels = true
   cubicInterpolationMode: string | undefined = undefined
   displayLabelValues: number[][] = this.labelsValue.map(e => e.map(o => o.position).map(Number))
   reverseXAxis: boolean = this.axesSpecValue["reverse"]
@@ -126,24 +126,24 @@ export default class extends Controller {
 
   parseCSV(rawData: string): Point[] {
 
-    let data: string[][] = Papa.parse(rawData).data
+    const data: string[][] = Papa.parse(rawData).data
 
     this.dataStepValue = Number(data[0][0]) - Number(data[1][0])
 
-    let xValue: number[] = data.map((d) => {
+    const xValue: number[] = data.map((d) => {
       return parseFloat(Object.values(d)[0])
     }).filter(value => !Number.isNaN(value))
 
-    let yValue: number[] = data.map((d) => {
+    const yValue: number[] = data.map((d) => {
       return parseFloat(Object.values(d)[1])
     }).filter(value => !Number.isNaN(value))
 
-    let parsedData: Point[] = xValue
+    const parsedData: Point[] = xValue
       .map((v, i) => {
         return [v, yValue[i]]
       })
       .map((v) => {
-        let [x, y] = v
+        const [x, y] = v
         return { x, y }
       })
 
@@ -163,7 +163,7 @@ export default class extends Controller {
 
     if (window.scatterChart) { window.scatterChart.destroy() }
 
-    let id = this.canvasIdValue
+    const id = this.canvasIdValue
 
     const makeChart = (data, filenames) => {
 
@@ -202,7 +202,7 @@ export default class extends Controller {
           })),
         },
         options: {
-          locale: 'fr',
+          locale: "fr",
           animation: false,
           responsive: true,
           layout: {
@@ -331,10 +331,10 @@ export default class extends Controller {
     if (!this.normalized) {
       window.scatterChart.resetZoom()
 
-      let data: Point[] = this.currentPlotDataValue[0]
-      let range: number[][] = this.getRange(data)
+      const data: Point[] = this.currentPlotDataValue[0]
+      const range: number[][] = this.getRange(data)
       this.normalizeFactor = range[1][1]
-      let normalizedY: number[] = data.map(e => e["y"] / this.normalizeFactor)
+      const normalizedY: number[] = data.map(e => e["y"] / this.normalizeFactor)
 
       this.currentPlotDataValue = [data.map((e, i) => (
         {
@@ -346,8 +346,8 @@ export default class extends Controller {
     else {
       window.scatterChart.resetZoom()
 
-      let data: Point[] = this.currentPlotDataValue[0]
-      let denormalizedY: number[] = data.map(e => e["y"] * this.normalizeFactor)
+      const data: Point[] = this.currentPlotDataValue[0]
+      const denormalizedY: number[] = data.map(e => e["y"] * this.normalizeFactor)
 
       this.currentPlotDataValue = [data.map((e, i) => (
         {
@@ -394,11 +394,11 @@ export default class extends Controller {
 
     window.scatterChart.resetZoom()
 
-    let radius = parseFloat(this.gaussianFilterSliderTarget.value)
+    const radius = parseFloat(this.gaussianFilterSliderTarget.value)
     if (radius < 0 || radius > 10) { return }
 
-    let data = this.unmodifiedPlotDataValue[0]
-    let smoothedY: number[] = blur(data.map(e => e["y"]), radius)
+    const data = this.unmodifiedPlotDataValue[0]
+    const smoothedY: number[] = blur(data.map(e => e["y"]), radius)
 
     this.currentPlotDataValue = [data.map((e, i) => (
       {
@@ -422,7 +422,7 @@ export default class extends Controller {
     (this.normalizeButtonTarget.parentElement as HTMLButtonElement).disabled = true;
     (this.normalizeButtonTarget.parentElement as HTMLButtonElement).classList.add("!text-gray-300");
     (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).disabled = true;
-    (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).classList.add("!text-gray-300");
+    (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).classList.add("!text-gray-300")
     this.gaussianFilterSliderTarget.disabled = true
   }
 
@@ -431,7 +431,7 @@ export default class extends Controller {
     (this.normalizeButtonTarget.parentElement as HTMLButtonElement).disabled = false;
     (this.normalizeButtonTarget.parentElement as HTMLButtonElement).classList.remove("!text-gray-300");
     (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).disabled = false;
-    (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).classList.remove("!text-gray-300");
+    (this.transmissionPlotButtonTarget.parentElement as HTMLButtonElement).classList.remove("!text-gray-300")
     this.gaussianFilterSliderTarget.disabled = false
   }
 
@@ -447,12 +447,12 @@ export default class extends Controller {
       this.disableControls()
       window.scatterChart.resetZoom()
 
-      let data: Point[] = this.currentPlotDataValue[0]
+      const data: Point[] = this.currentPlotDataValue[0]
 
-      let derY: number[] = data.flatMap((e, i) => i < data.length - 4 ? (2 * e["y"] - 5 * data[(i + 1)]["y"] + 4 * data[(i + 2)]["y"] - data[(i + 3)]["y"]) / (this.dataStepValue ** 2) : 0)
-      let smoothedDerY: number[] = blur(derY, 2)
-      let [min, max] = [Math.min(...smoothedDerY), Math.max(...smoothedDerY)]
-      let rescaledSmoothedDerY: number[] = smoothedDerY.map(e => (e - min) / (max - min))
+      const derY: number[] = data.flatMap((e, i) => i < data.length - 4 ? (2 * e["y"] - 5 * data[(i + 1)]["y"] + 4 * data[(i + 2)]["y"] - data[(i + 3)]["y"]) / (this.dataStepValue ** 2) : 0)
+      const smoothedDerY: number[] = blur(derY, 2)
+      const [min, max] = [Math.min(...smoothedDerY), Math.max(...smoothedDerY)]
+      const rescaledSmoothedDerY: number[] = smoothedDerY.map(e => (e - min) / (max - min))
 
       this.currentPlotDataValue = [this.currentPlotDataValue[0], data.map((e, i) => (
         {
@@ -486,10 +486,10 @@ export default class extends Controller {
     if (!this.transmissionPlot) {
       window.scatterChart.resetZoom()
 
-      let data: Point[] = this.currentPlotDataValue[0]
+      const data: Point[] = this.currentPlotDataValue[0]
       const range: number[][] = this.getRange(data)
-      let normalizedY: number[] = data.map(e => e["y"] / range[1][1])
-      let transmY: number[] = normalizedY.map((e) => (10 ** (-e)) * 100)
+      const normalizedY: number[] = data.map(e => e["y"] / range[1][1])
+      const transmY: number[] = normalizedY.map((e) => (10 ** (-e)) * 100)
 
       this.currentPlotDataValue = [data.map((e, i) => (
         {

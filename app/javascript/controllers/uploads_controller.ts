@@ -44,10 +44,10 @@ export default class extends Controller {
       `${count} ${noun}${count !== 1 ? suffix : ""}`
 
     const setupUppy = (element) => {
-      let trigger = this.triggerTarget
+      const trigger = this.triggerTarget
 
-      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']")!.getAttribute("content")
-      let field_name = element.dataset.uppy
+      const direct_upload_url = document.querySelector("meta[name='direct-upload-url']")!.getAttribute("content")
+      const field_name = element.dataset.uppy
 
       trigger.addEventListener("click", (e) => e.preventDefault())
 
@@ -78,14 +78,14 @@ export default class extends Controller {
         proudlyDisplayPoweredByUppy: false
       })
 
-      let dashboard = document.querySelector(".uppy-Dashboard-inner")!
+      const dashboard = document.querySelector(".uppy-Dashboard-inner")!
       dashboard.removeAttribute("style")
 
       let filesCount = 0
 
       uppy.on("complete", (result) => {
         filesCount += result.successful.length
-        let filecountText = document.querySelector(`#${this.textTarget.id}`)!
+        const filecountText = document.querySelector(`#${this.textTarget.id}`)!
         filecountText.innerHTML = `Add ${pluralize(filesCount, "file")}`
         result.successful.forEach(file => {
           appendUploadedFile(element, file, field_name)
