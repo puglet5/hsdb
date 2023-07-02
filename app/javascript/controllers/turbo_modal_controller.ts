@@ -1,7 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import hotkeys from "hotkeys-js"
 
-
 export default class extends Controller {
 
   static targets = ["modal"]
@@ -12,6 +11,7 @@ export default class extends Controller {
   uppy_states_arr: boolean[]
 
   connect() {
+    // @ts-ignore
     hotkeys("escape", (event) => {
       this.uppy_db_arr = document.getElementsByClassName("uppy-Dashboard")
       this.uppy_states_arr = [...this.uppy_db_arr].map(e => e.getAttribute("aria-hidden") == "true")

@@ -1,12 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
-import { Chart, registerables } from "chart.js"
+import { Chart, ChartComponentLike, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import Papa from "papaparse"
 import { blur } from "d3-array"
 
 Chart.register(...registerables)
-Chart.register(zoomPlugin)
+Chart.register(zoomPlugin as unknown as ChartComponentLike)
 Chart.register(ChartDataLabels)
 
 interface Point {
