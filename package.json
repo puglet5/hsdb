@@ -20,6 +20,7 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "chartjs-plugin-zoom": "^2.0.1",
     "d3": "^7.8.5",
+    "d3-array": "^3.2.4",
     "debounce": "^1.2.1",
     "esbuild": "^0.18.10",
     "esbuild-rails": "^1.0.7",
@@ -41,7 +42,7 @@
   "browserslist": [
     "defaults"
   ],
-  "packageManager": "yarn@3.5.1",
+  "packageManager": "yarn@3.6.1",
   "scripts": {
     "build:css:dev": "tailwindcss -i ./app/assets/stylesheets/application.scss -o ./app/assets/builds/application.css",
     "build:css": "yarn build:css:dev && postcss ./app/assets/builds/application.css -o ./app/assets/builds/application.css",
@@ -54,8 +55,9 @@
     "@types/node": "^20.3.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
+    "@yarnpkg/sdks": "^3.0.0-rc.47",
     "cssnano": "^6.0.1",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "postcss": "^8.4.24",
     "postcss-cli": "^10.1.0",
     "postcss-nesting": "^11.3.0",
