@@ -16,7 +16,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: 3.2.1
+          ruby-version: 3.2.2
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -35,7 +35,7 @@ jobs:
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
-          yarn run eslint -c .eslintrc.json .
+          yarn eslint . --ext js,ts
 
       - name: Run security checks
         run: |
@@ -71,7 +71,7 @@ jobs:
           uses: ruby/setup-ruby@v1
           with:
             bundler-cache: true
-            ruby-version: 3.2.1
+            ruby-version: 3.2.2
 
         - name: Setup Node
           uses: actions/setup-node@v3

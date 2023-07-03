@@ -4,7 +4,7 @@ export default class extends Controller {
 
   connect() {
 
-    let bttButton = document.getElementById("btn-back-to-top")!
+    const bttButton = document.getElementById("btn-back-to-top")!
 
     const scrollListen = () => {
       if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {

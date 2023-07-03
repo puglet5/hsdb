@@ -1,21 +1,19 @@
 import { Controller } from "@hotwired/stimulus"
-import Uppy from "@uppy/core"
-import Dashboard from "@uppy/dashboard"
+import Uppy, { PluginOptions, UppyFile, UppyOptions } from "@uppy/core"
+import Dashboard, { DashboardOptions } from "@uppy/dashboard"
 import ActiveStorageUpload from "uppy-activestorage-upload"
 
 export default class extends Controller {
 
   static values = {
-    filetype: String,
     allowedfiletypes: Array,
-    allowmultiple: Boolean,
-    thumbnails: Boolean,
+    allowmultiplefiles: Boolean,
+    generatethumbnails: Boolean,
   }
 
-  filetypeValueValue: string
   allowedfiletypesValue: string[]
-  allowmultipleValue: boolean
-  thumbnailsValue: boolean
+  allowmultiplefilesValue: boolean
+  generatethumbnailsValue: boolean
 
   static targets = ["div", "trigger", "text"]
 
@@ -23,76 +21,77 @@ export default class extends Controller {
   readonly textTarget!: HTMLElement
   readonly divTarget!: HTMLElement
 
-  readonly hasTriggerTarget: boolean
-  readonly hasDivTarget: boolean
-  readonly hasTextTarget: boolean
-
   connect() {
 
-    const appendUploadedFile = (element, file, field_name) => {
-      const hiddenField = document.createElement("input")
-
-      hiddenField.setAttribute("type", "hidden")
-      hiddenField.setAttribute("name", field_name)
-      hiddenField.setAttribute("data-pending-upload", "true")
-      hiddenField.setAttribute("value", file.response.signed_id)
-
-      element.appendChild(hiddenField)
+    const uppyOptions: UppyOptions = {
+      autoProceed: false,
+      allowMultipleUploads: this.allowmultiplefilesValue,
+      allowMultipleUploadBatches: this.allowmultiplefilesValue,
+      restrictions: {
+        allowedFileTypes: this.allowedfiletypesValue.length ? this.allowedfiletypesValue : null,
+        maxNumberOfFiles: this.allowmultiplefilesValue ? null : 1
+      },
     }
 
-    const pluralize = (count, noun, suffix = "s") =>
-      `${count} ${noun}${count !== 1 ? suffix : ""}`
-
-    const setupUppy = (element) => {
-      let trigger = this.triggerTarget
-
-      let direct_upload_url = document.querySelector("meta[name='direct-upload-url']")!.getAttribute("content")
-      let field_name = element.dataset.uppy
-
-      trigger.addEventListener("click", (e) => e.preventDefault())
-
-      const uppy = new Uppy({
-        autoProceed: false,
-        allowMultipleUploads: this.allowmultipleValue,
-        allowMultipleUploadBatches: this.allowmultipleValue,
-        restrictions: {
-          allowedFileTypes: this.allowedfiletypesValue.length ? this.allowedfiletypesValue : null,
-          maxNumberOfFiles: this.allowmultipleValue ? null : 1
-        },
-      })
-
+    const dashboardOptions: DashboardOptions = {
+      disableThumbnailGenerator: !this.generatethumbnailsValue,
       // @ts-expect-error
+      trigger: this.triggerTarget,
+      doneButtonHandler: null,
+      target: this.divTarget,
+      closeModalOnClickOutside: true,
+      animateOpenClose: false,
+      disableInformer: true,
+      theme: "auto",
+      hidePauseResumeButton: true,
+      closeAfterFinish: false,
+      inline: false,
+      showRemoveButtonAfterComplete: false,
+      showProgressDetails: true,
+      fileManagerSelectionType: "files",
+      proudlyDisplayPoweredByUppy: false
+    }
+
+    const setupUppy = (element: HTMLElement) => {
+      const directUploadUrl = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
+      const fieldName = element.dataset.uppy
+
+      const uppy = new Uppy(uppyOptions)
+
       uppy.use(ActiveStorageUpload, {
-        directUploadUrl: direct_upload_url
-      })
+        directUploadUrl
+      } as PluginOptions)
 
-      // @ts-expect-error
-      uppy.use(Dashboard, {
-        disableThumbnailGenerator: !this.thumbnailsValue,
-        trigger: trigger,
-        target: this.divTarget,
-        closeAfterFinish: false,
-        inline: false,
-        showProgressDetails: false,
-        fileManagerSelectionType: "both",
-        proudlyDisplayPoweredByUppy: false
-      })
-
-      let dashboard = document.querySelector(".uppy-Dashboard-inner")!
-      dashboard.removeAttribute("style")
-
-      let filesCount = 0
+      uppy.use(Dashboard, dashboardOptions)
 
       uppy.on("complete", (result) => {
-        filesCount += result.successful.length
-        let filecountText = document.querySelector(`#${this.textTarget.id}`)!
-        filecountText.innerHTML = `Add ${pluralize(filesCount, "file")}`
+        const filecountText = document.querySelector(`#${this.textTarget.id}`) as HTMLElement
+        filecountText.innerHTML = `Add ${pluralize(result.successful.length, "file")}`
         result.successful.forEach(file => {
-          appendUploadedFile(element, file, field_name)
+          appendUploadedFile(element, file, fieldName)
         })
       })
     }
 
     setupUppy(this.divTarget)
+
+    this.triggerTarget.addEventListener("click", (e) => e.preventDefault())
+    const dashboard = document.querySelector(".uppy-Dashboard-inner") as HTMLElement
+    dashboard.removeAttribute("style")
   }
+}
+
+function pluralize(count: number, noun: string, suffix = "s") {
+  return `${count} ${noun}${count !== 1 ? suffix : ""}`
+}
+
+function appendUploadedFile(element: HTMLElement, file: UppyFile, fieldName: string) {
+  const hiddenField = document.createElement("input")
+
+  hiddenField.setAttribute("type", "hidden")
+  hiddenField.setAttribute("name", fieldName)
+  hiddenField.setAttribute("data-pending-upload", "true")
+  hiddenField.setAttribute("value", file.response.signed_id)
+
+  element.appendChild(hiddenField)
 }

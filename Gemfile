@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.1'
+ruby '3.2.2'
 
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'active_record_extended', '~> 3.0'
@@ -79,7 +79,7 @@ group :development do
 end
 
 group :test do
-  gem 'pundit-matchers', '~> 2.2' # policy matchers
+  gem 'pundit-matchers', '~> 3.1' # policy matchers
   gem 'rails-controller-testing', '~> 1.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.1' # rails matchers for common tasks
@@ -108,8 +108,7 @@ end
 gem 'capistrano', '~> 3.17'
 gem 'capistrano3-puma', '~> 5'
 gem 'capistrano-bundler', '~> 2.1'
-gem 'capistrano-rails', '~> 1.6'
-gem 'capistrano-rvm', '~> 0.1.2'
 gem 'capistrano-git-with-submodules', '~> 2.0'
+gem 'capistrano-rails', '~> 1.6'
 gem 'capistrano-rails-console', '~> 2.3'
-
+gem 'capistrano-rvm', '~> 0.1.2'

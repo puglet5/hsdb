@@ -18,7 +18,7 @@ export default class extends Controller {
       return
     }
 
-    let active = this.tabTargets.find(x => x.id === localStorage.getItem("active_tab"))
+    const active = this.tabTargets.find(x => x.id === localStorage.getItem("active_tab"))
 
     if (active == undefined) {
       this.tabTargets[0].classList.add(...this.activeClasses)
@@ -26,19 +26,19 @@ export default class extends Controller {
       return
     }
 
-    let active_id = this.tabTargets.indexOf(active)
+    const active_id = this.tabTargets.indexOf(active)
     active.classList.add(...this.activeClasses)
     this.panelTargets[active_id].classList.remove("hidden")
   }
 
   switch(e) {
-    let active = this.tabTargets.filter(elem => elem.classList.contains("active-tab"))[0]
-    let current = e.target.closest("[data-tabs-target]")
+    const active = this.tabTargets.filter(elem => elem.classList.contains("active-tab"))[0]
+    const current = e.target.closest("[data-tabs-target]")
 
     if (current === active) { return }
 
-    let active_id = this.tabTargets.indexOf(active)
-    let current_id = this.tabTargets.indexOf(current)
+    const active_id = this.tabTargets.indexOf(active)
+    const current_id = this.tabTargets.indexOf(current)
 
     active.classList.remove(...this.activeClasses)
     this.panelTargets[active_id].classList.add("hidden")

@@ -75,17 +75,17 @@
         <% end %>
       </ul>
     </div>
-    <%= tag.div class: "flex my-auto place-self-end space-x-2" do %>
+    <%= tag.div class: "flex my-auto space-x-2 place-self-end" do %>
       <% if current_user %>
         <%= turbo_frame_tag :dark, data: { turbo_action: :advance } do %>
-          <%= simple_form_for current_user, url: update_settings_user_path(current_user), html: { method: :patch, class: "my-auto flex items-center justify-center" }, validate: true, data: { turbo: false } do |f| %>
+          <%= simple_form_for current_user, url: update_settings_user_path(current_user.id), html: { method: :patch, class: "flex items-center justify-center my-auto" }, validate: true, data: { turbo: false } do |f| %>
 
             <%= hidden_field_tag "user[settings[ui][dark]]", false %>
             <% checked =  !current_user.settings(:ui).dark ? "checked" : 0 %>
             <%= f.check_box "settings[ui][dark]", { multiple: false, class: "hidden", checked: checked }, true, false %>
             <% if !current_user.settings(:ui).dark %>
               <%= render TooltipComponent.new(tooltip: "Dark mode", user: current_user, cls: "!inline-flex") do %>
-                <button type="submit" class="my-auto h-full">
+                <button type="submit" class="h-full my-auto">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars text-primary-300 hover:text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>

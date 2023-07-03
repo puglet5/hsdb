@@ -7,7 +7,7 @@ export default class extends Controller {
     json: String
   }
 
-  jsonValue: Object
+  jsonValue: any
 
   connect() {
     const jsonData = this.jsonValue

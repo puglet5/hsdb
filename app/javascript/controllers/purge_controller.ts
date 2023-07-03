@@ -36,7 +36,7 @@ export default class extends Controller {
     this.returnTarget.classList.toggle("hidden")
     this.placeholderTarget.classList.toggle("hidden")
 
-    let input = document.createElement("input")
+    const input = document.createElement("input")
     input.classList.add("hidden")
     input.name = `${this.classnameValue}[purge_attachments][]`
     input.setAttribute("value", this.idValue)

@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { PreparedPhotoSwipeOptions } from "photoswipe"
 import PhotoSwipeLightbox from "photoswipe/lightbox"
 
 export default class extends Controller {
@@ -17,7 +18,7 @@ export default class extends Controller {
       pswpModule: () => import("photoswipe")
     }
 
-    const lightbox = new PhotoSwipeLightbox(options)
+    const lightbox = new PhotoSwipeLightbox(options as Partial<PreparedPhotoSwipeOptions>)
 
     lightbox.on("uiRegister", function () {
       lightbox.pswp.ui.registerElement({
@@ -32,7 +33,7 @@ export default class extends Controller {
           outlineID: "pswp__icn-download"
         },
 
-        onInit: (el, pswp) => {
+        onInit: (el: HTMLAnchorElement, pswp) => {
           el.setAttribute("download", "")
           el.setAttribute("target", "_blank")
           el.setAttribute("rel", "noopener")

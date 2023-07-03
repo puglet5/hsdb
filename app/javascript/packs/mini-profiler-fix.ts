@@ -1,7 +1,4 @@
-interface Window {
-  MiniProfilerContainer: any;
-  MiniProfiler: any;
-}
+//@ts-nocheck
 
 document.addEventListener("turbo:before-visit", e => {
   window.MiniProfilerContainer = document.querySelector("body > .profiler-results")
