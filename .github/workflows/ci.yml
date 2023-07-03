@@ -89,8 +89,8 @@ jobs:
 
         - name: Install packages
           run: |
-            yarn build:dev
-            yarn build:css:dev
+            yarn build
+            yarn build:css
 
         - name: Setup test database and run tests
           env:
