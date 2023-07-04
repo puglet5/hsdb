@@ -49,9 +49,9 @@
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
-                  uploads_allowmultiple_value: false,
+                  uploads_allowmultiplefiles_value: false,
                   uploads_allowedfiletypes_value: [".dpt", "text/*", ".raw", ".mon", ".csv", ".spectable", ".txt", ".dat"],
-                  uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
+                  uploads_generatethumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
                   <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>
                   <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>
@@ -68,8 +68,8 @@
                   controller: "uploads",
                   uploads_target: "div",
                   uploads_filetype_value: "files",
-                  uploads_allowmultiple_value: false,
-                  uploads_thumbnails_value: current_user.settings(:uploading).thumbnails
+                  uploads_allowmultiplefiles_value: false,
+                  uploads_generatethumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
                   <%= render Forms::LabelComponent.new().with_content("Equipment settings") %>
                   <%= tag.div class: "flex items-center justify-center w-full p-2 pr-6 text-sm bg-white border border-gray-300 rounded-md cursor-pointer w-fullbg-white hover:bg-gray-100 py-auto", data: { uploads_target: "trigger"} do %>

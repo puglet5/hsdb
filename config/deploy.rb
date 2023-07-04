@@ -13,7 +13,7 @@ set :user, 'hslab'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
-set :rvm_ruby_version, '3.2.1'
+set :rvm_ruby_version, '3.2.2'
 
 set :pty,             true
 set :use_sudo,        false
