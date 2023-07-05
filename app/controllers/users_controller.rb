@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
       @user.settings(key.to_sym).update! value
     end
-    redirect_to request.referer || @user
+    redirect_to @user
     flash.keep[:success] = 'Settings updated!' if user_url(@user) == request.referer
   end
 
