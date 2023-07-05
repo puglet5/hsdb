@@ -112,6 +112,7 @@ export default class extends Controller {
   reverseXAxis: boolean = this.axesSpecValue["reverse"]
 
   connect() {
+    console.log(this.axesSpecValue)
     if (this.compareValue) {
       this.disableControls()
       this.visualize()
@@ -196,7 +197,7 @@ export default class extends Controller {
                   return false
               },
               formatter: (value) => {
-                return parseFloat(value["x"]).toFixed(0)
+                return parseFloat(value["x"]).toFixed(this.axesSpecValue["peak_label_precision"])
               }
             },
           })),

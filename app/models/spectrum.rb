@@ -35,14 +35,14 @@ class Spectrum < RsdbRecord
   include ParseMetadata
 
   AXES_SPEC = {
-    not_set: { labels: ['', ''], reverse: false },
-    xrf: { labels: ['Energy, kEv', 'Intensity, a.u.'], reverse: false },
-    xrd: { labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false },
-    ftir: { labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true },
-    libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false },
-    raman: { labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false },
-    thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false },
-    reflectance: { labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false },
+    not_set: { labels: ['', ''], reverse: false, peak_label_precision: 0 },
+    xrf: { labels: ['Energy, kEv', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2 },
+    xrd: { labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2 },
+    ftir: { labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true, peak_label_precision: 0 },
+    libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0 },
+    raman: { labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0 },
+    thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2 },
+    reflectance: { labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false, peak_label_precision: 0 },
     other: { labels: ['', ''], reverse: false }
   }.freeze
 
