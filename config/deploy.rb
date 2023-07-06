@@ -3,8 +3,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.17.3'
 
-# replace obvious parts
-server '192.168.0.100', port: 22, roles: %i[web app db], primary: true
+server '0.0.0.0', port: 22, roles: %i[web app db], primary: true
 set :application, 'hsdb'
 set :repo_url, 'https://github.com/puglet5/hsdb'
 set :branch, 'production'
