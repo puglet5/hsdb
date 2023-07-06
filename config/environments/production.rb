@@ -30,7 +30,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = true
+  config.public_file_server.enabled = false
   config.assets.digest = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -48,7 +48,7 @@ Rails.application.configure do
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
   config.action_cable.disable_request_forgery_protection = true
-  config.action_cable.url = 'ws://192.168.0.100/cable'
+  config.action_cable.url = 'ws://localhost/cable'
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
