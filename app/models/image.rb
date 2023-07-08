@@ -4,13 +4,13 @@
 #
 # Table name: images
 #
-#  id         :bigint           not null, primary key
 #  artwork_id :bigint           not null, indexed
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  range      :integer          default(0)
 #  category   :integer          default("vis")
+#  created_at :datetime         not null
+#  id         :bigint           not null, primary key
+#  range      :integer          default(0)
 #  status     :integer          default("not_set")
+#  updated_at :datetime         not null
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (artwork_id => artworks.id)
+#  fk_rails_54bb6d10ea  (artwork_id => artworks.id)
 #
 class Image < ApplicationRecord
   include ProcessImage

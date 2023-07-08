@@ -4,14 +4,14 @@
 #
 # Table name: categories
 #
-#  id            :bigint           not null, primary key
 #  category_name :string           not null
 #  created_at    :datetime         not null
-#  updated_at    :datetime         not null
 #  discussion_id :integer          indexed
-#  slug          :string
-#  pinned        :boolean          default(FALSE)
+#  id            :bigint           not null, primary key
 #  lock_version  :integer
+#  pinned        :boolean          default(FALSE)
+#  slug          :string
+#  updated_at    :datetime         not null
 #
 # Indexes
 #

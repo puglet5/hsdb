@@ -4,20 +4,20 @@
 #
 # Table name: spectra
 #
-#  id                     :bigint           not null, primary key
-#  format                 :integer          default("not_set"), not null
-#  status                 :integer          default("none"), not null
 #  category               :integer          default("not_set"), not null
-#  sample_id              :bigint           not null, indexed
 #  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  range                  :integer          default("not_set"), not null
-#  metadata               :jsonb            not null, indexed
 #  filename               :string
-#  user_id                :bigint           not null, indexed
+#  format                 :integer          default("not_set"), not null
+#  id                     :bigint           not null, primary key
+#  metadata               :jsonb            not null, indexed
 #  plain_text_description :text
 #  plain_text_equipment   :text
+#  range                  :integer          default("not_set"), not null
+#  sample_id              :bigint           not null, indexed
+#  status                 :integer          default("none"), not null
 #  task_id                :string
+#  updated_at             :datetime         not null
+#  user_id                :bigint           default(1), not null, indexed
 #
 # Indexes
 #
@@ -27,7 +27,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sample_id => samples.id)
+#  fk_rails_dfa20a7cb9  (sample_id => samples.id)
 #
 RSpec.describe Spectrum, type: :model do
   let(:user) { create(:user) }

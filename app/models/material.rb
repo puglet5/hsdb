@@ -4,9 +4,9 @@
 #
 # Table name: materials
 #
+#  created_at :datetime         not null
 #  id         :bigint           not null, primary key
 #  name       :string           not null, indexed
-#  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes

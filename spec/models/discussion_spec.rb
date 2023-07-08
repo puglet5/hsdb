@@ -4,16 +4,16 @@
 #
 # Table name: discussions
 #
-#  id           :bigint           not null, primary key
-#  title        :string           not null
+#  category_id  :integer          default(2), indexed
 #  content      :text
 #  created_at   :datetime         not null
+#  id           :bigint           not null, primary key
+#  lock_version :integer
+#  pinned       :boolean          default(FALSE)
+#  slug         :string
+#  title        :string           not null
 #  updated_at   :datetime         not null
 #  user_id      :integer          indexed
-#  category_id  :integer          default(2), indexed
-#  slug         :string
-#  pinned       :boolean          default(FALSE)
-#  lock_version :integer
 #
 # Indexes
 #
@@ -25,7 +25,6 @@
 #  discussions_category_id_fk  (category_id => categories.id)
 #  discussions_user_id_fk      (user_id => users.id)
 #
-
 RSpec.describe Discussion, type: :model do
   let(:user) { create(:user) }
   let(:category) { create(:category) }

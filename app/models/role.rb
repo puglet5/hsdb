@@ -4,11 +4,11 @@
 #
 # Table name: roles
 #
+#  created_at    :datetime         not null
 #  id            :bigint           not null, primary key
 #  name          :string           indexed => [resource_type, resource_id]
-#  resource_type :string           indexed => [name, resource_id], indexed => [resource_id]
 #  resource_id   :bigint           indexed => [name, resource_type], indexed => [resource_type]
-#  created_at    :datetime         not null
+#  resource_type :string           indexed => [name, resource_id], indexed => [resource_id]
 #  updated_at    :datetime         not null
 #
 # Indexes
