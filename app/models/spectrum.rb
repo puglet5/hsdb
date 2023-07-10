@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # == Schema Information
 #
@@ -44,6 +44,14 @@ class Spectrum < RsdbRecord
     thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2 },
     reflectance: { labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false, peak_label_precision: 0 },
     other: { labels: ['', ''], reverse: false }
+  }.freeze
+
+  HEADER_MATCH_TABLE = {
+    xrf: { regex: Regexp.new('^.*[+-]?([0-9]*[.])?[0-9]+[ \t]+[+-]?([0-9]*[.])?[0-9]+.*$'), encoding: 'UTF-8' },
+    ftir: { regex: Regexp.new('^.*[+-]?([0-9]*[.])?[0-9]+[,][+-]?([0-9]*[.])?[0-9]+.*$'), encoding: 'UTF-8' },
+    libs: { regex: Regexp.new("^.*Wavelenght[ \t]+Spectrum.*$"), encoding: 'UTF-8' },
+    raman: { regex: Regexp.new("^.*[+-]?([0-9]*[.])?[0-9]+[\t][+-]?([0-9]*[.])?[0-9]+.*$"), encoding: 'UTF-8' },
+    reflectance: { regex: Regexp.new('^.*\/\/Монохроматор: результаты регистрации.*$'.force_encoding('UTF-8'), Regexp::FIXEDENCODING), encoding: 'Windows-1251' }
   }.freeze
 
   default_scope { order(created_at: :desc) }
@@ -113,20 +121,52 @@ class Spectrum < RsdbRecord
     file_format = file.filename.to_s.split('.').last
     case file_format
     when 'dat'
-      xrf_type!
+      if valid_header?(file, :xrf)
+        xrf_type!
+      else
+        other_type!
+      end
     when 'dpt'
-      ftir_type!
+      if valid_header?(file, :ftir)
+        ftir_type!
+      else
+        other_type!
+      end
     when 'spectable'
-      libs_type!
+      if valid_header?(file, :libs)
+        libs_type!
+      else
+        other_type!
+      end
     when 'mon'
-      reflectance_type!
+      if valid_header?(file, :reflectance)
+        reflectance_type!
+      else
+        other_type!
+      end
     when 'txt'
-      raman_type!
+      if valid_header?(file, :raman)
+        raman_type!
+      elsif valid_header?(file, :xrf)
+        xrf_type!
+      else
+        other_type!
+      end
     when 'csv'
       not_set_type!
     else
       other_type!
     end
+  end
+
+  def valid_header?(file, acquisition_method)
+    file_path = ActiveStorage::Blob.service.path_for(file.key)
+    begin
+      header = File.open(file_path, encoding: HEADER_MATCH_TABLE[acquisition_method][:encoding], &:readline)
+    rescue StandardError
+      return false
+    end
+    HEADER_MATCH_TABLE[acquisition_method][:regex].match?(header)
   end
 
   def request_processing(initiator)
