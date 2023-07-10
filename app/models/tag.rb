@@ -4,9 +4,9 @@
 #
 # Table name: tags
 #
+#  created_at :datetime         not null
 #  id         :bigint           not null, primary key
 #  title      :string
-#  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord

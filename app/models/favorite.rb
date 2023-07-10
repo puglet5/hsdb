@@ -4,14 +4,14 @@
 #
 # Table name: favorites
 #
-#  id               :bigint           not null, primary key
-#  favoritable_type :string           not null, indexed => [favoritable_id], indexed => [favoritable_id], indexed => [favoritable_id, favoritor_type, favoritor_id, scope]
-#  favoritable_id   :bigint           not null, indexed => [favoritable_type], indexed => [favoritable_type], indexed => [favoritable_type, favoritor_type, favoritor_id, scope]
-#  favoritor_type   :string           not null, indexed => [favoritor_id], indexed => [favoritor_id], indexed => [favoritable_type, favoritable_id, favoritor_id, scope]
-#  favoritor_id     :bigint           not null, indexed => [favoritor_type], indexed => [favoritor_type], indexed => [favoritable_type, favoritable_id, favoritor_type, scope]
-#  scope            :string           default("favorite"), not null, indexed, indexed => [favoritable_type, favoritable_id, favoritor_type, favoritor_id]
 #  blocked          :boolean          default(FALSE), not null, indexed
 #  created_at       :datetime         not null
+#  favoritable_id   :bigint           not null, indexed => [favoritable_type], indexed => [favoritable_type], indexed => [favoritable_type, favoritor_type, favoritor_id, scope]
+#  favoritable_type :string           not null, indexed => [favoritable_id], indexed => [favoritable_id], indexed => [favoritable_id, favoritor_type, favoritor_id, scope]
+#  favoritor_id     :bigint           not null, indexed => [favoritor_type], indexed => [favoritor_type], indexed => [favoritable_type, favoritable_id, favoritor_type, scope]
+#  favoritor_type   :string           not null, indexed => [favoritor_id], indexed => [favoritor_id], indexed => [favoritable_type, favoritable_id, favoritor_id, scope]
+#  id               :bigint           not null, primary key
+#  scope            :string           default("favorite"), not null, indexed, indexed => [favoritable_type, favoritable_id, favoritor_type, favoritor_id]
 #  updated_at       :datetime         not null
 #
 # Indexes

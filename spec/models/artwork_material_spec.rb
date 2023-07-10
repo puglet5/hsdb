@@ -4,10 +4,10 @@
 #
 # Table name: artwork_materials
 #
-#  id          :bigint           not null, primary key
 #  artwork_id  :bigint           not null, indexed, indexed => [material_id]
-#  material_id :bigint           not null, indexed => [artwork_id], indexed
 #  created_at  :datetime         not null
+#  id          :bigint           not null, primary key
+#  material_id :bigint           not null, indexed => [artwork_id], indexed
 #  updated_at  :datetime         not null
 #
 # Indexes
@@ -18,10 +18,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (artwork_id => artworks.id)
-#  fk_rails_...  (material_id => materials.id)
+#  fk_rails_3f1e6fb54f  (material_id => materials.id)
+#  fk_rails_a316e2fe05  (artwork_id => artworks.id)
 #
-
 RSpec.describe ArtworkMaterial, type: :model do
   describe 'associations' do
     it { should belong_to(:material) }

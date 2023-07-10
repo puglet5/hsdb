@@ -4,16 +4,15 @@
 #
 # Table name: materials
 #
+#  created_at :datetime         not null
 #  id         :bigint           not null, primary key
 #  name       :string           not null, indexed
-#  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
 #
 #  index_materials_on_name  (name) UNIQUE
 #
-
 RSpec.describe Material, type: :model do
   let(:valid_attributes) do
     {

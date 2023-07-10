@@ -4,13 +4,13 @@
 #
 # Table name: replies
 #
+#  created_at    :datetime         not null
+#  discussion_id :integer          indexed
 #  id            :bigint           not null, primary key
 #  reply         :text             not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  discussion_id :integer          indexed
-#  user_id       :integer          indexed
 #  slug          :string
+#  updated_at    :datetime         not null
+#  user_id       :integer          indexed
 #
 # Indexes
 #
@@ -22,7 +22,6 @@
 #  replies_discussion_id_fk  (discussion_id => discussions.id)
 #  replies_user_id_fk        (user_id => users.id)
 #
-
 RSpec.describe Reply, type: :model do
   let(:user) { create(:user) }
   let(:discussion) { create(:discussion) }

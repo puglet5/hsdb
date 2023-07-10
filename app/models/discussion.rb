@@ -4,16 +4,16 @@
 #
 # Table name: discussions
 #
-#  id           :bigint           not null, primary key
-#  title        :string           not null
+#  category_id  :integer          default(2), indexed
 #  content      :text
 #  created_at   :datetime         not null
+#  id           :bigint           not null, primary key
+#  lock_version :integer
+#  pinned       :boolean          default(FALSE)
+#  slug         :string
+#  title        :string           not null
 #  updated_at   :datetime         not null
 #  user_id      :integer          indexed
-#  category_id  :integer          default(2), indexed
-#  slug         :string
-#  pinned       :boolean          default(FALSE)
-#  lock_version :integer
 #
 # Indexes
 #

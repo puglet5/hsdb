@@ -4,19 +4,19 @@
 #
 # Table name: artworks
 #
-#  id           :bigint           not null, primary key
-#  title        :string           not null
-#  description  :text             not null
 #  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  user_id      :integer          indexed
+#  date         :string
+#  description  :text             not null
+#  id           :bigint           not null, primary key
+#  lock_version :integer
+#  metadata     :jsonb            not null, indexed
 #  slug         :string
 #  status       :integer          default("draft")
-#  metadata     :jsonb            not null, indexed
-#  date         :string
-#  survey_date  :date
 #  style_id     :bigint           indexed
-#  lock_version :integer
+#  survey_date  :date
+#  title        :string           not null
+#  updated_at   :datetime         not null
+#  user_id      :integer          indexed
 #
 # Indexes
 #
@@ -27,7 +27,7 @@
 # Foreign Keys
 #
 #  artworks_user_id_fk  (user_id => users.id)
-#  fk_rails_...         (style_id => styles.id)
+#  fk_rails_a8cd17dcba  (style_id => styles.id)
 #
 FactoryBot.define do
   factory :artwork do

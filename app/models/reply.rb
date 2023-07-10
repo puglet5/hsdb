@@ -4,13 +4,13 @@
 #
 # Table name: replies
 #
+#  created_at    :datetime         not null
+#  discussion_id :integer          indexed
 #  id            :bigint           not null, primary key
 #  reply         :text             not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  discussion_id :integer          indexed
-#  user_id       :integer          indexed
 #  slug          :string
+#  updated_at    :datetime         not null
+#  user_id       :integer          indexed
 #
 # Indexes
 #

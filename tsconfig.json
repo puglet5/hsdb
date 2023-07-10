@@ -9,6 +9,7 @@
     "useDefineForClassFields": false,
     "moduleResolution": "nodenext",
     "noEmit": true,
+    "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "baseUrl": "./",
     "outDir": "app/assets/builds",

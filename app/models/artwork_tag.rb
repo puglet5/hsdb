@@ -4,10 +4,10 @@
 #
 # Table name: artwork_tags
 #
-#  id         :bigint           not null, primary key
 #  artwork_id :bigint           not null, indexed, indexed => [tag_id]
-#  tag_id     :bigint           not null, indexed => [artwork_id], indexed
 #  created_at :datetime         not null
+#  id         :bigint           not null, primary key
+#  tag_id     :bigint           not null, indexed => [artwork_id], indexed
 #  updated_at :datetime         not null
 #
 # Indexes
@@ -18,8 +18,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (artwork_id => artworks.id)
-#  fk_rails_...  (tag_id => tags.id)
+#  fk_rails_6e260d7103  (tag_id => tags.id)
+#  fk_rails_f3f5e51fc4  (artwork_id => artworks.id)
 #
 class ArtworkTag < ApplicationRecord
   belongs_to :artwork
