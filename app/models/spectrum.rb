@@ -84,8 +84,9 @@ class Spectrum < RsdbRecord
   before_save { self.plain_text_description = description&.body&.to_plain_text }
   before_save { self.plain_text_equipment = equipment&.body&.to_plain_text }
 
-  after_create :infer_format
-  after_create :infer_category
+  after_create -> { infer_format }
+  after_commit -> { infer_category }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
+
   after_commit :parse_metadata, on: %i[create update]
   after_commit -> { request_processing self }, on: %i[create],
                                                if: lambda { |s|
@@ -164,9 +165,14 @@ class Spectrum < RsdbRecord
     begin
       header = File.open(file_path, encoding: HEADER_MATCH_TABLE[acquisition_method][:encoding], &:readline)
     rescue StandardError
-      return false
+      false
     end
-    HEADER_MATCH_TABLE[acquisition_method][:regex].match?(header)
+
+    begin
+      HEADER_MATCH_TABLE[acquisition_method][:regex].match?(header)
+    rescue StandardError
+      false
+    end
   end
 
   def request_processing(initiator)
