@@ -34,5 +34,15 @@ FactoryBot.define do
     association :sample, factory: :sample, strategy: :build
     association :user, factory: :user, strategy: :build
     metadata { '{"test_key": "test_value"}' }
+
+    trait :with_file do
+      transient do
+        file { 'test.csv' }
+      end
+      after(:build) do |s, e|
+        blob = ActiveStorage::Blob.create_and_upload!(io: Rails.root.join("spec/fixtures/files/spectra/#{e.file}").open, filename: e.file, content_type: 'text/*', metadata: nil)
+        s.file.attach(blob)
+      end
+    end
   end
 end

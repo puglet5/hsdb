@@ -29,6 +29,7 @@
 #
 #  fk_rails_dfa20a7cb9  (sample_id => samples.id)
 #
+
 RSpec.describe Spectrum, type: :model do
   let(:user) { create(:user) }
   let(:sample) { create(:sample) }
@@ -67,6 +68,33 @@ RSpec.describe Spectrum, type: :model do
       expect(valid_spectrum.file.attached?).to eq(false)
       expect(valid_spectrum.processed_file.attached?).to eq(false)
       expect(valid_spectrum.settings.attached?).to eq(false)
+    end
+  end
+
+  describe 'Acquisition method inference' do
+    let!(:xrf_txt_spectrum) { create(:spectrum, :with_file, file: 'xrf.txt') }
+    let!(:xrf_dat_spectrum) { create(:spectrum, :with_file, file: 'xrf.dat') }
+    let!(:ftir_dpt_spectrum) { create(:spectrum, :with_file, file: 'ftir.dpt') }
+    let!(:raman_txt_spectrum) { create(:spectrum, :with_file, file: 'raman.txt') }
+    let!(:libs_spectable_spectrum) { create(:spectrum, :with_file, file: 'libs.spectable') }
+    it 'infers .txt XRF files' do
+      expect(xrf_txt_spectrum.category).to eq('xrf')
+    end
+
+    it 'infers .dat XRF files' do
+      expect(xrf_dat_spectrum.category).to eq('xrf')
+    end
+
+    it 'infers .dpt FTIR files' do
+      expect(ftir_dpt_spectrum.category).to eq('ftir')
+    end
+
+    it 'infers .txt Raman files' do
+      expect(raman_txt_spectrum.category).to eq('raman')
+    end
+
+    it 'infers .spectable LIBS files' do
+      expect(libs_spectable_spectrum.category).to eq('libs')
     end
   end
 
