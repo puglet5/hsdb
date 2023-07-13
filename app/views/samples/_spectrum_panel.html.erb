@@ -25,7 +25,15 @@
       </div>
     </div>
     <div id="controls" class="flex flex-row items-center justify-center mx-1 space-x-1">
+
       <%= render "samples/spectrum_request_processing_button_frame", spectrum: spectrum, sample: sample %>
+
+      <%= tag.div do %>
+        <%= render TooltipComponent.new(tooltip: "Toggle comparison", user: current_user) do %>
+          <%= tag.div data: { compare_target: "toggle", action: "click->compare#toggle", id: spectrum.id } do %>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <% if policy(spectrum).edit? %>
         <%= link_to [:edit, sample, spectrum], data: { turbo_frame: "spectrum_action_modal" } do %>

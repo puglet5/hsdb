@@ -77,8 +77,23 @@
     </div>
     <%= tag.div class: "flex my-auto space-x-2 place-self-end" do %>
       <% if current_user %>
-        <%= tag.div data: { controller: "dropdown" }, class: "my-auto" do %>
-          <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0 text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-controller-target="toggle" data-action="click->dropdown#toggle">
+
+        <%= tag.div class: "my-auto" do %>
+          <a data-compare-target="anchor" class="relative hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-scale text-primary-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M7 20l10 0"></path>
+              <path d="M6 6l6 -1l6 1"></path>
+              <path d="M12 3l0 17"></path>
+              <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0"></path>
+              <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0"></path>
+            </svg>
+            <span data-compare-target="count" class="absolute hidden text-xs font-medium text-gray-700 top-1/2 right-1/2">2</span>
+          </a>
+        <% end %>
+
+        <%= tag.div data: { controller: "dropdown" } do %>
+          <button type="button" class="flex mx-0 text-sm bg-white rounded-full md:mr-0 text-primary-300 hover:text-primary-500 <%= active_style url_for(current_user), "!text-primary-500 " %> <%= active_style "/edit", "!text-primary-500 " %>" aria-expanded="false" data-action="click->dropdown#toggle">
             <span class="sr-only">Open user menu</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

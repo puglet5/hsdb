@@ -112,7 +112,6 @@ export default class extends Controller {
   reverseXAxis: boolean = this.axesSpecValue["reverse"]
 
   connect() {
-    console.log(this.axesSpecValue)
     if (this.compareValue) {
       this.disableControls()
       this.visualize()
