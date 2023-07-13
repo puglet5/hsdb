@@ -52,7 +52,7 @@ gem 'simple_form', '~> 5.1' # form helpers
 gem 'stimulus-rails', '~> 1.1'
 gem 'turbo-rails', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'view_component', '~> 2.62'
+gem 'view_component', '~> 3.4'
 
 gem 'client_side_validations', '~> 21.0'
 gem 'client_side_validations-simple_form', '~> 15.0'
@@ -89,9 +89,9 @@ group :test do
 end
 
 group :development, :test do
-  gem 'better_errors', '< 2.10'
+  gem 'better_errors', '~> 2.10', '>= 2.10.1'
   gem 'binding_of_caller', '~> 1.0' # for better_errors
-  gem 'brakeman', '~> 5.2'
+  gem 'brakeman', '~> 6.0'
   gem 'bundler-audit', '~> 0.9.1'
   gem 'capybara'
   gem 'database_cleaner-active_record'
