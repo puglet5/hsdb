@@ -27,5 +27,17 @@
       <%= render "shared/back_to_top" %>
     </main>
     <%= render "shared/application_footer" %>
+
+    <%# datepicker fix %>
+    <div class="hidden">
+      <div class="days">
+        <div class="grid flex-1 block grid-cols-7 mb-1 text-sm font-semibold leading-9 text-center text-gray-900 border-0 rounded-lg cursor-default days-of-week dow"></div>
+        <div class="grid flex-1 block w-64 h-6 grid-cols-7 text-sm font-medium font-semibold leading-6 leading-9 text-center text-gray-500 text-gray-900 border-0 rounded-lg cursor-default datepicker-grid dark:text-gray-400"></div>
+      </div>
+      <div class="calendar-weeks">
+        <div class="flex days-of-week"><span class="h-6 text-sm font-medium leading-6 text-gray-500 dow dark:text-gray-400"></span></div>
+        <div class="flex-1 block text-sm font-semibold leading-9 text-center text-gray-900 border-0 rounded-lg cursor-default weeks week"></div>
+      </div>
+    </div>
   </body>
 <% end %>
