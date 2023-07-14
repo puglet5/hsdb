@@ -28,6 +28,9 @@ export default class extends Controller {
   spectraIdsValue: number[]
 
   initialize() {
+    if (!localStorage.getItem("compareIds")) {
+      localStorage.setItem("compareIds", "[]")
+    }
     this.spectraIdsValue = JSON.parse(localStorage.getItem("compareIds")) as number[]
   }
 
@@ -48,7 +51,6 @@ export default class extends Controller {
   }
 
   toggleTargetConnected(e: HTMLDivElement){
-    console.log(+e.dataset.id, this.spectraIdsValue.includes(+e.dataset.id))
     if (this.spectraIdsValue.includes(+e.dataset.id)) {
       e.innerHTML = removeIcon
     } else {
