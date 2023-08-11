@@ -28,9 +28,6 @@ export default class extends Controller {
   spectraIdsValue: number[]
 
   initialize() {
-    if (!localStorage.getItem("compareIds")) {
-      localStorage.setItem("compareIds", "[]")
-    }
     this.spectraIdsValue = JSON.parse(localStorage.getItem("compareIds")) as number[]
   }
 
@@ -50,7 +47,8 @@ export default class extends Controller {
     }
   }
 
-  toggleTargetConnected(e: HTMLDivElement){
+  toggleTargetConnected(e: HTMLDivElement) {
+    console.log(+e.dataset.id, this.spectraIdsValue.includes(+e.dataset.id))
     if (this.spectraIdsValue.includes(+e.dataset.id)) {
       e.innerHTML = removeIcon
     } else {
@@ -59,7 +57,7 @@ export default class extends Controller {
   }
 
   composeUrl() {
-    const params = this.spectraIdsValue.map(e=>`ids[]=${e}`).join("&")
+    const params = this.spectraIdsValue.map(e => `ids[]=${e}`).join("&")
     const url = `${window.location.origin}/samples/compare/?${params}`
     this.anchorTarget.href = url
   }
@@ -67,7 +65,7 @@ export default class extends Controller {
   toggle(e) {
     const id = +e.currentTarget.dataset.id
     if (this.spectraIdsValue.includes(id)) {
-      this.spectraIdsValue = this.spectraIdsValue.filter(e=>e!==id)
+      this.spectraIdsValue = this.spectraIdsValue.filter(e => e !== id)
       e.currentTarget.innerHTML = addIcon
     } else {
       this.spectraIdsValue = [...this.spectraIdsValue, id]
