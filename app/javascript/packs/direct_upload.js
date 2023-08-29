@@ -1,14 +1,8 @@
 
 addEventListener("direct-upload:initialize", event => {
   const { target, detail } = event
-  // eslint-disable-next-line no-unused-vars
-  const { id, file } = detail
-  // target.insertAdjacentHTML("beforebegin", `
-  //   <div id="direct-upload-${id}" class="direct-upload direct-upload--pending">
-  //     <div id="direct-upload-progress-${id}" class="direct-upload__progress" style="width: 0%"></div>
-  //     <span class="direct-upload__filename"></span>
-  //   </div>
-  // `)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { _, file } = detail
   target.previousElementSibling.querySelector(".direct-upload__filename").textContent = file.name
 })
 
