@@ -10,7 +10,7 @@ class SamplesController < ApplicationController
   breadcrumb 'Samples', :samples, match: :exclusive
 
   def index
-    samples = Sample.all.order('created_at asc')
+    samples = Sample.order('created_at asc')
 
     authorize samples
 

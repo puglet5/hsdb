@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   breadcrumb 'Forum', :discussions_path, match: :exact, only: %i[show new edit]
 
   def index
-    @discussions = Discussion.all.includes(%i[user category rich_text_content replies]).order('created_at desc')
+    @discussions = Discussion.includes(%i[user category rich_text_content replies]).order('created_at desc')
     @discussions_unpinned = @discussions.where(pinned: false).order('created_at desc')
     @discussions_pinned = @discussions.where(pinned: true).order('created_at desc')
   end
@@ -58,7 +58,7 @@ class CategoriesController < ApplicationController
   end
 
   def fetch_categories
-    @categories = Category.all.includes([:discussions]).order('created_at asc')
+    @categories = Category.includes([:discussions]).order('created_at asc')
   end
 
   def category_params

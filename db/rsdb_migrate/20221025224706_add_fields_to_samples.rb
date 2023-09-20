@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AddFieldsToSamples < ActiveRecord::Migration[7.0]
+  # rubocop:disable Rails/BulkChangeTable
   def change
     add_column :samples, :cas_no, :string
     add_column :samples, :cas_name, :string
@@ -11,4 +12,5 @@ class AddFieldsToSamples < ActiveRecord::Migration[7.0]
     add_column :samples, :location, :string
     add_column :samples, :survey_date, :date
   end
+  # rubocop:enable Rails/BulkChangeTable
 end
