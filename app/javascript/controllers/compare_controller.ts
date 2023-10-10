@@ -28,7 +28,7 @@ export default class extends Controller {
   spectraIdsValue: number[]
 
   initialize() {
-    this.spectraIdsValue = JSON.parse(localStorage.getItem("compareIds")) as number[]
+    this.spectraIdsValue = JSON.parse(localStorage.getItem("compareIds")) as number[] ?? []
   }
 
   connect() {
@@ -36,7 +36,7 @@ export default class extends Controller {
   }
 
   showLink() {
-    if (this.spectraIdsValue.length) {
+    if (this.spectraIdsValue?.length) {
       this.anchorTarget.classList.remove("hidden")
       this.countTarget.classList.remove("hidden")
       this.countTarget.innerHTML = this.spectraIdsValue.length.toString()
