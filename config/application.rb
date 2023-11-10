@@ -19,7 +19,7 @@ Bundler.require(*Rails.groups)
 
 module HSDB
   class Application < Rails::Application
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
     config.i18n.available_locales = %i[en ru]
     config.i18n.default_locale = :en

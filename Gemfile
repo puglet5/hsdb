@@ -11,7 +11,7 @@ gem 'active_storage-send_zip', '~> 0.3.4'
 gem 'activestorage-validator', '~> 0.3'
 gem 'acts_as_favoritor', '~> 6.0'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'caxlsx', '~> 3.2' # .xlsx generation
+gem 'caxlsx', '~> 4.0' # .xlsx generation
 gem 'caxlsx_rails', '~> 0.6.3'
 gem 'cssbundling-rails', '~> 1.0'
 gem 'devise', '~> 4.8', '>= 4.8.1'
@@ -34,11 +34,11 @@ gem 'mini_magick', '~> 4.11' # image processing
 gem 'pagy', '~> 6.0' # pagination
 gem 'pg', '~> 1.4' # postgres
 gem 'propshaft', '~> 0.6' # asset delivery
-gem 'puma', '>= 5.6.4'
+gem 'puma', '~> 6.4'
 gem 'pundit', '~> 2.1' # authorization / policies
 gem 'rack-cors', '~> 2.0'
 gem 'rack-mini-profiler', '~> 3.0'
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.1'
 gem 'rails-i18n', '~> 7.0.4'
 gem 'ransack', '~> 3.2.1' # object-based searching
 gem 'redis', '~> 5.0'
@@ -80,11 +80,8 @@ end
 group :test do
   gem 'pundit-matchers', '~> 3.1' # policy matchers
   gem 'rails-controller-testing', '~> 1.0'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.1' # rails matchers for common tasks
   gem 'simplecov', '~> 0.22' # code coverage reporter
-  gem 'webdrivers'
-  gem 'webmock'
 end
 
 group :development, :test do
@@ -105,7 +102,7 @@ group :development, :test do
 end
 
 gem 'capistrano', '~> 3.17'
-gem 'capistrano3-puma', '~> 5'
+gem 'capistrano3-puma', '6.0.0.beta.1'
 gem 'capistrano-bundler', '~> 2.1'
 gem 'capistrano-git-with-submodules', '~> 2.0'
 gem 'capistrano-rails', '~> 1.6'
