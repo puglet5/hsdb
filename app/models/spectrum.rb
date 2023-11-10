@@ -148,7 +148,7 @@ class Spectrum < RsdbRecord
         other_type!
       end
     when 'xy'
-        xrd_type!
+      xrd_type!
     when 'txt'
       if valid_header?(file, :raman)
         raman_type!
