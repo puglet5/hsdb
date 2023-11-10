@@ -40,7 +40,6 @@ gem 'rack-cors', '~> 2.0'
 gem 'rack-mini-profiler', '~> 3.0'
 gem 'rails', '~> 7.0.4'
 gem 'rails-i18n', '~> 7.0.4'
-gem 'rails_semantic_logger', '~> 4.10'
 gem 'ransack', '~> 3.2.1' # object-based searching
 gem 'redis', '~> 5.0'
 gem 'redis-client', '~> 0.14'
