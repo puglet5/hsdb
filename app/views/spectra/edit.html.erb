@@ -24,6 +24,16 @@
                 <%= f.input :category, default: @spectrum.category, collection: SpectraHelper::HUMANIZED_CATEGORIES_COLLECTION, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600 peer" }, hint: false, label: false %>
               </div>
 
+              <div>
+                <%= render Forms::LabelComponent.new(optional: true).with_content("Sample thickness (mm)") %>
+                <%= f.input :sample_thickness, as: :float, input_html: { class: "w-full p-4 pr-6 text-sm border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-primary-500 focus:border-primary-600", min: 0, step: 0.1 }, error_html: { data: { controller: 'flash', 'flash-target': 'flash' } }, placeholder: "3.61", required: false, disabled: false, readonly: false, hint: false, label: false, error: false %>
+              </div>
+
+              <div class="flex my-auto space-x-2">
+                <%= f.input :is_reference, default: false, input_html: { class: "w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500" } %>
+                <%= render Forms::LabelComponent.new(optional: true, cls: "!mb-0").with_content("Reference spectrum") %>
+              </div>
+
               <div class="col-span-2 mb-4">
                 <%= render Forms::LabelComponent.new().with_content("Description") %>
                 <%= render Forms::TextInputComponent.new(form: f, as: :rich_text_area, field: :description, required: false, placeholder: "General description") %>

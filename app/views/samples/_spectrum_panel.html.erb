@@ -6,21 +6,21 @@
         <path d="M8 4h-3v16h3"></path>
         <path d="M16 4h3v16h-3"></path>
       </svg>
-      <div class="flex space-x-1 text-gray-700">
-        <span class="my-auto">
-          <%= ApplicationHelper.humanize_range spectrum.range %>
-        </span>
-        <div class="my-auto">
-          &middot;
-        </div>
-        <span class="my-auto">
+      <div class="flex text-gray-700">
+        <span class="my-auto mr-2 text-sm font-medium text-gray-500">
           <%= ApplicationHelper.humanize_category spectrum.category %>
         </span>
-        <div class="my-auto">
+        <div class="my-auto mr-2 text-sm text-gray-500">
           &middot;
         </div>
-        <span class="my-auto">
+        <span class="my-auto mr-2 text-xs font-medium text-gray-500">
           <%= ApplicationHelper.humanize_file_format spectrum.format %>
+        </span>
+        <div class="my-auto mr-2 text-sm text-gray-500">
+          &middot;
+        </div>
+        <span class="my-auto mr-2 text-xs font-medium text-gray-500">
+          id: <%= spectrum.id %>
         </span>
       </div>
     </div>
