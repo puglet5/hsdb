@@ -46,7 +46,7 @@ class SpectrumSerializer < ActiveModel::Serializer
     attributes :id, :title
   end
 
-  attributes :id, :format, :status, :category, :range, :metadata
+  attributes :id, :format, :status, :category, :range, :metadata, :sample_thickness, :is_reference
   attributes :file_url
   attributes :filename
 
