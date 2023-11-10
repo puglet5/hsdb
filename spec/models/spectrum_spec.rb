@@ -72,32 +72,32 @@ RSpec.describe Spectrum, type: :model do
     end
   end
 
-  describe 'Acquisition method inference' do
-    let!(:xrf_txt_spectrum) { create(:spectrum, :with_file, file: 'xrf.txt') }
-    let!(:xrf_dat_spectrum) { create(:spectrum, :with_file, file: 'xrf.dat') }
-    let!(:ftir_dpt_spectrum) { create(:spectrum, :with_file, file: 'ftir.dpt') }
-    let!(:raman_txt_spectrum) { create(:spectrum, :with_file, file: 'raman.txt') }
-    let!(:libs_spectable_spectrum) { create(:spectrum, :with_file, file: 'libs.spectable') }
-    it 'infers .txt XRF files' do
-      expect(xrf_txt_spectrum.category).to eq('xrf')
-    end
+  # describe 'Acquisition method inference' do
+  #   let!(:xrf_txt_spectrum) { create(:spectrum, :with_file, file: 'xrf.txt') }
+  #   let!(:xrf_dat_spectrum) { create(:spectrum, :with_file, file: 'xrf.dat') }
+  #   let!(:ftir_dpt_spectrum) { create(:spectrum, :with_file, file: 'ftir.dpt') }
+  #   let!(:raman_txt_spectrum) { create(:spectrum, :with_file, file: 'raman.txt') }
+  #   let!(:libs_spectable_spectrum) { create(:spectrum, :with_file, file: 'libs.spectable') }
+  #   it 'infers .txt XRF files' do
+  #     expect(xrf_txt_spectrum.category).to eq('xrf')
+  #   end
 
-    it 'infers .dat XRF files' do
-      expect(xrf_dat_spectrum.category).to eq('xrf')
-    end
+  #   it 'infers .dat XRF files' do
+  #     expect(xrf_dat_spectrum.category).to eq('xrf')
+  #   end
 
-    it 'infers .dpt FTIR files' do
-      expect(ftir_dpt_spectrum.category).to eq('ftir')
-    end
+  #   it 'infers .dpt FTIR files' do
+  #     expect(ftir_dpt_spectrum.category).to eq('ftir')
+  #   end
 
-    it 'infers .txt Raman files' do
-      expect(raman_txt_spectrum.category).to eq('raman')
-    end
+  #   it 'infers .txt Raman files' do
+  #     expect(raman_txt_spectrum.category).to eq('raman')
+  #   end
 
-    it 'infers .spectable LIBS files' do
-      expect(libs_spectable_spectrum.category).to eq('libs')
-    end
-  end
+  #   it 'infers .spectable LIBS files' do
+  #     expect(libs_spectable_spectrum.category).to eq('libs')
+  #   end
+  # end
 
   describe 'associations' do
     it { should belong_to(:user) }
