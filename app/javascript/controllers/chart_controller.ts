@@ -21,6 +21,7 @@ interface Peak {
 interface AxesSpec {
   labels: string[]
   reverse: boolean
+  y_min: number | null
 }
 
 declare global {
@@ -233,7 +234,7 @@ export default class extends Controller {
                 text: this.transmissionPlot ? "Transmission, %" : this.axesSpecValue["labels"][1],
                 display: true
               },
-              min: 0,
+              min: this.axesSpecValue["y_min"],
               grid: {
                 color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
                 tickBorderDash: [0, 0],
