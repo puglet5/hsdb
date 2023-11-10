@@ -9,11 +9,13 @@
 #  filename               :string
 #  format                 :integer          default("not_set"), not null
 #  id                     :bigint           not null, primary key
+#  is_reference           :boolean          default(FALSE)
 #  metadata               :jsonb            not null, indexed
 #  plain_text_description :text
 #  plain_text_equipment   :text
 #  range                  :integer          default("not_set"), not null
 #  sample_id              :bigint           not null, indexed
+#  sample_thickness       :float
 #  status                 :integer          default("none"), not null
 #  task_id                :string
 #  updated_at             :datetime         not null
