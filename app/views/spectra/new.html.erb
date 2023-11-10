@@ -45,7 +45,7 @@
                   uploads_target: "div",
                   uploads_filetype_value: "files",
                   uploads_allowmultiplefiles_value: false,
-                  uploads_allowedfiletypes_value: [".dpt", "text/*", ".raw", ".mon", ".csv", ".spectable", ".txt", ".dat"],
+                  uploads_allowedfiletypes_value: [".dpt", "text/*", ".raw", ".mon", ".csv", ".spectable", ".txt", ".dat", ".xy", ".spec"],
                   uploads_generatethumbnails_value: current_user.settings(:uploading).thumbnails
                   } do %>
                   <%= render Forms::LabelComponent.new().with_content("Spectrum file") %>

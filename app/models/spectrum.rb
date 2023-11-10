@@ -69,7 +69,7 @@ class Spectrum < RsdbRecord
 
   enum range: { not_set: 0, vis: 1, ir: 2, uv: 3, other: 4 }, _default: :not_set
 
-  enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, dpt: 7, other: 99 }, _default: :not_set, _suffix: :format
+  enum format: { not_set: 0, csv: 1, imp: 2, spectable: 3, mon: 4, txt: 5, dat: 6, dpt: 7, xy: 8, spec: 9, other: 99 }, _default: :not_set, _suffix: :format
 
   enum category: { not_set: 0, xrf: 1, xrd: 2, ftir: 3, libs: 4, raman: 5, thz: 6, reflectance: 7, other: 99 }, _default: :not_set, _suffix: :type
 
@@ -139,12 +139,16 @@ class Spectrum < RsdbRecord
       else
         other_type!
       end
+    when 'spec'
+      libs_type!
     when 'mon'
       if valid_header?(file, :reflectance)
         reflectance_type!
       else
         other_type!
       end
+    when 'xy'
+        xrd_type!
     when 'txt'
       if valid_header?(file, :raman)
         raman_type!
