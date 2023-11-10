@@ -9,7 +9,7 @@
           <path d="M4 12v6a8 3 0 0 0 16 0v-6"></path>
         </svg>
         <p class="hidden lg:block">
-          <% unless Rails.application.routes.recognize_path(:samples)[:controller] == params[:controller] %>
+          <% unless Rails.application.routes.recognize_path("samples")[:controller] == params[:controller] %>
             ITMO Heritage Science DB
           <% else %>
             ITMO Reference Spectra DB

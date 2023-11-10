@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def get_controller(url)
-    Rails.application.routes.recognize_path(url)[:controller]
+    Rails.application.routes.recognize_path(url.to_s)[:controller]
   end
 
   def active?(controller, url, klass)
