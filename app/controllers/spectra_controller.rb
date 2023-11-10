@@ -112,7 +112,9 @@ class SpectraController < ApplicationController
       :metadata,
       :description,
       :equipment,
-      :settings
+      :settings,
+      :sample_thickness,
+      :is_reference
     )
   end
 

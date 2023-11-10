@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_163506) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_212412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_163506) do
     t.text "plain_text_equipment"
     t.string "task_id"
     t.boolean "is_reference", default: false
+    t.float "sample_thickness"
     t.index ["metadata"], name: "index_spectra_on_metadata", using: :gin
     t.index ["sample_id"], name: "index_spectra_on_sample_id"
     t.index ["user_id"], name: "index_spectra_on_user_id"
