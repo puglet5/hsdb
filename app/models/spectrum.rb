@@ -38,7 +38,7 @@ class Spectrum < RsdbRecord
 
   AXES_SPEC = {
     not_set: { labels: ['', ''], reverse: false, peak_label_precision: 0, y_min: 0 },
-    xrf: { labels: ['Energy, kEv', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
+    xrf: { labels: ['Energy, keV', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
     xrd: { labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
     ftir: { labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true, peak_label_precision: 0, y_min: 0 },
     libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
