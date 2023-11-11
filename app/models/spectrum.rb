@@ -60,6 +60,7 @@ class Spectrum < RsdbRecord
   scope :by_status, ->(status) { where(status: status) }
   scope :by_format, ->(format) { where(format: format) }
   scope :by_range,  ->(range)  { where(range: range) }
+  scope :by_sample_id, ->(sample_id) { where(sample_id: sample_id) }
 
   # dates are passed in ISO 8601 format, i.e. YYYY-MM-DD.
   scope :by_created_at_period, ->(start_date, end_date) { where('created_at BETWEEN ? and ?', start_date, end_date) }

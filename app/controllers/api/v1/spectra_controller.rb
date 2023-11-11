@@ -6,6 +6,7 @@ module Api
       has_scope :by_status
       has_scope :by_range
       has_scope :by_format
+      has_scope :by_sample_id
 
       def index
         @spectra = apply_scopes(Spectrum).all
