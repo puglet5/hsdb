@@ -1,64 +1,71 @@
 <%= simple_form_for @user, url: update_settings_user_path, html: { method: :patch }, validate: true, data: { turbo: false } do |f| %>
-  <div class="mb-4">
-    <div class="flex items-center">
-      <%= hidden_field_tag "user[settings[uploading][thumbnails]]", false %>
-      <% checked =  @user.settings(:uploading).thumbnails ? "checked" : 0 %>
-      <%= f.check_box "settings[uploading][thumbnails]", {multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
-      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Thumbnail generation</label>
-    </div>
-    <%= render Forms::PHelperComponent.new().with_content("Disable thumbnail generation when uploading images if you experience any problems") %>
-  </div>
 
-  <div class="mb-4">
-    <%= render Forms::LabelComponent.new().with_content("Artworks per page") %>
-    <%= fields_for "user[settings[pagination]]" do |sf| %>
-      <%= sf.number_field :per, { min: 5, max: 50, value: @user.settings(:pagination).per, class: "block w-1/3 text-sm text-gray-700 border border-gray-300 rounded-md select-none bg-gray-50 focus:ring-primary-500 focus:border-primary-600 p-2.5 ", onKeyDown: "return false"} %>
+  <%= f.fields_for :settings do |s| %>
+    <div class="mb-4">
+      <div class="flex items-center">
+        <%= s.fields_for :uploading do |su| %>
+          <% checked = @user.settings(:uploading).thumbnails ? "checked" : 0 %>
+          <%= su.check_box :thumbnails, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Thumbnail generation</label>
+
+        <% end %>
+      </div>
+      <%= render Forms::PHelperComponent.new().with_content("Disable thumbnail generation when uploading images if you experience any problems") %>
+    </div>
+
+    <div class="mb-4">
+      <%= render Forms::LabelComponent.new().with_content("Artworks per page") %>
+      <%= s.fields_for :pagination do |sp| %>
+        <%= sp.number_field :per, { min: 5, max: 50, value: @user.settings(:pagination).per, class: "block w-1/3 text-sm text-gray-700 border border-gray-300 rounded-md select-none bg-gray-50 focus:ring-primary-500 focus:border-primary-600 p-2.5 ", onKeyDown: "return false"} %>
+      <% end %>
+      <%= render Forms::PHelperComponent.new().with_content("Controls the number of upload cards to be displayed on the index page") %>
+    </div>
+
+    <div class="mb-4">
+      <div class="flex items-center">
+        <%= s.fields_for :processing do |sp| %>
+          <% checked = @user.settings(:processing).enabled ? "checked" : 0 %>
+          <%= sp.check_box :enabled, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Automatic spectra processing</label>
+        <% end %>
+      </div>
+      <%= render Forms::PHelperComponent.new().with_content("Enables automatic processing for uploaded spectra files. Disabled by default.") %>
+    </div>
+
+    <%= s.fields_for :ui do |su| %>
+      <div class="mb-4">
+        <div class="flex items-center">
+          <% checked = @user.settings(:ui).tooltips ? "checked" : 0 %>
+          <%= su.check_box :tooltips, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Informational tooltips</label>
+        </div>
+        <%= render Forms::PHelperComponent.new().with_content("Toggles tooltips and popovers") %>
+      </div>
+
+      <div class="mb-4">
+        <div class="flex items-center">
+          <% checked = @user.settings(:ui).breadcrumbs ? "checked" : 0 %>
+          <%= su.check_box :breadcrumbs, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Breadcrumbs</label>
+        </div>
+        <%= render Forms::PHelperComponent.new().with_content("Toggles navigation breadcrumbs") %>
+      </div>
+
+      <div class="mb-4">
+        <div class="flex items-center">
+          <% checked = @user.settings(:ui).dark ? "checked" : 0 %>
+          <%= su.check_box :dark, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
+          <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Dark mode (experimental)</label>
+
+        </div>
+        <%= render Forms::PHelperComponent.new().with_content("Enables dark mode on the website") %>
+      </div>
     <% end %>
-    <%= render Forms::PHelperComponent.new().with_content("Controls the number of upload cards to be displayed on the index page") %>
-  </div>
 
-  <div class="mb-4">
-    <div class="flex items-center">
-      <%= hidden_field_tag "user[settings[processing][enabled]]", false %>
-      <% checked =  @user.settings(:processing).enabled ? "checked" : 0 %>
-      <%= f.check_box "settings[processing][enabled]", {multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
-      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Automatic spectra processing</label>
+    <div class="mb-4">
+      <%= render Forms::SubmitComponent.new(form: f, cls: "text-xs !p-2 !m-0") do %>
+        Update settings
+      <% end %>
     </div>
-    <%= render Forms::PHelperComponent.new().with_content("Enables automatic processing for uploaded spectra files. Disabled by default.") %>
-  </div>
-
-  <div class="mb-4">
-    <div class="flex items-center">
-      <%= hidden_field_tag "user[settings[ui][tooltips]]", false %>
-      <% checked =  @user.settings(:ui).tooltips ? "checked" : 0 %>
-      <%= f.check_box "settings[ui][tooltips]", { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
-      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Informational tooltips</label>
-    </div>
-    <%= render Forms::PHelperComponent.new().with_content("Toggles tooltips and popovers") %>
-  </div>
-
-  <div class="mb-4">
-    <div class="flex items-center">
-      <%= hidden_field_tag "user[settings[ui][breadcrumbs]]", false %>
-      <% checked =  @user.settings(:ui).breadcrumbs ? "checked" : 0 %>
-      <%= f.check_box "settings[ui][breadcrumbs]", { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
-      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Breadcrumbs</label>
-    </div>
-    <%= render Forms::PHelperComponent.new().with_content("Toggles navigation breadcrumbs") %>
-  </div>
-
-  <div class="mb-4">
-    <div class="flex items-center">
-      <%= hidden_field_tag "user[settings[ui][dark]]", false %>
-      <% checked =  @user.settings(:ui).dark ? "checked" : 0 %>
-      <%= f.check_box "settings[ui][dark]", { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked }, true, false %>
-      <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Dark mode (experimental)</label>
-    </div>
-    <%= render Forms::PHelperComponent.new().with_content("Enables dark mode on the website") %>
-  </div>
-  <div class="mb-4">
-    <%= render Forms::SubmitComponent.new(form: f, cls: "text-xs !p-2 !m-0") do %>
-      Update settings
-    <% end %>
-  </div>
+  <% end %>
 <% end %>
