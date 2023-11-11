@@ -109,10 +109,11 @@ export default class extends Controller {
   transmissionPlot = false
   showLabels = true
   cubicInterpolationMode: string | undefined = undefined
-  displayLabelValues: number[][] = this.labelsValue.map(e => e.map(o => o.position).map(Number))
+  displayLabelValues: number[][] = this.labelsValue?.map(e => e?.map(o => o.position).map(Number)) ?? []
   reverseXAxis: boolean = this.axesSpecValue["reverse"]
 
   connect() {
+    console.log(this.labelsValue)
     if (this.compareValue) {
       this.disableControls()
       this.visualize()
@@ -192,7 +193,7 @@ export default class extends Controller {
               },
               display: (context) => {
                 if (this.showLabels)
-                  return (this.displayLabelValues[i].includes(context.dataIndex) ? "auto" : false)
+                  return (this.displayLabelValues[i]?.includes(context.dataIndex) ? "auto" : false)
                 else
                   return false
               },
