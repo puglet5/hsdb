@@ -419,6 +419,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbs (2.8.4)
+    rchardet (1.8.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
     redis (5.0.8)
@@ -643,6 +644,7 @@ DEPENDENCIES
   rails-erd
   rails-i18n (~> 7.0.4)
   ransack (~> 3.2.1)
+  rchardet (~> 1.8)
   redis (~> 5.0)
   redis-client (~> 0.14)
   rolify (~> 6.0)

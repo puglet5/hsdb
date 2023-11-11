@@ -41,6 +41,7 @@ gem 'rack-mini-profiler', '~> 3.0'
 gem 'rails', '~> 7.1'
 gem 'rails-i18n', '~> 7.0.4'
 gem 'ransack', '~> 3.2.1' # object-based searching
+gem 'rchardet', '~> 1.8'
 gem 'redis', '~> 5.0'
 gem 'redis-client', '~> 0.14'
 gem 'rolify', '~> 6.0' # user roles

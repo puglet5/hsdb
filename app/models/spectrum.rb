@@ -31,6 +31,9 @@
 #
 #  fk_rails_dfa20a7cb9  (sample_id => samples.id)
 #
+
+require 'rchardet'
+
 class Spectrum < RsdbRecord
   include Authorship
   include CustomValidations
@@ -49,11 +52,71 @@ class Spectrum < RsdbRecord
   }.freeze
 
   HEADER_MATCH_TABLE = {
-    xrf: { regex: Regexp.new('^.*[+-]?([0-9]*[.])?[0-9]+[ \t]+[+-]?([0-9]*[.])?[0-9]+.*$'), encoding: 'UTF-8' },
-    ftir: { regex: Regexp.new('^.*[+-]?([0-9]*[.])?[0-9]+[,][+-]?([0-9]*[.])?[0-9]+.*$'), encoding: 'UTF-8' },
-    libs: { regex: Regexp.new("^.*Wavelenght[ \t]+Spectrum.*$"), encoding: 'UTF-8' },
-    raman: { regex: Regexp.new("^.*[+-]?([0-9]*[.])?[0-9]+[\t][+-]?([0-9]*[.])?[0-9]+.*$"), encoding: 'UTF-8' },
-    reflectance: { regex: Regexp.new('^.*\/\/Монохроматор: результаты регистрации.*$'.force_encoding('UTF-8'), Regexp::FIXEDENCODING), encoding: 'Windows-1251' }
+    libs_spectable: {
+      regex_lines: [
+        Regexp.new("^Wavelenght[ \t]+Spectrum$"),
+        Regexp.new("^Integration delay[ \t]+[+-]?([0-9]*[,])?[0-9]+$"),
+        Regexp.new("^[+-]?([0-9]*[,])?[0-9]+\t[+-]?([0-9]*[,])?[0-9]+$")
+      ]
+    },
+    libs_spec: {
+      regex_lines: [
+        Regexp.new('^[0-9]+$'),
+        Regexp.new('^[0-9]+$'),
+        Regexp.new("^[+-]?([0-9]*[,])?[0-9]+[ \t]+[+-]?([0-9]*[,])?[0-9]+$")
+      ]
+    },
+    reflectance_mon: {
+      regex_lines: [Regexp.new('^//Монохроматор: результаты регистрации$'.force_encoding(Encoding::UTF_8), Regexp::FIXEDENCODING)]
+    },
+    reflectance_csv: {
+      regex_lines: [
+        Regexp.new('^nm; ((%R)|A)$'),
+        Regexp.new('[+-]?([0-9]*[,])?[0-9]+; [+-]?([0-9]*[,])?[0-9]+'),
+        Regexp.new('[+-]?([0-9]*[,])?[0-9]+; [+-]?([0-9]*[,])?[0-9]+')
+      ]
+    },
+    raman_txt: {
+      regex_lines: [Regexp.new("^[+-]?([0-9]*[.])?[0-9]+[\t][+-]?([0-9]*[.])?[0-9]+$")]
+    },
+    ftir_dpt: {
+      regex_lines: [Regexp.new('^[+-]?([0-9]*[.])?[0-9]+[,][+-]?([0-9]*[.])?[0-9]+$')]
+    },
+    xrd_txt: {
+      regex_lines: [
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ +[0-9]+$'),
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ +[0-9]+$'),
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ +[0-9]+$')
+      ]
+    },
+    xrf_txt: {
+      regex_lines: [
+        Regexp.new("^[+-]?([0-9]*[.])?[0-9]+\t +[+-]?([0-9]*[.])?[0-9]+$"),
+        Regexp.new("^[+-]?([0-9]*[.])?[0-9]+\t +[+-]?([0-9]*[.])?[0-9]+$"),
+        Regexp.new("^[+-]?([0-9]*[.])?[0-9]+\t +[+-]?([0-9]*[.])?[0-9]+$")
+      ]
+    },
+    xrf_dat: {
+      regex_lines: [
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ [+-]?([0-9]*[.])?[0-9]+$'),
+        Regexp.new('^[0-9]+$'),
+        Regexp.new('^[0-9]+$')
+      ]
+    },
+    xrd_xy: {
+      regex_lines: [
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ [+-]?([0-9]*[.])?[0-9]+$'),
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ [+-]?([0-9]*[.])?[0-9]+$'),
+        Regexp.new('^[+-]?([0-9]*[.])?[0-9]+ [+-]?([0-9]*[.])?[0-9]+$')
+      ]
+    },
+    thz_txt: {
+      regex_lines: [
+        Regexp.new("^[+-]?([0-9]*[,])?[0-9]+\t[+-]?([0-9]*[,])?[0-9]+$"),
+        Regexp.new("^[+-]?([0-9]*[,])?[0-9]+\t[+-]?([0-9]*[,])?[0-9]+$"),
+        Regexp.new("^[+-]?([0-9]*[,])?[0-9]+\t[+-]?([0-9]*[,])?[0-9]+$")
+      ]
+    }
   }.freeze
 
   default_scope { order(created_at: :desc) }
@@ -88,7 +151,7 @@ class Spectrum < RsdbRecord
   before_save { self.plain_text_equipment = equipment&.body&.to_plain_text }
 
   after_create -> { infer_format }
-  # after_commit -> { infer_category }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
+  after_commit -> { infer_type }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
 
   after_commit :parse_metadata, on: %i[create update]
   after_commit -> { request_processing self }, on: %i[create],
@@ -119,66 +182,24 @@ class Spectrum < RsdbRecord
     end
   end
 
-  def infer_category
+  def infer_type
     return unless file.attached? || !not_set_type?
 
-    file_format = file.filename.to_s.split('.').last
-    case file_format
-    when 'dat'
-      if valid_header?(file, :xrf)
-        xrf_type!
-      else
-        other_type!
-      end
-    when 'dpt'
-      if valid_header?(file, :ftir)
-        ftir_type!
-      else
-        other_type!
-      end
-    when 'spectable'
-      if valid_header?(file, :libs)
-        libs_type!
-      else
-        other_type!
-      end
-    when 'spec'
-      libs_type!
-    when 'mon'
-      if valid_header?(file, :reflectance)
-        reflectance_type!
-      else
-        other_type!
-      end
-    when 'xy'
-      xrd_type!
-    when 'txt'
-      if valid_header?(file, :raman)
-        raman_type!
-      elsif valid_header?(file, :xrf)
-        xrf_type!
-      else
-        other_type!
-      end
-    when 'csv'
-      not_set_type!
-    else
-      other_type!
-    end
-  end
-
-  def valid_header?(file, acquisition_method)
     file_path = ActiveStorage::Blob.service.path_for(file.key)
-    begin
-      header = File.open(file_path, encoding: HEADER_MATCH_TABLE[acquisition_method][:encoding], &:readline)
-    rescue StandardError
-      false
-    end
 
-    begin
-      HEADER_MATCH_TABLE[acquisition_method][:regex].match?(header)
-    rescue StandardError
-      false
+    file_encoding = CharDet.detect(File.open(file_path, &:readline))['encoding']
+
+    File.open(file_path, 'r', encoding: file_encoding) do |f|
+      HEADER_MATCH_TABLE.stringify_keys.each do |k, v|
+        res = v[:regex_lines].map { |r| r.match?(f.gets.strip) }
+        if res.all?
+          # rubocop:disable Rails/SkipsModelValidations
+          update_column(:category, k.split('_')[0])
+          # rubocop:enable Rails/SkipsModelValidations
+          break
+        end
+        f.rewind
+      end
     end
   end
 
