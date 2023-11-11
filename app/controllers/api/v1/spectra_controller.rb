@@ -4,7 +4,7 @@ module Api
   module V1
     class SpectraController < ApiController
       has_scope :by_status
-      has_scope :by_range
+      has_scope :by_type
       has_scope :by_format
       has_scope :by_sample_id
 
