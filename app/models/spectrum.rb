@@ -13,6 +13,7 @@
 #  metadata               :jsonb            not null, indexed
 #  plain_text_description :text
 #  plain_text_equipment   :text
+#  processing_message     :text
 #  range                  :integer          default("not_set"), not null
 #  sample_id              :bigint           not null, indexed
 #  sample_thickness       :float
@@ -31,7 +32,6 @@
 #
 #  fk_rails_dfa20a7cb9  (sample_id => samples.id)
 #
-
 require 'rchardet'
 
 class Spectrum < RsdbRecord

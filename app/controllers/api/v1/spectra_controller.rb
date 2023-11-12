@@ -43,7 +43,7 @@ module Api
 
       def spectrum_params
         params.require(:spectrum).permit(
-          :sample_id, :status, :metadata, :processed_file
+          :sample_id, :status, :metadata, :processed_file, :processing_message
         )
       end
     end

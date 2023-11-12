@@ -13,6 +13,7 @@
 #  metadata               :jsonb            not null, indexed
 #  plain_text_description :text
 #  plain_text_equipment   :text
+#  processing_message     :text
 #  range                  :integer          default("not_set"), not null
 #  sample_id              :bigint           not null, indexed
 #  sample_thickness       :float
