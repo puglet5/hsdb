@@ -154,6 +154,7 @@ class Spectrum < RsdbRecord
   after_commit -> { infer_type }, on: %i[create], if: ->(s) { s.file.attached? && s.file.persisted? }
 
   after_commit :parse_metadata, on: %i[create update]
+  after_commit :parse_processing_message, on: %i[update]
   after_commit -> { request_processing self }, on: %i[create],
                                                if: lambda { |s|
                                                      s.file.attached? &&
@@ -201,6 +202,15 @@ class Spectrum < RsdbRecord
         f.rewind
       end
     end
+  end
+
+  def parse_processing_message
+    return unless processing_message
+
+    parsed_message = processing_message.gsub!(/^"|"?$/, '')
+    # rubocop:disable Rails/SkipsModelValidations
+    update_column(:processing_message, parsed_message) if parsed_message
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   def request_processing(initiator)
