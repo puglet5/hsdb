@@ -236,7 +236,7 @@ GEM
     faraday-net_http (3.0.2)
     ffi (1.16.3)
     foreman (0.87.2)
-    friendly_id (5.5.0)
+    friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     fuubar (2.5.1)
       rspec-core (~> 3.0)
@@ -300,7 +300,7 @@ GEM
     logstasher (2.1.5)
       activesupport (>= 5.2)
       request_store
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -316,7 +316,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
-    net-imap (0.4.4)
+    net-imap (0.4.5)
       date
       net-protocol
     net-pop (0.1.2)
