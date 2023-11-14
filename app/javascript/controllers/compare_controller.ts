@@ -48,7 +48,6 @@ export default class extends Controller {
   }
 
   toggleTargetConnected(e: HTMLDivElement) {
-    console.log(+e.dataset.id, this.spectraIdsValue.includes(+e.dataset.id))
     if (this.spectraIdsValue.includes(+e.dataset.id)) {
       e.innerHTML = removeIcon
     } else {

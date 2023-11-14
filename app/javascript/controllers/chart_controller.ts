@@ -113,7 +113,6 @@ export default class extends Controller {
   reverseXAxis: boolean = this.axesSpecValue["reverse"]
 
   connect() {
-    console.log(this.labelsValue)
     if (this.compareValue) {
       this.disableControls()
       this.visualize()
@@ -153,6 +152,8 @@ export default class extends Controller {
   }
 
   async visualize() {
+
+    let chart = this
 
     if (!this.hasCurrentPlotDataValue && !this.hasUnmodifiedPlotDataValue) {
       const raw = await this.import(this.urlsValue)
@@ -204,6 +205,7 @@ export default class extends Controller {
           })),
         },
         options: {
+          events: ["dblclick", 'mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
           locale: "fr",
           animation: false,
           responsive: true,
@@ -305,7 +307,20 @@ export default class extends Controller {
               display: false
             }
           }
-        }
+        },
+        plugins: [
+          {
+            id: "doubleClick",
+            afterEvent(_c, args, _o) {
+              if (args.event.type === "dblclick") {
+                setTimeout(() => {
+                  chart.resetZoom()
+                }, 0)
+                return
+              }
+            }
+          }
+        ]
       })
     }
 
