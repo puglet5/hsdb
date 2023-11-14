@@ -7,7 +7,6 @@
           <% checked = @user.settings(:uploading).thumbnails ? "checked" : 0 %>
           <%= su.check_box :thumbnails, { multiple: false, class: "w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-500 focus:ring-primary-500 focus:ring-1 ", checked: checked } %>
           <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-700">Thumbnail generation</label>
-
         <% end %>
       </div>
       <%= render Forms::PHelperComponent.new().with_content("Disable thumbnail generation when uploading images if you experience any problems") %>
