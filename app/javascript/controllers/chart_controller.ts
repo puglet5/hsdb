@@ -153,8 +153,6 @@ export default class extends Controller {
 
   async visualize() {
 
-    let chart = this
-
     if (!this.hasCurrentPlotDataValue && !this.hasUnmodifiedPlotDataValue) {
       const raw = await this.import(this.urlsValue)
       this.unmodifiedPlotDataValue = raw.map(r => this.parseCSV(r))
@@ -205,7 +203,7 @@ export default class extends Controller {
           })),
         },
         options: {
-          events: ["dblclick", 'mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
+          events: ["dblclick", 'mousemove', 'mouseout', 'click', "drag", "wheel"],
           locale: "fr",
           animation: false,
           responsive: true,
@@ -290,7 +288,17 @@ export default class extends Controller {
                 mode: "xy",
               },
               pan: {
-                enabled: true
+                enabled: true,
+                //@ts-ignore
+                onPanStart(ctx) {
+                  ctx.chart.options.plugins.tooltip.enabled = false
+                },
+                onPanComplete(ctx) {
+                  ctx.chart.options.plugins.tooltip.enabled = true
+                  let active = ctx.chart.getActiveElements()
+                  ctx.chart.tooltip.setActiveElements([{ datasetIndex: 0, index: active[0].index }], { x: 1, y: 1 })
+                  ctx.chart.update()
+                }
               },
               limits: {
                 x: { min: "original", max: "original" },
@@ -311,15 +319,26 @@ export default class extends Controller {
         plugins: [
           {
             id: "doubleClick",
-            afterEvent(_c, args, _o) {
-              if (args.event.type === "dblclick") {
+            afterEvent(chart, evt, _o) {
+              if (evt.event.type === "dblclick") {
                 setTimeout(() => {
                   chart.resetZoom()
                 }, 0)
-                return
               }
             }
-          }
+          },
+          {
+            id: "toolbarHider",
+            afterEvent: (chart: any, evt: any, opts: any) => {
+              const { left, right, bottom, top } = chart.chartArea;
+              const e = evt.event;
+              const status = e.x >= left && e.x <= right && e.y <= bottom && e.y >= top;
+              if (status !== chart.options.plugins.tooltip.enabled) {
+                chart.options.plugins.tooltip.enabled = status;
+                chart.update();
+              }
+            }
+          },
         ]
       })
     }
