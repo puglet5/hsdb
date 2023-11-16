@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { Chart, ChartComponentLike, registerables } from "chart.js"
+import { Chart, ChartComponentLike, ChartConfiguration, ChartDataset, DatasetChartOptions, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import Papa from "papaparse"
@@ -29,7 +29,7 @@ interface AxesSpec {
 
 declare global {
   interface Window {
-    scatterChart: any;
+    scatterChart: Chart
   }
 }
 
@@ -107,13 +107,16 @@ export default class extends Controller {
 
   normalized = false
   normalizeFactor = 1
-  labelAlignment = "top"
+  labelAlignment: "top" | "bottom" = "top"
   derivativePlot = false
   transmissionPlot = false
   showLabels = true
-  cubicInterpolationMode: string | undefined = undefined
+  cubicInterpolationMode: DatasetChartOptions["scatter"]["datasets"]["cubicInterpolationMode"] = "monotone"
   displayLabelValues: number[][] = this.labelsValue?.map(e => e?.map(o => o.position).map(Number)) ?? []
   reverseXAxis: boolean = this.axesSpecValue.reverse
+  // @ts-ignore
+  traceLabels: string[] = this.filenamesValue
+  dataHeader: string[] = ["x", "y"]
 
   connect() {
     this.visualize()
@@ -140,21 +143,26 @@ export default class extends Controller {
       transform: transformNaN
     }
 
-    const { data, errors, meta } = Papa.parse(rawData, config)
+    const { data, meta } = Papa.parse(rawData, config)
 
-    let header = meta.fields ?? ["x", "y"]
+    const header = meta.fields ?? this.axesSpecValue.labels
 
-    let rows = data.map(e => Object.values(e))
-    let cols = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]))
+    const rows: number[][] = data.map(e => Object.values(e))
+    const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]))
 
-    return this.toChartData(cols, header, this.axesSpecValue.cols_type)
+    const labels = header.flatMap((e, i) => this.axesSpecValue.cols_type.split("")[i] === "y" ? e : [])
+
+    this.dataHeader = header
+    this.traceLabels = labels
+
+    return this.toChartData(cols, this.axesSpecValue.cols_type)
   }
 
-  toChartData(data: number[][], fields: string[], axesSpec: string) {
+  toChartData(data: number[][], axesSpec: string) {
     // [[x[], y[], y[]], [x[], y[]]]
-    let parsedData: number[][][] = []
+    const parsedData: number[][][] = []
     let latestXIndex: number = -1
-    axesSpec.split('').forEach((e, i) => {
+    axesSpec.split("").forEach((e, i) => {
       if (e === "x") {
         latestXIndex += 1
         parsedData.push([data[i]])
@@ -165,16 +173,14 @@ export default class extends Controller {
 
     // [[x[], y[]], ...]
 
-    let convertedDataIntermediate = parsedData.map((traceE, traceI) => traceE.map((e, i) => {
+    const convertedDataIntermediate = parsedData.map(traceE => traceE.map((e, i) => {
       return [traceE[0], traceE[i]]
     }).slice(1))
 
-    let dataDimensions = convertedDataIntermediate.map(e => e.length)
-    let convertedData = convertedDataIntermediate.flat()
+    const dataDimensions = convertedDataIntermediate.map(e => e.length)
+    const convertedData = convertedDataIntermediate.flat()
 
-    console.log(convertedDataIntermediate)
-
-    let objectData: Point[][] = convertedData.map((data, i) => {
+    const objectData: Point[][] = convertedData.map(data => {
       return data[0].map((v, i) => {
         return [v, data[1][i]]
       })
@@ -193,20 +199,117 @@ export default class extends Controller {
       if (i === dimensions[0]) {
         traceNum += 1
       }
-      console.log(traceNum)
       return {
         data: data[i],
         label: label,
+        hidden: i >= 1,
         showLine: true,
         lineTension: 0,
+        cubicInterpolationMode: this.cubicInterpolationMode,
         yAxisID: `y${traceNum}`,
-        xAxisID: `x${traceNum}`
-      }
+        xAxisID: `x${traceNum}`,
+        datalabels: {
+          anchor: "center",
+          align: this.labelAlignment,
+          clip: true,
+          borderRadius: 2,
+          backgroundColor: "rgba(255, 255, 255, .75)",
+          labels: {
+            value: {},
+            title: {
+              color: this.darkValue ? "white" : "black",
+              // backgroundColor: "rgba(34, 81, 163, .1)",
+            }
+          },
+          display: (context) => {
+            if (this.showLabels)
+              return (this.displayLabelValues[i]?.includes(context.dataIndex) ? "auto" : false)
+            else
+              return false
+          },
+          formatter: (value) => {
+            return parseFloat(value["x"]).toFixed(this.axesSpecValue.peak_label_precision)
+          }
+        },
+      } as ChartConfiguration["options"]["datasets"]
     })
   }
 
-  constructScales(dimenisons: number[], labels: string[]) {
-
+  constructScales(dimensions: number[], labels: string[]) {
+    return {
+      y: { display: false },
+      x: { display: false },
+      y1: {
+        border: { dash: [4, 4] },
+        display: "auto",
+        type: "linear",
+        position: "left",
+        title: {
+          text: labels.slice(1, dimensions[0] + 1) ?? this.axesSpecValue.labels[1],
+          display: true
+        },
+        min: this.axesSpecValue.y_min,
+        grid: {
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+          tickBorderDash: [0, 0],
+          tickLength: 10,
+          tickWidth: 1,
+        },
+        grace: "5%"
+      },
+      y2: {
+        display: "auto",
+        type: "linear",
+        position: "left",
+        border: { dash: [4, 4] },
+        title: {
+          text: labels.slice(dimensions[0] + dimensions[1] + 1) ?? this.axesSpecValue.labels[1],
+          display: true
+        },
+        min: this.axesSpecValue.y_min,
+        grid: {
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+          tickBorderDash: [0, 0],
+          tickLength: 10,
+          tickWidth: 1,
+        },
+        grace: "5%"
+      },
+      x1: {
+        display: "auto",
+        type: "linear",
+        position: "bottom",
+        border: { dash: [4, 4] },
+        title: {
+          text: labels[0] ?? this.axesSpecValue.labels[0],
+          display: true
+        },
+        grid: {
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+          tickBorderDash: [0, 0],
+          tickLength: 10,
+          tickWidth: 1,
+        },
+        reverse: this.reverseXAxis
+      },
+      x2: {
+        display: "auto",
+        position: "bottom",
+        border: { dash: [4, 4] },
+        title: {
+          text: labels.slice(dimensions[0] + 1, dimensions[0] + dimensions[1] + 1)
+            ?? this.axesSpecValue.labels[1],
+          display: true
+        },
+        min: this.axesSpecValue.y_min,
+        grid: {
+          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+          tickBorderDash: [0, 0],
+          tickLength: 10,
+          tickWidth: 1,
+        },
+      }
+    } as ChartConfiguration["options"]["scales"]
   }
 
   async visualize() {
@@ -220,188 +323,13 @@ export default class extends Controller {
     //   this.currentPlotDataValue = this.unmodifiedPlotDataValue
     // }
 
-    let rawData = await this.import(this.urlsValue)
-    let parsedData = rawData.map(r => this.parseCSV(r)).flat()[0]
-    let datasets = this.constructDatasets(parsedData.data, parsedData.dimensions, ["Refraction", "Absorption", "Signal"])
+    const rawData = await this.import(this.urlsValue)
+    const parsedData = rawData.map(r => this.parseCSV(r)).flat()[0]
+    const dataDimensions = parsedData.dimensions
+    const chartData = parsedData.data
+    const datasets: ChartDataset[] = this.constructDatasets(chartData, dataDimensions, this.traceLabels) as ChartDataset[]
 
     if (window.scatterChart) { window.scatterChart.destroy() }
-
-    const makeChart = (data, filenames) => {
-
-      window.scatterChart = new Chart(`canvas-${this.canvasIdValue}`, {
-        type: "scatter",
-        data: {
-          datasets: data.map((d, i) => ({
-            label: filenames[i],
-            data: d,
-            showLine: true,
-            lineTension: 0,
-            cubicInterpolationMode: this.cubicInterpolationMode,
-            datalabels: {
-              anchor: "center",
-              align: this.labelAlignment,
-              clip: true,
-              borderRadius: 2,
-              backgroundColor: "rgba(255, 255, 255, .75)",
-              labels: {
-                value: {},
-                title: {
-                  color: this.darkValue ? "white" : "black",
-                  // backgroundColor: "rgba(34, 81, 163, .1)",
-                }
-              },
-              display: (context) => {
-                if (this.showLabels)
-                  return (this.displayLabelValues[i]?.includes(context.dataIndex) ? "auto" : false)
-                else
-                  return false
-              },
-              formatter: (value) => {
-                return parseFloat(value["x"]).toFixed(this.axesSpecValue.peak_label_precision)
-              }
-            },
-          })),
-        },
-        options: {
-          events: ["dblclick", 'mousemove', 'mouseout', 'click', "drag", "wheel"],
-          locale: "fr",
-          animation: false,
-          responsive: true,
-          layout: {
-            padding: {
-              left: 20,
-              right: 20,
-              top: 20,
-              bottom: 20
-            },
-          },
-          elements: {
-            point: {
-              radius: 0
-            },
-            line: this.compareValue ? {
-              borderWidth: 2
-            } :
-              {
-                backgroundColor: this.darkValue ? "#ffffff" : "#000000",
-                borderColor: this.darkValue ? "#ffffff" : "#000000",
-                borderWidth: 2
-              }
-          },
-          scales: {
-            y: {
-              border: { dash: [4, 4] },
-              title: {
-                text: this.transmissionPlot ? "Transmission, %" : this.axesSpecValue.labels[1],
-                display: true
-              },
-              min: this.axesSpecValue.y_min,
-              grid: {
-                color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-                tickBorderDash: [0, 0],
-                tickLength: 10,
-                tickWidth: 1,
-              },
-              grace: "5%"
-            },
-            x: {
-              border: { dash: [4, 4] },
-              title: {
-                text: this.axesSpecValue.labels[0],
-                display: true
-              },
-              grid: {
-                color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-                tickBorderDash: [0, 0],
-                tickLength: 10,
-                tickWidth: 1,
-              },
-              reverse: this.reverseXAxis
-            }
-          },
-          interaction: {
-            mode: "nearest",
-            axis: "x",
-            intersect: false
-          },
-          plugins: {
-            tooltip: {
-              animation: false,
-              displayColors: !this.compareValue,
-              callbacks: {
-                label: function (tooltipItem) {
-                  return tooltipItem.formattedValue
-                },
-                title: function () {
-                  return
-                }
-              },
-            },
-            zoom: {
-              zoom: {
-                wheel: {
-                  enabled: true,
-                },
-                pinch: {
-                  enabled: false
-                },
-                mode: "xy",
-              },
-              pan: {
-                enabled: true,
-                //@ts-ignore
-                onPanStart(ctx) {
-                  ctx.chart.options.plugins.tooltip.enabled = false
-                },
-                onPanComplete(ctx) {
-                  ctx.chart.options.plugins.tooltip.enabled = true
-                  let active = ctx.chart.getActiveElements()
-                  ctx.chart.tooltip.setActiveElements([{ datasetIndex: 0, index: active[0].index }], { x: 1, y: 1 })
-                  ctx.chart.update()
-                }
-              },
-              limits: {
-                x: { min: "original", max: "original" },
-                y: { min: "original", max: "original" }
-              },
-            },
-            legend:
-            {
-              labels: {
-                boxWidth: 0,
-              }
-            },
-            datalabels: {
-              display: false
-            }
-          }
-        },
-        plugins: [
-          {
-            id: "doubleClick",
-            afterEvent(chart, evt, _o) {
-              if (evt.event.type === "dblclick") {
-                setTimeout(() => {
-                  chart.resetZoom()
-                }, 0)
-              }
-            }
-          },
-          {
-            id: "toolbarHider",
-            afterEvent: (chart: any, evt: any, opts: any) => {
-              const { left, right, bottom, top } = chart.chartArea;
-              const e = evt.event;
-              const status = e.x >= left && e.x <= right && e.y <= bottom && e.y >= top;
-              if (status !== chart.options.plugins.tooltip.enabled) {
-                chart.options.plugins.tooltip.enabled = status;
-                chart.update();
-              }
-            }
-          },
-        ]
-      })
-    }
 
     window.scatterChart = new Chart(`canvas-${this.canvasIdValue}`, {
       type: "scatter",
@@ -409,7 +337,7 @@ export default class extends Controller {
         datasets: datasets
       },
       options: {
-        events: ["dblclick", 'mousemove', 'mouseout', 'click', "drag", "wheel"],
+        events: ["dblclick", "mousemove", "mouseout", "click", "drag", "wheel"],
         locale: "fr",
         animation: false,
         responsive: true,
@@ -434,43 +362,71 @@ export default class extends Controller {
               borderWidth: 2
             }
         },
-        scales: {
-          y: { display: false },
-          x: { display: false },
-
-          y1: {
-            display: 'auto',
-            type: 'linear',
-            position: 'left',
-          },
-          y2: {
-            display: 'auto',
-            type: 'linear',
-            position: 'right',
-            grid: {
-              drawOnChartArea: false,
-            },
-          },
-          x1: {
-            display: 'auto',
-            position: "bottom",
-          },
-          x2: {
-            display: 'auto',
-            position: "top",
-            grid: {
-              drawOnChartArea: false,
-            },
-          }
-        },
+        scales: this.constructScales(dataDimensions, this.dataHeader),
         interaction: {
           mode: "nearest",
           axis: "x",
           intersect: false
         },
         plugins: {
+          tooltip: {
+            animation: false,
+            displayColors: !this.compareValue,
+            callbacks: {
+              label: function (tooltipItem) {
+                return tooltipItem.formattedValue
+              },
+              title: function () {
+                return
+              }
+            },
+          },
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true,
+              },
+              pinch: {
+                enabled: false
+              },
+              mode: "xy",
+            },
+            pan: {
+              enabled: true,
+              //@ts-ignore
+              onPanStart(ctx) {
+                ctx.chart.options.plugins.tooltip.enabled = false
+              },
+              onPanComplete(ctx) {
+                ctx.chart.options.plugins.tooltip.enabled = true
+                const active = ctx.chart.getActiveElements()
+                ctx.chart.tooltip.setActiveElements([{ datasetIndex: 0, index: active[0].index }], { x: 1, y: 1 })
+                ctx.chart.update()
+              }
+            },
+            limits: {
+              x: { min: "original", max: "original" },
+              y: { min: "original", max: "original" }
+            },
+          },
           legend:
           {
+            onClick: function (e, legendItem) {
+              const index = legendItem.datasetIndex
+              const chart = this.chart
+
+              chart.data.datasets.forEach(function (e, i) {
+                const meta = chart.getDatasetMeta(i)
+
+                if (i !== index) {
+                  meta.hidden = true
+                } else if (i === index) {
+                  meta.hidden = false
+                }
+              })
+
+              chart.update()
+            },
             labels: {
               boxWidth: 0,
             }
@@ -480,6 +436,30 @@ export default class extends Controller {
           }
         }
       },
+      plugins: [
+        {
+          id: "doubleClick",
+          afterEvent(chart, evt) {
+            if (evt.event.type === "dblclick") {
+              setTimeout(() => {
+                chart.resetZoom()
+              }, 0)
+            }
+          }
+        },
+        {
+          id: "toolbarHider",
+          afterEvent: (chart, evt) => {
+            const { left, right, bottom, top } = chart.chartArea
+            const e = evt.event
+            const status = e.x >= left && e.x <= right && e.y <= bottom && e.y >= top
+            if (status !== chart.options.plugins.tooltip.enabled) {
+              chart.options.plugins.tooltip.enabled = status
+              chart.update()
+            }
+          }
+        },
+      ]
     })
 
   }
