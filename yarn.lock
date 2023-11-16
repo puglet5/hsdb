@@ -708,6 +708,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/papaparse@npm:^5.3.11":
+  version: 5.3.11
+  resolution: "@types/papaparse@npm:5.3.11"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 13d224b0b8eb5ad8c0d9a16181149b662c034078dd2ac43808314e82faced309d70128c919695a9b91168df31dbd96ec15f32d570b2055a9e6b8c0b511c6047e
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
@@ -1306,6 +1315,7 @@ __metadata:
     "@rails/activestorage": "npm:7.1.2"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
     "@types/node": "npm:^20.9.0"
+    "@types/papaparse": "npm:^5.3.11"
     "@typescript-eslint/eslint-plugin": "npm:^6.11.0"
     "@typescript-eslint/parser": "npm:^6.11.0"
     "@uppy/core": "npm:3.1.1"

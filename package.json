@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.11.8",
     "@rails/actiontext": "7.1.2",
     "@rails/activestorage": "7.1.2",
+    "@types/papaparse": "^5.3.11",
     "@uppy/core": "3.1.1",
     "@uppy/dashboard": "3.3.1",
     "@uppy/utils": "5.1.3",
