@@ -10,6 +10,7 @@ gem 'active_record_extended', '~> 3.0'
 gem 'active_storage-send_zip', '~> 0.3.4'
 gem 'activestorage-validator', '~> 0.3'
 gem 'acts_as_favoritor', '~> 6.0'
+gem 'ar_transaction_changes', '~> 1.1'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'caxlsx', '~> 4.0' # .xlsx generation
 gem 'caxlsx_rails', '~> 0.6.3'
@@ -17,19 +18,13 @@ gem 'cssbundling-rails', '~> 1.0'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'doorkeeper', '~> 5.5', '>= 5.5.4' # api oauth
 gem 'dotenv-rails', '~> 2.8'
-gem 'loaf', '~> 0.10.0'
-# gem 'elasticsearch', '~> 7.13', '< 7.14'
-# gem 'elasticsearch-model', '~> 7.2'
-# gem 'elasticsearch-persistence', '~> 7.2'
-# gem 'elasticsearch-rails', '~> 7.2'
-gem 'ar_transaction_changes', '~> 1.1'
 gem 'faraday', '~> 2.7'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'has_scope', '~> 0.8.0'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 gem 'jsbundling-rails', '~> 1.0'
 gem 'ledermann-rails-settings', '~> 2.5' # user settings
-gem 'logstasher', '~> 2.1' # generate logstash compatible rails logs
+gem 'loaf', '~> 0.10.0'
 gem 'mini_magick', '~> 4.11' # image processing
 gem 'pagy', '~> 6.0' # pagination
 gem 'pg', '~> 1.4' # postgres
@@ -66,15 +61,11 @@ group :development do
   gem 'foreman', '~> 0.87.2'
   gem 'hotwire-livereload', '~> 1.2'
   gem 'htmlbeautifier' # erb formatter
-  gem 'immigrant' # generate db migrations
-  gem 'letter_opener' # mail in development
   gem 'license_finder', '~> 7.0' # find dependencies' licenses
   gem 'rails-erd' # generate er diagrams
   gem 'rubocop', '~> 1.35', '>= 1.35.1', require: false
   gem 'rubocop-performance', '~> 1.14', '>= 1.14.3', require: false
   gem 'rubocop-rails', '~> 2.15', '>= 2.15.2', require: false
-  gem 'solargraph', '~> 0.48' # ruby language server
-  gem 'solargraph-rails', '~> 1.1'
   gem 'web-console'
 end
 
@@ -90,7 +81,6 @@ group :development, :test do
   gem 'binding_of_caller', '~> 1.0' # for better_errors
   gem 'brakeman', '~> 6.0'
   gem 'bundler-audit', '~> 0.9.1'
-  gem 'capybara'
   gem 'database_cleaner-active_record'
   gem 'database_consistency', '~> 1.1'
   gem 'debug', '>= 1.0.0'
