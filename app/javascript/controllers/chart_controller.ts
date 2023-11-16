@@ -22,6 +22,9 @@ interface AxesSpec {
   labels: string[]
   reverse: boolean
   y_min: number | null
+  type: string
+  cols_type: string
+  peak_label_precision: number
 }
 
 declare global {
@@ -110,9 +113,10 @@ export default class extends Controller {
   showLabels = true
   cubicInterpolationMode: string | undefined = undefined
   displayLabelValues: number[][] = this.labelsValue?.map(e => e?.map(o => o.position).map(Number)) ?? []
-  reverseXAxis: boolean = this.axesSpecValue["reverse"]
+  reverseXAxis: boolean = this.axesSpecValue.reverse
 
   connect() {
+    this.visualize()
     if (this.compareValue) {
       this.disableControls()
       this.visualize()
@@ -125,50 +129,106 @@ export default class extends Controller {
     )
   }
 
-  parseCSV(rawData: string): Point[] {
+  parseCSV(rawData: string) {
 
-    const data: string[][] = Papa.parse(rawData).data
+    const transformNaN = (e: string) => { return e === "nan" ? NaN : e }
 
-    this.dataStepValue = Number(data[0][0]) - Number(data[1][0])
+    const config = {
+      header: this.axesSpecValue.type === "thz",
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      transform: transformNaN
+    }
 
-    const xValue: number[] = data.map((d) => {
-      return parseFloat(Object.values(d)[0])
-    }).filter(value => !Number.isNaN(value))
+    const { data, errors, meta } = Papa.parse(rawData, config)
 
-    const yValue: number[] = data.map((d) => {
-      return parseFloat(Object.values(d)[1])
-    }).filter(value => !Number.isNaN(value))
+    let header = meta.fields ?? ["x", "y"]
 
-    const parsedData: Point[] = xValue
-      .map((v, i) => {
-        return [v, yValue[i]]
+    let rows = data.map(e => Object.values(e))
+    let cols = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]))
+
+    return this.toChartData(cols, header, this.axesSpecValue.cols_type)
+  }
+
+  toChartData(data: number[][], fields: string[], axesSpec: string) {
+    // [[x[], y[], y[]], [x[], y[]]]
+    let parsedData: number[][][] = []
+    let latestXIndex: number = -1
+    axesSpec.split('').forEach((e, i) => {
+      if (e === "x") {
+        latestXIndex += 1
+        parsedData.push([data[i]])
+      } else if (e === "y") {
+        parsedData[latestXIndex].push(data[i])
+      }
+    })
+
+    // [[x[], y[]], ...]
+
+    let convertedDataIntermediate = parsedData.map((traceE, traceI) => traceE.map((e, i) => {
+      return [traceE[0], traceE[i]]
+    }).slice(1))
+
+    let dataDimensions = convertedDataIntermediate.map(e => e.length)
+    let convertedData = convertedDataIntermediate.flat()
+
+    console.log(convertedDataIntermediate)
+
+    let objectData: Point[][] = convertedData.map((data, i) => {
+      return data[0].map((v, i) => {
+        return [v, data[1][i]]
       })
-      .map((v) => {
-        const [x, y] = v
-        return { x, y }
-      })
+        .map((v) => {
+          const [x, y] = v
+          return { x, y }
+        })
+    })
 
-    return parsedData
+    return { data: objectData, dimensions: dataDimensions }
+  }
+
+  constructDatasets(data: Point[][], dimensions: number[], labels: string[]) {
+    let traceNum = 1
+    return labels.map((label, i) => {
+      if (i === dimensions[0]) {
+        traceNum += 1
+      }
+      console.log(traceNum)
+      return {
+        data: data[i],
+        label: label,
+        showLine: true,
+        lineTension: 0,
+        yAxisID: `y${traceNum}`,
+        xAxisID: `x${traceNum}`
+      }
+    })
+  }
+
+  constructScales(dimenisons: number[], labels: string[]) {
+
   }
 
   async visualize() {
 
-    if (!this.hasCurrentPlotDataValue && !this.hasUnmodifiedPlotDataValue) {
-      const raw = await this.import(this.urlsValue)
-      this.unmodifiedPlotDataValue = raw.map(r => this.parseCSV(r))
-    }
+    // if (!this.hasCurrentPlotDataValue && !this.hasUnmodifiedPlotDataValue) {
+    //   const raw = await this.import(this.urlsValue)
+    //   this.unmodifiedPlotDataValue = raw.map(r => this.parseCSV(r))
+    // }
 
-    if (this.hasUnmodifiedPlotDataValue && !this.hasCurrentPlotDataValue) {
-      this.currentPlotDataValue = this.unmodifiedPlotDataValue
-    }
+    // if (this.hasUnmodifiedPlotDataValue && !this.hasCurrentPlotDataValue) {
+    //   this.currentPlotDataValue = this.unmodifiedPlotDataValue
+    // }
+
+    let rawData = await this.import(this.urlsValue)
+    let parsedData = rawData.map(r => this.parseCSV(r)).flat()[0]
+    let datasets = this.constructDatasets(parsedData.data, parsedData.dimensions, ["Refraction", "Absorption", "Signal"])
 
     if (window.scatterChart) { window.scatterChart.destroy() }
 
-    const id = this.canvasIdValue
-
     const makeChart = (data, filenames) => {
 
-      window.scatterChart = new Chart(`canvas-${id}`, {
+      window.scatterChart = new Chart(`canvas-${this.canvasIdValue}`, {
         type: "scatter",
         data: {
           datasets: data.map((d, i) => ({
@@ -197,7 +257,7 @@ export default class extends Controller {
                   return false
               },
               formatter: (value) => {
-                return parseFloat(value["x"]).toFixed(this.axesSpecValue["peak_label_precision"])
+                return parseFloat(value["x"]).toFixed(this.axesSpecValue.peak_label_precision)
               }
             },
           })),
@@ -232,10 +292,10 @@ export default class extends Controller {
             y: {
               border: { dash: [4, 4] },
               title: {
-                text: this.transmissionPlot ? "Transmission, %" : this.axesSpecValue["labels"][1],
+                text: this.transmissionPlot ? "Transmission, %" : this.axesSpecValue.labels[1],
                 display: true
               },
-              min: this.axesSpecValue["y_min"],
+              min: this.axesSpecValue.y_min,
               grid: {
                 color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
                 tickBorderDash: [0, 0],
@@ -247,7 +307,7 @@ export default class extends Controller {
             x: {
               border: { dash: [4, 4] },
               title: {
-                text: this.axesSpecValue["labels"][0],
+                text: this.axesSpecValue.labels[0],
                 display: true
               },
               grid: {
@@ -343,7 +403,85 @@ export default class extends Controller {
       })
     }
 
-    makeChart(this.currentPlotDataValue, this.filenamesValue)
+    window.scatterChart = new Chart(`canvas-${this.canvasIdValue}`, {
+      type: "scatter",
+      data: {
+        datasets: datasets
+      },
+      options: {
+        events: ["dblclick", 'mousemove', 'mouseout', 'click', "drag", "wheel"],
+        locale: "fr",
+        animation: false,
+        responsive: true,
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
+          },
+        },
+        elements: {
+          point: {
+            radius: 0
+          },
+          line: this.compareValue ? {
+            borderWidth: 2
+          } :
+            {
+              backgroundColor: this.darkValue ? "#ffffff" : "#000000",
+              borderColor: this.darkValue ? "#ffffff" : "#000000",
+              borderWidth: 2
+            }
+        },
+        scales: {
+          y: { display: false },
+          x: { display: false },
+
+          y1: {
+            display: 'auto',
+            type: 'linear',
+            position: 'left',
+          },
+          y2: {
+            display: 'auto',
+            type: 'linear',
+            position: 'right',
+            grid: {
+              drawOnChartArea: false,
+            },
+          },
+          x1: {
+            display: 'auto',
+            position: "bottom",
+          },
+          x2: {
+            display: 'auto',
+            position: "top",
+            grid: {
+              drawOnChartArea: false,
+            },
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend:
+          {
+            labels: {
+              boxWidth: 0,
+            }
+          },
+          datalabels: {
+            display: false
+          }
+        }
+      },
+    })
+
   }
 
   getRange(data: Point[]): number[][] {

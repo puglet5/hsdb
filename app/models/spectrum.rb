@@ -40,15 +40,15 @@ class Spectrum < RsdbRecord
   include ParseMetadata
 
   AXES_SPEC = {
-    not_set: { labels: ['', ''], reverse: false, peak_label_precision: 0, y_min: 0 },
-    xrf: { labels: ['Energy, keV', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
-    xrd: { labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
-    ftir: { labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true, peak_label_precision: 0, y_min: 0 },
-    libs: { labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    raman: { labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    thz: { labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: nil },
-    reflectance: { labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    other: { labels: ['', ''], reverse: false }
+    not_set: { cols_type: 'xy', type: 'not_set', labels: ['', ''], reverse: false, peak_label_precision: 0, y_min: 0 },
+    xrf: { cols_type: 'xy', type: 'xrf', labels: ['Energy, keV', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
+    xrd: { cols_type: 'xy', type: 'xrd', labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
+    ftir: { cols_type: 'xy', type: 'ftir', labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true, peak_label_precision: 0, y_min: 0 },
+    libs: { cols_type: 'xy', type: 'libs', labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
+    raman: { cols_type: 'xy', type: 'raman', labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
+    thz: { cols_type: 'xyyxy', type: 'thz', labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: nil },
+    reflectance: { cols_type: 'xy', type: 'reflectance', labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false, peak_label_precision: 0, y_min: 0 },
+    other: { cols_type: 'xy', type: 'other', labels: ['', ''], reverse: false }
   }.freeze
 
   HEADER_MATCH_TABLE = {
