@@ -79,4 +79,12 @@ class Sample < RsdbRecord
   before_save { self.plain_text_description = description&.body&.to_plain_text }
 
   enum category: { not_set: 0, ceramics: 1, pigments: 2, other: 3 }, _default: :not_set, _suffix: :category
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[cas_name cas_no category color common_names compound created_at formula is_reference location metadata origin owner plain_text_description sku slug survey_date title updated_at user_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[documents_attachments favorited file_attachments images_attachments rich_text_description spectra user]
+  end
 end

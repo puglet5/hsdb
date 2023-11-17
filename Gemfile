@@ -35,7 +35,7 @@ gem 'rack-cors', '~> 2.0'
 gem 'rack-mini-profiler', '~> 3.0'
 gem 'rails', '~> 7.1'
 gem 'rails-i18n', '~> 7.0.4'
-gem 'ransack', '~> 3.2.1' # object-based searching
+gem 'ransack', '~> 4.1' # object-based searching
 gem 'rchardet', '~> 1.8'
 gem 'redis', '~> 5.0'
 gem 'redis-client', '~> 0.14'
@@ -84,7 +84,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'database_consistency', '~> 1.1'
   gem 'debug', '>= 1.0.0'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '<= 6.3'
   gem 'faker', '>= 3'
   gem 'fuubar', '~> 2.5'
   gem 'listen', '~> 3.7'

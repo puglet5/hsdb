@@ -78,6 +78,14 @@ class Artwork < ApplicationRecord
   after_commit :parse_metadata, on: %i[create update]
   after_commit -> { process_image self, thumbnail&.id }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at date description id id_value metadata slug status style_id survey_date title updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[artwork_materials artwork_tags documents_attachments favorited image_attachments images materials rich_text_body style tags thumbnail_attachment user]
+  end
+
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
   end
