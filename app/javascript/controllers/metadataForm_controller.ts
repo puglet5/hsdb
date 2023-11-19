@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
+import { Typed } from "stimulus-typescript"
 
 const parsedDataToArray = (values) => {
   const temp_arr: any[] = []
@@ -40,25 +41,16 @@ const parseInputData = (inputs) => [].reduce.call(
   {}
 )
 
-export default class extends Controller {
+const targets = {
+  addButton: HTMLElement,
+  fieldRow: HTMLElement,
+  formContainer: HTMLElement,
+  clonedFieldRow: HTMLElement,
+  railsInput: HTMLElement,
+  jsonContainer: HTMLElement
+}
 
-  static targets = [
-    "addButton",
-    "fieldRow",
-    "formContainer",
-    "clonedFieldRow",
-    "railsInput",
-    "jsonContainer"
-  ]
-
-  readonly addButtonTarget!: HTMLElement
-  readonly fieldRowTarget!: HTMLElement
-  readonly formContainerTarget!: HTMLElement
-  readonly clonedFieldRowTarget!: HTMLElement
-  readonly clonedFieldRowTargets!: HTMLElement[]
-  readonly railsInputTarget!: HTMLElement
-  readonly jsonContainerTarget!: HTMLElement
-
+export default class extends Typed(Controller, { targets }) {
 
   connect() {
     const fieldRowClone = this.fieldRowTarget

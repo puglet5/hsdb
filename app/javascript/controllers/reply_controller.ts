@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
-  static targets = ["reply"]
+const targets = {
+  reply: HTMLElement
+}
 
-  readonly replyTarget!: HTMLElement
+export default class extends Typed(Controller, { targets }) {
 
   deleteTargetDisconnected() {
     if (!document.getElementById("reply-form")) {

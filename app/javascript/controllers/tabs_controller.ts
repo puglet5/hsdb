@@ -1,15 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  tab: HTMLElement,
+  panel: HTMLElement
+}
+
+export default class extends Typed(Controller, { targets }) {
 
   static classes = ["active"]
 
-  activeClasses: string[]
-
-  static targets = ["tab", "panel"]
-
-  readonly tabTargets!: HTMLElement[]
-  readonly panelTargets!: HTMLElement[]
+  declare readonly activeClasses: string[]
 
   connect() {
     if (!localStorage.active_tab) {
@@ -31,9 +32,9 @@ export default class extends Controller {
     this.panelTargets[active_id].classList.remove("hidden")
   }
 
-  switch(e) {
+  switch(e: { target: HTMLElement }) {
     const active = this.tabTargets.filter(elem => elem.classList.contains("active-tab"))[0]
-    const current = e.target.closest("[data-tabs-target]")
+    const current = e.target.closest("[data-tabs-target]") as HTMLElement
 
     if (current === active) { return }
 
@@ -47,7 +48,7 @@ export default class extends Controller {
     this.store_tab(current)
   }
 
-  store_tab(tab) {
+  store_tab(tab: HTMLElement) {
     localStorage.setItem("active_tab", tab.id)
   }
 }

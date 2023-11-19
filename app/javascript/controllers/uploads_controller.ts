@@ -2,25 +2,22 @@ import { Controller } from "@hotwired/stimulus"
 import Uppy, { PluginOptions, UppyFile, UppyOptions } from "@uppy/core"
 import Dashboard, { DashboardOptions } from "@uppy/dashboard"
 import ActiveStorageUpload from "uppy-activestorage-upload"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+type File = UppyFile & { response: { signed_id: string } }
+const values = {
+  allowedfiletypes: Array<string>,
+  allowmultiplefiles: Boolean,
+  generatethumbnails: Boolean,
+}
 
-  static values = {
-    allowedfiletypes: Array,
-    allowmultiplefiles: Boolean,
-    generatethumbnails: Boolean,
-  }
+const targets = {
+  trigger: HTMLElement,
+  text: HTMLElement,
+  div: HTMLElement
+}
 
-  allowedfiletypesValue: string[]
-  allowmultiplefilesValue: boolean
-  generatethumbnailsValue: boolean
-
-  static targets = ["div", "trigger", "text"]
-
-  readonly triggerTarget!: HTMLElement
-  readonly textTarget!: HTMLElement
-  readonly divTarget!: HTMLElement
-
+export default class extends Typed(Controller, { values, targets }) {
   connect() {
 
     const uppyOptions: UppyOptions = {
@@ -68,7 +65,7 @@ export default class extends Controller {
         const filecountText = document.querySelector(`#${this.textTarget.id}`) as HTMLElement
         filecountText.innerHTML = `Add ${pluralize(result.successful.length, "file")}`
         result.successful.forEach(file => {
-          appendUploadedFile(element, file, fieldName)
+          appendUploadedFile(element, (file as any as File), fieldName)
         })
       })
     }
@@ -85,7 +82,7 @@ function pluralize(count: number, noun: string, suffix = "s") {
   return `${count} ${noun}${count !== 1 ? suffix : ""}`
 }
 
-function appendUploadedFile(element: HTMLElement, file: UppyFile, fieldName: string) {
+function appendUploadedFile(element: HTMLElement, file: File, fieldName: string) {
   const hiddenField = document.createElement("input")
 
   hiddenField.setAttribute("type", "hidden")

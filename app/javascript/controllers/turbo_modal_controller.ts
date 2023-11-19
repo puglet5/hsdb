@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 import hotkeys from "hotkeys-js"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  modal: HTMLElement
+}
 
-  static targets = ["modal"]
-
-  readonly modalTarget!: HTMLElement
+export default class extends Typed(Controller, { targets }) {
 
   uppy_db_arr: HTMLCollectionOf<Element>
   uppy_states_arr: boolean[]

@@ -1,11 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
+import {  Typed } from "stimulus-typescript"
 
-export default class extends Controller {
-
+export default class extends Typed(Controller, {}) {
   connect() {
-
     const bttButton = document.getElementById("btn-back-to-top")!
-
     const scrollListen = () => {
       if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
         bttButton.classList.remove("hidden")

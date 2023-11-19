@@ -3,6 +3,7 @@ import { Chart, ChartComponentLike, ChartConfiguration, ChartDataset, DatasetCha
 import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import Papa from "papaparse"
+import { Object_, Typed } from "stimulus-typescript"
 
 export function blur(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
@@ -83,77 +84,33 @@ declare global {
   }
 }
 
-export default class extends Controller {
+const values = {
+  urls: Array<string>,
+  currentPlotData: Array<Array<Point>>,
+  unmodifiedPlotData: Array<Array<Point>>,
+  filenames: Array<string>,
+  ids: Array<string>,
+  axesSpec: Object_<AxesSpec>,
+  labels: Array<Array<Peak>>,
+  dark: Boolean,
+  compare: Boolean,
+  canvasId: String,
+  dataStep: Number,
+  controlsDisabled: Boolean
+}
 
-  static values = {
-    urls: Array,
-    currentPlotData: Array,
-    unmodifiedPlotData: Array,
-    filenames: Array,
-    ids: Array,
-    axesSpec: Object,
-    labels: Array,
-    dark: Boolean,
-    compare: Boolean,
-    canvasId: String,
-    dataStep: Number,
-    controlsDisabled: Boolean
-  }
+const targets = {
+  canvas: HTMLCanvasElement,
+  interpolateButton: HTMLElement,
+  normalizeButton: HTMLElement,
+  gaussianFilterSlider: HTMLInputElement,
+  showLabelsButton: HTMLElement,
+  derivativePlotButton: HTMLElement,
+  transmissionPlotButton: HTMLElement,
+  reverseXAxisButton: HTMLElement,
+}
 
-  urlsValue: string[]
-  currentPlotDataValue: Point[][]
-  unmodifiedPlotDataValue: Point[][]
-  filenamesValue: string[]
-  idsValue: string[]
-  axesSpecValue!: AxesSpec
-  labelsValue!: Peak[][]
-  darkValue: boolean
-  compareValue: boolean
-  canvasIdValue: string
-  dataStepValue: number
-  controlsDisabledValue: boolean
-
-  readonly hasUrlsValue: boolean
-  readonly hasCurrentPlotDataValue: boolean
-  readonly hasUnmodifiedPlotDataValue: boolean
-  readonly hasFilenamesValue: boolean
-  readonly hasIdsValue: boolean
-  readonly hasAxesSpecValue: boolean
-  readonly hasLabelsValue: boolean
-  readonly hasDarkValue: boolean
-  readonly hasCompareValue: boolean
-  readonly hasCanvasIdValue: boolean
-  readonly hasDataStepValue: boolean
-  readonly hasControlsDisabledValue: boolean
-
-  static targets = [
-    "canvas",
-    "interpolateButton",
-    "normalizeButton",
-    "gaussianFilterSlider",
-    "showLabelsButton",
-    "derivativePlotButton",
-    "transmissionPlotButton",
-    "reverseXAxisButton"
-  ]
-
-  readonly canvasTarget!: HTMLCanvasElement
-  readonly interpolateButtonTarget!: HTMLElement
-  readonly normalizeButtonTarget!: HTMLElement
-  readonly gaussianFilterSliderTarget!: HTMLInputElement
-  readonly showLabelsButtonTarget!: HTMLElement
-  readonly derivativePlotButtonTarget!: HTMLElement
-  readonly transmissionPlotButtonTarget!: HTMLElement
-  readonly reverseXAxisButtonTarget!: HTMLElement
-
-  readonly hasCanvasTarget!: boolean
-  readonly hasInterpolateButtonTarget!: boolean
-  readonly hasNormalizeButtonTarget!: boolean
-  readonly hasGaussianFilterSliderTarget!: boolean
-  readonly hasShowLabelsButtonTarget!: boolean
-  readonly hasDerivativePlotButtonTarget!: boolean
-  readonly hasTransmissionPlotButtonTarget!: boolean
-  readonly hasReverseXAxisButtonTarget!: boolean
+export default class extends Typed(Controller, { values, targets }) {
 
   normalized = false
   normalizeFactor = 1

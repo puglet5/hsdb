@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  input: HTMLInputElement
+}
 
-  static targets = ["input"]
-
-  readonly inputTarget!: HTMLInputElement
+export default class extends Typed(Controller, { targets }) {
 
   connect() {
     this.inputTarget.style.resize = "none"

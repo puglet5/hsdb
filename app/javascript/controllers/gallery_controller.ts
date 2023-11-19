@@ -1,10 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 import { PreparedPhotoSwipeOptions } from "photoswipe"
 import PhotoSwipeLightbox from "photoswipe/lightbox"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
 
-  static targets = ["wrapper"]
+const targets = {
+  wrapper: HTMLElement
+}
+
+export default class extends Typed(Controller, { targets }) {
 
   connect() {
 

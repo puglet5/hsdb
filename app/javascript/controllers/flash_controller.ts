@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  flash: HTMLElement
+}
 
-  static targets = ["flash"]
-
-  readonly flashTarget!: HTMLElement
+export default class extends Typed(Controller, { targets }) {
 
   connect() {
     const flash = this.element

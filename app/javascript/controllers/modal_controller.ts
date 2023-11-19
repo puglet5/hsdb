@@ -1,15 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 import hotkeys from "hotkeys-js"
+import { Typed } from "stimulus-typescript"
 
+const targets = {
+  modal: HTMLElement
+}
 
-export default class extends Controller {
+export default class extends Typed(Controller, { targets }) {
 
-  static targets = ["modal"]
-
-  readonly modalTarget!: HTMLElement
-
-  // @ts-expect-error
-  modal: HTMLDialogElement = document.getElementById("confirm-modal")!
+  modal: HTMLDialogElement = document.getElementById("confirm-modal")! as HTMLDialogElement
 
   connect() {
     // @ts-ignore

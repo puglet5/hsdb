@@ -6,7 +6,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "alwaysStrict": false,
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": true,
     "moduleResolution": "nodenext",
     "noEmit": true,
     "skipLibCheck": true,
@@ -17,7 +17,7 @@
       "ESNext",
       "DOM",
       "DOM.Iterable",
-    ]
+    ],
   },
   "include": [
     "app/javascript/**/*"

@@ -1,13 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 import jsonview from "@pgrabovets/json-view"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const values = {
+  json: String
+}
 
-  static values = {
-    json: String
-  }
+export default class extends Typed(Controller, { values }) {
 
-  jsonValue: any
 
   connect() {
     const jsonData = this.jsonValue

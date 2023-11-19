@@ -2,19 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 import Uppy from "@uppy/core"
 import Dashboard from "@uppy/dashboard"
 import ActiveStorageUpload from "uppy-activestorage-upload"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  image: HTMLImageElement,
+  trigger: HTMLElement,
+  div: HTMLElement
+}
 
-  static targets = ["image", "trigger", "div"]
-
-  readonly imageTarget!: HTMLImageElement
-  readonly triggerTarget!: HTMLElement
-  readonly divTarget!: HTMLElement
-
-  readonly hasImageTarget: boolean
-  readonly hasTriggerTarget: boolean
-  readonly hasDivTarget: boolean
-
+export default class extends Typed(Controller, { targets }) {
   connect() {
     const setupUppy = (element) => {
       const trigger = this.triggerTarget

@@ -1,13 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  input: HTMLInputElement,
+  svg: HTMLElement
+}
 
-  static targets = ["input", "svg"]
-
-  readonly inputTarget!: HTMLInputElement
-  readonly svgTarget!: HTMLElement
-
-
+export default class extends Typed(Controller, { targets }) {
   toggle() {
     const input = this.inputTarget
 

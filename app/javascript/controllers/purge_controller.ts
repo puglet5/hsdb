@@ -1,30 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const values = {
+  classname: String,
+  id: String
+}
 
-  static values = {
-    classname: String,
-    id: String
-  }
+const targets = {
+  delete: HTMLElement,
+  object: HTMLElement,
+  return: HTMLElement,
+  div: HTMLElement,
+  input: HTMLElement,
+  placeholder: HTMLElement
+}
 
-  classnameValue: string
-  idValue: string
-
-  static targets = [
-    "delete",
-    "object",
-    "return",
-    "div",
-    "input",
-    "placeholder"
-  ]
-
-  readonly deleteTarget!: HTMLElement
-  readonly objectTarget!: HTMLElement
-  readonly returnTarget!: HTMLElement
-  readonly divTarget!: HTMLElement
-  readonly inputTarget!: HTMLElement
-  readonly placeholderTarget!: HTMLElement
+export default class extends Typed(Controller, { values, targets }) {
 
   greyout() {
     this.objectTarget.classList.toggle("opacity-25")

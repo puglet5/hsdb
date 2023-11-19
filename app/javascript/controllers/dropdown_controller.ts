@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 import hotkeys from "hotkeys-js"
+import { Typed } from "stimulus-typescript"
 
-export default class extends Controller {
+const targets = {
+  dropdown: HTMLElement
+}
 
-  static targets = ["dropdown"]
-
-  readonly dropdownTarget!: HTMLElement
+export default class extends Typed(Controller, { targets }) {
 
   connect() {
     // @ts-ignore
