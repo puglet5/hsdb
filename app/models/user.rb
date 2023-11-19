@@ -76,7 +76,7 @@ class User < ApplicationRecord
 
   friendly_id :full_name_slug, use: %i[slugged finders]
 
-  after_commit -> { process_image self, avatar&.id }, on: %i[create update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
+  after_commit -> { process_image self, avatar&.id }, on: %i[update], unless: -> { transaction_changed_attributes.keys == ['updated_at'] }
 
   def full_name_slug
     "#{first_name} - #{last_name}"
