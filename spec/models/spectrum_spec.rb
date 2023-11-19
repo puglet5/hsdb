@@ -87,46 +87,57 @@ RSpec.describe Spectrum, type: :model do
     let!(:reflectance_mon_spectrum) { create(:spectrum, :with_file, file: 'reflectance.mon') }
 
     it 'infers .txt xrf files' do
+      xrf_txt_spectrum.reload
       expect(xrf_txt_spectrum.category).to eq('xrf')
     end
 
     it 'infers .dat xrf files' do
+      xrf_dat_spectrum.reload
       expect(xrf_dat_spectrum.category).to eq('xrf')
     end
 
     it 'infers .txt xrd files' do
+      xrd_txt_spectrum.reload
       expect(xrd_txt_spectrum.category).to eq('xrd')
     end
 
     it 'infers .xy xrd files' do
+      xrd_xy_spectrum.reload
       expect(xrd_xy_spectrum.category).to eq('xrd')
     end
 
     it 'infers .dpt ftir files' do
+      ftir_dpt_spectrum.reload
       expect(ftir_dpt_spectrum.category).to eq('ftir')
     end
 
     it 'infers .txt raman files' do
+      raman_txt_spectrum.reload
       expect(raman_txt_spectrum.category).to eq('raman')
     end
 
     it 'infers .spectable libs files' do
+      libs_spectable_spectrum.reload
       expect(libs_spectable_spectrum.category).to eq('libs')
     end
 
     it 'infers .spec libs files' do
+      libs_spec_spectrum.reload
       expect(libs_spec_spectrum.category).to eq('libs')
     end
 
     it 'infers .txt thz files' do
+      thz_txt_spectrum.reload
       expect(thz_txt_spectrum.category).to eq('thz')
     end
 
     it 'infers .csv reflectance files' do
+      reflectance_csv_spectrum.reload
       expect(reflectance_csv_spectrum.category).to eq('reflectance')
     end
 
     it 'infers .mon reflectance files' do
+      reflectance_mon_spectrum.reload
       expect(reflectance_mon_spectrum.category).to eq('reflectance')
     end
   end
