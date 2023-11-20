@@ -40,15 +40,15 @@ class Spectrum < RsdbRecord
   include ParseMetadata
 
   AXES_SPEC = {
-    not_set: { cols_type: 'xy', type: 'not_set', labels: ['', ''], reverse: false, peak_label_precision: 0, y_min: 0 },
-    xrf: { cols_type: 'xy', type: 'xrf', labels: ['Energy, keV', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
-    xrd: { cols_type: 'xy', type: 'xrd', labels: ['2Theta, degrees', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: 0 },
-    ftir: { cols_type: 'xy', type: 'ftir', labels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], reverse: true, peak_label_precision: 0, y_min: 0 },
-    libs: { cols_type: 'xy', type: 'libs', labels: ['Wavelength, nm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    raman: { cols_type: 'xy', type: 'raman', labels: ['Raman shift, 1/cm', 'Intensity, a.u.'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    thz: { cols_type: 'xyyxy', type: 'thz', labels: ['Frequency, THz', 'Intensity, a.u.'], reverse: false, peak_label_precision: 2, y_min: nil },
-    reflectance: { cols_type: 'xy', type: 'reflectance', labels: ['Wavelength, nm', 'Reflectance, %'], reverse: false, peak_label_precision: 0, y_min: 0 },
-    other: { cols_type: 'xy', type: 'other', labels: ['', ''], reverse: false }
+    not_set: { columnAxisType: 'xy', spectroscopyMethod: 'not_set', axesLabels: ['', ''], xAxisReverse: false, peakLabelPrecision: 0, yAxisMin: 0 },
+    xrf: { columnAxisType: 'xy', spectroscopyMethod: 'xrf', axesLabels: ['Energy, keV', 'Intensity, a.u.'], xAxisReverse: false, peakLabelPrecision: 2, yAxisMin: 0 },
+    xrd: { columnAxisType: 'xy', spectroscopyMethod: 'xrd', axesLabels: ['2Theta, degrees', 'Intensity, a.u.'], xAxisReverse: false, peakLabelPrecision: 2, yAxisMin: 0 },
+    ftir: { columnAxisType: 'xy', spectroscopyMethod: 'ftir', axesLabels: ['Wavenumber, 1/cm', 'Intensity, a.u.'], xAxisReverse: true, peakLabelPrecision: 0, yAxisMin: 0 },
+    libs: { columnAxisType: 'xy', spectroscopyMethod: 'libs', axesLabels: ['Wavelength, nm', 'Intensity, a.u.'], xAxisReverse: false, peakLabelPrecision: 0, yAxisMin: 0 },
+    raman: { columnAxisType: 'xy', spectroscopyMethod: 'raman', axesLabels: ['Raman shift, 1/cm', 'Intensity, a.u.'], xAxisReverse: false, peakLabelPrecision: 0, yAxisMin: 0 },
+    thz: { columnAxisType: 'xyyxy', spectroscopyMethod: 'thz', axesLabels: ['Frequency, THz', 'Intensity, a.u.'], xAxisReverse: false, peakLabelPrecision: 2, yAxisMin: nil },
+    reflectance: { columnAxisType: 'xy', spectroscopyMethod: 'reflectance', axesLabels: ['Wavelength, nm', 'Reflectance, %'], xAxisReverse: false, peakLabelPrecision: 0, yAxisMin: 0 },
+    other: { columnAxisType: 'xy', spectroscopyMethod: 'other', axesLabels: ['', ''], reverse: false, peakLabelPrecision: 0, yAxisMin: nil }
   }.freeze
 
   HEADER_MATCH_TABLE = {
