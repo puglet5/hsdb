@@ -1,10 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 import { Chart, ChartComponentLike, ChartConfiguration, ChartDataset, DatasetChartOptions, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
-import ChartDataLabels from "chartjs-plugin-datalabels"
-import { AxesSpec, Peak, Point } from "../spectra/utils.ts"
+import ChartDataLabels, { Context } from "chartjs-plugin-datalabels"
 import { Spectrum } from "../spectra/spectrum.ts"
-import { Object_, Typed } from "stimulus-typescript"
+import { Typed } from "stimulus-typescript"
+import { Point } from "../spectra/utils.ts"
 
 Chart.register(...registerables)
 Chart.register(zoomPlugin as unknown as ChartComponentLike)
@@ -17,17 +17,11 @@ declare global {
 }
 
 const values = {
-  urls: Array<string>,
-  currentPlotData: Array<Array<Point>>,
-  unmodifiedPlotData: Array<Array<Point>>,
-  filenames: Array<string>,
-  ids: Array<string>,
-  axesSpec: Object_<AxesSpec>,
-  labels: Array<Array<Peak>>,
   dark: Boolean,
   compare: Boolean,
   canvasId: String,
-  controlsDisabled: Boolean
+  controlsDisabled: Boolean,
+  spectra: Array<string>
 }
 
 const targets = {
@@ -42,7 +36,6 @@ const targets = {
 }
 
 export default class extends Typed(Controller, { values, targets }) {
-
   normalized = false
   normalizeFactor = 1
   labelAlignment: "top" | "bottom" = "top"
@@ -50,14 +43,20 @@ export default class extends Typed(Controller, { values, targets }) {
   transmissionPlot = false
   showLabels = true
   cubicInterpolationMode: DatasetChartOptions["scatter"]["datasets"]["cubicInterpolationMode"] = "monotone"
-  displayLabelValues: number[][] = this.labelsValue?.map(e => e?.map(o => o.position).map(Number)) ?? []
-  spectrum: Spectrum = Spectrum.create({ filename: this.filenamesValue, axes: this.axesSpecValue })
+  allowedKeys = Object.getOwnPropertyNames(new Spectrum) as (keyof Spectrum)[]
+
+  spectra = this.spectraValue
+    .map(r => JSON.parse(r))
+    .map(e => Spectrum.create({
+      ...this.allowedKeys.reduce((obj, key) => ({ ...obj, [key]: e[key] }), {}),
+      data: {
+        peaks: e.metadata.peaks ?? [],
+      }
+    }))
 
   async connect() {
-    const rawData = await this.importData(this.urlsValue)
-    this.spectrum.parseRawData(rawData[0])
-
-    console.log(this.spectrum)
+    const rawData = await this.importData(this.spectra.map(e => e.processed_file_url))
+    this.spectra.map((e, i) => e.parseRawData(rawData[i]))
   }
 
   async importData(url: string[]): Promise<string[]> {
@@ -66,25 +65,26 @@ export default class extends Typed(Controller, { values, targets }) {
     )
   }
 
-  constructDatasets(data: Point[][], dimensions: number[], labels: string[]) {
-    let traceNum = 1
-    return labels.map((label, i) => {
-      if (i === dimensions[0]) {
+  constructDatasets(spectrum: Spectrum) {
+    let traceNum = 0
+    return spectrum.axes.yLabels.map((label, i) => {
+      if (i === spectrum.data.dimensions[0]) {
         traceNum += 1
       }
       return {
-        data: data[i],
+        data: spectrum.data.chartData[i],
         label: label,
         hidden: i >= 1,
         showLine: true,
         lineTension: 0,
         cubicInterpolationMode: this.cubicInterpolationMode,
-        yAxisID: `y${traceNum}`,
-        xAxisID: `x${traceNum}`,
+        yAxisID: `y${spectrum.id}${i}`,
+        xAxisID: `x${spectrum.id}${traceNum}`,
         datalabels: {
           anchor: "center",
           align: this.labelAlignment,
           clip: true,
+          opacity: 1,
           borderRadius: 2,
           backgroundColor: "rgba(255, 255, 255, .75)",
           labels: {
@@ -94,107 +94,81 @@ export default class extends Typed(Controller, { values, targets }) {
               // backgroundColor: "rgba(34, 81, 163, .1)",
             }
           },
-          display: (context) => {
-            if (this.showLabels)
-              return (this.displayLabelValues[i]?.includes(context.dataIndex) ? "auto" : false)
-            else
-              return false
+          display: (context: Context) => {
+            return (spectrum.getPeakPositions().includes(context.dataIndex) ? "auto" : false)
           },
-          formatter: (value) => {
-            return parseFloat(value["x"]).toFixed(this.axesSpecValue.peakLabelPrecision)
+          formatter: (value: Point) => {
+            return value["x"].toFixed(spectrum.axes.peakLabelPrecision)
           }
         },
-      } as ChartConfiguration["options"]["datasets"]
+      } as ChartConfiguration["options"]["datasets"]["scatter"]
     })
   }
 
-  constructScales(dimensions: number[], labels: string[]) {
-    return {
-      y: { display: false },
-      x: { display: false },
-      y1: {
-        border: { dash: [4, 4] },
-        display: "auto",
-        type: "linear",
+  constructScales(spectrum: Spectrum) {
+
+    const grid = {
+      color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
+      tickBorderDash: [0, 0],
+      tickLength: 10,
+      tickWidth: 1,
+    }
+    const border = { dash: [4, 4] }
+    const type = "linear"
+    const display = "auto"
+
+    const yAxes: [string, object][] = spectrum.axes.yLabels.map((e, i) => {
+      return [`y${spectrum.id}${i}`, {
+        border,
+        display,
+        type,
         position: "left",
         title: {
-          text: labels.slice(1, dimensions[0] + 1) ?? this.axesSpecValue.axesLabels[1],
+          text: e,
           display: true
         },
-        min: this.axesSpecValue.yAxisMin,
-        grid: {
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-          tickBorderDash: [0, 0],
-          tickLength: 10,
-          tickWidth: 1,
-        },
+        min: spectrum.axes.yAxisMin,
+        grid,
         grace: "5%"
-      },
-      y2: {
-        display: "auto",
-        type: "linear",
-        position: "left",
-        border: { dash: [4, 4] },
-        title: {
-          text: labels.slice(dimensions[0] + dimensions[1] + 1) ?? this.axesSpecValue.axesLabels[1],
-          display: true
-        },
-        min: this.axesSpecValue.yAxisMin,
-        grid: {
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-          tickBorderDash: [0, 0],
-          tickLength: 10,
-          tickWidth: 1,
-        },
-        grace: "5%"
-      },
-      x1: {
-        display: "auto",
-        type: "linear",
+      }]
+    })
+
+    const xAxes: [string, object][] = spectrum.axes.xLabels.map((e, i) => {
+      return [`x${spectrum.id}${i}`, {
+        display,
+        type,
         position: "bottom",
-        border: { dash: [4, 4] },
+        border,
         title: {
-          text: labels[0] ?? this.axesSpecValue.axesLabels[0],
+          text: e,
           display: true
         },
-        grid: {
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-          tickBorderDash: [0, 0],
-          tickLength: 10,
-          tickWidth: 1,
-        },
-        reverse: this.spectrum.axes.xAxisReverse
-      },
-      x2: {
-        display: "auto",
-        position: "bottom",
-        border: { dash: [4, 4] },
-        title: {
-          text: labels.slice(dimensions[0] + 1, dimensions[0] + dimensions[1] + 1)
-            ?? this.axesSpecValue.axesLabels[1],
-          display: true
-        },
-        min: this.axesSpecValue.yAxisMin,
-        grid: {
-          color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
-          tickBorderDash: [0, 0],
-          tickLength: 10,
-          tickWidth: 1,
-        },
-      }
-    } as ChartConfiguration["options"]["scales"]
+        grid,
+        reverse: spectrum.axes.xAxisReverse
+      }]
+    })
+
+    const entries = new Map([
+      ["y", { display: false }],
+      ["x", { display: false }],
+      ...xAxes,
+      ...yAxes
+    ])
+
+    return Object.fromEntries(entries) as ChartConfiguration["options"]["scales"]
   }
 
   async visualize() {
-    const { chartData, dimensions } = this.spectrum.data
-    const datasets: ChartDataset[] = this.constructDatasets(chartData, dimensions, this.spectrum.data.traceLabels) as ChartDataset[]
+    const datasets = this.spectra.map(this.constructDatasets.bind(this)).flat() as ChartDataset[]
+    const scalesArray = this.spectra.map(this.constructScales.bind(this)).flat()
+    const scales = Object.assign({}, ...scalesArray) as ChartConfiguration["options"]["scales"]
 
     if (window.scatterChart) { window.scatterChart.destroy() }
 
     window.scatterChart = new Chart(`canvas-${this.canvasIdValue}`, {
       type: "scatter",
       data: {
-        datasets: datasets
+        datasets
       },
       options: {
         events: ["dblclick", "mousemove", "mouseout", "click", "drag", "wheel"],
@@ -222,7 +196,7 @@ export default class extends Typed(Controller, { values, targets }) {
               borderWidth: 2
             }
         },
-        scales: this.constructScales(dimensions, this.spectrum.data.header),
+        scales,
         interaction: {
           mode: "nearest",
           axis: "x",
@@ -260,7 +234,7 @@ export default class extends Typed(Controller, { values, targets }) {
               onPanComplete(ctx) {
                 ctx.chart.options.plugins.tooltip.enabled = true
                 const active = ctx.chart.getActiveElements()
-                if (active) {
+                if (active[0]) {
                   ctx.chart.tooltip.setActiveElements([{ datasetIndex: 0, index: active[0].index }], { x: 1, y: 1 })
                 }
                 ctx.chart.update()
@@ -327,8 +301,6 @@ export default class extends Typed(Controller, { values, targets }) {
 
   resetAll() {
     this.normalized = false
-    this.currentPlotDataValue = this.hasUnmodifiedPlotDataValue ? this.unmodifiedPlotDataValue : this.currentPlotDataValue
-    this.cubicInterpolationMode = undefined
     window.scatterChart.resetZoom()
     this.gaussianFilterSliderTarget.value = "0"
     this.interpolateButtonTarget.classList.remove("hidden")
@@ -342,7 +314,6 @@ export default class extends Typed(Controller, { values, targets }) {
   }
 
   toggleInterpolate() {
-    window.scatterChart.resetZoom()
     if (this.cubicInterpolationMode == undefined) {
       this.cubicInterpolationMode = "monotone"
     }
@@ -350,14 +321,16 @@ export default class extends Typed(Controller, { values, targets }) {
       this.cubicInterpolationMode = undefined
     }
     this.interpolateButtonTarget.classList.toggle("hidden")
-    this.visualize()
+    window.scatterChart.data.datasets.forEach(e => (e as ChartConfiguration["options"]["datasets"]["scatter"]).cubicInterpolationMode = this.cubicInterpolationMode)
+    window.scatterChart.update()
   }
 
   toggleLabels() {
-    window.scatterChart.resetZoom()
-    this.showLabels = !this.showLabels
     this.showLabelsButtonTarget.classList.toggle("hidden")
-    this.visualize()
+    window.scatterChart.data.datasets.forEach(e => {
+      return e.datalabels.opacity = 1 - (e.datalabels.opacity as number)
+    })
+    window.scatterChart.update()
   }
 
   disableControls() {
@@ -380,7 +353,7 @@ export default class extends Typed(Controller, { values, targets }) {
 
   toggleReverseXAxis() {
     window.scatterChart.resetZoom()
-    this.spectrum.axes.xAxisReverse = !this.spectrum.axes.xAxisReverse
+    this.spectra.map(e => e.axes.xAxisReverse = !e.axes.xAxisReverse)
     this.visualize()
   }
 }

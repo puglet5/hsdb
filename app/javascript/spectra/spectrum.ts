@@ -7,18 +7,20 @@ const produce = (proto: object, base: Data, values: any) =>
 const transformNaN = (e: string) => { return e === "nan" ? NaN : e }
 
 class Data {
-  static create(values: any) {
+  static create<Type extends Data>(
+    this: { new(t: Data): Type },
+    values?: Omit<Partial<Type>, keyof Data>,
+  ): Type {
     return produce(this.prototype, new this(Data), values)
   }
-
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  constructor(_values: any) { }
 }
 
 export class Spectrum extends Data {
-  public filename: string
+  public id: number
+  public processed_file_url: string
+  public processed_filename: string
   public axes: AxesSpec
-  public data: SpectrumData = {} as SpectrumData
+  public data: Partial<SpectrumData> = {} as SpectrumData
 
   parseRawData(rawData: string) {
     const config = {
@@ -34,11 +36,16 @@ export class Spectrum extends Data {
     const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]))
 
     this.data.header = meta.fields ?? this.axes.axesLabels
-    this.data.traceLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : [])
+    this.axes.xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
+    this.axes.yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
     this.data.chartData = this.toChartData(cols, this.axes.columnAxisType).data
     this.data.dimensions = this.toChartData(cols, this.axes.columnAxisType).dimensions
 
     return this.data.chartData
+  }
+
+  getPeakPositions() {
+    return this.data.peaks?.map(o => o.position).map(Number)
   }
 
   toChartData(data: number[][], axesSpec: string) {

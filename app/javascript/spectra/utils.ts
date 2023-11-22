@@ -64,6 +64,8 @@ export interface AxesSpec {
   axesLabels: string[]
   xAxisReverse: boolean
   yAxisMin: number | null
+  xLabels: string[]
+  yLabels: string[]
   columnAxisType: "xy" | "xyyxy" | string
   peakLabelPrecision: number
   spectroscopyMethod: string
@@ -72,9 +74,8 @@ export interface AxesSpec {
 export interface SpectrumData {
   rawData: string
   chartData: Point[][]
-  alteredData?: Point[][]
-  header?: string[]
-  traceLabels: string[]
+  alteredData: Point[][]
+  header: string[]
   dimensions: number[]
   peaks: Peak[]
   secondDerivativeData: Point[][]
