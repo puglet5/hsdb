@@ -1,6 +1,6 @@
-/* eslint-disable */
+import type { Config } from 'tailwindcss'
 
-module.exports = {
+export default {
   darkMode: "class",
   content: [
     './app/**/*.html.erb',
@@ -100,4 +100,4 @@ module.exports = {
       },
     },
   }
-}
+} satisfies Config
