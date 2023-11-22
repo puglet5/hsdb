@@ -8,8 +8,8 @@ require 'active_job/railtie'
 require 'active_record/railtie'
 require 'active_storage/engine'
 require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_mailbox/engine'
+# require 'action_mailer/railtie'
+# require 'action_mailbox/engine'
 require 'action_text/engine'
 require 'action_view/railtie'
 require 'action_cable/engine'
@@ -28,12 +28,8 @@ module HSDB
 
     config.active_job.queue_adapter = :sidekiq
 
-    # mailers config
-    config.action_mailer.deliver_later_queue_name = nil # defaults to "mailers"
-    config.action_mailbox.queues.routing    = nil       # defaults to "action_mailbox_routing"
-
     # active storage config
-    config.active_storage.queues.mirror     = nil # defaults to "active_storage_mirror"
+    config.active_storage.queues.mirror = nil # defaults to "active_storage_mirror"
     config.active_storage.track_variants = true # used to eager load image variants
 
     config.generators do |g|

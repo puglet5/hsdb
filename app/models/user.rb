@@ -38,8 +38,7 @@ class User < ApplicationRecord
 
   acts_as_favoritor
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
+  devise :database_authenticatable, :registerable, :rememberable, :validatable, :trackable
 
   has_many :discussions, dependent: :nullify
   has_many :artworks, dependent: :nullify

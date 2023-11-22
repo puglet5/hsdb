@@ -20,18 +20,6 @@ Devise.setup do |config|
   # Configure the parent class to the devise controllers.
   # config.parent_controller =
 
-  # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in Devise::Mailer,
-  # note that it will be overwritten if you use your own mailer class
-  # with default "from" parameter.
-  config.mailer_sender = 'support@heritagedb.itmo.ru'
-
-  # Configure the class responsible to send e-mails.
-  config.mailer = 'UserMailer'
-
-  # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
-
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
