@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { Chart, ChartComponentLike, ChartConfiguration, ChartDataset, DatasetChartOptions, registerables } from "chart.js"
+import { Chart, ChartComponentLike, ChartConfiguration, ChartDataset, ChartEvent, DatasetChartOptions, LegendItem, registerables } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels, { Context } from "chartjs-plugin-datalabels"
 import { Spectrum } from "../spectra/spectrum.ts"
@@ -36,8 +36,6 @@ const targets = {
 }
 
 export default class extends Typed(Controller, { values, targets }) {
-  normalized = false
-  normalizeFactor = 1
   labelAlignment: "top" | "bottom" = "top"
   derivativePlot = false
   transmissionPlot = false
@@ -75,13 +73,13 @@ export default class extends Typed(Controller, { values, targets }) {
       }
       return {
         data: data[i],
-        label: label,
+        label: `${spectrum.processed_filename.split(".")[0]} (${label})`,
         hidden: i >= 1,
         showLine: true,
         lineTension: 0,
         cubicInterpolationMode: this.cubicInterpolationMode,
-        yAxisID: `y${spectrum.id}${i}`,
-        xAxisID: `x${spectrum.id}${traceNum}`,
+        yAxisID: this.compareValue ? "y" : `y${spectrum.id}${i}`,
+        xAxisID: this.compareValue ? "x" : `x${spectrum.id}${traceNum}`,
         datalabels: {
           anchor: "center",
           align: this.labelAlignment,
@@ -157,13 +155,56 @@ export default class extends Typed(Controller, { values, targets }) {
       ...yAxes
     ])
 
-    return Object.fromEntries(entries) as ChartConfiguration["options"]["scales"]
+    const axes = Object.fromEntries(entries) as ChartConfiguration["options"]["scales"]
+
+    const compareAxes = {
+      x: {
+        display,
+        border,
+        type,
+        position: "left",
+        title: {
+          text: spectrum.axes.yLabels,
+          display: true
+        },
+        min: spectrum.axes.yAxisMin,
+        grid,
+        grace: "5%"
+      },
+      y: {
+        display,
+        type,
+        position: "bottom",
+        border,
+        title: {
+          text: spectrum.axes.xLabels,
+          display: true
+        },
+        grid,
+        reverse: spectrum.axes.xAxisReverse
+      }
+    }
+
+    return this.compareValue ? compareAxes : axes
   }
 
   async visualize() {
     const datasets = this.spectra.map(e => this.constructDatasets(e, e.data.originalData)).flat() as ChartDataset[]
     const scalesArray = this.spectra.map(e => this.constructScales(e)).flat()
     const scales = Object.assign({}, ...scalesArray) as ChartConfiguration["options"]["scales"]
+
+    const defaultLegendClickHandler = Chart.defaults.plugins.legend.onClick
+    const customLegendClickHandler = function (_e: ChartEvent, legendItem: LegendItem) {
+      const chart: Chart = this.chart
+
+      chart.data.datasets.forEach((_, i) => {
+        const meta = chart.getDatasetMeta(i)
+        meta.hidden = i !== legendItem.datasetIndex
+      })
+
+      chart.update()
+    }
+    const legendClickHandler = this.compareValue ? defaultLegendClickHandler : customLegendClickHandler
 
     if (window.scatterChart) { window.scatterChart.destroy() }
 
@@ -177,6 +218,7 @@ export default class extends Typed(Controller, { values, targets }) {
         locale: "en",
         animation: false,
         responsive: true,
+        normalized: true,
         layout: {
           padding: {
             left: 20,
@@ -248,22 +290,7 @@ export default class extends Typed(Controller, { values, targets }) {
           },
           legend:
           {
-            onClick: function (e, legendItem) {
-              const index = legendItem.datasetIndex
-              const chart = this.chart
-
-              chart.data.datasets.forEach(function (e, i) {
-                const meta = chart.getDatasetMeta(i)
-
-                if (i !== index) {
-                  meta.hidden = true
-                } else if (i === index) {
-                  meta.hidden = false
-                }
-              })
-
-              chart.update()
-            },
+            onClick: legendClickHandler,
             labels: {
               boxWidth: 0,
             }
@@ -298,11 +325,9 @@ export default class extends Typed(Controller, { values, targets }) {
         },
       ]
     })
-
   }
 
   resetAll() {
-    this.normalized = false
     window.scatterChart.resetZoom()
     this.gaussianFilterSliderTarget.value = "0"
     this.interpolateButtonTarget.classList.remove("hidden")
