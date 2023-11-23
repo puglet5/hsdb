@@ -1,5 +1,5 @@
 import Papa from "papaparse"
-import { SpectrumData, AxesSpec, Point, normalizeData, SpectrumDataset } from "./utils.ts"
+import { SpectrumData, AxesSpec, Point, normalizeData, SpectrumDataset, getDataRange } from "./utils.ts"
 
 const produce = (proto: object, base: Data, values: any) =>
   Object.freeze(Object.assign(Object.seal(Object.assign(Object.create(proto), base)), values))
@@ -32,24 +32,33 @@ export class Spectrum extends Data {
     }
 
     const { data, meta } = Papa.parse(rawData, config)
-    this.data.dataset = {} as SpectrumDataset
 
     const rows: number[][] = data.map(e => Object.values(e))
     const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex])).map(e => e.filter(x => !Number.isNaN(x)))
+
+    console.log(this.data)
 
     this.data.header = meta.fields ?? this.axes.axesLabels
     this.axes.xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
     this.axes.yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
 
-    this.data.originalData = this.dataToPoints(cols, this.axes.columnAxisType).data
-    this.data.dimensions = this.dataToPoints(cols, this.axes.columnAxisType).dimensions
-    this.data.dataset.data = this.data.originalData
-    this.data.dataset.normalized = Array.from({ length: this.data.dataset.data.length }, () => false)
-    this.data.normalizedData = this.data.originalData.map(normalizeData)
+    const pointData = this.dataToPoints(cols, this.axes.columnAxisType)
+
+    this.data.datasets = pointData.data.map((e, i) => {
+      return {
+        originalData: e,
+        data: e,
+        normalized: false,
+        originalRange: getDataRange(e),
+        peaks: [],
+        secondDerivativeData: []
+      }
+    })
+    this.data.dimensions = pointData.dimensions
   }
 
   getPeakPositions() {
-    return this.data.peaks?.map(o => o.position).map(Number)
+    return this.data.datasets[0].peaks.map(o => o.position).map(Number)
   }
 
   dataToPoints(data: number[][], axesSpec: string) {
@@ -82,5 +91,23 @@ export class Spectrum extends Data {
     })
 
     return { data: objectData, dimensions: dataDimensions }
+  }
+
+  toggleNormalizeDatasetEntry(i: number) {
+    const dataset = this.data.datasets[i]
+
+    if (dataset.normalized) {
+      this.data.datasets[i] = {
+        ...dataset,
+        data: normalizeData(dataset.data, dataset.originalRange[1][1]),
+        normalized: false
+      }
+    } else {
+      this.data.datasets[i] = {
+        ...dataset,
+        data: normalizeData(dataset.data),
+        normalized: true
+      }
+    }
   }
 }

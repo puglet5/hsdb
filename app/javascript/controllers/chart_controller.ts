@@ -46,10 +46,7 @@ export default class extends Typed(Controller, { values, targets }) {
   spectra = this.spectraValue
     .map(r => JSON.parse(r))
     .map(e => Spectrum.create({
-      ...this.allowedKeys.reduce((obj, key) => ({ ...obj, [key]: e[key] }), {}),
-      data: {
-        peaks: e.metadata.peaks ?? [],
-      }
+      ...this.allowedKeys.reduce((obj, key) => ({ ...obj, [key]: e[key] }), {})
     }))
 
   async connect() {
@@ -189,7 +186,7 @@ export default class extends Typed(Controller, { values, targets }) {
   }
 
   async visualize() {
-    const datasets = this.spectra.map(e => this.constructDatasets(e, e.data.originalData)).flat() as ChartDataset[]
+    const datasets = this.spectra.map(e => this.constructDatasets(e, e.data.datasets.map(e => e.originalData))).flat() as ChartDataset[]
     const scalesArray = this.spectra.map(e => this.constructScales(e)).flat()
     const scales = Object.assign({}, ...scalesArray) as ChartConfiguration["options"]["scales"]
 
@@ -386,26 +383,6 @@ export default class extends Typed(Controller, { values, targets }) {
 
   toggleNormalize() {
     const chart = window.scatterChart
-    const displayedDatasetIds = chart.data.datasets.map((ds, i) => chart.isDatasetVisible(i) ? i : undefined)
-    const displayedDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.dataset.data)).flat() as ChartDataset[]
-    const normalizedDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.normalizedData)).flat() as ChartDataset[]
-
-    const allDatasets = (chart.config.data.datasets as ChartDataset[]).map((e, i) => {
-      if (displayedDatasetIds.includes(i)) {
-        if (this.spectra[0].data.dataset.normalized[i] === true) {
-          this.spectra[0].data.dataset.normalized[i] = false
-          displayedDatasets[i].hidden = false
-          return displayedDatasets[i]
-        }
-        this.spectra[0].data.dataset.normalized[i] = true
-        normalizedDatasets[i].hidden = false
-        return normalizedDatasets[i]
-      }
-
-      return e
-    })
-
-    chart.config.data.datasets = allDatasets
     chart.resetZoom()
     chart.update()
   }

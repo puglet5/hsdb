@@ -72,19 +72,19 @@ export interface AxesSpec {
 }
 
 export interface SpectrumDataset {
-  data: Point[][],
-  normalized: boolean[]
+  data: Point[],
+  normalized: boolean
+  originalRange: number[][]
+  secondDerivativeData: Point[]
+  originalData: Point[]
+  peaks: Peak[]
 }
 
 export interface SpectrumData {
   rawData: string
-  originalData: Point[][]
-  dataset: SpectrumDataset
+  datasets: SpectrumDataset[]
   header: string[]
   dimensions: number[]
-  peaks: Peak[]
-  secondDerivativeData: Point[][]
-  normalizedData: Point[][]
 }
 
 export function getDataRange(data: Point[]): number[][] {
@@ -103,9 +103,9 @@ export function getDataRange(data: Point[]): number[][] {
   ]
 }
 
-export function normalizeData(data: Point[]) {
+export function normalizeData(data: Point[], normalizeTo: number = 1) {
   const range: number[][] = getDataRange(data)
-  const normalizationFactor = range[1][1]
+  const normalizationFactor = range[1][1] / normalizeTo
   const normalizedY: number[] = data.map(e => e["y"] / normalizationFactor)
 
   const normalizedData = data.map((e, i) => (
