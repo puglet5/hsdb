@@ -71,10 +71,15 @@ export interface AxesSpec {
   spectroscopyMethod: string
 }
 
+export interface SpectrumDataset {
+  data: Point[][],
+  normalized: boolean[]
+}
+
 export interface SpectrumData {
   rawData: string
-  chartData: Point[][]
-  alteredData: Point[][]
+  originalData: Point[][]
+  dataset: SpectrumDataset
   header: string[]
   dimensions: number[]
   peaks: Peak[]
@@ -83,6 +88,7 @@ export interface SpectrumData {
 }
 
 export function getDataRange(data: Point[]): number[][] {
+
   const y = data
     .map(e => Object.values(e))
     .map(e => e[1])
@@ -102,13 +108,14 @@ export function normalizeData(data: Point[]) {
   const normalizationFactor = range[1][1]
   const normalizedY: number[] = data.map(e => e["y"] / normalizationFactor)
 
-  data.map((e, i) => (
+  const normalizedData = data.map((e, i) => (
     {
       x: e["x"],
       y: normalizedY[i],
     }
   ))
-  return data
+
+  return normalizedData
 }
 
 export function calculateSecondDerivative(data: Point[]) {

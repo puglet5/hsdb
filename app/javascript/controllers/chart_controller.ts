@@ -57,6 +57,8 @@ export default class extends Typed(Controller, { values, targets }) {
   async connect() {
     const rawData = await this.importData(this.spectra.map(e => e.processed_file_url))
     this.spectra.map((e, i) => e.parseRawData(rawData[i]))
+
+    if (this.compareValue) this.visualize()
   }
 
   async importData(url: string[]): Promise<string[]> {
@@ -65,14 +67,14 @@ export default class extends Typed(Controller, { values, targets }) {
     )
   }
 
-  constructDatasets(spectrum: Spectrum) {
+  constructDatasets(spectrum: Spectrum, data: Point[][]) {
     let traceNum = 0
     return spectrum.axes.yLabels.map((label, i) => {
       if (i === spectrum.data.dimensions[0]) {
         traceNum += 1
       }
       return {
-        data: spectrum.data.chartData[i],
+        data: data[i],
         label: label,
         hidden: i >= 1,
         showLine: true,
@@ -101,7 +103,7 @@ export default class extends Typed(Controller, { values, targets }) {
             return value["x"].toFixed(spectrum.axes.peakLabelPrecision)
           }
         },
-      } as ChartConfiguration["options"]["datasets"]["scatter"]
+      }
     })
   }
 
@@ -159,8 +161,8 @@ export default class extends Typed(Controller, { values, targets }) {
   }
 
   async visualize() {
-    const datasets = this.spectra.map(this.constructDatasets.bind(this)).flat() as ChartDataset[]
-    const scalesArray = this.spectra.map(this.constructScales.bind(this)).flat()
+    const datasets = this.spectra.map(e => this.constructDatasets(e, e.data.originalData)).flat() as ChartDataset[]
+    const scalesArray = this.spectra.map(e => this.constructScales(e)).flat()
     const scales = Object.assign({}, ...scalesArray) as ChartConfiguration["options"]["scales"]
 
     if (window.scatterChart) { window.scatterChart.destroy() }
@@ -172,7 +174,7 @@ export default class extends Typed(Controller, { values, targets }) {
       },
       options: {
         events: ["dblclick", "mousemove", "mouseout", "click", "drag", "wheel"],
-        locale: "fr",
+        locale: "en",
         animation: false,
         responsive: true,
         layout: {
@@ -355,5 +357,31 @@ export default class extends Typed(Controller, { values, targets }) {
     window.scatterChart.resetZoom()
     this.spectra.map(e => e.axes.xAxisReverse = !e.axes.xAxisReverse)
     this.visualize()
+  }
+
+  toggleNormalize() {
+    const chart = window.scatterChart
+    const displayedDatasetIds = chart.data.datasets.map((ds, i) => chart.isDatasetVisible(i) ? i : undefined)
+    const displayedDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.dataset.data)).flat() as ChartDataset[]
+    const normalizedDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.normalizedData)).flat() as ChartDataset[]
+
+    const allDatasets = (chart.config.data.datasets as ChartDataset[]).map((e, i) => {
+      if (displayedDatasetIds.includes(i)) {
+        if (this.spectra[0].data.dataset.normalized[i] === true) {
+          this.spectra[0].data.dataset.normalized[i] = false
+          displayedDatasets[i].hidden = false
+          return displayedDatasets[i]
+        }
+        this.spectra[0].data.dataset.normalized[i] = true
+        normalizedDatasets[i].hidden = false
+        return normalizedDatasets[i]
+      }
+
+      return e
+    })
+
+    chart.config.data.datasets = allDatasets
+    chart.resetZoom()
+    chart.update()
   }
 }

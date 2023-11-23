@@ -2,13 +2,9 @@
   <div class="px-4 py-24 mx-auto text-gray-700 sm:px-6 lg:px-8">
     <%= tag.div data: {
                     controller: "chart",
-                    chart_urls_value: @spectra.map(&:processed_file).map(&:url),
-                    chart_filenames_value: @spectra.map(&:processed_file).map(&:filename),
-                    chart_ids_value: @spectra.map(&:id),
                     chart_canvas_id_value: @spectra.map(&:id).map(&:to_s).join('-'),
-                    chart_axes_spec_value: Spectrum::AXES_SPEC[@spectra.first.category.to_sym],
-                    chart_labels_value: @spectra.map { |s| s.metadata["peaks"] },
                     chart_dark_value: current_user.settings(:ui).dark,
+                    chart_spectra_value: @spectra.map{ |s| SpectrumSerializer.new(s).to_json },
                     chart_compare_value: true
                   } do %>
       <div class="relative bg-white rounded-md shadow">
