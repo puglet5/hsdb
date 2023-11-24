@@ -1,16 +1,16 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss"
 
 export default {
   darkMode: "class",
   content: [
-    './app/**/*.html.erb',
-    './app/components/*.rb',
-    './app/components/*',
-    './app/components/*.html.erb',
-    './app/helpers/**/*.rb',
-    './app/assets/stylesheets/**/*.css',
-    './app/javascript/**/*.js',
-    './node_modules/flowbite/dist/datepicker.js'
+    "./app/**/*.html.erb",
+    "./app/components/*.rb",
+    "./app/components/*",
+    "./app/components/*.html.erb",
+    "./app/helpers/**/*.rb",
+    "./app/assets/stylesheets/**/*.css",
+    "./app/javascript/**/*.js",
+    "./node_modules/flowbite/dist/datepicker.js"
   ],
   plugins: [
     require("flowbite/plugin"),
@@ -19,7 +19,7 @@ export default {
   theme: {
     extend: {
       aspectRatio: {
-        '4/3': '4 / 3',
+        "4/3": "4 / 3",
       },
       boxShadow: {
         "3xl": "0 0 120px rgba(0, 0, 0, 0.3)",

@@ -1,5 +1,5 @@
 import Papa from "papaparse"
-import { SpectrumData, AxesSpec, Point, normalizeData, SpectrumDataset, getDataRange } from "./utils.ts"
+import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange } from "./utils.ts"
 
 const produce = (proto: object, base: Data, values: any) =>
   Object.freeze(Object.assign(Object.seal(Object.assign(Object.create(proto), base)), values))
@@ -42,7 +42,7 @@ export class Spectrum extends Data {
 
     const pointData = this.dataToPoints(cols, this.axes.columnAxisType)
 
-    this.data.datasets = pointData.data.map((e, i) => {
+    this.data.datasets = pointData.data.map(e => {
       return {
         originalData: e,
         data: e,
@@ -92,24 +92,6 @@ export class Spectrum extends Data {
   }
 
   toggleNormalizeDatasetEntry(i: number) {
-    const dataset = this.data.datasets[i]
-
-    if (dataset.normalized) {
-      this.data.datasets[i] = {
-        ...dataset,
-        data: normalizeData(dataset.data, dataset.originalRange[1][1]),
-        normalized: false
-      }
-    } else {
-      this.data.datasets[i] = {
-        ...dataset,
-        data: normalizeData(dataset.data),
-        normalized: true
-      }
-    }
-  }
-  
-  smoothDatasetEntry(i: number, r: number) {
     const dataset = this.data.datasets[i]
 
     if (dataset.normalized) {

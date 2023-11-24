@@ -389,7 +389,7 @@ export default class extends Typed(Controller, { values, targets }) {
     const datasetsPerSpectrum = this.spectra.map(e => e.data.datasets.length)
 
     const datasetsBySpectrum = datasetsPerSpectrum.map((de, di) => {
-      let mask = displayedDatasetIds.map((id, i) => de * (di + 1) > id && id >= de * di)
+      const mask = displayedDatasetIds.map(id => de * (di + 1) > id && id >= de * di)
       return displayedDatasetIds.filter((_e, i) => mask[i]).map(e => e % de)
     })
 
