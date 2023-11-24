@@ -160,7 +160,7 @@ export default class extends Typed(Controller, { values, targets }) {
         type,
         position: "left",
         title: {
-          text: spectrum.axes.yLabels,
+          text: spectrum.axes.xLabels,
           display: true
         },
         min: spectrum.axes.yAxisMin,
@@ -173,7 +173,7 @@ export default class extends Typed(Controller, { values, targets }) {
         position: "bottom",
         border,
         title: {
-          text: spectrum.axes.xLabels,
+          text: spectrum.axes.yLabels,
           display: true
         },
         grid,
