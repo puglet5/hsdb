@@ -10,6 +10,8 @@ Chart.register(...registerables)
 Chart.register(zoomPlugin as unknown as ChartComponentLike)
 Chart.register(ChartDataLabels)
 
+type ChartScale = ChartConfiguration["options"]["scales"]
+
 declare global {
   interface Window {
     scatterChart: Chart
@@ -37,22 +39,20 @@ const targets = {
 
 export default class extends Typed(Controller, { values, targets }) {
   labelAlignment: "top" | "bottom" = "top"
-  derivativePlot = false
-  transmissionPlot = false
-  showLabels = true
   cubicInterpolationMode: DatasetChartOptions["scatter"]["datasets"]["cubicInterpolationMode"] = "monotone"
   allowedKeys = Object.getOwnPropertyNames(new Spectrum) as (keyof Spectrum)[]
 
   spectra = this.spectraValue
     .map(r => JSON.parse(r))
     .map(e => Spectrum.create({
-      ...this.allowedKeys.reduce((obj, key) => ({ ...obj, [key]: e[key] }), {})
+      ...this.allowedKeys.reduce((obj, key) => ({ ...obj, [key]: e[key] }), {}),
+      data: {}
     }))
 
   async connect() {
     const rawData = await this.importData(this.spectra.map(e => e.processed_file_url))
     this.spectra.map((e, i) => e.parseRawData(rawData[i]))
-
+    
     if (this.compareValue) this.visualize()
   }
 
@@ -73,13 +73,12 @@ export default class extends Typed(Controller, { values, targets }) {
         label: `${spectrum.processed_filename.split(".")[0]} (${label})`,
         hidden: i >= 1,
         showLine: true,
-        lineTension: 0,
         cubicInterpolationMode: this.cubicInterpolationMode,
         yAxisID: this.compareValue ? "y" : `y${spectrum.id}${i}`,
         xAxisID: this.compareValue ? "x" : `x${spectrum.id}${traceNum}`,
         datalabels: {
           anchor: "center",
-          align: this.labelAlignment,
+          align: "top",
           clip: true,
           opacity: 1,
           borderRadius: 2,
@@ -97,8 +96,8 @@ export default class extends Typed(Controller, { values, targets }) {
           formatter: (value: Point) => {
             return value["x"].toFixed(spectrum.axes.peakLabelPrecision)
           }
-        },
-      }
+        }
+      } as ChartConfiguration<"scatter">["data"]["datasets"][number]
     })
   }
 
@@ -127,7 +126,7 @@ export default class extends Typed(Controller, { values, targets }) {
         min: spectrum.axes.yAxisMin,
         grid,
         grace: "5%"
-      }]
+      } as ChartScale[keyof ChartScale]]
     })
 
     const xAxes: [string, object][] = spectrum.axes.xLabels.map((e, i) => {
@@ -142,7 +141,7 @@ export default class extends Typed(Controller, { values, targets }) {
         },
         grid,
         reverse: spectrum.axes.xAxisReverse
-      }]
+      } as ChartScale[keyof ChartScale]]
     })
 
     const entries = new Map([
@@ -152,7 +151,7 @@ export default class extends Typed(Controller, { values, targets }) {
       ...yAxes
     ])
 
-    const axes = Object.fromEntries(entries) as ChartConfiguration["options"]["scales"]
+    const axes = Object.fromEntries(entries) as ChartScale
 
     const compareAxes = {
       x: {
@@ -295,7 +294,7 @@ export default class extends Typed(Controller, { values, targets }) {
           datalabels: {
             display: false
           }
-        }
+        },
       },
       plugins: [
         {
@@ -383,7 +382,33 @@ export default class extends Typed(Controller, { values, targets }) {
 
   toggleNormalize() {
     const chart = window.scatterChart
+
+    const allDatasets = chart.data.datasets
+    const displayedDatasetIds = allDatasets.flatMap((_ds, i) => chart.isDatasetVisible(i) ? i : [])
+
+    const datasetsPerSpectrum = this.spectra.map(e => e.data.datasets.length)
+
+    const datasetsBySpectrum = datasetsPerSpectrum.map((de, di) => {
+      let mask = displayedDatasetIds.map((id, i) => de * (di + 1) > id && id >= de * di)
+      return displayedDatasetIds.filter((_e, i) => mask[i]).map(e => e % de)
+    })
+
+    this.spectra.map((e, i) => {
+      datasetsBySpectrum[i].map(de => {
+        e.toggleNormalizeDatasetEntry(de)
+      })
+    })
+
+    const newDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.datasets.map(e => e.data))).flat() as ChartDataset[]
+    newDatasets.map((e, i) => {
+      e.hidden = !chart.isDatasetVisible(i)
+    })
+
+    chart.config.data.datasets = newDatasets
+
     chart.resetZoom()
     chart.update()
+    this.normalizeButtonTarget.classList.toggle("hidden")
+
   }
 }

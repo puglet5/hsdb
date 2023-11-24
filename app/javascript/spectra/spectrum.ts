@@ -36,8 +36,6 @@ export class Spectrum extends Data {
     const rows: number[][] = data.map(e => Object.values(e))
     const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex])).map(e => e.filter(x => !Number.isNaN(x)))
 
-    console.log(this.data)
-
     this.data.header = meta.fields ?? this.axes.axesLabels
     this.axes.xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
     this.axes.yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
@@ -94,6 +92,24 @@ export class Spectrum extends Data {
   }
 
   toggleNormalizeDatasetEntry(i: number) {
+    const dataset = this.data.datasets[i]
+
+    if (dataset.normalized) {
+      this.data.datasets[i] = {
+        ...dataset,
+        data: normalizeData(dataset.data, dataset.originalRange[1][1]),
+        normalized: false
+      }
+    } else {
+      this.data.datasets[i] = {
+        ...dataset,
+        data: normalizeData(dataset.data),
+        normalized: true
+      }
+    }
+  }
+  
+  smoothDatasetEntry(i: number, r: number) {
     const dataset = this.data.datasets[i]
 
     if (dataset.normalized) {

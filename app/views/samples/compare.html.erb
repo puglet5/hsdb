@@ -29,6 +29,26 @@
                 </svg>
               </button>
             <% end %>
+            
+            <%= render TooltipComponent.new(tooltip: "Normalize", user: current_user) do %>
+              <button type="button" class="flex items-center ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleNormalize">
+                <svg xmlns="http://www.w3.org/2000/svg" data-chart-target="normalizeButton" class="w-5 h-5 icon icon-tabler icon-tabler-fold peer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 3v6l3 -3m-6 0l3 3"></path>
+                  <path d="M12 21v-6l3 3m-6 0l3 -3"></path>
+                  <path d="M4 12l1 0"></path>
+                  <path d="M9 12l1 0"></path>
+                  <path d="M14 12l1 0"></path>
+                  <path d="M19 12l1 0"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-5 h-5 icon icon-tabler icon-tabler-arrows-vertical peer-[.hidden]:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M8 7l4 -4l4 4"></path>
+                  <path d="M8 17l4 4l4 -4"></path>
+                  <path d="M12 3l0 18"></path>
+                </svg>
+              </button>
+            <% end %>
 
             <%= render TooltipComponent.new(tooltip: "Toggle transmission plot", user: current_user) do %>
               <button type="button" class="items-center hidden ml-auto text-sm text-gray-400 bg-transparent rounded-md p-1.5 hover:text-gray-700 hover:bg-gray-200" data-action="click->chart#toggleTransmissionPlot">
