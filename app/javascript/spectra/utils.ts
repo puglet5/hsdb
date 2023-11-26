@@ -58,25 +58,31 @@ export interface Point {
 
 export interface Peak {
   readonly position: number
+  readonly fwhm: number
 }
 
 export interface AxesSpec {
   readonly axesLabels: string[]
-  xAxisReverse: boolean
-  readonly yAxisMin: number | null
-  xLabels: string[]
-  yLabels: string[]
   readonly columnAxisType: "xy" | "xyyxy"
   readonly peakLabelPrecision: number
   readonly spectroscopyMethod: "not_set" | "xrf" | "xrd" | "ftir" | "libs" | "raman" | "thz" | "reflectance" | "other"
+  readonly yAxisMin: number
+  readonly xAxisReverse: boolean
 }
 
 export interface SpectrumDataset {
-  data: Point[],
+  id: string
+  data: Point[]
   normalized: boolean
-  originalRange: number[][]
-  secondDerivativeData: Point[]
-  originalData: Point[]
+  xAxisReverse: boolean
+  readonly yAxisMin: number | null
+  xLabel: string
+  yLabel: string
+  yAxisID: string
+  xAxisID: string
+  isSecondDerivativeData: boolean
+  originalRange?: number[][]
+  originalData?: Point[]
   peaks?: Readonly<Peak[]>
 }
 

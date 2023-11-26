@@ -1,5 +1,6 @@
 import Papa from "papaparse"
-import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange, SpectrumDataset, toSmoothedData } from "./utils.ts"
+import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange, SpectrumDataset, toSmoothedData, calculateSecondDerivative } from "./utils.ts"
+import { createId } from "@paralleldrive/cuid2"
 
 const produce = <O extends object>(proto: O, base: Data, values: any): O =>
   Object.freeze(Object.assign(Object.seal(Object.assign(Object.create(proto), base)), values))
@@ -36,22 +37,34 @@ export class Spectrum extends Data {
     const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex])).map(e => e.filter(x => !Number.isNaN(x)))
 
     this.data.header = meta.fields ?? this.axes.axesLabels
-    this.axes.xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
-    this.axes.yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
+    const xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
+    const yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
 
     const pointData = this.dataToPoints(cols, this.axes.columnAxisType)
 
-    this.data.datasets = pointData.data.map(e => {
+    this.data.dimensions = pointData.dimensions
+
+    this.data.datasets = pointData.data.map((e, i) => {
+      let traceNum = 0
+      if (i === this.data.dimensions[0]) {
+        traceNum += 1
+      }
       return {
+        id: createId(),
         originalData: e,
         data: e,
+        yAxisID: createId(),
+        xAxisID: createId(),
+        xLabel: xLabels[traceNum],
+        yLabel: yLabels[i],
+        yAxisMin: this.axes.yAxisMin,
+        xAxisReverse: this.axes.xAxisReverse,
         normalized: false,
+        isSecondDerivativeData: false,
         originalRange: getDataRange(e),
-        secondDerivativeData: [],
         peaks: this.data.metadata.peaks
       } satisfies Partial<SpectrumDataset>
     })
-    this.data.dimensions = pointData.dimensions
   }
 
   getPeakPositions() {
@@ -119,5 +132,33 @@ export class Spectrum extends Data {
     }
 
     this.data.datasets[i].data = data
+  }
+
+  addSecondDerivativeDataset(i: number) {
+    const dataset = this.data.datasets[i]
+
+    const derivativeDataset = {
+      ...dataset,
+      id: createId(),
+      yAxisMin: 0,
+      yLabel: `${dataset.yLabel} (2nd Derivative)`,
+      isSecondDerivativeData: true,
+      normalized: true,
+      data: calculateSecondDerivative(dataset.data)
+    } satisfies SpectrumDataset
+
+    this.data.datasets = [...this.data.datasets, derivativeDataset]
+  }
+
+  resetData() {
+    this.data.datasets = this.data.datasets.flatMap(ds => {
+      if (ds.isSecondDerivativeData) { return [] }
+      return {
+        ...ds,
+        normalized: false,
+        data: ds.originalData,
+        xAxisReverse: this.axes.xAxisReverse
+      }
+    })
   }
 }

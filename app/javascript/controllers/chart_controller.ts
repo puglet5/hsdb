@@ -43,10 +43,10 @@ const targets = {
   interpolateButton: HTMLElement,
   normalizeButton: HTMLElement,
   smoothingRadiusSlider: HTMLInputElement,
-  showLabelsButton: HTMLElement,
-  derivativePlotButton: HTMLElement,
-  transmissionPlotButton: HTMLElement,
-  reverseXAxisButton: HTMLElement,
+  showLabelsButton: HTMLButtonElement,
+  derivativePlotButton: HTMLButtonElement,
+  transmissionPlotButton: HTMLButtonElement,
+  reverseXAxisButton: HTMLButtonElement,
 }
 
 export default class ChartController extends Typed(Controller, { values, targets }) {
@@ -73,6 +73,8 @@ export default class ChartController extends Typed(Controller, { values, targets
     this.spectra.map((e, i) => e.parseRawData(rawData[i]))
 
     if (this.compareValue) this.visualize()
+    console.log(this.spectra[0].data.datasets)
+    this.visualize()
   }
 
   async importData(url: string[]): Promise<string[]> {
@@ -81,21 +83,17 @@ export default class ChartController extends Typed(Controller, { values, targets
     )
   }
 
-  constructDatasets(spectrum: Readonly<Spectrum>, data: Readonly<Point[][]>) {
+  constructDatasets(spectrum: Readonly<Spectrum>) {
     const peaks = spectrum.getPeakPositions()
-    let traceNum = 0
-    return spectrum.axes.yLabels.map((label, i) => {
-      if (i === spectrum.data.dimensions[0]) {
-        traceNum += 1
-      }
+    return spectrum.data.datasets.map((ds, i) => {
       return {
-        data: data[i],
-        label: `${spectrum.processed_filename.split(".")[0]} (${label})`,
+        data: ds.data,
+        label: `${spectrum.processed_filename.split(".")[0]} (${ds.yLabel})`,
         hidden: i >= 1,
         showLine: true,
         cubicInterpolationMode: this.cubicInterpolationMode,
-        yAxisID: this.compareValue ? "y" : `y${spectrum.id}${i}`,
-        xAxisID: this.compareValue ? "x" : `x${spectrum.id}${traceNum}`,
+        yAxisID: this.compareValue ? "y" : ds.yAxisID,
+        xAxisID: this.compareValue ? "x" : ds.xAxisID,
         datalabels: {
           anchor: "center",
           align: "top",
@@ -133,34 +131,34 @@ export default class ChartController extends Typed(Controller, { values, targets
     const type = "linear"
     const display = "auto"
 
-    const yAxes: [string, object][] = spectrum.axes.yLabels.map((e, i) => {
-      return [`y${spectrum.id}${i}`, {
+    const yAxes: [string, object][] = spectrum.data.datasets.map(ds => {
+      return [ds.yAxisID, {
         border,
         display,
         type,
         position: "left",
         title: {
-          text: e,
+          text: ds.yLabel,
           display: true
         },
-        min: spectrum.axes.yAxisMin,
+        min: ds.yAxisMin,
         grid,
         grace: "5%"
       } as ChartScale[keyof ChartScale]]
     })
 
-    const xAxes: [string, object][] = spectrum.axes.xLabels.map((e, i) => {
-      return [`x${spectrum.id}${i}`, {
+    const xAxes: [string, object][] = spectrum.data.datasets.map(ds => {
+      return [ds.xAxisID, {
         display,
         type,
         position: "bottom",
         border,
         title: {
-          text: e,
+          text: ds.xLabel,
           display: true
         },
         grid,
-        reverse: spectrum.axes.xAxisReverse
+        reverse: ds.xAxisReverse
       } as ChartScale[keyof ChartScale]]
     })
 
@@ -180,7 +178,7 @@ export default class ChartController extends Typed(Controller, { values, targets
         type,
         position: "left",
         title: {
-          text: spectrum.axes.xLabels,
+          text: spectrum.data.datasets.map(ds => ds.xLabel),
           display: true
         },
         min: spectrum.axes.yAxisMin,
@@ -193,7 +191,7 @@ export default class ChartController extends Typed(Controller, { values, targets
         position: "bottom",
         border,
         title: {
-          text: spectrum.axes.yLabels,
+          text: spectrum.data.datasets.map(ds => ds.yLabel),
           display: true
         },
         grid,
@@ -208,10 +206,18 @@ export default class ChartController extends Typed(Controller, { values, targets
     this.legendClickHandler.bind(this)(e, legendItem, legend)
 
     const chart = this.chart
+    chart.resetZoom()
     const allDatasets = this.chart.data.datasets
     const displayedDatasetIds: number[] = allDatasets.flatMap((_ds, i) => this.chart.isDatasetVisible(i) ? i : [])
 
-    if (displayedDatasetIds.length > 1 || this.spectra.length > 1) return
+    if (displayedDatasetIds.length > 1 || this.spectra.length > 1) {
+      this.derivativePlotButtonTarget.disabled = true
+      this.smoothingRadiusSliderTarget.disabled = true
+      return
+    }
+
+    this.derivativePlotButtonTarget.disabled = false
+    this.smoothingRadiusSliderTarget.disabled = false
 
     allDatasets.map((_e, i) => {
       if (this.chart.isDatasetVisible(i)) {
@@ -221,7 +227,9 @@ export default class ChartController extends Typed(Controller, { values, targets
           this.reverseXAxisButtonTarget.classList.remove("scale-x-[-1]")
         }
 
-        if (this.spectra[0].data.datasets[i].normalized) {
+        const normalized = this.spectra[0].data?.datasets[i]?.normalized || false
+
+        if (normalized) {
           this.normalizeButtonTarget.classList.add("hidden")
         } else {
           this.normalizeButtonTarget.classList.remove("hidden")
@@ -233,7 +241,7 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   visualize() {
-    const datasets = this.spectra.map(e => this.constructDatasets(e, e.data.datasets.map(e => e.originalData))).flat() as ChartDataset[]
+    const datasets = this.spectra.map(e => this.constructDatasets(e)).flat() as ChartDataset[]
     const scalesArray = this.spectra.map(e => this.constructScales(e)).flat()
     const scales = Object.assign({}, ...scalesArray) as ChartConfiguration["options"]["scales"]
 
@@ -370,6 +378,8 @@ export default class ChartController extends Typed(Controller, { values, targets
       this.smoothingRadiusSliderTarget.value = "0"
     }
 
+    this.spectra.map(e => e.resetData())
+
     this.visualize()
   }
 
@@ -424,7 +434,7 @@ export default class ChartController extends Typed(Controller, { values, targets
       })
     })
 
-    const newDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.datasets.map(e => e.data))).flat() as ChartDataset[]
+    const newDatasets = this.spectra.map(e => this.constructDatasets(e)).flat() as ChartDataset[]
     newDatasets.map((e, i) => {
       e.hidden = !this.chart.isDatasetVisible(i)
     })
@@ -453,12 +463,29 @@ export default class ChartController extends Typed(Controller, { values, targets
       })
     })
 
-    const newDatasets = this.spectra.map(e => this.constructDatasets(e, e.data.datasets.map(e => e.data))).flat() as ChartDataset[]
+    const newDatasets = this.spectra.map(e => this.constructDatasets(e)).flat() as ChartDataset[]
     newDatasets.map((e, i) => {
       e.hidden = !this.chart.isDatasetVisible(i)
     })
 
     this.chart.config.data.datasets = newDatasets
+
+    this.chart.update()
+  }
+
+  toggleSecondDerivativePlot() {
+    if (this.compareValue) { return }
+
+    const allDatasets = this.chart.data.datasets
+    const displayedDatasets = allDatasets.map((_ds, i) => this.chart.isDatasetVisible(i) ? i : undefined).filter(Boolean)
+
+    if (displayedDatasets.length !== 1) { return }
+
+    this.spectra[0].addSecondDerivativeDataset(displayedDatasets[0])
+
+    const datasets = this.spectra.map(e => this.constructDatasets(e)).flat() as ChartDataset[]
+
+    this.chart.config.data.datasets = datasets
 
     this.chart.update()
   }

@@ -456,7 +456,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paralleldrive/cuid2@npm:^2.2.0":
+"@paralleldrive/cuid2@npm:^2.2.0, @paralleldrive/cuid2@npm:^2.2.2":
   version: 2.2.2
   resolution: "@paralleldrive/cuid2@npm:2.2.2"
   dependencies:
@@ -1267,6 +1267,7 @@ __metadata:
     "@client-side-validations/simple-form": "npm:^0.4.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^7.3.0"
+    "@paralleldrive/cuid2": "npm:^2.2.2"
     "@pgrabovets/json-view": "npm:^2.7.5"
     "@popperjs/core": "npm:^2.11.8"
     "@rails/actiontext": "npm:7.1.2"
