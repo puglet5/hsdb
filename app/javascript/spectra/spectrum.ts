@@ -1,3 +1,4 @@
+
 import Papa from "papaparse"
 import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange, SpectrumDataset, toSmoothedData, calculateSecondDerivative } from "./utils.ts"
 import { createId } from "@paralleldrive/cuid2"
@@ -53,6 +54,7 @@ export class Spectrum extends Data {
         id: createId(),
         originalData: e,
         data: e,
+        hidden: i >= 1,
         yAxisID: createId(),
         xAxisID: createId(),
         xLabel: xLabels[traceNum],
@@ -103,39 +105,38 @@ export class Spectrum extends Data {
     return { data: objectData, dimensions: dataDimensions }
   }
 
-  toggleNormalizeDatasetEntry(i: number) {
-    const dataset = this.data.datasets[i]
+  toggleNormalizeDatasetEntry(id: string) {
+    const dataset = this.findDatasetByID(id)
 
     if (dataset.normalized) {
-      this.data.datasets[i] = {
+      Object.assign(dataset, {
         ...dataset,
         data: normalizeData(dataset.data, dataset.originalRange[1][1]),
         normalized: false
-      }
+      })
     } else {
-      this.data.datasets[i] = {
+      Object.assign(dataset, {
         ...dataset,
         data: normalizeData(dataset.data),
         normalized: true
-      }
+      })
     }
   }
 
-  smoothDatasetEntry(i: number, r: number) {
-    const dataset = this.data.datasets[i]
-    let data = dataset.originalData
-
-    data = toSmoothedData(data, r)
+  smoothDatasetEntry(id: string, r: number) {
+    const dataset = this.findDatasetByID(id)
+    console.log(dataset)
+    const data = toSmoothedData(dataset.originalData, r)
 
     if (dataset.normalized) {
-      data = normalizeData(data)
+      Object.assign(dataset, { ...dataset, data: normalizeData(data) })
+    } else {
+      Object.assign(dataset, { ...dataset, data })
     }
-
-    this.data.datasets[i].data = data
   }
 
-  addSecondDerivativeDataset(i: number) {
-    const dataset = this.data.datasets[i]
+  addSecondDerivativeDataset(id: string) {
+    const dataset = this.findDatasetByID(id)
 
     const derivativeDataset = {
       ...dataset,
@@ -144,6 +145,7 @@ export class Spectrum extends Data {
       yLabel: `${dataset.yLabel} (2nd Derivative)`,
       isSecondDerivativeData: true,
       normalized: true,
+      hidden: false,
       data: calculateSecondDerivative(dataset.data)
     } satisfies SpectrumDataset
 
@@ -160,5 +162,9 @@ export class Spectrum extends Data {
         xAxisReverse: this.axes.xAxisReverse
       }
     })
+  }
+
+  findDatasetByID(id: string) {
+    return this.data.datasets.filter(e => e.id === id)[0]
   }
 }

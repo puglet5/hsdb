@@ -75,6 +75,7 @@ export interface SpectrumDataset {
   data: Point[]
   normalized: boolean
   xAxisReverse: boolean
+  hidden: boolean
   readonly yAxisMin: number | null
   xLabel: string
   yLabel: string

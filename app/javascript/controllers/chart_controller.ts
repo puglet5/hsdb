@@ -4,25 +4,13 @@ import zoomPlugin from "chartjs-plugin-zoom"
 import ChartDataLabels, { Context } from "chartjs-plugin-datalabels"
 import { Spectrum } from "../spectra/spectrum.ts"
 import { Typed } from "stimulus-typescript"
-import { Point } from "../spectra/utils.ts"
+import { Point, SpectrumDataset } from "../spectra/utils.ts"
 
 Chart.register(...registerables)
 Chart.register(zoomPlugin as unknown as ChartComponentLike)
 Chart.register(ChartDataLabels)
 
 type ChartScale = ChartConfiguration["options"]["scales"]
-
-const defaultLegendClickHandler = Chart.defaults.plugins.legend.onClick
-const customLegendClickHandler = function (_e: ChartEvent, legendItem: LegendItem) {
-  const chart: Chart = this.chart
-
-  chart.data.datasets.forEach((_, i) => {
-    const meta = chart.getDatasetMeta(i)
-    meta.hidden = i !== legendItem.datasetIndex
-  })
-
-  chart.update()
-}
 
 declare global {
   interface Window {
@@ -50,6 +38,7 @@ const targets = {
 }
 
 export default class ChartController extends Typed(Controller, { values, targets }) {
+
   labelAlignment: "top" | "bottom" = "top"
   cubicInterpolationMode: DatasetChartOptions["scatter"]["datasets"]["cubicInterpolationMode"] = "monotone"
   allowedKeys = Object.getOwnPropertyNames(new Spectrum) as (keyof Spectrum)[]
@@ -64,9 +53,24 @@ export default class ChartController extends Typed(Controller, { values, targets
       }
     }))
 
+  defaultLegendClickHandler = Chart.defaults.plugins.legend.onClick
+  customLegendClickHandler = function (_e: ChartEvent, legendItem: LegendItem) {
+    const chart: Chart = this.chart
+    
+    chart.config.data.datasets.forEach((ds: ChartDataset, i: number) => {
+      let dataset: SpectrumDataset = this.spectra.map((s: Spectrum) => {
+        return s.findDatasetByID(chart.config.data.datasets[i]["id"])
+      })[0]
+      ds.hidden = i !== legendItem.datasetIndex
+      Object.assign(dataset, { ...dataset, hidden: ds.hidden })
+    })
+    
+    chart.update()
+  }
+
   legendClickHandler = this.compareValue ?
-    defaultLegendClickHandler :
-    customLegendClickHandler
+    this.defaultLegendClickHandler :
+    this.customLegendClickHandler
 
   async connect() {
     const rawData = await this.importData(this.spectra.map(e => e.processed_file_url))
@@ -87,9 +91,10 @@ export default class ChartController extends Typed(Controller, { values, targets
     const peaks = spectrum.getPeakPositions()
     return spectrum.data.datasets.map((ds, i) => {
       return {
+        id: ds.id,
         data: ds.data,
         label: `${spectrum.processed_filename.split(".")[0]} (${ds.yLabel})`,
-        hidden: i >= 1,
+        hidden: ds.hidden,
         showLine: true,
         cubicInterpolationMode: this.cubicInterpolationMode,
         yAxisID: this.compareValue ? "y" : ds.yAxisID,
@@ -120,7 +125,6 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   constructScales(spectrum: Readonly<Spectrum>) {
-
     const grid = {
       color: this.darkValue ? "#1e1e1e" : "#e1e1e1",
       tickBorderDash: [0, 0],
@@ -208,7 +212,7 @@ export default class ChartController extends Typed(Controller, { values, targets
     const chart = this.chart
     chart.resetZoom()
     const allDatasets = this.chart.data.datasets
-    const displayedDatasetIds: number[] = allDatasets.flatMap((_ds, i) => this.chart.isDatasetVisible(i) ? i : [])
+    const displayedDatasetIds: string[] = allDatasets.flatMap((ds, i) => this.chart.isDatasetVisible(i) ? ds["id"] : [])
 
     if (displayedDatasetIds.length > 1 || this.spectra.length > 1) {
       this.derivativePlotButtonTarget.disabled = true
@@ -219,23 +223,19 @@ export default class ChartController extends Typed(Controller, { values, targets
     this.derivativePlotButtonTarget.disabled = false
     this.smoothingRadiusSliderTarget.disabled = false
 
-    allDatasets.map((_e, i) => {
-      if (this.chart.isDatasetVisible(i)) {
-        if (this.chart.config.options.scales[allDatasets[i]["xAxisID"]].reverse) {
-          this.reverseXAxisButtonTarget.classList.add("scale-x-[-1]")
-        } else {
-          this.reverseXAxisButtonTarget.classList.remove("scale-x-[-1]")
-        }
+    const dataset = this.spectra[0].findDatasetByID(displayedDatasetIds[0])
 
-        const normalized = this.spectra[0].data?.datasets[i]?.normalized || false
+    if (dataset.xAxisReverse) {
+      this.reverseXAxisButtonTarget.classList.add("scale-x-[-1]")
+    } else {
+      this.reverseXAxisButtonTarget.classList.remove("scale-x-[-1]")
+    }
 
-        if (normalized) {
-          this.normalizeButtonTarget.classList.add("hidden")
-        } else {
-          this.normalizeButtonTarget.classList.remove("hidden")
-        }
-      }
-    })
+    if (dataset.normalized) {
+      this.normalizeButtonTarget.classList.add("hidden")
+    } else {
+      this.normalizeButtonTarget.classList.remove("hidden")
+    }
 
     chart.update()
   }
@@ -404,12 +404,16 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   toggleReverseXAxis() {
-    const allDatasets = this.chart.data.datasets
+    const displayedDatasetIds: string[] = this.chart.data.datasets.flatMap((ds, i) => this.chart.isDatasetVisible(i) ? ds["id"] : [])
 
-    allDatasets.map((_e, i) => {
-      if (this.chart.isDatasetVisible(i)) {
-        this.chart.config.options.scales[allDatasets[i]["xAxisID"]].reverse = !this.chart.config.options.scales[allDatasets[i]["xAxisID"]].reverse
-      }
+    this.spectra.map(e => {
+      displayedDatasetIds.map(id => {
+        let dataset = e.findDatasetByID(id)
+        if (dataset) { dataset.xAxisReverse = !dataset.xAxisReverse }
+        this.chart.options.scales[dataset.xAxisID] = {
+          ...this.chart.options.scales[dataset.xAxisID], reverse: dataset.xAxisReverse
+        }
+      })
     })
 
     this.chart.resetZoom()
@@ -418,19 +422,12 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   toggleNormalize() {
-    const allDatasets = this.chart.data.datasets
-    const displayedDatasetIds: number[] = allDatasets.flatMap((_ds, i) => this.chart.isDatasetVisible(i) ? i : [])
+    const displayedDatasetIds: string[] = this.chart.data.datasets.flatMap((ds, i) => this.chart.isDatasetVisible(i) ? ds["id"] : [])
 
-    const datasetsPerSpectrum = this.spectra.map(e => e.data.datasets.length)
-
-    const datasetsBySpectrum = datasetsPerSpectrum.map((de, di) => {
-      const mask = displayedDatasetIds.map(id => de * (di + 1) > id && id >= de * di)
-      return displayedDatasetIds.filter((_e, i) => mask[i]).map(e => e % de)
-    })
-
-    this.spectra.map((e, i) => {
-      datasetsBySpectrum[i].map(de => {
-        e.toggleNormalizeDatasetEntry(de)
+    this.spectra.map(e => {
+      displayedDatasetIds.map(id => {
+        let dataset = e.findDatasetByID(id)
+        if (dataset) e.toggleNormalizeDatasetEntry(id)
       })
     })
 
@@ -447,19 +444,12 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   applySmoothing() {
-    const allDatasets = this.chart.data.datasets
-    const displayedDatasetIds: number[] = allDatasets.flatMap((_ds, i) => this.chart.isDatasetVisible(i) ? i : [])
+    const displayedDatasetIds: string[] = this.chart.data.datasets.flatMap((ds, i) => this.chart.isDatasetVisible(i) ? ds["id"] : [])
 
-    const datasetsPerSpectrum = this.spectra.map(e => e.data.datasets.length)
-
-    const datasetsBySpectrum = datasetsPerSpectrum.map((de, di) => {
-      const mask = displayedDatasetIds.map(id => de * (di + 1) > id && id >= de * di)
-      return displayedDatasetIds.filter((_e, i) => mask[i]).map(e => e % de)
-    })
-
-    this.spectra.map((e, i) => {
-      datasetsBySpectrum[i].map(de => {
-        e.smoothDatasetEntry(de, +this.smoothingRadiusSliderTarget.value)
+    this.spectra.map(e => {
+      displayedDatasetIds.map(id => {
+        let dataset = e.findDatasetByID(id)
+        if (dataset) e.smoothDatasetEntry(id, +this.smoothingRadiusSliderTarget.value)
       })
     })
 
@@ -477,11 +467,19 @@ export default class ChartController extends Typed(Controller, { values, targets
     if (this.compareValue) { return }
 
     const allDatasets = this.chart.data.datasets
-    const displayedDatasets = allDatasets.map((_ds, i) => this.chart.isDatasetVisible(i) ? i : undefined).filter(Boolean)
+    const displayedDatasetIDs: string[] = allDatasets.map((ds, i) => this.chart.isDatasetVisible(i) ? ds["id"] : undefined).filter(Boolean)
 
-    if (displayedDatasets.length !== 1) { return }
+    if (displayedDatasetIDs.length !== 1) { return }
 
-    this.spectra[0].addSecondDerivativeDataset(displayedDatasets[0])
+    this.spectra.map(s => {
+      displayedDatasetIDs.map(id => {
+        let dataset = s.findDatasetByID(id)
+        if (dataset) {
+          s.toggleNormalizeDatasetEntry(id)
+          s.addSecondDerivativeDataset(id)
+        }
+      })
+    })
 
     const datasets = this.spectra.map(e => this.constructDatasets(e)).flat() as ChartDataset[]
 
