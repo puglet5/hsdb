@@ -10,6 +10,7 @@ export default {
     "./app/helpers/**/*.rb",
     "./app/assets/stylesheets/**/*.css",
     "./app/javascript/**/*.js",
+    "./app/javascript/**/*.ts",
     "./node_modules/flowbite/dist/datepicker.js"
   ],
   plugins: [

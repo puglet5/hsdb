@@ -1,27 +1,26 @@
 import Papa from "papaparse"
-import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange } from "./utils.ts"
+import { SpectrumData, AxesSpec, Point, normalizeData, getDataRange, SpectrumDataset, toSmoothedData } from "./utils.ts"
 
-const produce = (proto: object, base: Data, values: any) =>
+const produce = <O extends object>(proto: O, base: Data, values: any): O =>
   Object.freeze(Object.assign(Object.seal(Object.assign(Object.create(proto), base)), values))
 
 const transformNaN = (e: string) => { return e === "nan" ? NaN : e }
 
 class Data {
-  static create<Type extends Data>(
-    this: { new(t: Data): Type },
-    values?: Omit<Partial<Type>, keyof Data>,
-  ): Type {
-    return produce(this.prototype, new this(Data), values)
+  static create<T extends Data>(
+    this: { new(t: Data): T },
+    values?: Omit<Partial<T>, keyof Data>,
+  ): T {
+    return produce(this.prototype as T, new this(Data), values)
   }
 }
 
 export class Spectrum extends Data {
-  public id: number
-  public processed_file_url: string
-  public processed_filename: string
+  public readonly id: number
+  public readonly processed_file_url: string
+  public readonly processed_filename: string
   public axes: AxesSpec
   public data: Partial<SpectrumData>
-
 
   parseRawData(rawData: string) {
     const config = {
@@ -48,21 +47,21 @@ export class Spectrum extends Data {
         data: e,
         normalized: false,
         originalRange: getDataRange(e),
-        peaks: [],
-        secondDerivativeData: []
-      }
+        secondDerivativeData: [],
+        peaks: this.data.metadata.peaks
+      } satisfies Partial<SpectrumDataset>
     })
     this.data.dimensions = pointData.dimensions
   }
 
   getPeakPositions() {
-    return this.data.datasets[0].peaks.map(o => o.position).map(Number)
+    return this.data.datasets[0].peaks?.map(o => o.position).map(Number) ?? []
   }
 
-  dataToPoints(data: number[][], axesSpec: string) {
+  dataToPoints(data: Readonly<number[][]>, columnCoordinates: AxesSpec["columnAxisType"]) {
     const parsedData: number[][][] = []
-    let latestXIndex: number = -1
-    axesSpec.split("").forEach((e, i) => {
+    let latestXIndex = -1
+    columnCoordinates.split("").forEach((e, i) => {
       if (e === "x") {
         latestXIndex += 1
         parsedData.push([data[i]])
@@ -107,5 +106,18 @@ export class Spectrum extends Data {
         normalized: true
       }
     }
+  }
+
+  smoothDatasetEntry(i: number, r: number) {
+    const dataset = this.data.datasets[i]
+    let data = dataset.originalData
+
+    data = toSmoothedData(data, r)
+
+    if (dataset.normalized) {
+      data = normalizeData(data)
+    }
+
+    this.data.datasets[i].data = data
   }
 }
