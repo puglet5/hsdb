@@ -58,7 +58,7 @@ export default class ChartController extends Typed(Controller, { values, targets
     const chart: Chart = this.chart
     
     chart.config.data.datasets.forEach((ds: ChartDataset, i: number) => {
-      let dataset: SpectrumDataset = this.spectra.map((s: Spectrum) => {
+      const dataset: SpectrumDataset = this.spectra.map((s: Spectrum) => {
         return s.findDatasetByID(chart.config.data.datasets[i]["id"])
       })[0]
       ds.hidden = i !== legendItem.datasetIndex
@@ -89,7 +89,7 @@ export default class ChartController extends Typed(Controller, { values, targets
 
   constructDatasets(spectrum: Readonly<Spectrum>) {
     const peaks = spectrum.getPeakPositions()
-    return spectrum.data.datasets.map((ds, i) => {
+    return spectrum.data.datasets.map(ds => {
       return {
         id: ds.id,
         data: ds.data,
@@ -408,7 +408,7 @@ export default class ChartController extends Typed(Controller, { values, targets
 
     this.spectra.map(e => {
       displayedDatasetIds.map(id => {
-        let dataset = e.findDatasetByID(id)
+        const dataset = e.findDatasetByID(id)
         if (dataset) { dataset.xAxisReverse = !dataset.xAxisReverse }
         this.chart.options.scales[dataset.xAxisID] = {
           ...this.chart.options.scales[dataset.xAxisID], reverse: dataset.xAxisReverse
@@ -426,7 +426,7 @@ export default class ChartController extends Typed(Controller, { values, targets
 
     this.spectra.map(e => {
       displayedDatasetIds.map(id => {
-        let dataset = e.findDatasetByID(id)
+        const dataset = e.findDatasetByID(id)
         if (dataset) e.toggleNormalizeDatasetEntry(id)
       })
     })
@@ -448,7 +448,7 @@ export default class ChartController extends Typed(Controller, { values, targets
 
     this.spectra.map(e => {
       displayedDatasetIds.map(id => {
-        let dataset = e.findDatasetByID(id)
+        const dataset = e.findDatasetByID(id)
         if (dataset) e.smoothDatasetEntry(id, +this.smoothingRadiusSliderTarget.value)
       })
     })
@@ -473,7 +473,7 @@ export default class ChartController extends Typed(Controller, { values, targets
 
     this.spectra.map(s => {
       displayedDatasetIDs.map(id => {
-        let dataset = s.findDatasetByID(id)
+        const dataset = s.findDatasetByID(id)
         if (dataset) {
           s.toggleNormalizeDatasetEntry(id)
           s.addSecondDerivativeDataset(id)
