@@ -69,8 +69,8 @@ export class Spectrum extends Data {
     })
   }
 
-  getPeakPositions() {
-    return this.data.datasets[0].peaks?.map(o => o.position).map(Number) ?? []
+  getDatasetPeakPositions(i: number) {
+    return this.data.datasets[i].peaks?.map(o => o.position).map(Number) ?? []
   }
 
   dataToPoints(data: Readonly<number[][]>, columnCoordinates: AxesSpec["columnAxisType"]) {
@@ -110,13 +110,11 @@ export class Spectrum extends Data {
 
     if (dataset.normalized) {
       Object.assign(dataset, {
-        ...dataset,
         data: normalizeData(dataset.data, dataset.originalRange[1][1]),
         normalized: false
       })
     } else {
       Object.assign(dataset, {
-        ...dataset,
         data: normalizeData(dataset.data),
         normalized: true
       })
@@ -125,13 +123,12 @@ export class Spectrum extends Data {
 
   smoothDatasetEntry(id: string, r: number) {
     const dataset = this.findDatasetByID(id)
-    console.log(dataset)
     const data = toSmoothedData(dataset.originalData, r)
 
     if (dataset.normalized) {
-      Object.assign(dataset, { ...dataset, data: normalizeData(data) })
+      Object.assign(dataset, { data: normalizeData(data) })
     } else {
-      Object.assign(dataset, { ...dataset, data })
+      Object.assign(dataset, { data })
     }
   }
 
@@ -146,6 +143,7 @@ export class Spectrum extends Data {
       isSecondDerivativeData: true,
       normalized: true,
       hidden: false,
+      peaks: [],
       data: calculateSecondDerivative(dataset.data)
     } satisfies SpectrumDataset
 

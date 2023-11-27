@@ -54,9 +54,18 @@ export default class ChartController extends Typed(Controller, { values, targets
     }))
 
   defaultLegendClickHandler = Chart.defaults.plugins.legend.onClick
-  customLegendClickHandler = function (_e: ChartEvent, legendItem: LegendItem) {
+  customLegendClickHandler = function (e: ChartEvent, legendItem: LegendItem, legend: LegendElement<"scatter">) {
     const chart: Chart = this.chart
-    
+
+    const dataset: SpectrumDataset = this.spectra.map((s: Spectrum) => {
+      return s.findDatasetByID(chart.config.data.datasets[legendItem.datasetIndex]["id"])
+    })[0]
+
+    if (dataset.isSecondDerivativeData) {
+      this.defaultLegendClickHandler.bind(this)(e, legendItem, legend)
+      return
+    }
+
     chart.config.data.datasets.forEach((ds: ChartDataset, i: number) => {
       const dataset: SpectrumDataset = this.spectra.map((s: Spectrum) => {
         return s.findDatasetByID(chart.config.data.datasets[i]["id"])
@@ -64,7 +73,7 @@ export default class ChartController extends Typed(Controller, { values, targets
       ds.hidden = i !== legendItem.datasetIndex
       Object.assign(dataset, { ...dataset, hidden: ds.hidden })
     })
-    
+
     chart.update()
   }
 
@@ -77,7 +86,6 @@ export default class ChartController extends Typed(Controller, { values, targets
     this.spectra.map((e, i) => e.parseRawData(rawData[i]))
 
     if (this.compareValue) this.visualize()
-    console.log(this.spectra[0].data.datasets)
     this.visualize()
   }
 
@@ -88,8 +96,8 @@ export default class ChartController extends Typed(Controller, { values, targets
   }
 
   constructDatasets(spectrum: Readonly<Spectrum>) {
-    const peaks = spectrum.getPeakPositions()
-    return spectrum.data.datasets.map(ds => {
+    return spectrum.data.datasets.map((ds, i) => {
+      const peaks = spectrum.getDatasetPeakPositions(i)
       return {
         id: ds.id,
         data: ds.data,
@@ -99,6 +107,8 @@ export default class ChartController extends Typed(Controller, { values, targets
         cubicInterpolationMode: this.cubicInterpolationMode,
         yAxisID: this.compareValue ? "y" : ds.yAxisID,
         xAxisID: this.compareValue ? "x" : ds.xAxisID,
+        backgroundColor: ds.isSecondDerivativeData ? "teal" : "black",
+        borderColor: ds.isSecondDerivativeData ? "teal" : "black",
         datalabels: {
           anchor: "center",
           align: "top",
@@ -475,7 +485,7 @@ export default class ChartController extends Typed(Controller, { values, targets
       displayedDatasetIDs.map(id => {
         const dataset = s.findDatasetByID(id)
         if (dataset) {
-          s.toggleNormalizeDatasetEntry(id)
+          // s.toggleNormalizeDatasetEntry(id) 
           s.addSecondDerivativeDataset(id)
         }
       })
