@@ -84,7 +84,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'database_consistency', '~> 1.1'
   gem 'debug', '>= 1.0.0'
-  gem 'factory_bot_rails', '<= 6.2'
+  gem 'factory_bot_rails', ' ~> 6.2'
   gem 'faker', '>= 3'
   gem 'fuubar', '~> 2.5'
   gem 'listen', '~> 3.7'
