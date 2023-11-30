@@ -30,7 +30,6 @@
 #
 FactoryBot.define do
   factory :user do
-    sequence(:id) { |n| n }
     first_name { 'test' }
     last_name { 'user' }
     password { '123456' }
