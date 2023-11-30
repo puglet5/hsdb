@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.configure do |config|
-  config.swagger_root = Rails.root.join('swagger').to_s
+  config.openapi_root = Rails.root.join('swagger').to_s
 
-  config.swagger_docs = {
+  config.openapi_specs = {
     'v1/swagger.json' => {
       openapi: '3.0.1',
       info: {
@@ -24,5 +24,5 @@ RSpec.configure do |config|
     }
   }
 
-  config.swagger_format = :json
+  config.openapi_format = :json
 end
