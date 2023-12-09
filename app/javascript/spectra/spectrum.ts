@@ -37,7 +37,10 @@ export class Spectrum extends Data {
     const rows: number[][] = data.map(e => Object.values(e))
     const cols: number[][] = rows[0].map((_, colIndex) => rows.map(row => row[colIndex])).map(e => e.filter(x => !Number.isNaN(x)))
 
-    this.data.header = meta.fields ?? this.axes.axesLabels
+    this.data.header = cols.length === 2 ?
+      this.axes.axesLabels :
+      meta.fields ?? this.axes.axesLabels
+
     const xLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "x" ? e : []) ?? ["x"]
     const yLabels = this.data.header.flatMap((e, i) => this.axes.columnAxisType.split("")[i] === "y" ? e : []) ?? ["y"]
 
@@ -76,6 +79,11 @@ export class Spectrum extends Data {
   dataToPoints(data: Readonly<number[][]>, columnCoordinates: AxesSpec["columnAxisType"]) {
     const parsedData: number[][][] = []
     let latestXIndex = -1
+
+    if (columnCoordinates.length !== data.length) {
+      columnCoordinates = "xy"
+    }
+
     columnCoordinates.split("").forEach((e, i) => {
       if (e === "x") {
         latestXIndex += 1
