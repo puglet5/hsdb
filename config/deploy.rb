@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # config valid for current version and patch releases of Capistrano
-lock '~> 3.17.3'
+lock '~> 3.18'
 
 server '0.0.0.0', port: 22, roles: %i[web app db], primary: true
 set :application, 'hsdb'
