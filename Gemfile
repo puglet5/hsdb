@@ -72,7 +72,7 @@ end
 group :test do
   gem 'pundit-matchers', '~> 3.1' # policy matchers
   gem 'rails-controller-testing', '~> 1.0'
-  gem 'shoulda-matchers', '~> 5.1' # rails matchers for common tasks
+  gem 'shoulda-matchers', '~> 6.0' # rails matchers for common tasks
   gem 'simplecov', '~> 0.22' # code coverage reporter
 end
 
