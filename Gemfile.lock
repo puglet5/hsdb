@@ -502,7 +502,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
     uniform_notifier (1.16.0)
-    view_component (3.8.0)
+    view_component (3.9.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -607,7 +607,7 @@ DEPENDENCIES
   stimulus-rails (~> 1.1)
   turbo-rails (~> 1.1)
   tzinfo-data
-  view_component (~> 3.4)
+  view_component (~> 3.9)
   web-console
 
 RUBY VERSION
