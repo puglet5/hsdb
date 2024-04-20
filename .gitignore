@@ -36,7 +36,6 @@
 yarn-debug.log*
 .yarn-integrity
 mkmf.log
-.vscode/tasks.json
 .vscode/extensions.json
 /public/packs
 /public/images
