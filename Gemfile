@@ -17,7 +17,7 @@ gem 'caxlsx_rails', '~> 0.6.3'
 gem 'cssbundling-rails', '~> 1.0'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'doorkeeper', '~> 5.5', '>= 5.5.4' # api oauth
-gem 'dotenv-rails', '~> 2.8'
+gem 'dotenv-rails', '~> 3.1'
 gem 'faraday', '~> 2.7'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'has_scope', '~> 0.8.0'
@@ -58,7 +58,7 @@ group :development do
   gem 'annotate', '~> 3.2' # db schema annotations for models and tests
   gem 'bullet', '~> 7.0', '>= 7.0.3' # detect ineffective db queries
   gem 'erb_lint', '~> 0.4'
-  gem 'foreman', '~> 0.87.2'
+  gem 'foreman', '~> 0.88'
   gem 'hotwire-livereload', '~> 1.2'
   gem 'htmlbeautifier' # erb formatter
   gem 'license_finder', '~> 7.0' # find dependencies' licenses
